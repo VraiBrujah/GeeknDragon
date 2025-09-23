@@ -1,0 +1,126 @@
+{
+    "mapping": {
+        "piece-personnalisee": "coin-custom-single",
+        "lot3-pieces": "coin-trio-customizable",
+        "lot5-metaux": "coin-quintessence-metals",
+        "lot7-pieces-libre": "coin-septuple-free",
+        "lot10": "coin-traveler-offering",
+        "lot25": "coin-five-realms-complete",
+        "lot50-essence": "coin-merchant-essence-double",
+        "lot50-tresorerie": "coin-lord-treasury-uniform",
+        "pack-10-cartes-aleatoires": "cards-random-discovery-10",
+        "pack-57-armes-armures": "cards-weapons-armor-57",
+        "pack-65-paquetages": "cards-adventure-packs-65",
+        "pack-70-explosifs-outils": "cards-explosives-tools-70",
+        "pack-145-services-vehicules": "cards-services-vehicles-145",
+        "pack-226-arsenal-aventurier": "cards-adventurer-arsenal-226",
+        "pack-316-butins-ingenieries": "cards-loot-engineering-316",
+        "pack-223-routes-services": "cards-roads-services-223",
+        "triptyque-aleatoire": "triptych-mystery-hero"
+    },
+    "changes": [
+        {
+            "line": 2,
+            "old_id": "piece-personnalisee",
+            "new_id": "coin-custom-single",
+            "product_name": "Pièce Personnalisée"
+        },
+        {
+            "line": 3,
+            "old_id": "lot3-pieces",
+            "new_id": "coin-trio-customizable",
+            "product_name": "Trio de Pièces"
+        },
+        {
+            "line": 4,
+            "old_id": "lot5-metaux",
+            "new_id": "coin-quintessence-metals",
+            "product_name": "Quintessence Métallique"
+        },
+        {
+            "line": 5,
+            "old_id": "lot7-pieces-libre",
+            "new_id": "coin-septuple-free",
+            "product_name": "Septuple Libre"
+        },
+        {
+            "line": 6,
+            "old_id": "lot10",
+            "new_id": "coin-traveler-offering",
+            "product_name": "Offrande du Voyageur"
+        },
+        {
+            "line": 7,
+            "old_id": "lot25",
+            "new_id": "coin-five-realms-complete",
+            "product_name": "La Monnaie des Cinq Royaumes"
+        },
+        {
+            "line": 8,
+            "old_id": "lot50-essence",
+            "new_id": "coin-merchant-essence-double",
+            "product_name": "Essence du Marchand"
+        },
+        {
+            "line": 9,
+            "old_id": "lot50-tresorerie",
+            "new_id": "coin-lord-treasury-uniform",
+            "product_name": "La Trésorerie du Seigneur"
+        },
+        {
+            "line": 10,
+            "old_id": "pack-10-cartes-aleatoires",
+            "new_id": "cards-random-discovery-10",
+            "product_name": "10 Cartes Surprise"
+        },
+        {
+            "line": 35,
+            "old_id": "pack-57-armes-armures",
+            "new_id": "cards-weapons-armor-57",
+            "product_name": "Armes & Armures"
+        },
+        {
+            "line": 50,
+            "old_id": "pack-65-paquetages",
+            "new_id": "cards-adventure-packs-65",
+            "product_name": "Paquetages d'Aventure"
+        },
+        {
+            "line": 65,
+            "old_id": "pack-70-explosifs-outils",
+            "new_id": "cards-explosives-tools-70",
+            "product_name": "Explosifs & Outils"
+        },
+        {
+            "line": 80,
+            "old_id": "pack-145-services-vehicules",
+            "new_id": "cards-services-vehicles-145",
+            "product_name": "Services & Véhicules"
+        },
+        {
+            "line": 81,
+            "old_id": "pack-316-butins-ingenieries",
+            "new_id": "cards-loot-engineering-316",
+            "product_name": "Butins & Ingénieries"
+        },
+        {
+            "line": 82,
+            "old_id": "pack-223-routes-services",
+            "new_id": "cards-roads-services-223",
+            "product_name": "Routes & Services"
+        },
+        {
+            "line": 83,
+            "old_id": "pack-226-arsenal-aventurier",
+            "new_id": "cards-adventurer-arsenal-226",
+            "product_name": "Arsenal de l'Aventurier"
+        },
+        {
+            "line": 84,
+            "old_id": "triptyque-aleatoire",
+            "new_id": "triptych-mystery-hero",
+            "product_name": "Triptyques Mystères"
+        }
+    ],
+    "timestamp": "2025-09-23 04:53:25"
+}

@@ -50,7 +50,19 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
           <a href="<?= langUrl('boutique.php#pieces') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.coins.title">Pièces métalliques</h4>
             <p class="text-center" data-i18n="home.mustHave.coins.desc">Monnaie physique pour ressentir chaque trésor et influencer la chance à la table</p>
-              <img src="/media/products/bundles/lot10Piece2-300.webp" alt="Pièces métalliques gravées pour JDR" class="rounded mb-4" loading="lazy">
+              <?php
+    // Récupération dynamique du premier produit de pièces
+    $products = json_decode(file_get_contents("data/products.json"), true);
+    $coinProduct = null;
+    foreach ($products as $id => $product) {
+        if (str_starts_with($id, "coin-")) {
+            $coinProduct = $product;
+            break;
+        }
+    }
+    $defaultImage = $coinProduct["images"][0] ?? "/media/products/bundles/default-coins.webp";
+    ?>
+    <img src="<?= $defaultImage ?>" alt="Pièces métalliques gravées pour JDR" class="rounded mb-4" loading="lazy">
           </a>
           <a href="<?= langUrl('boutique.php#triptyques') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.triptych.title">Fiche Triptyque</h4>

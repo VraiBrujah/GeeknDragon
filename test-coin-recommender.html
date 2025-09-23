@@ -31,7 +31,7 @@
     <div class="test-case">
         <h2>Test 3: Plusieurs multiplicateurs d'une même pièce</h2>
         <p>1 or de chaque multiplicateur (1, 10, 100, 1000, 10000)</p>
-        <p>(devrait optimiser: peut-être lot25 ou lots individuels selon le prix)</p>
+        <p>(devrait optimiser: peut-être coin-five-realms-complete ou lots individuels selon le prix)</p>
         <div id="test3-result"></div>
     </div>
 
@@ -87,7 +87,7 @@
         };
         testRecommendations('test2-result', test2Input, 'Test 2: Exemple utilisateur');
 
-        // Test 3: 1 or de chaque multiplicateur (doit préférer lot25)
+        // Test 3: 1 or de chaque multiplicateur (doit préférer coin-five-realms-complete)
         const test3Input = {
             gold: { 1: 1, 10: 1, 100: 1, 1000: 1, 10000: 1 }
         };

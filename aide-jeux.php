@@ -1461,7 +1461,7 @@ echo $snipcartInit;
                 <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-primary w-full">
                   🛒 Voir les Pièces en Boutique
                 </a>
-                <a href="<?= langUrl('product.php?id=lot50-tresorerie&from=pieces') ?>" class="btn btn-outline w-full">
+                <a href="<?= langUrl('product.php?id=coin-lord-treasury-uniform&from=pieces') ?>" class="btn btn-outline w-full">
                   ⭐ Set Complet de Trésorerie
                 </a>
               </div>
@@ -1749,7 +1749,7 @@ function confirmDownload() {
 </script>
 <script src="/js/hero-videos.js"></script>
 <script src="/js/boutique-premium.js"></script>
-<script src="/js/coin-lots-recommender.js"></script>
+<script src="/js/dynamic-coin-recommender.js"></script>
 <script src="/js/currency-converter.js"></script>
 
 <script>
@@ -1771,22 +1771,17 @@ document.addEventListener('DOMContentLoaded', function() {
         // L'ID reste le même (pas de multiplicateur dans l'ID)
         const productId = lot.productId;
         
-        // Obtenir le nom du produit (sans multiplicateur dans le nom)
+        // Obtenir le nom du produit dynamiquement
         const getProductName = (id) => {
-          const recommender = window.converterInstance?.lotsRecommender;
+          const recommender = window.dynamicRecommender;
           if (recommender && recommender.products && recommender.products[id]) {
             return recommender.products[id].name;
           }
-          const fallbackNames = {
-            'lot10': "L'Offrande du Voyageur",
-            'lot25': "La Monnaie des Cinq Royaumes", 
-            'lot50-essence': "L'Essence du Marchand",
-            'lot50-tresorerie': "La Trésorerie du Seigneur"
-          };
-          return fallbackNames[id] || id;
+          // Fallback minimal si pas encore chargé
+          return id.replace(/^coin-/, "").replace(/-/g, " ");
         };
         
-        const productName = getProductName(lot.productId);
+        const productName = getProductNameDynamic(lot.productId);
         
         // Créer un bouton temporaire invisible avec les mêmes attributs que la boutique
         const tempButton = document.createElement('button');

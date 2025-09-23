@@ -11,7 +11,7 @@ class CsvProductsManager
     private $csvHeaders = [
         'id', 'name_fr', 'name_en', 'price', 'description_fr', 'description_en', 
         'summary_fr', 'summary_en', 'images', 'multipliers', 'metals_fr', 
-        'metals_en', 'coin_lots', 'languages', 'customizable', 'triptych_options', 'triptych_type'
+        'metals_en', 'coin_lots', 'languages', 'customizable', 'triptych_options', 'triptych_type', 'category'
     ];
 
     /**
@@ -147,6 +147,18 @@ class CsvProductsManager
     private function parseProductRow(array $headers, array $row, int $lineNumber): array
     {
         try {
+            // S'assurer que la ligne a le bon nombre de colonnes
+            if (count($row) !== count($headers)) {
+                // Ajouter des colonnes vides si nécessaire
+                while (count($row) < count($headers)) {
+                    $row[] = '';
+                }
+                // Ou supprimer les colonnes en trop
+                if (count($row) > count($headers)) {
+                    $row = array_slice($row, 0, count($headers));
+                }
+            }
+            
             $data = array_combine($headers, $row);
             
             if (empty($data['id'])) {
@@ -215,6 +227,18 @@ class CsvProductsManager
                 $product['customizable'] = in_array($customizable, ['true', 'vrai', '1', 'oui', 'yes']);
             }
 
+            // Catégorie (pieces, cards, triptychs)
+            if (!empty($data['category'])) {
+                $category = strtolower(trim($data['category']));
+                if (in_array($category, ['pieces', 'cards', 'triptychs'])) {
+                    $product['category'] = $category;
+                } else {
+                    $product['category'] = 'cards'; // Par défaut
+                }
+            } else {
+                $product['category'] = 'cards'; // Par défaut si vide
+            }
+
             return ['success' => true, 'data' => $product];
 
         } catch (Exception $e) {
@@ -244,7 +268,8 @@ class CsvProductsManager
             isset($product['languages']) ? implode('|', $product['languages']) : '',
             isset($product['customizable']) ? ($product['customizable'] ? 'VRAI' : 'FAUX') : 'FAUX',
             isset($product['triptych_options']) ? implode('|', $product['triptych_options']) : '',
-            $product['triptych_type'] ?? ''
+            $product['triptych_type'] ?? '',
+            $product['category'] ?? 'cards'
         ];
     }
 

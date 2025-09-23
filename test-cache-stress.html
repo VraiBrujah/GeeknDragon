@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Stress Cache Dynamique</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .stress { border-left: 4px solid #ff5722; }
+        .invalidation { border-left: 4px solid #9c27b0; }
+        .performance { border-left: 4px solid #4caf50; }
+        .result { background: #f0f8ff; padding: 10px; margin: 10px 0; border-radius: 3px; }
+        .success { color: #4CAF50; font-weight: bold; }
+        .warning { color: #ff9800; font-weight: bold; }
+        .error { color: #f44336; font-weight: bold; }
+        button { background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 3px; cursor: pointer; margin: 5px; }
+        button:hover { background: #0056b3; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0; }
+        .stat-card { background: #333; color: white; padding: 15px; border-radius: 8px; text-align: center; }
+        .progress { width: 100%; height: 20px; background: #ddd; border-radius: 10px; overflow: hidden; margin: 10px 0; }
+        .progress-bar { height: 100%; background: #4caf50; transition: width 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔥 Test Stress Cache - Calculateur Dynamique</h1>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <h3>Cache Size</h3>
+                <div id="cacheSize">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Tests Effectués</h3>
+                <div id="testsCount">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Cache Hits</h3>
+                <div id="cacheHits">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Temps Moyen</h3>
+                <div id="avgTime">0ms</div>
+            </div>
+        </div>
+
+        <div class="test-section stress">
+            <h2>🚀 Test Stress Cache (1000 calculs)</h2>
+            <p>Génère 1000 combinaisons aléatoires pour tester la limite du cache et les performances</p>
+            <button onclick="runStressTest()" id="stressBtn">Lancer Test Stress</button>
+            <div class="progress">
+                <div class="progress-bar" id="stressProgress" style="width: 0%"></div>
+            </div>
+            <div id="stressResults" class="result"></div>
+        </div>
+
+        <div class="test-section invalidation">
+            <h2>♻️ Test Invalidation Cache</h2>
+            <p>Vérifie le nettoyage automatique du cache à la limite de 1000 entrées</p>
+            <button onclick="runInvalidationTest()" id="invalidationBtn">Test Invalidation</button>
+            <div id="invalidationResults" class="result"></div>
+        </div>
+
+        <div class="test-section performance">
+            <h2>⚡ Test Performance Cache vs Sans Cache</h2>
+            <p>Compare les temps d'exécution avec et sans cache pour la même combinaison</p>
+            <button onclick="runPerformanceTest()" id="performanceBtn">Test Performance</button>
+            <div id="performanceResults" class="result"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>🧹 Contrôles Cache</h2>
+            <button onclick="clearCache()">Vider Cache</button>
+            <button onclick="showCacheContents()">Afficher Contenu Cache</button>
+            <button onclick="generateCacheStats()">Statistiques Détaillées</button>
+            <div id="cacheControls" class="result"></div>
+        </div>
+    </div>
+
+    <!-- Inclusion du calculateur dynamique -->
+    <script src="/js/dynamic-coin-recommender.js"></script>
+    
+    <script>
+        let calculator = null;
+        let testStats = {
+            totalTests: 0,
+            cacheHits: 0,
+            cacheMisses: 0,
+            totalTime: 0
+        };
+
+        // === INITIALISATION ===
+        async function initializeCalculator() {
+            try {
+                let attempts = 0;
+                const maxAttempts = 20;
+                
+                while (!window.dynamicRecommender && attempts < maxAttempts) {
+                    await new Promise(resolve => setTimeout(resolve, 200));
+                    attempts++;
+                }
+                
+                if (!window.dynamicRecommender) {
+                    throw new Error('Calculateur non chargé');
+                }
+                
+                calculator = window.dynamicRecommender;
+                
+                // Attendre chargement produits
+                attempts = 0;
+                while (!calculator.products && attempts < maxAttempts) {
+                    await new Promise(resolve => setTimeout(resolve, 200));
+                    attempts++;
+                }
+                
+                if (!calculator.products) {
+                    throw new Error('Produits non chargés');
+                }
+                
+                console.log('Calculateur stress test prêt');
+                updateStats();
+                
+            } catch (error) {
+                console.error('Erreur initialisation:', error);
+            }
+        }
+
+        // === GÉNÉRATION DONNÉES TEST ===
+        function generateRandomNeeds() {
+            return {
+                copper: Math.floor(Math.random() * 20) + 1,
+                silver: Math.floor(Math.random() * 15) + 1,
+                electrum: Math.floor(Math.random() * 10) + 1,
+                gold: Math.floor(Math.random() * 12) + 1,
+                platinum: Math.floor(Math.random() * 8) + 1
+            };
+        }
+
+        // === TEST STRESS ===
+        async function runStressTest() {
+            if (!calculator) {
+                alert('Calculateur non initialisé');
+                return;
+            }
+
+            const stressBtn = document.getElementById('stressBtn');
+            const progressBar = document.getElementById('stressProgress');
+            const resultsDiv = document.getElementById('stressResults');
+            
+            stressBtn.disabled = true;
+            stressBtn.textContent = 'Test en cours...';
+            
+            const totalTests = 1000;
+            const startTime = performance.now();
+            let cacheHitCount = 0;
+            let cacheMissCount = 0;
+            const times = [];
+            
+            resultsDiv.innerHTML = '<div class="warning">⏳ Exécution de 1000 tests stress...</div>';
+
+            // Générer 1000 tests
+            for (let i = 0; i < totalTests; i++) {
+                const needs = generateRandomNeeds();
+                const cacheKey = JSON.stringify(needs);
+                const wasCached = calculator.cache.has(cacheKey);
+                
+                const testStart = performance.now();
+                const result = calculator.recommend(
+                    needs.copper, needs.silver, needs.electrum, needs.gold, needs.platinum
+                );
+                const testTime = performance.now() - testStart;
+                
+                times.push(testTime);
+                if (wasCached) {
+                    cacheHitCount++;
+                } else {
+                    cacheMissCount++;
+                }
+                
+                // Mise à jour progress
+                const progress = ((i + 1) / totalTests) * 100;
+                progressBar.style.width = progress + '%';
+                
+                // Pause mini pour éviter le freeze
+                if (i % 50 === 0) {
+                    await new Promise(resolve => setTimeout(resolve, 1));
+                }
+            }
+            
+            const totalTime = performance.now() - startTime;
+            const avgTime = times.reduce((a, b) => a + b, 0) / times.length;
+            const minTime = Math.min(...times);
+            const maxTime = Math.max(...times);
+            
+            resultsDiv.innerHTML = `
+                <div class="success">✅ Test Stress Terminé</div>
+                <div><strong>Tests effectués:</strong> ${totalTests}</div>
+                <div><strong>Cache hits:</strong> ${cacheHitCount} (${Math.round((cacheHitCount/totalTests)*100)}%)</div>
+                <div><strong>Cache misses:</strong> ${cacheMissCount} (${Math.round((cacheMissCount/totalTests)*100)}%)</div>
+                <div><strong>Temps total:</strong> ${totalTime.toFixed(2)}ms</div>
+                <div><strong>Temps moyen:</strong> ${avgTime.toFixed(2)}ms</div>
+                <div><strong>Temps min/max:</strong> ${minTime.toFixed(2)}ms / ${maxTime.toFixed(2)}ms</div>
+                <div><strong>Taille cache finale:</strong> ${calculator.cache.size} entrées</div>
+            `;
+            
+            testStats.totalTests += totalTests;
+            testStats.cacheHits += cacheHitCount;
+            testStats.cacheMisses += cacheMissCount;
+            testStats.totalTime += totalTime;
+            
+            stressBtn.disabled = false;
+            stressBtn.textContent = 'Lancer Test Stress';
+            updateStats();
+        }
+
+        // === TEST INVALIDATION ===
+        async function runInvalidationTest() {
+            if (!calculator) {
+                alert('Calculateur non initialisé');
+                return;
+            }
+
+            const invalidationBtn = document.getElementById('invalidationBtn');
+            const resultsDiv = document.getElementById('invalidationResults');
+            
+            invalidationBtn.disabled = true;
+            invalidationBtn.textContent = 'Test en cours...';
+            
+            resultsDiv.innerHTML = '<div class="warning">⏳ Test invalidation cache...</div>';
+
+            // Remplir le cache jusqu'à la limite
+            console.log('Taille cache avant:', calculator.cache.size);
+            
+            let testsAdded = 0;
+            const startSize = calculator.cache.size;
+            
+            // Ajouter des entrées jusqu'à dépasser 1000
+            while (calculator.cache.size < 1010 && testsAdded < 2000) {
+                const needs = generateRandomNeeds();
+                calculator.recommend(needs.copper, needs.silver, needs.electrum, needs.gold, needs.platinum);
+                testsAdded++;
+            }
+            
+            const afterSize = calculator.cache.size;
+            
+            resultsDiv.innerHTML = `
+                <div class="success">✅ Test Invalidation Terminé</div>
+                <div><strong>Taille cache initiale:</strong> ${startSize} entrées</div>
+                <div><strong>Tests ajoutés:</strong> ${testsAdded}</div>
+                <div><strong>Taille cache finale:</strong> ${afterSize} entrées</div>
+                <div><strong>Nettoyage automatique:</strong> ${afterSize < startSize + testsAdded ? '✅ Effectué' : '❌ Non effectué'}</div>
+                <div><strong>Limite respectée:</strong> ${afterSize <= 1000 ? '✅ Oui' : '❌ Non'}</div>
+            `;
+            
+            invalidationBtn.disabled = false;
+            invalidationBtn.textContent = 'Test Invalidation';
+            updateStats();
+        }
+
+        // === TEST PERFORMANCE ===
+        async function runPerformanceTest() {
+            if (!calculator) {
+                alert('Calculateur non initialisé');
+                return;
+            }
+
+            const performanceBtn = document.getElementById('performanceBtn');
+            const resultsDiv = document.getElementById('performanceResults');
+            
+            performanceBtn.disabled = true;
+            performanceBtn.textContent = 'Test en cours...';
+            
+            resultsDiv.innerHTML = '<div class="warning">⏳ Test performance cache vs sans cache...</div>';
+
+            // Test avec cache
+            const needs = { copper: 15, silver: 8, electrum: 5, gold: 10, platinum: 3 };
+            
+            // Premier calcul (cache miss)
+            const startMiss = performance.now();
+            const result1 = calculator.recommend(needs.copper, needs.silver, needs.electrum, needs.gold, needs.platinum);
+            const timeMiss = performance.now() - startMiss;
+            
+            // Deuxième calcul (cache hit)
+            const startHit = performance.now();
+            const result2 = calculator.recommend(needs.copper, needs.silver, needs.electrum, needs.gold, needs.platinum);
+            const timeHit = performance.now() - startHit;
+            
+            // Vérifier que les résultats sont identiques
+            const resultsIdentical = JSON.stringify(result1) === JSON.stringify(result2);
+            const speedupFactor = timeMiss / timeHit;
+            const speedupPercentage = ((timeMiss - timeHit) / timeMiss) * 100;
+            
+            resultsDiv.innerHTML = `
+                <div class="success">✅ Test Performance Terminé</div>
+                <div><strong>Premier calcul (cache miss):</strong> ${timeMiss.toFixed(2)}ms</div>
+                <div><strong>Deuxième calcul (cache hit):</strong> ${timeHit.toFixed(2)}ms</div>
+                <div><strong>Résultats identiques:</strong> ${resultsIdentical ? '✅ Oui' : '❌ Non'}</div>
+                <div><strong>Facteur accélération:</strong> ${speedupFactor.toFixed(1)}x</div>
+                <div><strong>Gain performance:</strong> ${speedupPercentage.toFixed(1)}%</div>
+                <div><strong>Recommandation:</strong> ${result1.length} produits suggérés</div>
+            `;
+            
+            performanceBtn.disabled = false;
+            performanceBtn.textContent = 'Test Performance';
+        }
+
+        // === CONTRÔLES CACHE ===
+        function clearCache() {
+            if (calculator && calculator.cache) {
+                calculator.cache.clear();
+                updateStats();
+                document.getElementById('cacheControls').innerHTML = '<div class="success">✅ Cache vidé</div>';
+            }
+        }
+
+        function showCacheContents() {
+            if (calculator && calculator.cache) {
+                const contents = Array.from(calculator.cache.keys()).slice(0, 10);
+                document.getElementById('cacheControls').innerHTML = `
+                    <div><strong>Échantillon du cache (${contents.length}/${calculator.cache.size}):</strong></div>
+                    ${contents.map(key => `<div style="font-size: 0.8em; margin: 2px 0;">${key}</div>`).join('')}
+                `;
+            }
+        }
+
+        function generateCacheStats() {
+            if (calculator && calculator.cache) {
+                const cacheKeys = Array.from(calculator.cache.keys());
+                const avgKeyLength = cacheKeys.reduce((sum, key) => sum + key.length, 0) / cacheKeys.length;
+                
+                document.getElementById('cacheControls').innerHTML = `
+                    <div><strong>Statistiques Cache Détaillées:</strong></div>
+                    <div>• Nombre d'entrées: ${calculator.cache.size}</div>
+                    <div>• Longueur moyenne clé: ${avgKeyLength.toFixed(1)} caractères</div>
+                    <div>• Mémoire estimée: ${(calculator.cache.size * avgKeyLength * 2).toFixed(0)} bytes</div>
+                    <div>• Taux de remplissage: ${(calculator.cache.size / 1000 * 100).toFixed(1)}%</div>
+                `;
+            }
+        }
+
+        // === MISE À JOUR STATS ===
+        function updateStats() {
+            if (calculator && calculator.cache) {
+                document.getElementById('cacheSize').textContent = calculator.cache.size;
+            }
+            document.getElementById('testsCount').textContent = testStats.totalTests;
+            document.getElementById('cacheHits').textContent = testStats.cacheHits;
+            if (testStats.totalTests > 0) {
+                document.getElementById('avgTime').textContent = (testStats.totalTime / testStats.totalTests).toFixed(2) + 'ms';
+            }
+        }
+
+        // === INITIALISATION AUTOMATIQUE ===
+        window.addEventListener('load', initializeCalculator);
+    </script>
+</body>
+</html>

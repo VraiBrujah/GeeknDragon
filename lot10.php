@@ -1,4 +1,5 @@
 <?php
-header('Location: product.php?id=lot10' . (isset($_GET['from']) ? '&from=' . urlencode($_GET['from']) : ''), true, 301);
+// Redirection automatique vers le nouvel ID
+header('Location: product.php?id=coin-traveler-offering' . (isset($_GET['from']) ? '&from=' . urlencode($_GET['from']) : ''));
 exit;
 ?>

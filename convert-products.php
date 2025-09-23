@@ -29,7 +29,9 @@ echo $result['message'] . PHP_EOL;
 
 if ($result['success']) {
     $products = json_decode(file_get_contents('data/products.json'), true);
-    echo 'Prix mis a jour: ' . $products['piece-personnalisee']['price'] . ' euros' . PHP_EOL;
+    // Prix du premier produit trouvé comme exemple
+$firstProduct = reset($products);
+echo 'Prix mis a jour: ' . ($firstProduct['price'] ?? '0') . ' euros' . PHP_EOL;
     echo 'Nombre de produits: ' . count($products) . PHP_EOL;
 } else {
     echo "ERREUR lors de la conversion!" . PHP_EOL;

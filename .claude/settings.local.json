@@ -48,7 +48,8 @@
       "Bash(lsof:*)",
       "Bash(del:*)",
       "Bash(wmic:*)",
-      "Bash(CONVERTIR.cmd)"
+      "Bash(CONVERTIR.cmd)",
+      "Bash(awk:*)"
     ],
     "deny": [],
     "ask": []

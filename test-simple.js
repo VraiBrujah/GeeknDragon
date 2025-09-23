@@ -3,7 +3,7 @@ console.log('🧪 Test de la logique de recommandation...');
 
 // Mock des données produits
 const mockProducts = {
-  "piece-personnalisee": {
+  "coin-custom-single": {
     "name": "Pièce Personnalisée",
     "price": 15,
     "multipliers": [1, 10, 100, 1000, 10000],
@@ -11,13 +11,13 @@ const mockProducts = {
     "customizable": true,
     "metals": ["cuivre", "argent", "électrum", "or", "platine"]
   },
-  "lot10": {
+  "coin-traveler-offering": {
     "name": "Offrande du Voyageur",
     "price": 60,
     "multipliers": [1, 10, 100, 1000, 10000],
     "coin_lots": { "copper": 2, "silver": 2, "electrum": 2, "gold": 2, "platinum": 2 }
   },
-  "lot25": {
+  "coin-five-realms-complete": {
     "name": "La Monnaie des Cinq Royaumes",
     "price": 145,
     "multipliers": [],

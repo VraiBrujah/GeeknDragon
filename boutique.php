@@ -91,14 +91,16 @@ foreach ($data as $id => $p) {
         'customizable' => $p['customizable'] ?? false,
     ];
     
-    // Catégorisation des produits
-    if (str_starts_with($id, 'lot') || str_starts_with($id, 'piece') || str_contains($id, 'essence') || str_contains($id, 'tresorerie')) {
+    // Catégorisation des produits basée sur la colonne 'category' du CSV
+    $category = $p['category'] ?? 'cards'; // Par défaut 'cards' si pas défini
+    
+    if ($category === 'pieces') {
         $product['url'] = 'product.php?id=' . urlencode($id) . '&from=pieces';
         $pieces[] = $product;
-    } elseif (str_starts_with($id, 'triptyque')) {
+    } elseif ($category === 'triptychs') {
         $product['url'] = 'product.php?id=' . urlencode($id) . '&from=triptychs';
         $triptychs[] = $product;
-    } else {
+    } else { // 'cards' ou toute autre valeur
         $product['url'] = 'product.php?id=' . urlencode($id) . '&from=cards';
         $cards[] = $product;
     }

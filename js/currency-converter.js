@@ -1,23 +1,16 @@
-// Convertisseur de monnaie Premium avec synchronisation temps réel
+// Convertisseur de monnaie autonome avec détection dynamique des éléments DOM
 class CurrencyConverterPremium {
   constructor() {
     this.rates = {copper: 1, silver: 10, electrum: 50, gold: 100, platinum: 1000};
     this.multipliers = [1, 10, 100, 1000, 10000];
     this.nf = new Intl.NumberFormat('fr-FR');
-    this.editMode = true; // Édition activée par défaut
+    this.editMode = true;
     
-    this.sourceInputs = document.querySelectorAll('#currency-converter-premium input[data-currency]');
-    this.multiplierInputs = document.querySelectorAll('.multiplier-input');
-    this.bestDisplay = document.getElementById('currency-best');
-    
-    // Références vers les cartes positionnées
-    this.metalCards = {
-      copper: document.getElementById('copper-card'),
-      silver: document.getElementById('silver-card'),
-      electrum: document.getElementById('electrum-card'),
-      gold: document.getElementById('gold-card'),
-      platinum: document.getElementById('platinum-card')
-    };
+    // Références dynamiques aux éléments DOM
+    this.sourceInputs = null;
+    this.multiplierInputs = null;
+    this.bestDisplay = null;
+    this.metalCards = {};
     
     this.currencyData = {
       copper: { name: 'Cuivre', nameEn: 'Copper', emoji: '🪙', color: 'amber' },
@@ -27,15 +20,53 @@ class CurrencyConverterPremium {
       platinum: { name: 'Platine', nameEn: 'Platinum', emoji: '💎', color: 'cyan' }
     };
 
-    // Initialiser le recommandeur de lots
-    this.lotsRecommender = new CoinLotsRecommender();
+    // Callbacks pour les événements de changement
+    this.changeCallbacks = [];
     
     this.init();
   }
   
   init() {
+    this.refreshDOMReferences();
     this.setupEventListeners();
     this.updateDisplay();
+  }
+  
+  // Méthode pour rafraîchir dynamiquement les références DOM
+  refreshDOMReferences() {
+    // Tentative de détection des différents types de convertisseurs
+    const container = document.getElementById('currency-converter-premium');
+    if (container) {
+      this.sourceInputs = container.querySelectorAll('input[data-currency]');
+      this.multiplierInputs = container.querySelectorAll('.multiplier-input');
+      this.bestDisplay = document.getElementById('currency-best');
+      
+      // Références dynamiques aux cartes
+      Object.keys(this.currencyData).forEach(currency => {
+        const cardElement = document.getElementById(`${currency}-card`);
+        if (cardElement) {
+          this.metalCards[currency] = cardElement;
+        }
+      });
+    }
+  }
+  
+  // Méthode pour ajouter des callbacks d'événements
+  onChange(callback) {
+    if (typeof callback === 'function') {
+      this.changeCallbacks.push(callback);
+    }
+  }
+  
+  // Méthode pour notifier les changements
+  notifyChange(data) {
+    this.changeCallbacks.forEach(callback => {
+      try {
+        callback(data);
+      } catch (error) {
+        console.warn('Erreur dans callback du convertisseur:', error);
+      }
+    });
   }
   
   getCurrentLang() {
@@ -67,7 +98,10 @@ class CurrencyConverterPremium {
   setupEventListeners() {
     // Utilisation de la délégation d'événements pour réduire le nombre de listeners
     const converterContainer = document.getElementById('currency-converter-premium');
-    if (!converterContainer) return;
+    if (!converterContainer) {
+      console.warn('Container currency-converter-premium non trouvé');
+      return;
+    }
     
     // Débounce pour éviter les calculs trop fréquents
     const debounce = (func, delay) => {
@@ -78,8 +112,15 @@ class CurrencyConverterPremium {
       };
     };
     
-    const debouncedUpdateSources = debounce(() => this.updateFromSources(), 150);
-    const debouncedUpdateMultipliers = debounce(() => this.updateFromMultipliers(), 150);
+    const debouncedUpdateSources = debounce(() => {
+      this.updateFromSources();
+      this.notifyChange(this.getCurrentValues());
+    }, 150);
+    
+    const debouncedUpdateMultipliers = debounce(() => {
+      this.updateFromMultipliers();
+      this.notifyChange(this.getCurrentValues());
+    }, 150);
     
     // Délégation d'événements sur le container principal
     converterContainer.addEventListener('input', (e) => {
@@ -99,7 +140,39 @@ class CurrencyConverterPremium {
     }, { passive: true });
   }
   
+  // Méthode pour obtenir les valeurs actuelles du convertisseur
+  getCurrentValues() {
+    if (!this.sourceInputs) {
+      this.refreshDOMReferences();
+    }
+    
+    const values = { copper: 0, silver: 0, electrum: 0, gold: 0, platinum: 0 };
+    const baseValue = this.getTotalBaseValue();
+    
+    if (this.sourceInputs) {
+      this.sourceInputs.forEach(input => {
+        const currency = input.dataset.currency;
+        const amount = Math.max(0, parseInt(input.value) || 0);
+        values[currency] = amount;
+      });
+    }
+    
+    return {
+      values,
+      baseValue,
+      breakdown: this.getOptimalBreakdown(baseValue)
+    };
+  }
+  
   getTotalBaseValue() {
+    if (!this.sourceInputs) {
+      this.refreshDOMReferences();
+    }
+    
+    if (!this.sourceInputs || this.sourceInputs.length === 0) {
+      return 0;
+    }
+    
     return Array.from(this.sourceInputs).reduce((sum, input) => {
       const currency = input.dataset.currency;
       const amount = Math.max(0, parseInt(input.value) || 0);
@@ -120,7 +193,6 @@ class CurrencyConverterPremium {
     
     this.updateMetalCards(baseValue);
     this.updateOptimalRecommendations(baseValue);
-    this.updateCoinLotsRecommendations(baseValue);
   }
   
   updateFromMultipliers() {
@@ -142,7 +214,6 @@ class CurrencyConverterPremium {
     this.distributeOptimally(totalValue);
     this.updateMetalCards(totalValue);
     this.updateOptimalRecommendations(totalValue);
-    this.updateCoinLotsRecommendations(totalValue);
   }
   
   distributeOptimally(totalValue) {
@@ -163,12 +234,16 @@ class CurrencyConverterPremium {
   updateMetalCards(baseValue) {
     if (baseValue === 0) {
       Object.keys(this.metalCards).forEach(currency => {
-        this.metalCards[currency].innerHTML = '';
+        if (this.metalCards[currency]) {
+          this.metalCards[currency].innerHTML = '';
+        }
       });
       return;
     }
     
     Object.keys(this.rates).forEach(currency => {
+      if (!this.metalCards[currency]) return;
+      
       const data = this.currencyData[currency];
       const rate = this.rates[currency];
       const totalUnits = Math.floor(baseValue / rate);
@@ -351,6 +426,12 @@ class CurrencyConverterPremium {
   }
   
   updateOptimalRecommendations(baseValue) {
+    if (!this.bestDisplay) {
+      this.refreshDOMReferences();
+    }
+    
+    if (!this.bestDisplay) return;
+    
     if (baseValue === 0) {
       const enterAmountsText = this.getTranslation('shop.converter.enterAmounts', 'Entrez des montants pour voir les recommandations optimales');
       this.bestDisplay.innerHTML = enterAmountsText;
@@ -413,41 +494,6 @@ class CurrencyConverterPremium {
     return minimalPieces;
   }
   
-  updateCoinLotsRecommendations(baseValue) {
-    const recommendationsContainer = document.getElementById('coin-lots-recommendations');
-    
-    if (!recommendationsContainer) {
-      return; // Le conteneur n'existe pas encore
-    }
-
-    if (baseValue === 0) {
-      recommendationsContainer.style.display = 'none';
-      return;
-    }
-
-    // Afficher la section
-    recommendationsContainer.style.display = 'block';
-
-    // Calculer la répartition optimale des pièces
-    const coinsBreakdown = this.lotsRecommender.getOptimalCoinsBreakdown(baseValue);
-    
-    // Calculer les lots minimaux recommandés
-    const recommendedLots = this.lotsRecommender.calculateMinimalLots(coinsBreakdown);
-    
-    // Mettre à jour l'affichage
-    const recommendationsContent = document.getElementById('coin-lots-content');
-    const addToCartButton = document.getElementById('add-all-lots-to-cart');
-    
-    if (recommendationsContent) {
-      recommendationsContent.innerHTML = this.lotsRecommender.formatRecommendation(recommendedLots);
-    }
-
-    // Stocker les données pour l'ajout au panier
-    if (addToCartButton) {
-      addToCartButton.dataset.lotsData = JSON.stringify(this.lotsRecommender.generateCartData(recommendedLots));
-      addToCartButton.style.display = recommendedLots.length > 0 ? 'block' : 'none';
-    }
-  }
 
   updateDisplay() {
     this.updateFromSources();

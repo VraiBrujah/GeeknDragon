@@ -1,5 +1,5 @@
 {
-    "piece-personnalisee": {
+    "coin-custom-single": {
         "name": "Pièce Personnalisée",
         "name_en": "Custom Coin",
         "price": 10,
@@ -42,9 +42,10 @@
             "gold": 1,
             "platinum": 1
         },
-        "customizable": true
+        "customizable": true,
+        "category": "pieces"
     },
-    "lot3-pieces": {
+    "coin-trio-customizable": {
         "name": "Trio de Pièces",
         "name_en": "Trio of Coins",
         "price": 25,
@@ -87,9 +88,10 @@
             "gold": 3,
             "platinum": 3
         },
-        "customizable": true
+        "customizable": true,
+        "category": "pieces"
     },
-    "lot5-metaux": {
+    "coin-quintessence-metals": {
         "name": "Quintessence Métallique",
         "name_en": "Metal Quintessence",
         "price": 35,
@@ -118,9 +120,10 @@
             "gold": 1,
             "platinum": 1
         },
-        "customizable": true
+        "customizable": true,
+        "category": "pieces"
     },
-    "lot7-pieces-libre": {
+    "coin-septuple-free": {
         "name": "Septuple Libre",
         "name_en": "Free Septuple",
         "price": 50,
@@ -163,9 +166,10 @@
             "gold": 7,
             "platinum": 7
         },
-        "customizable": true
+        "customizable": true,
+        "category": "pieces"
     },
-    "lot10": {
+    "coin-traveler-offering": {
         "name": "Offrande du Voyageur",
         "name_en": "The Traveler Offering",
         "price": 60,
@@ -198,9 +202,10 @@
             "gold": 2,
             "platinum": 2
         },
-        "customizable": false
+        "customizable": false,
+        "category": "pieces"
     },
-    "lot25": {
+    "coin-five-realms-complete": {
         "name": "La Monnaie des Cinq Royaumes",
         "name_en": "Currency of the Five Realms",
         "price": 145,
@@ -257,9 +262,10 @@
                 "10000": 1
             }
         },
-        "customizable": false
+        "customizable": false,
+        "category": "pieces"
     },
-    "lot50-essence": {
+    "coin-merchant-essence-double": {
         "name": "Essence du Marchand",
         "name_en": "Essence of the Merchant",
         "price": 275,
@@ -316,9 +322,10 @@
                 "10000": 2
             }
         },
-        "customizable": false
+        "customizable": false,
+        "category": "pieces"
     },
-    "lot50-tresorerie": {
+    "coin-lord-treasury-uniform": {
         "name": "La Trésorerie du Seigneur",
         "name_en": "The Lord's Treasury",
         "price": 275,
@@ -351,90 +358,75 @@
             "gold": 10,
             "platinum": 10
         },
-        "customizable": false
+        "customizable": false,
+        "category": "pieces"
     },
-    "pack-10-cartes-aleatoires": {
+    "cards-random-discovery-10": {
         "name": "10 Cartes Surprise",
         "name_en": "10 Random Cards",
         "price": 10,
-        "description": "### Découverte aléatoire\n**10 cartes tirées au sort** dans nos collections. Choisissez simplement votre catégorie préférée et laissez-vous surprendre !\n**Catégories disponibles :**\n- **Totalement aléatoire** : mélange de toutes nos cartes\n- **Armes** : mêlée & distance\n- **Armures** : protection & boucliers\n- **Équipement** : outils d'aventure\n- **Butin** : trésors & artefacts\n- **Services** : voyages & commerce\n- **Explosifs** : matériel moderne\n- **Véhicules** : moyens de transport\n- **Poisons** : substances dangereuses\n*Parfait pour découvrir nos cartes ou compléter une collection !*",
-        "description_en": "### Random discovery\n**10 randomly drawn cards** from our collections. Simply choose your preferred category and let yourself be surprised!\n**Available categories:**\n- **Totally random**: mix of all our cards\n- **Weapons**: melee & ranged\n- **Armor**: protection & shields\n- **Equipment**: adventure tools\n- **Loot**: treasures & artifacts\n- **Services**: travel & trade\n- **Explosives**: modern gear\n- **Vehicles**: means of transport\n- **Poisons**: dangerous substances\n*Perfect for discovering our cards or completing a collection!*",
-        "summary": "Paquet de dix cartes surprises selon la catégorie choisie pour découvrir ou compléter la collection.",
-        "summary_en": "Pack of ten surprise cards in the chosen category to discover or round out the collection.",
+        "description": "### Découverte aléatoire",
+        "description_en": "cards",
+        "summary": "cards",
+        "summary_en": "",
         "images": [
-            "/media/products/cards/arme-recto.webp",
-            "/media/products/cards/alexandrite-recto.webp",
-            "/media/products/cards/sac-aa-dos-recto.webp",
-            "/media/products/cards/bombe-recto.webp"
+            "/media/products/cards/alexandrite-recto.webp"
         ],
         "multipliers": [],
-        "languages": [
-            "FR",
-            "EN"
-        ],
-        "customizable": false
+        "customizable": false,
+        "category": "cards"
     },
-    "pack-57-armes-armures": {
+    "cards-weapons-armor-57": {
         "name": "Armes & Armures",
         "name_en": "Weapons & Armor",
-        "price": 19.95,
-        "description": "### Combat complet - 57 cartes\nCollection parfaite des **44 armes** et **13 armures** : tout l'équipement nécessaire pour équiper et protéger votre groupe au combat.\n**Contenu :**\n- **44 armes complètes** : mêlée, distance, exotiques\n- **13 armures** : légères, intermédiaires, lourdes\n- **Protection totale** pour tous les styles de combat\n- **Arsenal complet** sans superflu\n*L'essentiel du combat en un seul paquet !*",
-        "description_en": "### Complete combat - 57 cards\nPerfect collection of **44 weapons** and **13 armors**: all the equipment needed to arm and protect your party in combat.\n**Contents:**\n- **44 complete weapons**: melee, ranged, exotic\n- **13 armors**: light, medium, heavy\n- **Total protection** for every fighting style\n- **Complete arsenal** without excess\n*Combat essentials in one package!*",
-        "summary": "Collection de 57 cartes d'armes et armures pour équiper complètement un groupe.",
-        "summary_en": "Collection of 57 weapon and armor cards to fully equip a party.",
+        "price": 20,
+        "description": "### Combat complet - 57 cartes",
+        "description_en": "cards",
+        "summary": "cards",
+        "summary_en": "",
         "images": [
             "/media/products/cards/arme-recto.webp",
             "/media/products/cards/armure-recto.webp"
         ],
         "multipliers": [],
-        "languages": [
-            "FR",
-            "EN"
-        ],
-        "customizable": false
+        "customizable": false,
+        "category": "cards"
     },
-    "pack-65-paquetages": {
+    "cards-adventure-packs-65": {
         "name": "Paquetages d'Aventure",
         "name_en": "Adventure Packs",
-        "price": 22.75,
-        "description": "### Équipement par background - 65 cartes\nCollection complète des **65 paquetages** spécialisés selon les backgrounds : artiste, cambrioleur, diplomate, érudit, explorateur et plus.\n**Contenu :**\n- **7 paquetages complets** pour tous les backgrounds\n- **Équipement spécialisé** selon le profil du personnage\n- **Matériel de survie** adapté aux missions spécifiques\n- **Immersion totale** dans le rôle choisi\n*Équipez votre personnage selon son histoire !*",
-        "description_en": "### Equipment by background - 65 cards\nComplete collection of **65 specialized packs** according to backgrounds: artist, burglar, diplomat, scholar, explorer, and more.\n**Contents:**\n- **7 complete packs** for every background\n- **Specialized equipment** according to character profile\n- **Survival gear** adapted to specific missions\n- **Total immersion** in the chosen role\n*Equip your character according to their story!*",
-        "summary": "Collection de 65 cartes de paquetages spécialisés pour équiper selon le background.",
-        "summary_en": "Collection of 65 specialized pack cards to equip according to background.",
+        "price": 23,
+        "description": "### Équipement par background - 65 cartes",
+        "description_en": "cards",
+        "summary": "cards",
+        "summary_en": "",
         "images": [
             "/media/products/cards/sac-aa-dos-recto.webp"
         ],
         "multipliers": [],
-        "languages": [
-            "FR",
-            "EN"
-        ],
-        "customizable": false
+        "customizable": false,
+        "category": "cards"
     },
-    "pack-70-explosifs-outils": {
+    "cards-explosives-tools-70": {
         "name": "Explosifs & Outils",
         "name_en": "Explosives & Tools",
-        "price": 24.5,
-        "description": "### Arsenal spécialisé - 70 cartes\nCollection tactique de **70 cartes** : explosifs modernes, outils d'artisan et poisons pour campagnes qui sortent de l'ordinaire.\n**Contenu :**\n- **20 explosifs** : grenades, bombes, charges explosives\n- **37 outils spécialisés** : artisanat, crochetage, alchimie\n- **13 poisons** : effets variés et substances dangereuses\n- **Matériel moderne** pour campagnes avancées\n*Pour des aventures qui repoussent les limites !*",
-        "description_en": "### Specialized arsenal - 70 cards\nTactical collection of **70 cards**: modern explosives, craftsman tools, and poisons for campaigns that break the mold.\n**Contents:**\n- **20 explosives**: grenades, bombs, explosive charges\n- **37 specialized tools**: crafting, lockpicking, alchemy\n- **13 poisons**: varied effects and dangerous substances\n- **Modern equipment** for advanced campaigns\n*For adventures that push the boundaries!*",
-        "summary": "Collection de 70 cartes d'explosifs, outils et poisons pour campagnes avancées.",
-        "summary_en": "Collection of 70 explosive, tool, and poison cards for advanced campaigns.",
+        "price": 25,
+        "description": "### Arsenal spécialisé - 70 cartes",
+        "description_en": "cards",
+        "summary": "cards",
+        "summary_en": "",
         "images": [
             "/media/products/cards/bombe-recto.webp",
-            "/media/products/cards/mataerield-alchimiste-recto.webp",
-            "/media/products/cards/sang-d-assassin-recto.webp"
+            "/media/products/cards/mataerield-alchimiste-recto.webp"
         ],
         "multipliers": [],
-        "languages": [
-            "FR",
-            "EN"
-        ],
-        "customizable": false
+        "customizable": false,
+        "category": "cards"
     },
-    "pack-145-services-vehicules": {
+    "cards-services-vehicles-145": {
         "name": "Services & Véhicules",
         "name_en": "Services & Vehicles",
-        "price": 50.75,
+        "price": 50,
         "description": "### Voyage et logistique - 145 cartes Collection étendue de **145 cartes** pour organiser voyages et missions : services d'auberge, transport et tous types de véhicules. **Contenu :**\\n- **63 services** : auberges, soins, mercenaires, passeurs\\n- **54 véhicules** : terrestres, marins, aériens\\n- **28 cartes de règles** : pour maîtriser voyages et logistique *Tout pour voyager et s'organiser en campagne !*",
         "description_en": "### Travel and logistics - 117 cards Extended collection of **117 cards** to organize travels and missions: inn services, transport, and all types of vehicles. **Contents:** *Everything to travel and organize in campaigns!*",
         "summary": "Collection de 145 cartes de services et véhicules pour organiser voyages et missions.",
@@ -448,12 +440,13 @@
             "FR",
             "EN"
         ],
-        "customizable": false
+        "customizable": false,
+        "category": "cards"
     },
-    "pack-316-butins-ingenieries": {
+    "cards-loot-engineering-316": {
         "name": "Butins & Ingénieries",
         "name_en": "Loot & Engineering",
-        "price": 110.6,
+        "price": 100,
         "description": "### Butin • Explosifs & armes modernes/futuristes • Marchandises • Outils - 316 cartes Pour des campagnes qui osent : trésors variés, matériel instable, techno-reliques et les indispensables de l'artisan. **Contenu :**\\n- **204 butins** : trésors, gemmes, artefacts\\n- **27 marchandises** : biens de commerce\\n- **20 explosifs** : grenades, bombes, charges\\n- **37 outils** : artisanat, crochetage, alchimie\\n- **28 cartes de règles** : pour maîtriser ces équipements *Injecte de la variété et des choix tactiques — du troc de marché au braquage high-fantasy.*",
         "description_en": "### Loot • Explosives & Modern/Futuristic Weapons • Trade Goods • Tools For campaigns that push the envelope: varied treasures, volatile hardware, techno-relics, and every crafter's staple. **Contents:** *Add variety and tactical choices — from market bartering to high-fantasy heists.*",
         "summary": "Cartes de butin et matériel exotique mêlant trésors, explosifs et outils pour campagnes audacieuses.",
@@ -469,12 +462,13 @@
             "FR",
             "EN"
         ],
-        "customizable": false
+        "customizable": false,
+        "category": "cards"
     },
-    "pack-223-routes-services": {
+    "cards-roads-services-223": {
         "name": "Routes & Services",
         "name_en": "Roads & Services",
-        "price": 78.05,
+        "price": 75,
         "description": "### Paquetages • Services • Véhicules • Poisons - 223 cartes Tout pour mettre le monde en mouvement : prépare tes PJ, voyage, négocie, et risque avec des cartes claires et pratiques. **Contenu :**\\n- **65 paquetages** : 7 types selon les backgrounds\\n- **63 services** : auberges, soins, mercenaires\\n- **54 véhicules** : terrestres, marins, aériens\\n- **13 poisons** : substances dangereuses\\n- **28 cartes de règles** : pour maîtriser voyages et services *Parfait pour les campagnes orientées exploration, voyage et intrigue.*",
         "description_en": "### Packs • Services • Vehicles • Poisons Everything to set your world in motion: ready your PCs, travel, bargain, and take risks with clean, table-friendly cards. **Contents:** *Perfect for exploration-, travel- and intrigue-heavy campaigns.*",
         "summary": "Sélection de cartes dédiées aux voyages, services, véhicules et poisons pour dynamiser l'exploration.",
@@ -490,12 +484,13 @@
             "FR",
             "EN"
         ],
-        "customizable": false
+        "customizable": false,
+        "category": "cards"
     },
-    "pack-226-arsenal-aventurier": {
+    "cards-adventurer-arsenal-226": {
         "name": "Arsenal de l'Aventurier",
         "name_en": "Adventurer's Arsenal",
-        "price": 79.1,
+        "price": 75,
         "description": "### Armes • Armures • Équipement - 226 cartes Un lot massif et prêt-à-jouer pour équiper tout un groupe : armes classiques et exotiques, protections pour chaque style, et l'essentiel d'aventure en cartes illustrées. **Contenu :**\\n- **44 armes complètes** : mêlée, distance, exotiques\\n- **13 armures** : légères, intermédiaires, lourdes\\n- **141 équipements** : outils d'aventure essentiels\\n- **28 cartes de règles** : pour maîtriser votre équipement *Idéal pour la table : pioche, pose, échange — fini la fouille dans le manuel.*",
         "description_en": "### Weapons • Armor • Equipment A massive, ready-to-play bundle to outfit an entire party: classic and exotic weapons, protection for every build, and all the adventuring essentials as illustrated cards. **Contents:** *Perfect at the table: draw, place, trade — no more digging through the rulebook.*",
         "summary": "Boîte de cartes illustrées couvrant armes, armures et équipement pour équiper immédiatement un groupe.",
@@ -511,9 +506,10 @@
             "FR",
             "EN"
         ],
-        "customizable": false
+        "customizable": false,
+        "category": "cards"
     },
-    "triptyque-aleatoire": {
+    "triptych-mystery-hero": {
         "name": "Triptyques Mystères",
         "name_en": "Mystery Triptychs",
         "price": 60,
@@ -528,6 +524,7 @@
             "/media/game/triptychs/examples/race-aasimar-verso.webp"
         ],
         "multipliers": [],
-        "customizable": false
+        "customizable": false,
+        "category": "triptychs"
     }
 }
