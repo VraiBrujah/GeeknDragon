@@ -549,58 +549,181 @@ class CurrencyConverterPremium {
     const recommendationsContainer = document.getElementById('coin-lots-recommendations');
     if (!recommendationsContainer) return;
     
-    // Toujours afficher la section
     recommendationsContainer.style.display = 'block';
     
     if (baseValue === 0) {
-      // Afficher un message d'invitation au lieu de cacher
       this.displayDefaultRecommendationMessage();
       return;
     }
     
-    // Afficher l'indicateur de calcul immédiatement
+    // Afficher l'indicateur de calcul avec boulier
     this.showCalculatingIndicator();
     
-    // Calculer les besoins en pièces depuis les valeurs sources
-    const values = this.getCurrentValues();
-    const { copper, silver, electrum, gold, platinum } = values.values;
-    
-    // Utilisation non-bloquante avec setTimeout pour performances
+    // Utilisation non-bloquante avec timeout de sécurité
     setTimeout(() => {
-      let recommendations = [];
+      try {
+        // Utiliser la métaheuristique pour trouver les lots optimaux
+        const optimalSolution = this.findMinimalCoins(baseValue);
+        const recommendations = this.convertSolutionToLots(optimalSolution);
+        
+        if (recommendations && recommendations.length > 0) {
+          this.displayRecommendations(recommendations);
+        } else {
+          this.displayNoRecommendationsMessage();
+        }
+      } catch (error) {
+        console.error('Erreur calcul recommandations:', error);
+        this.displayNoRecommendationsMessage();
+      } finally {
+        this.hideCalculatingIndicator();
+      }
+    }, 100);
+  }
+  
+  convertSolutionToLots(solution) {
+    if (!solution || !window.products) return [];
+    
+    const recommendations = [];
+    
+    // Pour chaque pièce nécessaire, trouver la solution la moins chère
+    solution.forEach(item => {
+      const bestOption = this.findCheapestProductForCoin(item.currency, item.multiplier, item.quantity);
+      if (bestOption) {
+        recommendations.push(bestOption);
+      }
+    });
+    
+    return recommendations;
+  }
+  
+  findCheapestProductForCoin(currency, multiplier, quantity) {
+    if (!window.products) return null;
+    
+    // Mappage simple des noms de devises FR vers EN pour compatibilité
+    const currencyMapping = {
+      'cuivre': 'copper',
+      'argent': 'silver', 
+      'électrum': 'electrum',
+      'or': 'gold',
+      'platine': 'platinum',
+      'copper': 'copper',
+      'silver': 'silver',
+      'electrum': 'electrum', 
+      'gold': 'gold',
+      'platinum': 'platinum'
+    };
+    
+    const metalName = currencyMapping[currency] || currency;
+    const metalNameFr = {
+      'copper': 'cuivre',
+      'silver': 'argent',
+      'electrum': 'électrum', 
+      'gold': 'or',
+      'platinum': 'platine'
+    }[metalName] || metalName;
+    
+    // Option 1: Pièce personnalisée (toujours disponible, prix fixe 10$)
+    const customCoinPrice = quantity * 10; // 10$ par pièce
+    
+    let bestOption = {
+      productId: 'coin-custom-single',
+      quantity: quantity,
+      price: window.products['coin-custom-single']?.price || 10,
+      totalCost: customCoinPrice,
+      displayName: `Pièce Personnalisée (${metalNameFr} ×${multiplier})`,
+      customFields: {
+        custom1: {
+          name: 'Metal',
+          type: 'dropdown', 
+          value: metalNameFr,
+          role: 'metal'
+        },
+        custom2: {
+          name: 'Multiplicateur',
+          type: 'dropdown',
+          value: multiplier.toString(),
+          role: 'multiplier'
+        }
+      }
+    };
+    
+    // Option 2: Rechercher des lots plus avantageux
+    Object.entries(window.products).forEach(([id, product]) => {
+      if (!id.startsWith('coin-') || !product.coin_lots) return;
       
-      // Utiliser le nouvel analyseur si disponible
-      if (window.CoinLotAnalyzer && window.products) {
-        try {
-          const analyzer = new window.CoinLotAnalyzer(window.products);
-          const optimalLots = analyzer.getRecommendations(copper, silver, electrum, gold, platinum);
-          
-          // Convertir en format attendu
-          recommendations = optimalLots.map(lot => ({
-            productId: lot.productId,
-            quantity: lot.quantity,
-            price: lot.price,
-            displayName: lot.displayName,
-            customFields: lot.customFields
-          }));
-        } catch (error) {
-          console.error('Erreur dans CoinLotAnalyzer:', error);
+      const lotForCurrency = product.coin_lots[metalName];
+      if (!lotForCurrency) return;
+      
+      let coinsPerProduct = 0;
+      let canProvide = false;
+      
+      if (product.customizable) {
+        // Produit personnalisable : vérifier si métal et multiplicateur disponibles
+        if (product.metals?.includes(metalNameFr) && product.multipliers?.includes(multiplier)) {
+          coinsPerProduct = lotForCurrency * multiplier;
+          canProvide = true;
+        }
+      } else {
+        // Produit fixe : vérifier structure exacte
+        if (typeof lotForCurrency === 'number') {
+          // Format simple: coin_lots.copper = 5 (avec multiplicateur séparé)
+          if (product.multipliers?.includes(multiplier)) {
+            coinsPerProduct = lotForCurrency * multiplier;
+            canProvide = true;
+          }
+        } else if (typeof lotForCurrency === 'object') {
+          // Format détaillé: coin_lots.copper.1 = 5
+          const exactLot = lotForCurrency[multiplier];
+          if (exactLot) {
+            coinsPerProduct = exactLot;
+            canProvide = true;
+          }
         }
       }
       
-      // Fallback vers l'ancienne méthode si nécessaire
-      if (recommendations.length === 0 && window.convertCoinsToLots) {
-        recommendations = window.convertCoinsToLots(copper, silver, electrum, gold, platinum);
+      if (canProvide && coinsPerProduct > 0) {
+        const productsNeeded = Math.ceil(quantity / coinsPerProduct);
+        const totalCost = productsNeeded * product.price;
+        
+        // Si c'est moins cher que l'option actuelle
+        if (totalCost < bestOption.totalCost) {
+          bestOption = {
+            productId: id,
+            quantity: productsNeeded,
+            price: product.price,
+            totalCost: totalCost,
+            displayName: product.customizable 
+              ? `${product.name} (${metalNameFr} ×${multiplier})`
+              : product.name,
+            customFields: product.customizable ? {
+              custom1: {
+                name: 'Metal',
+                type: 'dropdown',
+                value: metalNameFr,
+                role: 'metal'
+              },
+              custom2: {
+                name: 'Multiplicateur', 
+                type: 'dropdown',
+                value: multiplier.toString(),
+                role: 'multiplier'
+              }
+            } : {}
+          };
+        }
       }
-      
-      if (recommendations && recommendations.length > 0) {
-        this.displayRecommendations(recommendations);
-      } else {
-        this.displayNoRecommendationsMessage();
-      }
-      
-      this.hideCalculatingIndicator();
-    }, 50); // Délai minimal pour éviter le blocage
+    });
+    
+    return bestOption;
+  }
+  
+  
+  generateDisplayNameForProduct(product, coinItem) {
+    const lang = this.getCurrentLang();
+    const baseName = lang === 'en' ? (product.name_en || product.name) : product.name;
+    
+    // Pour les produits personnalisables, ne pas inclure les variations dans le nom
+    return baseName;
   }
   
   displayRecommendations(recommendations) {
@@ -613,45 +736,34 @@ class CurrencyConverterPremium {
     let html = '<div class="space-y-4">';
     let totalPrice = 0;
     
-    recommendations.forEach(item => {
-      const totalItemPrice = item.price * item.quantity;
+    recommendations.forEach((item, index) => {
+      const totalItemPrice = item.totalCost || (item.price * item.quantity);
       totalPrice += totalItemPrice;
       
-      // Utiliser le displayName s'il existe (produits personnalisables), sinon le nom du produit
+      // Nom du produit (déjà avec variations si nécessaire)
       let productName = item.displayName;
-      if (!productName) {
-        const product = window.products ? window.products[item.productId] : null;
-        if (product) {
-          productName = lang === 'en' ? (product.name_en || product.name) : product.name;
-        } else {
-          productName = item.productId;
-        }
-      }
       
-      // Afficher les variations si présentes
+      // Afficher les variations de façon claire
       let variationsDisplay = '';
-      if (item.customFields) {
+      if (item.customFields && Object.keys(item.customFields).length > 0) {
         const variations = [];
         Object.values(item.customFields).forEach(field => {
           if (field.role === 'metal') {
-            const translatedMetal = window.SnipcartUtils ? 
-              window.SnipcartUtils.translateMetal(field.value, lang) : field.value;
-            variations.push(this.getTranslation('product.metal', 'Métal') + ': ' + translatedMetal);
+            variations.push(`Métal: ${field.value}`);
           } else if (field.role === 'multiplier') {
-            variations.push(this.getTranslation('product.multiplier', 'Multiplicateur') + ': ×' + field.value);
+            variations.push(`Multiplicateur: ×${field.value}`);
           }
         });
         
         if (variations.length > 0) {
-          variationsDisplay = `<p class="text-xs text-gray-500">${variations.join(', ')}</p>`;
+          variationsDisplay = `<p class="text-xs text-gray-400">${variations.join(' • ')}</p>`;
         }
       }
       
-      // Afficher avec le nom traduit
       html += `
         <div class="bg-gray-800/50 rounded-lg p-4 border border-gray-600/30">
           <div class="flex justify-between items-center">
-            <div>
+            <div class="flex-1">
               <h6 class="font-medium text-gray-200">${productName}</h6>
               ${variationsDisplay}
               <p class="text-sm text-gray-400">${this.getTranslation('product.quantity', 'Quantité')}: ${item.quantity}</p>
@@ -690,14 +802,16 @@ class CurrencyConverterPremium {
     const recommendationsContent = document.getElementById('coin-lots-content');
     if (!recommendationsContent) return;
     
-    // Boulier animé immersif avec le style du site
+    const lang = this.getCurrentLang();
+    const calculatingText = lang === 'en' ? 'Calculating optimal lots...' : 'Calcul des lots optimaux...';
+    
     recommendationsContent.innerHTML = `
       <div class="calculating-indicator flex items-center justify-center p-8">
         <div class="text-center">
           <div class="abacus-animation mb-4">
             <div class="text-6xl animate-bounce">🧮</div>
           </div>
-          <p class="text-amber-300 font-medium">Calcul des lots optimaux...</p>
+          <p class="text-amber-300 font-medium">${calculatingText}</p>
           <div class="flex justify-center mt-2 space-x-1">
             <div class="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
             <div class="w-2 h-2 bg-amber-400 rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
@@ -705,19 +819,6 @@ class CurrencyConverterPremium {
           </div>
         </div>
       </div>
-      <style>
-        @keyframes bounce {
-          0%, 20%, 53%, 80%, 100% { transform: translateY(0); }
-          40%, 43% { transform: translateY(-10px); }
-          70% { transform: translateY(-5px); }
-        }
-        .animate-bounce { animation: bounce 1s infinite; }
-        .animate-pulse { animation: pulse 1.5s ease-in-out infinite; }
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.3; }
-        }
-      </style>
     `;
   }
 

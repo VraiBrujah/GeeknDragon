@@ -79,32 +79,22 @@ const multipliers = [1, 10, 100, 1000, 10000]; // Multiplicateurs physiques
 
 #### Composants JavaScript Critiques
 
-##### CurrencyConverterPremium (`js/currency-converter.js`)
-- Convertisseur temps réel avec logique complexe corrigée
-- Calcul optimal de répartition minimisant le nombre de pièces physiques
-- Recommandations de lots intelligentes avec prix minimum
+##### CurrencyConverterPremium (`js/currency-converter.js`) - **UNIFIÉ & OPTIMISÉ**
+- **Métaheuristique multi-stratégies** pour optimisation globale
+- Convertisseur temps réel avec calcul optimal des pièces physiques
+- **Recommandations de lots intégrées** avec parsing dynamique de products.json
+- Gestion intelligente des produits personnalisables et fixes
+- Calcul d'efficacité prix/pièce pour sélection optimale des lots
+- Animation boulier multilingue pour feedback utilisateur
 - Gestion états, callbacks, internationalisation
-- Optimisations performance (throttling, delegation événements)
 - Interface utilisateur riche (cartes, animations, traductions)
 
-##### CoinLotAnalyzer (`js/coin-lot-analyzer.js`) - **NOUVEAU**
-- Parsing dynamique des capacités de tous les lots depuis products.json
-- Algorithme d'optimisation prix minimum pour recommandations
-- Support complet des produits personnalisables et fixes
-- Calcul automatique des besoins par métal/multiplicateur
-- Gestion intelligente des variations et champs personnalisés
-
-##### SnipcartUtils (`js/snipcart-utils.js`) - **NOUVEAU**
-- Utilitaires réutilisables pour l'ajout au panier cohérent
+##### SnipcartUtils (`js/snipcart-utils.js`) - **RÉUTILISABLE**
+- Utilitaires cohérents pour l'ajout au panier (boutique + aide-jeux)
 - Génération automatique des attributs Snipcart corrects
 - Support complet des champs personnalisés (métal, multiplicateur)
 - Fonctions d'ajout multiple au panier avec feedback utilisateur
 - Traductions automatiques et gestion multilingue
-
-##### DynamicCoinRecommender (`js/dynamic-coin-recommender.js`)
-- Analyse products.json automatiquement (MAINTENANT OBSOLÈTE - remplacé par CoinLotAnalyzer)
-- Cache localStorage avec expiration
-- Integration Snipcart seamless
 
 ##### App Principal (`js/app.js`)
 - Utilitaires génériques réutilisables
@@ -215,10 +205,71 @@ addMultipleToCart(products, onProgress) {
 
 ### Intégration Convertisseur ↔ Recommandations
 
-1. **Convertisseur** calcule valeurs optimales par métal/multiplicateur
-2. **CoinLotAnalyzer** convertit en besoins structurés
-3. **Algorithme** trouve les lots les moins chers
-4. **SnipcartUtils** ajoute au panier avec attributs corrects
+1. **Convertisseur** calcule valeurs optimales par métal/multiplicateur avec métaheuristiques
+2. **Algorithme** trouve les lots les moins chers via parsing dynamique
+3. **SnipcartUtils** ajoute au panier avec attributs corrects
+
+### 🧪 Système de Tests Intégré
+
+#### Tests Automatisés (`js/currency-converter-tests.js`)
+- **Tests de Base** : Validation conversion optimale, calculs métaheuristiques
+- **Tests Avancés** : Recommandations de lots, minimisation coût, couverture
+- **Tests Critiques** : Cas problématiques (1661 cuivres), validation algorithmes
+
+#### Interface de Débogage (aide-jeux.php)
+- **Raccourci** : `Ctrl+Shift+T` pour afficher/masquer section debug
+- **Auto-activation** : URL avec `#debug` ou `?debug=1`
+- **Tests en temps réel** : Validation immédiate des calculs
+
+#### Pages de Tests Standalone
+- **test-converter-system.html** : Tests complets avec interface utilisateur
+- **validate-integration.html** : Validation finale de l'intégration
+- **quick-test.js** : Guide de référence pour tests manuels
+
+#### Validation Métaheuristique
+```javascript
+// 3 stratégies gloutonnes pour optimisation
+greedyStrategy(targetValue, denoms, strategy) {
+  switch (strategy) {
+    case 0: // Standard greedy (plus grande valeur d'abord)
+    case 1: // Éviter gros multiplicateurs 
+    case 2: // Préférence une pièce par métal
+  }
+}
+```
+
+#### Critères de Validation
+- ✅ **Performance** : Solution en <100ms, aucune boucle infinie
+- ✅ **Optimalité** : Nombre minimal de pièces physiques
+- ✅ **Coût** : Lots recommandés minimisent le prix total
+- ✅ **Couverture** : Aucun déficit, surplus acceptable
+- ✅ **Cohérence** : Même comportement boutique vs aide-jeux
+
+## 🧹 Pratiques de Nettoyage & Optimisation
+
+### Métaheuristiques Adoptées
+- **Multi-stratégies gloutonnes** : 3 approches testées, meilleure retenue
+- **Recherche locale limitée** : Performance O(n) garantie
+- **Timeout de sécurité** : Aucun blocage possible
+- **Animation feedback** : Boulier multilingue pendant calculs
+
+### Réutilisation de Code
+- **Pas de duplication** : Une seule fonction par fonctionnalité
+- **Composants modulaires** : SnipcartUtils partagé boutique/aide-jeux
+- **Parsing dynamique** : products.json analysé automatiquement
+- **Pas de hardcoding** : Tout paramétrable et extensible
+
+### Nettoyage Automatique
+- **Fichiers obsolètes supprimés** : coin-lot-analyzer.js, dynamic-coin-recommender.js
+- **Scripts inutiles retirés** : aide-jeux.php allégé
+- **Code mort éliminé** : Fonctions non-utilisées supprimées
+- **Dépendances optimisées** : Seuls les scripts nécessaires chargés
+
+### Patterns de Conception
+- **Strategy Pattern** : Multiple algorithmes d'optimisation
+- **Factory Pattern** : Génération dynamique des champs Snipcart
+- **Observer Pattern** : Callbacks pour réactivité
+- **Template Method** : Structure commune, implémentations variables
 
 ## 🔄 Corrections Majeures Récentes
 
