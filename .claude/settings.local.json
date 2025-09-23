@@ -49,7 +49,9 @@
       "Bash(del:*)",
       "Bash(wmic:*)",
       "Bash(CONVERTIR.cmd)",
-      "Bash(awk:*)"
+      "Bash(awk:*)",
+      "Bash(jq:*)",
+      "WebFetch(domain:localhost)"
     ],
     "deny": [],
     "ask": []

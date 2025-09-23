@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport de Test - Recommandations de Lots</title>
+    <style>
+        body { font-family: 'Segoe UI', system-ui, sans-serif; margin: 0; padding: 20px; background: #1a1a2e; color: #eee; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .stat-card { background: linear-gradient(135deg, #16213e 0%, #0f172a 100%); padding: 20px; border-radius: 10px; text-align: center; border: 1px solid #334155; }
+        .stat-number { font-size: 2.5rem; font-weight: bold; margin-bottom: 5px; }
+        .pass { color: #10b981; }
+        .fail { color: #ef4444; }
+        .error { color: #f59e0b; }
+        .test-details { background: #0f172a; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #334155; }
+        .test-header { display: flex; justify-content: between; align-items: center; margin-bottom: 15px; }
+        .test-status { padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; }
+        .status-pass { background: #10b981; color: white; }
+        .status-fail { background: #ef4444; color: white; }
+        .status-error { background: #f59e0b; color: black; }
+        .test-data { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .data-section { background: #1e293b; padding: 15px; border-radius: 8px; }
+        .data-section h4 { margin: 0 0 10px 0; color: #94a3b8; font-size: 0.9rem; text-transform: uppercase; }
+        .recommendations { background: #065f46; padding: 10px; border-radius: 5px; margin-top: 10px; }
+        .issues { background: #7c2d12; padding: 10px; border-radius: 5px; margin-top: 10px; }
+        .loading { text-align: center; padding: 40px; }
+        .spinner { width: 40px; height: 40px; border: 4px solid #334155; border-top: 4px solid #3b82f6; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        button { background: #3b82f6; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 1rem; }
+        button:hover { background: #2563eb; }
+        .export-section { text-align: center; margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Rapport de Test - Système de Recommandations de Lots</h1>
+            <p>Analyse automatisée des performances et de la logique des recommandations</p>
+        </div>
+
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Exécution des tests en cours...</p>
+        </div>
+
+        <div id="report" style="display: none;">
+            <div class="summary" id="summary"></div>
+            <div id="test-details"></div>
+            
+            <div class="export-section">
+                <button onclick="exportReport()">📄 Exporter le Rapport (JSON)</button>
+                <button onclick="runTestsAgain()">🔄 Relancer les Tests</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dynamic-coin-recommender.js"></script>
+    <script>
+        let testResults = null;
+
+        async function runTestsAndGenerateReport() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('report').style.display = 'none';
+
+            try {
+                // Charger les données
+                const response = await fetch('/data/products.json');
+                window.products = await response.json();
+                
+                // Initialiser le recommandeur
+                const recommender = new DynamicCoinRecommender();
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                const results = [];
+                
+                const testCases = [
+                    {
+                        name: '🟢 FACILE: 1 pièce de cuivre',
+                        input: { copper: 1, silver: 0, electrum: 0, gold: 0, platinum: 0 },
+                        expected: {
+                            shouldHaveRecommendations: true,
+                            maxPrice: 20,
+                            description: 'Devrait recommander le produit le moins cher (coin-custom-single)'
+                        }
+                    },
+                    {
+                        name: '🟡 MOYEN: Petit trésor mixte',
+                        input: { copper: 10, silver: 5, electrum: 0, gold: 2, platinum: 0 },
+                        expected: {
+                            shouldHaveRecommendations: true,
+                            maxPrice: 150,
+                            maxEfficiency: 5.0,
+                            description: 'Devrait optimiser avec des lots moyens'
+                        }
+                    },
+                    {
+                        name: '🟠 DIFFICILE: Trésor complet',
+                        input: { copper: 50, silver: 20, electrum: 10, gold: 5, platinum: 2 },
+                        expected: {
+                            shouldHaveRecommendations: true,
+                            maxPrice: 400,
+                            maxEfficiency: 3.0,
+                            description: 'Devrait utiliser des lots complexes pour optimiser'
+                        }
+                    },
+                    {
+                        name: '🔴 EXTREME: Hoard de dragon',
+                        input: { copper: 1000, silver: 500, electrum: 100, gold: 50, platinum: 10 },
+                        expected: {
+                            shouldHaveRecommendations: true,
+                            maxEfficiency: 2.0,
+                            description: 'Devrait privilégier les plus gros lots pour minimiser le coût'
+                        }
+                    },
+                    {
+                        name: '🔵 EDGE: Aucune pièce',
+                        input: { copper: 0, silver: 0, electrum: 0, gold: 0, platinum: 0 },
+                        expected: {
+                            shouldHaveRecommendations: false,
+                            description: 'Ne devrait retourner aucune recommandation'
+                        }
+                    },
+                    {
+                        name: '🟣 EDGE: Monnaie rare uniquement',
+                        input: { copper: 0, silver: 0, electrum: 0, gold: 0, platinum: 3 },
+                        expected: {
+                            shouldHaveRecommendations: true,
+                            maxPrice: 200,
+                            description: 'Devrait gérer les monnaies rares correctement'
+                        }
+                    }
+                ];
+
+                // Exécuter les tests
+                for (const testCase of testCases) {
+                    const result = await executeTest(recommender, testCase);
+                    results.push(result);
+                }
+
+                // Générer le rapport
+                testResults = {
+                    timestamp: new Date().toISOString(),
+                    summary: {
+                        total: results.length,
+                        passed: results.filter(r => r.status === 'PASS').length,
+                        failed: results.filter(r => r.status === 'FAIL').length,
+                        errors: results.filter(r => r.status === 'ERROR').length
+                    },
+                    details: results
+                };
+
+                displayReport(testResults);
+
+            } catch (error) {
+                console.error('Erreur lors des tests:', error);
+                document.getElementById('loading').innerHTML = `<div class="error">❌ Erreur: ${error.message}</div>`;
+            }
+        }
+
+        async function executeTest(recommender, testCase) {
+            const result = {
+                testName: testCase.name,
+                input: testCase.input,
+                expected: testCase.expected,
+                actual: {},
+                status: 'UNKNOWN',
+                issues: [],
+                timestamp: new Date().toISOString()
+            };
+
+            try {
+                const recommendations = await recommender.recommend(
+                    testCase.input.copper,
+                    testCase.input.silver,
+                    testCase.input.electrum,
+                    testCase.input.gold,
+                    testCase.input.platinum
+                );
+
+                result.actual.recommendations = recommendations;
+                result.actual.hasRecommendations = recommendations && recommendations.length > 0;
+
+                if (result.actual.hasRecommendations) {
+                    result.actual.totalPrice = recommendations.reduce((sum, rec) => sum + (rec.price * rec.quantity), 0);
+                    result.actual.productCount = recommendations.length;
+                    result.actual.products = recommendations.map(rec => rec.productId);
+                    
+                    const totalCoins = Object.values(testCase.input).reduce((a,b) => a+b, 0);
+                    result.actual.efficiency = totalCoins > 0 ? result.actual.totalPrice / totalCoins : 0;
+                    result.actual.averageUnitPrice = result.actual.totalPrice / totalCoins;
+                }
+
+                // Validation des attentes
+                result.status = 'PASS';
+
+                if (testCase.expected.shouldHaveRecommendations !== undefined) {
+                    if (testCase.expected.shouldHaveRecommendations !== result.actual.hasRecommendations) {
+                        result.status = 'FAIL';
+                        result.issues.push(`Recommandations attendues: ${testCase.expected.shouldHaveRecommendations}, obtenues: ${result.actual.hasRecommendations}`);
+                    }
+                }
+
+                if (testCase.expected.maxPrice && result.actual.totalPrice > testCase.expected.maxPrice) {
+                    result.status = 'FAIL';
+                    result.issues.push(`Prix dépassé: ${result.actual.totalPrice.toFixed(2)}€ > ${testCase.expected.maxPrice}€`);
+                }
+
+                if (testCase.expected.maxEfficiency && result.actual.efficiency > testCase.expected.maxEfficiency) {
+                    result.status = 'FAIL';
+                    result.issues.push(`Efficacité insuffisante: ${result.actual.efficiency.toFixed(2)}€/pièce > ${testCase.expected.maxEfficiency}€/pièce`);
+                }
+
+            } catch (error) {
+                result.status = 'ERROR';
+                result.actual.error = error.message;
+                result.issues.push(`Erreur d'exécution: ${error.message}`);
+            }
+
+            return result;
+        }
+
+        function displayReport(report) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('report').style.display = 'block';
+
+            // Résumé
+            const summaryHTML = `
+                <div class="stat-card">
+                    <div class="stat-number">${report.summary.total}</div>
+                    <div>Tests Total</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number pass">${report.summary.passed}</div>
+                    <div>✅ Réussis</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number fail">${report.summary.failed}</div>
+                    <div>❌ Échoués</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number error">${report.summary.errors}</div>
+                    <div>⚠️ Erreurs</div>
+                </div>
+            `;
+            document.getElementById('summary').innerHTML = summaryHTML;
+
+            // Détails
+            const detailsHTML = report.details.map(result => `
+                <div class="test-details">
+                    <div class="test-header">
+                        <h3>${result.testName}</h3>
+                        <span class="test-status status-${result.status.toLowerCase()}">${result.status}</span>
+                    </div>
+                    <p><strong>Description:</strong> ${result.expected.description}</p>
+                    
+                    <div class="test-data">
+                        <div class="data-section">
+                            <h4>📥 Entrées</h4>
+                            <pre>${JSON.stringify(result.input, null, 2)}</pre>
+                        </div>
+                        <div class="data-section">
+                            <h4>📤 Résultats</h4>
+                            ${result.actual.hasRecommendations ? `
+                                <p><strong>Produits:</strong> ${result.actual.productCount}</p>
+                                <p><strong>Prix total:</strong> ${result.actual.totalPrice.toFixed(2)}€</p>
+                                <p><strong>Efficacité:</strong> ${result.actual.efficiency.toFixed(2)}€/pièce</p>
+                                <div class="recommendations">
+                                    <strong>Recommandations:</strong><br>
+                                    ${result.actual.products.join(', ')}
+                                </div>
+                            ` : '<p>Aucune recommandation</p>'}
+                            
+                            ${result.issues.length > 0 ? `
+                                <div class="issues">
+                                    <strong>⚠️ Problèmes:</strong><br>
+                                    ${result.issues.join('<br>')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('test-details').innerHTML = detailsHTML;
+        }
+
+        function exportReport() {
+            if (!testResults) return;
+            
+            const blob = new Blob([JSON.stringify(testResults, null, 2)], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `rapport-test-recommandations-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function runTestsAgain() {
+            runTestsAndGenerateReport();
+        }
+
+        // Auto-démarrage
+        document.addEventListener('DOMContentLoaded', runTestsAndGenerateReport);
+    </script>
+</body>
+</html>

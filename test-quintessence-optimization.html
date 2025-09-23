@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Optimisation Quintessence</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #1a1a1a; color: white; }
+        .result { background: #2a2a2a; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        .success { background: #0a3a0a; }
+        .error { background: #3a0a0a; }
+        .info { background: #0a2a3a; }
+        .expected { background: #3a2a0a; }
+        button { background: #4a4a4a; color: white; border: none; padding: 10px 20px; margin: 5px; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #6a6a6a; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test Optimisation Globale</h1>
+    
+    <div class="expected result">
+        <h3>🎯 Résultat Attendu</h3>
+        <p><strong>Besoin:</strong> 1 platine + 1 or + 1 électrum + 1 argent + 1 cuivre</p>
+        <p><strong>Recommandation attendue:</strong> 1× Quintessence Métallique ($35)</p>
+        <p><strong>Au lieu de:</strong> 5× Pièce Personnalisée ($50)</p>
+    </div>
+    
+    <button onclick="testQuintessence()">🚀 Test Quintessence</button>
+    <button onclick="testVariousScenarios()">📊 Test Divers Scénarios</button>
+    <button onclick="clearResults()">🗑️ Effacer</button>
+    
+    <div id="results"></div>
+
+    <script>
+        // Données minimales pour le test
+        window.products = {
+            "coin-custom-single": {
+                "name": "Pièce Personnalisée",
+                "price": 10,
+                "coin_lots": { "copper": 1, "silver": 1, "electrum": 1, "gold": 1, "platinum": 1 },
+                "customizable": true,
+                "multipliers": [1, 10, 100, 1000, 10000],
+                "category": "pieces"
+            },
+            "coin-quintessence-metals": {
+                "name": "Quintessence Métallique",
+                "price": 35,
+                "coin_lots": { "copper": 1, "silver": 1, "electrum": 1, "gold": 1, "platinum": 1 },
+                "customizable": true,
+                "multipliers": [1, 10, 100, 1000, 10000],
+                "category": "pieces"
+            },
+            "coin-trio-customizable": {
+                "name": "Trio de Pièces", 
+                "price": 25,
+                "coin_lots": { "copper": 3, "silver": 3, "electrum": 3, "gold": 3, "platinum": 3 },
+                "customizable": true,
+                "multipliers": [1, 10, 100, 1000, 10000],
+                "category": "pieces"
+            },
+            "coin-traveler-offering": {
+                "name": "Offrande du Voyageur",
+                "price": 60,
+                "coin_lots": { "copper": 2, "silver": 2, "electrum": 2, "gold": 2, "platinum": 2 },
+                "customizable": false,
+                "category": "pieces"
+            }
+        };
+
+        function log(message, type = 'result') {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = `result ${type}`;
+            div.innerHTML = `<strong>${new Date().toLocaleTimeString()}</strong>: ${message}`;
+            results.appendChild(div);
+        }
+
+        function clearResults() {
+            document.getElementById('results').innerHTML = '';
+        }
+
+        async function testQuintessence() {
+            clearResults();
+            log('🔄 Test cas Quintessence: 1 de chaque métal', 'info');
+            
+            try {
+                await new Promise(resolve => setTimeout(resolve, 2000)); // Plus de temps pour l'init
+                
+                if (window.dynamicRecommender) {
+                    await window.dynamicRecommender.waitForReady(); // Attendre explicitement
+                    
+                    log('✅ Recommandeur initialisé, test en cours...', 'info');
+                    
+                    // Test: 1 cuivre + 1 argent + 1 électrum + 1 or + 1 platine
+                    const recommendations = await window.dynamicRecommender.recommend(1, 1, 1, 1, 1);
+                    
+                    log(`📋 Recommandations reçues (${recommendations?.length || 0} lots):`, 'info');
+                    console.log('DEBUG - Recommandations complètes:', recommendations);
+                    
+                    if (recommendations && recommendations.length > 0) {
+                        let totalCost = 0;
+                        let hasQuintessence = false;
+                        
+                        recommendations.forEach((rec, i) => {
+                            const cost = rec.price * rec.quantity;
+                            totalCost += cost;
+                            
+                            log(`${i+1}. ${rec.quantity}× ${rec.displayName || rec.productId} - $${cost.toFixed(2)}`, 'info');
+                            
+                            if (rec.productId === 'coin-quintessence-metals') {
+                                hasQuintessence = true;
+                                log('✅ Quintessence Métallique trouvée!', 'success');
+                            }
+                        });
+                        
+                        log(`💰 Coût total: $${totalCost.toFixed(2)}`, totalCost <= 35 ? 'success' : 'error');
+                        
+                        // Analyse détaillée
+                        if (hasQuintessence && totalCost === 35 && recommendations.length === 1) {
+                            log('🎯 PARFAIT: 1× Quintessence Métallique ($35) - Optimisation réussie!', 'success');
+                        } else if (hasQuintessence) {
+                            log('⚠️ Quintessence trouvée mais avec d\'autres lots - À vérifier', 'info');
+                        } else if (totalCost === 50) {
+                            log('❌ PROBLÈME: Recommande probablement 5× Pièce Personnalisée ($50)', 'error');
+                        } else if (totalCost <= 35) {
+                            log('✅ SUCCÈS: Solution optimale trouvée', 'success');
+                        } else {
+                            log('❌ ÉCHEC: Solution non optimale (devrait coûter $35)', 'error');
+                        }
+                        
+                    } else {
+                        log('❌ Aucune recommandation générée', 'error');
+                    }
+                } else {
+                    log('❌ window.dynamicRecommender non disponible', 'error');
+                }
+            } catch (error) {
+                log(`❌ Erreur: ${error.message}`, 'error');
+                console.error('Détails complets:', error);
+            }
+        }
+
+        async function testVariousScenarios() {
+            clearResults();
+            log('🔄 Test de divers scénarios', 'info');
+            
+            const scenarios = [
+                { name: "2 cuivre seulement", needs: [2, 0, 0, 0, 0] },
+                { name: "3 de chaque métal", needs: [3, 3, 3, 3, 3] },
+                { name: "Mix asymétrique", needs: [5, 2, 1, 1, 0] }
+            ];
+            
+            for (const scenario of scenarios) {
+                log(`\n--- ${scenario.name} ---`, 'info');
+                
+                try {
+                    const [copper, silver, electrum, gold, platinum] = scenario.needs;
+                    const recommendations = await window.dynamicRecommender.recommend(copper, silver, electrum, gold, platinum);
+                    
+                    if (recommendations && recommendations.length > 0) {
+                        const totalCost = recommendations.reduce((sum, rec) => sum + (rec.price * rec.quantity), 0);
+                        log(`Solution: ${recommendations.length} lot(s) pour $${totalCost.toFixed(2)}`, 'info');
+                        
+                        recommendations.forEach(rec => {
+                            log(`- ${rec.quantity}× ${rec.displayName || rec.productId}`, 'info');
+                        });
+                    } else {
+                        log('Aucune solution trouvée', 'error');
+                    }
+                } catch (error) {
+                    log(`Erreur: ${error.message}`, 'error');
+                }
+            }
+        }
+    </script>
+    
+    <script src="js/dynamic-coin-recommender.js"></script>
+</body>
+</html>

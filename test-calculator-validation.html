@@ -12,7 +12,6 @@
         .test-case.MOYEN { border-left: 4px solid #FF9800; }
         .test-case.COMPLEXE { border-left: 4px solid #F44336; }
         .test-case.EDGE { border-left: 4px solid #9C27B0; }
-        .test-case.CACHE { border-left: 4px solid #00BCD4; }
         .needs { background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 3px; }
         .result { background: #e8f5e8; padding: 10px; margin: 10px 0; border-radius: 3px; }
         .error { background: #ffe8e8; padding: 10px; margin: 10px 0; border-radius: 3px; color: #d32f2f; }
@@ -55,7 +54,6 @@
         
         <button onclick="runAllTests()" id="runButton" disabled>🚀 Lancer Tous les Tests</button>
         <button onclick="runIndividualTests()" id="individualButton" disabled>🔍 Tests Individuels</button>
-        <button onclick="runCacheTests()" id="cacheButton" disabled>💾 Tests Cache Dynamique</button>
         <button onclick="clearResults()">🗑️ Effacer Résultats</button>
         
         <div id="testResults"></div>
@@ -177,83 +175,12 @@
     }
 ];
 
-        // === TESTS SPÉCIFIQUES CACHE ===
-        const cacheTestCases = [
-            {
-                "name": "CACHE 1: Calcul avec cache vide",
-                "needs": {
-                    "copper": 7,
-                    "silver": 3,
-                    "electrum": 2,
-                    "gold": 4,
-                    "platinum": 1
-                },
-                "expected_strategy": "Premier calcul, mise en cache automatique",
-                "complexity": "CACHE",
-                "testCache": true
-            },
-            {
-                "name": "CACHE 2: Même calcul (doit utiliser cache)",
-                "needs": {
-                    "copper": 7,
-                    "silver": 3,
-                    "electrum": 2,
-                    "gold": 4,
-                    "platinum": 1
-                },
-                "expected_strategy": "Résultat depuis cache (temps < 1ms)",
-                "complexity": "CACHE",
-                "testCache": true
-            },
-            {
-                "name": "CACHE 3: Nouveau calcul complexe",
-                "needs": {
-                    "copper": 13,
-                    "silver": 7,
-                    "electrum": 5,
-                    "gold": 9,
-                    "platinum": 4
-                },
-                "expected_strategy": "Calcul dynamique + mise en cache",
-                "complexity": "CACHE",
-                "testCache": true
-            },
-            {
-                "name": "CACHE 4: Répétition calcul précédent",
-                "needs": {
-                    "copper": 13,
-                    "silver": 7,
-                    "electrum": 5,
-                    "gold": 9,
-                    "platinum": 4
-                },
-                "expected_strategy": "Résultat depuis cache (temps < 1ms)",
-                "complexity": "CACHE",
-                "testCache": true
-            },
-            {
-                "name": "CACHE 5: Combinaison unique non-cachée",
-                "needs": {
-                    "copper": 17,
-                    "silver": 11,
-                    "electrum": 6,
-                    "gold": 14,
-                    "platinum": 8
-                },
-                "expected_strategy": "Calcul dynamique en temps réel",
-                "complexity": "CACHE",
-                "testCache": true
-            }
-        ];
-
         // === VARIABLES GLOBALES ===
         let calculator = null;
         let testResults = [];
         let globalStatusEl = document.getElementById('globalStatus');
         let runButton = document.getElementById('runButton');
         let individualButton = document.getElementById('individualButton');
-        let cacheButton = document.getElementById('cacheButton');
-        let cacheTestResults = [];
 
         // === INITIALISATION ===
         async function initializeCalculator() {
@@ -287,7 +214,6 @@
                 globalStatusEl.innerHTML = '<div class="success">✅ Calculateur initialisé avec ' + Object.keys(calculator.products).length + ' produits</div>';
                 runButton.disabled = false;
                 individualButton.disabled = false;
-                cacheButton.disabled = false;
                 
                 console.log('Calculateur prêt:', calculator);
                 console.log('Produits chargés:', Object.keys(calculator.products));
@@ -552,229 +478,9 @@
             }
         }
 
-        function runCacheTests() {
-            clearResults();
-            cacheTestResults = [];
-            
-            globalStatusEl.innerHTML = '<div class="loading">⏳ Tests cache en cours...</div>';
-            
-            // Vider le cache avant les tests
-            if (calculator && calculator.cache) {
-                calculator.cache.clear();
-                console.log('Cache vidé pour les tests');
-            }
-            
-            cacheTestCases.forEach((testCase, index) => {
-                setTimeout(() => runCacheTest(testCase, index), index * 200);
-            });
-            
-            // Générer le rapport cache après tous les tests
-            setTimeout(() => generateCacheReport(), cacheTestCases.length * 200 + 500);
-        }
-        
-        function runCacheTest(testCase, index) {
-            try {
-                const startTime = performance.now();
-                const cacheKey = JSON.stringify(testCase.needs);
-                const wasCached = calculator.cache && calculator.cache.has(cacheKey);
-                
-                // Exécution du test
-                const result = calculator.recommend(
-                    testCase.needs.copper,
-                    testCase.needs.silver,
-                    testCase.needs.electrum,
-                    testCase.needs.gold,
-                    testCase.needs.platinum
-                );
-                
-                const executionTime = performance.now() - startTime;
-                const isNowCached = calculator.cache && calculator.cache.has(cacheKey);
-                
-                // Analyse spécifique cache
-                const analysis = analyzeCacheTest(testCase, result, executionTime, wasCached, isNowCached);
-                cacheTestResults[index] = analysis;
-                
-                updateCacheTestInPlace(testCase, analysis, index);
-                
-            } catch (error) {
-                console.error('Erreur test cache ' + index + ':', error);
-                const analysis = {
-                    success: false,
-                    error: error.message,
-                    wasCached: false,
-                    isNowCached: false,
-                    executionTime: 0
-                };
-                cacheTestResults[index] = analysis;
-                updateCacheTestInPlace(testCase, analysis, index);
-            }
-        }
-        
-        function analyzeCacheTest(testCase, recommendation, executionTime, wasCached, isNowCached) {
-            const analysis = {
-                success: false,
-                recommendation: recommendation,
-                executionTime: Math.round(executionTime * 100) / 100,
-                wasCached: wasCached,
-                isNowCached: isNowCached,
-                cacheWorking: false,
-                details: []
-            };
-            
-            // Vérifier que la recommandation existe
-            if (!recommendation || recommendation.length === 0) {
-                analysis.error = 'Aucune recommandation retournée';
-                return analysis;
-            }
-            
-            // Tests spécifiques selon le cas
-            if (testCase.name.includes('Même calcul')) {
-                // Ce test vérifie que le cache fonctionne
-                analysis.cacheWorking = wasCached && executionTime < 1;
-                analysis.success = analysis.cacheWorking;
-                if (!analysis.success) {
-                    analysis.error = wasCached ? 'Cache utilisé mais temps trop élevé' : 'Cache non utilisé';
-                }
-            } else if (testCase.name.includes('Répétition')) {
-                // Même chose pour les répétitions
-                analysis.cacheWorking = wasCached && executionTime < 1;
-                analysis.success = analysis.cacheWorking;
-                if (!analysis.success) {
-                    analysis.error = wasCached ? 'Cache utilisé mais temps trop élevé' : 'Cache non utilisé';
-                }
-            } else {
-                // Tests de calcul dynamique (nouveaux calculs)
-                analysis.cacheWorking = !wasCached && isNowCached;
-                analysis.success = analysis.cacheWorking && recommendation.length > 0;
-                if (!analysis.success) {
-                    analysis.error = !wasCached ? 
-                        (!isNowCached ? 'Résultat non mis en cache' : 'Calcul échoué') : 
-                        'Était déjà en cache (test invalide)';
-                }
-            }
-            
-            // Ajouter les détails de la recommandation
-            recommendation.forEach(item => {
-                const product = calculator.products[item.productId];
-                analysis.details.push({
-                    product: product ? product.name : item.productId,
-                    quantity: item.quantity,
-                    price: item.price
-                });
-            });
-            
-            return analysis;
-        }
-        
-        function updateCacheTestInPlace(testCase, analysis, index) {
-            const resultsDiv = document.getElementById('testResults');
-            let testDiv = document.getElementById('cache-test-' + index);
-            
-            if (!testDiv) {
-                testDiv = document.createElement('div');
-                testDiv.className = 'test-case ' + testCase.complexity;
-                testDiv.id = 'cache-test-' + index;
-                
-                testDiv.innerHTML = `
-                    <h3>${testCase.name}</h3>
-                    <div class="needs">
-                        <strong>Besoins:</strong> 
-                        🥉${testCase.needs.copper} cuivre, 
-                        🥈${testCase.needs.silver} argent, 
-                        ⚡${testCase.needs.electrum} électrum, 
-                        🥇${testCase.needs.gold} or, 
-                        💎${testCase.needs.platinum} platine
-                    </div>
-                    <div class="expected">
-                        <strong>Test cache:</strong> ${testCase.expected_strategy}
-                    </div>
-                    <div class="result" id="cache-result-${index}">
-                        <div class="loading">⏳ Test en cours...</div>
-                    </div>
-                `;
-                
-                resultsDiv.appendChild(testDiv);
-            }
-            
-            displayCacheTestResult(analysis, index);
-        }
-        
-        function displayCacheTestResult(analysis, index) {
-            const resultDiv = document.getElementById('cache-result-' + index);
-            if (!resultDiv) return;
-            
-            if (analysis.success) {
-                resultDiv.innerHTML = `
-                    <div class="success">✅ TEST CACHE RÉUSSI</div>
-                    <div><strong>Temps d'exécution:</strong> ${analysis.executionTime}ms</div>
-                    <div><strong>État cache avant:</strong> ${analysis.wasCached ? '💾 En cache' : '🆕 Nouveau'}</div>
-                    <div><strong>État cache après:</strong> ${analysis.isNowCached ? '💾 Mis en cache' : '❌ Non caché'}</div>
-                    <div><strong>Fonctionnement cache:</strong> ${analysis.cacheWorking ? '✅ Correct' : '❌ Problème'}</div>
-                    <div class="recommendations">
-                        <strong>Recommandation:</strong>
-                        ${analysis.details.map(item => 
-                            `<div class="recommendation">${item.quantity}x ${item.product} (${item.price}€)</div>`
-                        ).join('')}
-                    </div>
-                `;
-            } else {
-                resultDiv.innerHTML = `
-                    <div class="failure">❌ TEST CACHE ÉCHOUÉ</div>
-                    <div class="error"><strong>Erreur:</strong> ${analysis.error || 'Erreur inconnue'}</div>
-                    <div><strong>Temps d'exécution:</strong> ${analysis.executionTime}ms</div>
-                    <div><strong>État cache avant:</strong> ${analysis.wasCached ? '💾 En cache' : '🆕 Nouveau'}</div>
-                    <div><strong>État cache après:</strong> ${analysis.isNowCached ? '💾 Mis en cache' : '❌ Non caché'}</div>
-                `;
-            }
-        }
-        
-        function generateCacheReport() {
-            const successful = cacheTestResults.filter(r => r && r.success).length;
-            const total = cacheTestResults.filter(r => r).length;
-            const percentage = total > 0 ? Math.round((successful / total) * 100) : 0;
-            
-            // Calculs statistiques spécifiques cache
-            const validResults = cacheTestResults.filter(r => r && r.success);
-            const cacheHits = cacheTestResults.filter(r => r && r.wasCached).length;
-            const cacheMisses = cacheTestResults.filter(r => r && !r.wasCached).length;
-            const avgTimeCache = validResults.filter(r => r.wasCached).length > 0 ? 
-                validResults.filter(r => r.wasCached).reduce((sum, r) => sum + r.executionTime, 0) / validResults.filter(r => r.wasCached).length : 0;
-            const avgTimeNoCache = validResults.filter(r => !r.wasCached).length > 0 ? 
-                validResults.filter(r => !r.wasCached).reduce((sum, r) => sum + r.executionTime, 0) / validResults.filter(r => !r.wasCached).length : 0;
-            
-            document.getElementById('successCount').textContent = successful;
-            document.getElementById('failureCount').textContent = total - successful;
-            document.getElementById('globalScore').textContent = percentage + '%';
-            document.getElementById('globalScore').className = percentage >= 90 ? 'success' : percentage >= 70 ? 'loading' : 'failure';
-            
-            globalStatusEl.innerHTML = `
-                <div class="${percentage >= 90 ? 'success' : percentage >= 70 ? 'loading' : 'failure'}">
-                    ${percentage >= 90 ? '🎉' : percentage >= 70 ? '⚠️' : '❌'} 
-                    RAPPORT CACHE: ${successful}/${total} tests réussis (${percentage}%)
-                </div>
-                <div style="margin-top: 10px; font-size: 0.9em;">
-                    💾 <strong>Statistiques Cache:</strong><br>
-                    • Cache hits: ${cacheHits} | Cache misses: ${cacheMisses}<br>
-                    • Temps moyen avec cache: ${avgTimeCache.toFixed(2)}ms<br>
-                    • Temps moyen sans cache: ${avgTimeNoCache.toFixed(2)}ms<br>
-                    • Gain performance: ${avgTimeNoCache > 0 ? Math.round(((avgTimeNoCache - avgTimeCache) / avgTimeNoCache) * 100) : 0}%
-                </div>
-            `;
-            
-            // Vérification taille cache
-            if (calculator && calculator.cache) {
-                globalStatusEl.innerHTML += `
-                    <div style="margin-top: 10px; color: #00BCD4;">
-                        🗃️ <strong>État final cache:</strong> ${calculator.cache.size} entrées
-                    </div>
-                `;
-            }
-        }
-
         function clearResults() {
             document.getElementById('testResults').innerHTML = '';
             testResults = [];
-            cacheTestResults = [];
             document.getElementById('successCount').textContent = '0';
             document.getElementById('failureCount').textContent = '0';
             document.getElementById('globalScore').textContent = '0%';

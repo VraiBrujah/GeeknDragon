@@ -30,6 +30,9 @@ class CurrencyConverterPremium {
     this.refreshDOMReferences();
     this.setupEventListeners();
     this.updateDisplay();
+    
+    // Afficher le message par défaut des recommandations dès l'initialisation
+    this.displayDefaultRecommendationMessage();
   }
   
   // Méthode pour rafraîchir dynamiquement les références DOM
@@ -193,6 +196,7 @@ class CurrencyConverterPremium {
     
     this.updateMetalCards(baseValue);
     this.updateOptimalRecommendations(baseValue);
+    this.updateCoinLotsRecommendations(baseValue);
   }
   
   updateFromMultipliers() {
@@ -214,6 +218,7 @@ class CurrencyConverterPremium {
     this.distributeOptimally(totalValue);
     this.updateMetalCards(totalValue);
     this.updateOptimalRecommendations(totalValue);
+    this.updateCoinLotsRecommendations(totalValue);
   }
   
   distributeOptimally(totalValue) {
@@ -495,6 +500,178 @@ class CurrencyConverterPremium {
   }
   
 
+  updateCoinLotsRecommendations(baseValue) {
+    const recommendationsContainer = document.getElementById('coin-lots-recommendations');
+    if (!recommendationsContainer) return;
+    
+    // Toujours afficher la section
+    recommendationsContainer.style.display = 'block';
+    
+    if (baseValue === 0) {
+      // Afficher un message d'invitation au lieu de cacher
+      this.displayDefaultRecommendationMessage();
+      return;
+    }
+    
+    // Afficher l'indicateur de calcul immédiatement
+    this.showCalculatingIndicator();
+    
+    // Calculer les besoins en pièces depuis les valeurs sources
+    const values = this.getCurrentValues();
+    const { copper, silver, electrum, gold, platinum } = values.values;
+    
+    // Utilisation non-bloquante avec setTimeout pour performances
+    setTimeout(() => {
+      let recommendations = [];
+      if (window.convertCoinsToLots) {
+        recommendations = window.convertCoinsToLots(copper, silver, electrum, gold, platinum);
+      } else {
+        console.warn('window.convertCoinsToLots non disponible');
+      }
+      
+      if (recommendations && recommendations.length > 0) {
+        this.displayRecommendations(recommendations);
+      } else {
+        this.displayNoRecommendationsMessage();
+      }
+      
+      this.hideCalculatingIndicator();
+    }, 50); // Délai minimal pour éviter le blocage
+  }
+  
+  displayRecommendations(recommendations) {
+    const recommendationsContent = document.getElementById('coin-lots-content');
+    const addToCartButton = document.getElementById('add-all-lots-to-cart');
+    
+    if (!recommendationsContent) return;
+    
+    let html = '<div class="space-y-4">';
+    let totalPrice = 0;
+    
+    recommendations.forEach(item => {
+      const totalItemPrice = item.price * item.quantity;
+      totalPrice += totalItemPrice;
+      
+      // Utiliser le displayName s'il existe (produits personnalisables), sinon le nom du produit
+      let productName = item.displayName;
+      if (!productName) {
+        const product = window.products ? window.products[item.productId] : null;
+        productName = product ? (product.name || item.productId) : item.productId;
+      }
+      
+      // Afficher avec le nom traduit
+      html += `
+        <div class="bg-gray-800/50 rounded-lg p-4 border border-gray-600/30">
+          <div class="flex justify-between items-center">
+            <div>
+              <h6 class="font-medium text-gray-200">${productName}</h6>
+              <p class="text-sm text-gray-400">Quantité: ${item.quantity}</p>
+            </div>
+            <div class="text-right">
+              <p class="font-bold text-green-400">$${totalItemPrice.toFixed(2)}</p>
+              <p class="text-xs text-gray-400">$${item.price.toFixed(2)} / unité</p>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+    
+    html += `
+      <div class="border-t border-gray-600/30 pt-4">
+        <div class="flex justify-between items-center text-lg font-bold">
+          <span class="text-gray-200">Total:</span>
+          <span class="text-green-400">$${totalPrice.toFixed(2)}</span>
+        </div>
+      </div>
+    </div>`;
+    
+    recommendationsContent.innerHTML = html;
+    
+    if (addToCartButton) {
+      addToCartButton.style.display = 'block';
+      addToCartButton.dataset.lotsData = JSON.stringify(recommendations);
+    }
+  }
+
+  showCalculatingIndicator() {
+    const recommendationsContent = document.getElementById('coin-lots-content');
+    if (!recommendationsContent) return;
+    
+    // Boulier animé immersif avec le style du site
+    recommendationsContent.innerHTML = `
+      <div class="calculating-indicator flex items-center justify-center p-8">
+        <div class="text-center">
+          <div class="abacus-animation mb-4">
+            <div class="text-6xl animate-bounce">🧮</div>
+          </div>
+          <p class="text-amber-300 font-medium">Calcul des lots optimaux...</p>
+          <div class="flex justify-center mt-2 space-x-1">
+            <div class="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
+            <div class="w-2 h-2 bg-amber-400 rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
+            <div class="w-2 h-2 bg-amber-400 rounded-full animate-pulse" style="animation-delay: 0.4s"></div>
+          </div>
+        </div>
+      </div>
+      <style>
+        @keyframes bounce {
+          0%, 20%, 53%, 80%, 100% { transform: translateY(0); }
+          40%, 43% { transform: translateY(-10px); }
+          70% { transform: translateY(-5px); }
+        }
+        .animate-bounce { animation: bounce 1s infinite; }
+        .animate-pulse { animation: pulse 1.5s ease-in-out infinite; }
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.3; }
+        }
+      </style>
+    `;
+  }
+
+  displayDefaultRecommendationMessage() {
+    const recommendationsContent = document.getElementById('coin-lots-content');
+    const addToCartButton = document.getElementById('add-all-lots-to-cart');
+    
+    if (recommendationsContent) {
+      recommendationsContent.innerHTML = `
+        <div class="text-center py-8">
+          <div class="text-6xl mb-4">🪙</div>
+          <p class="text-gray-300 text-lg mb-2">Entrez des montants dans le convertisseur</p>
+          <p class="text-gray-400 text-sm">pour voir les lots de pièces recommandés</p>
+        </div>
+      `;
+    }
+    
+    if (addToCartButton) {
+      addToCartButton.style.display = 'none';
+    }
+  }
+
+  displayNoRecommendationsMessage() {
+    const recommendationsContent = document.getElementById('coin-lots-content');
+    const addToCartButton = document.getElementById('add-all-lots-to-cart');
+    
+    if (recommendationsContent) {
+      recommendationsContent.innerHTML = `
+        <div class="text-center py-8">
+          <div class="text-6xl mb-4">🔍</div>
+          <p class="text-gray-300 text-lg mb-2">Aucune recommandation trouvée</p>
+          <p class="text-gray-400 text-sm">Essayez avec d'autres montants</p>
+        </div>
+      `;
+    }
+    
+    if (addToCartButton) {
+      addToCartButton.style.display = 'none';
+    }
+  }
+  
+  hideCalculatingIndicator() {
+    // L'indicateur sera remplacé par displayRecommendations()
+    // Pas besoin de le cacher explicitement
+  }
+
+
   updateDisplay() {
     this.updateFromSources();
   }
@@ -528,6 +705,8 @@ const initConverter = () => {
   setTimeout(() => {
     if (document.getElementById('currency-converter-premium')) {
       window.converterInstance = new CurrencyConverterPremium();
+      // Référence globale simplifiée pour les boutons
+      window.currencyConverter = window.converterInstance;
     }
   }, 100);
 };

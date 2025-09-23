@@ -1307,7 +1307,7 @@ echo $snipcartInit;
       </div>
 
       <!-- ===== RECOMMANDATIONS DE LOTS DE PIÈCES ===== -->
-      <div id="coin-lots-recommendations" class="mt-12 mb-16" style="display: none;">
+      <div id="coin-lots-recommendations" class="mt-12 mb-16" style="display: block;">
         <div class="bg-gradient-to-r from-green-900/30 to-emerald-900/20 rounded-xl p-8 border border-green-700/50">
           <h4 class="text-2xl font-bold text-center text-gray-200 mb-8">
             🛒 Lots de pièces recommandés
@@ -1771,17 +1771,19 @@ document.addEventListener('DOMContentLoaded', function() {
         // L'ID reste le même (pas de multiplicateur dans l'ID)
         const productId = lot.productId;
         
-        // Obtenir le nom du produit dynamiquement
-        const getProductName = (id) => {
-          const recommender = window.dynamicRecommender;
-          if (recommender && recommender.products && recommender.products[id]) {
-            return recommender.products[id].name;
-          }
-          // Fallback minimal si pas encore chargé
-          return id.replace(/^coin-/, "").replace(/-/g, " ");
-        };
-        
-        const productName = getProductNameDynamic(lot.productId);
+        // Utiliser le displayName s'il existe, sinon obtenir le nom du produit dynamiquement
+        let productName = lot.displayName;
+        if (!productName) {
+          const getProductName = (id) => {
+            const recommender = window.dynamicRecommender;
+            if (recommender && recommender.products && recommender.products[id]) {
+              return recommender.products[id].name;
+            }
+            // Fallback minimal si pas encore chargé
+            return id.replace(/^coin-/, "").replace(/-/g, " ");
+          };
+          productName = getProductName(lot.productId);
+        }
         
         // Créer un bouton temporaire invisible avec les mêmes attributs que la boutique
         const tempButton = document.createElement('button');
@@ -1796,13 +1798,43 @@ document.addEventListener('DOMContentLoaded', function() {
         tempButton.setAttribute('data-item-url', window.location.href);
         tempButton.setAttribute('data-item-quantity', lot.quantity.toString());
         
-        // Si le produit a un multiplicateur, l'ajouter comme champ personnalisé (comme sur la boutique)
-        // Utilise l'index 2 comme défini par GD_CUSTOM_FIELD_MULTIPLIER_INDEX
-        if (lot.multiplier !== null && lot.multiplier !== undefined) {
+        // Pour les produits personnalisables avec métal spécifique
+        const product = window.products ? window.products[lot.productId] : null;
+        if (product && product.customizable && lot.customMetal) {
+          // Traduire le métal en français pour Snipcart
+          const metalTranslation = {
+            copper: 'cuivre',
+            silver: 'argent',
+            electrum: 'électrum', 
+            gold: 'or',
+            platinum: 'platine'
+          };
+          
+          const metalFR = metalTranslation[lot.customMetal] || lot.customMetal;
+          const multiplier = lot.customMultiplier || 1;
+          
+          // Champ pour la matière (index 1) - métal spécifique
+          tempButton.setAttribute('data-item-custom1-name', 'Métal');
+          tempButton.setAttribute('data-item-custom1-type', 'dropdown');
+          tempButton.setAttribute('data-item-custom1-options', 'cuivre|argent|électrum|or|platine');
+          tempButton.setAttribute('data-item-custom1-value', metalFR);
+          
+          // Champ pour le multiplicateur (index 2) - multiplicateur spécifique
           tempButton.setAttribute('data-item-custom2-name', 'Multiplicateur');
           tempButton.setAttribute('data-item-custom2-type', 'dropdown');
           tempButton.setAttribute('data-item-custom2-options', '1|10|100|1000|10000');
-          tempButton.setAttribute('data-item-custom2-value', `${lot.multiplier}`);
+          tempButton.setAttribute('data-item-custom2-value', multiplier.toString());
+        } else if (product && product.customizable) {
+          // Fallback pour les produits personnalisables sans spécification
+          tempButton.setAttribute('data-item-custom1-name', 'Métal');
+          tempButton.setAttribute('data-item-custom1-type', 'dropdown');
+          tempButton.setAttribute('data-item-custom1-options', 'cuivre|argent|électrum|or|platine');
+          tempButton.setAttribute('data-item-custom1-value', 'cuivre');
+          
+          tempButton.setAttribute('data-item-custom2-name', 'Multiplicateur');
+          tempButton.setAttribute('data-item-custom2-type', 'dropdown');
+          tempButton.setAttribute('data-item-custom2-options', '1|10|100|1000|10000');
+          tempButton.setAttribute('data-item-custom2-value', '1');
         }
         
         // Ajouter temporairement au DOM et cliquer

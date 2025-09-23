@@ -1,29 +1,70 @@
 /**
- * CALCULATEUR DE LOTS DYNAMIQUE 100% - OPTIMISÉ
- * Brute force intelligent avec cache pour recommandations optimales
- * Créé automatiquement depuis les données JSON des produits
+ * Recommandeur de pièces 100% dynamique - VERSION SIMPLIFIÉE
+ * Analyse automatiquement products.json et trouve la solution la moins chère
+ * Cache intelligent non-bloquant pour optimiser les performances
  */
 class DynamicCoinRecommender {
     constructor() {
-        this.products = null;
+        this.products = {};
         this.cache = new Map();
+        this.isLoading = false;
+        this.isReady = false;
+        this.loadPromise = null;
+
+        // Charger les données de façon non-bloquante
         this.loadProducts();
     }
 
     /**
-     * Chargement 100% dynamique des produits depuis le JSON
+     * Chargement avec cache et gestion des promesses
      */
     async loadProducts() {
+        // Éviter les chargements multiples
+        if (this.loadPromise) {
+            return this.loadPromise;
+        }
+
+        this.loadPromise = this.fetchProductsWithCache();
+        return this.loadPromise;
+    }
+
+    /**
+     * Récupération des données avec mise en cache
+     */
+    async fetchProductsWithCache() {
         try {
+            // Vérifier le cache localStorage en premier
+            const cacheKey = 'coin_products_cache';
+            const cacheTimeKey = 'coin_products_cache_time';
+            const cacheDuration = 5 * 60 * 1000; // 5 minutes
+
+            const cachedTime = localStorage.getItem(cacheTimeKey);
+            const cachedData = localStorage.getItem(cacheKey);
+
+            // Utiliser le cache si valide
+            if (cachedTime && cachedData && (Date.now() - parseInt(cachedTime)) < cacheDuration) {
+                this.products = JSON.parse(cachedData);
+                this.isReady = true;
+                console.log('Produits de pièces chargés depuis le cache:', Object.keys(this.products).length);
+                return;
+            }
+
+            // Sinon, charger depuis le serveur
             const response = await fetch('/data/products.json');
             const allProducts = await response.json();
-            
+
             // Extraction automatique des produits de pièces
             this.products = this.extractCoinProducts(allProducts);
-            console.log('Produits de pièces chargés dynamiquement:', Object.keys(this.products).length);
+            this.isReady = true;
+
+            // Mise en cache
+            localStorage.setItem(cacheKey, JSON.stringify(this.products));
+            localStorage.setItem(cacheTimeKey, Date.now().toString());
+
+            console.log('Produits de pièces chargés dynamiquement et mis en cache:', Object.keys(this.products).length);
         } catch (error) {
             console.error('Erreur chargement produits:', error);
-            // Pas de fallback hardcodé - on charge depuis les données statiques
+            // Fallback vers les données statiques
             this.loadFromStaticData();
         }
     }
@@ -33,185 +74,345 @@ class DynamicCoinRecommender {
      */
     extractCoinProducts(allProducts) {
         const coinProducts = {};
-        
+
         Object.keys(allProducts).forEach(id => {
             if (id.startsWith('coin-')) {
                 const product = allProducts[id];
-                
+
                 coinProducts[id] = {
                     name: product.name,
                     name_en: product.name_en || product.name,
                     price: parseFloat(product.price),
-                    customizable: product.customizable === 'VRAI',
-                    multipliers: this.parseMultipliers(product.multipliers),
-                    coinLots: this.parseCoinLots(product.coin_lots),
-                    metals: this.parseArray(product.metals_fr)
+                    customizable: product.customizable === true || product.customizable === 'true',
+                    coinLots: product.coin_lots || {},
+                    category: product.category
                 };
             }
         });
-        
+
         return coinProducts;
-    }
-
-    /**
-     * Parseurs pour les différents formats de données
-     */
-    parseMultipliers(str) {
-        if (!str) return [];
-        return str.split('|').map(m => parseInt(m)).filter(m => !isNaN(m));
-    }
-
-    parseCoinLots(str) {
-        if (!str) return {};
-        try {
-            return JSON.parse(str);
-        } catch (e) {
-            return {};
-        }
-    }
-
-    parseArray(str) {
-        if (!str) return [];
-        return str.split('|').filter(s => s.trim());
     }
 
     /**
      * Chargement depuis les données statiques (backup)
      */
     loadFromStaticData() {
-        // Utilise les données générées par PHP
-        this.products = GENERATED_COIN_PRODUCTS;
+        // Utiliser les données du window.products si disponible
+        if (window.products) {
+            this.products = this.extractCoinProducts(window.products);
+            this.isReady = true;
+            console.log('Produits de pièces chargés depuis window.products:', Object.keys(this.products).length);
+        } else {
+            console.warn('Aucune donnée de produits disponible');
+            this.products = {};
+            this.isReady = false;
+        }
     }
 
     /**
-     * ALGORITHME DE BRUTE FORCE OPTIMISÉ
-     * Trouve la combinaison la moins chère pour satisfaire les besoins
+     * ALGORITHME SIMPLIFIÉ - Trouve la combinaison la moins chère
      */
     findOptimalLots(needs) {
         const cacheKey = JSON.stringify(needs);
-        
+
         // Vérification cache
         if (this.cache.has(cacheKey)) {
             return this.cache.get(cacheKey);
         }
 
-        const bestCombination = this.bruteForceOptimal(needs);
-        
+        const bestCombination = this.findCheapestSolution(needs);
+
         // Mise en cache (limitation à 1000 entrées)
         if (this.cache.size > 1000) {
             this.cache.clear();
         }
         this.cache.set(cacheKey, bestCombination);
-        
+
         return bestCombination;
     }
 
     /**
-     * Brute force intelligent avec optimisations
+     * Trouve la solution la moins chère en testant toutes les combinaisons possibles
      */
-    bruteForceOptimal(needs) {
+    findCheapestSolution(needs) {
         if (!this.products) {
             console.warn('Produits non chargés');
             return [];
         }
 
-        const productIds = Object.keys(this.products);
-        let bestCombination = null;
-        let bestCost = Infinity;
+        console.log('🎯 Recherche de la solution optimale pour:', needs);
 
-        // Générateur de combinaisons avec optimisation early exit
-        this.generateCombinations(productIds, needs, 0, [], 0, (combination, cost) => {
-            if (cost < bestCost && this.satisfiesNeeds(combination, needs)) {
-                bestCost = cost;
-                bestCombination = [...combination];
+        // Filtrer les besoins non-zéro
+        const filteredNeeds = {};
+        Object.keys(needs).forEach(metal => {
+            if (needs[metal] > 0) {
+                filteredNeeds[metal] = needs[metal];
             }
         });
 
-        return bestCombination || [];
+        if (Object.keys(filteredNeeds).length === 0) {
+            return [];
+        }
+
+        // Obtenir tous les lots de pièces disponibles
+        const availableLots = this.getAllAvailableLots();
+        console.log(`💰 ${availableLots.length} lots disponibles pour optimisation`);
+
+        // Trouver la meilleure solution
+        const bestSolution = this.bruteForceOptimization(filteredNeeds, availableLots);
+
+        console.log('✅ Solution optimale trouvée:', bestSolution);
+        return bestSolution;
     }
 
     /**
-     * Générateur de combinaisons avec early exit
+     * Obtient tous les lots de pièces disponibles avec leurs configurations
      */
-    generateCombinations(productIds, needs, index, current, currentCost, callback) {
-        // Early exit si coût déjà trop élevé
-        if (currentCost >= callback.bestCost) return;
+    getAllAvailableLots() {
+        const lots = [];
 
-        // Test de la combinaison actuelle
-        callback(current, currentCost);
-
-        // Génération récursive
-        for (let i = index; i < productIds.length; i++) {
-            const productId = productIds[i];
+        Object.keys(this.products).forEach(productId => {
             const product = this.products[productId];
-            
-            // Optimisation: skip si ce produit ne peut pas aider
-            if (!this.canHelpWithNeeds(product, needs)) continue;
 
-            // Test avec quantités variables (1-10 max par produit)
-            for (let qty = 1; qty <= Math.min(10, this.maxReasonableQuantity(product, needs)); qty++) {
-                const newCost = currentCost + (product.price * qty);
-                if (newCost < callback.bestCost) {
-                    current.push({ productId, quantity: qty, price: product.price });
-                    this.generateCombinations(productIds, needs, i + 1, current, newCost, callback);
-                    current.pop();
-                }
-            }
-        }
-    }
-
-    /**
-     * Vérifications d'optimisation
-     */
-    canHelpWithNeeds(product, needs) {
-        const lots = product.coinLots;
-        for (const metal in needs) {
-            if (lots[metal] && needs[metal] > 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    maxReasonableQuantity(product, needs) {
-        // Calcul intelligent de la quantité max raisonnable
-        let maxNeeded = Math.max(...Object.values(needs));
-        return Math.ceil(maxNeeded / 10) + 1;
-    }
-
-    /**
-     * Vérification que les besoins sont satisfaits
-     */
-    satisfiesNeeds(combination, needs) {
-        const provided = { copper: 0, silver: 0, electrum: 0, gold: 0, platinum: 0 };
-        
-        combination.forEach(item => {
-            const product = this.products[item.productId];
-            const lots = product.coinLots;
-            
-            Object.keys(lots).forEach(metal => {
-                if (typeof lots[metal] === 'object') {
-                    // Gestion des lots complexes (avec multiplicateurs)
-                    Object.values(lots[metal]).forEach(count => {
-                        provided[metal] += count * item.quantity;
+            // Vérifier si c'est un produit de pièces
+            if (product.category === 'pieces' || product.coinLots) {
+                if (product.customizable) {
+                    // Produit personnalisable : créer un lot pour chaque métal
+                    ['copper', 'silver', 'electrum', 'gold', 'platinum'].forEach(metal => {
+                        if (product.coinLots[metal]) {
+                            lots.push({
+                                productId: productId,
+                                name: product.name,
+                                price: product.price,
+                                metal: metal,
+                                quantity: product.coinLots[metal],
+                                customizable: true,
+                                displayName: `${product.name} (${metal})`
+                            });
+                        }
                     });
                 } else {
-                    // Gestion des lots simples
-                    provided[metal] += lots[metal] * item.quantity;
+                    // Produit fixe : un lot avec toutes les pièces
+                    lots.push({
+                        productId: productId,
+                        name: product.name,
+                        price: product.price,
+                        coinLots: product.coinLots,
+                        customizable: false,
+                        displayName: product.name
+                    });
                 }
-            });
+            }
         });
 
-        // Vérification que tous les besoins sont couverts
-        return Object.keys(needs).every(metal => provided[metal] >= needs[metal]);
+        return lots;
     }
 
     /**
-     * Interface publique pour les recommandations
+     * Algorithme de force brute pour trouver la solution optimale
      */
-    recommend(copper = 0, silver = 0, electrum = 0, gold = 0, platinum = 0) {
+    bruteForceOptimization(needs, lots) {
+        let bestSolution = null;
+        let bestCost = Infinity;
+
+        console.log('🔍 Test de toutes les solutions possibles');
+
+        // Tester les solutions simples (1 produit)
+        for (const lot of lots) {
+            for (let qty = 1; qty <= 10; qty++) {
+                const solution = this.testSingleLotSolution(lot, qty, needs);
+                if (solution && solution.cost < bestCost) {
+                    bestCost = solution.cost;
+                    bestSolution = solution.combination;
+                    console.log(`🎯 Nouvelle meilleure solution: ${solution.description} = $${solution.cost}`);
+                }
+            }
+        }
+
+        // Tester les combinaisons de 2 produits si nécessaire
+        if (!bestSolution || bestCost > 50) {
+            for (let i = 0; i < lots.length; i++) {
+                for (let j = i + 1; j < lots.length; j++) {
+                    for (let qty1 = 1; qty1 <= 5; qty1++) {
+                        for (let qty2 = 1; qty2 <= 5; qty2++) {
+                            const solution = this.testTwoLotSolution(lots[i], qty1, lots[j], qty2, needs);
+                            if (solution && solution.cost < bestCost) {
+                                bestCost = solution.cost;
+                                bestSolution = solution.combination;
+                                console.log(`🎯 Nouvelle meilleure solution (2 lots): ${solution.description} = $${solution.cost}`);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        console.log(`✅ Solution finale: $${bestCost}`, bestSolution);
+        return bestSolution || [];
+    }
+
+    /**
+     * Teste une solution avec un seul lot
+     */
+    testSingleLotSolution(lot, quantity, needs) {
+        if (lot.customizable) {
+            // Produit personnalisable : vérifier si ce métal est nécessaire
+            if (needs[lot.metal] && needs[lot.metal] <= lot.quantity * quantity) {
+                return {
+                    combination: [{
+                        productId: lot.productId,
+                        quantity: quantity,
+                        price: lot.price,
+                        displayName: lot.displayName,
+                        customMultiplier: lot.metal
+                    }],
+                    cost: lot.price * quantity,
+                    description: `${quantity}× ${lot.displayName}`
+                };
+            }
+        } else {
+            // Produit fixe : vérifier si satisfait tous les besoins
+            if (this.satisfiesAllNeeds(lot.coinLots, quantity, needs)) {
+                return {
+                    combination: [{
+                        productId: lot.productId,
+                        quantity: quantity,
+                        price: lot.price,
+                        displayName: lot.displayName
+                    }],
+                    cost: lot.price * quantity,
+                    description: `${quantity}× ${lot.displayName}`
+                };
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Teste une solution avec deux lots
+     */
+    testTwoLotSolution(lot1, qty1, lot2, qty2, needs) {
+        const provided = this.calculateProvidedMetals([
+            { lot: lot1, quantity: qty1 },
+            { lot: lot2, quantity: qty2 }
+        ]);
+
+        // Vérifier si cette combinaison satisfait tous les besoins
+        const satisfies = Object.keys(needs).every(metal => provided[metal] >= needs[metal]);
+
+        if (satisfies) {
+            return {
+                combination: [
+                    {
+                        productId: lot1.productId,
+                        quantity: qty1,
+                        price: lot1.price,
+                        displayName: lot1.displayName,
+                        customMultiplier: lot1.customizable ? lot1.metal : undefined
+                    },
+                    {
+                        productId: lot2.productId,
+                        quantity: qty2,
+                        price: lot2.price,
+                        displayName: lot2.displayName,
+                        customMultiplier: lot2.customizable ? lot2.metal : undefined
+                    }
+                ],
+                cost: lot1.price * qty1 + lot2.price * qty2,
+                description: `${qty1}× ${lot1.displayName} + ${qty2}× ${lot2.displayName}`
+            };
+        }
+
+        return null;
+    }
+
+    /**
+     * Calcule les métaux fournis par une combinaison de lots
+     */
+    calculateProvidedMetals(lotCombination) {
+        const provided = { copper: 0, silver: 0, electrum: 0, gold: 0, platinum: 0 };
+
+        lotCombination.forEach(({ lot, quantity }) => {
+            if (lot.customizable) {
+                // Produit personnalisable : ajouter seulement le métal spécifique
+                provided[lot.metal] += lot.quantity * quantity;
+            } else {
+                // Produit fixe : ajouter tous les métaux
+                Object.keys(lot.coinLots).forEach(metal => {
+                    provided[metal] += lot.coinLots[metal] * quantity;
+                });
+            }
+        });
+
+        return provided;
+    }
+
+    /**
+     * Vérifie si un lot fixe satisfait tous les besoins
+     */
+    satisfiesAllNeeds(coinLots, quantity, needs) {
+        return Object.keys(needs).every(metal => {
+            const provided = (coinLots[metal] || 0) * quantity;
+            return provided >= needs[metal];
+        });
+    }
+
+    /**
+     * Attendre que les données soient prêtes
+     */
+    async waitForReady() {
+        if (this.isReady) return;
+
+        // Attendre la fin du chargement
+        if (this.loadPromise) {
+            await this.loadPromise;
+        }
+
+        // Si toujours pas prêt, attendre un peu
+        let attempts = 0;
+        while (!this.isReady && attempts < 50) {
+            await new Promise(resolve => setTimeout(resolve, 100));
+            attempts++;
+        }
+    }
+
+    /**
+     * Interface publique pour les recommandations avec attente non-bloquante
+     */
+    async recommend(copper = 0, silver = 0, electrum = 0, gold = 0, platinum = 0) {
+        // Attendre que les données soient prêtes
+        await this.waitForReady();
+
+        if (!this.isReady || !this.products) {
+            console.warn('Recommandeur pas encore prêt');
+            return [];
+        }
+
         const needs = { copper, silver, electrum, gold, platinum };
-        
+
+        // Filtrage des besoins zéro
+        Object.keys(needs).forEach(key => {
+            if (needs[key] <= 0) delete needs[key];
+        });
+
+        if (Object.keys(needs).length === 0) {
+            return [];
+        }
+
+        return this.findOptimalLots(needs);
+    }
+
+    /**
+     * Version synchrone pour la compatibilité
+     */
+    recommendSync(copper = 0, silver = 0, electrum = 0, gold = 0, platinum = 0) {
+        if (!this.isReady || !this.products) {
+            return [];
+        }
+
+        const needs = { copper, silver, electrum, gold, platinum };
+
         // Filtrage des besoins zéro
         Object.keys(needs).forEach(key => {
             if (needs[key] <= 0) delete needs[key];
@@ -225,251 +426,24 @@ class DynamicCoinRecommender {
     }
 }
 
-// Données générées automatiquement depuis PHP
-const GENERATED_COIN_PRODUCTS = [
-    {
-        "id": "coin-custom-single",
-        "name": "Pi\u00e8ce Personnalis\u00e9e",
-        "name_en": "Custom Coin",
-        "price": 10,
-        "customizable": false,
-        "multipliers": [
-            1,
-            10,
-            100,
-            1000,
-            10000
-        ],
-        "coin_lots": {
-            "copper": 1,
-            "silver": 1,
-            "electrum": 1,
-            "gold": 1,
-            "platinum": 1
-        },
-        "metals": [
-            "cuivre",
-            "argent",
-            "\u00e9lectrum",
-            "or",
-            "platine"
-        ]
-    },
-    {
-        "id": "coin-trio-customizable",
-        "name": "Trio de Pi\u00e8ces",
-        "name_en": "Trio of Coins",
-        "price": 25,
-        "customizable": false,
-        "multipliers": [
-            1,
-            10,
-            100,
-            1000,
-            10000
-        ],
-        "coin_lots": {
-            "copper": 3,
-            "silver": 3,
-            "electrum": 3,
-            "gold": 3,
-            "platinum": 3
-        },
-        "metals": [
-            "cuivre",
-            "argent",
-            "\u00e9lectrum",
-            "or",
-            "platine"
-        ]
-    },
-    {
-        "id": "coin-quintessence-metals",
-        "name": "Quintessence M\u00e9tallique",
-        "name_en": "Metal Quintessence",
-        "price": 35,
-        "customizable": false,
-        "multipliers": [
-            1,
-            10,
-            100,
-            1000,
-            10000
-        ],
-        "coin_lots": {
-            "copper": 1,
-            "silver": 1,
-            "electrum": 1,
-            "gold": 1,
-            "platinum": 1
-        }
-    },
-    {
-        "id": "coin-septuple-free",
-        "name": "Septuple Libre",
-        "name_en": "Free Septuple",
-        "price": 50,
-        "customizable": false,
-        "multipliers": [
-            1,
-            10,
-            100,
-            1000,
-            10000
-        ],
-        "coin_lots": {
-            "copper": 7,
-            "silver": 7,
-            "electrum": 7,
-            "gold": 7,
-            "platinum": 7
-        },
-        "metals": [
-            "cuivre",
-            "argent",
-            "\u00e9lectrum",
-            "or",
-            "platine"
-        ]
-    },
-    {
-        "id": "coin-traveler-offering",
-        "name": "Offrande du Voyageur",
-        "name_en": "The Traveler Offering",
-        "price": 60,
-        "customizable": false,
-        "multipliers": [
-            1,
-            10,
-            100,
-            1000,
-            10000
-        ],
-        "coin_lots": {
-            "copper": 2,
-            "silver": 2,
-            "electrum": 2,
-            "gold": 2,
-            "platinum": 2
-        }
-    },
-    {
-        "id": "coin-five-realms-complete",
-        "name": "La Monnaie des Cinq Royaumes",
-        "name_en": "Currency of the Five Realms",
-        "price": 145,
-        "customizable": false,
-        "multipliers": [],
-        "coin_lots": {
-            "copper": {
-                "1": 1,
-                "10": 1,
-                "100": 1,
-                "1000": 1,
-                "10000": 1
-            },
-            "silver": {
-                "1": 1,
-                "10": 1,
-                "100": 1,
-                "1000": 1,
-                "10000": 1
-            },
-            "electrum": {
-                "1": 1,
-                "10": 1,
-                "100": 1,
-                "1000": 1,
-                "10000": 1
-            },
-            "gold": {
-                "1": 1,
-                "10": 1,
-                "100": 1,
-                "1000": 1,
-                "10000": 1
-            },
-            "platinum": {
-                "1": 1,
-                "10": 1,
-                "100": 1,
-                "1000": 1,
-                "10000": 1
-            }
-        }
-    },
-    {
-        "id": "coin-merchant-essence-double",
-        "name": "Essence du Marchand",
-        "name_en": "Essence of the Merchant",
-        "price": 275,
-        "customizable": false,
-        "multipliers": [],
-        "coin_lots": {
-            "copper": {
-                "1": 2,
-                "10": 2,
-                "100": 2,
-                "1000": 2,
-                "10000": 2
-            },
-            "silver": {
-                "1": 2,
-                "10": 2,
-                "100": 2,
-                "1000": 2,
-                "10000": 2
-            },
-            "electrum": {
-                "1": 2,
-                "10": 2,
-                "100": 2,
-                "1000": 2,
-                "10000": 2
-            },
-            "gold": {
-                "1": 2,
-                "10": 2,
-                "100": 2,
-                "1000": 2,
-                "10000": 2
-            },
-            "platinum": {
-                "1": 2,
-                "10": 2,
-                "100": 2,
-                "1000": 2,
-                "10000": 2
-            }
-        }
-    },
-    {
-        "id": "coin-lord-treasury-uniform",
-        "name": "La Tr\u00e9sorerie du Seigneur",
-        "name_en": "The Lord's Treasury",
-        "price": 275,
-        "customizable": false,
-        "multipliers": [
-            1,
-            10,
-            100,
-            1000,
-            10000
-        ],
-        "coin_lots": {
-            "copper": 10,
-            "silver": 10,
-            "electrum": 10,
-            "gold": 10,
-            "platinum": 10
-        }
-    }
-];
+// Initialisation différée pour attendre le chargement des données
+document.addEventListener('DOMContentLoaded', () => {
+    // Attendre que window.products soit disponible
+    const initRecommender = () => {
+        if (window.products) {
+            window.dynamicRecommender = new DynamicCoinRecommender();
 
-// Instance globale
-window.dynamicRecommender = new DynamicCoinRecommender();
+            // Interface de compatibilité avec l'ancien système (synchrone)
+            window.convertCoinsToLots = function(copper = 0, silver = 0, electrum = 0, gold = 0, platinum = 0) {
+                return window.dynamicRecommender.recommendSync(copper, silver, electrum, gold, platinum);
+            };
 
-// Interface de compatibilité avec l'ancien système
-window.convertCoinsToLots = function(copper = 0, silver = 0, electrum = 0, gold = 0, platinum = 0) {
-    return window.dynamicRecommender.recommend(copper, silver, electrum, gold, platinum);
-};
+            console.log('DynamicCoinRecommender initialisé avec', Object.keys(window.dynamicRecommender.products || {}).length, 'produits de pièces');
+        } else {
+            // Réessayer dans 100ms
+            setTimeout(initRecommender, 100);
+        }
+    };
+
+    initRecommender();
+});
