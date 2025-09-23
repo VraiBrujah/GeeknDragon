@@ -1,11 +1,65 @@
-﻿id;name_fr;name_en;price;description_fr;description_en;summary_fr;summary_en;images;multipliers;metals_fr;metals_en;coin_lots;languages;customizable;triptych_options;triptych_type
-piece-personnalisee;Pièce Personnalisée;Custom Coin;10;"### Pièce unique à votre choix
+﻿Column1;Column2;Column3;Column4;Column5;Column6;Column7;Column8;Column9;Column10;Column11;Column12;Column13;Column14;Column15;Column16;Column17
+id;name_fr;name_en;price;description_fr;description_en;summary_fr;summary_en;images;multipliers;metals_fr;metals_en;coin_lots;languages;customizable;triptych_options;triptych_type
+piece-personnalisee;Pièce Personnalisée;Custom Coin;15;"### Pièce unique à votre choix
 Choisissez **le métal** (cuivre, argent, électrum, or, platine) et **le multiplicateur** (unitaire, ×10, ×100, ×1000, ×10000) pour créer votre pièce sur mesure.
 
 *Parfait pour compléter une collection ou remplacer une pièce perdue.*";"### Single coin of your choice
 Select **the metal** (copper, silver, electrum, gold, platinum) and **multiplier** (unit, ×10, ×100, ×1000, ×10000) to create your custom coin.
 
 *Perfect for completing a collection or replacing a lost coin.*";Pièce métallique personnalisable avec choix du métal et du multiplicateur.;Customizable metal coin with choice of metal and multiplier.;/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp;1|10|100|1000|10000;cuivre|argent|électrum|or|platine;copper|silver|electrum|gold|platinum;"{""copper"":1,""silver"":1,""electrum"":1,""gold"":1,""platinum"":1}";;VRAI;;
+lot3-pieces;Trio de Pièces;Trio of Coins;24;"### Trois pièces personnalisables
+**3 pièces métalliques** au choix avec métal et multiplicateur personnalisables. Idéal pour compléter une collection ou créer un petit trésor sur mesure.
+
+**Contenu :**
+- **3 pièces identiques** avec votre choix de métal
+- **Multiplicateur unique** pour toutes les pièces
+- **Finition soignée** selon le multiplicateur choisi
+
+*Parfait pour débuter ou compléter votre collection de pièces !*";"### Three customizable coins
+**3 metal coins** of your choice with customizable metal and multiplier. Perfect for completing a collection or creating a small custom treasure.
+
+**Contents:**
+- **3 identical coins** with your choice of metal
+- **Single multiplier** for all coins
+- **Quality finish** according to chosen multiplier
+
+*Perfect for starting or completing your coin collection!*";Lot de trois pièces personnalisables avec choix du métal et multiplicateur unique.;Set of three customizable coins with choice of metal and single multiplier.;/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp;1|10|100|1000|10000;cuivre|argent|électrum|or|platine;copper|silver|electrum|gold|platinum;"{""copper"":3,""silver"":3,""electrum"":3,""gold"":3,""platinum"":3}";;VRAI;;
+lot5-metaux;Quintessence Métallique;Metal Quintessence;35;"### Cinq métaux, un multiplicateur
+**5 pièces de métaux différents** appliquant le même multiplicateur choisi : une de chaque métal (cuivre, argent, électrum, or, platine) avec finition uniforme.
+
+**Contenu :**
+- **1 pièce de chaque métal** (cuivre, argent, électrum, or, platine)
+- **Multiplicateur identique** pour toutes les pièces
+- **Collection complète** des 5 métaux essentiels
+
+*Découvrez la diversité des métaux avec une valeur cohérente !*";"### Five metals, one multiplier
+**5 coins of different metals** applying the same chosen multiplier: one of each metal (copper, silver, electrum, gold, platinum) with uniform finish.
+
+**Contents:**
+- **1 coin of each metal** (copper, silver, electrum, gold, platinum)
+- **Identical multiplier** for all coins
+- **Complete collection** of the 5 essential metals
+
+*Discover the diversity of metals with consistent value!*";Collection de cinq pièces avec un de chaque métal et multiplicateur uniforme.;Collection of five coins with one of each metal and uniform multiplier.;/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp;1|10|100|1000|10000;;;"{""copper"":1,""silver"":1,""electrum"":1,""gold"":1,""platinum"":1}";;VRAI;;
+lot7-pieces-libre;Septuple Libre;Free Septuple;49;"### Sept pièces entièrement personnalisables
+**7 pièces métalliques** avec choix libre du métal et du multiplicateur pour chaque pièce. Créez votre propre assortiment selon vos besoins précis.
+
+**Contenu :**
+- **7 pièces au total** avec choix individuel
+- **Métal personnalisable** pour chaque pièce
+- **Multiplicateur personnalisable** pour chaque pièce
+- **Flexibilité maximale** dans la composition
+
+*Composez votre trésor exact selon vos besoins de jeu !*";"### Seven fully customizable coins
+**7 metal coins** with free choice of metal and multiplier for each coin. Create your own assortment according to your precise needs.
+
+**Contents:**
+- **7 coins total** with individual choice
+- **Customizable metal** for each coin
+- **Customizable multiplier** for each coin
+- **Maximum flexibility** in composition
+
+*Compose your exact treasure according to your game needs!*";Lot de sept pièces avec choix libre du métal et multiplicateur pour chaque pièce.;Set of seven coins with free choice of metal and multiplier for each coin.;/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp;1|10|100|1000|10000;cuivre|argent|électrum|or|platine;copper|silver|electrum|gold|platinum;"{""copper"":7,""silver"":7,""electrum"":7,""gold"":7,""platinum"":7}";;VRAI;;
 lot10;Offrande du Voyageur;The Traveler Offering;60;"### Trésor de départ immersif
 **10 pièces en métal** : **2 de chaque métal** (cuivre, argent, électrum, or, platine). Vous choisissez **un seul multiplicateur** pour tout le lot : *unitaire* par défaut (brillant, sans gravure) ou **x10 / x100 / x1 000 / x10 000** (gravure nette, finition légèrement mate).
 

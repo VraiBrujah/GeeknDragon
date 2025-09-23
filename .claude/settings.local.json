@@ -44,7 +44,11 @@
       "Bash(node:*)",
       "WebSearch",
       "Bash(timeout:*)",
-      "Bash(cmd /c:*)"
+      "Bash(cmd /c:*)",
+      "Bash(lsof:*)",
+      "Bash(del:*)",
+      "Bash(wmic:*)",
+      "Bash(CONVERTIR.cmd)"
     ],
     "deny": [],
     "ask": []

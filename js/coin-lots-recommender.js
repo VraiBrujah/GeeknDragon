@@ -155,6 +155,11 @@ class CoinLotsRecommender {
 
     const solutions = [];
 
+    // Détection spéciale : 1 de chaque métal = Quintessence Métallique optimal
+    if (this.isOneOfEachMetal(coinsBreakdown)) {
+      this.addQuintessenceMetalliqueSolution(coinsBreakdown, solutions);
+    }
+
     // Solution 1: Pièces personnalisées uniquement
     this.addCustomCoinsSolution(coinsBreakdown, solutions);
 
@@ -171,6 +176,49 @@ class CoinLotsRecommender {
     return solutions.reduce((best, current) =>
       current.totalPrice < best.totalPrice ? current : best
     ).lots;
+  }
+
+  /**
+   * Vérifie si les besoins correspondent exactement à 1 de chaque métal
+   */
+  isOneOfEachMetal(coinsBreakdown) {
+    const metals = ['copper', 'silver', 'electrum', 'gold', 'platinum'];
+    
+    // Compter le nombre total de pièces par métal
+    const totalsByMetal = {};
+    metals.forEach(metal => {
+      totalsByMetal[metal] = 0;
+      if (coinsBreakdown[metal]) {
+        Object.values(coinsBreakdown[metal]).forEach(count => {
+          totalsByMetal[metal] += count;
+        });
+      }
+    });
+    
+    // Vérifier si c'est exactement 1 de chaque métal
+    return metals.every(metal => totalsByMetal[metal] === 1) &&
+           Object.keys(coinsBreakdown).length === 5;
+  }
+
+  /**
+   * Ajoute la solution Quintessence Métallique optimale
+   */
+  addQuintessenceMetalliqueSolution(coinsBreakdown, solutions) {
+    const quintessence = this.products['lot5-metaux'];
+    if (!quintessence) return;
+
+    const lots = [{
+      productId: 'lot5-metaux',
+      name: quintessence.name,
+      quantity: 1,
+      price: quintessence.price,
+      multiplier: null
+    }];
+
+    solutions.push({ 
+      lots, 
+      totalPrice: quintessence.price 
+    });
   }
 
   /**
