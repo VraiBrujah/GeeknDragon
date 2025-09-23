@@ -9,7 +9,7 @@ echo 🚀 Lancement de la gestion des produits GeeknDragon
 echo.
 echo Choisissez votre outil préféré :
 echo.
-echo   1. 🔄 CONVERSION SIMPLE CSV vers JSON (convert-csv.bat)
+echo   1. 🔄 CONVERSION RAPIDE (CONVERTIR.cmd) - RECOMMANDÉ
 echo   2. 💻 Conversion PowerShell (Convert-CSV.ps1)
 echo   3. 📋 Script complet avec menu (update-products.bat)
 echo   4. 🌐 Interface web d'administration
@@ -17,7 +17,7 @@ echo.
 set /p choice="Votre choix (1-4) : "
 
 if "%choice%"=="1" (
-    call convert-csv.bat
+    call CONVERTIR.cmd
 ) else if "%choice%"=="2" (
     powershell -ExecutionPolicy Bypass -File "Convert-CSV.ps1"
 ) else if "%choice%"=="3" (

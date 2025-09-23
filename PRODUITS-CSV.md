@@ -6,10 +6,11 @@ Remplacer le hardcodage par un système de gestion des produits entièrement bas
 ## 🚀 Utilisation
 
 ### 🎛️ Scripts Windows (recommandé)
-1. **Double-cliquez sur `Gestion-Produits.bat`** pour choisir votre outil
-2. **Ou directement :**
-   - `update-products.bat` - Script simple avec menu
-   - `Update-Products.ps1` - Script PowerShell avancé avec statistiques
+1. **🔥 `CONVERTIR.cmd`** - **SOLUTION SIMPLE** (double-clic = conversion immédiate)
+2. **📋 `Gestion-Produits.bat`** - Lanceur avec choix d'outils
+3. **Ou directement :**
+   - `Convert-CSV.ps1` - Script PowerShell avec vérifications
+   - `update-products.bat` - Script complet avec menu (peut avoir des bugs)
 
 ### 🌐 Interface d'administration web
 1. Accédez à `/admin-products.php`
@@ -79,10 +80,11 @@ echo $manager->convertCsvToJson('data/products.csv', 'data/products.json')['mess
 ## 🛠️ Fichiers créés
 
 ### 📁 **Scripts et interfaces**
-- `Gestion-Produits.bat` - **Lanceur principal** (double-clic)
-- `update-products.bat` - Script Batch avec menu interactif
-- `Update-Products.ps1` - Script PowerShell avancé avec statistiques
+- `CONVERTIR.cmd` - **SOLUTION RECOMMANDÉE** (conversion en 1 clic)
+- `Gestion-Produits.bat` - Lanceur principal avec choix d'outils
+- `Convert-CSV.ps1` - Script PowerShell avec vérifications
 - `admin-products.php` - Interface web d'administration
+- `update-products.bat` - Script complet (peut avoir des bugs)
 
 ### 📁 **Système de gestion**
 - `includes/csv-products-manager.php` - Classe de conversion CSV ↔ JSON
