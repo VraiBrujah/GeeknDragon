@@ -373,11 +373,13 @@ a[aria-current="page"]{
 .multiplier-select {
   display: block;
   margin: 0;
-  min-width: 6rem;          /* largeur mini pour ne pas tronquer le texte */
-  padding: 0.5rem 1rem;     /* espacement interne pour agrandir la zone cliquable */
-  font-size: 1.125rem;      /* texte plus grand (ex. ~18px) */
+  width: 180px !important;      /* largeur fixe uniforme */
+  min-width: 180px !important;  /* largeur mini uniforme */
+  max-width: 180px !important;  /* largeur max uniforme */
+  padding: 0.5rem 1rem;         /* espacement interne pour agrandir la zone cliquable */
+  font-size: 1.125rem;          /* texte plus grand (ex. ~18px) */
   line-height: 1.5;
-  border-radius: 0.375rem;  /* coins légèrement arrondis comme les autres champs */
+  border-radius: 0.375rem;      /* coins légèrement arrondis comme les autres champs */
 }
 
 .multiplier-slot { height: 3rem; display:flex; align-items:center; justify-content:center; }
@@ -1058,7 +1060,7 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
 
 /* select Multiplicateur lisible (fiche produit uniquement) */
 .main-product .multiplier-select{
-  min-width:156px;padding:.5rem .75rem;border-radius:.5rem;
+  width:180px!important;min-width:180px!important;max-width:180px!important;padding:.5rem .75rem;border-radius:.5rem;
   background:#0b1220;color:#e5e7eb;border:1px solid rgba(129,140,248,.5);
 }
 
