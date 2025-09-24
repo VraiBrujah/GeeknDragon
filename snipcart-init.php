@@ -19,9 +19,9 @@ if (!$snipcartKey || !$snipcartLanguage) {
 <div hidden id="snipcart" data-api-key="<?= htmlspecialchars($snipcartKey) ?>"></div>
 <script>
   const lang = localStorage.getItem('snipcartLanguage') || '<?= htmlspecialchars($snipcartLanguage) ?>';
-  // Sans loadStrategy explicite, Snipcart se charge immédiatement (cf. documentation officielle).
   window.SnipcartSettings = {
     publicApiKey: '<?= htmlspecialchars($snipcartKey) ?>',
+    loadStrategy: 'onload',
     version: '3.4.0', // Version CSS fixe pour éviter les breaking changes
     config: {
       addProductBehavior: '<?= htmlspecialchars($snipcartAddProductBehavior) ?>',

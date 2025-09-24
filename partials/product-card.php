@@ -4,10 +4,6 @@
 if (!isset($product['id'])) {
     return;
 }
-
-if (!function_exists('gd_absolute_url')) {
-    require_once __DIR__ . '/../includes/url-utils.php';
-}
 $id = (string) $product['id'];
 
 $nameFr = (string) ($product['name'] ?? '');
@@ -58,7 +54,6 @@ $summary = $lang === 'en' ? $summaryEn : $summaryFr;
 
 $img = $product['img'] ?? ($product['images'][0] ?? '');
 $url = $product['url'] ?? ('product.php?id=' . urlencode($id));
-$absoluteUrl = gd_absolute_url($url);
 $price = number_format((float) ($product['price'] ?? 0), 2, '.', '');
 $multipliers = $product['multipliers'] ?? [];
 $metals = $product['metals'] ?? [];
@@ -283,7 +278,7 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
                 data-item-description-fr="<?= htmlspecialchars($summaryFr) ?>"
                 data-item-description-en="<?= htmlspecialchars($summaryEn) ?>"
                 data-item-price="<?= htmlspecialchars($price) ?>"
-                data-item-url="<?= htmlspecialchars($absoluteUrl) ?>"
+                data-item-url="<?= htmlspecialchars($url) ?>"
                 data-item-quantity="1"
                 <?php if ($triptychFieldIndex !== null) : ?>
                   data-item-custom<?= (int) $triptychFieldIndex ?>-name="<?= htmlspecialchars($triptychLabel ?? 'Option') ?>"
