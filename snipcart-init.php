@@ -22,6 +22,7 @@ if (!$snipcartKey || !$snipcartLanguage) {
   window.SnipcartSettings = {
     publicApiKey: '<?= htmlspecialchars($snipcartKey) ?>',
     loadStrategy: 'onload',
+    version: '3.4.0', // Version CSS fixe pour éviter les breaking changes
     config: {
       addProductBehavior: '<?= htmlspecialchars($snipcartAddProductBehavior) ?>',
       locale: lang,

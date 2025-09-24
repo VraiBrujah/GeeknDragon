@@ -13,12 +13,22 @@
  */
 class CoinLotOptimizer {
   constructor() {
+    // Mode debug - mettre à true pour voir les logs détaillés
+    this.DEBUG_MODE = false;
+
     this.rates = {copper: 1, silver: 10, electrum: 50, gold: 100, platinum: 1000};
     this.multipliers = [1, 10, 100, 1000, 10000];
     this.metalNames = {
       'fr': {'copper': 'Cuivre', 'silver': 'Argent', 'electrum': 'Électrum', 'gold': 'Or', 'platinum': 'Platine'},
       'en': {'copper': 'Copper', 'silver': 'Silver', 'electrum': 'Electrum', 'gold': 'Gold', 'platinum': 'Platinum'}
     };
+  }
+
+  // Log conditionnel pour le debug
+  debugLog(...args) {
+    if (this.DEBUG_MODE) {
+      console.log(...args);
+    }
   }
 
   getCurrentLang() {
@@ -31,7 +41,7 @@ class CoinLotOptimizer {
    * @returns {Array} Solution optimale formatée pour Snipcart
    */
   findOptimalProductCombination(needs) {
-    console.log('🎯 CoinLotOptimizer: Recherche solution optimale pour:', needs);
+    this.debugLog('🎯 CoinLotOptimizer: Recherche solution optimale pour:', needs);
     
     if (!needs || Object.keys(needs).length === 0) {
       return [];
@@ -39,13 +49,13 @@ class CoinLotOptimizer {
 
     // Vérifier disponibilité des produits
     if (!window.products) {
-      console.warn('❌ CoinLotOptimizer: window.products non disponible');
+      // Produits non disponibles - retour vide silencieux
       return [];
     }
 
     // 1. Générer toutes les variations possibles de tous les produits
     const allVariations = this.generateAllProductVariations();
-    console.log(`📦 CoinLotOptimizer: ${allVariations.length} variations générées`);
+    this.debugLog(`📦 CoinLotOptimizer: ${allVariations.length} variations générées`);
 
     // 2. Appliquer l'algorithme de sac à dos pour trouver la solution optimale
     const optimalSolution = this.knapsackOptimize(needs, allVariations);
@@ -71,7 +81,7 @@ class CoinLotOptimizer {
       }
     });
     
-    console.log(`✅ CoinLotOptimizer: ${variations.length} variations générées au total`);
+    this.debugLog(`✅ CoinLotOptimizer: ${variations.length} variations générées au total`);
     return variations;
   }
 
@@ -90,7 +100,7 @@ class CoinLotOptimizer {
       // CAS SPÉCIAL : Quintessence Métallique
       // 5 variations (1 par multiplicateur)
       // Chaque variation donne 1 pièce de chaque métal avec le même multiplicateur
-      console.log(`🔸 CoinLotOptimizer: ${product.name} - Type Quintessence (${multipliers.length} variations)`);
+      this.debugLog(`🔸 CoinLotOptimizer: ${product.name} - Type Quintessence (${multipliers.length} variations)`);
       
       multipliers.forEach(mult => {
         const capacity = {};
@@ -114,7 +124,7 @@ class CoinLotOptimizer {
       // 25 variations (5 métaux × 5 multiplicateurs)
       // Chaque variation donne N pièces du même métal/multiplicateur
       const coinsPerLot = Object.values(product.coin_lots)[0] || 1;
-      console.log(`🔹 CoinLotOptimizer: ${product.name} - Type normal (${metals.length * multipliers.length} variations, ${coinsPerLot} pièces par lot)`);
+      this.debugLog(`🔹 CoinLotOptimizer: ${product.name} - Type normal (${metals.length * multipliers.length} variations, ${coinsPerLot} pièces par lot)`);
       
       metals.forEach(metal => {
         multipliers.forEach(mult => {
@@ -145,7 +155,7 @@ class CoinLotOptimizer {
    * @param {Array} variations - Array à remplir
    */
   generateFixedVariations(productId, product, variations) {
-    console.log(`🔳 CoinLotOptimizer: ${product.name} - Produit fixe`);
+    this.debugLog(`🔳 CoinLotOptimizer: ${product.name} - Produit fixe`);
     
     const multipliers = product.multipliers || [];
     
@@ -220,7 +230,7 @@ class CoinLotOptimizer {
    * @returns {Array} Solution optimale
    */
   knapsackOptimize(needs, variations) {
-    console.log('🧮 CoinLotOptimizer: Algorithme de sac à dos...');
+    this.debugLog('🧮 CoinLotOptimizer: Algorithme de sac à dos...');
     
     const solutions = [];
     
@@ -237,7 +247,7 @@ class CoinLotOptimizer {
           type: 'single'
         });
         
-        console.log(`💡 CoinLotOptimizer: Solution unique: ${variation.name} (${variation.type}) x${quantity} = ${cost}$`);
+        this.debugLog(`💡 CoinLotOptimizer: Solution unique: ${variation.name} (${variation.type}) x${quantity} = ${cost}$`);
       }
     });
     
@@ -253,7 +263,7 @@ class CoinLotOptimizer {
         type: 'custom_multiple'
       });
       
-      console.log(`🔧 CoinLotOptimizer: Solution pièces personnalisées: ${totalCost}$ (${customSolution.length} produits)`);
+      this.debugLog(`🔧 CoinLotOptimizer: Solution pièces personnalisées: ${totalCost}$ (${customSolution.length} produits)`);
     }
     
     // ÉTAPE 3: Combinaisons multiples de Quintessence
@@ -270,7 +280,7 @@ class CoinLotOptimizer {
         type: 'quintessence_multiple'
       });
       
-      console.log(`🌟 CoinLotOptimizer: Combinaison Quintessence: ${totalCost}$ (${combination.length} Quintessences)`);
+      this.debugLog(`🌟 CoinLotOptimizer: Combinaison Quintessence: ${totalCost}$ (${combination.length} Quintessences)`);
     });
     
     // ÉTAPE 4: Décomposition intelligente avec Quintessences partielles
@@ -285,7 +295,7 @@ class CoinLotOptimizer {
       });
       
       const totalCost = solution.reduce((sum, item) => sum + (item.variation.price * item.quantity), 0);
-      console.log(`🧩 CoinLotOptimizer: Décomposition intelligente: ${totalCost}$ (${solution.length} produits)`);
+      this.debugLog(`🧩 CoinLotOptimizer: Décomposition intelligente: ${totalCost}$ (${solution.length} produits)`);
     });
     
     // ÉTAPE 5: Solutions combinées avec quintessence + complément
@@ -308,7 +318,7 @@ class CoinLotOptimizer {
             type: 'combined'
           });
           
-          console.log(`🔗 CoinLotOptimizer: Solution combinée: ${totalCost}$ (${allItems.length} produits)`);
+          this.debugLog(`🔗 CoinLotOptimizer: Solution combinée: ${totalCost}$ (${allItems.length} produits)`);
         }
       }
     });
@@ -322,11 +332,11 @@ class CoinLotOptimizer {
     
     if (completeSolutions.length > 0) {
       const best = completeSolutions[0];
-      console.log(`🏆 CoinLotOptimizer: Solution optimale: ${best.totalCost}$ (${best.type})`);
+      this.debugLog(`🏆 CoinLotOptimizer: Solution optimale: ${best.totalCost}$ (${best.type})`);
       return best.items;
     }
     
-    console.warn('⚠️ CoinLotOptimizer: Aucune solution trouvée');
+    // Aucune solution trouvée - retour vide silencieux
     return [];
   }
 
@@ -528,7 +538,7 @@ class CoinLotOptimizer {
     const patterns = this.multipliers.map(mult => this.identifyQuintessencePattern(needs, mult))
                                       .filter(p => p.matches >= 3); // Seuil abaissé à 3 pour plus de flexibilité
     
-    console.log(`🔍 CoinLotOptimizer: ${patterns.length} patterns Quintessence détectés`);
+    this.debugLog(`🔍 CoinLotOptimizer: ${patterns.length} patterns Quintessence détectés`);
     
     // 1. Tester combinaisons de 2 patterns viables avec complétion (INTELLIGENT)
     for (let i = 0; i < patterns.length; i++) {
@@ -571,7 +581,7 @@ class CoinLotOptimizer {
               
               // Vérifier que la solution complète couvre tous les besoins
               if (this.validateSolution(completeSolution, needs)) {
-                console.log(`🌟 CoinLotOptimizer: Combo optimal Quintessence ×${pattern1.multiplier} + ×${pattern2.multiplier} + custom: ${totalCost}$`);
+                this.debugLog(`🌟 CoinLotOptimizer: Combo optimal Quintessence ×${pattern1.multiplier} + ×${pattern2.multiplier} + custom: ${totalCost}$`);
                 combinations.push(completeSolution);
               }
             }
@@ -786,7 +796,7 @@ class CoinLotOptimizer {
     // Calculer la couverture totale avec debug
     solution.forEach(item => {
       if (!item.variation || !item.variation.capacity) {
-        console.warn('⚠️ CoinLotOptimizer: Variation sans capacity:', item.variation);
+        // Variation sans capacity - ignorée silencieusement
         return;
       }
       
@@ -810,7 +820,7 @@ class CoinLotOptimizer {
     }
     
     if (!isComplete) {
-      console.warn(`⚠️ CoinLotOptimizer: Solution incomplète rejetée. Pièces manquantes: ${missingCoins.join(', ')}`);
+      // Solution incomplète rejetée silencieusement
       return false;
     }
     

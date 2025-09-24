@@ -273,7 +273,7 @@ echo $snipcartInit;
     window.products = <?= json_encode($data) ?>;
   </script>
   <!-- Ordre correct comme index.php -->
-  <script src="/js/app.js"></script>
+  <script src="/js/app.js?v=<?= filemtime(__DIR__.'/js/app.js') ?>"></script>
   <script src="/js/hero-videos.js"></script>
   <!-- Scripts convertisseur supprimés: déplacés vers aide-jeux.php -->
 </body>

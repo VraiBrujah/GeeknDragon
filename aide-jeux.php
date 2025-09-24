@@ -1547,7 +1547,7 @@ echo $snipcartInit;
   // Exposer les données des produits pour le système de recommandation
   window.products = <?= json_encode($products_data) ?>;
 </script>
-<script src="/js/app.js"></script>
+<script src="/js/app.js?v=<?= filemtime(__DIR__.'/js/app.js') ?>"></script>
 <script>
 // Fonction pour retourner les cartes (triptyques)
 function flipCard(cardId) {

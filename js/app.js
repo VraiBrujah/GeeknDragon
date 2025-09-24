@@ -998,7 +998,8 @@ document.addEventListener('DOMContentLoaded', () => {
       
       if (snipcartBtn && customIndex) {
         snipcartBtn.setAttribute(`data-item-custom${customIndex}-value`, select.value);
-        console.log(`Synced custom${customIndex} to:`, select.value, 'for product:', targetId);
+        // Sync silencieux pour éviter le spam console
+        // console.log(`Synced custom${customIndex} to:`, select.value, 'for product:', targetId);
       }
     };
 
@@ -1015,7 +1016,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetId = btn.dataset.itemId || btn.getAttribute('data-item-id');
         const selects = document.querySelectorAll(`select[data-target="${targetId}"]`);
         selects.forEach(select => syncSelect(select));
-        console.log('Pre-sync before add to cart for:', targetId);
+        // Pre-sync silencieux
+        // console.log('Pre-sync before add to cart for:', targetId);
       });
     });
   };
@@ -1066,14 +1068,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const htmlElement = document.documentElement;
     const cmpStatus = htmlElement.getAttribute('data-cmp-status');
     
-    // Logging pour diagnostic
-    if (cmpStatus === 'loaded') {
-      log('CMP chargé avec succès');
-    } else if (cmpStatus === 'error') {
-      log('CMP: Erreur de chargement - Mode dégradé activé');
+    // Logging CMP réduit - uniquement pour les erreurs importantes
+    if (cmpStatus === 'error') {
+      console.warn('[GD] CMP: Erreur de chargement - Mode dégradé activé');
     } else if (cmpStatus === 'timeout') {
-      log('CMP: Timeout - Fonctionnement en mode essentiel');
+      console.warn('[GD] CMP: Timeout - Fonctionnement en mode essentiel');
     }
+    // Note: Status 'loaded' ne log plus pour réduire le bruit console
   };
   
   // Configuration des cookies e-commerce essentiels
@@ -1096,26 +1097,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const handleConsentUpdate = (event) => {
     const purposes = event.detail?.purposes || {};
     
-    log('CMP: Mise à jour consentements', purposes);
+    // Log silencieux - consentements mis à jour
     
     // Analytics (Google Analytics)
     if (purposes.analytics) {
-      log('CMP: Analytics autorisé');
+      // Analytics autorisé
       // Le gtag sera mis à jour automatiquement via l'événement
     } else {
-      log('CMP: Analytics refusé');
+      // Analytics refusé
     }
     
     // Marketing (publicité, remarketing)
     if (purposes.marketing) {
-      log('CMP: Marketing autorisé');
+      // Marketing autorisé
       // Activer les pixels Facebook/Google Ads si nécessaires
     } else {
-      log('CMP: Marketing refusé');
+      // Marketing refusé
     }
     
     // Fonctionnel (toujours accepté pour e-commerce)
-    log('CMP: Cookies fonctionnels maintenus pour e-commerce');
+    // Cookies fonctionnels maintenus pour e-commerce (silencieux)
     
     // Déclencher événement personnalisé pour d'autres modules
     document.dispatchEvent(new CustomEvent('gdConsentUpdate', {
