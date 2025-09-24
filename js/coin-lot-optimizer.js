@@ -523,14 +523,69 @@ class CoinLotOptimizer {
    */
   findQuintessenceCombinations(needs, quintessenceVariations) {
     const combinations = [];
-    const maxCombinationSize = 3; // Limite raisonnable pour éviter l'explosion combinatoire
     
-    // Générer toutes les combinaisons possibles de 1 à maxCombinationSize Quintessences
+    // NOUVELLE LOGIQUE: Tester spécifiquement les patterns détectés
+    const patterns = this.multipliers.map(mult => this.identifyQuintessencePattern(needs, mult))
+                                      .filter(p => p.matches >= 3); // Seuil abaissé à 3 pour plus de flexibilité
+    
+    console.log(`🔍 CoinLotOptimizer: ${patterns.length} patterns Quintessence détectés`);
+    
+    // 1. Tester combinaisons de 2 patterns viables avec complétion (INTELLIGENT)
+    for (let i = 0; i < patterns.length; i++) {
+      for (let j = i + 1; j < patterns.length; j++) {
+        const pattern1 = patterns[i];
+        const pattern2 = patterns[j];
+        
+        // Ne tester que si les patterns ont des multiplicateurs différents et suffisamment de métaux
+        if (pattern1.multiplier !== pattern2.multiplier && 
+            pattern1.matches >= 3 && pattern2.matches >= 3) {
+          
+          const quintessence1 = quintessenceVariations.find(v => v.multiplier === pattern1.multiplier);
+          const quintessence2 = quintessenceVariations.find(v => v.multiplier === pattern2.multiplier);
+          
+          if (quintessence1 && quintessence2) {
+            // Créer solution partielle avec 2 Quintessences
+            const partialSolution = [
+              { variation: quintessence1, quantity: 1 },
+              { variation: quintessence2, quantity: 1 }
+            ];
+            
+            // Calculer les besoins restants après ces 2 Quintessences
+            const remainingNeeds = { ...needs };
+            partialSolution.forEach(item => {
+              Object.entries(item.variation.capacity).forEach(([coinKey, capacity]) => {
+                if (remainingNeeds[coinKey]) {
+                  remainingNeeds[coinKey] = Math.max(0, remainingNeeds[coinKey] - capacity);
+                }
+              });
+            });
+            
+            // Compléter avec pièces personnalisées pour le reste  
+            const allVariations = this.generateAllProductVariations();
+            const customVariations = allVariations.filter(v => v.type === 'normal' && v.productId === 'coin-custom-single');
+            const complement = this.findCustomCoinsSolution(remainingNeeds, customVariations);
+            
+            if (complement) {
+              const completeSolution = [...partialSolution, ...complement];
+              const totalCost = completeSolution.reduce((sum, item) => sum + (item.variation.price * item.quantity), 0);
+              
+              // Vérifier que la solution complète couvre tous les besoins
+              if (this.validateSolution(completeSolution, needs)) {
+                console.log(`🌟 CoinLotOptimizer: Combo optimal Quintessence ×${pattern1.multiplier} + ×${pattern2.multiplier} + custom: ${totalCost}$`);
+                combinations.push(completeSolution);
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    // 2. Fallback: anciennes combinaisons pour compatibilité  
+    const maxCombinationSize = 3;
     for (let size = 2; size <= Math.min(maxCombinationSize, quintessenceVariations.length); size++) {
       const combos = this.generateCombinations(quintessenceVariations, size);
       
       combos.forEach(combo => {
-        // Tester si cette combinaison peut couvrir les besoins
         const solution = this.testQuintessenceCombination(needs, combo);
         if (solution && solution.length > 0) {
           combinations.push(solution);
