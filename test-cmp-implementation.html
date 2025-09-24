@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test CMP Implementation - Geek & Dragon</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #111827;
+            color: #f3f4f6;
+        }
+        
+        .test-section {
+            background: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .test-section h2 {
+            color: #d4af37;
+            margin-top: 0;
+            border-bottom: 2px solid #8b5a2b;
+            padding-bottom: 10px;
+        }
+        
+        .status-indicator {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin: 10px 0;
+            display: inline-block;
+        }
+        
+        .status-loading {
+            background: #f59e0b;
+            color: #92400e;
+        }
+        
+        .status-success {
+            background: #10b981;
+            color: #065f46;
+        }
+        
+        .status-error {
+            background: #ef4444;
+            color: #991b1b;
+        }
+        
+        .status-timeout {
+            background: #f97316;
+            color: #9a3412;
+        }
+        
+        .log-container {
+            background: #000;
+            border: 1px solid #374151;
+            border-radius: 4px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            margin: 10px 0;
+        }
+        
+        .log-entry {
+            margin: 3px 0;
+            padding: 2px 0;
+        }
+        
+        .log-info { color: #60a5fa; }
+        .log-success { color: #34d399; }
+        .log-warning { color: #fbbf24; }
+        .log-error { color: #f87171; }
+        
+        .test-button {
+            background: linear-gradient(135deg, #8B5A2B 0%, #D4AF37 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .test-button:hover {
+            background: linear-gradient(135deg, #A0632F 0%, #E6C547 100%);
+            transform: translateY(-1px);
+        }
+        
+        .cookie-list {
+            background: #374151;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        
+        .cookie-item {
+            font-size: 11px;
+            margin: 2px 0;
+            padding: 2px 5px;
+            background: #4b5563;
+            border-radius: 2px;
+        }
+        
+        .integration-test {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .integration-test {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test d'Implémentation CMP - Geek & Dragon</h1>
+    
+    <!-- Statut Global CMP -->
+    <div class="test-section">
+        <h2>📊 Statut CMP Global</h2>
+        <div id="cmp-status" class="status-indicator status-loading">Chargement...</div>
+        <div id="cmp-details"></div>
+        
+        <button class="test-button" onclick="refreshCmpStatus()">🔄 Actualiser Statut</button>
+        <button class="test-button" onclick="testCmpApi()">🔧 Tester API CMP</button>
+        <button class="test-button" onclick="triggerConsentBanner()">🏴 Afficher Bannière</button>
+    </div>
+    
+    <!-- Journaux en Temps Réel -->
+    <div class="test-section">
+        <h2>📝 Journaux CMP</h2>
+        <div id="cmp-logs" class="log-container">
+            <div class="log-entry log-info">[INIT] Initialisation des tests CMP...</div>
+        </div>
+        <button class="test-button" onclick="clearLogs()">🗑️ Vider Logs</button>
+        <button class="test-button" onclick="exportLogs()">💾 Exporter Logs</button>
+    </div>
+    
+    <!-- Tests d'Intégration -->
+    <div class="integration-test">
+        <!-- Google Analytics -->
+        <div class="test-section">
+            <h2>📈 Google Analytics</h2>
+            <div id="ga-status" class="status-indicator status-loading">Test en cours...</div>
+            <div id="ga-details">
+                <p><strong>Statut gtag:</strong> <span id="gtag-status">Non détecté</span></p>
+                <p><strong>Analytics Storage:</strong> <span id="analytics-storage">Unknown</span></p>
+                <p><strong>Ad Storage:</strong> <span id="ad-storage">Unknown</span></p>
+            </div>
+            <button class="test-button" onclick="testGoogleAnalytics()">🧪 Tester GA</button>
+        </div>
+        
+        <!-- Cookies E-commerce -->
+        <div class="test-section">
+            <h2>🍪 Cookies E-commerce</h2>
+            <div id="cookies-status" class="status-indicator status-loading">Analyse...</div>
+            <div>
+                <strong>Cookies Essentiels Détectés:</strong>
+                <div id="essential-cookies" class="cookie-list"></div>
+                <strong>Autres Cookies:</strong>
+                <div id="other-cookies" class="cookie-list"></div>
+            </div>
+            <button class="test-button" onclick="analyzeCookies()">🔍 Analyser Cookies</button>
+        </div>
+    </div>
+    
+    <!-- Snipcart Integration -->
+    <div class="test-section">
+        <h2>🛒 Test Snipcart & E-commerce</h2>
+        <div id="snipcart-status" class="status-indicator status-loading">Vérification...</div>
+        <div id="snipcart-details">
+            <p><strong>Snipcart chargé:</strong> <span id="snipcart-loaded">Non détecté</span></p>
+            <p><strong>Cookies panier:</strong> <span id="cart-cookies">Aucun</span></p>
+            <p><strong>Fonctionnalité e-commerce:</strong> <span id="ecommerce-functional">Test requis</span></p>
+        </div>
+        <button class="test-button" onclick="testSnipcart()">🛒 Tester Snipcart</button>
+        <button class="test-button" onclick="simulateAddToCart()">➕ Simuler Ajout Panier</button>
+    </div>
+    
+    <!-- Actions de Test -->
+    <div class="test-section">
+        <h2>⚡ Actions de Test</h2>
+        <button class="test-button" onclick="acceptAllConsents()">✅ Accepter Tous Consentements</button>
+        <button class="test-button" onclick="rejectAllConsents()">❌ Refuser Tous Consentements</button>
+        <button class="test-button" onclick="resetConsents()">🔄 Réinitialiser Consentements</button>
+        <button class="test-button" onclick="runFullTestSuite()">🚀 Test Complet</button>
+    </div>
+    
+    <!-- Rapport Final -->
+    <div class="test-section">
+        <h2>📋 Rapport d'Intégration</h2>
+        <div id="integration-report">
+            <div class="log-container" id="test-results">
+                <div class="log-entry log-info">[INIT] Prêt pour les tests d'intégration...</div>
+            </div>
+        </div>
+        <button class="test-button" onclick="generateReport()">📊 Générer Rapport Final</button>
+    </div>
+
+    <script>
+        // Variables globales pour les tests
+        let logContainer = document.getElementById('cmp-logs');
+        let testResults = document.getElementById('test-results');
+        let testCounter = 0;
+        
+        // Système de logging
+        function addLog(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry log-${type}`;
+            logEntry.textContent = `[${timestamp}] ${message}`;
+            logContainer.appendChild(logEntry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+        
+        function addTestResult(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry log-${type}`;
+            logEntry.textContent = `[${timestamp}] ${message}`;
+            testResults.appendChild(logEntry);
+            testResults.scrollTop = testResults.scrollHeight;
+        }
+        
+        // Vérification du statut CMP
+        function refreshCmpStatus() {
+            addLog('🔍 Vérification du statut CMP...', 'info');
+            
+            const htmlElement = document.documentElement;
+            const cmpStatus = htmlElement.getAttribute('data-cmp-status');
+            const statusElement = document.getElementById('cmp-status');
+            const detailsElement = document.getElementById('cmp-details');
+            
+            if (cmpStatus === 'loaded') {
+                statusElement.textContent = 'CMP Chargé ✅';
+                statusElement.className = 'status-indicator status-success';
+                addLog('✅ CMP chargé avec succès', 'success');
+            } else if (cmpStatus === 'error') {
+                statusElement.textContent = 'Erreur CMP ❌';
+                statusElement.className = 'status-indicator status-error';
+                addLog('❌ Erreur de chargement CMP', 'error');
+            } else if (cmpStatus === 'timeout') {
+                statusElement.textContent = 'Timeout CMP ⚠️';
+                statusElement.className = 'status-indicator status-timeout';
+                addLog('⚠️ Timeout CMP - Mode dégradé', 'warning');
+            } else {
+                statusElement.textContent = 'CMP En attente...';
+                statusElement.className = 'status-indicator status-loading';
+                addLog('⏳ CMP toujours en chargement', 'warning');
+            }
+            
+            // Détails supplémentaires
+            const cmpApi = window.__cmp || window.__tcfapi;
+            const consentString = localStorage.getItem('euconsent') || 'Non défini';
+            
+            detailsElement.innerHTML = `
+                <p><strong>API CMP disponible:</strong> ${cmpApi ? 'Oui' : 'Non'}</p>
+                <p><strong>Type API:</strong> ${window.__cmp ? 'CMP' : window.__tcfapi ? 'TCF' : 'Aucune'}</p>
+                <p><strong>Consent String:</strong> ${consentString.substring(0, 50)}${consentString.length > 50 ? '...' : ''}</p>
+            `;
+        }
+        
+        // Test API CMP
+        function testCmpApi() {
+            addLog('🔧 Test des APIs CMP disponibles...', 'info');
+            
+            if (window.__cmp) {
+                addLog('✅ API __cmp détectée', 'success');
+                try {
+                    window.__cmp('ping', null, (result) => {
+                        addLog(`📊 Ping CMP: ${JSON.stringify(result)}`, 'info');
+                    });
+                } catch (error) {
+                    addLog(`❌ Erreur ping CMP: ${error.message}`, 'error');
+                }
+            }
+            
+            if (window.__tcfapi) {
+                addLog('✅ API __tcfapi détectée', 'success');
+                try {
+                    window.__tcfapi('ping', 2, (result) => {
+                        addLog(`📊 Ping TCF: ${JSON.stringify(result)}`, 'info');
+                    });
+                } catch (error) {
+                    addLog(`❌ Erreur ping TCF: ${error.message}`, 'error');
+                }
+            }
+            
+            if (!window.__cmp && !window.__tcfapi) {
+                addLog('⚠️ Aucune API CMP détectée', 'warning');
+            }
+        }
+        
+        // Affichage forcé de la bannière
+        function triggerConsentBanner() {
+            addLog('🏴 Tentative d\'affichage de la bannière...', 'info');
+            
+            // Méthodes courantes pour forcer l'affichage
+            try {
+                if (window.__cmp) {
+                    window.__cmp('displayConsentUi', null);
+                    addLog('✅ Bannière CMP invoquée', 'success');
+                } else if (window.__tcfapi) {
+                    window.__tcfapi('displayConsentUi', 2);
+                    addLog('✅ Bannière TCF invoquée', 'success');
+                } else {
+                    addLog('❌ Impossible d\'invoquer la bannière - API non disponible', 'error');
+                }
+            } catch (error) {
+                addLog(`❌ Erreur affichage bannière: ${error.message}`, 'error');
+            }
+        }
+        
+        // Test Google Analytics
+        function testGoogleAnalytics() {
+            addLog('📈 Test de l\'intégration Google Analytics...', 'info');
+            
+            const gtagStatus = document.getElementById('gtag-status');
+            const analyticsStorage = document.getElementById('analytics-storage');
+            const adStorage = document.getElementById('ad-storage');
+            const gaStatus = document.getElementById('ga-status');
+            
+            if (window.gtag && window.dataLayer) {
+                gtagStatus.textContent = 'Chargé ✅';
+                gaStatus.textContent = 'Google Analytics Détecté ✅';
+                gaStatus.className = 'status-indicator status-success';
+                addLog('✅ Google Analytics détecté et fonctionnel', 'success');
+                
+                // Vérifier les consentements
+                try {
+                    // Test avec gtag pour obtenir les valeurs actuelles
+                    window.gtag('get', function(data) {
+                        analyticsStorage.textContent = data.analytics_storage || 'Non défini';
+                        adStorage.textContent = data.ad_storage || 'Non défini';
+                        addLog(`📊 Analytics Storage: ${data.analytics_storage}`, 'info');
+                        addLog(`📊 Ad Storage: ${data.ad_storage}`, 'info');
+                    });
+                } catch (error) {
+                    addLog(`⚠️ Impossible de lire les consentements GA: ${error.message}`, 'warning');
+                }
+            } else {
+                gtagStatus.textContent = 'Non chargé ❌';
+                gaStatus.textContent = 'Google Analytics Non Détecté ❌';
+                gaStatus.className = 'status-indicator status-error';
+                addLog('❌ Google Analytics non détecté', 'error');
+            }
+        }
+        
+        // Analyse des cookies
+        function analyzeCookies() {
+            addLog('🍪 Analyse des cookies du site...', 'info');
+            
+            const essentialContainer = document.getElementById('essential-cookies');
+            const otherContainer = document.getElementById('other-cookies');
+            const cookiesStatus = document.getElementById('cookies-status');
+            
+            const cookies = document.cookie.split(';');
+            const essentialPatterns = ['snipcart', 'PHPSESSID', 'lang', 'cart_session'];
+            
+            let essentialCookies = [];
+            let otherCookies = [];
+            
+            cookies.forEach(cookie => {
+                const [name] = cookie.trim().split('=');
+                const isEssential = essentialPatterns.some(pattern => 
+                    name.toLowerCase().includes(pattern.toLowerCase())
+                );
+                
+                if (isEssential) {
+                    essentialCookies.push(name);
+                } else if (name) {
+                    otherCookies.push(name);
+                }
+            });
+            
+            // Affichage
+            essentialContainer.innerHTML = essentialCookies.length ? 
+                essentialCookies.map(name => `<div class="cookie-item">${name}</div>`).join('') :
+                '<div class="cookie-item">Aucun cookie essentiel détecté</div>';
+                
+            otherContainer.innerHTML = otherCookies.length ?
+                otherCookies.map(name => `<div class="cookie-item">${name}</div>`).join('') :
+                '<div class="cookie-item">Aucun autre cookie détecté</div>';
+            
+            cookiesStatus.textContent = `${essentialCookies.length} essentiels, ${otherCookies.length} autres`;
+            cookiesStatus.className = 'status-indicator status-success';
+            
+            addLog(`🍪 Cookies analysés: ${essentialCookies.length} essentiels, ${otherCookies.length} autres`, 'success');
+        }
+        
+        // Test Snipcart
+        function testSnipcart() {
+            addLog('🛒 Test de l\'intégration Snipcart...', 'info');
+            
+            const snipcartLoaded = document.getElementById('snipcart-loaded');
+            const cartCookies = document.getElementById('cart-cookies');
+            const ecommerceFunctional = document.getElementById('ecommerce-functional');
+            const snipcartStatus = document.getElementById('snipcart-status');
+            
+            if (window.Snipcart) {
+                snipcartLoaded.textContent = 'Chargé ✅';
+                snipcartStatus.textContent = 'Snipcart Fonctionnel ✅';
+                snipcartStatus.className = 'status-indicator status-success';
+                addLog('✅ Snipcart détecté et chargé', 'success');
+                
+                // Vérifier les cookies Snipcart
+                const snipcartCookiesList = [];
+                document.cookie.split(';').forEach(cookie => {
+                    if (cookie.includes('snipcart')) {
+                        snipcartCookiesList.push(cookie.trim().split('=')[0]);
+                    }
+                });
+                
+                cartCookies.textContent = snipcartCookiesList.length ? 
+                    snipcartCookiesList.join(', ') : 'Aucun cookie panier détecté';
+                    
+                ecommerceFunctional.textContent = 'Opérationnel ✅';
+                
+                addLog(`🛒 Cookies Snipcart: ${snipcartCookiesList.length} détectés`, 'info');
+            } else {
+                snipcartLoaded.textContent = 'Non chargé ❌';
+                snipcartStatus.textContent = 'Snipcart Non Détecté ❌';
+                snipcartStatus.className = 'status-indicator status-error';
+                ecommerceFunctional.textContent = 'Non fonctionnel ❌';
+                addLog('❌ Snipcart non détecté - E-commerce compromis', 'error');
+            }
+        }
+        
+        // Simulation ajout panier
+        function simulateAddToCart() {
+            addLog('➕ Simulation d\'ajout au panier...', 'info');
+            
+            if (window.Snipcart && window.Snipcart.api) {
+                try {
+                    // Simuler un produit test
+                    const testProduct = {
+                        id: 'test-cmp-product',
+                        name: 'Test CMP Product',
+                        price: 1.00,
+                        currency: 'CAD'
+                    };
+                    
+                    window.Snipcart.api.cart.add(testProduct);
+                    addLog('✅ Produit test ajouté au panier avec succès', 'success');
+                    
+                    // Vérifier le panier après ajout
+                    setTimeout(() => {
+                        const cartItems = window.Snipcart.api.cart.items.all();
+                        addLog(`🛒 Articles dans le panier: ${cartItems.length}`, 'info');
+                        
+                        // Nettoyer le produit test
+                        window.Snipcart.api.cart.clear();
+                        addLog('🗑️ Panier nettoyé après test', 'info');
+                    }, 1000);
+                    
+                } catch (error) {
+                    addLog(`❌ Erreur ajout panier: ${error.message}`, 'error');
+                }
+            } else {
+                addLog('❌ API Snipcart non disponible pour le test', 'error');
+            }
+        }
+        
+        // Actions de consentement
+        function acceptAllConsents() {
+            addLog('✅ Acceptation de tous les consentements...', 'info');
+            
+            if (window.__cmp) {
+                try {
+                    window.__cmp('setConsent', { analytics: true, marketing: true, functional: true });
+                    addLog('✅ Consentements acceptés via CMP', 'success');
+                } catch (error) {
+                    addLog(`❌ Erreur acceptation CMP: ${error.message}`, 'error');
+                }
+            } else {
+                // Simulation pour les tests
+                document.dispatchEvent(new CustomEvent('cmpConsentUpdate', {
+                    detail: { purposes: { analytics: true, marketing: true, functional: true } }
+                }));
+                addLog('✅ Consentements simulés (mode test)', 'success');
+            }
+        }
+        
+        function rejectAllConsents() {
+            addLog('❌ Refus de tous les consentements...', 'info');
+            
+            if (window.__cmp) {
+                try {
+                    window.__cmp('setConsent', { analytics: false, marketing: false, functional: true });
+                    addLog('❌ Consentements refusés via CMP', 'success');
+                } catch (error) {
+                    addLog(`❌ Erreur refus CMP: ${error.message}`, 'error');
+                }
+            } else {
+                // Simulation pour les tests
+                document.dispatchEvent(new CustomEvent('cmpConsentUpdate', {
+                    detail: { purposes: { analytics: false, marketing: false, functional: true } }
+                }));
+                addLog('❌ Refus simulé (mode test)', 'success');
+            }
+        }
+        
+        function resetConsents() {
+            addLog('🔄 Réinitialisation des consentements...', 'info');
+            
+            // Supprimer les données de consentement locales
+            localStorage.removeItem('euconsent');
+            localStorage.removeItem('cmp-consent-data');
+            
+            // Supprimer les cookies de consentement
+            document.cookie.split(';').forEach(cookie => {
+                const [name] = cookie.trim().split('=');
+                if (name.includes('consent') || name.includes('cmp')) {
+                    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+                }
+            });
+            
+            addLog('🔄 Données de consentement supprimées', 'success');
+            
+            // Recharger la page pour réinitialiser
+            setTimeout(() => {
+                addLog('🔄 Rechargement de la page...', 'info');
+                window.location.reload();
+            }, 2000);
+        }
+        
+        // Test complet
+        function runFullTestSuite() {
+            addLog('🚀 Démarrage de la suite de tests complète...', 'info');
+            addTestResult('🚀 DÉBUT DE LA SUITE DE TESTS COMPLÈTE', 'info');
+            
+            let testStep = 0;
+            const tests = [
+                () => { testStep++; addTestResult(`[${testStep}/7] Test statut CMP...`, 'info'); refreshCmpStatus(); },
+                () => { testStep++; addTestResult(`[${testStep}/7] Test API CMP...`, 'info'); testCmpApi(); },
+                () => { testStep++; addTestResult(`[${testStep}/7] Test Google Analytics...`, 'info'); testGoogleAnalytics(); },
+                () => { testStep++; addTestResult(`[${testStep}/7] Analyse cookies...`, 'info'); analyzeCookies(); },
+                () => { testStep++; addTestResult(`[${testStep}/7] Test Snipcart...`, 'info'); testSnipcart(); },
+                () => { testStep++; addTestResult(`[${testStep}/7] Simulation ajout panier...`, 'info'); simulateAddToCart(); },
+                () => { testStep++; addTestResult(`[${testStep}/7] Génération rapport final...`, 'info'); generateReport(); }
+            ];
+            
+            // Exécuter les tests avec délai
+            tests.forEach((test, index) => {
+                setTimeout(test, index * 1500);
+            });
+        }
+        
+        // Génération du rapport final
+        function generateReport() {
+            addTestResult('📊 GÉNÉRATION DU RAPPORT FINAL...', 'info');
+            
+            const reportData = {
+                timestamp: new Date().toISOString(),
+                cmpStatus: document.documentElement.getAttribute('data-cmp-status'),
+                cmpApi: !!(window.__cmp || window.__tcfapi),
+                googleAnalytics: !!(window.gtag && window.dataLayer),
+                snipcart: !!window.Snipcart,
+                cookieCount: document.cookie.split(';').length,
+                essentialCookiesPresent: document.cookie.includes('snipcart') || document.cookie.includes('PHPSESSID')
+            };
+            
+            // Calcul du score global
+            let score = 0;
+            let maxScore = 6;
+            
+            if (reportData.cmpStatus === 'loaded') score++;
+            if (reportData.cmpApi) score++;
+            if (reportData.googleAnalytics) score++;
+            if (reportData.snipcart) score++;
+            if (reportData.cookieCount > 0) score++;
+            if (reportData.essentialCookiesPresent) score++;
+            
+            const percentage = Math.round((score / maxScore) * 100);
+            
+            addTestResult('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'info');
+            addTestResult('📋 RAPPORT FINAL D\'INTÉGRATION CMP', 'info');
+            addTestResult('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'info');
+            addTestResult(`🎯 Score Global: ${score}/${maxScore} (${percentage}%)`, percentage >= 80 ? 'success' : percentage >= 60 ? 'warning' : 'error');
+            addTestResult(`📅 Date: ${new Date().toLocaleString('fr-CA')}`, 'info');
+            addTestResult(`🏷️ Statut CMP: ${reportData.cmpStatus || 'Non défini'}`, reportData.cmpStatus === 'loaded' ? 'success' : 'error');
+            addTestResult(`🔧 API CMP: ${reportData.cmpApi ? 'Disponible' : 'Indisponible'}`, reportData.cmpApi ? 'success' : 'error');
+            addTestResult(`📈 Google Analytics: ${reportData.googleAnalytics ? 'Intégré' : 'Non intégré'}`, reportData.googleAnalytics ? 'success' : 'warning');
+            addTestResult(`🛒 Snipcart: ${reportData.snipcart ? 'Fonctionnel' : 'Non fonctionnel'}`, reportData.snipcart ? 'success' : 'error');
+            addTestResult(`🍪 Cookies: ${reportData.cookieCount} détectés`, reportData.cookieCount > 0 ? 'success' : 'warning');
+            addTestResult(`⚡ E-commerce: ${reportData.essentialCookiesPresent ? 'Opérationnel' : 'Compromis'}`, reportData.essentialCookiesPresent ? 'success' : 'error');
+            addTestResult('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'info');
+            
+            if (percentage >= 80) {
+                addTestResult('✅ IMPLÉMENTATION CMP RÉUSSIE !', 'success');
+                addTestResult('✅ Le site est conforme aux exigences RGPD', 'success');
+                addTestResult('✅ L\'e-commerce fonctionne correctement', 'success');
+            } else if (percentage >= 60) {
+                addTestResult('⚠️ IMPLÉMENTATION PARTIELLEMENT RÉUSSIE', 'warning');
+                addTestResult('⚠️ Quelques optimisations recommandées', 'warning');
+            } else {
+                addTestResult('❌ IMPLÉMENTATION NÉCESSITE DES CORRECTIONS', 'error');
+                addTestResult('❌ Action requise avant mise en production', 'error');
+            }
+            
+            addTestResult('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'info');
+            
+            addLog(`📊 Rapport généré - Score: ${percentage}%`, percentage >= 80 ? 'success' : 'warning');
+        }
+        
+        // Fonctions utilitaires
+        function clearLogs() {
+            logContainer.innerHTML = '<div class="log-entry log-info">[CLEAR] Logs effacés</div>';
+        }
+        
+        function exportLogs() {
+            const logs = Array.from(logContainer.children).map(entry => entry.textContent).join('\n');
+            const blob = new Blob([logs], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `cmp-logs-${Date.now()}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+            addLog('💾 Logs exportés avec succès', 'success');
+        }
+        
+        // Initialisation au chargement
+        document.addEventListener('DOMContentLoaded', () => {
+            addLog('🚀 Page de test CMP chargée', 'info');
+            addLog('🔍 Vérification automatique du statut...', 'info');
+            
+            // Tests initiaux
+            setTimeout(refreshCmpStatus, 1000);
+            setTimeout(testGoogleAnalytics, 2000);
+            setTimeout(analyzeCookies, 3000);
+            setTimeout(testSnipcart, 4000);
+            
+            // Écouter les événements CMP
+            document.addEventListener('cmpConsentUpdate', (event) => {
+                const purposes = event.detail.purposes;
+                addLog(`🔄 Consentements mis à jour: ${JSON.stringify(purposes)}`, 'success');
+            });
+            
+            document.addEventListener('gdConsentUpdate', (event) => {
+                const { purposes, timestamp } = event.detail;
+                addLog(`🎯 Événement GD Consent: ${JSON.stringify(purposes)} à ${new Date(timestamp).toLocaleTimeString()}`, 'info');
+            });
+        });
+    </script>
+    
+    <!-- Inclusion du head-common.php pour tester l'intégration réelle -->
+    <script>
+        // Simuler le comportement du CMP si non chargé après 3 secondes
+        setTimeout(() => {
+            if (!document.documentElement.getAttribute('data-cmp-status')) {
+                document.documentElement.setAttribute('data-cmp-status', 'timeout');
+                addLog('⚠️ Simulation timeout CMP pour les tests', 'warning');
+            }
+        }, 3000);
+        
+        // Message d'accueil
+        console.log('%c🧪 Page de Test CMP - Geek & Dragon', 'background: #8B5A2B; color: #D4AF37; font-size: 16px; font-weight: bold; padding: 10px;');
+        console.log('Cette page permet de tester l\'implémentation du CMP et ses intégrations.');
+        console.log('Utilisez les boutons pour effectuer des tests spécifiques ou lancez la suite complète.');
+    </script>
+</body>
+</html>

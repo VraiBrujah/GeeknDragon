@@ -1,7 +1,7 @@
 /* ========================================================================
    Geek & Dragon — app.js (full)
    Dernière mise à jour : Header/Nav fixes + i18n + mobile panel + boutique
-   + vidéos séquentielles + Swiper/Fancybox + helpers utilitaires.
+   + vidéos séquentielles + Swiper/Fancybox + helpers utilitaires + CMP Integration.
    ===================================================================== */
 
 /* global Swiper, Fancybox */
@@ -1055,4 +1055,90 @@ window.addEventListener('snipcart.ready', () => {
     new MutationObserver(toggleSnipcartScroll).observe(root, { childList: true, subtree: true });
   }
   toggleSnipcartScroll();
+});
+
+/* ========================================================================
+   CMP (CONSENT MANAGEMENT PLATFORM) — Intégration e-commerce
+   ===================================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+  // Vérifier le statut du CMP et ajuster les fonctionnalités
+  const checkCmpStatus = () => {
+    const htmlElement = document.documentElement;
+    const cmpStatus = htmlElement.getAttribute('data-cmp-status');
+    
+    // Logging pour diagnostic
+    if (cmpStatus === 'loaded') {
+      log('CMP chargé avec succès');
+    } else if (cmpStatus === 'error') {
+      log('CMP: Erreur de chargement - Mode dégradé activé');
+    } else if (cmpStatus === 'timeout') {
+      log('CMP: Timeout - Fonctionnement en mode essentiel');
+    }
+  };
+  
+  // Configuration des cookies e-commerce essentiels
+  const ensureEssentialCookies = () => {
+    // Ces cookies restent toujours disponibles pour le fonctionnement e-commerce
+    const essentialCookies = [
+      'snipcart_*', // Panier Snipcart
+      'PHPSESSID', // Session PHP
+      'lang_preference', // Langue utilisateur
+      'cart_session' // Session panier local
+    ];
+    
+    // Marquer les cookies essentiels comme exemptés
+    essentialCookies.forEach(cookieName => {
+      document.documentElement.setAttribute(`data-cookie-essential-${cookieName.replace('*', 'all')}`, 'true');
+    });
+  };
+  
+  // Gestionnaire de consentement personnalisé pour e-commerce
+  const handleConsentUpdate = (event) => {
+    const purposes = event.detail?.purposes || {};
+    
+    log('CMP: Mise à jour consentements', purposes);
+    
+    // Analytics (Google Analytics)
+    if (purposes.analytics) {
+      log('CMP: Analytics autorisé');
+      // Le gtag sera mis à jour automatiquement via l'événement
+    } else {
+      log('CMP: Analytics refusé');
+    }
+    
+    // Marketing (publicité, remarketing)
+    if (purposes.marketing) {
+      log('CMP: Marketing autorisé');
+      // Activer les pixels Facebook/Google Ads si nécessaires
+    } else {
+      log('CMP: Marketing refusé');
+    }
+    
+    // Fonctionnel (toujours accepté pour e-commerce)
+    log('CMP: Cookies fonctionnels maintenus pour e-commerce');
+    
+    // Déclencher événement personnalisé pour d'autres modules
+    document.dispatchEvent(new CustomEvent('gdConsentUpdate', {
+      detail: { purposes, timestamp: Date.now() }
+    }));
+  };
+  
+  // Écouteur d'événements CMP
+  document.addEventListener('cmpConsentUpdate', handleConsentUpdate);
+  
+  // Initialisation
+  checkCmpStatus();
+  ensureEssentialCookies();
+  
+  // Vérification périodique du statut CMP (au cas où)
+  const statusInterval = setInterval(() => {
+    const status = document.documentElement.getAttribute('data-cmp-status');
+    if (status && status !== 'unknown') {
+      clearInterval(statusInterval);
+      checkCmpStatus();
+    }
+  }, 500);
+  
+  // Arrêter la vérification après 10 secondes max
+  setTimeout(() => clearInterval(statusInterval), 10000);
 });
