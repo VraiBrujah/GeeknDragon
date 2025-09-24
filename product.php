@@ -100,8 +100,7 @@ $summary = $lang === 'en' ? $summaryEn : $summaryFr;
 
 $title  = $productName . ' | Geek & Dragon';
 $metaDescription = $productDesc;
-$host = $_SERVER['HTTP_HOST'] ?? 'geekndragon.com';
-$metaUrl = 'https://' . $host . '/product.php?id=' . urlencode($id);
+$metaUrl = gd_absolute_url('product.php?id=' . urlencode($id));
 $from = preg_replace('/[^a-z0-9_-]/i', '', $_GET['from'] ?? 'pieces');
 
 function getStock(string $id): ?int
