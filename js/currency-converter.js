@@ -221,7 +221,7 @@ class CurrencyConverterPremium {
     
     // Utiliser les valeurs utilisateur pour les recommandations optimales
     this.updateOptimalRecommendationsFromUser(totalValue);
-    this.updateCoinLotsRecommendations(totalValue);
+    this.updateCoinLotsRecommendations(totalValue, true); // true = utiliser valeurs utilisateur
   }
   
   distributeOptimally(totalValue) {
@@ -661,7 +661,7 @@ class CurrencyConverterPremium {
   }
   
 
-  updateCoinLotsRecommendations(baseValue) {
+  updateCoinLotsRecommendations(baseValue, useUserValues = false) {
     // Logique déplacée vers CoinLotOptimizer pour séparation des responsabilités
     const recommendationsContainer = document.getElementById('coin-lots-recommendations');
     if (!recommendationsContainer) return;
@@ -679,13 +679,23 @@ class CurrencyConverterPremium {
       
       setTimeout(() => {
         try {
-          // Convertir la solution de conversion en besoins
-          const optimalSolution = this.findMinimalCoins(baseValue);
-          const needs = {};
-          optimalSolution.forEach(item => {
-            const key = `${item.currency}_${item.multiplier}`;
-            needs[key] = (needs[key] || 0) + item.quantity;
-          });
+          let needs = {};
+          
+          if (useUserValues) {
+            // Utiliser les valeurs du tableau multiplicateur utilisateur
+            const userBreakdown = this.getUserMultiplierBreakdown();
+            userBreakdown.forEach(item => {
+              const key = `${item.currency}_${item.multiplier}`;
+              needs[key] = (needs[key] || 0) + item.quantity;
+            });
+          } else {
+            // Utiliser la solution algorithmique standard
+            const optimalSolution = this.findMinimalCoins(baseValue);
+            optimalSolution.forEach(item => {
+              const key = `${item.currency}_${item.multiplier}`;
+              needs[key] = (needs[key] || 0) + item.quantity;
+            });
+          }
           
           // Utiliser CoinLotOptimizer pour trouver les lots optimaux
           const optimizer = new window.CoinLotOptimizer();
