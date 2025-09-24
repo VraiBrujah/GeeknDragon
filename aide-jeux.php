@@ -1807,16 +1807,54 @@ document.addEventListener('DOMContentLoaded', function() {
       const productsToAdd = lotsData.map(lot => {
         const product = window.products?.[lot.productId];
         
+        // Fonction de traduction des métaux anglais -> français
+        const translateMetal = (englishMetal) => {
+          const metalTranslations = {
+            'copper': 'cuivre',
+            'silver': 'argent', 
+            'electrum': 'électrum',
+            'gold': 'or',
+            'platinum': 'platine'
+          };
+          return metalTranslations[englishMetal] || englishMetal;
+        };
+        
+        // Convertir customFields du format CoinLotOptimizer vers format SnipcartUtils
+        const convertedCustomFields = {};
+        let customIndex = 1;
+        
+        if (lot.customFields) {
+          Object.entries(lot.customFields).forEach(([fieldKey, fieldData]) => {
+            if (fieldData.role === 'metal') {
+              convertedCustomFields[`custom${customIndex}`] = {
+                name: 'Métal',
+                type: 'dropdown', 
+                options: 'cuivre|argent|électrum|or|platine',
+                value: translateMetal(fieldData.value) // TRADUCTION AJOUTÉE
+              };
+              customIndex++;
+            } else if (fieldData.role === 'multiplier') {
+              convertedCustomFields[`custom${customIndex}`] = {
+                name: 'Multiplicateur',
+                type: 'dropdown',
+                options: '1|10|100|1000|10000', 
+                value: fieldData.value.toString()
+              };
+              customIndex++;
+            }
+          });
+        }
+        
         return {
           product: {
             id: lot.productId,
             name: product?.name || lot.productId, // Utiliser le nom de base du produit
             summary: product?.summary || `Lot de pièces D&D - ${product?.name || lot.productId}`,
             price: lot.price,
-            url: `product.php?id=${encodeURIComponent(lot.productId)}`
+            url: lot.url || `product.php?id=${encodeURIComponent(lot.productId)}`
           },
           quantity: lot.quantity,
-          customFields: lot.customFields || {}
+          customFields: convertedCustomFields
         };
       });
       
