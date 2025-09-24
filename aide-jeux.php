@@ -43,47 +43,7 @@ $gameHelpTranslations = [
                 'quickNav' => 'Navigation Rapide',
                 'triptychsGuide' => 'Guide des Triptyques',
                 'cardsGuide' => 'Guide des Cartes',
-                'coinGuide' => 'Guide de la Monnaie',
-                'triptychsSubtitle' => 'Espèce, Classe, Historique - D&D 2024',
-                'cardsSubtitle' => 'Armes, Équipements, Sorts',
-                'coinSubtitle' => 'Système monétaire + Convertisseur'
-            ],
-            'triptychsSection' => [
-                'whatIs' => 'Qu\'est-ce qu\'un triptyque Geek & Dragon ?',
-                'description' => 'Un triptyque est une fiche de personnage cartonnée pliable en 3 volets, conçue pour remplacer les fastidieuses recherches dans les manuels. Chaque personnage D&D nécessite 3 triptyques différents qui se complètent parfaitement.',
-                'speciesTitle' => 'Triptyque d\'Espèce',
-                'speciesDesc' => 'Toutes les capacités raciales, traits et bonus de votre espèce (Elfe, Nain, Humain...)',
-                'classTitle' => 'Triptyque de Classe', 
-                'classDesc' => 'Compétences, sorts, aptitudes et progression de votre classe (Guerrier, Magicien, Rôdeur...)',
-                'backgroundTitle' => 'Triptyque d\'Historique',
-                'backgroundDesc' => 'Compétences sociales, équipements de départ et background de votre personnage',
-                'detailsText' => 'Découvrez en détail chaque type de triptyque. Cliquez sur les images pour voir le verso de chaque fiche.',
-                'clickToFlip' => 'Cliquez pour retourner la fiche'
-            ],
-            'diceRoller' => [
-                'title' => '🎲 Lanceur de Caractéristiques',
-                'description' => 'Lancez 4d6 et gardez les 3 meilleurs résultats. Vous ajouterez ensuite les bonus d\'Historique (+2 et +1) dans le triptyque d\'Historique.',
-                'rollButton' => 'Lancer',
-                'rollAllButton' => '🎲 Lancer toutes les caractéristiques',
-                'strength' => 'Force',
-                'dexterity' => 'Dextérité',
-                'constitution' => 'Constitution',
-                'intelligence' => 'Intelligence',
-                'wisdom' => 'Sagesse',
-                'charisma' => 'Charisme'
-            ],
-            'examples' => [
-                'species' => 'Exemple : Aasimar',
-                'speciesDesc' => 'Traits raciaux et aptitudes d\'espèce avec statistiques détaillées.',
-                'class' => 'Exemple : Barbare',
-                'classDesc' => 'Aptitudes de classe et progression avec statistiques vitales.',
-                'background' => 'Exemple : Acolyte',
-                'backgroundDesc' => 'Bonus de caractéristiques maintenant dans l\'historique.'
-            ],
-            'fillingGuide' => [
-                'title' => '📝 Guide Détaillé de Remplissage (D&D 2024)',
-                'newIn2024' => '⚠️ Nouveau dans D&D 2024 !',
-                'importantNote' => 'Les bonus de caractéristiques sont maintenant assignés par l\'Historique, plus par l\'Espèce ! C\'est dans le triptyque d\'Historique que vous noterez vos caractéristiques finales.'
+                'coinGuide' => 'Guide de la Monnaie'
             ]
         ]
     ],
@@ -117,46 +77,7 @@ $gameHelpTranslations = [
                 'quickNav' => 'Quick Navigation',
                 'triptychsGuide' => 'Triptychs Guide',
                 'cardsGuide' => 'Cards Guide',
-                'coinGuide' => 'Currency Guide',
-                'triptychsSubtitle' => 'Species, Class, Background - D&D 2024',
-                'cardsSubtitle' => 'Weapons, Equipment, Spells',
-                'coinSubtitle' => 'Monetary system + Converter'
-            ],
-            'triptychsSection' => [
-                'whatIs' => 'What is a Geek & Dragon triptych?',
-                'description' => 'A triptych is a foldable cardboard character sheet with 3 panels, designed to replace tedious manual searches. Each D&D character requires <strong>3 different triptychs</strong> that complement each other perfectly.',
-                'speciesTitle' => 'Species Triptych',
-                'speciesDesc' => 'All racial abilities, traits and bonuses of your species (Elf, Dwarf, Human...)',
-                'classTitle' => 'Class Triptych',
-                'classDesc' => 'Skills, spells, abilities and progression of your class (Fighter, Wizard, Ranger...)',
-                'backgroundTitle' => 'Background Triptych',
-                'backgroundDesc' => 'Social skills, starting equipment and your character\'s background',
-                'detailsText' => 'Discover each type of triptych in detail. Click on images to see the back of each sheet.'
-            ],
-            'diceRoller' => [
-                'title' => '🎲 Ability Score Roller',
-                'description' => 'Roll 4d6 and keep the 3 best results. You will then add Background bonuses (+2 and +1) in the Background triptych.',
-                'rollButton' => 'Roll',
-                'rollAllButton' => '🎲 Roll all ability scores',
-                'strength' => 'Strength',
-                'dexterity' => 'Dexterity',
-                'constitution' => 'Constitution',
-                'intelligence' => 'Intelligence',
-                'wisdom' => 'Wisdom',
-                'charisma' => 'Charisma'
-            ],
-            'examples' => [
-                'species' => 'Example: Aasimar',
-                'speciesDesc' => 'Racial traits and species abilities with detailed statistics.',
-                'class' => 'Example: Barbarian',
-                'classDesc' => 'Class abilities and progression with vital statistics.',
-                'background' => 'Example: Acolyte',
-                'backgroundDesc' => 'Ability score bonuses now in background.'
-            ],
-            'fillingGuide' => [
-                'title' => '📝 Detailed Filling Guide (D&D 2024)',
-                'newIn2024' => '⚠️ New in D&D 2024!',
-                'importantNote' => 'Ability score bonuses are now assigned by Background, not by Species! It is in the Background triptych that you will note your final ability scores.'
+                'coinGuide' => 'Currency Guide'
             ]
         ]
     ]
@@ -870,7 +791,7 @@ echo $snipcartInit;
           <div class="text-center">
             <div class="text-4xl mb-3">📜</div>
             <h3 class="text-xl font-bold text-indigo-400 mb-2"><?= $translations['gameHelp']['navigation']['triptychsGuide'] ?? 'Guide des Triptyques' ?></h3>
-            <p class="text-gray-300 text-sm"><?= $translations['gameHelp']['navigation']['triptychsSubtitle'] ?? 'Espèce, Classe, Historique - D&D 2024' ?></p>
+            <p class="text-gray-300 text-sm">Espèce, Classe, Historique - D&D 2024</p>
           </div>
         </a>
         
@@ -878,7 +799,7 @@ echo $snipcartInit;
           <div class="text-center">
             <div class="text-4xl mb-3">🃏</div>
             <h3 class="text-xl font-bold text-emerald-400 mb-2"><?= $translations['gameHelp']['navigation']['cardsGuide'] ?? 'Guide des Cartes' ?></h3>
-            <p class="text-gray-300 text-sm"><?= $translations['gameHelp']['navigation']['cardsSubtitle'] ?? 'Armes, Équipements, Sorts' ?></p>
+            <p class="text-gray-300 text-sm">Armes, Équipements, Sorts</p>
           </div>
         </a>
         
@@ -886,7 +807,7 @@ echo $snipcartInit;
           <div class="text-center">
             <div class="text-4xl mb-3">💰</div>
             <h3 class="text-xl font-bold text-amber-400 mb-2">Guide de la Monnaie</h3>
-            <p class="text-gray-300 text-sm"><?= $translations['gameHelp']['navigation']['coinSubtitle'] ?? 'Système monétaire + Convertisseur' ?></p>
+            <p class="text-gray-300 text-sm">Système monétaire + Convertisseur</p>
           </div>
         </a>
       </div>
@@ -897,30 +818,31 @@ echo $snipcartInit;
   <section class="py-16 bg-gray-900/80">
     <div class="max-w-6xl mx-auto px-6 text-center">
       <h2 class="text-3xl md:text-4xl font-bold mb-8 text-indigo-400">
-        <?= $translations['gameHelp']['triptychsSection']['whatIs'] ?? "Qu'est-ce qu'un triptyque Geek & Dragon ?" ?>
+        Qu'est-ce qu'un triptyque Geek & Dragon ?
       </h2>
       <div class="max-w-4xl mx-auto">
         <p class="text-xl text-gray-300 mb-8 txt-court">
-          <?= $translations['gameHelp']['triptychsSection']['description'] ?? 'Un triptyque est une fiche de personnage cartonnée pliable en 3 volets, conçue pour remplacer les fastidieuses recherches dans les manuels. Chaque personnage D&D nécessite 3 triptyques différents qui se complètent parfaitement.' ?> 
+          Un triptyque est une fiche de personnage cartonnée pliable en 3 volets, conçue pour remplacer les fastidieuses recherches dans les manuels. 
+          Chaque personnage D&D nécessite <strong>3 triptyques différents</strong> qui se complètent parfaitement.
         </p>
         
         <div class="grid md:grid-cols-3 gap-8 mt-12">
           <div class="bg-gradient-to-b from-emerald-900/30 to-emerald-800/20 p-6 rounded-xl border border-emerald-700/50">
             <div class="w-16 h-16 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4">1</div>
-            <h3 class="text-xl font-semibold mb-3 text-emerald-400"><?= $translations['gameHelp']['triptychsSection']['speciesTitle'] ?? "Triptyque d'Espèce" ?></h3>
-            <p class="text-gray-300"><?= $translations['gameHelp']['triptychsSection']['speciesDesc'] ?? 'Toutes les capacités raciales, traits et bonus de votre espèce (Elfe, Nain, Humain...)' ?></p>
+            <h3 class="text-xl font-semibold mb-3 text-emerald-400">Triptyque d'Espèce</h3>
+            <p class="text-gray-300">Toutes les capacités raciales, traits et bonus de votre espèce (Elfe, Nain, Humain...)</p>
           </div>
           
           <div class="bg-gradient-to-b from-blue-900/30 to-blue-800/20 p-6 rounded-xl border border-blue-700/50">
             <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4">2</div>
-            <h3 class="text-xl font-semibold mb-3 text-blue-400"><?= $translations['gameHelp']['triptychsSection']['classTitle'] ?? 'Triptyque de Classe' ?></h3>
-            <p class="text-gray-300"><?= $translations['gameHelp']['triptychsSection']['classDesc'] ?? 'Compétences, sorts, aptitudes et progression de votre classe (Guerrier, Magicien, Rôdeur...)' ?></p>
+            <h3 class="text-xl font-semibold mb-3 text-blue-400">Triptyque de Classe</h3>
+            <p class="text-gray-300">Compétences, sorts, aptitudes et progression de votre classe (Guerrier, Magicien, Rôdeur...)</p>
           </div>
           
           <div class="bg-gradient-to-b from-purple-900/30 to-purple-800/20 p-6 rounded-xl border border-purple-700/50">
             <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4">3</div>
-            <h3 class="text-xl font-semibold mb-3 text-purple-400"><?= $translations['gameHelp']['triptychsSection']['backgroundTitle'] ?? "Triptyque d'Historique" ?></h3>
-            <p class="text-gray-300"><?= $translations['gameHelp']['triptychsSection']['backgroundDesc'] ?? 'Compétences sociales, équipements de départ et background de votre personnage' ?></p>
+            <h3 class="text-xl font-semibold mb-3 text-purple-400">Triptyque d'Historique</h3>
+            <p class="text-gray-300">Compétences sociales, équipements de départ et background de votre personnage</p>
           </div>
         </div>
       </div>
@@ -933,55 +855,56 @@ echo $snipcartInit;
       
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-bold mb-8" data-i18n="gameHelp.triptychGuide.title">
-          <?= $translations['gameHelp']['triptychGuide']['title'] ?? "Les 3 Triptyques de votre Personnage" ?>
+          Les 3 Triptyques de votre Personnage
         </h2>
         <p class="text-xl text-gray-300 max-w-4xl mx-auto txt-court">
-          <?= $translations['gameHelp']['triptychsSection']['detailsText'] ?? 'Découvrez en détail chaque type de triptyque. Cliquez sur les images pour voir le verso de chaque fiche.' ?>
+          Découvrez en détail chaque type de triptyque. Cliquez sur les images pour voir le verso de chaque fiche.
         </p>
       </div>
 
       <!-- ===== LANCEUR DE DÉS POUR CARACTÉRISTIQUES ===== -->
       <div class="dice-roller">
-        <h3 class="text-2xl font-bold mb-4 text-center text-yellow-400"><?= $translations['gameHelp']['diceRoller']['title'] ?? '🎲 Lanceur de Caractéristiques' ?></h3>
+        <h3 class="text-2xl font-bold mb-4 text-center text-yellow-400">🎲 Lanceur de Caractéristiques</h3>
         <p class="text-gray-300 text-center mb-4">
-          <strong>D&D 2024 :</strong> <?= $translations['gameHelp']['diceRoller']['description'] ?? "Lancez 4d6 et gardez les 3 meilleurs résultats. Vous ajouterez ensuite les bonus d'Historique (+2 et +1) dans le triptyque d'Historique." ?>
+          <strong>D&D 2024 :</strong> Lancez 4d6 et gardez les 3 meilleurs résultats. 
+          Vous ajouterez ensuite les bonus d'<strong>Historique</strong> (+2 et +1) dans le triptyque d'Historique.
         </p>
         
         <div class="dice-grid">
           <div class="text-center">
-            <h4 class="font-semibold text-red-400 mb-2"><?= $translations['gameHelp']['diceRoller']['strength'] ?? 'Force' ?></h4>
-            <button class="stat-dice" onclick="rollStat('str')"><?= $translations['gameHelp']['diceRoller']['rollButton'] ?? 'Lancer' ?></button>
+            <h4 class="font-semibold text-red-400 mb-2">Force</h4>
+            <button class="stat-dice" onclick="rollStat('str')">Lancer</button>
             <div class="dice-result text-red-300" id="str-result">--</div>
           </div>
           <div class="text-center">
-            <h4 class="font-semibold text-green-400 mb-2"><?= $translations['gameHelp']['diceRoller']['dexterity'] ?? 'Dextérité' ?></h4>
-            <button class="stat-dice" onclick="rollStat('dex')"><?= $translations['gameHelp']['diceRoller']['rollButton'] ?? 'Lancer' ?></button>
+            <h4 class="font-semibold text-green-400 mb-2">Dextérité</h4>
+            <button class="stat-dice" onclick="rollStat('dex')">Lancer</button>
             <div class="dice-result text-green-300" id="dex-result">--</div>
           </div>
           <div class="text-center">
-            <h4 class="font-semibold text-orange-400 mb-2"><?= $translations['gameHelp']['diceRoller']['constitution'] ?? 'Constitution' ?></h4>
-            <button class="stat-dice" onclick="rollStat('con')"><?= $translations['gameHelp']['diceRoller']['rollButton'] ?? 'Lancer' ?></button>
+            <h4 class="font-semibold text-orange-400 mb-2">Constitution</h4>
+            <button class="stat-dice" onclick="rollStat('con')">Lancer</button>
             <div class="dice-result text-orange-300" id="con-result">--</div>
           </div>
           <div class="text-center">
-            <h4 class="font-semibold text-blue-400 mb-2"><?= $translations['gameHelp']['diceRoller']['intelligence'] ?? 'Intelligence' ?></h4>
-            <button class="stat-dice" onclick="rollStat('int')"><?= $translations['gameHelp']['diceRoller']['rollButton'] ?? 'Lancer' ?></button>
+            <h4 class="font-semibold text-blue-400 mb-2">Intelligence</h4>
+            <button class="stat-dice" onclick="rollStat('int')">Lancer</button>
             <div class="dice-result text-blue-300" id="int-result">--</div>
           </div>
           <div class="text-center">
-            <h4 class="font-semibold text-purple-400 mb-2"><?= $translations['gameHelp']['diceRoller']['wisdom'] ?? 'Sagesse' ?></h4>
-            <button class="stat-dice" onclick="rollStat('wis')"><?= $translations['gameHelp']['diceRoller']['rollButton'] ?? 'Lancer' ?></button>
+            <h4 class="font-semibold text-purple-400 mb-2">Sagesse</h4>
+            <button class="stat-dice" onclick="rollStat('wis')">Lancer</button>
             <div class="dice-result text-purple-300" id="wis-result">--</div>
           </div>
           <div class="text-center">
-            <h4 class="font-semibold text-pink-400 mb-2"><?= $translations['gameHelp']['diceRoller']['charisma'] ?? 'Charisme' ?></h4>
-            <button class="stat-dice" onclick="rollStat('cha')"><?= $translations['gameHelp']['diceRoller']['rollButton'] ?? 'Lancer' ?></button>
+            <h4 class="font-semibold text-pink-400 mb-2">Charisme</h4>
+            <button class="stat-dice" onclick="rollStat('cha')">Lancer</button>
             <div class="dice-result text-pink-300" id="cha-result">--</div>
           </div>
         </div>
         
         <div class="text-center mt-4">
-          <button class="roll-all-btn" onclick="rollAllStats()"><?= $translations['gameHelp']['diceRoller']['rollAllButton'] ?? '🎲 Lancer toutes les caractéristiques' ?></button>
+          <button class="roll-all-btn" onclick="rollAllStats()">🎲 Lancer toutes les caractéristiques</button>
         </div>
       </div>
 
@@ -1005,9 +928,9 @@ echo $snipcartInit;
           </div>
           
           <div class="text-center h-[180px] flex flex-col justify-start">
-            <h4 class="font-semibold mb-2 text-emerald-300"><?= $translations['gameHelp']['examples']['species'] ?? 'Exemple : Aasimar' ?></h4>
+            <h4 class="font-semibold mb-2 text-emerald-300">Exemple : Aasimar</h4>
             <p class="text-gray-300 text-sm mb-3">
-              <?= $translations['gameHelp']['examples']['speciesDesc'] ?? "Traits raciaux et aptitudes d'espèce avec statistiques détaillées." ?>
+              Traits raciaux et aptitudes d'espèce avec statistiques détaillées.
             </p>
             <ul class="text-gray-400 text-xs space-y-0.5">
               <li>• Traits et résistances</li>
@@ -1035,9 +958,9 @@ echo $snipcartInit;
           </div>
           
           <div class="text-center h-[180px] flex flex-col justify-start">
-            <h4 class="font-semibold mb-2 text-blue-300"><?= $translations['gameHelp']['examples']['class'] ?? 'Exemple : Barbare' ?></h4>
+            <h4 class="font-semibold mb-2 text-blue-300">Exemple : Barbare</h4>
             <p class="text-gray-300 text-sm mb-3">
-              <?= $translations['gameHelp']['examples']['classDesc'] ?? 'Aptitudes de classe et progression avec statistiques vitales.' ?>
+              Aptitudes de classe et progression avec statistiques vitales.
             </p>
             <ul class="text-gray-400 text-xs space-y-0.5">
               <li>• Initiative et jets de mort</li>
@@ -1066,9 +989,9 @@ echo $snipcartInit;
           </div>
           
           <div class="text-center h-[180px] flex flex-col justify-start">
-            <h4 class="font-semibold mb-2 text-purple-300"><?= $translations['gameHelp']['examples']['background'] ?? 'Exemple : Acolyte' ?></h4>
+            <h4 class="font-semibold mb-2 text-purple-300">Exemple : Acolyte</h4>
             <p class="text-gray-300 text-sm mb-3">
-              <strong>D&D 2024 :</strong> <?= $translations['gameHelp']['examples']['backgroundDesc'] ?? "Bonus de caractéristiques maintenant dans l'historique." ?>
+              <strong>D&D 2024 :</strong> Bonus de caractéristiques maintenant dans l'historique.
             </p>
             <ul class="text-gray-400 text-xs space-y-0.5">
               <li>• <strong>Bonus caractéristiques</strong></li>
@@ -1083,12 +1006,13 @@ echo $snipcartInit;
 
       <!-- ===== GUIDE DÉTAILLÉ DE REMPLISSAGE D&D 2024 ===== -->
       <div class="bg-gradient-to-r from-emerald-900/30 to-blue-900/30 rounded-xl p-8 border border-emerald-700/50 mt-16">
-        <h3 class="text-3xl font-bold mb-8 text-center text-emerald-400"><?= $translations['gameHelp']['fillingGuide']['title'] ?? '📝 Guide Détaillé de Remplissage (D&D 2024)' ?></h3>
+        <h3 class="text-3xl font-bold mb-8 text-center text-emerald-400">📝 Guide Détaillé de Remplissage (D&D 2024)</h3>
         
         <div class="bg-yellow-900/30 border border-yellow-600/50 rounded-lg p-4 mb-8">
-          <h4 class="text-xl font-bold text-yellow-400 mb-2"><?= $translations['gameHelp']['fillingGuide']['newIn2024'] ?? '⚠️ Nouveau dans D&D 2024 !' ?></h4>
+          <h4 class="text-xl font-bold text-yellow-400 mb-2">⚠️ Nouveau dans D&D 2024 !</h4>
           <p class="text-gray-300">
-            <strong>Important :</strong> <?= $translations['gameHelp']['fillingGuide']['importantNote'] ?? "Les bonus de caractéristiques sont maintenant assignés par l'Historique, plus par l'Espèce ! C'est dans le triptyque d'Historique que vous noterez vos caractéristiques finales." ?>
+            <strong>Important :</strong> Les bonus de caractéristiques sont maintenant assignés par l'<strong>Historique</strong>, 
+            plus par l'Espèce ! C'est dans le triptyque d'Historique que vous noterez vos caractéristiques finales.
           </p>
         </div>
         
