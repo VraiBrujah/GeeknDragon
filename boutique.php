@@ -165,7 +165,7 @@ echo $snipcartInit;
               Notre convertisseur de monnaie interactif a été déplacé vers la page d'aide des jeux 
               pour une meilleure organisation et une expérience utilisateur optimisée.
             </p>
-            <a href="<?= langUrl('aide-jeux.php#guide-monnaie') ?>" target="_blank" class="btn btn-primary">
+            <a href="<?= langUrl('aide-jeux.php#guide-monnaie') ?>" class="btn btn-primary">
               Utiliser le Convertisseur
             </a>
           </div>
