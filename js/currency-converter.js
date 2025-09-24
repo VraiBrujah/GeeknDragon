@@ -214,10 +214,13 @@ class CurrencyConverterPremium {
       input.value = '0';
     });
     
-    // Distribuer la valeur de manière optimale dans les sources
+    // NOUVELLE LOGIQUE : Garder les valeurs utilisateur du tableau multiplicateur
+    // au lieu de les redistribuer de manière optimale
     this.distributeOptimally(totalValue);
     this.updateMetalCards(totalValue);
-    this.updateOptimalRecommendations(totalValue);
+    
+    // Utiliser les valeurs utilisateur pour les recommandations optimales
+    this.updateOptimalRecommendationsFromUser(totalValue);
     this.updateCoinLotsRecommendations(totalValue);
   }
   
@@ -366,7 +369,17 @@ class CurrencyConverterPremium {
     let bestSolution = null;
     let minPieces = Infinity;
     
-    // Essayer plusieurs stratégies gloutonnes
+    // NOUVELLE STRATÉGIE : Répartition équilibrée (1 pièce par métal/multiplicateur)
+    const balancedSolution = this.balancedDistributionStrategy(targetValue, denoms);
+    if (balancedSolution && balancedSolution.length > 0) {
+      const pieces = balancedSolution.reduce((sum, item) => sum + item.quantity, 0);
+      if (pieces < minPieces) {
+        minPieces = pieces;
+        bestSolution = balancedSolution;
+      }
+    }
+    
+    // Essayer plusieurs stratégies gloutonnes comme fallback
     for (let strategy = 0; strategy < 3; strategy++) {
       const solution = this.greedyStrategy(targetValue, denoms, strategy);
       const pieces = solution.reduce((sum, item) => sum + item.quantity, 0);
@@ -447,6 +460,109 @@ class CurrencyConverterPremium {
     }
     
     return result;
+  }
+  
+  // Nouvelle stratégie : Répartition équilibrée (1 pièce par métal/multiplicateur)
+  balancedDistributionStrategy(targetValue, denoms) {
+    const result = [];
+    let remaining = targetValue;
+    
+    // Stratégie équilibrée : 1 pièce de chaque métal pour chaque multiplicateur
+    // Traiter multiplicateur par multiplicateur, du plus grand au plus petit
+    
+    for (const multiplier of this.multipliers.slice().reverse()) {
+      // Pour chaque multiplicateur, essayer d'ajouter 1 pièce de chaque métal
+      const metalOrder = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
+      
+      for (const currency of metalOrder) {
+        const denom = denoms.find(d => d.currency === currency && d.multiplier === multiplier);
+        if (denom && remaining >= denom.value) {
+          result.push({ ...denom, quantity: 1 });
+          remaining -= denom.value;
+        }
+      }
+    }
+    
+    // Vérifier si cette distribution équilibrée est intéressante
+    const balancedValue = result.reduce((sum, item) => sum + (item.value * item.quantity), 0);
+    const coverageRatio = balancedValue / targetValue;
+    
+    // Si on couvre au moins 70% avec une distribution équilibrée, l'utiliser
+    if (coverageRatio >= 0.7 && result.length >= 15) {
+      
+      // Compléter le reste avec l'algorithme glouton si nécessaire
+      if (remaining > 0) {
+        denoms.forEach(denom => {
+          if (remaining >= denom.value) {
+            const qty = Math.floor(remaining / denom.value);
+            if (qty > 0) {
+              // Chercher si cette dénomination existe déjà
+              const existing = result.find(r => r.currency === denom.currency && r.multiplier === denom.multiplier);
+              if (existing) {
+                existing.quantity += qty;
+              } else {
+                result.push({ ...denom, quantity: qty });
+              }
+              remaining -= qty * denom.value;
+            }
+          }
+        });
+      }
+      
+      return result;
+    }
+    
+    // Si la distribution équilibrée ne couvre pas assez, essayer une approche hybride
+    // Forcer au moins quelques pièces équilibrées si on a de gros montants
+    if (targetValue >= 11111) { // Valeur de la Quintessence ×1 + tous métaux ×1
+      const hybridResult = [];
+      let hybridRemaining = targetValue;
+      
+      // Forcer 1 pièce de chaque métal × multiplicateur 1 (Quintessence de base)
+      const baseQuintessence = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
+      for (const currency of baseQuintessence) {
+        const baseDenom = denoms.find(d => d.currency === currency && d.multiplier === 1);
+        if (baseDenom && hybridRemaining >= baseDenom.value) {
+          hybridResult.push({ ...baseDenom, quantity: 1 });
+          hybridRemaining -= baseDenom.value;
+        }
+      }
+      
+      // Puis essayer d'ajouter des multiplicateurs plus gros de manière équilibrée
+      for (const multiplier of [100, 10000]) {
+        let addedAny = false;
+        for (const currency of baseQuintessence) {
+          const denom = denoms.find(d => d.currency === currency && d.multiplier === multiplier);
+          if (denom && hybridRemaining >= denom.value) {
+            hybridResult.push({ ...denom, quantity: 1 });
+            hybridRemaining -= denom.value;
+            addedAny = true;
+          }
+        }
+        if (!addedAny) break; // Si on ne peut plus ajouter de ce multiplicateur, arrêter
+      }
+      
+      // Compléter avec l'algorithme glouton
+      denoms.forEach(denom => {
+        if (hybridRemaining >= denom.value) {
+          const qty = Math.floor(hybridRemaining / denom.value);
+          if (qty > 0) {
+            const existing = hybridResult.find(r => r.currency === denom.currency && r.multiplier === denom.multiplier);
+            if (existing) {
+              existing.quantity += qty;
+            } else {
+              hybridResult.push({ ...denom, quantity: qty });
+            }
+            hybridRemaining -= qty * denom.value;
+          }
+        }
+      });
+      
+      return hybridResult;
+    }
+    
+    // Sinon, retourner null pour laisser les autres stratégies prendre le relais
+    return null;
   }
   
   calculateRemainderPieces(remainderValue) {
@@ -723,6 +839,128 @@ class CurrencyConverterPremium {
       const newContainer = converterContainer.cloneNode(true);
       converterContainer.parentNode.replaceChild(newContainer, converterContainer);
     }
+  }
+  
+  // Nouvelle méthode pour récupérer les valeurs du tableau multiplicateur utilisateur
+  getUserMultiplierBreakdown() {
+    if (!this.multiplierInputs) {
+      this.refreshDOMReferences();
+    }
+    
+    const userBreakdown = [];
+    if (this.multiplierInputs) {
+      this.multiplierInputs.forEach(input => {
+        const currency = input.closest('tr').dataset.currency;
+        const multiplier = parseInt(input.dataset.multiplier);
+        const quantity = parseInt(input.value.replace(/\s/g, '')) || 0;
+        
+        if (quantity > 0) {
+          userBreakdown.push({
+            currency,
+            multiplier,
+            quantity,
+            value: this.rates[currency] * multiplier
+          });
+        }
+      });
+    }
+    
+    return userBreakdown;
+  }
+  
+  // Nouvelle méthode pour formater un breakdown en texte
+  formatBreakdownText(breakdown) {
+    if (!breakdown || breakdown.length === 0) return '';
+    
+    const formatted = breakdown.map(item => {
+      const data = this.currencyData[item.currency];
+      if (item.multiplier === 1) {
+        return `${this.nf.format(item.quantity)} ${data.emoji} ${this.getCurrencyName(item.currency).toLowerCase()}`;
+      } else {
+        return `${this.nf.format(item.quantity)} ${data.emoji} ${this.getCurrencyName(item.currency).toLowerCase()}(×${this.nf.format(item.multiplier)})`;
+      }
+    });
+    
+    // Joindre avec "et"
+    if (formatted.length > 1) {
+      const last = formatted.pop();
+      return formatted.join(', ') + ` ${this.getTranslation('shop.converter.and', 'et')} ` + last;
+    }
+    
+    return formatted.join('');
+  }
+  
+  // Méthode améliorée pour les recommandations depuis les valeurs utilisateur
+  updateOptimalRecommendationsFromUser(baseValue) {
+    if (!this.bestDisplay) {
+      this.refreshDOMReferences();
+    }
+    
+    if (!this.bestDisplay) return;
+    
+    if (baseValue === 0) {
+      const enterAmountsText = this.getTranslation('shop.converter.enterAmounts', 'Entrez des montants pour voir les recommandations optimales');
+      this.bestDisplay.innerHTML = enterAmountsText;
+      return;
+    }
+    
+    // Récupérer les valeurs du tableau multiplicateur (choix utilisateur)
+    const userBreakdown = this.getUserMultiplierBreakdown();
+    const userTotalCoins = userBreakdown.reduce((sum, item) => sum + item.quantity, 0);
+    
+    // Comparer avec l'algorithme optimal
+    const algorithmBreakdown = this.findMinimalCoins(baseValue);
+    const algorithmTotalCoins = algorithmBreakdown ? algorithmBreakdown.reduce((sum, item) => sum + item.quantity, 0) : Infinity;
+    
+    // Utiliser les valeurs utilisateur si elles sont équivalentes ou meilleures
+    let finalBreakdown, finalTotalCoins, source;
+    if (userTotalCoins > 0 && userTotalCoins <= algorithmTotalCoins) {
+      finalBreakdown = userBreakdown;
+      finalTotalCoins = userTotalCoins;
+      source = 'user';
+    } else if (algorithmBreakdown) {
+      finalBreakdown = algorithmBreakdown;
+      finalTotalCoins = algorithmTotalCoins;
+      source = 'algorithm';
+    } else {
+      // Fallback si aucun algorithme ne fonctionne
+      finalBreakdown = userBreakdown.length > 0 ? userBreakdown : [];
+      finalTotalCoins = userTotalCoins;
+      source = 'user';
+    }
+    
+    const finalBreakdownText = this.formatBreakdownText(finalBreakdown);
+    const sourceIndicator = source === 'user' ? 
+      '<span class="text-blue-600">✏️</span>' : 
+      '<span class="text-green-600">🤖</span>';
+    
+    // Calcul de la valeur en or avec reste (comme dans la méthode originale)
+    const goldValue = Math.floor(baseValue / this.rates.gold);
+    const goldRemainder = baseValue % this.rates.gold;
+    
+    let goldValueDisplay = '';
+    if (goldValue > 0) {
+      goldValueDisplay = `${this.nf.format(goldValue)} 🥇 ${this.getCurrencyName('gold').toLowerCase()}`;
+      if (goldRemainder > 0) {
+        const remainderBreakdown = this.getOptimalBreakdown(goldRemainder);
+        goldValueDisplay += ` ${this.getTranslation('shop.converter.and', 'et')} ${remainderBreakdown}`;
+      }
+    } else {
+      goldValueDisplay = this.getOptimalBreakdown(baseValue);
+    }
+    
+    const optimalConversionText = this.getTranslation('shop.converter.optimalConversion', 'Conversion optimale');
+    const totalText = this.getTranslation('shop.converter.total', 'Total');
+    const valueText = this.getTranslation('shop.converter.value', 'Valeur');
+    
+    this.bestDisplay.innerHTML = `
+      <div class="text-center">
+        <p class="text-lg mb-2"><strong>${optimalConversionText}:</strong> ${sourceIndicator}</p>
+        <p class="text-indigo-300 font-medium mb-2">${finalBreakdownText}</p>
+        <p class="text-sm text-gray-400">${totalText}: ${this.nf.format(finalTotalCoins)} ${this.getTranslation('shop.converter.coins', 'pièces')}</p>
+        <p class="text-sm text-gray-400"><br>${valueText}: ${goldValueDisplay}</p>
+      </div>
+    `;
   }
 }
 
