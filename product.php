@@ -16,29 +16,40 @@ if (!$id || !isset($data[$id])) {
 }
 $product = $data[$id];
 
-// CORRECTION DASHBOARD SNIPCART : Détecter UNIQUEMENT avec paramètre explicite
-if (isset($_GET['format']) && $_GET['format'] === 'json') {
-    header('Content-Type: application/json');
-    header('Access-Control-Allow-Origin: *');
+// CORRECTION DASHBOARD SNIPCART : Détecter les vrais crawlers Snipcart
+$userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+$purpose = $_SERVER['HTTP_X_SNIPCART_PURPOSE'] ?? '';
+$isSnipcartCrawler = (
+    strpos($userAgent, 'Snipcart/') !== false ||
+    $purpose === 'Crawling' ||
+    (isset($_GET['format']) && $_GET['format'] === 'json')
+);
+
+if ($isSnipcartCrawler) {
+    // Snipcart veut du HTML avec les bons attributs, PAS du JSON !
+    // On garde le HTML normal mais on s'assure qu'il est correct
     
-    $productName = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $product['name'];
-    $productSummary = $lang === 'en' ? ($product['summary_en'] ?? $product['summary'] ?? '') : ($product['summary'] ?? '');
+    // Si c'est explicitement demandé en JSON (debug)
+    if (isset($_GET['format']) && $_GET['format'] === 'json') {
+        header('Content-Type: application/json');
+        
+        $productName = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $product['name'];
+        $productSummary = $lang === 'en' ? ($product['summary_en'] ?? $product['summary'] ?? '') : ($product['summary'] ?? '');
+        
+        $jsonResponse = [
+            'id' => $id,
+            'name' => $productName,
+            'price' => floatval($product['price'] ?? 0),
+            'url' => "https://geekndragon.com/product.php?id=" . $id,
+            'description' => $productSummary
+        ];
+        
+        echo json_encode($jsonResponse, JSON_PRETTY_PRINT);
+        exit;
+    }
     
-    $jsonResponse = [
-        'id' => $id,
-        'name' => $productName,
-        'price' => floatval($product['price'] ?? 0),
-        'url' => "https://geekndragon.com/product.php?id=" . $id,
-        'description' => $productSummary,
-        'image' => isset($product['images'][0]) 
-            ? "https://geekndragon.com" . $product['images'][0] 
-            : null,
-        'stock' => isset($stockData[$id]) ? intval($stockData[$id]) : 999,
-        'customizable' => isset($product['customizable']) ? $product['customizable'] : false
-    ];
-    
-    echo json_encode($jsonResponse, JSON_PRETTY_PRINT);
-    exit;
+    // Pour les vrais crawlers Snipcart, on continue avec le HTML normal
+    // Ils cherchent un élément avec class="snipcart-add-item" et data-item-id correspondant
 }
 
 $productName = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $product['name'];
