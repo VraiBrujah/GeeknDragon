@@ -3,7 +3,24 @@
  * Fonctions cohérentes pour l'ajout au panier dans toute l'application
  */
 class SnipcartUtils {
-    
+
+    /**
+     * Normalise une URL (relative ou absolue) en utilisant l'origine courante de la page.
+     *
+     * @param {string} url URL potentiellement relative.
+     * @returns {string} URL absolue.
+     */
+    static normalizeUrl(url) {
+        const base = document.baseURI || window.location.href;
+        const candidate = url ?? '';
+
+        try {
+            return new URL(candidate, base).href;
+        } catch (error) {
+            return candidate;
+        }
+    }
+
     /**
      * Crée un bouton d'ajout au panier avec tous les attributs nécessaires
      */
@@ -39,7 +56,7 @@ class SnipcartUtils {
 
         // Ajouter l'URL du produit si disponible
         if (productData.url) {
-            baseAttributes['data-item-url'] = productData.url;
+            baseAttributes['data-item-url'] = this.normalizeUrl(productData.url);
         }
 
         // Appliquer les attributs de base
@@ -211,7 +228,7 @@ class SnipcartUtils {
             description: button.getAttribute('data-item-description'),
             price: parseFloat(button.getAttribute('data-item-price')),
             quantity: parseInt(button.getAttribute('data-item-quantity')),
-            url: button.getAttribute('data-item-url')
+            url: this.normalizeUrl(button.getAttribute('data-item-url'))
         };
     }
 
@@ -227,7 +244,7 @@ class SnipcartUtils {
                 name: displayName || product.name,
                 summary: product.summary,
                 price: product.price,
-                url: `product.php?id=${encodeURIComponent(product.id)}`
+                url: this.normalizeUrl(`/product.php?id=${encodeURIComponent(product.id)}`)
             },
             quantity: quantity,
             customFields: customFields || {}
