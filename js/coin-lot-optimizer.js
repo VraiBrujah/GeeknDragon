@@ -256,9 +256,25 @@ class CoinLotOptimizer {
       console.log(`🔧 CoinLotOptimizer: Solution pièces personnalisées: ${totalCost}$ (${customSolution.length} produits)`);
     }
     
-    // ÉTAPE 3: Solutions combinées avec quintessence + complément
-    // Utiliser une approche de base + compléments pour les cas complexes
+    // ÉTAPE 3: Combinaisons multiples de Quintessence
+    // Tester toutes les combinaisons possibles de Quintessence ensemble
     const quintessenceVariations = variations.filter(v => v.type === 'quintessence');
+    const quintessenceCombinations = this.findQuintessenceCombinations(needs, quintessenceVariations);
+    
+    quintessenceCombinations.forEach(combination => {
+      const totalCost = combination.reduce((sum, item) => sum + (item.variation.price * item.quantity), 0);
+      
+      solutions.push({
+        items: combination,
+        totalCost,
+        type: 'quintessence_multiple'
+      });
+      
+      console.log(`🌟 CoinLotOptimizer: Combinaison Quintessence: ${totalCost}$ (${combination.length} Quintessences)`);
+    });
+    
+    // ÉTAPE 4: Solutions combinées avec quintessence + complément
+    // Utiliser une approche de base + compléments pour les cas complexes
     
     quintessenceVariations.forEach(baseVariation => {
       const coverage = this.calculateCoverage(baseVariation, needs, 1);
@@ -282,7 +298,7 @@ class CoinLotOptimizer {
       }
     });
     
-    // ÉTAPE 4: Sélectionner la meilleure solution
+    // ÉTAPE 5: Sélectionner la meilleure solution
     solutions.sort((a, b) => a.totalCost - b.totalCost);
     
     if (solutions.length > 0) {
@@ -478,6 +494,84 @@ class CoinLotOptimizer {
     }
     
     return formatted;
+  }
+  
+  /**
+   * Trouve toutes les combinaisons valides de Quintessence
+   * @param {Object} needs - Besoins
+   * @param {Array} quintessenceVariations - Variations Quintessence disponibles
+   * @returns {Array} Combinaisons valides
+   */
+  findQuintessenceCombinations(needs, quintessenceVariations) {
+    const combinations = [];
+    const maxCombinationSize = 3; // Limite raisonnable pour éviter l'explosion combinatoire
+    
+    // Générer toutes les combinaisons possibles de 1 à maxCombinationSize Quintessences
+    for (let size = 2; size <= Math.min(maxCombinationSize, quintessenceVariations.length); size++) {
+      const combos = this.generateCombinations(quintessenceVariations, size);
+      
+      combos.forEach(combo => {
+        // Tester si cette combinaison peut couvrir les besoins
+        const solution = this.testQuintessenceCombination(needs, combo);
+        if (solution && solution.length > 0) {
+          combinations.push(solution);
+        }
+      });
+    }
+    
+    return combinations;
+  }
+  
+  /**
+   * Génère toutes les combinaisons de taille donnée
+   * @param {Array} items - Items à combiner
+   * @param {number} size - Taille des combinaisons
+   * @returns {Array} Toutes les combinaisons possibles
+   */
+  generateCombinations(items, size) {
+    if (size === 1) return items.map(item => [item]);
+    if (size > items.length) return [];
+    
+    const combinations = [];
+    
+    for (let i = 0; i <= items.length - size; i++) {
+      const smaller = this.generateCombinations(items.slice(i + 1), size - 1);
+      smaller.forEach(combo => {
+        combinations.push([items[i], ...combo]);
+      });
+    }
+    
+    return combinations;
+  }
+  
+  /**
+   * Teste si une combinaison de Quintessence peut couvrir les besoins
+   * @param {Object} needs - Besoins
+   * @param {Array} quintessenceCombo - Combinaison de Quintessences
+   * @returns {Array|null} Solution ou null si impossible
+   */
+  testQuintessenceCombination(needs, quintessenceCombo) {
+    // Calculer la couverture totale de cette combinaison
+    const totalCoverage = {};
+    
+    quintessenceCombo.forEach(variation => {
+      Object.entries(variation.capacity).forEach(([coinKey, quantity]) => {
+        totalCoverage[coinKey] = (totalCoverage[coinKey] || 0) + quantity;
+      });
+    });
+    
+    // Vérifier si la combinaison couvre tous les besoins
+    for (const [coinKey, needed] of Object.entries(needs)) {
+      if (needed > 0 && (!totalCoverage[coinKey] || totalCoverage[coinKey] < needed)) {
+        return null; // Ne peut pas couvrir ce besoin
+      }
+    }
+    
+    // Si on arrive ici, la combinaison fonctionne
+    return quintessenceCombo.map(variation => ({
+      variation,
+      quantity: 1 // Chaque Quintessence n'est utilisée qu'une fois
+    }));
   }
 }
 
