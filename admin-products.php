@@ -22,6 +22,7 @@ if (!is_string($adminPasswordHash) || $adminPasswordHash === '') {
 if (!isset($_SESSION['admin_authenticated'])) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['password'])) {
         if (password_verify($_POST['password'], $adminPasswordHash)) {
+            session_regenerate_id(true);
             $_SESSION['admin_authenticated'] = true;
             header('Location: ' . $_SERVER['PHP_SELF']);
             exit;
