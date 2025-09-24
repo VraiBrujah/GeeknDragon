@@ -227,6 +227,335 @@ $extraHead = <<<HTML
   object-fit: contain;
   background: #1f2937;
 }
+
+/* === WIDGET AUDIO D&D === */
+.music-player-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  width: auto;
+  padding: 0;
+  margin: 0;
+}
+
+.music-player {
+  background: linear-gradient(135deg, 
+    rgba(15, 23, 42, 0.98) 0%,
+    rgba(30, 41, 59, 0.98) 50%,
+    rgba(15, 23, 42, 0.98) 100%);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  border-radius: 25px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(139, 92, 246, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  width: auto;
+  min-width: 150px;
+  max-width: 180px;
+}
+
+.music-player:hover {
+  border-color: rgba(139, 92, 246, 0.6);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(139, 92, 246, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transform: scale(1.02);
+}
+
+.music-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.music-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.8), rgba(139, 92, 246, 0.8));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 12px rgba(139, 92, 246, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.music-btn:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+}
+
+.music-btn:active {
+  transform: scale(0.9);
+}
+
+.play-pause-btn {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.9), rgba(217, 119, 6, 0.9));
+  box-shadow: 0 3px 15px rgba(245, 158, 11, 0.3);
+}
+
+.play-pause-btn:hover {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  box-shadow: 0 5px 25px rgba(245, 158, 11, 0.5);
+}
+
+.music-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.play-pause-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.music-volume-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.volume-slider {
+  flex: 1;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  appearance: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 80px;
+  max-width: 120px;
+}
+
+.volume-slider:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.3);
+  box-shadow: 0 3px 15px rgba(245, 158, 11, 0.5);
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Status indicator - petit point lumineux */
+.music-status-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+  animation: musicPulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.music-status-indicator.paused {
+  background: linear-gradient(135deg, #6b7280, #4b5563);
+  box-shadow: 0 0 4px rgba(107, 114, 128, 0.3);
+  animation: none;
+}
+
+@keyframes musicPulse {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.7; 
+    transform: scale(1.2);
+  }
+}
+
+/* === RESPONSIVE MOBILE === */
+@media (max-width: 768px) {
+  .music-player-container {
+    position: fixed;
+    bottom: 20px;
+    right: 15px;
+    top: auto;
+    transform: none;
+    z-index: 1000;
+  }
+
+  .music-player {
+    min-width: 140px;
+    max-width: 160px;
+    padding: 12px 14px;
+    gap: 8px;
+    border-radius: 20px;
+  }
+
+  .music-controls {
+    gap: 4px;
+  }
+
+  .music-btn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .play-pause-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .music-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .play-pause-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .volume-slider {
+    min-width: 70px;
+    max-width: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .music-player-container {
+    bottom: 15px;
+    right: 10px;
+  }
+
+  .music-player {
+    min-width: 120px;
+    max-width: 140px;
+    padding: 10px 12px;
+    gap: 6px;
+  }
+
+  .music-controls {
+    gap: 3px;
+  }
+
+  .music-btn {
+    width: 26px;
+    height: 26px;
+  }
+
+  .play-pause-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .volume-slider {
+    min-width: 60px;
+    max-width: 80px;
+  }
+}
+
+/* Animations fluides */
+@keyframes musicPlayerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.music-player-container {
+  animation: musicPlayerFadeIn 0.6s ease-out;
+}
+
+/* Améliorer la responsivité des tableaux existants */
+@media (max-width: 768px) {
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .table-responsive table {
+    min-width: 600px;
+    font-size: 0.875rem;
+  }
+
+  .table-responsive th,
+  .table-responsive td {
+    padding: 0.5rem 0.75rem;
+    white-space: nowrap;
+  }
+
+  .currency-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .currency-card {
+    min-height: auto;
+  }
+
+  .currency-input-group {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .currency-input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-responsive table {
+    font-size: 0.75rem;
+  }
+
+  .table-responsive th,
+  .table-responsive td {
+    padding: 0.375rem 0.5rem;
+  }
+}
 </style>
 HTML;
 ?>
@@ -414,16 +743,14 @@ echo $snipcartInit;
           </div>
           
           <div class="text-center h-[180px] flex flex-col justify-start">
-            <h4 class="font-semibold mb-3 text-emerald-300">Exemple : Aasimar</h4>
-            <p class="text-gray-300 text-sm mb-4">
-              Traits raciaux, capacités innées, résistances et aptitudes d'espèce. 
-              Le recto présente les statistiques principales, le verso détaille les capacités spéciales.
+            <h4 class="font-semibold mb-2 text-emerald-300">Exemple : Aasimar</h4>
+            <p class="text-gray-300 text-sm mb-3">
+              Traits raciaux et aptitudes d'espèce avec statistiques détaillées.
             </p>
-            <ul class="text-gray-400 text-sm space-y-1">
-              <li>• Traits et résistances raciaux</li>
-              <li>• Sorts et capacités d'espèce</li>
-              <li>• Langues et sens spéciaux</li>
-              <li>• Aptitudes héréditaires</li>
+            <ul class="text-gray-400 text-xs space-y-0.5">
+              <li>• Traits et résistances</li>
+              <li>• Sorts d'espèce</li>
+              <li>• Langues spéciales</li>
             </ul>
           </div>
         </div>
@@ -446,16 +773,15 @@ echo $snipcartInit;
           </div>
           
           <div class="text-center h-[180px] flex flex-col justify-start">
-            <h4 class="font-semibold mb-3 text-blue-300">Exemple : Barbare - Voie de l'Arbre-Monde</h4>
-            <p class="text-gray-300 text-sm mb-4">
-              Aptitudes de classe, progression de niveau et sous-classe. 
-              Suivi des statistiques vitales et progression de personnage.
+            <h4 class="font-semibold mb-2 text-blue-300">Exemple : Barbare</h4>
+            <p class="text-gray-300 text-sm mb-3">
+              Aptitudes de classe et progression avec statistiques vitales.
             </p>
-            <ul class="text-gray-400 text-sm space-y-1">
-              <li>• Initiative et jets contre la mort</li>
-              <li>• Points de vie (max, actuels, temporaires)</li>
-              <li>• Classe d'armure (avec/sans bouclier)</li>
-              <li>• Rage et aptitudes de classe</li>
+            <ul class="text-gray-400 text-xs space-y-0.5">
+              <li>• Initiative et jets de mort</li>
+              <li>• Points de vie complets</li>
+              <li>• Classe d'armure</li>
+              <li>• Rage et aptitudes</li>
             </ul>
           </div>
         </div>
@@ -478,16 +804,15 @@ echo $snipcartInit;
           </div>
           
           <div class="text-center h-[180px] flex flex-col justify-start">
-            <h4 class="font-semibold mb-3 text-purple-300">Exemple : Acolyte</h4>
-            <p class="text-gray-300 text-sm mb-4">
-              <strong>Nouveau D&D 2024 :</strong> Les bonus de caractéristiques sont maintenant dans l'historique ! 
-              Plus les compétences sociales, équipement et aptitudes spéciales.
+            <h4 class="font-semibold mb-2 text-purple-300">Exemple : Acolyte</h4>
+            <p class="text-gray-300 text-sm mb-3">
+              <strong>D&D 2024 :</strong> Bonus de caractéristiques maintenant dans l'historique.
             </p>
-            <ul class="text-gray-400 text-sm space-y-1">
-              <li>• <strong>Bonus de caractéristiques (2024)</strong></li>
-              <li>• Compétences d'historique</li>
-              <li>• Aptitude d'historique spéciale</li>
-              <li>• Personnalité et roleplay</li>
+            <ul class="text-gray-400 text-xs space-y-0.5">
+              <li>• <strong>Bonus caractéristiques</strong></li>
+              <li>• Compétences sociales</li>
+              <li>• Aptitude spéciale</li>
+              <li>• Personnalité</li>
             </ul>
           </div>
         </div>
@@ -1786,6 +2111,7 @@ function confirmDownload() {
 <script src="/js/coin-lot-optimizer.js"></script>
 <script src="/js/currency-converter.js"></script>
 <script src="/js/currency-converter-tests.js"></script>
+<script src="/js/dnd-music-player.js?v=<?= filemtime(__DIR__.'/js/dnd-music-player.js') ?>"></script>
 
 <script>
 // Gestionnaire pour le bouton d'ajout au panier (utilise les utilitaires réutilisables)

@@ -53,7 +53,8 @@
       "Bash(jq:*)",
       "WebFetch(domain:localhost)",
       "Bash(python:*)",
-      "WebFetch(domain:docs.snipcart.com)"
+      "WebFetch(domain:docs.snipcart.com)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []
