@@ -32,7 +32,19 @@ $gameHelpTranslations = [
                 'organize' => 'Organisez sur votre table',
                 'reference' => 'Consultez pendant le jeu'
             ],
-            'comingSoon' => 'Bientôt disponible'
+            'comingSoon' => 'Bientôt disponible',
+            'buttons' => [
+                'discover' => 'Découvrir les Triptyques',
+                'cardsGuide' => 'Guide des Cartes', 
+                'moneyGuide' => 'Guide de la Monnaie',
+                'buyTriptychs' => 'Acheter mes Triptyques'
+            ],
+            'navigation' => [
+                'quickNav' => 'Navigation Rapide',
+                'triptychsGuide' => 'Guide des Triptyques',
+                'cardsGuide' => 'Guide des Cartes',
+                'coinGuide' => 'Guide de la Monnaie'
+            ]
         ]
     ],
     'en' => [
@@ -54,7 +66,19 @@ $gameHelpTranslations = [
                 'organize' => 'Organize on your table', 
                 'reference' => 'Reference during play'
             ],
-            'comingSoon' => 'Coming soon'
+            'comingSoon' => 'Coming soon',
+            'buttons' => [
+                'discover' => 'Discover Triptychs',
+                'cardsGuide' => 'Cards Guide', 
+                'moneyGuide' => 'Currency Guide',
+                'buyTriptychs' => 'Buy my Triptychs'
+            ],
+            'navigation' => [
+                'quickNav' => 'Quick Navigation',
+                'triptychsGuide' => 'Triptychs Guide',
+                'cardsGuide' => 'Cards Guide',
+                'coinGuide' => 'Currency Guide'
+            ]
         ]
     ]
 ];
@@ -636,6 +660,87 @@ $extraHead = <<<HTML
     padding: 0.375rem 0.5rem;
   }
 }
+
+/* === FIX NAVIGATION HEADER === */
+/* Force l'affichage de la navigation qui était masquée */
+@media (min-width: 768px) {
+  /* Forcer l'affichage de la navigation desktop */
+  header nav[aria-label="Navigation principale"] {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: static !important;
+    transform: none !important;
+  }
+  
+  /* Forcer l'affichage des liens de navigation */
+  header nav[aria-label="Navigation principale"] > ul {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  header nav[aria-label="Navigation principale"] > ul > li {
+    display: list-item !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Masquer les sous-menus par défaut */
+  header nav[aria-label="Navigation principale"] li ul {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+  
+  /* Afficher les sous-menus seulement au hover */
+  header nav[aria-label="Navigation principale"] li:hover > ul {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  header nav[aria-label="Navigation principale"] a {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: white !important;
+  }
+  
+  header #lang-switcher {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Fix navigation mobile */
+@media (max-width: 767px) {
+  header nav[aria-label="Navigation principale"] {
+    display: none !important;
+  }
+  
+  header #mobile-menu {
+    display: none !important;
+  }
+  
+  header #menu-btn {
+    display: block !important;
+  }
+}
+
+/* Assurer que les liens sont visibles */
+header .nav-link {
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: white !important;
+}
+
+/* Assurer que les boutons langue sont visibles */
+header .flag-btn {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
 </style>
 HTML;
 ?>
@@ -669,10 +774,10 @@ echo $snipcartInit;
         <?= $translations['gameHelp']['hero']['subtitle'] ?? 'Maîtrisez vos fiches de personnage Geek & Dragon' ?>
       </p>
       <div class="hero-cta flex flex-wrap justify-center gap-4">
-        <a href="#guide-triptyques" class="btn btn-primary">Découvrir les Triptyques</a>
-        <a href="#guide-cartes" class="btn btn-primary">Guide des Cartes</a>
-        <a href="#guide-monnaie" class="btn btn-primary">Guide de la Monnaie</a>
-        <a href="<?= langUrl('boutique.php#triptyques') ?>" class="btn btn-outline">Acheter mes Triptyques</a>
+        <a href="#guide-triptyques" class="btn btn-primary"><?= $translations['gameHelp']['buttons']['discover'] ?? 'Découvrir les Triptyques' ?></a>
+        <a href="#guide-cartes" class="btn btn-primary"><?= $translations['gameHelp']['buttons']['cardsGuide'] ?? 'Guide des Cartes' ?></a>
+        <a href="#guide-monnaie" class="btn btn-primary"><?= $translations['gameHelp']['buttons']['moneyGuide'] ?? 'Guide de la Monnaie' ?></a>
+        <a href="<?= langUrl('boutique.php#triptyques') ?>" class="btn btn-outline"><?= $translations['gameHelp']['buttons']['buyTriptychs'] ?? 'Acheter mes Triptyques' ?></a>
       </div>
     </div>
   </section>
@@ -680,12 +785,12 @@ echo $snipcartInit;
   <!-- ===== NAVIGATION RAPIDE ===== -->
   <section class="py-12 bg-gray-800/50">
     <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-2xl font-bold text-center mb-8 text-white">Navigation Rapide</h2>
+      <h2 class="text-2xl font-bold text-center mb-8 text-white"><?= $translations['gameHelp']['navigation']['quickNav'] ?? 'Navigation Rapide' ?></h2>
       <div class="grid md:grid-cols-3 gap-6">
         <a href="#guide-triptyques" class="group bg-gradient-to-br from-indigo-900/50 to-purple-900/50 rounded-xl p-6 border border-indigo-500/30 hover:border-indigo-400/50 transition-all">
           <div class="text-center">
             <div class="text-4xl mb-3">📜</div>
-            <h3 class="text-xl font-bold text-indigo-400 mb-2">Guide des Triptyques</h3>
+            <h3 class="text-xl font-bold text-indigo-400 mb-2"><?= $translations['gameHelp']['navigation']['triptychsGuide'] ?? 'Guide des Triptyques' ?></h3>
             <p class="text-gray-300 text-sm">Espèce, Classe, Historique - D&D 2024</p>
           </div>
         </a>
@@ -693,7 +798,7 @@ echo $snipcartInit;
         <a href="#guide-cartes" class="group bg-gradient-to-br from-emerald-900/50 to-teal-900/50 rounded-xl p-6 border border-emerald-500/30 hover:border-emerald-400/50 transition-all">
           <div class="text-center">
             <div class="text-4xl mb-3">🃏</div>
-            <h3 class="text-xl font-bold text-emerald-400 mb-2">Guide des Cartes</h3>
+            <h3 class="text-xl font-bold text-emerald-400 mb-2"><?= $translations['gameHelp']['navigation']['cardsGuide'] ?? 'Guide des Cartes' ?></h3>
             <p class="text-gray-300 text-sm">Armes, Équipements, Sorts</p>
           </div>
         </a>
@@ -2185,7 +2290,7 @@ function confirmDownload() {
     closeDownloadPopup();
 }
 </script>
-<script src="/js/hero-videos.js"></script>
+<script src="/js/hero-videos-simple.js?v=<?= filemtime(__DIR__.'/js/hero-videos-simple.js') ?>"></script>
 <script src="/js/boutique-premium.js"></script>
 <script src="/js/snipcart-utils.js"></script>
 <script src="/js/coin-lot-optimizer.js"></script>

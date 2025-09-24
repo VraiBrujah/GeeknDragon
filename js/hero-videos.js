@@ -4,6 +4,16 @@
 // - Plusieurs sources : double-buffer + préchargement, on ne retire l'ancien
 //   qu'après que le nouveau joue vraiment (plus d'écran vide).
 
+// Protection contre les conflits d'extensions
+(function() {
+  'use strict';
+  
+  // Éviter l'exécution multiple et les conflits d'extensions
+  if (window.__heroVideosInitialized) {
+    return;
+  }
+  window.__heroVideosInitialized = true;
+
 document.addEventListener('DOMContentLoaded', () => {
   const FADE_MS = 1000;
   const LOAD_AHEAD_SECONDS = 10; // Augmenté pour les vidéos lourdes
@@ -15,6 +25,26 @@ document.addEventListener('DOMContentLoaded', () => {
     ? window.matchMedia('(pointer: coarse)')
     : null;
   const readMediaQuery = (query) => (query && 'matches' in query ? query.matches : false);
+
+  // Gestionnaire d'erreur robuste contre les extensions
+  const safeVideoPlay = async (video) => {
+    if (!video || !autoPlayAllowed) return;
+    
+    try {
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        return await playPromise.catch((error) => {
+          // Log seulement si ce n'est pas une erreur d'extension connue
+          if (!error.message?.includes('interrupted') && !error.message?.includes('aborted')) {
+            console.debug('Hero Videos: Play error handled:', error.name);
+          }
+          return Promise.resolve(); // Résoudre silencieusement
+        });
+      }
+    } catch (error) {
+      console.debug('Hero Videos: Play error handled:', error.name);
+    }
+  };
 
   // Gestion paresseuse du préchargement : charge la prochaine vidéo seulement
   // lorsque l'utilisateur interagit ou quand la lecture courante approche de sa fin.
@@ -40,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         candidate.load();
       } catch (error) {
-        // ignore
+        console.debug('Hero Videos: Load error ignored:', error);
       }
     };
 
@@ -187,7 +217,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const vid = video;
         const run = () => {
           if (autoPlayAllowed && vid.paused) {
-            vid.play().catch(() => {});
+            // Protection renforcée contre les extensions
+            vid.play().catch((error) => {
+              console.debug('Hero Videos: Play error ignored:', error);
+            });
           }
           requestAnimationFrame(() => {
             vid.style.opacity = '1';
@@ -407,8 +440,8 @@ document.addEventListener('DOMContentLoaded', () => {
       current.loop = true;
 
       current.addEventListener('loadeddata', () => {
-        if (autoPlayAllowed && current.paused) {
-          current.play().catch(() => {});
+        if (current.paused) {
+          safeVideoPlay(current);
         }
         showWhenReady(current);
       }, { once: true });
@@ -416,7 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
       current.addEventListener('ended', () => {
         if (autoPlayAllowed) {
           current.currentTime = 0;
-          current.play().catch(() => {});
+          safeVideoPlay(current);
         }
       });
 
@@ -427,8 +460,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 300);
 
       document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible' && autoPlayAllowed && current.paused) {
-          current.play().catch(() => {});
+        if (document.visibilityState === 'visible' && current.paused) {
+          safeVideoPlay(current);
         }
       });
 
@@ -588,8 +621,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    // Vérification ultra-aggressive toutes les 3 secondes (réduit la charge CPU)
-    containerLoopInterval = setInterval(forceGlobalLoop, 3000);
+    // Vérification plus modérée toutes les 5 secondes (évite les conflits d'extensions)
+    containerLoopInterval = setInterval(forceGlobalLoop, 5000);
     
     // Nettoyage propre à la fermeture de page
     const cleanup = () => {
@@ -602,4 +635,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('beforeunload', cleanup);
     window.addEventListener('pagehide', cleanup); // Pour mobile/Safari
   });
-});
+}); // Fin DOMContentLoaded
+
+})(); // Fin de la fonction de protection contre les extensions
