@@ -80,7 +80,7 @@ $extraHead = <<<HTML
 }
 .triptych-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2rem;
 }
 .flip-container {
@@ -167,6 +167,86 @@ $extraHead = <<<HTML
 .roll-all-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+/* Ajustements responsives généraux pour une lecture mobile confortable */
+@media (max-width: 1024px) {
+  .flip-container {
+    height: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-text {
+    padding: 3rem 1.5rem;
+    max-width: 100%;
+  }
+  .hero-text h1 {
+    font-size: clamp(2.25rem, 7vw, 3rem);
+    line-height: 1.2;
+  }
+  .hero-text .txt-court {
+    font-size: clamp(1rem, 4.8vw, 1.3rem);
+  }
+  .hero-cta {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  .hero-cta .btn {
+    width: 100%;
+  }
+  .dice-roller {
+    padding: 1.25rem;
+  }
+  .dice-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .dice-result {
+    font-size: 1.25rem;
+  }
+  .roll-all-btn {
+    width: 100%;
+  }
+  .flip-container {
+    height: 420px;
+  }
+  .card-product .h-\[6rem\],
+  .card-product .h-\[180px\] {
+    height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-text {
+    padding: 2.5rem 1.25rem;
+  }
+  .hero-cta .btn {
+    font-size: 1rem;
+  }
+  .dice-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .flip-container {
+    height: 360px;
+  }
+  .currency-input-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .dice-grid {
+    grid-template-columns: 1fr;
+  }
+  .roll-all-btn {
+    font-size: 1rem;
+    padding: 0.875rem 1.5rem;
+  }
+  .dice-result {
+    font-size: 1.1rem;
+  }
 }
 .usage-step {
   background: linear-gradient(135deg, #1f2937, #374151);
@@ -588,7 +668,7 @@ echo $snipcartInit;
       <p class="text-xl mb-8 txt-court" data-i18n="gameHelp.hero.subtitle">
         <?= $translations['gameHelp']['hero']['subtitle'] ?? 'Maîtrisez vos fiches de personnage Geek & Dragon' ?>
       </p>
-      <div class="flex flex-wrap justify-center gap-4">
+      <div class="hero-cta flex flex-wrap justify-center gap-4">
         <a href="#guide-triptyques" class="btn btn-primary">Découvrir les Triptyques</a>
         <a href="#guide-cartes" class="btn btn-primary">Guide des Cartes</a>
         <a href="#guide-monnaie" class="btn btn-primary">Guide de la Monnaie</a>
@@ -1520,7 +1600,7 @@ echo $snipcartInit;
         <!-- Section 1: Monnaies sources avec design premium -->
         <div class="mb-8">
           <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.sourcesLabel">💰 Monnaies sources</h5>
-          <div class="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-6xl mx-auto">
+          <div class="currency-input-grid grid grid-cols-2 md:grid-cols-5 gap-4 max-w-6xl mx-auto">
             <div class="currency-input-card bg-gradient-to-br from-amber-900/20 to-orange-800/20 p-4 rounded-xl border border-amber-700/30">
               <label class="block text-amber-300 font-medium mb-2">🪙 Cuivre</label>
               <input type="number" min="0" step="1" value="0" data-currency="copper" 
