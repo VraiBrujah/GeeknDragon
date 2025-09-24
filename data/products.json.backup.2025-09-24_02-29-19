@@ -3,8 +3,8 @@
         "name": "Pièce Personnalisée",
         "name_en": "Custom Coin",
         "price": 10,
-        "description": "### Pièce unique à votre choix\n\nChoisissez **le métal** (cuivre, argent, électrum, or, platine) et **le multiplicateur** (unitaire, ×10, ×100, ×1000, ×10000) pour créer votre pièce sur mesure.\n\n*Parfait pour compléter une collection ou remplacer une pièce perdue.*",
-        "description_en": "### Single coin of your choice\n\nSelect **the metal** (copper, silver, electrum, gold, platinum) and **multiplier** (unit, ×10, ×100, ×1000, ×10000) to create your custom coin.\n\n*Perfect for completing a collection or replacing a lost coin.*",
+        "description": "### Pièce unique à votre choix Choisissez **le métal** (cuivre, argent, électrum, or, platine) et **le multiplicateur** (unitaire, ×10, ×100, ×1000, ×10000) pour créer votre pièce sur mesure. *Parfait pour compléter une collection ou remplacer une pièce perdue.*",
+        "description_en": "### Single coin of your choice Select **the metal** (copper, silver, electrum, gold, platinum) and **multiplier** (unit, ×10, ×100, ×1000, ×10000) to create your custom coin. *Perfect for completing a collection or replacing a lost coin.*",
         "summary": "Pièce métallique personnalisable avec choix du métal et du multiplicateur.",
         "summary_en": "Customizable metal coin with choice of metal and multiplier.",
         "images": [
@@ -49,8 +49,8 @@
         "name": "Trio de Pièces",
         "name_en": "Trio of Coins",
         "price": 25,
-        "description": "### Trois pièces personnalisables\n\n**3 pièces métalliques** au choix avec métal et multiplicateur personnalisables. Idéal pour compléter une collection ou créer un petit trésor sur mesure.\n\n**Contenu :**\n- 3 pièces au choix de métal et multiplicateur\n\n*Parfait pour débuter ou compléter votre collection de pièces !*",
-        "description_en": "### Three customizable coins\n\n**3 metal coins** of your choice with customizable metal and multiplier. Perfect for completing a collection or creating a small custom treasure.\n\n**Contents:**\n- 3 coins with choice of metal and multiplier\n\n*Perfect for starting or completing your coin collection!*",
+        "description": "### Trois pièces personnalisables **3 pièces métalliques** au choix avec métal et multiplicateur personnalisables. Idéal pour compléter une collection ou créer un petit trésor sur mesure. **Contenu :** *Parfait pour débuter ou compléter votre collection de pièces !*",
+        "description_en": "### Three customizable coins **3 metal coins** of your choice with customizable metal and multiplier. Perfect for completing a collection or creating a small custom treasure. **Contents:** *Perfect for starting or completing your coin collection!*",
         "summary": "Lot de trois pièces personnalisables avec choix du métal et multiplicateur unique.",
         "summary_en": "Set of three customizable coins with choice of metal and single multiplier.",
         "images": [
@@ -95,8 +95,8 @@
         "name": "Quintessence Métallique",
         "name_en": "Metal Quintessence",
         "price": 35,
-        "description": "### Cinq métaux, un multiplicateur\n\n**5 pièces de métaux différents** appliquant le même multiplicateur choisi : une de chaque métal (cuivre, argent, électrum, or, platine) avec finition uniforme.\n\n**Contenu :**\n- 1 pièce de cuivre\n- 1 pièce d'argent\n- 1 pièce d'électrum\n- 1 pièce d'or\n- 1 pièce de platine\n\n*Découvrez la diversité des métaux avec une valeur cohérente !*",
-        "description_en": "### Five metals, one multiplier\n\n**5 coins of different metals** applying the same chosen multiplier: one of each metal (copper, silver, electrum, gold, platinum) with uniform finish.\n\n**Contents:**\n- 1 copper coin\n- 1 silver coin\n- 1 electrum coin\n- 1 gold coin\n- 1 platinum coin\n\n*Discover the diversity of metals with consistent value!*",
+        "description": "### Cinq métaux, un multiplicateur **5 pièces de métaux différents** appliquant le même multiplicateur choisi : une de chaque métal (cuivre, argent, électrum, or, platine) avec finition uniforme. **Contenu :** *Découvrez la diversité des métaux avec une valeur cohérente !*",
+        "description_en": "### Five metals, one multiplier **5 coins of different metals** applying the same chosen multiplier: one of each metal (copper, silver, electrum, gold, platinum) with uniform finish. **Contents:** *Discover the diversity of metals with consistent value!*",
         "summary": "Collection de cinq pièces avec un de chaque métal et multiplicateur uniforme.",
         "summary_en": "Collection of five coins with one of each metal and uniform multiplier.",
         "images": [
@@ -376,14 +376,14 @@
         "customizable": false,
         "category": "cards"
     },
-    "cards-weapons-armor-60": {
+    "cards-weapons-armor-57": {
         "name": "Armes & Armures",
         "name_en": "Weapons & Armor",
-        "price": 21,
-        "description": "### Combat complet - 60 cartes\\n\\nCollection essentielle de **60 cartes** pour équiper vos combattants : arsenal complet d'armes de mêlée et à distance, protections légères aux lourdes, et boucliers.\\n\\n**Contenu :**\\n- **44 armes** : mêlée, distance, exotiques, armes à feu modernes et futuristes\\n- **14 armures** : légères, intermédiaires, lourdes\\n- **2 boucliers** : métal et bois\\n\\n*L'essentiel pour équiper guerriers, aventuriers et soldats !*",
-        "description_en": "### Complete combat arsenal - 60 cards\\n\\nEssential collection of **60 cards** to arm your fighters: complete arsenal of melee and ranged weapons, light to heavy protection, and shields.\\n\\n**Contents:**\\n- **44 weapons** : melee, ranged, exotic, modern and futuristic firearms\\n- **14 armor** : light, medium, heavy\\n- **2 shields** : metal and wood\\n\\n*Everything needed to outfit warriors, adventurers and soldiers!*",
-        "summary": "Collection de 60 cartes d'armes et armures pour équiper combattants et aventuriers.",
-        "summary_en": "Collection of 60 weapon and armor cards to equip fighters and adventurers.",
+        "price": 20,
+        "description": "### Combat complet - 57 cartes",
+        "description_en": "cards",
+        "summary": "cards",
+        "summary_en": "",
         "images": [
             "/media/products/cards/arme-recto.webp",
             "/media/products/cards/armure-recto.webp"
@@ -392,14 +392,14 @@
         "customizable": false,
         "category": "cards"
     },
-    "cards-adventure-packs-70": {
+    "cards-adventure-packs-65": {
         "name": "Paquetages d'Aventure",
         "name_en": "Adventure Packs",
-        "price": 25,
-        "description": "### Équipement par background - 70 cartes\\n\\nCollection complète de **70 cartes** regroupant tout l'équipement de départ selon les historiques D&D 5e. Idéal pour créer rapidement des personnages ou distribuer du matériel thématique.\\n\\n**Contenu :**\\n- **Paquetage d'artiste** : instruments et matériel créatif\\n- **Paquetage d'ecclésiastique** : objets religieux et sacrés\\n- **Paquetage d'explorateur** : survie et navigation\\n- **Paquetage d'exploration souterraine** : spéléologie et donjons\\n- **Paquetage d'érudit** : livres et outils d'étude\\n- **Paquetage de cambrioleur** : crochetage et infiltration\\n- **Paquetage de diplomate** : négociation et relations sociales\\n\\n*Personnalisez instantanément selon l'origine de vos héros !*",
-        "description_en": "### Equipment by background - 70 cards\\n\\nComplete collection of **70 cards** grouping all starting equipment according to D&D 5e backgrounds. Perfect for quickly creating characters or distributing thematic gear.\\n\\n**Contents:**\\n- **Artist's pack** : instruments and creative materials\\n- **Ecclesiastic's pack** : religious and sacred objects\\n- **Explorer's pack** : survival and navigation\\n- **Dungeoneering pack** : spelunking and dungeon gear\\n- **Scholar's pack** : books and study tools\\n- **Burglar's pack** : lockpicking and infiltration\\n- **Diplomat's pack** : negotiation and social relations\\n\\n*Instantly customize based on your heroes' origins!*",
-        "summary": "Collection de 70 cartes d'équipement organisées par paquetages d'historiques D&D.",
-        "summary_en": "Collection of 70 equipment cards organized by D&D background packs.",
+        "price": 23,
+        "description": "### Équipement par background - 65 cartes",
+        "description_en": "cards",
+        "summary": "cards",
+        "summary_en": "",
         "images": [
             "/media/products/cards/sac-aa-dos-recto.webp"
         ],
@@ -407,14 +407,14 @@
         "customizable": false,
         "category": "cards"
     },
-    "cards-explosives-tools-60": {
+    "cards-explosives-tools-70": {
         "name": "Explosifs & Outils",
         "name_en": "Explosives & Tools",
-        "price": 22,
-        "description": "### Arsenal spécialisé - 60 cartes\\n\\nCollection technique de **60 cartes** pour les campagnes avancées : explosifs, armes futuristes et outils d'artisan.\\n\\n**Contenu :**\\n- **21 explosifs** : bombes, grenades, dynamite, charges modernes et futuristes\\n- **37 outils** : artisanat, alchimie, crochetage, navigation\\n- **2 cartes règles** : mécaniques d'explosion et d'artisanat\\n\\n*Pour les aventuriers qui aiment les solutions créatives !*",
-        "description_en": "### Specialized arsenal - 60 cards\\n\\nTechnical collection of **60 cards** for advanced campaigns: explosives, futuristic weapons and artisan tools.\\n\\n**Contents:**\\n- **21 explosives** : bombs, grenades, dynamite, modern and futuristic charges\\n- **37 tools** : crafting, alchemy, lockpicking, navigation\\n- **2 rule cards** : explosion and crafting mechanics\\n\\n*For adventurers who love creative solutions!*",
-        "summary": "Collection de 60 cartes d'explosifs et outils spécialisés pour campagnes techniques.",
-        "summary_en": "Collection of 60 explosive and specialized tool cards for technical campaigns.",
+        "price": 25,
+        "description": "### Arsenal spécialisé - 70 cartes",
+        "description_en": "cards",
+        "summary": "cards",
+        "summary_en": "",
         "images": [
             "/media/products/cards/bombe-recto.webp",
             "/media/products/cards/mataerield-alchimiste-recto.webp"
@@ -423,14 +423,14 @@
         "customizable": false,
         "category": "cards"
     },
-    "cards-services-vehicles-85": {
+    "cards-services-vehicles-145": {
         "name": "Services & Véhicules",
         "name_en": "Services & Vehicles",
-        "price": 29,
-        "description": "### Voyage et logistique - 85 cartes\\n\\nCollection complète de **85 cartes** pour organiser voyages et missions : services d'auberge, transport et tous types de véhicules.\\n\\n**Contenu :**\\n- **55 services** : auberges, soins, trains de vie, mercenaires, passeurs\\n- **27 véhicules** : montures, terrestres, marins, aériens\\n- **3 cartes règles** : mécaniques de voyage et logistique\\n\\n*Tout pour voyager et s'organiser en campagne !*",
-        "description_en": "### Travel and logistics - 85 cards\\n\\nComplete collection of **85 cards** to organize travels and missions: inn services, transport, and all types of vehicles.\\n\\n**Contents:**\\n- **55 services** : inns, care, lifestyles, mercenaries, guides\\n- **27 vehicles** : mounts, land, sea, air\\n- **3 rule cards** : travel and logistics mechanics\\n\\n*Everything to travel and organize in campaigns!*",
-        "summary": "Collection de 85 cartes de services et véhicules pour organiser voyages et missions.",
-        "summary_en": "Collection of 85 service and vehicle cards to organize travels and missions.",
+        "price": 50,
+        "description": "### Voyage et logistique - 145 cartes Collection étendue de **145 cartes** pour organiser voyages et missions : services d'auberge, transport et tous types de véhicules. **Contenu :**\\n- **63 services** : auberges, soins, mercenaires, passeurs\\n- **54 véhicules** : terrestres, marins, aériens\\n- **28 cartes de règles** : pour maîtriser voyages et logistique *Tout pour voyager et s'organiser en campagne !*",
+        "description_en": "### Travel and logistics - 117 cards Extended collection of **117 cards** to organize travels and missions: inn services, transport, and all types of vehicles. **Contents:** *Everything to travel and organize in campaigns!*",
+        "summary": "Collection de 145 cartes de services et véhicules pour organiser voyages et missions.",
+        "summary_en": "Collection of 117 service and vehicle cards to organize travels and missions.",
         "images": [
             "/media/products/cards/biaere-chope-recto.webp",
             "/media/products/cards/vaisseau-aaerien-recto.webp"
@@ -443,16 +443,17 @@
         "customizable": false,
         "category": "cards"
     },
-    "cards-loot-engineering-170": {
+    "cards-loot-engineering-316": {
         "name": "Butins & Ingénieries",
         "name_en": "Loot & Engineering",
-        "price": 54,
-        "description": "### Butin • Marchandises • Outils - 170 cartes\\n\\nPour des campagnes qui osent : trésors variés, biens commerciaux et les indispensables de l'artisan.\\n\\n**Contenu :**\\n- **104 butins** : trésors, gemmes, artefacts, objets précieux\\n- **27 marchandises** : biens de commerce, matières premières\\n- **37 outils** : artisanat, crochetage, alchimie, navigation\\n- **2 cartes règles** : mécaniques de commerce et d'artisanat\\n\\n*Injecte de la variété et des choix tactiques — du troc de marché aux découvertes de trésors !*",
-        "description_en": "### Loot • Trade Goods • Tools - 170 cards\\n\\nFor campaigns that push the envelope: varied treasures, commercial goods, and every crafter's staple.\\n\\n**Contents:**\\n- **104 loot items** : treasures, gems, artifacts, precious objects\\n- **27 trade goods** : commercial goods, raw materials\\n- **37 tools** : crafting, lockpicking, alchemy, navigation\\n- **2 rule cards** : trade and crafting mechanics\\n\\n*Add variety and tactical choices — from market bartering to treasure discoveries!*",
-        "summary": "Collection de 170 cartes de butins, marchandises et outils pour enrichir vos campagnes.",
-        "summary_en": "Collection of 170 loot, trade goods, and tool cards to enrich your campaigns.",
+        "price": 100,
+        "description": "### Butin • Explosifs & armes modernes/futuristes • Marchandises • Outils - 316 cartes Pour des campagnes qui osent : trésors variés, matériel instable, techno-reliques et les indispensables de l'artisan. **Contenu :**\\n- **204 butins** : trésors, gemmes, artefacts\\n- **27 marchandises** : biens de commerce\\n- **20 explosifs** : grenades, bombes, charges\\n- **37 outils** : artisanat, crochetage, alchimie\\n- **28 cartes de règles** : pour maîtriser ces équipements *Injecte de la variété et des choix tactiques — du troc de marché au braquage high-fantasy.*",
+        "description_en": "### Loot • Explosives & Modern/Futuristic Weapons • Trade Goods • Tools For campaigns that push the envelope: varied treasures, volatile hardware, techno-relics, and every crafter's staple. **Contents:** *Add variety and tactical choices — from market bartering to high-fantasy heists.*",
+        "summary": "Cartes de butin et matériel exotique mêlant trésors, explosifs et outils pour campagnes audacieuses.",
+        "summary_en": "Cards of loot and exotic gear mixing treasures, explosives, and tools for daring campaigns.",
         "images": [
             "/media/products/cards/alexandrite-recto.webp",
+            "/media/products/cards/bombe-recto.webp",
             "/media/products/cards/chaevre-recto.webp",
             "/media/products/cards/mataerield-alchimiste-recto.webp"
         ],
@@ -464,14 +465,14 @@
         "customizable": false,
         "category": "cards"
     },
-    "cards-roads-services-165": {
+    "cards-roads-services-223": {
         "name": "Routes & Services",
         "name_en": "Roads & Services",
-        "price": 56,
-        "description": "### Paquetages • Services • Véhicules • Poisons - 165 cartes\\n\\nTout pour mettre le monde en mouvement : préparez vos PJ, voyagez, négociez et prenez des risques avec des cartes claires et pratiques.\\n\\n**Contenu :**\\n- **65 paquetages** : 7 types selon les historiques D&D\\n- **55 services** : auberges, soins, trains de vie, mercenaires\\n- **27 véhicules** : montures, terrestres, marins, aériens\\n- **14 poisons** : substances dangereuses et toxiques\\n- **4 cartes règles** : mécaniques de voyage, services et poisons\\n\\n*Parfait pour les campagnes orientées exploration, voyage et intrigue !*",
-        "description_en": "### Packs • Services • Vehicles • Poisons - 165 cards\\n\\nEverything to set your world in motion: ready your PCs, travel, bargain, and take risks with clean, table-friendly cards.\\n\\n**Contents:**\\n- **65 packs** : 7 types according to D&D backgrounds\\n- **55 services** : inns, care, lifestyles, mercenaries\\n- **27 vehicles** : mounts, land, sea, air\\n- **14 poisons** : dangerous and toxic substances\\n- **4 rule cards** : travel, services, and poison mechanics\\n\\n*Perfect for exploration-, travel- and intrigue-heavy campaigns!*",
-        "summary": "Sélection complète de 165 cartes dédiées aux voyages, services, véhicules et poisons.",
-        "summary_en": "Complete selection of 165 cards focused on travel, services, vehicles, and poisons.",
+        "price": 75,
+        "description": "### Paquetages • Services • Véhicules • Poisons - 223 cartes Tout pour mettre le monde en mouvement : prépare tes PJ, voyage, négocie, et risque avec des cartes claires et pratiques. **Contenu :**\\n- **65 paquetages** : 7 types selon les backgrounds\\n- **63 services** : auberges, soins, mercenaires\\n- **54 véhicules** : terrestres, marins, aériens\\n- **13 poisons** : substances dangereuses\\n- **28 cartes de règles** : pour maîtriser voyages et services *Parfait pour les campagnes orientées exploration, voyage et intrigue.*",
+        "description_en": "### Packs • Services • Vehicles • Poisons Everything to set your world in motion: ready your PCs, travel, bargain, and take risks with clean, table-friendly cards. **Contents:** *Perfect for exploration-, travel- and intrigue-heavy campaigns.*",
+        "summary": "Sélection de cartes dédiées aux voyages, services, véhicules et poisons pour dynamiser l'exploration.",
+        "summary_en": "Selection of cards focused on travel, services, vehicles, and poisons to energize exploration.",
         "images": [
             "/media/products/cards/sac-aa-dos-recto.webp",
             "/media/products/cards/biaere-chope-recto.webp",
@@ -486,14 +487,14 @@
         "customizable": false,
         "category": "cards"
     },
-    "cards-adventurer-arsenal-190": {
+    "cards-adventurer-arsenal-226": {
         "name": "Arsenal de l'Aventurier",
         "name_en": "Adventurer's Arsenal",
-        "price": 63,
-        "description": "### Armes • Armures • Équipement - 190 cartes\\n\\nLot massif et prêt-à-jouer pour équiper tout un groupe : armes classiques et exotiques, protections pour chaque style, et l'essentiel d'aventure en cartes illustrées.\\n\\n**Contenu :**\\n- **44 armes** : mêlée, distance, exotiques, armes à feu modernes\\n- **14 armures** : légères, intermédiaires, lourdes, boucliers\\n- **127 équipements** : outils d'aventure, survie, artisanat\\n- **5 cartes règles** : maîtriser équipement et mécaniques\\n\\n*Idéal pour la table : pioche, pose, échange — fini la fouille dans le manuel !*",
-        "description_en": "### Weapons • Armor • Equipment - 190 cards\\n\\nMassive, ready-to-play bundle to outfit an entire party: classic and exotic weapons, protection for every build, and all the adventuring essentials as illustrated cards.\\n\\n**Contents:**\\n- **44 weapons** : melee, ranged, exotic, modern firearms\\n- **14 armor** : light, medium, heavy, shields\\n- **127 equipment** : adventure tools, survival, crafting\\n- **5 rule cards** : master equipment and mechanics\\n\\n*Perfect at the table: draw, place, trade — no more digging through the rulebook!*",
-        "summary": "Boîte massive de 190 cartes illustrées pour équiper immédiatement tout un groupe d'aventuriers.",
-        "summary_en": "Massive box of 190 illustrated cards to instantly outfit an entire party of adventurers.",
+        "price": 75,
+        "description": "### Armes • Armures • Équipement - 226 cartes Un lot massif et prêt-à-jouer pour équiper tout un groupe : armes classiques et exotiques, protections pour chaque style, et l'essentiel d'aventure en cartes illustrées. **Contenu :**\\n- **44 armes complètes** : mêlée, distance, exotiques\\n- **13 armures** : légères, intermédiaires, lourdes\\n- **141 équipements** : outils d'aventure essentiels\\n- **28 cartes de règles** : pour maîtriser votre équipement *Idéal pour la table : pioche, pose, échange — fini la fouille dans le manuel.*",
+        "description_en": "### Weapons • Armor • Equipment A massive, ready-to-play bundle to outfit an entire party: classic and exotic weapons, protection for every build, and all the adventuring essentials as illustrated cards. **Contents:** *Perfect at the table: draw, place, trade — no more digging through the rulebook.*",
+        "summary": "Boîte de cartes illustrées couvrant armes, armures et équipement pour équiper immédiatement un groupe.",
+        "summary_en": "Box of illustrated cards covering weapons, armor, and gear to outfit a party instantly.",
         "images": [
             "/media/products/cards/arme-recto.webp",
             "/media/products/cards/arme-verso.webp",
@@ -512,8 +513,8 @@
         "name": "Triptyques Mystères",
         "name_en": "Mystery Triptychs",
         "price": 60,
-        "description": "### Trois triptyques, un héros clé en main\n\nTire au sort **1 Classe**, **1 Espèce** et **1 Historique** pour forger une origine unique, puis joue immédiatement avec :\n\n**Inclus :**\n- 1 triptyque Classe aléatoire\n- 1 triptyque Espèce aléatoire\n- 1 triptyque Historique aléatoire\n\n*Fini la fouille dans le manuel.*",
-        "description_en": "### Three triptychs, a plug-and-play hero\n\nDraw at random **1 Class**, **1 Species** and **1 Background** to forge a unique origin, then play right away with:\n\n**Included:**\n- 1 random Class triptych\n- 1 random Species triptych\n- 1 random Background triptych\n\n*No more digging through the rulebook.*",
+        "description": "### Trois triptyques, un héros clé en main Tire au sort **1 Classe**, **1 Espèce** et **1 Historique** pour forger une origine unique, puis joue immédiatement avec : **Inclus :** Un bundle idéal pour des *one-shots*, des tables débutantes ou pour surprendre des joueurs vétérans. *Fini la fouille dans le manuel.*",
+        "description_en": "### Three triptychs, a plug-and-play hero Draw at random **1 Class**, **1 Species** and **1 Background** to forge a unique origin, then play right away with: **Included:** Perfect for one-shots, new tables, or to surprise veteran players. *No more digging through the rulebook.*",
         "summary": "Lot de triptyques aléatoires pour créer un héros complet avec équipement assorti et pièces de départ.",
         "summary_en": "Bundle of random triptychs to build a complete hero with matching gear and starting coins.",
         "images": [
@@ -530,8 +531,8 @@
         "name": "Triptyques Especes",
         "name_en": "Species Triptychs",
         "price": 45,
-        "description": "### Collection complète des triptyques d'espèces\n\nDécouvrez toutes les espèces jouables de D&D 5e avec des triptyques détaillés et illustrés. Chaque triptyque présente les caractéristiques, capacités spéciales et traits culturels de l'espèce.\n\n**Contenu :**\n- Triptyques de toutes les espèces officielles\n- Caractéristiques détaillées\n- Capacités spéciales illustrées\n\n*Parfait pour créer des personnages variés ou enrichir vos campagnes !*",
-        "description_en": "### Complete collection of species triptychs\n\nDiscover all playable D&D 5e species with detailed and illustrated triptychs. Each triptych presents the characteristics, special abilities, and cultural traits of the species.\n\n**Contents:**\n- Triptychs of all official species\n- Detailed characteristics\n- Illustrated special abilities\n\n*Perfect for creating varied characters or enriching your campaigns!*",
+        "description": "### Collection complète des triptyques d'espèces Découvrez toutes les espèces jouables de D&D 5e avec des triptyques détaillés et illustrés. Chaque triptyque présente les caractéristiques, capacités spéciales et traits culturels de l'espèce. **Contenu :** Parfait pour créer des personnages variés ou enrichir vos campagnes !",
+        "description_en": "### Complete collection of species triptychs Discover all playable D&D 5e species with detailed and illustrated triptychs. Each triptych presents the characteristics, special abilities, and cultural traits of the species. **Contents:** Perfect for creating varied characters or enriching your campaigns!",
         "summary": "Collection de triptyques présentant toutes les espèces jouables avec leurs caractéristiques et capacités.",
         "summary_en": "Collection of triptychs featuring all playable species with their characteristics and abilities.",
         "images": [
@@ -591,8 +592,8 @@
         "name": "Triptyques Classes",
         "name_en": "Class Triptychs",
         "price": 55,
-        "description": "### Collection complète des triptyques de classes\n\nExplorez toutes les classes et sous-classes de D&D 5e avec des triptyques complets. Chaque triptyque détaille les capacités, sorts, et progressions de classe avec des exemples visuels.\n\n**Contenu :**\n- Triptyques de toutes les classes officielles\n- Sous-classes et archétypes\n- Progressions et capacités détaillées\n\n*Idéal pour comprendre les mécaniques de classe ou préparer des PNJ !*",
-        "description_en": "### Complete collection of class triptychs\n\nExplore all D&D 5e classes and subclasses with complete triptychs. Each triptych details class abilities, spells, and progressions with visual examples.\n\n**Contents:**\n- Triptychs of all official classes\n- Subclasses and archetypes\n- Detailed progressions and abilities\n\n*Ideal for understanding class mechanics or preparing NPCs!*",
+        "description": "### Collection complète des triptyques de classes Explorez toutes les classes et sous-classes de D&D 5e avec des triptyques complets. Chaque triptyque détaille les capacités, sorts, et progressions de classe avec des exemples visuels. **Contenu :** Idéal pour comprendre les mécaniques de classe ou préparer des PNJ !",
+        "description_en": "### Complete collection of class triptychs Explore all D&D 5e classes and subclasses with complete triptychs. Each triptych details class abilities, spells, and progressions with visual examples. **Contents:** Ideal for understanding class mechanics or preparing NPCs!",
         "summary": "Collection de triptyques couvrant toutes les classes et sous-classes avec leurs capacités et progressions.",
         "summary_en": "Collection of triptychs covering all classes and subclasses with their abilities and progressions.",
         "images": [
@@ -662,8 +663,8 @@
         "name": "Triptyques Historiques",
         "name_en": "Background Triptychs",
         "price": 35,
-        "description": "### Collection complète des triptyques d'historiques\n\nEnrichissez vos personnages avec tous les historiques disponibles en D&D 5e. Chaque triptyque présente l'origine, les compétences, équipements et contacts de l'historique.\n\n**Contenu :**\n- Triptyques de tous les historiques officiels\n- Compétences et équipements détaillés\n- Contacts et relations sociales\n\n*Parfait pour donner de la profondeur à vos personnages !*",
-        "description_en": "### Complete collection of background triptychs\n\nEnrich your characters with all available D&D 5e backgrounds. Each triptych presents the origin, skills, equipment, and contacts of the background.\n\n**Contents:**\n- Triptychs of all official backgrounds\n- Detailed skills and equipment\n- Contacts and social relations\n\n*Perfect for adding depth to your characters!*",
+        "description": "### Collection complète des triptyques d'historiques Enrichissez vos personnages avec tous les historiques disponibles en D&D 5e. Chaque triptyque présente l'origine, les compétences, équipements et contacts de l'historique. **Contenu :** Parfait pour donner de la profondeur à vos personnages !",
+        "description_en": "### Complete collection of background triptychs Enrich your characters with all available D&D 5e backgrounds. Each triptych presents the origin, skills, equipment, and contacts of the background. **Contents:** Perfect for adding depth to your characters!",
         "summary": "Collection de triptyques présentant tous les historiques avec leurs compétences et équipements.",
         "summary_en": "Collection of triptychs featuring all backgrounds with their skills and equipment.",
         "images": [

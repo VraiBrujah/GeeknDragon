@@ -170,8 +170,8 @@ class CsvProductsManager
                 'name' => trim($data['name_fr']) ?: '',
                 'name_en' => trim($data['name_en']) ?: '',
                 'price' => floatval($data['price']),
-                'description' => trim($data['description_fr']) ?: '',
-                'description_en' => trim($data['description_en']) ?: '',
+                'description' => $this->preserveNewlines($data['description_fr']) ?: '',
+                'description_en' => $this->preserveNewlines($data['description_en']) ?: '',
                 'summary' => trim($data['summary_fr']) ?: '',
                 'summary_en' => trim($data['summary_en']) ?: ''
             ];
@@ -339,6 +339,30 @@ class CsvProductsManager
         } catch (Exception $e) {
             return ['success' => false, 'message' => 'Erreur de validation : ' . $e->getMessage()];
         }
+    }
+
+    /**
+     * Préserve les retours à la ligne dans les descriptions tout en supprimant les espaces en début/fin
+     */
+    private function preserveNewlines(string $text): string
+    {
+        if (empty($text)) {
+            return '';
+        }
+
+        // Séparer les lignes, trim chaque ligne individuellement, puis rejoindre
+        $lines = explode("\n", $text);
+        $trimmedLines = array_map('trim', $lines);
+
+        // Supprimer les lignes vides au début et à la fin, mais conserver celles du milieu
+        while (!empty($trimmedLines) && $trimmedLines[0] === '') {
+            array_shift($trimmedLines);
+        }
+        while (!empty($trimmedLines) && $trimmedLines[count($trimmedLines) - 1] === '') {
+            array_pop($trimmedLines);
+        }
+
+        return implode("\n", $trimmedLines);
     }
 }
 ?>
