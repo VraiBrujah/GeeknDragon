@@ -1,19 +1,27 @@
 <?php
 /**
  * Interface d'administration pour la gestion des produits via CSV
- * 
+ *
  * Sécurisé par authentification basique
  */
 
+require __DIR__ . '/bootstrap.php';
 session_start();
 
-// Configuration d'authentification simple
-$ADMIN_PASSWORD = 'geekndragon2024'; // Changez ce mot de passe !
+// Récupération du mot de passe administrateur haché depuis l'environnement
+$adminPasswordHash = $_ENV['ADMIN_PASSWORD_HASH'] ?? $_SERVER['ADMIN_PASSWORD_HASH'] ?? null;
+
+if (!is_string($adminPasswordHash) || $adminPasswordHash === '') {
+    http_response_code(500);
+    error_log('Variable ADMIN_PASSWORD_HASH manquante ou vide.');
+    echo 'Configuration de sécurité manquante. Merci de contacter l\'équipe technique.';
+    exit;
+}
 
 // Vérification de l'authentification
 if (!isset($_SESSION['admin_authenticated'])) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['password'])) {
-        if ($_POST['password'] === $ADMIN_PASSWORD) {
+        if (password_verify($_POST['password'], $adminPasswordHash)) {
             $_SESSION['admin_authenticated'] = true;
             header('Location: ' . $_SERVER['PHP_SELF']);
             exit;

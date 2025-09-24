@@ -43,6 +43,7 @@ The application expects a few secrets to be provided through the environment:
 - `GA_MEASUREMENT_ID` – identifiant de mesure Google Analytics 4 (ex. `G-XXXXXXX`) chargé automatiquement avant Snipcart afin d'éviter l'avertissement « e-commerce tracking is enabled but no service found ».
 - `SENDGRID_API_KEY` – API key for the SendGrid SMTP service used to send emails.
 - `QUOTE_EMAIL` – recipient for quote requests (defaults to `contact@geekndragon.com`).
+- `ADMIN_PASSWORD_HASH` – hachage du mot de passe d'accès à l'espace d'administration généré avec `password_hash`. Utilisez un mot de passe fort et ne stockez jamais la valeur en clair dans le dépôt.
 
 To send emails from the contact form using SendGrid's SMTP service, configure credentials for the fixed sender address `no-reply@geekndragon.com`:
 
@@ -50,6 +51,18 @@ To send emails from the contact form using SendGrid's SMTP service, configure cr
 - `SMTP_PORT` – SMTP server port (defaults to 587 if unset).
 - `SMTP_USERNAME` – account username (for SendGrid use `apikey`).
 - `SMTP_PASSWORD` – password for the SMTP account (the same as `SENDGRID_API_KEY`).
+
+### Mise à jour sécurisée du mot de passe administrateur
+
+1. Choisissez un mot de passe robuste et générez son hachage depuis une machine de confiance :
+
+   ```bash
+   php -r "echo password_hash('votre-mot-de-passe-robuste', PASSWORD_DEFAULT);"
+   ```
+
+2. Copiez le hachage obtenu dans la variable `ADMIN_PASSWORD_HASH` de votre `.env` ou de votre configuration serveur.
+3. Déployez la nouvelle configuration puis reconnectez-vous à l'interface `admin-products.php` avec le mot de passe en clair correspondant.
+4. Supprimez toute note contenant l'ancien mot de passe et conservez le nouveau secret dans un coffre-fort dédié (ex. gestionnaire de mots de passe d'équipe).
 
 ## Local setup
 
