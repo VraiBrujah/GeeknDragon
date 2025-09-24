@@ -16,6 +16,31 @@ if (!$id || !isset($data[$id])) {
 }
 $product = $data[$id];
 
+// CORRECTION DASHBOARD SNIPCART : Détecter UNIQUEMENT avec paramètre explicite
+if (isset($_GET['format']) && $_GET['format'] === 'json') {
+    header('Content-Type: application/json');
+    header('Access-Control-Allow-Origin: *');
+    
+    $productName = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $product['name'];
+    $productSummary = $lang === 'en' ? ($product['summary_en'] ?? $product['summary'] ?? '') : ($product['summary'] ?? '');
+    
+    $jsonResponse = [
+        'id' => $id,
+        'name' => $productName,
+        'price' => floatval($product['price'] ?? 0),
+        'url' => "https://geekndragon.com/product.php?id=" . $id,
+        'description' => $productSummary,
+        'image' => isset($product['images'][0]) 
+            ? "https://geekndragon.com" . $product['images'][0] 
+            : null,
+        'stock' => isset($stockData[$id]) ? intval($stockData[$id]) : 999,
+        'customizable' => isset($product['customizable']) ? $product['customizable'] : false
+    ];
+    
+    echo json_encode($jsonResponse, JSON_PRETTY_PRINT);
+    exit;
+}
+
 $productName = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $product['name'];
 $descriptionFr = (string) ($product['description'] ?? '');
 $descriptionEn = (string) ($product['description_en'] ?? $descriptionFr);
