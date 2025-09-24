@@ -795,12 +795,13 @@ $extraHead = <<<HTML
 
 /* Fix navigation mobile */
 @media (max-width: 767px) {
-  header nav[aria-label="Navigation principale"] {
-    display: none !important;
-  }
+  /* Permettre au menu desktop de se cacher normalement en mobile */
   
-  header #mobile-menu {
-    display: none !important;
+  /* S'assurer que le menu mobile peut s'afficher quand activé */
+  header #mobile-menu.show {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
   
   header #menu-btn {
@@ -2134,6 +2135,28 @@ echo $snipcartInit;
   window.products = <?= json_encode($products_data) ?>;
 </script>
 <script src="/js/app.js?v=<?= filemtime(__DIR__.'/js/app.js') ?>"></script>
+<script>
+  // Forcer le chargement des traductions pour cette page
+  document.addEventListener('DOMContentLoaded', function() {
+    const lang = document.documentElement.lang || 'fr';
+    
+    // Charger et appliquer les traductions directement
+    fetch(`/translations/${lang}.json`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!data) return;
+        window.i18n = data;
+
+        document.querySelectorAll('[data-i18n]').forEach((el) => {
+          const keys = el.dataset.i18n.split('.');
+          let text = data; 
+          keys.forEach((k) => { if (text) text = text[k]; });
+          if (text != null) el.innerHTML = text;
+        });
+      })
+      .catch(err => console.warn('Translation loading failed:', err));
+  });
+</script>
 <script>
 // Fonction pour retourner les cartes (triptyques)
 function flipCard(cardId) {
