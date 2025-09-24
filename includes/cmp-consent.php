@@ -31,7 +31,7 @@ $cmpAttributes = [
     'data-cmp-codesrc="' . htmlspecialchars($cmpConfig['code_source']) . '"'
 ];
 
-// URL du script CMP avec autoblocking
+// URL du script CMP avec autoblocking mais exemptions configurées
 $cmpScriptUrl = 'https://' . $cmpConfig['cdn'] . '/delivery/autoblocking/' . $cmpConfig['id'] . '.js';
 
 ?>
@@ -66,6 +66,19 @@ $cmpScriptUrl = 'https://' . $cmpConfig['cdn'] . '/delivery/autoblocking/' . $cm
             'lang_preference', // Préférence langue
             'cart_session' // Session panier local
         ],
+        
+        // Scripts essentiels exempts de blocage CMP
+        essentialScripts: [
+            'cdn.snipcart.com', // CDN Snipcart toujours autorisé
+            'snipcart.js' // Script panier essentiel
+        ],
+        
+        // Configuration d'exemptions par attributs
+        exemptions: {
+            'data-cmp-ab': '0', // Désactiver autoblocking
+            'data-purposes': 'essential', // Marquage essentiel
+            'data-service': 'snipcart' // Service e-commerce critique
+        },
         
         // Configuration multilingue
         language: '<?= $currentLang ?>',

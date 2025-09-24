@@ -62,30 +62,94 @@ if (!$snipcartKey) {
 ?>
 <div hidden id="snipcart" data-api-key="<?= htmlspecialchars($snipcartKey) ?>"></div>
 <script>
-  const fallbackLang = '<?= htmlspecialchars($snipcartLanguage) ?>';
-  const lang = localStorage.getItem('snipcartLanguage') || fallbackLang;
+  // Configuration Snipcart simplifiée et robuste
+  (function() {
+    const fallbackLang = '<?= htmlspecialchars($snipcartLanguage) ?>';
+    let lang = fallbackLang;
 
-  try {
-    if (!localStorage.getItem('snipcartLanguage')) {
-      localStorage.setItem('snipcartLanguage', lang);
+    // Récupération sécurisée de la langue depuis localStorage
+    try {
+      const storedLang = localStorage.getItem('snipcartLanguage');
+      if (storedLang) {
+        lang = storedLang;
+      } else {
+        localStorage.setItem('snipcartLanguage', lang);
+      }
+    } catch (error) {
+      console.warn('localStorage indisponible, utilisation fallback lang:', fallbackLang);
     }
-  } catch (error) {
-    // Stockage indisponible (navigation privée, etc.) : on se contente du fallback.
-  }
 
-  window.SnipcartSettings = {
-    publicApiKey: '<?= htmlspecialchars($snipcartKey) ?>',
-    loadStrategy: 'onload',
-    version: '3.4.0', // Version CSS fixe pour éviter les breaking changes
-    config: {
-      addProductBehavior: '<?= htmlspecialchars($snipcartAddProductBehavior) ?>',
-      locale: lang,
-      customerAccount: { enabled: true },
-    },
-  };
+    // Configuration Snipcart avec chargement immédiat forcé
+    window.SnipcartSettings = {
+      publicApiKey: '<?= htmlspecialchars($snipcartKey) ?>',
+      loadStrategy: 'onload', // Retour au chargement immédiat
+      version: '3.4.0',
+      config: {
+        addProductBehavior: '<?= htmlspecialchars($snipcartAddProductBehavior) ?>',
+        locale: lang,
+        customerAccount: { enabled: true }
+      },
+    };
 
+    // Forcer l'initialisation immédiate
+    window.addEventListener('DOMContentLoaded', function() {
+      if (window.Snipcart && typeof window.Snipcart.api === 'undefined') {
+        console.warn('Snipcart détecté mais API non initialisée, forçage...');
+        // Tentative de forcer l'initialisation
+        setTimeout(function() {
+          if (window.Snipcart && window.Snipcart.ready) {
+            window.Snipcart.ready();
+          }
+        }, 100);
+      }
+    });
+
+    // Debug pour identifier les problèmes
+    if (window.location.hash === '#debug' || window.location.search.includes('debug=1')) {
+      console.log('Snipcart Debug - Configuration:', window.SnipcartSettings);
+      console.log('Snipcart Debug - API Key:', '<?= htmlspecialchars($snipcartKey) ?>');
+      console.log('Snipcart Debug - Langue:', lang);
+    }
+  })();
 </script>
-<!-- Librairie Snipcart -->
-<script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
+<!-- Librairie Snipcart avec exemption CMP configurée -->
+<script 
+  async 
+  src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"
+  data-cmp-ab="0"
+  data-purposes="essential"
+  data-service="snipcart"
+  class="cmplz-native">
+</script>
+<script>
+  // Vérification silencieuse de Snipcart (logs uniquement en mode debug)
+  const debugMode = window.location.hash === '#debug' || window.location.search.includes('debug=1');
+  
+  if (debugMode) {
+    console.log('🚀 Chargement Snipcart avec exemption CMP configurée');
+  }
+  
+  let checkCount = 0;
+  const checkSnipcart = setInterval(() => {
+    checkCount++;
+    
+    if (window.Snipcart && window.Snipcart.events) {
+      if (debugMode) {
+        console.log('✅ Snipcart détecté et prêt avec exemption CMP !');
+      }
+      clearInterval(checkSnipcart);
+    } else if (checkCount > 50) { // 5 secondes - Log d'erreur même sans debug
+      console.error('❌ Snipcart non disponible après 5s');
+      clearInterval(checkSnipcart);
+    }
+  }, 100);
+  
+  // Événements CMP uniquement en debug
+  if (debugMode) {
+    document.addEventListener('cmpConsentUpdate', function(event) {
+      console.log('📢 CMP: Mise à jour des consentements:', event.detail);
+    });
+  }
+</script>
 <!-- Script de personnalisation -->
 <script defer src="/js/snipcart.js?v=<?= filemtime(__DIR__.'/js/snipcart.js') ?>"></script>

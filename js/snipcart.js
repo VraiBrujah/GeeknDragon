@@ -9,14 +9,64 @@
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  // Attendre Snipcart prêt (robuste)
+  // Attendre Snipcart prêt avec stratégie d'attente plus patiente
   function whenSnipcartReady(cb) {
-    if (window.Snipcart && window.Snipcart.events) return cb();
-    document.addEventListener('snipcart.ready', cb, { once: true });
+    // Vérification immédiate plus simple
+    if (window.Snipcart && window.Snipcart.events) {
+      return cb();
+    }
+
+    let retryCount = 0;
+    const maxRetries = 100; // 10 secondes max (plus patient)
+    let handlerRemoved = false;
+
+    // Event listener pour snipcart.ready
+    const readyHandler = () => {
+      if (handlerRemoved) return;
+      handlerRemoved = true;
+      document.removeEventListener('snipcart.ready', readyHandler);
+      if (t) clearInterval(t);
+      cb();
+    };
+    
+    document.addEventListener('snipcart.ready', readyHandler);
+
+    // Polling simplifié
     const t = setInterval(() => {
+      retryCount++;
+      
+      // Vérification plus simple
       if (window.Snipcart && window.Snipcart.events) {
-        clearInterval(t);
-        cb();
+        if (!handlerRemoved) {
+          handlerRemoved = true;
+          document.removeEventListener('snipcart.ready', readyHandler);
+          clearInterval(t);
+          cb();
+        }
+        return;
+      }
+
+      // Debug périodique
+      if (retryCount % 20 === 0) { // Chaque 2 secondes
+        console.log(`Snipcart: attente... (${retryCount/10}s)`, {
+          snipcart: !!window.Snipcart,
+          events: !!(window.Snipcart && window.Snipcart.events)
+        });
+      }
+
+      if (retryCount >= maxRetries) {
+        console.error('Snipcart: échec de chargement après 10s');
+        if (!handlerRemoved) {
+          handlerRemoved = true;
+          document.removeEventListener('snipcart.ready', readyHandler);
+          clearInterval(t);
+        }
+        
+        // Dernière tentative sans conditions
+        setTimeout(() => {
+          console.warn('Snipcart: tentative d\'initialisation forcée...');
+          cb();
+        }, 500);
       }
     }, 100);
   }
@@ -160,25 +210,62 @@
     root.__observerMounted = true;
   }
 
-  whenSnipcartReady(() => {
-    // Langue depuis localStorage si besoin (cohérent avec snipcart-init.php)
+  // Fonction d'initialisation principale
+  function initializeSnipcartCustomizations() {
     try {
+      // Vérification de sécurité avant toute opération
+      if (!window.Snipcart) {
+        console.warn('⚠️ Snipcart non disponible lors de l\'initialisation des customizations');
+        return;
+      }
+
+      // Langue depuis localStorage si besoin (cohérent avec snipcart-init.php)
       const lang = localStorage.getItem('snipcartLanguage');
       if (lang && window.Snipcart?.store) {
         // Certaines versions exposent locale via store; sinon la config au load suffit
         // window.Snipcart.store.dispatch('session:setLocale', lang); // garde en commentaire si non supporté
       }
-    } catch (e) {}
 
-    // 1er passage + observer
-    processAll();
-    mountObserver();
+      // 1er passage + observer
+      processAll();
+      mountObserver();
 
-    // Écoute des évènements Snipcart (pour rafraîchir la mise en forme)
-    const ev = window.Snipcart.events;
-    if (ev?.on) {
-      ['item.added', 'item.updated', 'cart.opened', 'cart.closed']
-        .forEach(evt => ev.on(evt, processAll));
+      // Écoute des évènements Snipcart (pour rafraîchir la mise en forme)
+      const ev = window.Snipcart?.events;
+      if (ev?.on) {
+        ['item.added', 'item.updated', 'cart.opened', 'cart.closed', 'cart.confirmed']
+          .forEach(evt => ev.on(evt, processAll));
+      }
+
+      // Debug info
+      if (window.location.hash === '#debug' || window.location.search.includes('debug=1')) {
+        console.log('🎨 Snipcart customizations initialisées:', {
+          api: !!window.Snipcart?.api,
+          events: !!window.Snipcart?.events,
+          store: !!window.Snipcart?.store
+        });
+      }
+    } catch (error) {
+      console.error('💥 Erreur lors de l\'initialisation des customizations Snipcart:', error);
+      console.error('État Snipcart:', {
+        snipcart: !!window.Snipcart,
+        api: !!(window.Snipcart?.api),
+        events: !!(window.Snipcart?.events)
+      });
     }
-  });
+  }
+
+  // Initialisation principale
+  whenSnipcartReady(initializeSnipcartCustomizations);
+
+  // Réinitialisation lors des navigations (SPA-like behavior)
+  if (typeof window.addEventListener !== 'undefined') {
+    window.addEventListener('popstate', () => {
+      setTimeout(() => {
+        if (window.Snipcart && window.Snipcart.events) {
+          processAll();
+        }
+      }, 100);
+    });
+  }
 })();
