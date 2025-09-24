@@ -1142,3 +1142,46 @@ document.addEventListener('DOMContentLoaded', () => {
   // Arrêter la vérification après 10 secondes max
   setTimeout(() => clearInterval(statusInterval), 10000);
 });
+
+/* ========================================================================
+   GESTIONNAIRE D'ONGLETS AIDE-JEUX
+   ===================================================================== */
+(() => {
+  let aideJeuxWindow = null;
+
+  /**
+   * Ouvre aide-jeux.php dans un onglet intelligent :
+   * - Si déjà ouvert : focus sur l'onglet existant
+   * - Sinon : créer nouvel onglet
+   * @param {string} url - URL de la page aide-jeux
+   */
+  window.openAideJeuxTab = function(url) {
+    try {
+      // Si l'onglet existe et n'est pas fermé
+      if (aideJeuxWindow && !aideJeuxWindow.closed) {
+        // Focus sur l'onglet existant
+        aideJeuxWindow.focus();
+
+        // Si l'URL est différente, naviguer vers la nouvelle URL
+        const currentUrl = aideJeuxWindow.location.href;
+        if (currentUrl !== url) {
+          aideJeuxWindow.location.href = url;
+        }
+      } else {
+        // Créer nouvel onglet
+        aideJeuxWindow = window.open(url, 'AideJeuxGD');
+
+        if (aideJeuxWindow) {
+          aideJeuxWindow.focus();
+        } else {
+          // Fallback si bloqué
+          window.open(url, '_blank');
+        }
+      }
+    } catch (error) {
+      console.warn('[GD] Erreur gestion onglet aide-jeux:', error);
+      // Fallback : nouvel onglet classique
+      window.open(url, '_blank');
+    }
+  };
+});
