@@ -273,7 +273,22 @@ class CoinLotOptimizer {
       console.log(`🌟 CoinLotOptimizer: Combinaison Quintessence: ${totalCost}$ (${combination.length} Quintessences)`);
     });
     
-    // ÉTAPE 4: Solutions combinées avec quintessence + complément
+    // ÉTAPE 4: Décomposition intelligente avec Quintessences partielles
+    // Identifier les patterns Quintessence dans les besoins et les extraire
+    const decompositionSolutions = this.findDecompositionSolutions(needs, variations);
+    
+    decompositionSolutions.forEach(solution => {
+      solutions.push({
+        items: solution,
+        totalCost: solution.reduce((sum, item) => sum + (item.variation.price * item.quantity), 0),
+        type: 'decomposition'
+      });
+      
+      const totalCost = solution.reduce((sum, item) => sum + (item.variation.price * item.quantity), 0);
+      console.log(`🧩 CoinLotOptimizer: Décomposition intelligente: ${totalCost}$ (${solution.length} produits)`);
+    });
+    
+    // ÉTAPE 5: Solutions combinées avec quintessence + complément
     // Utiliser une approche de base + compléments pour les cas complexes
     
     quintessenceVariations.forEach(baseVariation => {
@@ -298,11 +313,15 @@ class CoinLotOptimizer {
       }
     });
     
-    // ÉTAPE 5: Sélectionner la meilleure solution
-    solutions.sort((a, b) => a.totalCost - b.totalCost);
+    // ÉTAPE 6: Filtrer les solutions complètes et sélectionner la meilleure
+    const completeSolutions = solutions.filter(solution => {
+      return this.validateSolution(solution.items, needs);
+    });
     
-    if (solutions.length > 0) {
-      const best = solutions[0];
+    completeSolutions.sort((a, b) => a.totalCost - b.totalCost);
+    
+    if (completeSolutions.length > 0) {
+      const best = completeSolutions[0];
       console.log(`🏆 CoinLotOptimizer: Solution optimale: ${best.totalCost}$ (${best.type})`);
       return best.items;
     }
@@ -560,18 +579,244 @@ class CoinLotOptimizer {
       });
     });
     
-    // Vérifier si la combinaison couvre tous les besoins
+    // Vérification STRICTE : la combinaison doit couvrir TOUS les besoins
     for (const [coinKey, needed] of Object.entries(needs)) {
       if (needed > 0 && (!totalCoverage[coinKey] || totalCoverage[coinKey] < needed)) {
-        return null; // Ne peut pas couvrir ce besoin
+        return null; // Ne peut pas couvrir ce besoin - rejeter
       }
     }
     
-    // Si on arrive ici, la combinaison fonctionne
+    // Si on arrive ici, la combinaison couvre 100% des besoins
     return quintessenceCombo.map(variation => ({
       variation,
-      quantity: 1 // Chaque Quintessence n'est utilisée qu'une fois
+      quantity: 1
     }));
+  }
+  
+  /**
+   * Trouve les solutions par décomposition intelligente
+   * Identifie les patterns Quintessence partiels et les complète optimalement
+   * @param {Object} needs - Besoins
+   * @param {Array} variations - Toutes les variations disponibles
+   * @returns {Array} Solutions de décomposition
+   */
+  findDecompositionSolutions(needs, variations) {
+    const solutions = [];
+    const quintessenceVariations = variations.filter(v => v.type === 'quintessence');
+    
+    // Identifier tous les patterns Quintessence possibles par multiplicateur
+    const patterns = this.multipliers.map(mult => this.identifyQuintessencePattern(needs, mult))
+                                      .filter(p => p.matches >= 3);
+    
+    // Tester des combinaisons de patterns (jusqu'à 3 patterns simultanés)
+    for (let i = 0; i < patterns.length; i++) {
+      // Pattern unique
+      const solution1 = this.buildMultiPatternSolution(needs, [patterns[i]], variations);
+      if (solution1 && solution1.length > 0) {
+        solutions.push(solution1);
+      }
+      
+      // Combinaisons de 2 patterns
+      for (let j = i + 1; j < patterns.length; j++) {
+        const solution2 = this.buildMultiPatternSolution(needs, [patterns[i], patterns[j]], variations);
+        if (solution2 && solution2.length > 0) {
+          solutions.push(solution2);
+        }
+        
+        // Combinaisons de 3 patterns si pertinent
+        for (let k = j + 1; k < patterns.length; k++) {
+          const solution3 = this.buildMultiPatternSolution(needs, [patterns[i], patterns[j], patterns[k]], variations);
+          if (solution3 && solution3.length > 0) {
+            solutions.push(solution3);
+          }
+        }
+      }
+    }
+    
+    return solutions;
+  }
+  
+  /**
+   * Identifie un pattern Quintessence partiel pour un multiplicateur donné
+   * @param {Object} needs - Besoins
+   * @param {number} multiplier - Multiplicateur à analyser
+   * @returns {Object} Pattern détecté
+   */
+  identifyQuintessencePattern(needs, multiplier) {
+    const metals = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
+    let matches = 0;
+    const matchingMetals = [];
+    
+    metals.forEach(metal => {
+      const key = `${metal}_${multiplier}`;
+      if (needs[key] && needs[key] >= 1) {
+        matches++;
+        matchingMetals.push(metal);
+      }
+    });
+    
+    return {
+      multiplier,
+      matches,
+      matchingMetals,
+      isComplete: matches === 5,
+      isPartial: matches >= 3 && matches < 5
+    };
+  }
+  
+  /**
+   * Construit une solution basée sur plusieurs patterns Quintessence
+   * @param {Object} originalNeeds - Besoins originaux
+   * @param {Array} patterns - Patterns Quintessence identifiés
+   * @param {Array} variations - Toutes les variations
+   * @returns {Array} Solution complète
+   */
+  buildMultiPatternSolution(originalNeeds, patterns, variations) {
+    const solution = [];
+    const remainingNeeds = { ...originalNeeds };
+    
+    // Pour chaque pattern, essayer d'utiliser une Quintessence si rentable
+    patterns.forEach(pattern => {
+      if (pattern.matches >= 4) { // Seuil pour utiliser une Quintessence
+        const quintessenceVar = variations.find(v => 
+          v.type === 'quintessence' && v.multiplier === pattern.multiplier
+        );
+        
+        if (quintessenceVar) {
+          solution.push({ variation: quintessenceVar, quantity: 1 });
+          
+          // Soustraire ce que la Quintessence couvre
+          Object.entries(quintessenceVar.capacity).forEach(([coinKey, quantity]) => {
+            if (remainingNeeds[coinKey]) {
+              remainingNeeds[coinKey] = Math.max(0, remainingNeeds[coinKey] - quantity);
+            }
+          });
+        }
+      }
+    });
+    
+    // Compléter avec les pièces personnalisées pour le reste
+    const customVariations = variations.filter(v => v.type === 'normal' && v.productId === 'coin-custom-pieces');
+    
+    Object.entries(remainingNeeds).forEach(([coinKey, needed]) => {
+      if (needed > 0) {
+        const [metal, mult] = coinKey.split('_');
+        const customVar = customVariations.find(v => 
+          v.metal === metal && v.multiplier === parseInt(mult)
+        );
+        
+        if (customVar) {
+          solution.push({ variation: customVar, quantity: needed });
+        }
+      }
+    });
+    
+    // Vérifier si cette solution est valide et rentable
+    if (solution.length > 0 && this.validateSolution(solution, originalNeeds)) {
+      return solution;
+    }
+    
+    return null;
+  }
+  
+  /**
+   * Valide qu'une solution couvre tous les besoins
+   * @param {Array} solution - Solution à valider
+   * @param {Object} originalNeeds - Besoins originaux
+   * @returns {boolean} Solution valide
+   */
+  validateSolution(solution, originalNeeds) {
+    const coverage = {};
+    
+    // Calculer la couverture totale avec debug
+    solution.forEach(item => {
+      if (!item.variation || !item.variation.capacity) {
+        console.warn('⚠️ CoinLotOptimizer: Variation sans capacity:', item.variation);
+        return;
+      }
+      
+      Object.entries(item.variation.capacity).forEach(([coinKey, capacity]) => {
+        coverage[coinKey] = (coverage[coinKey] || 0) + (capacity * item.quantity);
+      });
+    });
+    
+    // Vérifier que tous les besoins sont couverts (STRICT)
+    let isComplete = true;
+    let missingCoins = [];
+    
+    for (const [coinKey, needed] of Object.entries(originalNeeds)) {
+      if (needed > 0) {
+        const covered = coverage[coinKey] || 0;
+        if (covered < needed) {
+          isComplete = false;
+          missingCoins.push(`${coinKey} (besoin ${needed}, couvert ${covered})`);
+        }
+      }
+    }
+    
+    if (!isComplete) {
+      console.warn(`⚠️ CoinLotOptimizer: Solution incomplète rejetée. Pièces manquantes: ${missingCoins.join(', ')}`);
+      return false;
+    }
+    
+    return true;
+  }
+  
+  /**
+   * Complète une solution partielle avec des pièces personnalisées
+   * @param {Array} partialSolution - Solution partielle avec Quintessences
+   * @param {Object} remainingNeeds - Besoins restants à couvrir
+   * @returns {Array} Solution complète
+   */
+  completeWithCustomPieces(partialSolution, remainingNeeds) {
+    const solution = [...partialSolution]; // Copie de la solution partielle
+    
+    // Trouver les variations de pièces personnalisées
+    const customVariations = [];
+    if (window.products && window.products['coin-custom-pieces']) {
+      const product = window.products['coin-custom-pieces'];
+      const metals = product.metals_en || ['copper', 'silver', 'electrum', 'gold', 'platinum'];
+      const multipliers = product.multipliers || [1, 10, 100, 1000, 10000];
+      
+      metals.forEach(metal => {
+        multipliers.forEach(mult => {
+          if (product.coin_lots[metal]) {
+            customVariations.push({
+              productId: 'coin-custom-pieces',
+              name: product.name,
+              price: product.price,
+              type: 'normal',
+              metal,
+              multiplier: mult,
+              capacity: { [`${metal}_${mult}`]: product.coin_lots[metal] },
+              coinsProvided: product.coin_lots[metal]
+            });
+          }
+        });
+      });
+    }
+    
+    // Ajouter une pièce personnalisée pour chaque besoin restant
+    Object.entries(remainingNeeds).forEach(([coinKey, needed]) => {
+      if (needed > 0) {
+        const [metal, mult] = coinKey.split('_');
+        const customVar = customVariations.find(v => 
+          v.metal === metal && v.multiplier === parseInt(mult)
+        );
+        
+        if (customVar) {
+          solution.push({ variation: customVar, quantity: needed });
+        }
+      }
+    });
+    
+    // Valider la solution avant de la retourner
+    if (solution.length > 0 && this.validateSolution(solution, originalNeeds)) {
+      return solution;
+    }
+    
+    // Solution incomplète rejetée
+    return null;
   }
 }
 
