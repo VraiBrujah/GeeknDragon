@@ -373,7 +373,11 @@
             "/media/products/cards/alexandrite-recto.webp"
         ],
         "multipliers": [],
-        "customizable": false,
+        "languages": [
+            "FR",
+            "EN"
+        ],
+        "customizable": true,
         "category": "cards"
     },
     "cards-weapons-armor-60": {
@@ -389,7 +393,11 @@
             "/media/products/cards/armure-recto.webp"
         ],
         "multipliers": [],
-        "customizable": false,
+        "languages": [
+            "FR",
+            "EN"
+        ],
+        "customizable": true,
         "category": "cards"
     },
     "cards-adventure-packs-70": {
@@ -404,7 +412,11 @@
             "/media/products/cards/sac-aa-dos-recto.webp"
         ],
         "multipliers": [],
-        "customizable": false,
+        "languages": [
+            "FR",
+            "EN"
+        ],
+        "customizable": true,
         "category": "cards"
     },
     "cards-explosives-tools-60": {
@@ -420,7 +432,11 @@
             "/media/products/cards/mataerield-alchimiste-recto.webp"
         ],
         "multipliers": [],
-        "customizable": false,
+        "languages": [
+            "FR",
+            "EN"
+        ],
+        "customizable": true,
         "category": "cards"
     },
     "cards-services-vehicles-85": {
@@ -440,7 +456,7 @@
             "FR",
             "EN"
         ],
-        "customizable": false,
+        "customizable": true,
         "category": "cards"
     },
     "cards-loot-engineering-170": {
@@ -461,7 +477,7 @@
             "FR",
             "EN"
         ],
-        "customizable": false,
+        "customizable": true,
         "category": "cards"
     },
     "cards-roads-services-165": {
@@ -483,7 +499,7 @@
             "FR",
             "EN"
         ],
-        "customizable": false,
+        "customizable": true,
         "category": "cards"
     },
     "cards-adventurer-arsenal-190": {
@@ -505,7 +521,7 @@
             "FR",
             "EN"
         ],
-        "customizable": false,
+        "customizable": true,
         "category": "cards"
     },
     "triptych-mystery-hero": {
@@ -539,10 +555,6 @@
             "/media/game/triptychs/examples/race-aasimar-verso.webp"
         ],
         "multipliers": [],
-        "languages": [
-            "FR",
-            "EN"
-        ],
         "triptych_options": [
             "Aasimar",
             "Drakéide d'Airain",
@@ -584,7 +596,7 @@
             "Tieffelin - Infernal"
         ],
         "triptych_type": "species",
-        "customizable": true,
+        "customizable": false,
         "category": "triptychs"
     },
     "triptych-class-collection": {
@@ -600,10 +612,6 @@
             "/media/game/triptychs/examples/classe-barbare-verso.webp"
         ],
         "multipliers": [],
-        "languages": [
-            "FR",
-            "EN"
-        ],
         "triptych_options": [
             "Barbare - Voie de l'Arbre-Monde",
             "Barbare - Voie du Berserker",
@@ -655,7 +663,7 @@
             "Roublard - Voleur"
         ],
         "triptych_type": "class",
-        "customizable": true,
+        "customizable": false,
         "category": "triptychs"
     },
     "triptych-background-collection": {
@@ -671,10 +679,6 @@
             "/media/game/triptychs/examples/historique-acolyte-verso.webp"
         ],
         "multipliers": [],
-        "languages": [
-            "FR",
-            "EN"
-        ],
         "triptych_options": [
             "Acolyte",
             "Artisan",
@@ -694,7 +698,7 @@
             "Voyageur"
         ],
         "triptych_type": "background",
-        "customizable": true,
+        "customizable": false,
         "category": "triptychs"
     }
 }
