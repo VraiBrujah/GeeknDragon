@@ -18,7 +18,9 @@ if (isset($lines[0]) && strpos($lines[0], 'Column1') !== false) {
 }
 
 $manager = new CsvProductsManager();
-$result = $manager->convertCsvToJson($csvPath, 'data/products.json');
+
+// Utilisation de la nouvelle méthode avec synchronisation automatique
+$result = $manager->convertCsvToJsonWithSync($csvPath, 'data/products.json');
 
 // Supprime le fichier temporaire si créé
 if ($csvPath !== 'data/products.csv' && file_exists($csvPath)) {
@@ -30,9 +32,27 @@ echo $result['message'] . PHP_EOL;
 if ($result['success']) {
     $products = json_decode(file_get_contents('data/products.json'), true);
     // Prix du premier produit trouvé comme exemple
-$firstProduct = reset($products);
-echo 'Prix mis a jour: ' . ($firstProduct['price'] ?? '0') . ' euros' . PHP_EOL;
+    $firstProduct = reset($products);
+    echo 'Prix mis à jour: ' . ($firstProduct['price'] ?? '0') . ' euros' . PHP_EOL;
     echo 'Nombre de produits: ' . count($products) . PHP_EOL;
+
+    // Affichage des détails de synchronisation
+    if (isset($result['translation_sync'])) {
+        $sync = $result['translation_sync'];
+        if ($sync['success']) {
+            echo PHP_EOL . "🌍 SYNCHRONISATION TRADUCTIONS:" . PHP_EOL;
+            echo "✅ " . $sync['message'] . PHP_EOL;
+            if (isset($sync['languages_synced'])) {
+                echo "📋 Langues synchronisées: " . implode(', ', $sync['languages_synced']) . PHP_EOL;
+            }
+            if (isset($sync['fields_synced'])) {
+                echo "🏷️ Champs synchronisés: " . implode(', ', $sync['fields_synced']) . PHP_EOL;
+            }
+        } else {
+            echo PHP_EOL . "⚠️ SYNCHRONISATION TRADUCTIONS ÉCHOUÉE:" . PHP_EOL;
+            echo "❌ " . $sync['message'] . PHP_EOL;
+        }
+    }
 } else {
     echo "ERREUR lors de la conversion!" . PHP_EOL;
     if (isset($result['errors'])) {

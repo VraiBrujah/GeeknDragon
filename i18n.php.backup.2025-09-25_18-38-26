@@ -10,7 +10,7 @@
 // Inclusion du helper d'internationalisation
 require_once __DIR__ . '/includes/i18n-helper.php';
 
-$availableLangs = ['fr', 'en', 'es', 'de'];
+$availableLangs = ['fr', 'en'];
 
 // Fonction pour détecter la langue préférée du navigateur
 function getBrowserLanguage($availableLangs) {

@@ -1,0 +1,49 @@
+{
+    "extreme-1": {
+        "price": 99.99,
+        "super_long_field_name_with_underscores": "Nom très long avec des caractères spéciaux éàèùç!@#$%^&*()",
+        "super_long_field_name_with_underscores_fr": "Nom très long avec des caractères spéciaux éàèùç!@#$%^&*()",
+        "super_long_field_name_with_underscores_en": "Very long name with special characters éàèùç!@#$%^&*()",
+        "single_word": "Mot",
+        "single_word_fr": "Mot",
+        "single_word_en": "Word",
+        "special_chars": [
+            "Item1",
+            "Item2",
+            "Item3",
+            "Item4",
+            "Item5",
+            "Item6",
+            "Item7",
+            "Item8",
+            "Item9",
+            "Item10"
+        ],
+        "special_chars_fr": [
+            "Item1",
+            "Item2",
+            "Item3",
+            "Item4",
+            "Item5",
+            "Item6",
+            "Item7",
+            "Item8",
+            "Item9",
+            "Item10"
+        ],
+        "special_chars_en": [
+            "Item1",
+            "Item2",
+            "Item3",
+            "Item4",
+            "Item5",
+            "Item6",
+            "Item7",
+            "Item8",
+            "Item9",
+            "Item10"
+        ],
+        "multipliers": [],
+        "category": "cards"
+    }
+}

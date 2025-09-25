@@ -1,22 +1,115 @@
 <?php
 /**
  * Gestionnaire de conversion CSV <-> JSON pour les produits GeeknDragon
- * 
+ *
  * Permet la gestion complète des produits via CSV avec zéro hardcodage.
  * Toutes les données (images, variations, options) sont externalisées dans le CSV.
+ *
+ * Version 2.0 : Intégration TranslationSync pour uniformisation système multilingue
  */
+
+// Inclusion du système de synchronisation des traductions
+require_once __DIR__ . '/translation-sync.php';
 
 class CsvProductsManager
 {
-    private $csvHeaders = [
-        'id', 'name_fr', 'name_en', 'price', 'description_fr', 'description_en', 
-        'summary_fr', 'summary_en', 'images', 'multipliers', 'metals_fr', 
-        'metals_en', 'coin_lots', 'languages', 'customizable', 'triptych_options', 'triptych_type', 'category'
-    ];
+    private $csvHeaders = []; // Détection dynamique depuis CSV
+    private $translationSync;
 
     /**
-     * Convertit un fichier CSV en JSON produits
-     * 
+     * Constructeur : Initialise le système de synchronisation des traductions
+     */
+    public function __construct()
+    {
+        $this->translationSync = new TranslationSync();
+    }
+
+    /**
+     * Détecte dynamiquement les headers depuis un fichier CSV
+     */
+    private function detectCsvHeaders(string $csvPath): array
+    {
+        if (!file_exists($csvPath)) {
+            return [];
+        }
+
+        $file = fopen($csvPath, 'r');
+        $headers = fgetcsv($file, 0, ';');
+
+        // Essayer avec virgule si pas assez de colonnes
+        if (!$headers || count($headers) <= 1) {
+            rewind($file);
+            $headers = fgetcsv($file, 0, ',');
+        }
+
+        fclose($file);
+
+        // Nettoyage BOM UTF-8
+        if (!empty($headers[0])) {
+            $headers[0] = ltrim($headers[0], "\xEF\xBB\xBF");
+        }
+
+        return $headers ?: [];
+    }
+
+    /**
+     * Extrait dynamiquement tous les champs multilingues d'un produit
+     */
+    private function extractMultilingualFields(array $data, array $headers): array
+    {
+        $product = [];
+
+        // Traitement des champs de base (non multilingues)
+        $baseFields = ['id', 'price', 'images', 'multipliers', 'coin_lots',
+                      'languages', 'customizable', 'triptych_options', 'triptych_type', 'category'];
+
+        foreach ($baseFields as $field) {
+            if (isset($data[$field])) {
+                $product[$field] = $data[$field];
+            }
+        }
+
+        // Détection et traitement dynamique des champs multilingues
+        $translatableFields = [];
+        $languages = [];
+
+        foreach ($headers as $header) {
+            if (preg_match('/^(\w+)_([a-zA-Z]{2})$/', $header, $matches)) {
+                $fieldName = $matches[1];
+                $langCode = strtolower($matches[2]); // Normaliser
+
+                $translatableFields[$fieldName] = true;
+                $languages[$langCode] = true;
+
+                // Traitement du champ multilingue (y compris champs vides)
+                if (isset($data[$header])) {
+                    $value = trim($data[$header]);
+
+                    if ($langCode === 'fr') {
+                        // Langue principale (compatibilité avec l'ancien format)
+                        if (strpos($value, '|') !== false) {
+                            $product[$fieldName] = array_filter(array_map('trim', explode('|', $value)));
+                        } else {
+                            $product[$fieldName] = $fieldName === 'description' ? $this->preserveNewlines($value) : $value;
+                        }
+                    }
+
+                    // Toutes les langues avec suffixe
+                    if (strpos($value, '|') !== false) {
+                        $product[$fieldName . '_' . $langCode] = array_filter(array_map('trim', explode('|', $value)));
+                    } else {
+                        $product[$fieldName . '_' . $langCode] = $fieldName === 'description' ? $this->preserveNewlines($value) : $value;
+                    }
+                }
+            }
+        }
+
+        return $product;
+    }
+
+    /**
+     * Convertit un fichier CSV en JSON produits (méthode classique)
+     *
      * @param string $csvPath Chemin vers le fichier CSV
      * @param string $jsonPath Chemin de sortie JSON
      * @return array Résultat avec success et message
@@ -110,14 +203,17 @@ class CsvProductsManager
                 return ['success' => false, 'message' => 'JSON invalide : ' . json_last_error_msg()];
             }
 
+            // Génération dynamique des headers depuis tous les produits
+            $headers = $this->generateHeadersFromJson($productsData);
+
             $csvFile = fopen($csvPath, 'w');
-            
+
             // Écriture des en-têtes avec point-virgule
-            fputcsv($csvFile, $this->csvHeaders, ';');
+            fputcsv($csvFile, $headers, ';');
 
             // Écriture des données
             foreach ($productsData as $id => $product) {
-                $row = $this->productToRow($id, $product);
+                $row = $this->productToRow($id, $product, $headers);
                 fputcsv($csvFile, $row, ';');
             }
 
@@ -138,7 +234,16 @@ class CsvProductsManager
      */
     private function validateHeaders(array $headers): bool
     {
-        return count(array_intersect($this->csvHeaders, $headers)) === count($this->csvHeaders);
+        // Champs obligatoires pour le fonctionnement de base
+        $required = ['id', 'price'];
+
+        foreach ($required as $field) {
+            if (!in_array($field, $headers)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -160,21 +265,18 @@ class CsvProductsManager
             }
             
             $data = array_combine($headers, $row);
-            
+
             if (empty($data['id'])) {
                 return ['success' => false, 'message' => "Ligne $lineNumber : ID produit manquant"];
             }
 
-            $product = [
-                'id' => trim($data['id']),
-                'name' => trim($data['name_fr']) ?: '',
-                'name_en' => trim($data['name_en']) ?: '',
-                'price' => floatval($data['price']),
-                'description' => $this->preserveNewlines($data['description_fr']) ?: '',
-                'description_en' => $this->preserveNewlines($data['description_en']) ?: '',
-                'summary' => trim($data['summary_fr']) ?: '',
-                'summary_en' => trim($data['summary_en']) ?: ''
-            ];
+            // Utilisation de la nouvelle méthode dynamique
+            $product = $this->extractMultilingualFields($data, $headers);
+
+            // Prix (obligatoire)
+            $product['price'] = floatval($data['price'] ?? 0);
+
+            // Traitement spécialisé des champs non multilingues
 
             // Images (séparées par |)
             if (!empty($data['images'])) {
@@ -186,16 +288,6 @@ class CsvProductsManager
                 $product['multipliers'] = array_map('intval', array_filter(explode('|', $data['multipliers'])));
             } else {
                 $product['multipliers'] = [];
-            }
-
-            // Métaux FR (séparées par |)
-            if (!empty($data['metals_fr'])) {
-                $product['metals'] = array_filter(array_map('trim', explode('|', $data['metals_fr'])));
-            }
-
-            // Métaux EN (séparées par |)
-            if (!empty($data['metals_en'])) {
-                $product['metals_en'] = array_filter(array_map('trim', explode('|', $data['metals_en'])));
             }
 
             // Langues (séparées par |)
@@ -247,30 +339,68 @@ class CsvProductsManager
     }
 
     /**
-     * Convertit un produit en ligne CSV
+     * Convertit un produit en ligne CSV de manière dynamique
      */
-    private function productToRow(string $id, array $product): array
+    private function productToRow(string $id, array $product, array $headers): array
     {
-        return [
-            $id,
-            $product['name'] ?? '',
-            $product['name_en'] ?? '',
-            $product['price'] ?? 0,
-            $product['description'] ?? '',
-            $product['description_en'] ?? '',
-            $product['summary'] ?? '',
-            $product['summary_en'] ?? '',
-            isset($product['images']) ? implode('|', $product['images']) : '',
-            isset($product['multipliers']) ? implode('|', $product['multipliers']) : '',
-            isset($product['metals']) ? implode('|', $product['metals']) : '',
-            isset($product['metals_en']) ? implode('|', $product['metals_en']) : '',
-            isset($product['coin_lots']) ? json_encode($product['coin_lots']) : '',
-            isset($product['languages']) ? implode('|', $product['languages']) : '',
-            isset($product['customizable']) ? ($product['customizable'] ? 'VRAI' : 'FAUX') : 'FAUX',
-            isset($product['triptych_options']) ? implode('|', $product['triptych_options']) : '',
-            $product['triptych_type'] ?? '',
-            $product['category'] ?? 'cards'
-        ];
+        $row = [];
+
+        foreach ($headers as $header) {
+            if ($header === 'id') {
+                $row[] = $id;
+            } else {
+                $value = $product[$header] ?? '';
+
+                // Traitement spécialisé selon le type de champ
+                if (is_array($value)) {
+                    if ($header === 'coin_lots') {
+                        // JSON pour coin_lots
+                        $row[] = json_encode($value);
+                    } else {
+                        // Implode avec | pour les autres arrays
+                        $row[] = implode('|', $value);
+                    }
+                } elseif (is_bool($value)) {
+                    // Booléens en français
+                    $row[] = $value ? 'VRAI' : 'FAUX';
+                } else {
+                    // Valeur simple
+                    $row[] = (string)$value;
+                }
+            }
+        }
+
+        return $row;
+    }
+
+    /**
+     * Génère dynamiquement la liste des headers depuis le contenu JSON
+     */
+    private function generateHeadersFromJson(array $productsData): array
+    {
+        $allFields = [];
+
+        foreach ($productsData as $id => $product) {
+            foreach (array_keys($product) as $field) {
+                $allFields[$field] = true;
+            }
+        }
+
+        // Assurer l'ordre logique : id d'abord, price ensuite, puis le reste
+        $orderedHeaders = ['id'];
+
+        // Ajouter price s'il existe
+        if (isset($allFields['price'])) {
+            $orderedHeaders[] = 'price';
+            unset($allFields['price']);
+        }
+
+        // Ajouter tous les autres champs triés
+        $remainingFields = array_keys($allFields);
+        sort($remainingFields);
+        $orderedHeaders = array_merge($orderedHeaders, $remainingFields);
+
+        return $orderedHeaders;
     }
 
     /**
@@ -299,7 +429,7 @@ class CsvProductsManager
             
             if (!$this->validateHeaders($headers)) {
                 fclose($csvFile);
-                return ['success' => false, 'message' => 'En-têtes CSV invalides. Attendus : ' . implode(', ', $this->csvHeaders)];
+                return ['success' => false, 'message' => 'En-têtes CSV invalides. Champs obligatoires requis : id, price'];
             }
 
             // Détecter le séparateur utilisé
@@ -363,6 +493,253 @@ class CsvProductsManager
         }
 
         return implode("\n", $trimmedLines);
+    }
+
+    // ========================================================================
+    // NOUVELLES MÉTHODES - SYSTÈME UNIFIÉ DE TRADUCTION
+    // ========================================================================
+
+    /**
+     * Convertit CSV en JSON avec synchronisation automatique des traductions
+     *
+     * Version améliorée qui synchronise automatiquement les traductions produits
+     * vers le système I18N principal (lang/fr.json, lang/en.json, etc.)
+     *
+     * @param string $csvPath Chemin vers le fichier CSV
+     * @param string $jsonPath Chemin de sortie JSON
+     * @return array Résultat avec success, message et détails synchronisation
+     */
+    public function convertCsvToJsonWithSync(string $csvPath, string $jsonPath): array
+    {
+        // 1. Conversion classique CSV -> JSON
+        $result = $this->convertCsvToJson($csvPath, $jsonPath);
+
+        if ($result['success']) {
+            // 2. Synchronisation automatique vers système I18N
+            $syncResult = $this->translationSync->syncProductTranslations($csvPath);
+
+            // 3. Merge des résultats
+            $result['translation_sync'] = $syncResult;
+
+            if ($syncResult['success']) {
+                $result['message'] .= ' + Traductions synchronisées vers système I18N';
+            } else {
+                $result['message'] .= ' (Avertissement: Synchronisation traductions échouée)';
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Ajoute support pour une nouvelle langue
+     *
+     * Crée automatiquement :
+     * - Fichier JSON de traductions (lang/XX.json)
+     * - Mise à jour configuration i18n.php
+     * - Instructions pour extension CSV
+     *
+     * @param string $langCode Code langue ISO 639-1 (ex: 'es', 'de', 'it')
+     * @return array Résultat de l'opération
+     */
+    public function addLanguageSupport(string $langCode): array
+    {
+        return $this->translationSync->addLanguageSupport($langCode);
+    }
+
+    /**
+     * Valide la cohérence des traductions synchronisées
+     *
+     * @return array Rapport de validation
+     */
+    public function validateTranslationConsistency(): array
+    {
+        return $this->translationSync->validateTranslationConsistency();
+    }
+
+    /**
+     * Détecte les langues supportées par le CSV
+     *
+     * Analyse les en-têtes CSV pour identifier toutes les langues présentes
+     * via les colonnes *_XX (ex: name_fr, description_en, summary_es)
+     *
+     * @param string $csvPath Chemin vers le fichier CSV
+     * @return array Langues détectées et statistiques
+     */
+    public function detectCsvLanguages(string $csvPath): array
+    {
+        try {
+            if (!file_exists($csvPath)) {
+                return ['success' => false, 'message' => 'Fichier CSV introuvable'];
+            }
+
+            $csvFile = fopen($csvPath, 'r');
+
+            // Lecture en-têtes avec support séparateurs multiples
+            $headers = fgetcsv($csvFile, 0, ';');
+            if (!$headers || count($headers) <= 1) {
+                rewind($csvFile);
+                $headers = fgetcsv($csvFile, 0, ',');
+            }
+
+            fclose($csvFile);
+
+            // Nettoyage BOM UTF-8
+            if (!empty($headers[0])) {
+                $headers[0] = ltrim($headers[0], "\xEF\xBB\xBF");
+            }
+
+            // Détection langues
+            $detectedLanguages = [];
+            $fieldsByLanguage = [];
+
+            foreach ($headers as $header) {
+                if (preg_match('/^(\w+)_([a-zA-Z]{2})$/', $header, $matches)) {
+                    $field = $matches[1];
+                    $lang = strtolower($matches[2]); // Normaliser en minuscules
+
+                    $detectedLanguages[] = $lang;
+                    if (!isset($fieldsByLanguage[$lang])) {
+                        $fieldsByLanguage[$lang] = [];
+                    }
+                    $fieldsByLanguage[$lang][] = $field;
+                }
+            }
+
+            $detectedLanguages = array_unique($detectedLanguages);
+
+            return [
+                'success' => true,
+                'languages_detected' => $detectedLanguages,
+                'fields_by_language' => $fieldsByLanguage,
+                'total_languages' => count($detectedLanguages),
+                'total_multilingual_fields' => count(array_filter($headers, fn($h) => preg_match('/_[a-zA-Z]{2}$/i', $h)))
+            ];
+
+        } catch (Exception $e) {
+            return ['success' => false, 'message' => 'Erreur détection langues : ' . $e->getMessage()];
+        }
+    }
+
+    /**
+     * Génère un rapport complet du système multilingue
+     *
+     * @param string $csvPath Chemin vers le fichier CSV
+     * @return array Rapport détaillé
+     */
+    public function generateMultilingualReport(string $csvPath): array
+    {
+        $report = [
+            'success' => true,
+            'timestamp' => date('Y-m-d H:i:s'),
+            'csv_analysis' => $this->detectCsvLanguages($csvPath),
+            'i18n_consistency' => $this->validateTranslationConsistency()
+        ];
+
+        // Analyse détaillée des correspondances
+        if ($report['csv_analysis']['success'] && $report['i18n_consistency']['success']) {
+            $csvLangs = $report['csv_analysis']['languages_detected'];
+            $i18nLangs = array_keys($report['i18n_consistency']['languages']);
+
+            $report['system_alignment'] = [
+                'csv_languages' => $csvLangs,
+                'i18n_languages' => $i18nLangs,
+                'synchronized_languages' => array_intersect($csvLangs, $i18nLangs),
+                'csv_only_languages' => array_diff($csvLangs, $i18nLangs),
+                'i18n_only_languages' => array_diff($i18nLangs, $csvLangs),
+                'fully_aligned' => empty(array_diff($csvLangs, $i18nLangs)) && empty(array_diff($i18nLangs, $csvLangs))
+            ];
+        }
+
+        return $report;
+    }
+
+    /**
+     * Extension automatique du CSV pour nouvelle langue
+     *
+     * Ajoute les colonnes nécessaires pour une nouvelle langue
+     * ATTENTION: Cette méthode nécessite une validation manuelle du CSV résultant
+     *
+     * @param string $csvPath Chemin vers le fichier CSV source
+     * @param string $langCode Code de la nouvelle langue
+     * @param string $outputPath Chemin de sortie (optionnel)
+     * @return array Résultat de l'extension
+     */
+    public function extendCsvForLanguage(string $csvPath, string $langCode, string $outputPath = null): array
+    {
+        try {
+            if (!file_exists($csvPath)) {
+                return ['success' => false, 'message' => 'Fichier CSV source introuvable'];
+            }
+
+            $outputPath = $outputPath ?? str_replace('.csv', "_extended_{$langCode}.csv", $csvPath);
+
+            // Analyse CSV actuel
+            $detection = $this->detectCsvLanguages($csvPath);
+            if (!$detection['success']) {
+                return $detection;
+            }
+
+            // Vérification langue pas déjà présente
+            if (in_array($langCode, $detection['languages_detected'])) {
+                return ['success' => false, 'message' => "Langue {$langCode} déjà présente dans le CSV"];
+            }
+
+            // Lecture et extension du CSV
+            $csvFile = fopen($csvPath, 'r');
+            $outputFile = fopen($outputPath, 'w');
+
+            // En-têtes avec nouvelles colonnes
+            $headers = fgetcsv($csvFile, 0, ';');
+            if (!$headers || count($headers) <= 1) {
+                rewind($csvFile);
+                $headers = fgetcsv($csvFile, 0, ',');
+            }
+
+            // Nettoyage BOM
+            if (!empty($headers[0])) {
+                $headers[0] = ltrim($headers[0], "\xEF\xBB\xBF");
+            }
+
+            // Ajout nouvelles colonnes pour la langue
+            $newHeaders = $headers;
+            $translationFields = ['name', 'description', 'summary', 'metals'];
+
+            foreach ($translationFields as $field) {
+                $newHeaders[] = $field . '_' . $langCode;
+            }
+
+            fputcsv($outputFile, $newHeaders, ';');
+
+            // Copie des données avec colonnes vides pour nouvelle langue
+            $separator = (count($headers) > 1) ? ';' : ',';
+            while (($row = fgetcsv($csvFile, 0, $separator)) !== false) {
+                // Ajout colonnes vides pour chaque nouveau champ
+                foreach ($translationFields as $field) {
+                    $row[] = ''; // Valeur vide à remplir manuellement
+                }
+                fputcsv($outputFile, $row, ';');
+            }
+
+            fclose($csvFile);
+            fclose($outputFile);
+
+            return [
+                'success' => true,
+                'message' => "CSV étendu pour la langue {$langCode}",
+                'output_file' => $outputPath,
+                'new_columns_added' => array_map(fn($f) => $f . '_' . $langCode, $translationFields),
+                'next_steps' => [
+                    '1. Vérifiez le fichier généré : ' . basename($outputPath),
+                    '2. Remplissez manuellement les colonnes de traduction',
+                    '3. Utilisez convertCsvToJsonWithSync() pour synchroniser',
+                    '4. Testez avec generateMultilingualReport()'
+                ]
+            ];
+
+        } catch (Exception $e) {
+            return ['success' => false, 'message' => 'Erreur extension CSV : ' . $e->getMessage()];
+        }
     }
 }
 ?>

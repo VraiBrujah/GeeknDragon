@@ -276,9 +276,7 @@
             "triptychDescription": "Un triptyque est une fiche de personnage cartonnée pliable en 3 volets, conçue pour remplacer les fastidieuses recherches dans les manuels.",
             "threeRequired": "Chaque personnage D&D nécessite 3 triptyques différents qui se complètent parfaitement.",
             "detailsText": "Découvrez en détail chaque type de triptyque. Cliquez sur les images pour voir le verso de chaque fiche.",
-            "clickToFlip": "Cliquez pour retourner la fiche",
-            "classTriptych": "Triptyque de Classe",
-            "backgroundTriptych": "Triptyque d'Historique"
+            "clickToFlip": "Cliquez pour retourner la fiche"
         },
         "navigation": {
             "quickNav": "Navigation Rapide",
@@ -976,71 +974,6 @@
             "name": "Triptyques Historiques",
             "description": "### Collection complète des triptyques d'historiques\r\n\r\nEnrichissez vos personnages avec tous les historiques disponibles en D&D 5e. Chaque triptyque présente l'origine, les compétences, équipements et contacts de l'historique.\r\n\r\n**Contenu :**\r\n- Triptyques de tous les historiques officiels\r\n- Compétences et équipements détaillés\r\n- Contacts et relations sociales\r\n\r\n*Parfait pour donner de la profondeur à vos personnages !*",
             "summary": "Collection de triptyques présentant tous les historiques avec leurs compétences et équipements."
-        },
-        "test-produit-1": {
-            "nom": "Objet Magique",
-            "details": "Description française détaillée",
-            "type": [
-                "Artefact",
-                "Relique"
-            ],
-            "couleurs": [
-                "Rouge",
-                "Bleu",
-                "Vert"
-            ]
-        },
-        "test-produit-2": {
-            "nom": "Grimoire Ancien",
-            "details": "Livre de sorts ancestraux",
-            "type": [
-                "Manuel",
-                "Guide"
-            ],
-            "couleurs": [
-                "Noir",
-                "Or"
-            ]
-        },
-        "test-produit-3": {
-            "nom": "Épée Enchantée",
-            "details": "Lame forgée par les elfes",
-            "type": [
-                "Épée",
-                "Lame"
-            ],
-            "couleurs": [
-                "Argenté",
-                "Brillant"
-            ]
-        },
-        "livre-1": {
-            "titre": "Le Guide Complet",
-            "resume": "Un livre essentiel pour débuter",
-            "specifications": [
-                "Couverture rigide",
-                "300 pages",
-                "Format A5"
-            ],
-            "tags": [
-                "Fantastique",
-                "Aventure",
-                "Guide"
-            ]
-        },
-        "accessoire-2": {
-            "titre": "Dés Enchantés",
-            "resume": "Set de dés magiques",
-            "specifications": [
-                "Métal",
-                "Gravures runiques",
-                "Set de 7"
-            ],
-            "tags": [
-                "Précision",
-                "Magie",
-                "Mystique"
-            ]
         }
     }
 }

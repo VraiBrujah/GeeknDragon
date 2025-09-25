@@ -276,9 +276,7 @@
             "triptychDescription": "Un triptyque est une fiche de personnage cartonnée pliable en 3 volets, conçue pour remplacer les fastidieuses recherches dans les manuels.",
             "threeRequired": "Chaque personnage D&D nécessite 3 triptyques différents qui se complètent parfaitement.",
             "detailsText": "Découvrez en détail chaque type de triptyque. Cliquez sur les images pour voir le verso de chaque fiche.",
-            "clickToFlip": "Cliquez pour retourner la fiche",
-            "classTriptych": "Triptyque de Classe",
-            "backgroundTriptych": "Triptyque d'Historique"
+            "clickToFlip": "Cliquez pour retourner la fiche"
         },
         "navigation": {
             "quickNav": "Navigation Rapide",
@@ -1012,34 +1010,6 @@
             "couleurs": [
                 "Argenté",
                 "Brillant"
-            ]
-        },
-        "livre-1": {
-            "titre": "Le Guide Complet",
-            "resume": "Un livre essentiel pour débuter",
-            "specifications": [
-                "Couverture rigide",
-                "300 pages",
-                "Format A5"
-            ],
-            "tags": [
-                "Fantastique",
-                "Aventure",
-                "Guide"
-            ]
-        },
-        "accessoire-2": {
-            "titre": "Dés Enchantés",
-            "resume": "Set de dés magiques",
-            "specifications": [
-                "Métal",
-                "Gravures runiques",
-                "Set de 7"
-            ],
-            "tags": [
-                "Précision",
-                "Magie",
-                "Mystique"
             ]
         }
     }

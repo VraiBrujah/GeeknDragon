@@ -1501,10 +1501,10 @@ echo $snipcartInit;
       
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-bold mb-8 text-yellow-400">
-          <?= __('gameHelp.money.title', '💰 Guide de la Monnaie D&D') ?>
+          <?= __('money.title', '💰 Guide de la Monnaie D&D') ?>
         </h2>
         <p class="text-xl text-gray-300 max-w-4xl mx-auto txt-court">
-          <?= __('gameHelp.money.description', 'Découvrez le système monétaire de D&D, nos pièces physiques Geek & Dragon, et utilisez notre convertisseur pour gérer facilement vos finances d\'aventurier !') ?>
+          <?= __('money.description', 'Découvrez le système monétaire de D&D, nos pièces physiques Geek & Dragon, et utilisez notre convertisseur pour gérer facilement vos finances d\'aventurier !') ?>
         </p>
       </div>
 
@@ -1513,46 +1513,46 @@ echo $snipcartInit;
         
         <!-- Types de Pièces -->
         <div class="bg-gradient-to-b from-amber-900/30 to-yellow-900/20 p-8 rounded-xl border border-amber-700/50">
-          <h3 class="text-2xl font-bold mb-6 text-center text-amber-400"><?= __('gameHelp.money.coinTypes.title', '💎 Types de Pièces') ?></h3>
+          <h3 class="text-2xl font-bold mb-6 text-center text-amber-400"><?= __('money.coinTypes.title', '💎 Types de Pièces') ?></h3>
           
           <div class="space-y-4">
             <div class="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-lg">
               <div class="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center text-white font-bold">PP</div>
               <div>
-                <h4 class="font-semibold text-yellow-400"><?= __('gameHelp.money.coinTypes.platinum.name', '&nbsp;&nbsp;&nbsp;&nbsp;Pièce de Platine (pp)') ?></h4>
-                <p class="text-gray-300 text-sm"><?= __('gameHelp.money.coinTypes.platinum.description', '&nbsp;&nbsp;&nbsp;&nbsp;La plus précieuse • 1 pp = 10 po') ?></p>
+                <h4 class="font-semibold text-yellow-400"><?= __('money.coinTypes.platinum.name', '&nbsp;&nbsp;&nbsp;&nbsp;Pièce de Platine (pp)') ?></h4>
+                <p class="text-gray-300 text-sm"><?= __('money.coinTypes.platinum.description', '&nbsp;&nbsp;&nbsp;&nbsp;La plus précieuse • 1 pp = 10 po') ?></p>
               </div>
             </div>
             
             <div class="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-lg">
               <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-black font-bold">PO</div>
               <div>
-                <h4 class="font-semibold text-yellow-400"><?= __('gameHelp.money.coinTypes.gold.name', '&nbsp;&nbsp;&nbsp;&nbsp;Pièce d\'Or (po)') ?></h4>
-                <p class="text-gray-300 text-sm"><?= __('gameHelp.money.coinTypes.gold.description', '&nbsp;&nbsp;&nbsp;&nbsp;Monnaie de référence • 1 po = 10 pa') ?></p>
+                <h4 class="font-semibold text-yellow-400"><?= __('money.coinTypes.gold.name', '&nbsp;&nbsp;&nbsp;&nbsp;Pièce d\'Or (po)') ?></h4>
+                <p class="text-gray-300 text-sm"><?= __('money.coinTypes.gold.description', '&nbsp;&nbsp;&nbsp;&nbsp;Monnaie de référence • 1 po = 10 pa') ?></p>
               </div>
             </div>
             
             <div class="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-lg">
               <div class="w-12 h-12 bg-gray-400 rounded-full flex items-center justify-center text-black font-bold">PA</div>
               <div>
-                <h4 class="font-semibold text-gray-400"><?= __('gameHelp.money.coinTypes.silver.name', '&nbsp;&nbsp;&nbsp;&nbsp;Pièce d\'Argent (pa)') ?></h4>
-                <p class="text-gray-300 text-sm"><?= __('gameHelp.money.coinTypes.silver.description', '&nbsp;&nbsp;&nbsp;&nbsp;Monnaie courante • 1 pa = 10 pe') ?></p>
+                <h4 class="font-semibold text-gray-400"><?= __('money.coinTypes.silver.name', '&nbsp;&nbsp;&nbsp;&nbsp;Pièce d\'Argent (pa)') ?></h4>
+                <p class="text-gray-300 text-sm"><?= __('money.coinTypes.silver.description', '&nbsp;&nbsp;&nbsp;&nbsp;Monnaie courante • 1 pa = 10 pe') ?></p>
               </div>
             </div>
             
             <div class="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-lg">
               <div class="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold">PE</div>
               <div>
-                <h4 class="font-semibold text-orange-400"><?= __('gameHelp.money.coinTypes.electrum.name', '&nbsp;&nbsp;&nbsp;&nbsp;Pièce d\'\u00c9lectrum (pe)') ?></h4>
-                <p class="text-gray-300 text-sm"><?= __('gameHelp.money.coinTypes.electrum.description', '&nbsp;&nbsp;&nbsp;&nbsp;Alliage or-argent • 1 pe = 5 pc') ?></p>
+                <h4 class="font-semibold text-orange-400"><?= __('money.coinTypes.electrum.name', '&nbsp;&nbsp;&nbsp;&nbsp;Pièce d\'\u00c9lectrum (pe)') ?></h4>
+                <p class="text-gray-300 text-sm"><?= __('money.coinTypes.electrum.description', '&nbsp;&nbsp;&nbsp;&nbsp;Alliage or-argent • 1 pe = 5 pc') ?></p>
               </div>
             </div>
             
             <div class="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-lg">
               <div class="w-12 h-12 bg-orange-800 rounded-full flex items-center justify-center text-white font-bold">PC</div>
               <div>
-                <h4 class="font-semibold text-orange-400"><?= __('gameHelp.money.coinTypes.copper.name', '&nbsp;&nbsp;&nbsp;&nbsp;Pièce de Cuivre (pc)') ?></h4>
-                <p class="text-gray-300 text-sm"><?= __('gameHelp.money.coinTypes.copper.description', '&nbsp;&nbsp;&nbsp;&nbsp;Menue monnaie • La plus commune') ?></p>
+                <h4 class="font-semibold text-orange-400"><?= __('money.coinTypes.copper.name', '&nbsp;&nbsp;&nbsp;&nbsp;Pièce de Cuivre (pc)') ?></h4>
+                <p class="text-gray-300 text-sm"><?= __('money.coinTypes.copper.description', '&nbsp;&nbsp;&nbsp;&nbsp;Menue monnaie • La plus commune') ?></p>
               </div>
             </div>
           </div>
@@ -1560,13 +1560,13 @@ echo $snipcartInit;
 
         <!-- Tableau de Conversion -->
         <div class="bg-gradient-to-b from-gray-900/30 to-slate-900/20 p-8 rounded-xl border border-slate-700/50">
-          <h3 class="text-2xl font-bold mb-6 text-center text-slate-400"><?= __('gameHelp.money.conversionTable.title', '🔄 Tableau de Conversion') ?></h3>
+          <h3 class="text-2xl font-bold mb-6 text-center text-slate-400"><?= __('money.conversionTable.title', '🔄 Tableau de Conversion') ?></h3>
           
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
               <thead>
                 <tr class="border-b border-gray-600">
-                  <th class="text-left py-2 text-gray-300"><?= __('gameHelp.money.conversionTable.headers.coin', 'Pièce') ?></th>
+                  <th class="text-left py-2 text-gray-300"><?= __('money.conversionTable.headers.coin', 'Pièce') ?></th>
                   <th class="text-center py-2 text-yellow-400">PP</th>
                   <th class="text-center py-2 text-yellow-400">PO</th>
                   <th class="text-center py-2 text-gray-400">PA</th>
@@ -1576,7 +1576,7 @@ echo $snipcartInit;
               </thead>
               <tbody class="text-gray-300">
                 <tr class="border-b border-gray-700">
-                  <td class="py-2 font-semibold text-yellow-400"><?= __('gameHelp.money.conversionTable.rows.platinum', 'Platine (pp)') ?></td>
+                  <td class="py-2 font-semibold text-yellow-400"><?= __('money.conversionTable.rows.platinum', 'Platine (pp)') ?></td>
                   <td class="text-center">1</td>
                   <td class="text-center">10</td>
                   <td class="text-center">100</td>
@@ -1584,7 +1584,7 @@ echo $snipcartInit;
                   <td class="text-center">1000</td>
                 </tr>
                 <tr class="border-b border-gray-700">
-                  <td class="py-2 font-semibold text-yellow-400"><?= __('gameHelp.money.conversionTable.rows.gold', 'Or (po)') ?></td>
+                  <td class="py-2 font-semibold text-yellow-400"><?= __('money.conversionTable.rows.gold', 'Or (po)') ?></td>
                   <td class="text-center">1/10</td>
                   <td class="text-center">1</td>
                   <td class="text-center">10</td>
@@ -1592,7 +1592,7 @@ echo $snipcartInit;
                   <td class="text-center">100</td>
                 </tr>
                 <tr class="border-b border-gray-700">
-                  <td class="py-2 font-semibold text-gray-400"><?= __('gameHelp.money.conversionTable.rows.silver', 'Argent (pa)') ?></td>
+                  <td class="py-2 font-semibold text-gray-400"><?= __('money.conversionTable.rows.silver', 'Argent (pa)') ?></td>
                   <td class="text-center">1/100</td>
                   <td class="text-center">1/10</td>
                   <td class="text-center">1</td>
@@ -1600,7 +1600,7 @@ echo $snipcartInit;
                   <td class="text-center">10</td>
                 </tr>
                 <tr class="border-b border-gray-700">
-                  <td class="py-2 font-semibold text-orange-400"><?= __('gameHelp.money.conversionTable.rows.electrum', 'Électrum (pe)') ?></td>
+                  <td class="py-2 font-semibold text-orange-400"><?= __('money.conversionTable.rows.electrum', 'Électrum (pe)') ?></td>
                   <td class="text-center">1/200</td>
                   <td class="text-center">1/20</td>
                   <td class="text-center">1/2</td>
@@ -1608,7 +1608,7 @@ echo $snipcartInit;
                   <td class="text-center">5</td>
                 </tr>
                 <tr>
-                  <td class="py-2 font-semibold text-orange-400"><?= __('gameHelp.money.conversionTable.rows.copper', 'Cuivre (pc)') ?></td>
+                  <td class="py-2 font-semibold text-orange-400"><?= __('money.conversionTable.rows.copper', 'Cuivre (pc)') ?></td>
                   <td class="text-center">1/1000</td>
                   <td class="text-center">1/100</td>
                   <td class="text-center">1/10</td>
@@ -1631,27 +1631,27 @@ echo $snipcartInit;
           <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.sourcesLabel"><?= __('shop.converter.sourcesLabel', '💰 Monnaies sources') ?></h5>
           <div class="currency-input-grid grid grid-cols-2 md:grid-cols-5 gap-4 max-w-6xl mx-auto">
             <div class="currency-input-card bg-gradient-to-br from-amber-900/20 to-orange-800/20 p-4 rounded-xl border border-amber-700/30">
-              <label class="block text-amber-300 font-medium mb-2"><?= __('gameHelp.money.converter.labels.copper', '🪙 Cuivre') ?></label>
+              <label class="block text-amber-300 font-medium mb-2"><?= __('money.converter.labels.copper', '🪙 Cuivre') ?></label>
               <input type="number" min="0" step="1" value="0" data-currency="copper" 
                      class="w-full bg-gray-800/80 text-amber-300 border border-amber-700/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all" />
             </div>
             <div class="currency-input-card bg-gradient-to-br from-gray-600/20 to-gray-500/20 p-4 rounded-xl border border-gray-500/30">
-              <label class="block text-gray-300 font-medium mb-2"><?= __('gameHelp.money.converter.labels.silver', '🥈 Argent') ?></label>
+              <label class="block text-gray-300 font-medium mb-2"><?= __('money.converter.labels.silver', '🥈 Argent') ?></label>
               <input type="number" min="0" step="1" value="0" data-currency="silver" 
                      class="w-full bg-gray-800/80 text-gray-300 border border-gray-500/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all" />
             </div>
             <div class="currency-input-card bg-gradient-to-br from-yellow-600/20 to-green-600/20 p-4 rounded-xl border border-yellow-500/30">
-              <label class="block text-yellow-300 font-medium mb-2"><?= __('gameHelp.money.converter.labels.electrum', '⚡ Électrum') ?></label>
+              <label class="block text-yellow-300 font-medium mb-2"><?= __('money.converter.labels.electrum', '⚡ Électrum') ?></label>
               <input type="number" min="0" step="1" value="0" data-currency="electrum" 
                      class="w-full bg-gray-800/80 text-yellow-300 border border-yellow-500/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all" />
             </div>
             <div class="currency-input-card bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 p-4 rounded-xl border border-yellow-400/30">
-              <label class="block text-yellow-300 font-medium mb-2"><?= __('gameHelp.money.converter.labels.gold', '🥇 Or') ?></label>
+              <label class="block text-yellow-300 font-medium mb-2"><?= __('money.converter.labels.gold', '🥇 Or') ?></label>
               <input type="number" min="0" step="1" value="0" data-currency="gold" 
                      class="w-full bg-gray-800/80 text-yellow-300 border border-yellow-400/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all" />
             </div>
             <div class="currency-input-card bg-gradient-to-br from-cyan-500/20 to-blue-600/20 p-4 rounded-xl border border-cyan-400/30">
-              <label class="block text-cyan-300 font-medium mb-2"><?= __('gameHelp.money.converter.labels.platinum', '💎 Platine') ?></label>
+              <label class="block text-cyan-300 font-medium mb-2"><?= __('money.converter.labels.platinum', '💎 Platine') ?></label>
               <input type="number" min="0" step="1" value="0" data-currency="platinum" 
                      class="w-full bg-gray-800/80 text-cyan-300 border border-cyan-400/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all" />
             </div>
@@ -1676,7 +1676,7 @@ echo $snipcartInit;
                 </thead>
                 <tbody>
                   <tr class="border-b border-gray-700/30" data-currency="platinum">
-                    <td class="p-3 text-cyan-300 font-medium"><?= __('gameHelp.money.converter.multiplierTable.platinum', '💎 Platine') ?></td>
+                    <td class="p-3 text-cyan-300 font-medium"><?= __('money.converter.multiplierTable.platinum', '💎 Platine') ?></td>
                     <td class="p-2" data-label="×1"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
                     <td class="p-2" data-label="×10"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
                     <td class="p-2" data-label="×100"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
@@ -1684,7 +1684,7 @@ echo $snipcartInit;
                     <td class="p-2" data-label="×10000"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
                   </tr>
                   <tr class="border-b border-gray-700/30" data-currency="gold">
-                    <td class="p-3 text-yellow-300 font-medium"><?= __('gameHelp.money.converter.multiplierTable.gold', '🥇 Or') ?></td>
+                    <td class="p-3 text-yellow-300 font-medium"><?= __('money.converter.multiplierTable.gold', '🥇 Or') ?></td>
                     <td class="p-2" data-label="×1"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
                     <td class="p-2" data-label="×10"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
                     <td class="p-2" data-label="×100"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
@@ -1692,7 +1692,7 @@ echo $snipcartInit;
                     <td class="p-2" data-label="×10000"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
                   </tr>
                   <tr class="border-b border-gray-700/30" data-currency="electrum">
-                    <td class="p-3 text-yellow-300 font-medium"><?= __('gameHelp.money.converter.multiplierTable.electrum', '⚡ Électrum') ?></td>
+                    <td class="p-3 text-yellow-300 font-medium"><?= __('money.converter.multiplierTable.electrum', '⚡ Électrum') ?></td>
                     <td class="p-2" data-label="×1"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
                     <td class="p-2" data-label="×10"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
                     <td class="p-2" data-label="×100"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
@@ -1700,7 +1700,7 @@ echo $snipcartInit;
                     <td class="p-2" data-label="×10000"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
                   </tr>
                   <tr class="border-b border-gray-700/30" data-currency="silver">
-                    <td class="p-3 text-gray-300 font-medium"><?= __('gameHelp.money.converter.multiplierTable.silver', '🥈 Argent') ?></td>
+                    <td class="p-3 text-gray-300 font-medium"><?= __('money.converter.multiplierTable.silver', '🥈 Argent') ?></td>
                     <td class="p-2" data-label="×1"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
                     <td class="p-2" data-label="×10"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
                     <td class="p-2" data-label="×100"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
@@ -1708,7 +1708,7 @@ echo $snipcartInit;
                     <td class="p-2" data-label="×10000"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
                   </tr>
                   <tr data-currency="copper">
-                    <td class="p-3 text-amber-300 font-medium"><?= __('gameHelp.money.converter.multiplierTable.copper', '🪙 Cuivre') ?></td>
+                    <td class="p-3 text-amber-300 font-medium"><?= __('money.converter.multiplierTable.copper', '🪙 Cuivre') ?></td>
                     <td class="p-2" data-label="×1"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
                     <td class="p-2" data-label="×10"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
                     <td class="p-2" data-label="×100"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
@@ -1734,7 +1734,7 @@ echo $snipcartInit;
             <div id="gold-card"></div>
             <div id="platinum-card"></div>
             <div id="optimal-recommendations" class="bg-gradient-to-r from-indigo-900/30 to-purple-900/30 rounded-xl p-6 border border-indigo-500/30">
-              <h6 class="text-indigo-300 font-bold text-lg mb-4"><?= __('gameHelp.money.converter.recommendations.title', '✨ Recommandations optimales') ?></h6>
+              <h6 class="text-indigo-300 font-bold text-lg mb-4"><?= __('money.converter.recommendations.title', '✨ Recommandations optimales') ?></h6>
               <div id="currency-best" class="text-gray-200"></div>
             </div>
           </div>
@@ -1745,13 +1745,13 @@ echo $snipcartInit;
       <div id="coin-lots-recommendations" class="mt-12 mb-16" style="display: block;">
         <div class="bg-gradient-to-r from-green-900/30 to-emerald-900/20 rounded-xl p-8 border border-green-700/50">
           <h4 class="text-2xl font-bold text-center text-gray-200 mb-8">
-            <?= __('gameHelp.money.converter.lotsRecommendedTitle', '🛒 Lots de pièces recommandés') ?>
+            <?= __('money.converter.lotsRecommendedTitle', '🛒 Lots de pièces recommandés') ?>
           </h4>
           
           <div class="max-w-4xl mx-auto">
             <div class="text-center mb-6">
               <p class="text-gray-300 mb-4">
-                <?= __('gameHelp.money.lotsRecommendations.description', 'Voici les lots minimaux recommandés pour couvrir exactement vos besoins en pièces physiques :') ?>
+                <?= __('money.lotsRecommendations.description', 'Voici les lots minimaux recommandés pour couvrir exactement vos besoins en pièces physiques :') ?>
               </p>
             </div>
             
@@ -1779,7 +1779,7 @@ echo $snipcartInit;
 
       <!-- ===== TESTS SYSTÈME CONVERTISSEUR (DEBUG) ===== -->
       <div class="bg-gradient-to-r from-blue-900/30 to-indigo-900/20 rounded-xl p-8 border border-blue-700/50 mb-16" id="debug-section" style="display: none;">
-        <h3 class="text-3xl font-bold mb-6 text-center text-blue-400"><?= __('gameHelp.money.tests.title', '🔬 Tests du Système de Conversion') ?></h3>
+        <h3 class="text-3xl font-bold mb-6 text-center text-blue-400"><?= __('money.tests.title', '🔬 Tests du Système de Conversion') ?></h3>
         
         <div class="max-w-4xl mx-auto">
           <p class="text-center text-gray-300 mb-6">
@@ -1788,22 +1788,22 @@ echo $snipcartInit;
           
           <div class="grid md:grid-cols-2 gap-6 mb-6">
             <button id="run-basic-tests" class="btn btn-primary">
-              <?= __('gameHelp.money.tests.basicButton', '🧪 Tests de Base') ?>
+              <?= __('money.tests.basicButton', '🧪 Tests de Base') ?>
             </button>
             <button id="run-advanced-tests" class="btn btn-secondary">
-              <?= __('gameHelp.money.tests.advancedButton', '🔬 Tests Avancés') ?>
+              <?= __('money.tests.advancedButton', '🔬 Tests Avancés') ?>
             </button>
           </div>
           
           <div class="bg-gray-800/50 rounded-lg p-6">
             <div class="flex justify-between items-center mb-4">
-              <h4 class="text-xl font-semibold text-blue-300"><?= __('gameHelp.money.tests.results', 'Résultats des Tests') ?></h4>
+              <h4 class="text-xl font-semibold text-blue-300"><?= __('money.tests.results', 'Résultats des Tests') ?></h4>
               <button id="clear-test-results" class="text-sm text-gray-400 hover:text-white">
                 🗑️ Effacer
               </button>
             </div>
             <div id="test-results" class="text-sm font-mono">
-              <div class="text-gray-400"><?= __('gameHelp.money.tests.noTests', 'Aucun test exécuté...') ?></div>
+              <div class="text-gray-400"><?= __('money.tests.noTests', 'Aucun test exécuté...') ?></div>
             </div>
           </div>
         </div>
@@ -1824,19 +1824,19 @@ echo $snipcartInit;
                 <div class="absolute inset-0 bg-black/50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <div class="text-center text-white">
                     <div class="text-3xl mb-2">📥</div>
-                    <div class="font-bold text-lg"><?= __('gameHelp.money.download.button', 'Télécharger') ?></div>
-                    <div class="text-sm text-amber-300"><?= __('gameHelp.money.download.subtitle', 'Fiche à imprimer') ?></div>
+                    <div class="font-bold text-lg"><?= __('money.download.button', 'Télécharger') ?></div>
+                    <div class="text-sm text-amber-300"><?= __('money.download.subtitle', 'Fiche à imprimer') ?></div>
                   </div>
                 </div>
               </div>
               
               <div class="mt-4 text-center">
                 <p class="text-amber-300 font-medium mb-2">📄 Fiche de Monnaie officielle</p>
-                <p class="text-xs text-gray-400 mb-3"><?= __('gameHelp.money.download.instruction', 'Cliquez sur l\'image pour télécharger la fiche à imprimer') ?></p>
+                <p class="text-xs text-gray-400 mb-3"><?= __('money.download.instruction', 'Cliquez sur l\'image pour télécharger la fiche à imprimer') ?></p>
                 
                 <button onclick="downloadMoneySheet()" 
                         class="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm">
-                  <?= __('gameHelp.money.download.downloadSheet', '📥 Télécharger la fiche') ?>
+                  <?= __('money.download.downloadSheet', '📥 Télécharger la fiche') ?>
                 </button>
               </div>
             </div>
@@ -1844,7 +1844,7 @@ echo $snipcartInit;
           
           <!-- Texte explicatif avec plus d'espacement -->
           <div class="order-1 md:order-2 space-y-8 flex flex-col justify-center px-4 md:px-8">
-            <h3 class="text-3xl font-bold text-amber-400"><?= __('gameHelp.money.physicalTreasure.title', '🏆 Pourquoi le Trésor Physique ?') ?></h3>
+            <h3 class="text-3xl font-bold text-amber-400"><?= __('money.physicalTreasure.title', '🏆 Pourquoi le Trésor Physique ?') ?></h3>
             
             <div class="space-y-6 text-gray-300">
               <blockquote class="text-lg font-medium text-amber-300 italic border-l-4 border-amber-500 pl-6 bg-amber-900/10 py-4 rounded-r-lg">
@@ -1853,23 +1853,23 @@ echo $snipcartInit;
               
               <div class="space-y-4">
                 <p class="text-base leading-relaxed">
-                  <?= __('gameHelp.money.physicalTreasure.paragraph1', 'Dans Donjons & Dragons, les <strong class="text-amber-400">deux objectifs principaux</strong> sont l\'expérience et le trésor. Devoir écrire le trésor sur papier puis le gommer ne lui rend pas hommage. Le trésor mérite d\'\u00eatre <strong class="text-yellow-400">tangible, pesé, manipulé</strong>.') ?>
+                  <?= __('money.physicalTreasure.paragraph1', 'Dans Donjons & Dragons, les <strong class="text-amber-400">deux objectifs principaux</strong> sont l\'expérience et le trésor. Devoir écrire le trésor sur papier puis le gommer ne lui rend pas hommage. Le trésor mérite d\'\u00eatre <strong class="text-yellow-400">tangible, pesé, manipulé</strong>.') ?>
                 </p>
                 
                 <p class="text-base leading-relaxed">
-                  <?= __('gameHelp.money.physicalTreasure.paragraph2', 'Nos pièces physiques transforment chaque récompense en moment mémorable. Quand le MJ fait <em class="text-amber-300">tinter les pièces d\'or</em> dans sa main avant de les distribuer, c\'est toute l\'immersion qui s\'intensifie.') ?>
+                  <?= __('money.physicalTreasure.paragraph2', 'Nos pièces physiques transforment chaque récompense en moment mémorable. Quand le MJ fait <em class="text-amber-300">tinter les pièces d\'or</em> dans sa main avant de les distribuer, c\'est toute l\'immersion qui s\'intensifie.') ?>
                 </p>
               </div>
               
               <div class="bg-amber-900/20 p-6 rounded-lg border border-amber-600/30 mt-8">
                 <h4 class="text-lg font-bold text-amber-400 mb-4 flex items-center justify-between">
-                  <span><?= __('gameHelp.money.physicalTreasure.property', '📋 Système de Propriété') ?></span>
+                  <span><?= __('money.physicalTreasure.property', '📋 Système de Propriété') ?></span>
                   <button onclick="downloadMoneySheet()" class="text-xs bg-amber-600 hover:bg-amber-700 px-3 py-1 rounded-full transition-colors">
-                    <?= __('gameHelp.money.download.button', '📥 Télécharger') ?>
+                    <?= __('money.download.button', '📥 Télécharger') ?>
                   </button>
                 </h4>
                 <p class="text-sm leading-relaxed">
-                  <?= __('gameHelp.money.physicalTreasure.sheetInstructions', 'Utilisez notre <strong>fiche de monnaie</strong> pour répertorier vos trésors. Inscrivez votre nom, comptez vos pièces, signez et remettez au MJ. En fin de campagne, récupérez facilement votre investissement !') ?>
+                  <?= __('money.physicalTreasure.sheetInstructions', 'Utilisez notre <strong>fiche de monnaie</strong> pour répertorier vos trésors. Inscrivez votre nom, comptez vos pièces, signez et remettez au MJ. En fin de campagne, récupérez facilement votre investissement !') ?>
                 </p>
               </div>
             </div>
@@ -1879,32 +1879,32 @@ echo $snipcartInit;
 
       <!-- ===== PIÈCES PHYSIQUES GEEK & DRAGON ===== -->
       <div class="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 rounded-xl p-8 border border-purple-700/50">
-        <h3 class="text-3xl font-bold mb-8 text-center text-purple-400"><?= __('gameHelp.money.physicalCoins.title', '🪙 Pièces Physiques Geek & Dragon') ?></h3>
+        <h3 class="text-3xl font-bold mb-8 text-center text-purple-400"><?= __('money.physicalCoins.title', '🪙 Pièces Physiques Geek & Dragon') ?></h3>
         
         <div class="grid md:grid-cols-2 gap-8">
           
           <!-- Description -->
           <div class="space-y-6">
             <div>
-              <h4 class="text-xl font-bold mb-4 text-purple-400"><?= __('gameHelp.money.physicalCoins.authentic.title', '✨ Des Pièces Authentiques') ?></h4>
+              <h4 class="text-xl font-bold mb-4 text-purple-400"><?= __('money.physicalCoins.authentic.title', '✨ Des Pièces Authentiques') ?></h4>
               <p class="text-gray-300 mb-4">
                 <?= __('money.converter.coinDescription.faithfulReproduction', 'Nos pièces métalliques reproduisent fidèlement le système monétaire de D&D. Chaque type de pièce a son propre design et sa finition unique.') ?>
               </p>
               <ul class="text-gray-300 space-y-2">
-                <li><?= __('gameHelp.money.physicalCoins.authentic.feature1', '• <strong>Métal véritable</strong> avec finitions spécifiques') ?></li>
-                <li><?= __('gameHelp.money.physicalCoins.authentic.feature2', '• <strong>Gravures détaillées</strong> inspirées de l\'univers D&D') ?></li>
-                <li><?= __('gameHelp.money.physicalCoins.authentic.feature3', '• <strong>Poids authentique</strong> pour une expérience immersive') ?></li>
-                <li><?= __('gameHelp.money.physicalCoins.authentic.feature4', '• <strong>Sets complets</strong> ou pièces individuelles') ?></li>
+                <li><?= __('money.physicalCoins.authentic.feature1', '• <strong>Métal véritable</strong> avec finitions spécifiques') ?></li>
+                <li><?= __('money.physicalCoins.authentic.feature2', '• <strong>Gravures détaillées</strong> inspirées de l\'univers D&D') ?></li>
+                <li><?= __('money.physicalCoins.authentic.feature3', '• <strong>Poids authentique</strong> pour une expérience immersive') ?></li>
+                <li><?= __('money.physicalCoins.authentic.feature4', '• <strong>Sets complets</strong> ou pièces individuelles') ?></li>
               </ul>
             </div>
             
             <div>
-              <h4 class="text-xl font-bold mb-4 text-purple-400"><?= __('gameHelp.money.physicalCoins.gameUse.title', '🎯 Utilisation en Jeu') ?></h4>
+              <h4 class="text-xl font-bold mb-4 text-purple-400"><?= __('money.physicalCoins.gameUse.title', '🎯 Utilisation en Jeu') ?></h4>
               <ul class="text-gray-300 space-y-2">
-                <li><?= __('gameHelp.money.physicalCoins.gameUse.feature2', '• <strong>Immersion totale</strong> lors des transactions') ?></li>
-                <li><?= __('gameHelp.money.physicalCoins.uses.feature5', '• <strong>Gestion tactile</strong> de votre trésor') ?></li>
-                <li><?= __('gameHelp.money.physicalCoins.gameUse.feature1', '• <strong>Récompenses physiques</strong> pour les joueurs') ?></li>
-                <li><?= __('gameHelp.money.physicalCoins.gameUse.feature3', '• <strong>Ambiance médiévale-fantastique</strong> renforcée') ?></li>
+                <li><?= __('money.physicalCoins.gameUse.feature2', '• <strong>Immersion totale</strong> lors des transactions') ?></li>
+                <li><?= __('money.physicalCoins.uses.feature5', '• <strong>Gestion tactile</strong> de votre trésor') ?></li>
+                <li><?= __('money.physicalCoins.gameUse.feature1', '• <strong>Récompenses physiques</strong> pour les joueurs') ?></li>
+                <li><?= __('money.physicalCoins.gameUse.feature3', '• <strong>Ambiance médiévale-fantastique</strong> renforcée') ?></li>
               </ul>
             </div>
           </div>
@@ -1912,9 +1912,9 @@ echo $snipcartInit;
           <!-- Call to Action -->
           <div class="flex flex-col justify-center">
             <div class="bg-gradient-to-r from-yellow-900/30 to-amber-900/30 rounded-lg p-6 border border-yellow-600/50 text-center">
-              <h4 class="text-xl font-bold mb-4 text-yellow-400"><?= __('gameHelp.money.physicalCoins.order.title', '💰 Commandez vos Pièces') ?></h4>
+              <h4 class="text-xl font-bold mb-4 text-yellow-400"><?= __('money.physicalCoins.order.title', '💰 Commandez vos Pièces') ?></h4>
               <p class="text-gray-300 mb-6">
-                <?= __('gameHelp.money.physicalCoins.order.description', 'Découvrez notre collection complète de pièces métalliques et donnez vie à l\'économie de vos parties !') ?>
+                <?= __('money.physicalCoins.order.description', 'Découvrez notre collection complète de pièces métalliques et donnez vie à l\'économie de vos parties !') ?>
               </p>
               <div class="space-y-4">
                 <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-primary w-full">
@@ -1932,7 +1932,7 @@ echo $snipcartInit;
       <!-- Bouton de retour au hero -->
       <div class="text-center mt-16">
         <a href="#main" class="btn btn-outline">
-          <?= __('gameHelp.money.backToMain', '⬆️ Retour aux guides principaux') ?>
+          <?= __('money.backToMain', '⬆️ Retour aux guides principaux') ?>
         </a>
       </div>
 
@@ -2169,25 +2169,25 @@ function downloadMoneySheet() {
         <div class="bg-gray-800 rounded-xl p-6 max-w-md w-full mx-4 border border-amber-600/30">
             <div class="text-center mb-6">
                 <div class="text-4xl mb-3">📥</div>
-                <h3 class="text-xl font-bold text-amber-400 mb-2"><?= __('gameHelp.money.download.title', 'Télécharger la Fiche de Monnaie') ?></h3>
+                <h3 class="text-xl font-bold text-amber-400 mb-2"><?= __('money.download.title', 'Télécharger la Fiche de Monnaie') ?></h3>
                 <p class="text-gray-300 text-sm">
-                    <?= __('gameHelp.money.download.description', 'Téléchargez l\'image de la fiche de monnaie pour l\'imprimer chez vous') ?>
+                    <?= __('money.download.description', 'Téléchargez l\'image de la fiche de monnaie pour l\'imprimer chez vous') ?>
                 </p>
             </div>
             
             <div class="bg-amber-900/20 p-4 rounded-lg border border-amber-600/30 mb-4">
-                <h4 class="font-bold text-amber-400 mb-2"><?= __('gameHelp.money.download.printTip', '💡 Conseil d\'impression :') ?></h4>
+                <h4 class="font-bold text-amber-400 mb-2"><?= __('money.download.printTip', '💡 Conseil d\'impression :') ?></h4>
                 <p class="text-sm text-gray-300">
-                    <?= __('gameHelp.money.download.instructions', 'Imprimez sur du papier cartonné (200-250g) pour une meilleure durabilité. Vous pouvez plastifier la fiche pour une utilisation répétée.') ?>
+                    <?= __('money.download.instructions', 'Imprimez sur du papier cartonné (200-250g) pour une meilleure durabilité. Vous pouvez plastifier la fiche pour une utilisation répétée.') ?>
                 </p>
             </div>
             
             <div class="flex gap-3">
                 <button onclick="confirmDownload()" class="flex-1 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-                    <?= __('gameHelp.money.download.confirmButton', '📥 Télécharger') ?>
+                    <?= __('money.download.confirmButton', '📥 Télécharger') ?>
                 </button>
                 <button onclick="closeDownloadPopup()" class="flex-1 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-                    <?= __('gameHelp.money.download.cancelButton', 'Annuler') ?>
+                    <?= __('money.download.cancelButton', 'Annuler') ?>
                 </button>
             </div>
         </div>
@@ -2239,8 +2239,8 @@ document.addEventListener('DOMContentLoaded', function() {
       if (lotsData.length === 0) {
         const lang = document.documentElement.lang || 'fr';
         const message = lang === 'en' ? 
-          '<?= __('gameHelp.money.converter.lotsRecommendations.noLotsMessage', 'No lots to add to cart.') ?>' :
-          '<?= __('gameHelp.money.converter.lotsRecommendations.noLotsMessage', 'Aucun lot à ajouter au panier.') ?>';
+          '<?= __('money.converter.lotsRecommendations.noLotsMessage', 'Aucun lot à ajouter au panier.') ?>' :
+          '<?= __('money.converter.lotsRecommendations.noLotsMessage', 'Aucun lot à ajouter au panier.') ?>';
         alert(message);
         return;
       }
@@ -2291,7 +2291,7 @@ document.addEventListener('DOMContentLoaded', function() {
           product: {
             id: lot.productId,
             name: product?.name || lot.productId, // Utiliser le nom de base du produit
-            summary: product?.summary || `<?= __('gameHelp.money.converter.productSummary', 'Lot de pièces D&D') ?> - ${product?.name || lot.productId}`,
+            summary: product?.summary || `<?= __('money.converter.productSummary', 'Lot de pièces D&D') ?> - ${product?.name || lot.productId}`,
             price: lot.price,
             url: lot.url || `product.php?id=${encodeURIComponent(lot.productId)}`
           },
@@ -2373,14 +2373,14 @@ document.addEventListener('DOMContentLoaded', function() {
   if (runBasicTestsBtn) {
     runBasicTestsBtn.addEventListener('click', function() {
       if (window.CurrencyConverterTests) {
-        testResults.innerHTML = '<div class="text-yellow-400"><?= __('gameHelp.money.tests.runningBasic', 'Exécution des tests de base...') ?></div>';
+        testResults.innerHTML = '<div class="text-yellow-400"><?= __('money.tests.runningBasic', 'Exécution des tests de base...') ?></div>';
         
         setTimeout(() => {
           const results = window.CurrencyConverterTests.runBasicTests();
-          displayTestResults(results, '<?= __('gameHelp.money.tests.basic', 'Tests de Base') ?>');
+          displayTestResults(results, '<?= __('money.tests.basic', 'Tests de Base') ?>');
         }, 100);
       } else {
-        testResults.innerHTML = '<div class="text-red-400"><?= __('gameHelp.money.tests.notAvailable', '❌ CurrencyConverterTests non disponible') ?></div>';
+        testResults.innerHTML = '<div class="text-red-400"><?= __('money.tests.notAvailable', '❌ CurrencyConverterTests non disponible') ?></div>';
       }
     });
   }
@@ -2388,27 +2388,27 @@ document.addEventListener('DOMContentLoaded', function() {
   if (runAdvancedTestsBtn) {
     runAdvancedTestsBtn.addEventListener('click', function() {
       if (window.CurrencyConverterTests) {
-        testResults.innerHTML = '<div class="text-yellow-400"><?= __('gameHelp.money.tests.runningAdvanced', 'Exécution des tests avancés...') ?></div>';
+        testResults.innerHTML = '<div class="text-yellow-400"><?= __('money.tests.runningAdvanced', 'Exécution des tests avancés...') ?></div>';
         
         setTimeout(() => {
           const results = window.CurrencyConverterTests.runAdvancedTests();
-          displayTestResults(results, '<?= __('gameHelp.money.tests.advanced', 'Tests Avancés') ?>');
+          displayTestResults(results, '<?= __('money.tests.advanced', 'Tests Avancés') ?>');
         }, 100);
       } else {
-        testResults.innerHTML = '<div class="text-red-400"><?= __('gameHelp.money.tests.notAvailable', '❌ CurrencyConverterTests non disponible') ?></div>';
+        testResults.innerHTML = '<div class="text-red-400"><?= __('money.tests.notAvailable', '❌ CurrencyConverterTests non disponible') ?></div>';
       }
     });
   }
 
   if (clearResultsBtn) {
     clearResultsBtn.addEventListener('click', function() {
-      testResults.innerHTML = '<div class="text-gray-400"><?= __('gameHelp.money.tests.noTests', 'Aucun test exécuté...') ?></div>';
+      testResults.innerHTML = '<div class="text-gray-400"><?= __('money.tests.noTests', 'Aucun test exécuté...') ?></div>';
     });
   }
 
   function displayTestResults(results, testType) {
     if (!results) {
-      testResults.innerHTML = '<div class="text-red-400"><?= __('gameHelp.money.tests.error', '❌ Erreur lors de l\'exécution des tests') ?></div>';
+      testResults.innerHTML = '<div class="text-red-400"><?= __('money.tests.error', '❌ Erreur lors de l\'exécution des tests') ?></div>';
       return;
     }
 

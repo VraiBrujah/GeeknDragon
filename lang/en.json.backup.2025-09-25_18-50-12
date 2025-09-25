@@ -276,9 +276,7 @@
             "triptychDescription": "A triptych is a foldable cardboard character sheet with 3 panels, designed to replace tedious manual searches.",
             "threeRequired": "Each D&D character requires 3 different triptychs that complement each other perfectly.",
             "detailsText": "Discover each type of triptych in detail. Click on images to see the back of each sheet.",
-            "clickToFlip": "Click to flip the sheet",
-            "classTriptych": "Class Triptych",
-            "backgroundTriptych": "Background Triptych"
+            "clickToFlip": "Click to flip the sheet"
         },
         "navigation": {
             "quickNav": "Quick Navigation",
@@ -674,6 +672,149 @@
                 }
             },
             "backToMain": "⬆️ Back to main guides"
+        },
+        "money": {
+            "title": "💰 D&D Currency Guide",
+            "description": "Discover the D&D monetary system, our Geek & Dragon physical coins, and use our converter to easily manage your adventurer finances!",
+            "coinTypes": {
+                "title": "💎 Coin Types",
+                "platinum": {
+                    "name": "    Platinum Coin (pp)",
+                    "description": "    Most valuable • 1 pp = 10 gp"
+                },
+                "gold": {
+                    "name": "    Gold Coin (gp)",
+                    "description": "    Reference currency • 1 gp = 10 sp"
+                },
+                "silver": {
+                    "name": "    Silver Coin (sp)",
+                    "description": "    Common currency • 1 sp = 10 ep"
+                },
+                "electrum": {
+                    "name": "    Electrum Coin (ep)",
+                    "description": "    Gold-silver alloy • 1 ep = 5 cp"
+                },
+                "copper": {
+                    "name": "    Copper Coin (cp)",
+                    "description": "    Small change • Most common"
+                }
+            },
+            "conversionTable": {
+                "title": "🔄 Conversion Table",
+                "headers": {
+                    "coin": "Coin"
+                },
+                "rows": {
+                    "platinum": "Platinum (pp)",
+                    "gold": "Gold (gp)",
+                    "silver": "Silver (sp)",
+                    "electrum": "Electrum (ep)",
+                    "copper": "Copper (cp)"
+                }
+            },
+            "converter": {
+                "recommendations": {
+                    "title": "✨ Optimal recommendations"
+                },
+                "lotsRecommendations": {
+                    "description": "Here are the minimal recommended lots to cover exactly your physical coin needs:",
+                    "addAllButton": "Add all lots to cart",
+                    "optimizationNote": "These recommendations optimize the number of lots needed for the most advantageous price.",
+                    "noLotsMessage": "No lots to add to cart."
+                },
+                "abbreviations": {
+                    "copper": "cp",
+                    "silver": "sp",
+                    "electrum": "ep",
+                    "gold": "gp",
+                    "platinum": "pp"
+                },
+                "debugSection": {
+                    "title": "Debug section to validate metaheuristic algorithms for conversion and lot recommendations."
+                },
+                "labels": {
+                    "copper": "🪙 Copper",
+                    "silver": "🥈 Silver",
+                    "electrum": "⚡ Electrum",
+                    "gold": "🥇 Gold",
+                    "platinum": "💎 Platinum"
+                },
+                "multiplierTable": {
+                    "copper": "🪙 Copper",
+                    "silver": "🥈 Silver",
+                    "electrum": "⚡ Electrum",
+                    "gold": "🥇 Gold",
+                    "platinum": "💎 Platinum"
+                },
+                "lotsRecommendedTitle": "🛍️ Recommended coin lots",
+                "productSummary": "D&D coin lot",
+                "coinDescription": {
+                    "faithfulReproduction": "Our metal coins faithfully reproduce the D&D monetary system. Each type of coin has its own design and unique finish."
+                }
+            },
+            "physicalTreasure": {
+                "title": "🏆 Why Physical Treasure?",
+                "paragraph1": "In Dungeons & Dragons, the <strong class=\"text-amber-400\">two main objectives</strong> are experience and treasure. Having to write treasure on paper then erase it doesn't do it justice. Treasure deserves to be <strong class=\"text-yellow-400\">tangible, weighed, handled</strong>.",
+                "paragraph2": "Our physical coins transform each reward into a memorable moment. When the DM makes <em class=\"text-amber-300\">gold coins tinkle</em> in their hand before distributing them, the entire immersion intensifies.",
+                "property": "📋 Property System",
+                "sheetInstructions": "Use our <strong>money sheet</strong> to catalog your treasures. Write your name, count your coins, sign and give to the DM. At the end of the campaign, easily recover your investment!"
+            },
+            "physicalCoins": {
+                "title": "🪙 Geek & Dragon Physical Coins",
+                "authentic": {
+                    "title": "✨ Authentic Coins",
+                    "feature1": "• <strong>Real metal</strong> with specific finishes",
+                    "feature2": "• <strong>Detailed engravings</strong> inspired by the D&D universe",
+                    "feature3": "• <strong>Authentic weight</strong> for immersive experience",
+                    "feature4": "• <strong>Complete sets</strong> or individual coins"
+                },
+                "uses": {
+                    "feature5": "• <strong>Tactile management</strong> of your treasure"
+                },
+                "gameUse": {
+                    "title": "🎯 In-Game Use",
+                    "feature1": "• <strong>Physical rewards</strong> for players",
+                    "feature2": "• <strong>Total immersion</strong> during transactions",
+                    "feature3": "• <strong>Enhanced medieval-fantasy</strong> atmosphere"
+                },
+                "order": {
+                    "title": "💰 Order your Coins",
+                    "description": "Discover our complete collection of metal coins and bring your game economy to life!",
+                    "shopButton": "🛒 See Coins in Shop",
+                    "treasuryButton": "⭐ Complete Treasury Set"
+                }
+            },
+            "tests": {
+                "title": "🔬 Conversion System Tests",
+                "results": "Test Results",
+                "runningBasic": "Running basic tests...",
+                "runningAdvanced": "Running advanced tests...",
+                "noTests": "No tests executed...",
+                "error": "❌ Error during test execution",
+                "notAvailable": "❌ CurrencyConverterTests not available",
+                "basic": "Basic Tests",
+                "advanced": "Advanced Tests",
+                "basicButton": "🧪 Basic Tests",
+                "advancedButton": "🔬 Advanced Tests",
+                "successText": "tests passed",
+                "errorLabel": "Error",
+                "performance": "Performance",
+                "totalTime": "Total time"
+            },
+            "download": {
+                "title": "Download the Money Sheet",
+                "subtitle": "Printable sheet",
+                "button": "📥 Download",
+                "buttonShort": "📥 Download",
+                "downloadSheet": "📥 Download sheet",
+                "instruction": "Click on the image to download the printable sheet",
+                "printTip": "💡 Printing tip:",
+                "description": "Download the money sheet image to print it at home",
+                "instructions": "Print on cardstock paper (200-250g) for better durability. You can laminate the sheet for repeated use.",
+                "confirmButton": "📥 Download",
+                "cancelButton": "Cancel"
+            },
+            "backToMain": "⬆️ Back to main guides"
         }
     },
     "callToAction": {
@@ -710,149 +851,6 @@
             "protection": "<strong>Protection:</strong> Use transparent card sleeves",
             "notes": "<strong>Notes:</strong> Annotate temporary modifications in pencil<br><em>Pro tip: Use Staedtler 8B or 9B pencils for optimal marking</em>"
         }
-    },
-    "money": {
-        "title": "💰 D&D Currency Guide",
-        "description": "Discover the D&D monetary system, our Geek & Dragon physical coins, and use our converter to easily manage your adventurer finances!",
-        "coinTypes": {
-            "title": "💎 Coin Types",
-            "platinum": {
-                "name": "    Platinum Coin (pp)",
-                "description": "    Most valuable • 1 pp = 10 gp"
-            },
-            "gold": {
-                "name": "    Gold Coin (gp)",
-                "description": "    Reference currency • 1 gp = 10 sp"
-            },
-            "silver": {
-                "name": "    Silver Coin (sp)",
-                "description": "    Common currency • 1 sp = 10 ep"
-            },
-            "electrum": {
-                "name": "    Electrum Coin (ep)",
-                "description": "    Gold-silver alloy • 1 ep = 5 cp"
-            },
-            "copper": {
-                "name": "    Copper Coin (cp)",
-                "description": "    Small change • Most common"
-            }
-        },
-        "conversionTable": {
-            "title": "🔄 Conversion Table",
-            "headers": {
-                "coin": "Coin"
-            },
-            "rows": {
-                "platinum": "Platinum (pp)",
-                "gold": "Gold (gp)",
-                "silver": "Silver (sp)",
-                "electrum": "Electrum (ep)",
-                "copper": "Copper (cp)"
-            }
-        },
-        "converter": {
-            "recommendations": {
-                "title": "✨ Optimal recommendations"
-            },
-            "lotsRecommendations": {
-                "description": "Here are the minimal recommended lots to cover exactly your physical coin needs:",
-                "addAllButton": "Add all lots to cart",
-                "optimizationNote": "These recommendations optimize the number of lots needed for the most advantageous price.",
-                "noLotsMessage": "No lots to add to cart."
-            },
-            "abbreviations": {
-                "copper": "cp",
-                "silver": "sp",
-                "electrum": "ep",
-                "gold": "gp",
-                "platinum": "pp"
-            },
-            "debugSection": {
-                "title": "Debug section to validate metaheuristic algorithms for conversion and lot recommendations."
-            },
-            "labels": {
-                "copper": "🪙 Copper",
-                "silver": "🥈 Silver",
-                "electrum": "⚡ Electrum",
-                "gold": "🥇 Gold",
-                "platinum": "💎 Platinum"
-            },
-            "multiplierTable": {
-                "copper": "🪙 Copper",
-                "silver": "🥈 Silver",
-                "electrum": "⚡ Electrum",
-                "gold": "🥇 Gold",
-                "platinum": "💎 Platinum"
-            },
-            "lotsRecommendedTitle": "🛍️ Recommended coin lots",
-            "productSummary": "D&D coin lot",
-            "coinDescription": {
-                "faithfulReproduction": "Our metal coins faithfully reproduce the D&D monetary system. Each type of coin has its own design and unique finish."
-            }
-        },
-        "physicalTreasure": {
-            "title": "🏆 Why Physical Treasure?",
-            "paragraph1": "In Dungeons & Dragons, the <strong class=\"text-amber-400\">two main objectives</strong> are experience and treasure. Having to write treasure on paper then erase it doesn't do it justice. Treasure deserves to be <strong class=\"text-yellow-400\">tangible, weighed, handled</strong>.",
-            "paragraph2": "Our physical coins transform each reward into a memorable moment. When the DM makes <em class=\"text-amber-300\">gold coins tinkle</em> in their hand before distributing them, the entire immersion intensifies.",
-            "property": "📋 Property System",
-            "sheetInstructions": "Use our <strong>money sheet</strong> to catalog your treasures. Write your name, count your coins, sign and give to the DM. At the end of the campaign, easily recover your investment!"
-        },
-        "physicalCoins": {
-            "title": "🪙 Geek & Dragon Physical Coins",
-            "authentic": {
-                "title": "✨ Authentic Coins",
-                "feature1": "• <strong>Real metal</strong> with specific finishes",
-                "feature2": "• <strong>Detailed engravings</strong> inspired by the D&D universe",
-                "feature3": "• <strong>Authentic weight</strong> for immersive experience",
-                "feature4": "• <strong>Complete sets</strong> or individual coins"
-            },
-            "uses": {
-                "feature5": "• <strong>Tactile management</strong> of your treasure"
-            },
-            "gameUse": {
-                "title": "🎯 In-Game Use",
-                "feature1": "• <strong>Physical rewards</strong> for players",
-                "feature2": "• <strong>Total immersion</strong> during transactions",
-                "feature3": "• <strong>Enhanced medieval-fantasy</strong> atmosphere"
-            },
-            "order": {
-                "title": "💰 Order your Coins",
-                "description": "Discover our complete collection of metal coins and bring your game economy to life!",
-                "shopButton": "🛒 See Coins in Shop",
-                "treasuryButton": "⭐ Complete Treasury Set"
-            }
-        },
-        "tests": {
-            "title": "🔬 Conversion System Tests",
-            "results": "Test Results",
-            "runningBasic": "Running basic tests...",
-            "runningAdvanced": "Running advanced tests...",
-            "noTests": "No tests executed...",
-            "error": "❌ Error during test execution",
-            "notAvailable": "❌ CurrencyConverterTests not available",
-            "basic": "Basic Tests",
-            "advanced": "Advanced Tests",
-            "basicButton": "🧪 Basic Tests",
-            "advancedButton": "🔬 Advanced Tests",
-            "successText": "tests passed",
-            "errorLabel": "Error",
-            "performance": "Performance",
-            "totalTime": "Total time"
-        },
-        "download": {
-            "title": "Download the Money Sheet",
-            "subtitle": "Printable sheet",
-            "button": "📥 Download",
-            "buttonShort": "📥 Download",
-            "downloadSheet": "📥 Download sheet",
-            "instruction": "Click on the image to download the printable sheet",
-            "printTip": "💡 Printing tip:",
-            "description": "Download the money sheet image to print it at home",
-            "instructions": "Print on cardstock paper (200-250g) for better durability. You can laminate the sheet for repeated use.",
-            "confirmButton": "📥 Download",
-            "cancelButton": "Cancel"
-        },
-        "backToMain": "⬆️ Back to main guides"
     },
     "backToTop": "⬆️ Back to main guides",
     "products": {
@@ -976,71 +974,6 @@
             "name": "Background Triptychs",
             "description": "### Complete collection of background triptychs\r\n\r\nEnrich your characters with all available D&D 5e backgrounds. Each triptych presents the origin, skills, equipment, and contacts of the background.\r\n\r\n**Contents:**\r\n- Triptychs of all official backgrounds\r\n- Detailed skills and equipment\r\n- Contacts and social relations\r\n\r\n*Perfect for adding depth to your characters!*",
             "summary": "Collection of triptychs featuring all backgrounds with their skills and equipment."
-        },
-        "test-produit-1": {
-            "nom": "Magic Item",
-            "details": "Detailed English description",
-            "type": [
-                "Artifact",
-                "Relic"
-            ],
-            "couleurs": [
-                "Red",
-                "Blue",
-                "Green"
-            ]
-        },
-        "test-produit-2": {
-            "nom": "Ancient Grimoire",
-            "details": "Ancient spellbook",
-            "type": [
-                "Manual",
-                "Guide"
-            ],
-            "couleurs": [
-                "Black",
-                "Gold"
-            ]
-        },
-        "test-produit-3": {
-            "nom": "Enchanted Sword",
-            "details": "Blade forged by elves",
-            "type": [
-                "Sword",
-                "Blade"
-            ],
-            "couleurs": [
-                "Silver",
-                "Shining"
-            ]
-        },
-        "livre-1": {
-            "titre": "Complete Guide",
-            "resume": "Essential book for beginners",
-            "specifications": [
-                "Hardcover",
-                "300 pages",
-                "A5 format"
-            ],
-            "tags": [
-                "Fantasy",
-                "Adventure",
-                "Guide"
-            ]
-        },
-        "accessoire-2": {
-            "titre": "Enchanted Dice",
-            "resume": "Magical dice set",
-            "specifications": [
-                "Metal",
-                "Runic engravings",
-                "Set of 7"
-            ],
-            "tags": [
-                "Precision",
-                "Magic",
-                "Mystical"
-            ]
         }
     }
 }

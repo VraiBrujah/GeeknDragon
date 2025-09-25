@@ -153,10 +153,7 @@
         "description_en": "### Five metals, one multiplier\n\n**5 coins of different metals** applying the same chosen multiplier: one of each metal (copper, silver, electrum, gold, platinum) with uniform finish.\n\n**Contents:**\n- 1 copper coin\n- 1 silver coin\n- 1 electrum coin\n- 1 gold coin\n- 1 platinum coin\n\n*Discover the diversity of metals with consistent value!*",
         "summary": "Collection de cinq pièces avec un de chaque métal et multiplicateur uniforme.",
         "summary_fr": "Collection de cinq pièces avec un de chaque métal et multiplicateur uniforme.",
-        "summary_en": "Collection of five coins with one of each metal and uniform multiplier.",
-        "metals": "",
-        "metals_fr": "",
-        "metals_en": ""
+        "summary_en": "Collection of five coins with one of each metal and uniform multiplier."
     },
     "coin-septuple-free": {
         "price": 50,
@@ -257,10 +254,7 @@
         "description_en": "### Immersive starter hoard\n\n**10 metal coins** : **2 of each metal** (copper, silver, electrum, gold, platinum). Choose **one multiplier** for the whole set.\n\n**Contents:**\n- 2 copper coins\n- 2 silver coins\n- 2 electrum coins\n- 2 gold coins\n- 2 platinum coins\n- Single multiplier choice: ×1, ×10, ×100, ×1000, ×10000\n- Finish: unit (shiny) or engraved (slightly matte)\n\n*Use multipliers to speed up counting without breaking immersion.*",
         "summary": "Ensemble de 10 pièces métalliques assorties avec multiplicateur unique pour accélérer les comptes.",
         "summary_fr": "Ensemble de 10 pièces métalliques assorties avec multiplicateur unique pour accélérer les comptes.",
-        "summary_en": "Set of 10 assorted metal coins with a single multiplier to speed up tallying.",
-        "metals": "",
-        "metals_fr": "",
-        "metals_en": ""
+        "summary_en": "Set of 10 assorted metal coins with a single multiplier to speed up tallying."
     },
     "coin-five-realms-complete": {
         "price": 145,
@@ -326,10 +320,7 @@
         "description_en": "### 25 coins, no duplicates\n\n**5 metals × 5 multipliers** = **25 unique designs**. Each metal comes in unit (shiny) and with engraved multipliers (matte finish).\n\n**Contents:**\n- 5 copper coins: ×1, ×10, ×100, ×1000, ×10000\n- 5 silver coins: ×1, ×10, ×100, ×1000, ×10000\n- 5 electrum coins: ×1, ×10, ×100, ×1000, ×10000\n- 5 gold coins: ×1, ×10, ×100, ×1000, ×10000\n- 5 platinum coins: ×1, ×10, ×100, ×1000, ×10000\n\n**Everything included** — no selection needed.\n*Use multipliers to speed up counting without breaking immersion.*",
         "summary": "Collection de 25 pièces uniques couvrant les cinq métaux et tous les multiplicateurs pour la table.",
         "summary_fr": "Collection de 25 pièces uniques couvrant les cinq métaux et tous les multiplicateurs pour la table.",
-        "summary_en": "Collection of 25 unique coins covering five metals and every multiplier for the table.",
-        "metals": "",
-        "metals_fr": "",
-        "metals_en": ""
+        "summary_en": "Collection of 25 unique coins covering five metals and every multiplier for the table."
     },
     "coin-merchant-essence-double": {
         "price": 275,
@@ -395,10 +386,7 @@
         "description_en": "### 50 coins, double the variety\n\n**2 copies** of each of the **25 designs** from the *Currency of the Five Realms* — total **50 coins**.\n\n**Contents:**\n- 10 copper coins: 2×(×1, ×10, ×100, ×1000, ×10000)\n- 10 silver coins: 2×(×1, ×10, ×100, ×1000, ×10000)\n- 10 electrum coins: 2×(×1, ×10, ×100, ×1000, ×10000)\n- 10 gold coins: 2×(×1, ×10, ×100, ×1000, ×10000)\n- 10 platinum coins: 2×(×1, ×10, ×100, ×1000, ×10000)\n- Finish: unit (shiny) and engraved (matte)\n\n**Everything included** — no selection needed.\n*Use multipliers to speed up counting without breaking immersion.*",
         "summary": "Double exemplaire de chaque modèle pour 50 pièces prêtes à l'emploi avec tous les multiplicateurs.",
         "summary_fr": "Double exemplaire de chaque modèle pour 50 pièces prêtes à l'emploi avec tous les multiplicateurs.",
-        "summary_en": "Two copies of every design for 50 ready-to-play coins including every multiplier.",
-        "metals": "",
-        "metals_fr": "",
-        "metals_en": ""
+        "summary_en": "Two copies of every design for 50 ready-to-play coins including every multiplier."
     },
     "coin-lord-treasury-uniform": {
         "price": 275,
@@ -440,10 +428,7 @@
         "description_en": "### 50 coins for opulence\n\n**10 coins of each metal** (copper, silver, electrum, gold, platinum) using the **same multiplier** selected at checkout.\n\n**Contents:**\n- 10 copper coins (same multiplier)\n- 10 silver coins (same multiplier)\n- 10 electrum coins (same multiplier)\n- 10 gold coins (same multiplier)\n- 10 platinum coins (same multiplier)\n- Multiplier choice: ×1, ×10, ×100, ×1000, ×10000\n- Finish: unit (shiny) or engraved (matte)\n\n*Use multipliers to speed up counting without breaking immersion.*",
         "summary": "Sélection de 50 pièces d'un même multiplicateur pour assurer une trésorerie abondante et cohérente.",
         "summary_fr": "Sélection de 50 pièces d'un même multiplicateur pour assurer une trésorerie abondante et cohérente.",
-        "summary_en": "Selection of 50 coins sharing one multiplier to deliver a plentiful, consistent treasury.",
-        "metals": "",
-        "metals_fr": "",
-        "metals_en": ""
+        "summary_en": "Selection of 50 coins sharing one multiplier to deliver a plentiful, consistent treasury."
     },
     "cards-random-discovery-10": {
         "price": 10,
@@ -468,10 +453,7 @@
         "description_en": "### Random discovery - 10 cards\n\nMystery selection of **10 equipment cards** drawn from our complete catalog. Perfect for discovering new items or enriching your collection with surprises!\n\n**Contents:**\n- 10 random equipment cards\n- Possible mix: weapons, armor, tools, special items\n- High-quality illustrated cards\n- Compatible with D&D 5e and similar systems\n\n*Adventure begins with the surprise of the unknown!*",
         "summary": "Sélection mystère de 10 cartes d'équipement pour découvrir de nouveaux objets.",
         "summary_fr": "Sélection mystère de 10 cartes d'équipement pour découvrir de nouveaux objets.",
-        "summary_en": "Mystery selection of 10 equipment cards to discover new items.",
-        "metals": "",
-        "metals_fr": "",
-        "metals_en": ""
+        "summary_en": "Mystery selection of 10 equipment cards to discover new items."
     },
     "cards-weapons-armor-60": {
         "price": 21,
@@ -497,10 +479,7 @@
         "description_en": "### Complete combat arsenal - 60 cards\\n\\nEssential collection of **60 cards** to arm your fighters: complete arsenal of melee and ranged weapons, light to heavy protection, and shields.\\n\\n**Contents:**\\n- **44 weapons** : melee, ranged, exotic, modern and futuristic firearms\\n- **14 armor** : light, medium, heavy\\n- **2 shields** : metal and wood\\n\\n*Everything needed to outfit warriors, adventurers and soldiers!*",
         "summary": "Collection de 60 cartes d'armes et armures pour équiper combattants et aventuriers.",
         "summary_fr": "Collection de 60 cartes d'armes et armures pour équiper combattants et aventuriers.",
-        "summary_en": "Collection of 60 weapon and armor cards to equip fighters and adventurers.",
-        "metals": "",
-        "metals_fr": "",
-        "metals_en": ""
+        "summary_en": "Collection of 60 weapon and armor cards to equip fighters and adventurers."
     },
     "cards-adventure-packs-70": {
         "price": 25,
@@ -525,10 +504,7 @@
         "description_en": "### Equipment by background - 70 cards\\n\\nComplete collection of **70 cards** grouping all starting equipment according to D&D 5e backgrounds. Perfect for quickly creating characters or distributing thematic gear.\\n\\n**Contents:**\\n- **Artist's pack** : instruments and creative materials\\n- **Ecclesiastic's pack** : religious and sacred objects\\n- **Explorer's pack** : survival and navigation\\n- **Dungeoneering pack** : spelunking and dungeon gear\\n- **Scholar's pack** : books and study tools\\n- **Burglar's pack** : lockpicking and infiltration\\n- **Diplomat's pack** : negotiation and social relations\\n\\n*Instantly customize based on your heroes' origins!*",
         "summary": "Collection de 70 cartes d'équipement organisées par paquetages d'historiques D&D.",
         "summary_fr": "Collection de 70 cartes d'équipement organisées par paquetages d'historiques D&D.",
-        "summary_en": "Collection of 70 equipment cards organized by D&D background packs.",
-        "metals": "",
-        "metals_fr": "",
-        "metals_en": ""
+        "summary_en": "Collection of 70 equipment cards organized by D&D background packs."
     },
     "cards-explosives-tools-60": {
         "price": 22,
@@ -554,10 +530,7 @@
         "description_en": "### Specialized arsenal - 60 cards\\n\\nTechnical collection of **60 cards** for advanced campaigns: explosives, futuristic weapons and artisan tools.\\n\\n**Contents:**\\n- **21 explosives** : bombs, grenades, dynamite, modern and futuristic charges\\n- **37 tools** : crafting, alchemy, lockpicking, navigation\\n- **2 rule cards** : explosion and crafting mechanics\\n\\n*For adventurers who love creative solutions!*",
         "summary": "Collection de 60 cartes d'explosifs et outils spécialisés pour campagnes techniques.",
         "summary_fr": "Collection de 60 cartes d'explosifs et outils spécialisés pour campagnes techniques.",
-        "summary_en": "Collection of 60 explosive and specialized tool cards for technical campaigns.",
-        "metals": "",
-        "metals_fr": "",
-        "metals_en": ""
+        "summary_en": "Collection of 60 explosive and specialized tool cards for technical campaigns."
     },
     "cards-services-vehicles-85": {
         "price": 29,
@@ -583,10 +556,7 @@
         "description_en": "### Travel and logistics - 85 cards\\n\\nComplete collection of **85 cards** to organize travels and missions: inn services, transport, and all types of vehicles.\\n\\n**Contents:**\\n- **55 services** : inns, care, lifestyles, mercenaries, guides\\n- **27 vehicles** : mounts, land, sea, air\\n- **3 rule cards** : travel and logistics mechanics\\n\\n*Everything to travel and organize in campaigns!*",
         "summary": "Collection de 85 cartes de services et véhicules pour organiser voyages et missions.",
         "summary_fr": "Collection de 85 cartes de services et véhicules pour organiser voyages et missions.",
-        "summary_en": "Collection of 85 service and vehicle cards to organize travels and missions.",
-        "metals": "",
-        "metals_fr": "",
-        "metals_en": ""
+        "summary_en": "Collection of 85 service and vehicle cards to organize travels and missions."
     },
     "cards-loot-engineering-170": {
         "price": 54,
@@ -613,10 +583,7 @@
         "description_en": "### Loot • Trade Goods • Tools - 170 cards\\n\\nFor campaigns that push the envelope: varied treasures, commercial goods, and every crafter's staple.\\n\\n**Contents:**\\n- **104 loot items** : treasures, gems, artifacts, precious objects\\n- **27 trade goods** : commercial goods, raw materials\\n- **37 tools** : crafting, lockpicking, alchemy, navigation\\n- **2 rule cards** : trade and crafting mechanics\\n\\n*Add variety and tactical choices — from market bartering to treasure discoveries!*",
         "summary": "Collection de 170 cartes de butins, marchandises et outils pour enrichir vos campagnes.",
         "summary_fr": "Collection de 170 cartes de butins, marchandises et outils pour enrichir vos campagnes.",
-        "summary_en": "Collection of 170 loot, trade goods, and tool cards to enrich your campaigns.",
-        "metals": "",
-        "metals_fr": "",
-        "metals_en": ""
+        "summary_en": "Collection of 170 loot, trade goods, and tool cards to enrich your campaigns."
     },
     "cards-roads-services-165": {
         "price": 56,
@@ -644,10 +611,7 @@
         "description_en": "### Packs • Services • Vehicles • Poisons - 165 cards\\n\\nEverything to set your world in motion: ready your PCs, travel, bargain, and take risks with clean, table-friendly cards.\\n\\n**Contents:**\\n- **65 packs** : 7 types according to D&D backgrounds\\n- **55 services** : inns, care, lifestyles, mercenaries\\n- **27 vehicles** : mounts, land, sea, air\\n- **14 poisons** : dangerous and toxic substances\\n- **4 rule cards** : travel, services, and poison mechanics\\n\\n*Perfect for exploration-, travel- and intrigue-heavy campaigns!*",
         "summary": "Sélection complète de 165 cartes dédiées aux voyages, services, véhicules et poisons.",
         "summary_fr": "Sélection complète de 165 cartes dédiées aux voyages, services, véhicules et poisons.",
-        "summary_en": "Complete selection of 165 cards focused on travel, services, vehicles, and poisons.",
-        "metals": "",
-        "metals_fr": "",
-        "metals_en": ""
+        "summary_en": "Complete selection of 165 cards focused on travel, services, vehicles, and poisons."
     },
     "cards-adventurer-arsenal-190": {
         "price": 63,
@@ -675,10 +639,7 @@
         "description_en": "### Weapons • Armor • Equipment - 190 cards\\n\\nMassive, ready-to-play bundle to outfit an entire party: classic and exotic weapons, protection for every build, and all the adventuring essentials as illustrated cards.\\n\\n**Contents:**\\n- **44 weapons** : melee, ranged, exotic, modern firearms\\n- **14 armor** : light, medium, heavy, shields\\n- **127 equipment** : adventure tools, survival, crafting\\n- **5 rule cards** : master equipment and mechanics\\n\\n*Perfect at the table: draw, place, trade — no more digging through the rulebook!*",
         "summary": "Boîte massive de 190 cartes illustrées pour équiper immédiatement tout un groupe d'aventuriers.",
         "summary_fr": "Boîte massive de 190 cartes illustrées pour équiper immédiatement tout un groupe d'aventuriers.",
-        "summary_en": "Massive box of 190 illustrated cards to instantly outfit an entire party of adventurers.",
-        "metals": "",
-        "metals_fr": "",
-        "metals_en": ""
+        "summary_en": "Massive box of 190 illustrated cards to instantly outfit an entire party of adventurers."
     },
     "triptych-mystery-hero": {
         "price": 60,
@@ -703,10 +664,7 @@
         "description_en": "### Three triptychs, a plug-and-play hero\n\nDraw at random **1 Class**, **1 Species** and **1 Background** to forge a unique origin, then play right away with:\n\n**Included:**\n- 1 random Class triptych\n- 1 random Species triptych\n- 1 random Background triptych\n\n*No more digging through the rulebook.*",
         "summary": "Lot de triptyques aléatoires pour créer un héros complet avec équipement assorti et pièces de départ.",
         "summary_fr": "Lot de triptyques aléatoires pour créer un héros complet avec équipement assorti et pièces de départ.",
-        "summary_en": "Bundle of random triptychs to build a complete hero with matching gear and starting coins.",
-        "metals": "",
-        "metals_fr": "",
-        "metals_en": ""
+        "summary_en": "Bundle of random triptychs to build a complete hero with matching gear and starting coins."
     },
     "triptych-species-collection": {
         "price": 45,
@@ -768,10 +726,7 @@
         "description_en": "### Complete collection of species triptychs\n\nDiscover all playable D&D 5e species with detailed and illustrated triptychs. Each triptych presents the characteristics, special abilities, and cultural traits of the species.\n\n**Contents:**\n- Triptychs of all official species\n- Detailed characteristics\n- Illustrated special abilities\n\n*Perfect for creating varied characters or enriching your campaigns!*",
         "summary": "Collection de triptyques présentant toutes les espèces jouables avec leurs caractéristiques et capacités.",
         "summary_fr": "Collection de triptyques présentant toutes les espèces jouables avec leurs caractéristiques et capacités.",
-        "summary_en": "Collection of triptychs featuring all playable species with their characteristics and abilities.",
-        "metals": "",
-        "metals_fr": "",
-        "metals_en": ""
+        "summary_en": "Collection of triptychs featuring all playable species with their characteristics and abilities."
     },
     "triptych-class-collection": {
         "price": 55,
@@ -843,10 +798,7 @@
         "description_en": "### Complete collection of class triptychs\n\nExplore all D&D 5e classes and subclasses with complete triptychs. Each triptych details class abilities, spells, and progressions with visual examples.\n\n**Contents:**\n- Triptychs of all official classes\n- Subclasses and archetypes\n- Detailed progressions and abilities\n\n*Ideal for understanding class mechanics or preparing NPCs!*",
         "summary": "Collection de triptyques couvrant toutes les classes et sous-classes avec leurs capacités et progressions.",
         "summary_fr": "Collection de triptyques couvrant toutes les classes et sous-classes avec leurs capacités et progressions.",
-        "summary_en": "Collection of triptychs covering all classes and subclasses with their abilities and progressions.",
-        "metals": "",
-        "metals_fr": "",
-        "metals_en": ""
+        "summary_en": "Collection of triptychs covering all classes and subclasses with their abilities and progressions."
     },
     "triptych-background-collection": {
         "price": 35,
@@ -886,9 +838,6 @@
         "description_en": "### Complete collection of background triptychs\n\nEnrich your characters with all available D&D 5e backgrounds. Each triptych presents the origin, skills, equipment, and contacts of the background.\n\n**Contents:**\n- Triptychs of all official backgrounds\n- Detailed skills and equipment\n- Contacts and social relations\n\n*Perfect for adding depth to your characters!*",
         "summary": "Collection de triptyques présentant tous les historiques avec leurs compétences et équipements.",
         "summary_fr": "Collection de triptyques présentant tous les historiques avec leurs compétences et équipements.",
-        "summary_en": "Collection of triptychs featuring all backgrounds with their skills and equipment.",
-        "metals": "",
-        "metals_fr": "",
-        "metals_en": ""
+        "summary_en": "Collection of triptychs featuring all backgrounds with their skills and equipment."
     }
 }
