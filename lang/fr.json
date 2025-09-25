@@ -4,6 +4,9 @@
       "title": "Geek & Dragon | Aides de jeu immersives",
       "desc": "Cartes, pièces et fiches pour enrichir vos parties de D&D."
     },
+    "gameHelp": {
+      "description": "Guide complet pour vos accessoires D&D Geek & Dragon : triptyques de personnage, cartes d'équipement, monnaie physique et convertisseur. Tout pour enrichir vos parties de jeu de rôle."
+    },
     "shop": {
       "title": "Boutique | Geek & Dragon",
       "desc": "Achetez nos cartes et accessoires immersifs pour D&D."
@@ -502,6 +505,7 @@
         }
       },
       "contact": {
+        "title": "📧 Comment Commander",
         "description": "Pour un triptyque entièrement personnalisé, contactez-nous par email avec les détails de votre personnage :",
         "email": "commande@geekndragon.com",
         "subject": "Triptyque Personnalisé",
@@ -550,7 +554,8 @@
         "item4": "• <strong>Backup régulier :</strong> Prenez une photo de vos triptyques remplis"
       },
       "recommended": "Crayon recommandé : Staedtler HB ou 2H pour un tracé précis et effaçable."
-    }
+    },
+    "backToMain": "⬆️ Retour aux guides principaux"
   },
   "cards": {
     "mainTitle": "🃏 Guide des Cartes à Jouer Geek & Dragon",
@@ -747,6 +752,17 @@
     "converter": {
       "recommendations": {
         "title": "✨ Recommandations optimales"
+      },
+      "lotsRecommendations": {
+        "description": "Voici les lots minimaux recommandés pour couvrir exactement vos besoins en pièces physiques :",
+        "addAllButton": "Ajouter tous les lots au panier",
+        "optimizationNote": "Ces recommandations optimisent le nombre de lots nécessaires pour le prix le plus avantageux."
+      },
+      "debugSection": {
+        "title": "Section de débogage pour valider les algorithmes métaheuristiques de conversion et recommandations de lots."
+      },
+      "coinDescription": {
+        "faithfulReproduction": "Nos pièces métalliques reproduisent fidèlement le système monétaire de D&D. Chaque type de pièce a son propre design et sa finition unique."
       }
     },
     "backToMain": "⬆️ Retour aux guides principaux"

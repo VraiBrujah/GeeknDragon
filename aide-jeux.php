@@ -8,7 +8,7 @@ require __DIR__ . '/i18n.php';
 $products_data = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true) ?? [];
 
 $title = __('meta.home.title', 'Geek & Dragon') . ' | Aide de Jeux';
-$metaDescription = 'Guide complet pour vos accessoires D&D Geek & Dragon : triptyques de personnage, cartes d\'équipement, monnaie physique et convertisseur. Tout pour enrichir vos parties de jeu de rôle.';
+$metaDescription = __('meta.gameHelp.description', 'Guide complet pour vos accessoires D&D Geek & Dragon : triptyques de personnage, cartes d\'équipement, monnaie physique et convertisseur. Tout pour enrichir vos parties de jeu de rôle.');
 $metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/aide-jeux.php';
 
 // Les traductions sont maintenant dans le système centralisé lang/{fr,en}.json
@@ -1182,7 +1182,7 @@ echo $snipcartInit;
           </div>
           
           <div class="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-lg p-6 mt-8 border border-yellow-700/50">
-            <h4 class="text-xl font-bold mb-4 text-yellow-400">📧 Comment Commander</h4>
+            <h4 class="text-xl font-bold mb-4 text-yellow-400"><?= __('gameHelp.customTriptychs.contact.title', '📧 Comment Commander') ?></h4>
             <p class="text-gray-300 mb-4">
               <?= __('gameHelp.customTriptychs.contact.description', 'Pour un triptyque entièrement personnalisé, contactez-nous par email avec les détails de votre personnage :') ?>
             </p>
@@ -1272,7 +1272,7 @@ echo $snipcartInit;
       <!-- Bouton de retour au hero -->
       <div class="text-center mt-16">
         <a href="#main" class="btn btn-outline">
-          ⬆️ Retour aux guides principaux
+          <?= __('gameHelp.backToMain', '⬆️ Retour aux guides principaux') ?>
         </a>
       </div>
     </div>
@@ -1751,7 +1751,7 @@ echo $snipcartInit;
           <div class="max-w-4xl mx-auto">
             <div class="text-center mb-6">
               <p class="text-gray-300 mb-4">
-                Voici les lots minimaux recommandés pour couvrir exactement vos besoins en pièces physiques :
+                <?= __('gameHelp.money.lotsRecommendations.description', 'Voici les lots minimaux recommandés pour couvrir exactement vos besoins en pièces physiques :') ?>
               </p>
             </div>
             
@@ -1766,11 +1766,11 @@ echo $snipcartInit;
                       class="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-200 shadow-sm hover:shadow-md"
                       style="display: none;">
 
-                Ajouter tous les lots au panier
+                <?= __('money.converter.lotsRecommendations.addAllButton', 'Ajouter tous les lots au panier') ?>
               </button>
               
               <p class="text-sm text-gray-400 mt-4">
-                Ces recommandations optimisent le nombre de lots nécessaires pour le prix le plus avantageux.
+                <?= __('money.converter.lotsRecommendations.optimizationNote', 'Ces recommandations optimisent le nombre de lots nécessaires pour le prix le plus avantageux.') ?>
               </p>
             </div>
           </div>
@@ -1783,7 +1783,7 @@ echo $snipcartInit;
         
         <div class="max-w-4xl mx-auto">
           <p class="text-center text-gray-300 mb-6">
-            Section de débogage pour valider les algorithmes métaheuristiques de conversion et recommandations de lots.
+            <?= __('money.converter.debugSection.title', 'Section de débogage pour valider les algorithmes métaheuristiques de conversion et recommandations de lots.') ?>
           </p>
           
           <div class="grid md:grid-cols-2 gap-6 mb-6">
@@ -1888,8 +1888,7 @@ echo $snipcartInit;
             <div>
               <h4 class="text-xl font-bold mb-4 text-purple-400"><?= __('gameHelp.money.physicalCoins.authentic.title', '✨ Des Pièces Authentiques') ?></h4>
               <p class="text-gray-300 mb-4">
-                Nos pièces métalliques reproduisent fidèlement le système monétaire de D&D. 
-                Chaque type de pièce a son propre design et sa finition unique.
+                <?= __('money.converter.coinDescription.faithfulReproduction', 'Nos pièces métalliques reproduisent fidèlement le système monétaire de D&D. Chaque type de pièce a son propre design et sa finition unique.') ?>
               </p>
               <ul class="text-gray-300 space-y-2">
                 <li><?= __('gameHelp.money.physicalCoins.authentic.feature1', '• <strong>Métal véritable</strong> avec finitions spécifiques') ?></li>

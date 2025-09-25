@@ -4,6 +4,9 @@
       "title": "Geek & Dragon | Immersive game aids",
       "desc": "Cards, coins and sheets to enrich your D&D sessions."
     },
+    "gameHelp": {
+      "description": "Complete guide for your D&D Geek & Dragon accessories: character triptychs, equipment cards, physical currency and converter. Everything to enrich your role-playing sessions."
+    },
     "shop": {
       "title": "Shop | Geek & Dragon",
       "desc": "Buy our immersive cards and accessories for D&D."
@@ -502,6 +505,7 @@
         }
       },
       "contact": {
+        "title": "📧 How to Order",
         "description": "For a fully personalized triptych, contact us by email with your character details:",
         "email": "commande@geekndragon.com",
         "subject": "Custom Triptych",
@@ -550,7 +554,8 @@
         "item4": "• <strong>Regular backup:</strong> Take a photo of your filled triptychs"
       },
       "recommended": "Recommended pencil: Staedtler HB or 2H for precise and erasable lines."
-    }
+    },
+    "backToMain": "⬆️ Back to main guides"
   },
   "cards": {
     "mainTitle": "🃏 Geek & Dragon Playing Cards Guide",
@@ -747,6 +752,17 @@
     "converter": {
       "recommendations": {
         "title": "✨ Optimal recommendations"
+      },
+      "lotsRecommendations": {
+        "description": "Here are the minimal recommended lots to cover exactly your physical coin needs:",
+        "addAllButton": "Add all lots to cart",
+        "optimizationNote": "These recommendations optimize the number of lots needed for the most advantageous price."
+      },
+      "debugSection": {
+        "title": "Debug section to validate metaheuristic algorithms for conversion and lot recommendations."
+      },
+      "coinDescription": {
+        "faithfulReproduction": "Our metal coins faithfully reproduce the D&D monetary system. Each type of coin has its own design and unique finish."
       }
     },
     "backToMain": "⬆️ Back to main guides"

@@ -246,8 +246,22 @@ document.addEventListener('DOMContentLoaded', () => {
       const picked = btn.dataset.lang;
       // Sauvegarder la langue choisie
       window.GD.setLang(picked);
-      // Recharger la page pour que toutes les traductions se mettent à jour
-      window.location.reload();
+      
+      // Construire la nouvelle URL avec la bonne langue
+      let newUrl = window.location.pathname;
+      if (picked !== 'fr') {
+        // Ajouter le paramètre lang pour les langues autres que français
+        const params = new URLSearchParams(window.location.search);
+        params.set('lang', picked);
+        newUrl += '?' + params.toString();
+      }
+      // Ajouter le fragment s'il existe
+      if (window.location.hash) {
+        newUrl += window.location.hash;
+      }
+      
+      // Naviguer vers la nouvelle URL
+      window.location.href = newUrl;
     });
   });
 
