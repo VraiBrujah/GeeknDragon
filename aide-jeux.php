@@ -2220,11 +2220,11 @@ function confirmDownload() {
 }
 </script>
 <script src="/js/hero-videos.js?v=<?= filemtime(__DIR__.'/js/hero-videos.js') ?>"></script>
-<script src="/js/boutique-premium.js"></script>
-<script src="/js/snipcart-utils.js"></script>
-<script src="/js/coin-lot-optimizer.js"></script>
-<script src="/js/currency-converter.js"></script>
-<script src="/js/currency-converter-tests.js"></script>
+<script src="/js/boutique-premium.js?v=<?= filemtime(__DIR__.'/js/boutique-premium.js') ?>"></script>
+<script src="/js/snipcart-utils.js?v=<?= filemtime(__DIR__.'/js/snipcart-utils.js') ?>"></script>
+<script src="/js/coin-lot-optimizer.js?v=<?= filemtime(__DIR__.'/js/coin-lot-optimizer.js') ?>"></script>
+<script src="/js/currency-converter.js?v=<?= filemtime(__DIR__.'/js/currency-converter.js') ?>"></script>
+<script src="/js/currency-converter-tests.js?v=<?= filemtime(__DIR__.'/js/currency-converter-tests.js') ?>"></script>
 <script src="/js/dnd-music-player.js?v=<?= filemtime(__DIR__.'/js/dnd-music-player.js') ?>"></script>
 
 <script>
@@ -2339,7 +2339,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       } else {
         console.error('SnipcartUtils non disponible');
-        alert('Erreur : impossible d\'ajouter au panier');
+        alert("Erreur : impossible d'ajouter au panier");
       }
     });
   }
@@ -2373,14 +2373,14 @@ document.addEventListener('DOMContentLoaded', function() {
   if (runBasicTestsBtn) {
     runBasicTestsBtn.addEventListener('click', function() {
       if (window.CurrencyConverterTests) {
-        testResults.innerHTML = '<div class="text-yellow-400"><?= __('money.tests.runningBasic', 'Exécution des tests de base...') ?></div>';
+        testResults.innerHTML = "<div class=\"text-yellow-400\"><?= __('money.tests.runningBasic', 'Exécution des tests de base...') ?></div>";
         
         setTimeout(() => {
           const results = window.CurrencyConverterTests.runBasicTests();
           displayTestResults(results, '<?= __('money.tests.basic', 'Tests de Base') ?>');
         }, 100);
       } else {
-        testResults.innerHTML = '<div class="text-red-400"><?= __('money.tests.notAvailable', '❌ CurrencyConverterTests non disponible') ?></div>';
+        testResults.innerHTML = "<div class=\"text-red-400\"><?= __('money.tests.notAvailable', '❌ CurrencyConverterTests non disponible') ?></div>";
       }
     });
   }
@@ -2388,27 +2388,27 @@ document.addEventListener('DOMContentLoaded', function() {
   if (runAdvancedTestsBtn) {
     runAdvancedTestsBtn.addEventListener('click', function() {
       if (window.CurrencyConverterTests) {
-        testResults.innerHTML = '<div class="text-yellow-400"><?= __('money.tests.runningAdvanced', 'Exécution des tests avancés...') ?></div>';
+        testResults.innerHTML = "<div class=\"text-yellow-400\"><?= __('money.tests.runningAdvanced', 'Exécution des tests avancés...') ?></div>";
         
         setTimeout(() => {
           const results = window.CurrencyConverterTests.runAdvancedTests();
           displayTestResults(results, '<?= __('money.tests.advanced', 'Tests Avancés') ?>');
         }, 100);
       } else {
-        testResults.innerHTML = '<div class="text-red-400"><?= __('money.tests.notAvailable', '❌ CurrencyConverterTests non disponible') ?></div>';
+        testResults.innerHTML = "<div class=\"text-red-400\"><?= __('money.tests.notAvailable', '❌ CurrencyConverterTests non disponible') ?></div>";
       }
     });
   }
 
   if (clearResultsBtn) {
     clearResultsBtn.addEventListener('click', function() {
-      testResults.innerHTML = '<div class="text-gray-400"><?= __('money.tests.noTests', 'Aucun test exécuté...') ?></div>';
+      testResults.innerHTML = "<div class=\"text-gray-400\"><?= __('money.tests.noTests', 'Aucun test exécuté...') ?></div>";
     });
   }
 
   function displayTestResults(results, testType) {
     if (!results) {
-      testResults.innerHTML = '<div class="text-red-400"><?= __('money.tests.error', '❌ Erreur lors de l&apos;exécution des tests') ?></div>';
+      testResults.innerHTML = "<div class=\"text-red-400\"><?= __('money.tests.error', '❌ Erreur lors de l\'exécution des tests') ?></div>";
       return;
     }
 
