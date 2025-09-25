@@ -30,6 +30,7 @@
     "products": "Produits",
     "news": "Actualités",
     "shop": "Boutique",
+    "gameHelp": "Aide de Jeux",
     "contact": "Contact",
     "cart": "Panier",
     "account": "Compte",
@@ -751,11 +752,15 @@
     "download": {
       "title": "Télécharger la Fiche de Monnaie",
       "subtitle": "Fiche à imprimer",
-      "button": "Télécharger",
+      "button": "📥 Télécharger",
       "buttonShort": "📥 Télécharger",
-      "link": "📥 Télécharger la fiche",
+      "downloadSheet": "📥 Télécharger la fiche",
       "instruction": "Cliquez sur l'image pour télécharger la fiche à imprimer",
-      "printTip": "💡 Conseil d'impression :"
+      "printTip": "💡 Conseil d'impression :",
+      "description": "Téléchargez l'image de la fiche de monnaie pour l'imprimer chez vous",
+      "instructions": "Imprimez sur du papier cartonné (200-250g) pour une meilleure durabilité. Vous pouvez plastifier la fiche pour une utilisation répétée.",
+      "confirmButton": "📥 Télécharger",
+      "cancelButton": "Annuler"
     },
     "converter": {
       "recommendations": {

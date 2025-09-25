@@ -755,7 +755,7 @@ echo $snipcartInit;
   <section class="py-16 bg-gray-900/80">
     <div class="max-w-6xl mx-auto px-6 text-center">
       <h2 class="text-3xl md:text-4xl font-bold mb-8 text-indigo-400">
-        Qu'est-ce qu'un triptyque Geek & Dragon ?
+        <?= __('gameHelp.sections.whatIsTriptyque', 'Qu\'est-ce qu\'un triptyque Geek & Dragon ?') ?>
       </h2>
       <div class="max-w-4xl mx-auto">
         <p class="text-xl text-gray-300 mb-8 txt-court">
@@ -1836,7 +1836,7 @@ echo $snipcartInit;
                 
                 <button onclick="downloadMoneySheet()" 
                         class="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm">
-                  📥 Télécharger la fiche
+                  <?= __('gameHelp.money.download.downloadSheet', '📥 Télécharger la fiche') ?>
                 </button>
               </div>
             </div>
@@ -1865,7 +1865,7 @@ echo $snipcartInit;
                 <h4 class="text-lg font-bold text-amber-400 mb-4 flex items-center justify-between">
                   <span><?= __('gameHelp.money.physicalTreasure.property', '📋 Système de Propriété') ?></span>
                   <button onclick="downloadMoneySheet()" class="text-xs bg-amber-600 hover:bg-amber-700 px-3 py-1 rounded-full transition-colors">
-                    📥 Télécharger
+                    <?= __('gameHelp.money.download.button', '📥 Télécharger') ?>
                   </button>
                 </h4>
                 <p class="text-sm leading-relaxed">
@@ -2156,24 +2156,23 @@ function downloadMoneySheet() {
                 <div class="text-4xl mb-3">📥</div>
                 <h3 class="text-xl font-bold text-amber-400 mb-2"><?= __('gameHelp.money.download.title', 'Télécharger la Fiche de Monnaie') ?></h3>
                 <p class="text-gray-300 text-sm">
-                    Téléchargez l'image de la fiche de monnaie pour l'imprimer chez vous
+                    <?= __('gameHelp.money.download.description', 'Téléchargez l\'image de la fiche de monnaie pour l\'imprimer chez vous') ?>
                 </p>
             </div>
             
             <div class="bg-amber-900/20 p-4 rounded-lg border border-amber-600/30 mb-4">
                 <h4 class="font-bold text-amber-400 mb-2"><?= __('gameHelp.money.download.printTip', '💡 Conseil d\'impression :') ?></h4>
                 <p class="text-sm text-gray-300">
-                    Imprimez sur du papier cartonné (200-250g) pour une meilleure durabilité. 
-                    Vous pouvez plastifier la fiche pour une utilisation répétée.
+                    <?= __('gameHelp.money.download.instructions', 'Imprimez sur du papier cartonné (200-250g) pour une meilleure durabilité. Vous pouvez plastifier la fiche pour une utilisation répétée.') ?>
                 </p>
             </div>
             
             <div class="flex gap-3">
                 <button onclick="confirmDownload()" class="flex-1 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-                    📥 Télécharger
+                    <?= __('gameHelp.money.download.confirmButton', '📥 Télécharger') ?>
                 </button>
                 <button onclick="closeDownloadPopup()" class="flex-1 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-                    Annuler
+                    <?= __('gameHelp.money.download.cancelButton', 'Annuler') ?>
                 </button>
             </div>
         </div>

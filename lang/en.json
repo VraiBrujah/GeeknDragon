@@ -30,6 +30,7 @@
     "products": "Products",
     "news": "News",
     "shop": "Shop",
+    "gameHelp": "Game Help",
     "contact": "Contact",
     "cart": "Cart",
     "account": "Account",
@@ -751,11 +752,15 @@
     "download": {
       "title": "Download the Money Sheet",
       "subtitle": "Printable sheet",
-      "button": "Download",
+      "button": "📥 Download",
       "buttonShort": "📥 Download",
-      "link": "📥 Download sheet",
+      "downloadSheet": "📥 Download sheet",
       "instruction": "Click on the image to download the printable sheet",
-      "printTip": "💡 Printing tip:"
+      "printTip": "💡 Printing tip:",
+      "description": "Download the money sheet image to print it at home",
+      "instructions": "Print on cardstock paper (200-250g) for better durability. You can laminate the sheet for repeated use.",
+      "confirmButton": "📥 Download",
+      "cancelButton": "Cancel"
     },
     "converter": {
       "recommendations": {
