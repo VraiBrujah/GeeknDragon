@@ -2408,7 +2408,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function displayTestResults(results, testType) {
     if (!results) {
-      testResults.innerHTML = '<div class="text-red-400"><?= __('money.tests.error', '❌ Erreur lors de l\'exécution des tests') ?></div>';
+      testResults.innerHTML = '<div class="text-red-400"><?= __('money.tests.error', '❌ Erreur lors de l&apos;exécution des tests') ?></div>';
       return;
     }
 
