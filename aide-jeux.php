@@ -7,83 +7,12 @@ require __DIR__ . '/i18n.php';
 // Charger les données des produits pour le système de recommandation
 $products_data = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true) ?? [];
 
-$title = 'Aide de Jeux - ' . ($translations['meta']['home']['title'] ?? 'Geek & Dragon');
+$title = __('meta.home.title', 'Geek & Dragon') . ' | Aide de Jeux';
 $metaDescription = 'Guide complet pour vos accessoires D&D Geek & Dragon : triptyques de personnage, cartes d\'équipement, monnaie physique et convertisseur. Tout pour enrichir vos parties de jeu de rôle.';
 $metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/aide-jeux.php';
 
-// Ajouter les traductions spécifiques pour cette page
-$gameHelpTranslations = [
-    'fr' => [
-        'gameHelp' => [
-            'hero' => [
-                'title' => 'Guides d\'Aide aux Jeux',
-                'subtitle' => 'Maîtrisez tous vos accessoires Geek & Dragon : triptyques, cartes et monnaie'
-            ],
-            'triptychGuide' => [
-                'title' => 'Les 3 Triptyques de votre Personnage',
-                'description' => 'Chaque personnage D&D nécessite 3 triptyques cartonnés : Espèce, Classe et Historique.',
-                'species' => 'Triptyque d\'Espèce',
-                'class' => 'Triptyque de Classe', 
-                'background' => 'Triptyque d\'Historique'
-            ],
-            'howToUse' => [
-                'title' => 'Comment utiliser vos triptyques',
-                'fold' => 'Pliez en 3 volets',
-                'organize' => 'Organisez sur votre table',
-                'reference' => 'Consultez pendant le jeu'
-            ],
-            'comingSoon' => 'Bientôt disponible',
-            'buttons' => [
-                'discover' => 'Découvrir les Triptyques',
-                'cardsGuide' => 'Guide des Cartes', 
-                'moneyGuide' => 'Guide de la Monnaie',
-                'buyTriptychs' => 'Acheter mes Triptyques'
-            ],
-            'navigation' => [
-                'quickNav' => 'Navigation Rapide',
-                'triptychsGuide' => 'Guide des Triptyques',
-                'cardsGuide' => 'Guide des Cartes',
-                'coinGuide' => 'Guide de la Monnaie'
-            ]
-        ]
-    ],
-    'en' => [
-        'gameHelp' => [
-            'hero' => [
-                'title' => 'Game Help Guides',
-                'subtitle' => 'Master all your Geek & Dragon accessories: triptychs, cards and currency'
-            ],
-            'triptychGuide' => [
-                'title' => 'Your Character\'s 3 Triptychs',
-                'description' => 'Each D&D character requires 3 cardboard triptychs: Species, Class and Background.',
-                'species' => 'Species Triptych',
-                'class' => 'Class Triptych',
-                'background' => 'Background Triptych'
-            ],
-            'howToUse' => [
-                'title' => 'How to use your triptychs',
-                'fold' => 'Fold into 3 panels',
-                'organize' => 'Organize on your table', 
-                'reference' => 'Reference during play'
-            ],
-            'comingSoon' => 'Coming soon',
-            'buttons' => [
-                'discover' => 'Discover Triptychs',
-                'cardsGuide' => 'Cards Guide', 
-                'moneyGuide' => 'Currency Guide',
-                'buyTriptychs' => 'Buy my Triptychs'
-            ],
-            'navigation' => [
-                'quickNav' => 'Quick Navigation',
-                'triptychsGuide' => 'Triptychs Guide',
-                'cardsGuide' => 'Cards Guide',
-                'coinGuide' => 'Currency Guide'
-            ]
-        ]
-    ]
-];
-
-$translations = array_merge_recursive($translations, $gameHelpTranslations[$lang]);
+// Les traductions sont maintenant dans le système centralisé lang/{fr,en}.json
+// Plus besoin de traductions hardcodées !
 
 $extraHead = <<<HTML
 <style>
@@ -700,7 +629,8 @@ $extraHead = <<<HTML
     opacity: 1 !important;
   }
   
-  header nav[aria-label="Navigation principale"] a {
+  /* Plus spécifique : uniquement les liens DANS la navigation */
+  header nav[aria-label="Navigation principale"] ul a {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
@@ -729,8 +659,8 @@ $extraHead = <<<HTML
   }
 }
 
-/* Assurer que les liens sont visibles */
-header .nav-link {
+/* Assurer que UNIQUEMENT les liens de navigation sont visibles - pas le titre */
+header nav[aria-label="Navigation principale"] .nav-link {
   opacity: 1 !important;
   visibility: visible !important;
   color: white !important;
@@ -740,6 +670,13 @@ header .nav-link {
 header .flag-btn {
   opacity: 1 !important;
   visibility: visible !important;
+}
+
+/* S'assurer que le titre reste intact et visible */
+.site-title {
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: white !important;
 }
 </style>
 HTML;
@@ -768,16 +705,16 @@ echo $snipcartInit;
     <div class="absolute inset-0 bg-black/60"></div>
     <div class="relative z-10 max-w-4xl p-6 hero-text">
       <h1 class="text-5xl font-extrabold mb-6" data-i18n="gameHelp.hero.title">
-        <?= $translations['gameHelp']['hero']['title'] ?? 'Guide des Triptyques' ?>
+        <?= __('gameHelp.hero.title', 'Guide des Triptyques') ?>
       </h1>
       <p class="text-xl mb-8 txt-court" data-i18n="gameHelp.hero.subtitle">
-        <?= $translations['gameHelp']['hero']['subtitle'] ?? 'Maîtrisez vos fiches de personnage Geek & Dragon' ?>
+        <?= __('gameHelp.hero.subtitle', 'Maîtrisez vos fiches de personnage Geek & Dragon') ?>
       </p>
       <div class="hero-cta flex flex-wrap justify-center gap-4">
-        <a href="#guide-triptyques" class="btn btn-primary"><?= $translations['gameHelp']['buttons']['discover'] ?? 'Découvrir les Triptyques' ?></a>
-        <a href="#guide-cartes" class="btn btn-primary"><?= $translations['gameHelp']['buttons']['cardsGuide'] ?? 'Guide des Cartes' ?></a>
-        <a href="#guide-monnaie" class="btn btn-primary"><?= $translations['gameHelp']['buttons']['moneyGuide'] ?? 'Guide de la Monnaie' ?></a>
-        <a href="<?= langUrl('boutique.php#triptyques') ?>" class="btn btn-outline"><?= $translations['gameHelp']['buttons']['buyTriptychs'] ?? 'Acheter mes Triptyques' ?></a>
+        <a href="#guide-triptyques" class="btn btn-primary"><?= __('gameHelp.buttons.discover', 'Découvrir les Triptyques') ?></a>
+        <a href="#guide-cartes" class="btn btn-primary"><?= __('gameHelp.buttons.cardsGuide', 'Guide des Cartes') ?></a>
+        <a href="#guide-monnaie" class="btn btn-primary"><?= __('gameHelp.buttons.moneyGuide', 'Guide de la Monnaie') ?></a>
+        <a href="<?= langUrl('boutique.php#triptyques') ?>" class="btn btn-outline"><?= __('gameHelp.buttons.buyTriptychs', 'Acheter mes Triptyques') ?></a>
       </div>
     </div>
   </section>
@@ -785,29 +722,29 @@ echo $snipcartInit;
   <!-- ===== NAVIGATION RAPIDE ===== -->
   <section class="py-12 bg-gray-800/50">
     <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-2xl font-bold text-center mb-8 text-white"><?= $translations['gameHelp']['navigation']['quickNav'] ?? 'Navigation Rapide' ?></h2>
+      <h2 class="text-2xl font-bold text-center mb-8 text-white"><?= __('gameHelp.navigation.quickNav', 'Navigation Rapide') ?></h2>
       <div class="grid md:grid-cols-3 gap-6">
         <a href="#guide-triptyques" class="group bg-gradient-to-br from-indigo-900/50 to-purple-900/50 rounded-xl p-6 border border-indigo-500/30 hover:border-indigo-400/50 transition-all">
           <div class="text-center">
             <div class="text-4xl mb-3">📜</div>
-            <h3 class="text-xl font-bold text-indigo-400 mb-2"><?= $translations['gameHelp']['navigation']['triptychsGuide'] ?? 'Guide des Triptyques' ?></h3>
-            <p class="text-gray-300 text-sm">Espèce, Classe, Historique - D&D 2024</p>
+            <h3 class="text-xl font-bold text-indigo-400 mb-2"><?= __('gameHelp.navigation.triptychsGuide', 'Guide des Triptyques') ?></h3>
+            <p class="text-gray-300 text-sm"><?= __('gameHelp.navigation.triptychsSubtitle', 'Espèce, Classe, Historique - D&D 2024') ?></p>
           </div>
         </a>
         
         <a href="#guide-cartes" class="group bg-gradient-to-br from-emerald-900/50 to-teal-900/50 rounded-xl p-6 border border-emerald-500/30 hover:border-emerald-400/50 transition-all">
           <div class="text-center">
             <div class="text-4xl mb-3">🃏</div>
-            <h3 class="text-xl font-bold text-emerald-400 mb-2"><?= $translations['gameHelp']['navigation']['cardsGuide'] ?? 'Guide des Cartes' ?></h3>
-            <p class="text-gray-300 text-sm">Armes, Équipements, Sorts</p>
+            <h3 class="text-xl font-bold text-emerald-400 mb-2"><?= __('gameHelp.navigation.cardsGuide', 'Guide des Cartes') ?></h3>
+            <p class="text-gray-300 text-sm"><?= __('gameHelp.navigation.cardsSubtitle', 'Armes, Équipements, Sorts') ?></p>
           </div>
         </a>
         
         <a href="#guide-monnaie" class="group bg-gradient-to-br from-amber-900/50 to-yellow-900/50 rounded-xl p-6 border border-amber-500/30 hover:border-amber-400/50 transition-all">
           <div class="text-center">
             <div class="text-4xl mb-3">💰</div>
-            <h3 class="text-xl font-bold text-amber-400 mb-2">Guide de la Monnaie</h3>
-            <p class="text-gray-300 text-sm">Système monétaire + Convertisseur</p>
+            <h3 class="text-xl font-bold text-amber-400 mb-2"><?= __('gameHelp.navigation.coinGuide', 'Guide de la Monnaie') ?></h3>
+            <p class="text-gray-300 text-sm"><?= __('gameHelp.navigation.coinSubtitle', 'Système monétaire + Convertisseur') ?></p>
           </div>
         </a>
       </div>
@@ -822,27 +759,27 @@ echo $snipcartInit;
       </h2>
       <div class="max-w-4xl mx-auto">
         <p class="text-xl text-gray-300 mb-8 txt-court">
-          Un triptyque est une fiche de personnage cartonnée pliable en 3 volets, conçue pour remplacer les fastidieuses recherches dans les manuels. 
-          Chaque personnage D&D nécessite <strong>3 triptyques différents</strong> qui se complètent parfaitement.
+          <?= __('gameHelp.sections.triptychDescription', 'Un triptyque est une fiche de personnage cartonnée pliable en 3 volets, conçue pour remplacer les fastidieuses recherches dans les manuels.') ?> 
+          <?= __('gameHelp.sections.threeRequired', 'Chaque personnage D&D nécessite <strong>3 triptyques différents</strong> qui se complètent parfaitement.') ?>
         </p>
         
         <div class="grid md:grid-cols-3 gap-8 mt-12">
           <div class="bg-gradient-to-b from-emerald-900/30 to-emerald-800/20 p-6 rounded-xl border border-emerald-700/50">
             <div class="w-16 h-16 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4">1</div>
-            <h3 class="text-xl font-semibold mb-3 text-emerald-400">Triptyque d'Espèce</h3>
-            <p class="text-gray-300">Toutes les capacités raciales, traits et bonus de votre espèce (Elfe, Nain, Humain...)</p>
+            <h3 class="text-xl font-semibold mb-3 text-emerald-400"><?= __('gameHelp.species.title', 'Triptyque d\'Espèce') ?></h3>
+            <p class="text-gray-300"><?= __('gameHelp.species.description', 'Toutes les capacités raciales, traits et bonus de votre espèce (Elfe, Nain, Humain...)') ?></p>
           </div>
           
           <div class="bg-gradient-to-b from-blue-900/30 to-blue-800/20 p-6 rounded-xl border border-blue-700/50">
             <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4">2</div>
-            <h3 class="text-xl font-semibold mb-3 text-blue-400">Triptyque de Classe</h3>
-            <p class="text-gray-300">Compétences, sorts, aptitudes et progression de votre classe (Guerrier, Magicien, Rôdeur...)</p>
+            <h3 class="text-xl font-semibold mb-3 text-blue-400"><?= __('gameHelp.sections.classTriptych', 'Triptyque de Classe') ?></h3>
+            <p class="text-gray-300"><?= __('gameHelp.class.description', 'Compétences, sorts, aptitudes et progression de votre classe (Guerrier, Magicien, Rôdeur...)') ?></p>
           </div>
           
           <div class="bg-gradient-to-b from-purple-900/30 to-purple-800/20 p-6 rounded-xl border border-purple-700/50">
             <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4">3</div>
-            <h3 class="text-xl font-semibold mb-3 text-purple-400">Triptyque d'Historique</h3>
-            <p class="text-gray-300">Compétences sociales, équipements de départ et background de votre personnage</p>
+            <h3 class="text-xl font-semibold mb-3 text-purple-400"><?= __('gameHelp.sections.backgroundTriptych', 'Triptyque d\'Historique') ?></h3>
+            <p class="text-gray-300"><?= __('gameHelp.background.description', 'Compétences sociales, équipements de départ et background de votre personnage') ?></p>
           </div>
         </div>
       </div>
@@ -858,53 +795,53 @@ echo $snipcartInit;
           Les 3 Triptyques de votre Personnage
         </h2>
         <p class="text-xl text-gray-300 max-w-4xl mx-auto txt-court">
-          Découvrez en détail chaque type de triptyque. Cliquez sur les images pour voir le verso de chaque fiche.
+          <?= __('gameHelp.sections.detailsText', 'Découvrez en détail chaque type de triptyque. Cliquez sur les images pour voir le verso de chaque fiche.') ?>
         </p>
       </div>
 
       <!-- ===== LANCEUR DE DÉS POUR CARACTÉRISTIQUES ===== -->
       <div class="dice-roller">
-        <h3 class="text-2xl font-bold mb-4 text-center text-yellow-400">🎲 Lanceur de Caractéristiques</h3>
+        <h3 class="text-2xl font-bold mb-4 text-center text-yellow-400"><?= __('gameHelp.diceRoller.title', '🎲 Lanceur de Caractéristiques') ?></h3>
         <p class="text-gray-300 text-center mb-4">
-          <strong>D&D 2024 :</strong> Lancez 4d6 et gardez les 3 meilleurs résultats. 
-          Vous ajouterez ensuite les bonus d'<strong>Historique</strong> (+2 et +1) dans le triptyque d'Historique.
+          <?= __('gameHelp.diceRoller.description', '<strong>D&D 2024 :</strong> Lancez 4d6 et gardez les 3 meilleurs résultats.') ?> 
+          <?= __('gameHelp.diceRoller.backgroundNote', 'Vous ajouterez ensuite les bonus d\'<strong>Historique</strong> (+2 et +1) dans le triptyque d\'Historique.') ?>
         </p>
         
         <div class="dice-grid">
           <div class="text-center">
-            <h4 class="font-semibold text-red-400 mb-2">Force</h4>
-            <button class="stat-dice" onclick="rollStat('str')">Lancer</button>
+            <h4 class="font-semibold text-red-400 mb-2"><?= __('gameHelp.diceRoller.strength', 'Force') ?></h4>
+            <button class="stat-dice" onclick="rollStat('str')"><?= __('gameHelp.diceRoller.rollButton', 'Lancer') ?></button>
             <div class="dice-result text-red-300" id="str-result">--</div>
           </div>
           <div class="text-center">
-            <h4 class="font-semibold text-green-400 mb-2">Dextérité</h4>
-            <button class="stat-dice" onclick="rollStat('dex')">Lancer</button>
+            <h4 class="font-semibold text-green-400 mb-2"><?= __('gameHelp.diceRoller.dexterity', 'Dextérité') ?></h4>
+            <button class="stat-dice" onclick="rollStat('dex')"><?= __('gameHelp.diceRoller.rollButton', 'Lancer') ?></button>
             <div class="dice-result text-green-300" id="dex-result">--</div>
           </div>
           <div class="text-center">
-            <h4 class="font-semibold text-orange-400 mb-2">Constitution</h4>
-            <button class="stat-dice" onclick="rollStat('con')">Lancer</button>
+            <h4 class="font-semibold text-orange-400 mb-2"><?= __('gameHelp.diceRoller.constitution', 'Constitution') ?></h4>
+            <button class="stat-dice" onclick="rollStat('con')"><?= __('gameHelp.diceRoller.rollButton', 'Lancer') ?></button>
             <div class="dice-result text-orange-300" id="con-result">--</div>
           </div>
           <div class="text-center">
-            <h4 class="font-semibold text-blue-400 mb-2">Intelligence</h4>
-            <button class="stat-dice" onclick="rollStat('int')">Lancer</button>
+            <h4 class="font-semibold text-blue-400 mb-2"><?= __('gameHelp.diceRoller.intelligence', 'Intelligence') ?></h4>
+            <button class="stat-dice" onclick="rollStat('int')"><?= __('gameHelp.diceRoller.rollButton', 'Lancer') ?></button>
             <div class="dice-result text-blue-300" id="int-result">--</div>
           </div>
           <div class="text-center">
-            <h4 class="font-semibold text-purple-400 mb-2">Sagesse</h4>
-            <button class="stat-dice" onclick="rollStat('wis')">Lancer</button>
+            <h4 class="font-semibold text-purple-400 mb-2"><?= __('gameHelp.diceRoller.wisdom', 'Sagesse') ?></h4>
+            <button class="stat-dice" onclick="rollStat('wis')"><?= __('gameHelp.diceRoller.rollButton', 'Lancer') ?></button>
             <div class="dice-result text-purple-300" id="wis-result">--</div>
           </div>
           <div class="text-center">
-            <h4 class="font-semibold text-pink-400 mb-2">Charisme</h4>
-            <button class="stat-dice" onclick="rollStat('cha')">Lancer</button>
+            <h4 class="font-semibold text-pink-400 mb-2"><?= __('gameHelp.diceRoller.charisma', 'Charisme') ?></h4>
+            <button class="stat-dice" onclick="rollStat('cha')"><?= __('gameHelp.diceRoller.rollButton', 'Lancer') ?></button>
             <div class="dice-result text-pink-300" id="cha-result">--</div>
           </div>
         </div>
         
         <div class="text-center mt-4">
-          <button class="roll-all-btn" onclick="rollAllStats()">🎲 Lancer toutes les caractéristiques</button>
+          <button class="roll-all-btn" onclick="rollAllStats()"><?= __('gameHelp.diceRoller.rollAllButton', '🎲 Lancer toutes les caractéristiques') ?></button>
         </div>
       </div>
 
@@ -913,29 +850,29 @@ echo $snipcartInit;
         <!-- Triptyque d'Espèce -->
         <div class="card-product">
           <div class="h-[6rem] mb-6 flex items-center justify-center">
-            <h3 class="text-2xl font-bold text-center text-emerald-400 leading-tight">🧝 Espèce</h3>
+            <h3 class="text-2xl font-bold text-center text-emerald-400 leading-tight"><?= __('gameHelp.examples.species', '🧝 Espèce') ?></h3>
           </div>
           
           <div class="flip-container" id="species-flip" onclick="flipCard('species-flip')">
             <div class="flipper">
               <div class="front">
-                <img src="/media/game/triptychs/examples/race-aasimar-recto.webp" alt="Triptyque Espèce Aasimar - Recto" class="triptych-preview">
+                <img src="/media/game/triptychs/examples/race-aasimar-recto.webp" alt="<?= __('gameHelp.images.speciesAssimarFront', 'Triptyque Espèce Aasimar - Recto') ?>" class="triptych-preview">
               </div>
               <div class="back">
-                <img src="/media/game/triptychs/examples/race-aasimar-verso.webp" alt="Triptyque Espèce Aasimar - Verso" class="triptych-preview">
+                <img src="/media/game/triptychs/examples/race-aasimar-verso.webp" alt="<?= __('gameHelp.images.speciesAssimarBack', 'Triptyque Espèce Aasimar - Verso') ?>" class="triptych-preview">
               </div>
             </div>
           </div>
           
           <div class="text-center h-[180px] flex flex-col justify-start">
-            <h4 class="font-semibold mb-2 text-emerald-300">Exemple : Aasimar</h4>
+            <h4 class="font-semibold mb-2 text-emerald-300"><?= __('gameHelp.species.example', 'Exemple : Aasimar') ?></h4>
             <p class="text-gray-300 text-sm mb-3">
-              Traits raciaux et aptitudes d'espèce avec statistiques détaillées.
+              <?= __('gameHelp.species.exampleDesc', 'Traits raciaux et aptitudes d\'espèce avec statistiques détaillées.') ?>
             </p>
             <ul class="text-gray-400 text-xs space-y-0.5">
-              <li>• Traits et résistances</li>
-              <li>• Sorts d'espèce</li>
-              <li>• Langues spéciales</li>
+              <li><?= __('gameHelp.species.trait1', '• Traits et résistances') ?></li>
+              <li><?= __('gameHelp.species.trait2', '• Sorts d\'espèce') ?></li>
+              <li><?= __('gameHelp.species.trait3', '• Langues spéciales') ?></li>
             </ul>
           </div>
         </div>
@@ -943,7 +880,7 @@ echo $snipcartInit;
         <!-- Triptyque de Classe -->
         <div class="card-product">
           <div class="h-[6rem] mb-6 flex items-center justify-center">
-            <h3 class="text-2xl font-bold text-center text-blue-400 leading-tight">⚔️ Classe</h3>
+            <h3 class="text-2xl font-bold text-center text-blue-400 leading-tight"><?= __('gameHelp.examples.class', '⚔️ Classe') ?></h3>
           </div>
           
           <div class="flip-container" id="class-flip" onclick="flipCard('class-flip')">
@@ -958,15 +895,15 @@ echo $snipcartInit;
           </div>
           
           <div class="text-center h-[180px] flex flex-col justify-start">
-            <h4 class="font-semibold mb-2 text-blue-300">Exemple : Barbare</h4>
+            <h4 class="font-semibold mb-2 text-blue-300"><?= __('gameHelp.class.example', 'Exemple : Barbare') ?></h4>
             <p class="text-gray-300 text-sm mb-3">
-              Aptitudes de classe et progression avec statistiques vitales.
+              <?= __('gameHelp.class.exampleDesc', 'Aptitudes de classe et progression avec statistiques vitales.') ?>
             </p>
             <ul class="text-gray-400 text-xs space-y-0.5">
-              <li>• Initiative et jets de mort</li>
-              <li>• Points de vie complets</li>
-              <li>• Classe d'armure</li>
-              <li>• Rage et aptitudes</li>
+              <li><?= __('gameHelp.class.trait1', '• Initiative et jets de mort') ?></li>
+              <li><?= __('gameHelp.class.trait2', '• Points de vie complets') ?></li>
+              <li><?= __('gameHelp.class.trait3', '• Classe d\'armure') ?></li>
+              <li><?= __('gameHelp.class.trait4', '• Rage et aptitudes') ?></li>
             </ul>
           </div>
         </div>
@@ -974,7 +911,7 @@ echo $snipcartInit;
         <!-- Triptyque d'Historique -->
         <div class="card-product">
           <div class="h-[6rem] mb-6 flex items-center justify-center">
-            <h3 class="text-2xl font-bold text-center text-purple-400 leading-tight">📜 Historique</h3>
+            <h3 class="text-2xl font-bold text-center text-purple-400 leading-tight"><?= __('gameHelp.examples.background', '📜 Historique') ?></h3>
           </div>
           
           <div class="flip-container" id="background-flip" onclick="flipCard('background-flip')">
@@ -989,15 +926,15 @@ echo $snipcartInit;
           </div>
           
           <div class="text-center h-[180px] flex flex-col justify-start">
-            <h4 class="font-semibold mb-2 text-purple-300">Exemple : Acolyte</h4>
+            <h4 class="font-semibold mb-2 text-purple-300"><?= __('gameHelp.background.example', 'Exemple : Acolyte') ?></h4>
             <p class="text-gray-300 text-sm mb-3">
-              <strong>D&D 2024 :</strong> Bonus de caractéristiques maintenant dans l'historique.
+              <?= __('gameHelp.background.exampleDesc', '<strong>D&D 2024 :</strong> Bonus de caractéristiques maintenant dans l\'historique.') ?>
             </p>
             <ul class="text-gray-400 text-xs space-y-0.5">
-              <li>• <strong>Bonus caractéristiques</strong></li>
-              <li>• Compétences sociales</li>
-              <li>• Aptitude spéciale</li>
-              <li>• Personnalité</li>
+              <li><?= __('gameHelp.background.trait1', '• <strong>Bonus caractéristiques</strong>') ?></li>
+              <li><?= __('gameHelp.background.trait2', '• Compétences sociales') ?></li>
+              <li><?= __('gameHelp.background.trait3', '• Aptitude spéciale') ?></li>
+              <li><?= __('gameHelp.background.trait4', '• Personnalité') ?></li>
             </ul>
           </div>
         </div>
@@ -1006,13 +943,12 @@ echo $snipcartInit;
 
       <!-- ===== GUIDE DÉTAILLÉ DE REMPLISSAGE D&D 2024 ===== -->
       <div class="bg-gradient-to-r from-emerald-900/30 to-blue-900/30 rounded-xl p-8 border border-emerald-700/50 mt-16">
-        <h3 class="text-3xl font-bold mb-8 text-center text-emerald-400">📝 Guide Détaillé de Remplissage (D&D 2024)</h3>
+        <h3 class="text-3xl font-bold mb-8 text-center text-emerald-400"><?= __('gameHelp.detailedGuide.title', '📝 Guide Détaillé de Remplissage (D&D 2024)') ?></h3>
         
         <div class="bg-yellow-900/30 border border-yellow-600/50 rounded-lg p-4 mb-8">
-          <h4 class="text-xl font-bold text-yellow-400 mb-2">⚠️ Nouveau dans D&D 2024 !</h4>
+          <h4 class="text-xl font-bold text-yellow-400 mb-2"><?= __('gameHelp.fillingGuide.newIn2024', '⚠️ Nouveau dans D&D 2024 !') ?></h4>
           <p class="text-gray-300">
-            <strong>Important :</strong> Les bonus de caractéristiques sont maintenant assignés par l'<strong>Historique</strong>, 
-            plus par l'Espèce ! C'est dans le triptyque d'Historique que vous noterez vos caractéristiques finales.
+            <?= __('gameHelp.detailedGuide.important', '<strong>Important :</strong>') ?> <?= __('gameHelp.detailedGuide.importantText', 'Les bonus de caractéristiques sont maintenant assignés par l\'<strong>Historique</strong>, plus par l\'Espèce ! C\'est dans le triptyque d\'Historique que vous noterez vos caractéristiques finales.') ?>
           </p>
         </div>
         
@@ -1020,38 +956,38 @@ echo $snipcartInit;
 
           <!-- Triptyque d'Historique - PREMIER car c'est là qu'on note les caractéristiques -->
           <div class="bg-purple-900/20 p-6 rounded-lg border border-purple-500/50">
-            <h4 class="text-xl font-bold mb-4 text-purple-400">📜 1. Triptyque d'Historique (PRIORITÉ)</h4>
+            <h4 class="text-xl font-bold mb-4 text-purple-400"><?= __('gameHelp.detailedGuide.backgroundPriority.title', '📜 1. Triptyque d\'Historique (PRIORITÉ)') ?></h4>
             
             <div class="space-y-4">
               <div class="border-l-4 border-purple-500 pl-4">
-                <h5 class="font-semibold text-purple-300">1. Bonus de caractéristiques (NOUVEAU 2024)</h5>
+                <h5 class="font-semibold text-purple-300"><?= __('gameHelp.detailedGuide.backgroundPriority.characteristics.title', '1. Bonus de caractéristiques (NOUVEAU 2024)') ?></h5>
                 <p class="text-gray-300 text-sm">
-                  <strong>C'est ICI que vous notez vos caractéristiques finales !</strong><br>
-                  • Lancez 4d6 (gardez les 3 meilleurs) avec le lanceur ci-dessus<br>
-                  • Ajoutez les bonus d'historique (+2 dans une carac, +1 dans une autre)<br>
-                  • Notez le total final et le modificateur (ex: 16 = +3)<br>
-                  • <em>Les espèces n'ont plus de bonus de caractéristiques fixes</em>
+                  <?= __('gameHelp.detailedGuide.backgroundPriority.characteristics.important', '<strong>C\'est ICI que vous notez vos caractéristiques finales !</strong>') ?><br>
+                  <?= __('gameHelp.detailedGuide.backgroundPriority.characteristics.rules.rule1', '• Lancez 4d6 (gardez les 3 meilleurs) avec le lanceur ci-dessus') ?><br>
+                  <?= __('gameHelp.detailedGuide.backgroundPriority.characteristics.rules.rule2', '• Ajoutez les bonus d\'historique (+2 dans une carac, +1 dans une autre)') ?><br>
+                  <?= __('gameHelp.detailedGuide.backgroundPriority.characteristics.rules.rule3', '• Notez le total final et le modificateur (ex: 16 = +3)') ?><br>
+                  <?= __('gameHelp.detailedGuide.backgroundPriority.characteristics.rules.rule4', '• <em>Les espèces n\'ont plus de bonus de caractéristiques fixes</em>') ?>
                 </p>
               </div>
               
               <div class="border-l-4 border-purple-500 pl-4">
-                <h5 class="font-semibold text-purple-300">2. Compétences et maîtrises (toutes sources)</h5>
+                <h5 class="font-semibold text-purple-300"><?= __('gameHelp.detailedGuide.backgroundPriority.skills.title', '2. Compétences et maîtrises (toutes sources)') ?></h5>
                 <p class="text-gray-300 text-sm">
-                  <strong>Triptyque d'Historique = CENTRALISATION de toutes les compétences !</strong><br>
-                  • Les 2 compétences d'historique<br>
-                  • Compétences de classe (reportées depuis le triptyque de Classe)<br>
-                  • Compétences raciales (reportées depuis le triptyque d'Espèce)<br>
-                  • Maîtrises d'outils spécifiques<br>
-                  • Aptitude d'historique unique (ex: Initié à la magie)
+                  <?= __('gameHelp.detailedGuide.backgroundPriority.skills.important', '<strong>Triptyque d\'Historique = CENTRALISATION de toutes les compétences !</strong>') ?><br>
+                  <?= __('gameHelp.detailedGuide.backgroundPriority.skills.list.item1', '• Les 2 compétences d\'historique') ?><br>
+                  <?= __('gameHelp.detailedGuide.backgroundPriority.skills.list.item2', '• Compétences de classe (reportées depuis le triptyque de Classe)') ?><br>
+                  <?= __('gameHelp.detailedGuide.backgroundPriority.skills.list.item3', '• Compétences raciales (reportées depuis le triptyque d\'Espèce)') ?><br>
+                  <?= __('gameHelp.detailedGuide.backgroundPriority.skills.list.item4', '• Maîtrises d\'outils spécifiques') ?><br>
+                  <?= __('gameHelp.detailedGuide.backgroundPriority.skills.list.item5', '• Aptitude d\'historique unique (ex: Initié à la magie)') ?>
                 </p>
               </div>
               
               <div class="border-l-4 border-purple-500 pl-4">
-                <h5 class="font-semibold text-purple-300">3. Équipement et Personnalité</h5>
+                <h5 class="font-semibold text-purple-300"><?= __('gameHelp.detailedGuide.backgroundPriority.equipment.title', '3. Équipement et Personnalité') ?></h5>
                 <p class="text-gray-300 text-sm">
-                  • Cartes d'équipement de départ fournies avec le triptyque<br>
-                  • Remplissez les traits de personnalité (Coûts, Idéaux, Liens, Défauts)<br>
-                  • Développez votre background narratif
+                  <?= __('gameHelp.detailedGuide.backgroundPriority.equipment.list.item1', '• Cartes d\\équipement de départ fournies avec le triptyque') ?><br>
+                  <?= __('gameHelp.detailedGuide.backgroundPriority.equipment.list.item2', '• Remplissez les traits de personnalité (Coûts, Idéaux, Liens, Défauts)') ?><br>
+                  <?= __('gameHelp.detailedGuide.backgroundPriority.equipment.list.item3', '• Développez votre background narratif') ?>
                 </p>
               </div>
             </div>
@@ -1059,43 +995,43 @@ echo $snipcartInit;
           
           <!-- Triptyque d'Espèce - Remplissage -->
           <div class="bg-gray-800/50 p-6 rounded-lg">
-            <h4 class="text-xl font-bold mb-4 text-emerald-400">🧝 2. Triptyque d'Espèce</h4>
+            <h4 class="text-xl font-bold mb-4 text-emerald-400"><?= __('gameHelp.detailedGuide.speciesGuide.title', '🧝 2. Triptyque d\'Espèce') ?></h4>
             
             <div class="space-y-4">
               <div class="border-l-4 border-emerald-500 pl-4">
-                <h5 class="font-semibold text-emerald-300">1. Langues et traits raciaux</h5>
+                <h5 class="font-semibold text-emerald-300"><?= __('gameHelp.detailedGuide.speciesGuide.traits.title', '1. Langues et traits raciaux') ?></h5>
                 <p class="text-gray-300 text-sm">
-                  <strong>Langues :</strong> C'est ICI que vous notez les langues !<br>
-                  • Langue commune + langue raciale (ex: Céleste, Draconique)<br>
-                  • Une troisième langue au choix<br>
-                  • Cochez les résistances aux dégâts<br>
-                  • Notez les sens spéciaux (vision dans le noir, etc.)
+                  <?= __('gameHelp.detailedGuide.speciesGuide.traits.languages', '<strong>Langues :</strong> C\'est ICI que vous notez les langues !') ?><br>
+                  <?= __('gameHelp.detailedGuide.speciesGuide.traits.list.item1', '• Langue commune + langue raciale (ex: Céleste, Draconique)') ?><br>
+                  <?= __('gameHelp.detailedGuide.speciesGuide.traits.list.item2', '• Une troisième langue au choix') ?><br>
+                  <?= __('gameHelp.detailedGuide.speciesGuide.traits.list.item3', '• Cochez les résistances aux dégâts') ?><br>
+                  <?= __('gameHelp.detailedGuide.speciesGuide.traits.list.item4', '• Notez les sens spéciaux (vision dans le noir, etc.)') ?>
                 </p>
               </div>
               
               <div class="border-l-4 border-emerald-500 pl-4">
-                <h5 class="font-semibold text-emerald-300">2. Capacités et sorts d'espèce</h5>
+                <h5 class="font-semibold text-emerald-300"><?= __('gameHelp.detailedGuide.speciesGuide.abilities.title', '2. Capacités et sorts d\'espèce') ?></h5>
                 <p class="text-gray-300 text-sm">
-                  • Détaillez les sorts raciaux (niveau, utilisations/repos)<br>
-                  • Notez les aptitudes héréditaires uniques<br>
-                  • Cochez les immunités et résistances spéciales<br>
-                  • Taille, vitesse de déplacement, durée de vie
+                  <?= __('gameHelp.detailedGuide.speciesGuide.abilities.list.item1', '• Détaillez les sorts raciaux (niveau, utilisations/repos)') ?><br>
+                  <?= __('gameHelp.detailedGuide.speciesGuide.abilities.list.item2', '• Notez les aptitudes héréditaires uniques') ?><br>
+                  <?= __('gameHelp.detailedGuide.speciesGuide.abilities.list.item3', '• Cochez les immunités et résistances spéciales') ?><br>
+                  <?= __('gameHelp.detailedGuide.speciesGuide.abilities.list.item4', '• Taille, vitesse de déplacement, durée de vie') ?>
                 </p>
                 <div class="mt-3 p-2 bg-yellow-900/30 rounded border-l-2 border-yellow-500">
                   <p class="text-yellow-300 text-xs italic">
-                    📝 <strong>Note importante :</strong> Les compétences et maîtrises d'espèce doivent être reportées sur le triptyque d'Historique !
+                    <?= __('gameHelp.detailedGuide.speciesGuide.note', '📝 <strong>Note importante :</strong> Les compétences et maîtrises d\'espèce doivent être reportées sur le triptyque d\'Historique !') ?>
                   </p>
                 </div>
               </div>
               
               <div class="border-l-4 border-emerald-500 pl-4">
-                <h5 class="font-semibold text-emerald-300">3. Champs "Entraînements" (vides au départ)</h5>
+                <h5 class="font-semibold text-emerald-300"><?= __('gameHelp.detailedGuide.speciesGuide.training.title', '3. Champs "Entraînements" (vides au départ)') ?></h5>
                 <p class="text-gray-300 text-sm">
-                  <strong>Important :</strong> Ces 5 champs sont pour les acquisitions EN JEU<br>
-                  • Nouvelles langues apprises durant l'aventure<br>
-                  • Maîtrises d'outils acquises<br>
-                  • Compétences spéciales gagnées<br>
-                  • Ne les remplissez que si votre personnage apprend quelque chose
+                  <?= __('gameHelp.detailedGuide.speciesGuide.training.important', '<strong>Important :</strong> Ces 5 champs sont pour les acquisitions EN JEU') ?><br>
+                  <?= __('gameHelp.detailedGuide.speciesGuide.training.list.item1', '• Nouvelles langues apprises durant l\'aventure') ?><br>
+                  <?= __('gameHelp.detailedGuide.speciesGuide.training.list.item2', '• Maîtrises d\'outils acquises') ?><br>
+                  <?= __('gameHelp.detailedGuide.speciesGuide.training.list.item3', '• Compétences spéciales gagnées') ?><br>
+                  <?= __('gameHelp.detailedGuide.speciesGuide.training.list.item4', '• Ne les remplissez que si votre personnage apprend quelque chose') ?>
                 </p>
               </div>
             </div>
@@ -1103,40 +1039,40 @@ echo $snipcartInit;
 
           <!-- Triptyque de Classe - Remplissage -->
           <div class="bg-gray-800/50 p-6 rounded-lg">
-            <h4 class="text-xl font-bold mb-4 text-blue-400">⚔️ 3. Triptyque de Classe</h4>
+            <h4 class="text-xl font-bold mb-4 text-blue-400"><?= __('gameHelp.detailedGuide.classGuide.title', '⚔️ 3. Triptyque de Classe') ?></h4>
             
             <div class="space-y-4">
               <div class="border-l-4 border-blue-500 pl-4">
-                <h5 class="font-semibold text-blue-300">1. Statistiques vitales et combat</h5>
+                <h5 class="font-semibold text-blue-300"><?= __('gameHelp.detailedGuide.classGuide.combat.title', '1. Statistiques vitales et combat') ?></h5>
                 <p class="text-gray-300 text-sm">
-                  • <strong>Points de vie :</strong> Maximum, actuels, temporaires<br>
-                  • <strong>Classe d'armure :</strong> Avec et sans bouclier<br>
-                  • <strong>Initiative :</strong> Modificateur et résultat de jet<br>
-                  • <strong>Jets contre la mort :</strong> Suivi des réussites/échecs<br>
-                  • Niveau actuel et bonus de maîtrise
+                  <?= __('gameHelp.detailedGuide.classGuide.combat.list.item1', '• <strong>Points de vie :</strong> Maximum, actuels, temporaires') ?><br>
+                  <?= __('gameHelp.detailedGuide.classGuide.combat.list.item2', '• <strong>Classe d\'armure :</strong> Avec et sans bouclier') ?><br>
+                  <?= __('gameHelp.detailedGuide.classGuide.combat.list.item3', '• <strong>Initiative :</strong> Modificateur et résultat de jet') ?><br>
+                  <?= __('gameHelp.detailedGuide.classGuide.combat.list.item4', '• <strong>Jets contre la mort :</strong> Suivi des réussites/échecs') ?><br>
+                  <?= __('gameHelp.detailedGuide.classGuide.combat.list.item5', '• Niveau actuel et bonus de maîtrise') ?>
                 </p>
               </div>
               
               <div class="border-l-4 border-blue-500 pl-4">
-                <h5 class="font-semibold text-blue-300">2. Compétences et maîtrises de classe</h5>
+                <h5 class="font-semibold text-blue-300"><?= __('gameHelp.detailedGuide.classGuide.skills.title', '2. Compétences et maîtrises de classe') ?></h5>
                 <p class="text-gray-300 text-sm">
-                  • Cochez les compétences de classe maîtrisées<br>
-                  • Notez les maîtrises d'armes et armures<br>
-                  • Jets de sauvegarde maîtrisés
+                  <?= __('gameHelp.detailedGuide.classGuide.skills.list.item1', '• Cochez les compétences de classe maîtrisées') ?><br>
+                  <?= __('gameHelp.detailedGuide.classGuide.skills.list.item2', '• Notez les maîtrises d\'armes et armures') ?><br>
+                  <?= __('gameHelp.detailedGuide.classGuide.skills.list.item3', '• Jets de sauvegarde maîtrisés') ?>
                 </p>
                 <div class="mt-3 p-2 bg-yellow-900/30 rounded border-l-2 border-yellow-500">
                   <p class="text-yellow-300 text-xs italic">
-                    📝 <strong>Note importante :</strong> Les compétences et maîtrises de classe doivent être reportées sur le triptyque d'Historique !
+                    <?= __('gameHelp.detailedGuide.classGuide.note', '📝 <strong>Note importante :</strong> Les compétences et maîtrises de classe doivent être reportées sur le triptyque d\'Historique !') ?>
                   </p>
                 </div>
               </div>
               
               <div class="border-l-4 border-blue-500 pl-4">
-                <h5 class="font-semibold text-blue-300">3. Aptitudes et ressources</h5>
+                <h5 class="font-semibold text-blue-300"><?= __('gameHelp.detailedGuide.classGuide.abilities.title', '3. Aptitudes et ressources') ?></h5>
                 <p class="text-gray-300 text-sm">
-                  • Aptitudes acquises par niveau (cochez au fur et à mesure)<br>
-                  • Ressources de classe (Rage, Inspiration, Emplacements de sorts...)<br>
-                  • Capacités de sous-classe spécifiques
+                  <?= __('gameHelp.detailedGuide.classGuide.abilities.list.item1', '• Aptitudes acquises par niveau (cochez au fur et à mesure)') ?><br>
+                  <?= __('gameHelp.detailedGuide.classGuide.abilities.list.item2', '• Ressources de classe (Rage, Inspiration, Emplacements de sorts...)') ?><br>
+                  <?= __('gameHelp.detailedGuide.classGuide.abilities.list.item3', '• Capacités de sous-classe spécifiques') ?>
                 </p>
               </div>
             </div>
@@ -1144,34 +1080,34 @@ echo $snipcartInit;
 
           <!-- Ordre de remplissage -->
           <div class="bg-gradient-to-br from-yellow-900/30 to-orange-900/30 p-6 rounded-lg border border-yellow-600/50">
-            <h4 class="text-xl font-bold mb-4 text-yellow-400">📋 Ordre de Remplissage Recommandé</h4>
+            <h4 class="text-xl font-bold mb-4 text-yellow-400"><?= __('gameHelp.detailedGuide.order.title', '📋 Ordre de Remplissage Recommandé') ?></h4>
             
             <div class="space-y-3">
               <div class="flex items-start space-x-3">
                 <span class="bg-purple-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">1</span>
                 <p class="text-gray-300 text-sm">
-                  <strong>Historique FIRST :</strong> Lancez les dés et notez les caractéristiques avec bonus d'historique
+                  <?= __('gameHelp.detailedGuide.order.step1.text', '<strong>Historique FIRST :</strong> Lancez les dés et notez les caractéristiques avec bonus d\'historique') ?>
                 </p>
               </div>
               
               <div class="flex items-start space-x-3">
                 <span class="bg-emerald-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">2</span>
                 <p class="text-gray-300 text-sm">
-                  <strong>Espèce :</strong> Traits raciaux, langues, capacités. <em>Reportez les compétences sur l'Historique</em>
+                  <?= __('gameHelp.detailedGuide.order.step2.text', '<strong>Espèce :</strong> Traits raciaux, langues, capacités. <em>Reportez les compétences sur l\'Historique</em>') ?>
                 </p>
               </div>
               
               <div class="flex items-start space-x-3">
                 <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">3</span>
                 <p class="text-gray-300 text-sm">
-                  <strong>Classe :</strong> PV, aptitudes, ressources. <em>Reportez les compétences sur l'Historique</em>
+                  <?= __('gameHelp.detailedGuide.order.step3.text', '<strong>Classe :</strong> PV, aptitudes, ressources. <em>Reportez les compétences sur l\'Historique</em>') ?>
                 </p>
               </div>
               
               <div class="flex items-start space-x-3">
                 <span class="bg-purple-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">4</span>
                 <p class="text-gray-300 text-sm">
-                  <strong>Historique FINAL :</strong> Centralisez toutes les compétences et maîtrises des 3 triptyques
+                  <?= __('gameHelp.detailedGuide.order.step4.text', '<strong>Historique FINAL :</strong> Centralisez toutes les compétences et maîtrises des 3 triptyques') ?>
                 </p>
               </div>
             </div>
@@ -1179,34 +1115,34 @@ echo $snipcartInit;
 
           <!-- Conseils généraux -->
           <div class="bg-gray-800/50 p-6 rounded-lg">
-            <h4 class="text-xl font-bold mb-4 text-yellow-400">💡 Conseils de Remplissage</h4>
+            <h4 class="text-xl font-bold mb-4 text-yellow-400"><?= __('gameHelp.detailedGuide.tips.title', '💡 Conseils de Remplissage') ?></h4>
             
             <div class="space-y-3">
               <div class="flex items-start space-x-3">
                 <span class="text-yellow-400 font-bold">✏️</span>
                 <p class="text-gray-300 text-sm">
-                  <strong>Crayon obligatoire :</strong> Les valeurs évoluent constamment
+                  <?= __('gameHelp.detailedGuide.tips.tip1.text', '<strong>Crayon obligatoire :</strong> Les valeurs évoluent constamment') ?>
                 </p>
               </div>
               
               <div class="flex items-start space-x-3">
                 <span class="text-yellow-400 font-bold">📸</span>
                 <p class="text-gray-300 text-sm">
-                  <strong>Photo de sauvegarde :</strong> Sécurisez vos triptyques remplis
+                  <?= __('gameHelp.detailedGuide.tips.tip2.text', '<strong>Photo de sauvegarde :</strong> Sécurisez vos triptyques remplis') ?>
                 </p>
               </div>
               
               <div class="flex items-start space-x-3">
                 <span class="text-yellow-400 font-bold">🎯</span>
                 <p class="text-gray-300 text-sm">
-                  <strong>Organisation :</strong> Historique à gauche (caracs), Espèce au centre, Classe à droite
+                  <?= __('gameHelp.detailedGuide.tips.tip3.text', '<strong>Organisation :</strong> Historique à gauche (caracs), Espèce au centre, Classe à droite') ?>
                 </p>
               </div>
               
               <div class="flex items-start space-x-3">
                 <span class="text-yellow-400 font-bold">⚡</span>
                 <p class="text-gray-300 text-sm">
-                  <strong>Mémo 2024 :</strong> Les bonus de caracs viennent de l'HISTORIQUE maintenant !
+                  <?= __('gameHelp.detailedGuide.tips.tip4.text', '<strong>Mémo 2024 :</strong> Les bonus de caracs viennent de l\'HISTORIQUE maintenant !') ?>
                 </p>
               </div>
             </div>
@@ -1216,32 +1152,31 @@ echo $snipcartInit;
 
       <!-- ===== PERSONNALISATION SUR MESURE ===== -->
       <div class="bg-gradient-to-r from-indigo-900/30 to-purple-900/30 rounded-xl p-8 border border-indigo-700/50 mt-16">
-        <h3 class="text-3xl font-bold mb-6 text-center text-indigo-400">✨ Triptyques Personnalisés</h3>
+        <h3 class="text-3xl font-bold mb-6 text-center text-indigo-400"><?= __('gameHelp.customTriptychs.title', '✨ Triptyques Personnalisés') ?></h3>
         
         <div class="max-w-4xl mx-auto text-center">
           <p class="text-xl text-gray-300 mb-6 txt-court">
-            Vous voulez un triptyque totalement adapté à votre personnage unique ? 
-            Nous créons des triptyques sur mesure avec vos choix spécifiques !
+            <?= __('gameHelp.customTriptychs.description', 'Vous voulez un triptyque totalement adapté à votre personnage unique ? Nous créons des triptyques sur mesure avec vos choix spécifiques !') ?>
           </p>
           
           <div class="grid md:grid-cols-2 gap-8 mt-8">
             <div class="bg-gray-800/50 p-6 rounded-lg">
-              <h4 class="text-xl font-bold mb-4 text-indigo-300">🎯 Triptyques Standards</h4>
+              <h4 class="text-xl font-bold mb-4 text-indigo-300"><?= __('gameHelp.customTriptychs.standard.title', '🎯 Triptyques Standards') ?></h4>
               <ul class="text-gray-300 text-left space-y-2">
-                <li>• Cartes d'équipement aléatoires incluses</li>
-                <li>• Choix standards pour les options variables</li>
-                <li>• Livraison rapide depuis notre stock</li>
-                <li>• Prix catalogue de la boutique</li>
+                <li><?= __('gameHelp.customTriptychs.standard.list.item1', '• Cartes d\\équipement aléatoires incluses') ?></li>
+                <li><?= __('gameHelp.customTriptychs.standard.list.item2', '• Choix standards pour les options variables') ?></li>
+                <li><?= __('gameHelp.customTriptychs.standard.list.item3', '• Livraison rapide depuis notre stock') ?></li>
+                <li><?= __('gameHelp.customTriptychs.standard.list.item4', '• Prix catalogue de la boutique') ?></li>
               </ul>
             </div>
             
             <div class="bg-gray-800/50 p-6 rounded-lg border border-indigo-500/50">
-              <h4 class="text-xl font-bold mb-4 text-indigo-300">⭐ Triptyques Personnalisés</h4>
+              <h4 class="text-xl font-bold mb-4 text-indigo-300"><?= __('gameHelp.customTriptychs.custom.title', '⭐ Triptyques Personnalisés') ?></h4>
               <ul class="text-gray-300 text-left space-y-2">
-                <li>• Choix précis de tous les équipements</li>
-                <li>• Sélection manuelle des cartes incluses</li>
-                <li>• Adaptation à votre background spécifique</li>
-                <li>• Création sur commande (délai supplémentaire)</li>
+                <li><?= __('gameHelp.customTriptychs.custom.list.item1', '• Choix précis de tous les équipements') ?></li>
+                <li><?= __('gameHelp.customTriptychs.custom.list.item2', '• Sélection manuelle des cartes incluses') ?></li>
+                <li><?= __('gameHelp.customTriptychs.custom.list.item3', '• Adaptation à votre background spécifique') ?></li>
+                <li><?= __('gameHelp.customTriptychs.custom.list.item4', '• Création sur commande (délai supplémentaire)') ?></li>
               </ul>
             </div>
           </div>
@@ -1249,19 +1184,19 @@ echo $snipcartInit;
           <div class="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-lg p-6 mt-8 border border-yellow-700/50">
             <h4 class="text-xl font-bold mb-4 text-yellow-400">📧 Comment Commander</h4>
             <p class="text-gray-300 mb-4">
-              Pour un triptyque entièrement personnalisé, contactez-nous par email avec les détails de votre personnage :
+              <?= __('gameHelp.customTriptychs.contact.description', 'Pour un triptyque entièrement personnalisé, contactez-nous par email avec les détails de votre personnage :') ?>
             </p>
             <div class="flex flex-col md:flex-row items-center justify-center gap-4">
-              <a href="mailto:commande@geekndragon.com?subject=Triptyque Personnalisé" 
+              <a href="mailto:<?= __('gameHelp.customTriptychs.contact.email', 'commande@geekndragon.com') ?>?subject=<?= __('gameHelp.customTriptychs.contact.subject', 'Triptyque Personnalisé') ?>" 
                  class="btn btn-primary text-lg px-6 py-3">
-                📧 commande@geekndragon.com
+                📧 <?= __('gameHelp.customTriptychs.contact.email', 'commande@geekndragon.com') ?>
               </a>
-              <span class="text-gray-400">Sujet : "Triptyque Personnalisé"</span>
+              <span class="text-gray-400"><?= __('gameHelp.customTriptychs.contact.subjectLabel', 'Sujet : "Triptyque Personnalisé"') ?></span>
             </div>
           </div>
           
           <div class="mt-6 text-sm text-gray-400">
-            <p>💡 <strong>Astuce :</strong> Précisez votre classe, espèce, historique et vos préférences d'équipement dans votre email</p>
+            <p><?= __('gameHelp.customTriptychs.contact.tip', '💡 <strong>Astuce :</strong> Précisez votre classe, espèce, historique et vos préférences d\'équipement dans votre email') ?></p>
           </div>
         </div>
       </div>
@@ -1274,67 +1209,59 @@ echo $snipcartInit;
     <div class="max-w-6xl mx-auto px-6">
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-bold mb-6 text-indigo-400">
-          Comment utiliser vos triptyques
+          <?= __('gameHelp.customTriptychs.usage.title', 'Comment utiliser vos triptyques') ?>
         </h2>
         <p class="text-xl text-gray-300 txt-court">
-          Vos triptyques cartonnés sont conçus pour être pliés et organisés sur votre table de jeu
+          <?= __('gameHelp.customTriptychs.usage.description', 'Vos triptyques cartonnés sont conçus pour être pliés et organisés sur votre table de jeu') ?>
         </p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
         <div class="usage-step">
           <div class="step-number">1</div>
-          <h3 class="text-xl font-semibold mb-4 text-indigo-400">📁 Pliez en 3 volets</h3>
+          <h3 class="text-xl font-semibold mb-4 text-indigo-400"><?= __('gameHelp.customTriptychs.usage.step1.title', '📁 Pliez en 3 volets') ?></h3>
           <p class="text-gray-300">
-            Chaque triptyque se plie facilement en 3 sections. Le carton robuste maintient la forme 
-            et permet une consultation rapide des informations sur les 3 volets.
+            <?= __('gameHelp.customTriptychs.usage.step1.text', 'Chaque triptyque se plie facilement en 3 sections. Le carton robuste maintient la forme et permet une consultation rapide des informations sur les 3 volets.') ?>
           </p>
         </div>
 
         <div class="usage-step">
           <div class="step-number">2</div>
-          <h3 class="text-xl font-semibold mb-4 text-blue-400">🎯 Organisez sur votre table</h3>
+          <h3 class="text-xl font-semibold mb-4 text-blue-400"><?= __('gameHelp.customTriptychs.usage.step2.title', '🎯 Organisez sur votre table') ?></h3>
           <p class="text-gray-300">
-            Disposez vos 3 triptyques devant vous : Espèce à gauche, Classe au centre, Historique à droite. 
-            Accès instantané à toutes vos capacités.
+            <?= __('gameHelp.customTriptychs.usage.step2.text', 'Disposez vos 3 triptyques devant vous : Espèce à gauche, Classe au centre, Historique à droite. Accès instantané à toutes vos capacités.') ?>
           </p>
         </div>
 
         <div class="usage-step">
           <div class="step-number">3</div>
-          <h3 class="text-xl font-semibold mb-4 text-purple-400">⚡ Consultez pendant le jeu</h3>
+          <h3 class="text-xl font-semibold mb-4 text-purple-400"><?= __('gameHelp.customTriptychs.usage.step3.title', '⚡ Consultez pendant le jeu') ?></h3>
           <p class="text-gray-300">
-            Plus besoin d'ouvrir les manuels ! Toutes vos aptitudes sont visibles d'un coup d'œil. 
-            Le MJ et les autres joueurs restent concentrés sur l'action.
+            <?= __('gameHelp.customTriptychs.usage.step3.text', 'Plus besoin d\'ouvrir les manuels ! Toutes vos aptitudes sont visibles d\'un coup d\'œil. Le MJ et les autres joueurs restent concentrés sur l\'action.') ?>
           </p>
         </div>
       </div>
 
       <div class="text-center mt-12">
         <div class="bg-gray-800/50 rounded-xl p-8 border border-gray-700">
-          <h3 class="text-2xl font-bold mb-4 text-yellow-400">💡 Conseil Pro</h3>
+          <h3 class="text-2xl font-bold mb-4 text-yellow-400"><?= __('gameHelp.customTriptychs.usage.proTip.title', '💡 Conseil Pro') ?></h3>
           <p class="text-gray-300 text-lg mb-6">
-            Gardez vos triptyques ouverts pendant toute la session.
-            Ils remplacent efficacement la feuille de personnage traditionnelle et accélèrent considérablement le jeu !
+            <?= __('gameHelp.customTriptychs.usage.proTip.text', 'Gardez vos triptyques ouverts pendant toute la session. Ils remplacent efficacement la feuille de personnage traditionnelle et accélèrent considérablement le jeu !') ?>
           </p>
 
           <div class="bg-gray-700/30 rounded-lg p-6 border border-yellow-500/30">
-            <h4 class="text-xl font-bold mb-4 text-yellow-300">✏️ Astuce d'Écriture & Effacement</h4>
+            <h4 class="text-xl font-bold mb-4 text-yellow-300"><?= __('gameHelp.customTriptychs.usage.proTip.writingAdvice.title', '✏️ Astuce d\'\u00c9criture & Effacement') ?></h4>
             <div class="grid md:grid-cols-2 gap-6">
               <div>
-                <h5 class="font-semibold text-yellow-200 mb-2">Pour les Triptyques :</h5>
+                <h5 class="font-semibold text-yellow-200 mb-2"><?= __('gameHelp.customTriptychs.usage.proTip.writingAdvice.triptychs.title', 'Pour les Triptyques :') ?></h5>
                 <p class="text-gray-300 text-sm mb-3">
-                  <strong>Marqueurs permanents Sharpie + gomme Staedtler</strong> = combinaison parfaite !
-                  Vous pouvez effacer complètement le marqueur sur les triptyques, même sur les zones colorées.
-                  N'hésitez pas à gommer énergiquement, le carton résiste parfaitement.
+                  <?= __('gameHelp.customTriptychs.usage.proTip.writingAdvice.triptychs.text', '<strong>Marqueurs permanents Sharpie + gomme Staedtler</strong> = combinaison parfaite ! Vous pouvez effacer complètement le marqueur sur les triptyques, même sur les zones colorées. N\'hésitez pas à gommer énergiquement, le carton résiste parfaitement.') ?>
                 </p>
               </div>
               <div>
-                <h5 class="font-semibold text-yellow-200 mb-2">Pour les Cartes :</h5>
+                <h5 class="font-semibold text-yellow-200 mb-2"><?= __('gameHelp.customTriptychs.usage.proTip.writingAdvice.cards.title', 'Pour les Cartes :') ?></h5>
                 <p class="text-gray-300 text-sm mb-3">
-                  La technique fonctionne aussi sur les cartes, mais <strong>limitez le gommage aux zones blanches</strong>
-                  idéalement car elles sont plus fines. Les cartes devraient être personnalisées à chaque personnage
-                  pour une expérience optimale !
+                  <?= __('gameHelp.customTriptychs.usage.proTip.writingAdvice.cards.text', 'La technique fonctionne aussi sur les cartes, mais <strong>limitez le gommage aux zones blanches</strong> idéalement car elles sont plus fines. Les cartes devraient être personnalisées à chaque personnage pour une expérience optimale !') ?>
                 </p>
               </div>
             </div>
@@ -1357,11 +1284,10 @@ echo $snipcartInit;
       
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-bold mb-8 text-yellow-400">
-          🃏 Guide des Cartes à Jouer Geek & Dragon
+          <?= __('gameHelp.cards.mainTitle', '🃏 Guide des Cartes à Jouer Geek & Dragon') ?>
         </h2>
         <p class="text-xl text-gray-300 max-w-4xl mx-auto txt-court">
-          Complétez vos triptyques avec nos cartes détaillées : Armes, Armures, Équipements, Sorts, Monstres et bien plus !
-          Chaque carte contient toutes les informations nécessaires pour accélérer vos parties.
+          <?= __('gameHelp.cards.mainDescription', 'Complétez vos triptyques avec nos cartes détaillées : Armes, Armures, Équipements, Sorts, Monstres et bien plus ! Chaque carte contient toutes les informations nécessaires pour accélérer vos parties.') ?>
         </p>
       </div>
 
@@ -1372,13 +1298,13 @@ echo $snipcartInit;
         <div class="bg-gradient-to-b from-amber-900/30 to-orange-900/20 p-6 rounded-xl border border-amber-700/50">
           <div class="text-center mb-6">
             <div class="w-16 h-16 bg-amber-600 rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4">⚔️</div>
-            <h3 class="text-xl font-bold text-amber-400">Cartes d'Équipement</h3>
+            <h3 class="text-xl font-bold text-amber-400"><?= __('gameHelp.cards.types.equipment.title', 'Cartes d\'Équipement') ?></h3>
           </div>
           <ul class="text-gray-300 text-sm space-y-2">
-            <li>• <strong>Armes :</strong> Statistiques complètes, propriétés spéciales</li>
-            <li>• <strong>Armures :</strong> CA, poids, restrictions de classe</li>
-            <li>• <strong>Équipement :</strong> Objets d'aventure et outils</li>
-            <li>• <strong>Objets magiques :</strong> Pouvoirs et malédictions <span class="text-amber-300 text-xs italic">(en cours de création par nos gobelins dans nos forges...)</span></li>
+            <li><?= __('gameHelp.cards.types.equipment.weapons', '• <strong>Armes :</strong> Statistiques complètes, propriétés spéciales') ?></li>
+            <li><?= __('gameHelp.cards.types.equipment.armor', '• <strong>Armures :</strong> CA, poids, restrictions de classe') ?></li>
+            <li><?= __('gameHelp.cards.types.equipment.equipment', '• <strong>Équipement :</strong> Objets d\'aventure et outils') ?></li>
+            <li><?= __('gameHelp.cards.types.equipment.magicItems', '• <strong>Objets magiques :</strong> Pouvoirs et malédictions <span class="text-amber-300 text-xs italic">(en cours de création par nos gobelins dans nos forges...)</span>') ?></li>
           </ul>
         </div>
         
@@ -1386,13 +1312,13 @@ echo $snipcartInit;
         <div class="bg-gradient-to-b from-blue-900/30 to-indigo-900/20 p-6 rounded-xl border border-blue-700/50">
           <div class="text-center mb-6">
             <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4">📜</div>
-            <h3 class="text-xl font-bold text-blue-400">Cartes de Règles</h3>
+            <h3 class="text-xl font-bold text-blue-400"><?= __('gameHelp.cards.types.rules.title', 'Cartes de Règles') ?></h3>
           </div>
           <ul class="text-gray-300 text-sm space-y-2">
-            <li>• <strong>Règles spéciales :</strong> Maladies, création d'objets</li>
-            <li>• <strong>Services :</strong> Marchands, artisans, guides</li>
-            <li>• <strong>Véhicules :</strong> Montres, navires, véhicules</li>
-            <li>• <strong>Poisons :</strong> Effets et antidotes</li>
+            <li><?= __('gameHelp.cards.types.rules.special', '• <strong>Règles spéciales :</strong> Maladies, création d\'objets') ?></li>
+            <li><?= __('gameHelp.cards.types.rules.services', '• <strong>Services :</strong> Marchands, artisans, guides') ?></li>
+            <li><?= __('gameHelp.cards.types.rules.vehicles', '• <strong>Véhicules :</strong> Montres, navires, véhicules') ?></li>
+            <li><?= __('gameHelp.cards.types.rules.poisons', '• <strong>Poisons :</strong> Effets et antidotes') ?></li>
           </ul>
         </div>
         
@@ -1400,38 +1326,37 @@ echo $snipcartInit;
         <div class="bg-gradient-to-b from-purple-900/30 to-violet-900/20 p-6 rounded-xl border border-purple-700/50">
           <div class="text-center mb-6">
             <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4">🎭</div>
-            <h3 class="text-xl font-bold text-purple-400">Cartes de Gameplay</h3>
+            <h3 class="text-xl font-bold text-purple-400"><?= __('gameHelp.cards.types.gameplay.title', 'Cartes de Gameplay') ?></h3>
           </div>
           <ul class="text-gray-300 text-sm space-y-2">
-            <li>• <strong>Sorts :</strong> Descriptions complètes, composantes</li>
-            <li>• <strong>Monstres :</strong> Statistiques, tactiques, butin</li>
-            <li>• <strong>Paquetages :</strong> Kits d'équipement thématiques</li>
-            <li>• <strong>Marchandises :</strong> Commerce et économie</li>
+            <li><?= __('gameHelp.cards.types.gameplay.spells', '• <strong>Sorts :</strong> Descriptions complètes, composantes') ?></li>
+            <li><?= __('gameHelp.cards.types.gameplay.monsters', '• <strong>Monstres :</strong> Statistiques, tactiques, butin') ?></li>
+            <li><?= __('gameHelp.cards.types.gameplay.packages', '• <strong>Paquetages :</strong> Kits d\'\u00e9quipement thématiques') ?></li>
+            <li><?= __('gameHelp.cards.types.gameplay.goods', '• <strong>Marchandises :</strong> Commerce et \u00e9conomie') ?></li>
           </ul>
         </div>
       </div>
 
       <!-- Note disponibilité cartes -->
       <div class="bg-gradient-to-r from-green-900/20 to-emerald-900/20 rounded-xl p-6 border border-green-700/50 mb-16 text-center">
-        <h4 class="text-xl font-bold mb-3 text-green-400">📦 Disponibilité des Cartes</h4>
+        <h4 class="text-xl font-bold mb-3 text-green-400"><?= __('gameHelp.cards.availability.title', '📦 Disponibilité des Cartes') ?></h4>
         <p class="text-gray-300 mb-2">
-          <strong>Toutes les cartes d'objets sont disponibles</strong> dans notre boutique !
-          Personnalisez vos decks selon vos besoins et votre personnage.
+          <?= __('gameHelp.cards.availability.available', '<strong>Toutes les cartes d\'objets sont disponibles</strong> dans notre boutique ! Personnalisez vos decks selon vos besoins et votre personnage.') ?>
         </p>
         <p class="text-green-300 text-sm italic">
-          ✨ Les cartes d'objets magiques arrivent bientôt, nos gobelins travaillent dur dans nos forges pour vous créer des merveilles !
+          <?= __('gameHelp.cards.availability.comingSoon', '✨ Les cartes d\'objets magiques arrivent bientôt, nos gobelins travaillent dur dans nos forges pour vous créer des merveilles !') ?>
         </p>
       </div>
 
       <!-- ===== EXEMPLES DE CARTES ===== -->
       <div class="bg-gradient-to-r from-slate-900/30 to-gray-900/30 rounded-xl p-8 border border-slate-700/50 mb-16">
-        <h3 class="text-3xl font-bold mb-8 text-center text-slate-400">🎴 Exemples de Cartes</h3>
+        <h3 class="text-3xl font-bold mb-8 text-center text-slate-400"><?= __('gameHelp.cards.examples.title', '🎴 Exemples de Cartes') ?></h3>
         
         <div class="grid md:grid-cols-2 gap-8">
           
           <!-- Exemple Arme -->
           <div class="text-center">
-            <h4 class="text-xl font-bold mb-4 text-amber-400">Carte d'Arme : Pistolet à Silex</h4>
+            <h4 class="text-xl font-bold mb-4 text-amber-400"><?= __('gameHelp.cards.examples.weapon.title', 'Carte d\'Arme : Pistolet à Silex') ?></h4>
             <div class="flip-container-card" onclick="flipCardExample('weapon-card')">
               <div class="flipper-card" id="weapon-card">
                 <div class="front-card">
@@ -1443,14 +1368,14 @@ echo $snipcartInit;
               </div>
             </div>
             <p class="text-gray-300 text-sm mt-4">
-              <strong>Recto :</strong> Illustration, prix, poids, bonus d'attaque<br>
-              <strong>Verso :</strong> Règles détaillées, propriétés spéciales
+              <?= __('gameHelp.cards.examples.weapon.front', '<strong>Recto :</strong> Illustration, prix, poids, bonus d\'attaque') ?><br>
+              <?= __('gameHelp.cards.examples.weapon.back', '<strong>Verso :</strong> Règles détaillées, propriétés spéciales') ?>
             </p>
           </div>
           
           <!-- Exemple Armure -->
           <div class="text-center">
-            <h4 class="text-xl font-bold mb-4 text-orange-400">Carte d'Armure : Armure de Cuir</h4>
+            <h4 class="text-xl font-bold mb-4 text-orange-400"><?= __('gameHelp.cards.examples.armor.title', 'Carte d\'Armure : Armure de Cuir') ?></h4>
             <div class="flip-container-card" onclick="flipCardExample('armor-card')">
               <div class="flipper-card" id="armor-card">
                 <div class="front-card">
@@ -1462,45 +1387,45 @@ echo $snipcartInit;
               </div>
             </div>
             <p class="text-gray-300 text-sm mt-4">
-              <strong>Recto :</strong> Illustration, prix, poids, CA de base<br>
-              <strong>Verso :</strong> Modificateurs, restrictions, descriptions
+              <?= __('gameHelp.cards.examples.armor.front', '<strong>Recto :</strong> Illustration, prix, poids, CA de base') ?><br>
+              <?= __('gameHelp.cards.examples.armor.back', '<strong>Verso :</strong> Modificateurs, restrictions, descriptions') ?>
             </p>
           </div>
         </div>
         
         <div class="text-center mt-8">
           <p class="text-yellow-300 italic">
-            💡 <strong>Astuce :</strong> Cliquez sur les cartes pour voir le recto et le verso !
+            <?= __('gameHelp.cards.examples.tip', '💡 <strong>Astuce :</strong> Cliquez sur les cartes pour voir le recto et le verso !') ?>
           </p>
         </div>
       </div>
 
       <!-- ===== COMMENT UTILISER LES CARTES ===== -->
       <div class="bg-gradient-to-r from-emerald-900/30 to-teal-900/30 rounded-xl p-8 border border-emerald-700/50">
-        <h3 class="text-3xl font-bold mb-8 text-center text-emerald-400">📋 Comment Utiliser vos Cartes</h3>
+        <h3 class="text-3xl font-bold mb-8 text-center text-emerald-400"><?= __('gameHelp.cards.usage.title', '📋 Comment Utiliser vos Cartes') ?></h3>
         
         <div class="grid md:grid-cols-2 gap-8">
           
           <!-- Pendant le Jeu -->
           <div class="bg-gray-800/50 p-6 rounded-lg">
-            <h4 class="text-xl font-bold mb-4 text-emerald-400">🎮 Pendant le Jeu</h4>
+            <h4 class="text-xl font-bold mb-4 text-emerald-400"><?= __('gameHelp.cards.usage.inGame.title', '🎮 Pendant le Jeu') ?></h4>
             
             <div class="space-y-4">
               <div class="border-l-4 border-emerald-500 pl-4">
-                <h5 class="font-semibold text-emerald-300">1. Accès Rapide</h5>
+                <h5 class="font-semibold text-emerald-300"><?= __('gameHelp.cards.usage.inGame.quickAccess.title', '1. Accès Rapide') ?></h5>
                 <p class="text-gray-300 text-sm">
-                  • Gardez vos cartes d'équipement à portée de main<br>
-                  • Consultez les propriétés spéciales sans ralentir le jeu<br>
-                  • Plus besoin d'ouvrir les manuels pendant l'action
+                  <?= __('gameHelp.cards.usage.inGame.quickAccess.list.item1', '• Gardez vos cartes d\'\u00e9quipement à portée de main') ?><br>
+                  <?= __('gameHelp.cards.usage.inGame.quickAccess.list.item2', '• Consultez les propriétés spéciales sans ralentir le jeu') ?><br>
+                  <?= __('gameHelp.cards.usage.inGame.quickAccess.list.item3', '• Plus besoin d\'ouvrir les manuels pendant l\'action') ?>
                 </p>
               </div>
               
               <div class="border-l-4 border-emerald-500 pl-4">
-                <h5 class="font-semibold text-emerald-300">2. Partage avec le MJ</h5>
+                <h5 class="font-semibold text-emerald-300"><?= __('gameHelp.cards.usage.inGame.dmShare.title', '2. Partage avec le MJ') ?></h5>
                 <p class="text-gray-300 text-sm">
-                  • Montrez directement vos cartes au MJ<br>
-                  • Validation immédiate des règles et effets<br>
-                  • Clarification rapide en cas de doute
+                  <?= __('gameHelp.cards.usage.inGame.dmShare.list.item1', '• Montrez directement vos cartes au MJ') ?><br>
+                  <?= __('gameHelp.cards.usage.inGame.dmShare.list.item2', '• Validation immédiate des règles et effets') ?><br>
+                  <?= __('gameHelp.cards.usage.inGame.dmShare.list.item3', '• Clarification rapide en cas de doute') ?>
                 </p>
               </div>
             </div>
@@ -1508,24 +1433,24 @@ echo $snipcartInit;
 
           <!-- Organisation -->
           <div class="bg-gray-800/50 p-6 rounded-lg">
-            <h4 class="text-xl font-bold mb-4 text-teal-400">🗂️ Organisation</h4>
+            <h4 class="text-xl font-bold mb-4 text-teal-400"><?= __('gameHelp.cards.usage.organization.title', '🗂️ Organisation') ?></h4>
             
             <div class="space-y-4">
               <div class="border-l-4 border-teal-500 pl-4">
-                <h5 class="font-semibold text-teal-300">1. Tri par Catégorie</h5>
+                <h5 class="font-semibold text-teal-300"><?= __('gameHelp.cards.usage.organization.categorySort.title', '1. Tri par Catégorie') ?></h5>
                 <p class="text-gray-300 text-sm">
-                  • Séparez : Armes, Armures, Équipement, Sorts<br>
-                  • Utilisez des intercalaires ou pochettes<br>
-                  • Gardez les cartes actuelles sur le dessus
+                  <?= __('gameHelp.cards.usage.organization.categorySort.list.item1', '• Séparez : Armes, Armures, Équipement, Sorts') ?><br>
+                  <?= __('gameHelp.cards.usage.organization.categorySort.list.item2', '• Utilisez des intercalaires ou pochettes') ?><br>
+                  <?= __('gameHelp.cards.usage.organization.categorySort.list.item3', '• Gardez les cartes actuelles sur le dessus') ?>
                 </p>
               </div>
               
               <div class="border-l-4 border-teal-500 pl-4">
-                <h5 class="font-semibold text-teal-300">2. Inventaire Visuel</h5>
+                <h5 class="font-semibold text-teal-300"><?= __('gameHelp.cards.usage.organization.visualInventory.title', '2. Inventaire Visuel') ?></h5>
                 <p class="text-gray-300 text-sm">
-                  • Étalez vos cartes d'équipement actuel<br>
-                  • Ajoutez/retirez selon vos acquisitions<br>
-                  • Inventaire physique = inventaire de personnage
+                  <?= __('gameHelp.cards.usage.organization.visualInventory.list.item1', '• Étalez vos cartes d\'\u00e9quipement actuel') ?><br>
+                  <?= __('gameHelp.cards.usage.organization.visualInventory.list.item2', '• Ajoutez/retirez selon vos acquisitions') ?><br>
+                  <?= __('gameHelp.cards.usage.organization.visualInventory.list.item3', '• Inventaire physique = inventaire de personnage') ?>
                 </p>
               </div>
             </div>
@@ -1535,25 +1460,25 @@ echo $snipcartInit;
 
         <!-- Conseils Pro -->
         <div class="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-lg p-6 mt-8 border border-yellow-700/50">
-          <h4 class="text-xl font-bold mb-4 text-yellow-400">⭐ Conseils de Pro</h4>
+          <h4 class="text-xl font-bold mb-4 text-yellow-400"><?= __('gameHelp.cards.usage.proTips.title', '⭐ Conseils de Pro') ?></h4>
           <div class="grid md:grid-cols-3 gap-4">
             <div class="text-center">
               <div class="text-2xl mb-2">🔄</div>
               <p class="text-gray-300 text-sm">
-                <strong>Rotation :</strong> Changez vos cartes selon vos aventures
+                <?= __('gameHelp.cards.usage.proTips.rotation', '<strong>Rotation :</strong> Changez vos cartes selon vos aventures') ?>
               </p>
             </div>
             <div class="text-center">
               <div class="text-2xl mb-2">🛡️</div>
               <p class="text-gray-300 text-sm">
-                <strong>Protection :</strong> Utilisez des protège-cartes transparents
+                <?= __('gameHelp.cards.usage.proTips.protection', '<strong>Protection :</strong> Utilisez des protège-cartes transparents') ?>
               </p>
             </div>
             <div class="text-center">
               <div class="text-2xl mb-2">📝</div>
               <p class="text-gray-300 text-sm">
-                <strong>Notes :</strong> Annotez au crayon les modifications temporaires<br>
-                <em>Conseil pro : Utilisez des crayons Staedtler 8B ou 9B pour un marquage optimal</em>
+                <?= __('gameHelp.cards.usage.proTips.notes.main', '<strong>Notes :</strong> Annotez au crayon les modifications temporaires') ?><br>
+                <em><?= __('gameHelp.cards.usage.proTips.notes.tip', 'Conseil pro : Utilisez des crayons Staedtler 8B ou 9B pour un marquage optimal') ?></em>
               </p>
             </div>
           </div>
@@ -1563,7 +1488,7 @@ echo $snipcartInit;
       <!-- Bouton de retour au hero -->
       <div class="text-center mt-16">
         <a href="#main" class="btn btn-outline">
-          ⬆️ Retour aux guides principaux
+          <?= __('gameHelp.cards.backToMain', '⬆️ Retour aux guides principaux') ?>
         </a>
       </div>
 
@@ -1576,11 +1501,10 @@ echo $snipcartInit;
       
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-bold mb-8 text-yellow-400">
-          💰 Guide de la Monnaie D&D
+          <?= __('gameHelp.money.title', '💰 Guide de la Monnaie D&D') ?>
         </h2>
         <p class="text-xl text-gray-300 max-w-4xl mx-auto txt-court">
-          Découvrez le système monétaire de D&D, nos pièces physiques Geek & Dragon, 
-          et utilisez notre convertisseur pour gérer facilement vos finances d'aventurier !
+          <?= __('gameHelp.money.description', 'Découvrez le système monétaire de D&D, nos pièces physiques Geek & Dragon, et utilisez notre convertisseur pour gérer facilement vos finances d\'aventurier !') ?>
         </p>
       </div>
 
@@ -1589,46 +1513,46 @@ echo $snipcartInit;
         
         <!-- Types de Pièces -->
         <div class="bg-gradient-to-b from-amber-900/30 to-yellow-900/20 p-8 rounded-xl border border-amber-700/50">
-          <h3 class="text-2xl font-bold mb-6 text-center text-amber-400">💎 Types de Pièces</h3>
+          <h3 class="text-2xl font-bold mb-6 text-center text-amber-400"><?= __('gameHelp.money.coinTypes.title', '💎 Types de Pièces') ?></h3>
           
           <div class="space-y-4">
             <div class="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-lg">
               <div class="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center text-white font-bold">PP</div>
               <div>
-                <h4 class="font-semibold text-yellow-400">&nbsp;&nbsp;&nbsp;&nbsp;Pièce de Platine (pp)</h4>
-                <p class="text-gray-300 text-sm">&nbsp;&nbsp;&nbsp;&nbsp;La plus précieuse • 1 pp = 10 po</p>
+                <h4 class="font-semibold text-yellow-400"><?= __('gameHelp.money.coinTypes.platinum.name', '&nbsp;&nbsp;&nbsp;&nbsp;Pièce de Platine (pp)') ?></h4>
+                <p class="text-gray-300 text-sm"><?= __('gameHelp.money.coinTypes.platinum.description', '&nbsp;&nbsp;&nbsp;&nbsp;La plus précieuse • 1 pp = 10 po') ?></p>
               </div>
             </div>
             
             <div class="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-lg">
               <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-black font-bold">PO</div>
               <div>
-                <h4 class="font-semibold text-yellow-400">&nbsp;&nbsp;&nbsp;&nbsp;Pièce d'Or (po)</h4>
-                <p class="text-gray-300 text-sm">&nbsp;&nbsp;&nbsp;&nbsp;Monnaie de référence • 1 po = 10 pa</p>
+                <h4 class="font-semibold text-yellow-400"><?= __('gameHelp.money.coinTypes.gold.name', '&nbsp;&nbsp;&nbsp;&nbsp;Pièce d\'Or (po)') ?></h4>
+                <p class="text-gray-300 text-sm"><?= __('gameHelp.money.coinTypes.gold.description', '&nbsp;&nbsp;&nbsp;&nbsp;Monnaie de référence • 1 po = 10 pa') ?></p>
               </div>
             </div>
             
             <div class="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-lg">
               <div class="w-12 h-12 bg-gray-400 rounded-full flex items-center justify-center text-black font-bold">PA</div>
               <div>
-                <h4 class="font-semibold text-gray-400">&nbsp;&nbsp;&nbsp;&nbsp;Pièce d'Argent (pa)</h4>
-                <p class="text-gray-300 text-sm">&nbsp;&nbsp;&nbsp;&nbsp;Monnaie courante • 1 pa = 10 pe</p>
+                <h4 class="font-semibold text-gray-400"><?= __('gameHelp.money.coinTypes.silver.name', '&nbsp;&nbsp;&nbsp;&nbsp;Pièce d\'Argent (pa)') ?></h4>
+                <p class="text-gray-300 text-sm"><?= __('gameHelp.money.coinTypes.silver.description', '&nbsp;&nbsp;&nbsp;&nbsp;Monnaie courante • 1 pa = 10 pe') ?></p>
               </div>
             </div>
             
             <div class="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-lg">
               <div class="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold">PE</div>
               <div>
-                <h4 class="font-semibold text-orange-400">&nbsp;&nbsp;&nbsp;&nbsp;Pièce d'Électrum (pe)</h4>
-                <p class="text-gray-300 text-sm">&nbsp;&nbsp;&nbsp;&nbsp;Alliage or-argent • 1 pe = 5 pc</p>
+                <h4 class="font-semibold text-orange-400"><?= __('gameHelp.money.coinTypes.electrum.name', '&nbsp;&nbsp;&nbsp;&nbsp;Pièce d\'\u00c9lectrum (pe)') ?></h4>
+                <p class="text-gray-300 text-sm"><?= __('gameHelp.money.coinTypes.electrum.description', '&nbsp;&nbsp;&nbsp;&nbsp;Alliage or-argent • 1 pe = 5 pc') ?></p>
               </div>
             </div>
             
             <div class="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-lg">
               <div class="w-12 h-12 bg-orange-800 rounded-full flex items-center justify-center text-white font-bold">PC</div>
               <div>
-                <h4 class="font-semibold text-orange-400">&nbsp;&nbsp;&nbsp;&nbsp;Pièce de Cuivre (pc)</h4>
-                <p class="text-gray-300 text-sm">&nbsp;&nbsp;&nbsp;&nbsp;Menue monnaie • La plus commune</p>
+                <h4 class="font-semibold text-orange-400"><?= __('gameHelp.money.coinTypes.copper.name', '&nbsp;&nbsp;&nbsp;&nbsp;Pièce de Cuivre (pc)') ?></h4>
+                <p class="text-gray-300 text-sm"><?= __('gameHelp.money.coinTypes.copper.description', '&nbsp;&nbsp;&nbsp;&nbsp;Menue monnaie • La plus commune') ?></p>
               </div>
             </div>
           </div>
@@ -1636,13 +1560,13 @@ echo $snipcartInit;
 
         <!-- Tableau de Conversion -->
         <div class="bg-gradient-to-b from-gray-900/30 to-slate-900/20 p-8 rounded-xl border border-slate-700/50">
-          <h3 class="text-2xl font-bold mb-6 text-center text-slate-400">🔄 Tableau de Conversion</h3>
+          <h3 class="text-2xl font-bold mb-6 text-center text-slate-400"><?= __('gameHelp.money.conversionTable.title', '🔄 Tableau de Conversion') ?></h3>
           
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
               <thead>
                 <tr class="border-b border-gray-600">
-                  <th class="text-left py-2 text-gray-300">Pièce</th>
+                  <th class="text-left py-2 text-gray-300"><?= __('gameHelp.money.conversionTable.headers.coin', 'Pièce') ?></th>
                   <th class="text-center py-2 text-yellow-400">PP</th>
                   <th class="text-center py-2 text-yellow-400">PO</th>
                   <th class="text-center py-2 text-gray-400">PA</th>
@@ -1652,7 +1576,7 @@ echo $snipcartInit;
               </thead>
               <tbody class="text-gray-300">
                 <tr class="border-b border-gray-700">
-                  <td class="py-2 font-semibold text-yellow-400">Platine (pp)</td>
+                  <td class="py-2 font-semibold text-yellow-400"><?= __('gameHelp.money.conversionTable.rows.platinum', 'Platine (pp)') ?></td>
                   <td class="text-center">1</td>
                   <td class="text-center">10</td>
                   <td class="text-center">100</td>
@@ -1660,7 +1584,7 @@ echo $snipcartInit;
                   <td class="text-center">1000</td>
                 </tr>
                 <tr class="border-b border-gray-700">
-                  <td class="py-2 font-semibold text-yellow-400">Or (po)</td>
+                  <td class="py-2 font-semibold text-yellow-400"><?= __('gameHelp.money.conversionTable.rows.gold', 'Or (po)') ?></td>
                   <td class="text-center">1/10</td>
                   <td class="text-center">1</td>
                   <td class="text-center">10</td>
@@ -1668,7 +1592,7 @@ echo $snipcartInit;
                   <td class="text-center">100</td>
                 </tr>
                 <tr class="border-b border-gray-700">
-                  <td class="py-2 font-semibold text-gray-400">Argent (pa)</td>
+                  <td class="py-2 font-semibold text-gray-400"><?= __('gameHelp.money.conversionTable.rows.silver', 'Argent (pa)') ?></td>
                   <td class="text-center">1/100</td>
                   <td class="text-center">1/10</td>
                   <td class="text-center">1</td>
@@ -1676,7 +1600,7 @@ echo $snipcartInit;
                   <td class="text-center">10</td>
                 </tr>
                 <tr class="border-b border-gray-700">
-                  <td class="py-2 font-semibold text-orange-400">Électrum (pe)</td>
+                  <td class="py-2 font-semibold text-orange-400"><?= __('gameHelp.money.conversionTable.rows.electrum', 'Électrum (pe)') ?></td>
                   <td class="text-center">1/200</td>
                   <td class="text-center">1/20</td>
                   <td class="text-center">1/2</td>
@@ -1684,7 +1608,7 @@ echo $snipcartInit;
                   <td class="text-center">5</td>
                 </tr>
                 <tr>
-                  <td class="py-2 font-semibold text-orange-400">Cuivre (pc)</td>
+                  <td class="py-2 font-semibold text-orange-400"><?= __('gameHelp.money.conversionTable.rows.copper', 'Cuivre (pc)') ?></td>
                   <td class="text-center">1/1000</td>
                   <td class="text-center">1/100</td>
                   <td class="text-center">1/10</td>
@@ -1707,27 +1631,27 @@ echo $snipcartInit;
           <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.sourcesLabel">💰 Monnaies sources</h5>
           <div class="currency-input-grid grid grid-cols-2 md:grid-cols-5 gap-4 max-w-6xl mx-auto">
             <div class="currency-input-card bg-gradient-to-br from-amber-900/20 to-orange-800/20 p-4 rounded-xl border border-amber-700/30">
-              <label class="block text-amber-300 font-medium mb-2">🪙 Cuivre</label>
+              <label class="block text-amber-300 font-medium mb-2"><?= __('gameHelp.money.converter.labels.copper', '🪙 Cuivre') ?></label>
               <input type="number" min="0" step="1" value="0" data-currency="copper" 
                      class="w-full bg-gray-800/80 text-amber-300 border border-amber-700/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all" />
             </div>
             <div class="currency-input-card bg-gradient-to-br from-gray-600/20 to-gray-500/20 p-4 rounded-xl border border-gray-500/30">
-              <label class="block text-gray-300 font-medium mb-2">🥈 Argent</label>
+              <label class="block text-gray-300 font-medium mb-2"><?= __('gameHelp.money.converter.labels.silver', '🥈 Argent') ?></label>
               <input type="number" min="0" step="1" value="0" data-currency="silver" 
                      class="w-full bg-gray-800/80 text-gray-300 border border-gray-500/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all" />
             </div>
             <div class="currency-input-card bg-gradient-to-br from-yellow-600/20 to-green-600/20 p-4 rounded-xl border border-yellow-500/30">
-              <label class="block text-yellow-300 font-medium mb-2">⚡ Électrum</label>
+              <label class="block text-yellow-300 font-medium mb-2"><?= __('gameHelp.money.converter.labels.electrum', '⚡ Électrum') ?></label>
               <input type="number" min="0" step="1" value="0" data-currency="electrum" 
                      class="w-full bg-gray-800/80 text-yellow-300 border border-yellow-500/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all" />
             </div>
             <div class="currency-input-card bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 p-4 rounded-xl border border-yellow-400/30">
-              <label class="block text-yellow-300 font-medium mb-2">🥇 Or</label>
+              <label class="block text-yellow-300 font-medium mb-2"><?= __('gameHelp.money.converter.labels.gold', '🥇 Or') ?></label>
               <input type="number" min="0" step="1" value="0" data-currency="gold" 
                      class="w-full bg-gray-800/80 text-yellow-300 border border-yellow-400/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all" />
             </div>
             <div class="currency-input-card bg-gradient-to-br from-cyan-500/20 to-blue-600/20 p-4 rounded-xl border border-cyan-400/30">
-              <label class="block text-cyan-300 font-medium mb-2">💎 Platine</label>
+              <label class="block text-cyan-300 font-medium mb-2"><?= __('gameHelp.money.converter.labels.platinum', '💎 Platine') ?></label>
               <input type="number" min="0" step="1" value="0" data-currency="platinum" 
                      class="w-full bg-gray-800/80 text-cyan-300 border border-cyan-400/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all" />
             </div>
@@ -1810,7 +1734,7 @@ echo $snipcartInit;
             <div id="gold-card"></div>
             <div id="platinum-card"></div>
             <div id="optimal-recommendations" class="bg-gradient-to-r from-indigo-900/30 to-purple-900/30 rounded-xl p-6 border border-indigo-500/30">
-              <h6 class="text-indigo-300 font-bold text-lg mb-4">✨ Recommandations optimales</h6>
+              <h6 class="text-indigo-300 font-bold text-lg mb-4"><?= __('gameHelp.money.converter.recommendations.title', '✨ Recommandations optimales') ?></h6>
               <div id="currency-best" class="text-gray-200"></div>
             </div>
           </div>
@@ -1855,7 +1779,7 @@ echo $snipcartInit;
 
       <!-- ===== TESTS SYSTÈME CONVERTISSEUR (DEBUG) ===== -->
       <div class="bg-gradient-to-r from-blue-900/30 to-indigo-900/20 rounded-xl p-8 border border-blue-700/50 mb-16" id="debug-section" style="display: none;">
-        <h3 class="text-3xl font-bold mb-6 text-center text-blue-400">🔬 Tests du Système de Conversion</h3>
+        <h3 class="text-3xl font-bold mb-6 text-center text-blue-400"><?= __('gameHelp.money.tests.title', '🔬 Tests du Système de Conversion') ?></h3>
         
         <div class="max-w-4xl mx-auto">
           <p class="text-center text-gray-300 mb-6">
@@ -1873,13 +1797,13 @@ echo $snipcartInit;
           
           <div class="bg-gray-800/50 rounded-lg p-6">
             <div class="flex justify-between items-center mb-4">
-              <h4 class="text-xl font-semibold text-blue-300">Résultats des Tests</h4>
+              <h4 class="text-xl font-semibold text-blue-300"><?= __('gameHelp.money.tests.results', 'Résultats des Tests') ?></h4>
               <button id="clear-test-results" class="text-sm text-gray-400 hover:text-white">
                 🗑️ Effacer
               </button>
             </div>
             <div id="test-results" class="text-sm font-mono">
-              <div class="text-gray-400">Aucun test exécuté...</div>
+              <div class="text-gray-400"><?= __('gameHelp.money.tests.noTests', 'Aucun test exécuté...') ?></div>
             </div>
           </div>
         </div>
@@ -1893,22 +1817,22 @@ echo $snipcartInit;
           <div class="order-2 md:order-1 flex flex-col">
             <div class="bg-gray-800/30 rounded-xl p-6 border border-amber-600/20">
               <div class="relative group cursor-pointer" onclick="downloadMoneySheet()">
-                <img src="/media/content/carte_propriete.webp" alt="Carte de propriété des pièces Geek & Dragon" 
+                <img src="/media/content/carte_propriete.webp" alt="<?= __('gameHelp.images.propertyCard', 'Carte de propriété des pièces Geek & Dragon') ?>" 
                      class="rounded-lg shadow-lg w-full object-cover border border-amber-600/30 transition-all duration-300 group-hover:shadow-2xl group-hover:scale-105" loading="lazy">
                 
                 <!-- Overlay de téléchargement au survol -->
                 <div class="absolute inset-0 bg-black/50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <div class="text-center text-white">
                     <div class="text-3xl mb-2">📥</div>
-                    <div class="font-bold text-lg">Télécharger</div>
-                    <div class="text-sm text-amber-300">Fiche à imprimer</div>
+                    <div class="font-bold text-lg"><?= __('gameHelp.money.download.button', 'Télécharger') ?></div>
+                    <div class="text-sm text-amber-300"><?= __('gameHelp.money.download.subtitle', 'Fiche à imprimer') ?></div>
                   </div>
                 </div>
               </div>
               
               <div class="mt-4 text-center">
                 <p class="text-amber-300 font-medium mb-2">📄 Fiche de Monnaie officielle</p>
-                <p class="text-xs text-gray-400 mb-3">Cliquez sur l'image pour télécharger la fiche à imprimer</p>
+                <p class="text-xs text-gray-400 mb-3"><?= __('gameHelp.money.download.instruction', 'Cliquez sur l\'image pour télécharger la fiche à imprimer') ?></p>
                 
                 <button onclick="downloadMoneySheet()" 
                         class="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm">
@@ -1920,38 +1844,32 @@ echo $snipcartInit;
           
           <!-- Texte explicatif avec plus d'espacement -->
           <div class="order-1 md:order-2 space-y-8 flex flex-col justify-center px-4 md:px-8">
-            <h3 class="text-3xl font-bold text-amber-400">🏆 Pourquoi le Trésor Physique ?</h3>
+            <h3 class="text-3xl font-bold text-amber-400"><?= __('gameHelp.money.physicalTreasure.title', '🏆 Pourquoi le Trésor Physique ?') ?></h3>
             
             <div class="space-y-6 text-gray-300">
               <blockquote class="text-lg font-medium text-amber-300 italic border-l-4 border-amber-500 pl-6 bg-amber-900/10 py-4 rounded-r-lg">
-                "S'il n'y avait plus de billets dans le Monopoly, le jeu perdrait tout son intérêt..."
+                "<?= __('gameHelp.quotes.monopoly', 'S\'il n\'y avait plus de billets dans le Monopoly, le jeu perdrait tout son intérêt...') ?>"
               </blockquote>
               
               <div class="space-y-4">
                 <p class="text-base leading-relaxed">
-                  Dans Donjons & Dragons, les <strong class="text-amber-400">deux objectifs principaux</strong> sont l'expérience et le trésor. 
-                  Devoir écrire le trésor sur papier puis le gommer ne lui rend pas hommage. 
-                  Le trésor mérite d'être <strong class="text-yellow-400">tangible, pesé, manipulé</strong>.
+                  <?= __('gameHelp.money.physicalTreasure.paragraph1', 'Dans Donjons & Dragons, les <strong class="text-amber-400">deux objectifs principaux</strong> sont l\'expérience et le trésor. Devoir écrire le trésor sur papier puis le gommer ne lui rend pas hommage. Le trésor mérite d\'\u00eatre <strong class="text-yellow-400">tangible, pesé, manipulé</strong>.') ?>
                 </p>
                 
                 <p class="text-base leading-relaxed">
-                  Nos pièces physiques transforment chaque récompense en moment mémorable. 
-                  Quand le MJ fait <em class="text-amber-300">tinter les pièces d'or</em> dans sa main avant de les distribuer, 
-                  c'est toute l'immersion qui s'intensifie.
+                  <?= __('gameHelp.money.physicalTreasure.paragraph2', 'Nos pièces physiques transforment chaque récompense en moment mémorable. Quand le MJ fait <em class="text-amber-300">tinter les pièces d\'or</em> dans sa main avant de les distribuer, c\'est toute l\'immersion qui s\'intensifie.') ?>
                 </p>
               </div>
               
               <div class="bg-amber-900/20 p-6 rounded-lg border border-amber-600/30 mt-8">
                 <h4 class="text-lg font-bold text-amber-400 mb-4 flex items-center justify-between">
-                  <span>📋 Système de Propriété</span>
+                  <span><?= __('gameHelp.money.physicalTreasure.property', '📋 Système de Propriété') ?></span>
                   <button onclick="downloadMoneySheet()" class="text-xs bg-amber-600 hover:bg-amber-700 px-3 py-1 rounded-full transition-colors">
                     📥 Télécharger
                   </button>
                 </h4>
                 <p class="text-sm leading-relaxed">
-                  Utilisez notre <strong>fiche de monnaie</strong> pour répertorier vos trésors. 
-                  Inscrivez votre nom, comptez vos pièces, signez et remettez au MJ. 
-                  En fin de campagne, récupérez facilement votre investissement !
+                  <?= __('gameHelp.money.physicalTreasure.sheetInstructions', 'Utilisez notre <strong>fiche de monnaie</strong> pour répertorier vos trésors. Inscrivez votre nom, comptez vos pièces, signez et remettez au MJ. En fin de campagne, récupérez facilement votre investissement !') ?>
                 </p>
               </div>
             </div>
@@ -1961,33 +1879,33 @@ echo $snipcartInit;
 
       <!-- ===== PIÈCES PHYSIQUES GEEK & DRAGON ===== -->
       <div class="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 rounded-xl p-8 border border-purple-700/50">
-        <h3 class="text-3xl font-bold mb-8 text-center text-purple-400">🪙 Pièces Physiques Geek & Dragon</h3>
+        <h3 class="text-3xl font-bold mb-8 text-center text-purple-400"><?= __('gameHelp.money.physicalCoins.title', '🪙 Pièces Physiques Geek & Dragon') ?></h3>
         
         <div class="grid md:grid-cols-2 gap-8">
           
           <!-- Description -->
           <div class="space-y-6">
             <div>
-              <h4 class="text-xl font-bold mb-4 text-purple-400">✨ Des Pièces Authentiques</h4>
+              <h4 class="text-xl font-bold mb-4 text-purple-400"><?= __('gameHelp.money.physicalCoins.authentic.title', '✨ Des Pièces Authentiques') ?></h4>
               <p class="text-gray-300 mb-4">
                 Nos pièces métalliques reproduisent fidèlement le système monétaire de D&D. 
                 Chaque type de pièce a son propre design et sa finition unique.
               </p>
               <ul class="text-gray-300 space-y-2">
-                <li>• <strong>Métal véritable</strong> avec finitions spécifiques</li>
-                <li>• <strong>Gravures détaillées</strong> inspirées de l'univers D&D</li>
-                <li>• <strong>Poids authentique</strong> pour une expérience immersive</li>
-                <li>• <strong>Sets complets</strong> ou pièces individuelles</li>
+                <li><?= __('gameHelp.money.physicalCoins.authentic.feature1', '• <strong>Métal véritable</strong> avec finitions spécifiques') ?></li>
+                <li><?= __('gameHelp.money.physicalCoins.authentic.feature2', '• <strong>Gravures détaillées</strong> inspirées de l\'univers D&D') ?></li>
+                <li><?= __('gameHelp.money.physicalCoins.authentic.feature3', '• <strong>Poids authentique</strong> pour une expérience immersive') ?></li>
+                <li><?= __('gameHelp.money.physicalCoins.authentic.feature4', '• <strong>Sets complets</strong> ou pièces individuelles') ?></li>
               </ul>
             </div>
             
             <div>
-              <h4 class="text-xl font-bold mb-4 text-purple-400">🎯 Utilisation en Jeu</h4>
+              <h4 class="text-xl font-bold mb-4 text-purple-400"><?= __('gameHelp.money.physicalCoins.gameUse.title', '🎯 Utilisation en Jeu') ?></h4>
               <ul class="text-gray-300 space-y-2">
-                <li>• <strong>Immersion totale</strong> lors des transactions</li>
-                <li>• <strong>Gestion tactile</strong> de votre trésor</li>
-                <li>• <strong>Récompenses physiques</strong> pour les joueurs</li>
-                <li>• <strong>Ambiance medievale-fantastique</strong> renforcée</li>
+                <li><?= __('gameHelp.money.physicalCoins.gameUse.feature2', '• <strong>Immersion totale</strong> lors des transactions') ?></li>
+                <li><?= __('gameHelp.money.physicalCoins.uses.feature5', '• <strong>Gestion tactile</strong> de votre trésor') ?></li>
+                <li><?= __('gameHelp.money.physicalCoins.gameUse.feature1', '• <strong>Récompenses physiques</strong> pour les joueurs') ?></li>
+                <li><?= __('gameHelp.money.physicalCoins.gameUse.feature3', '• <strong>Ambiance médiévale-fantastique</strong> renforcée') ?></li>
               </ul>
             </div>
           </div>
@@ -1995,7 +1913,7 @@ echo $snipcartInit;
           <!-- Call to Action -->
           <div class="flex flex-col justify-center">
             <div class="bg-gradient-to-r from-yellow-900/30 to-amber-900/30 rounded-lg p-6 border border-yellow-600/50 text-center">
-              <h4 class="text-xl font-bold mb-4 text-yellow-400">💰 Commandez vos Pièces</h4>
+              <h4 class="text-xl font-bold mb-4 text-yellow-400"><?= __('gameHelp.money.physicalCoins.order.title', '💰 Commandez vos Pièces') ?></h4>
               <p class="text-gray-300 mb-6">
                 Découvrez notre collection complète de pièces métalliques 
                 et donnez vie à l'économie de vos parties !
@@ -2016,7 +1934,7 @@ echo $snipcartInit;
       <!-- Bouton de retour au hero -->
       <div class="text-center mt-16">
         <a href="#main" class="btn btn-outline">
-          ⬆️ Retour aux guides principaux
+          <?= __('gameHelp.money.backToMain', '⬆️ Retour aux guides principaux') ?>
         </a>
       </div>
 
@@ -2026,24 +1944,23 @@ echo $snipcartInit;
   <!-- ===== CALL TO ACTION ===== -->
   <section class="py-16 bg-gray-900/80">
     <div class="max-w-4xl mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold mb-6 text-indigo-400">Prêt à révolutionner vos parties ?</h2>
+      <h2 class="text-3xl font-bold mb-6 text-indigo-400"><?= __('gameHelp.callToAction.title', 'Prêt à révolutionner vos parties ?') ?></h2>
       <p class="text-xl text-gray-300 mb-8 txt-court">
-        Découvrez notre collection complète : triptyques, cartes d'équipement et pièces métalliques. 
-        Transformez votre expérience de jeu de rôle avec nos accessoires artisanaux conçus au Québec.
+        <?= __('gameHelp.callToAction.description', 'Découvrez notre collection complète : triptyques, cartes d\'équipement et pièces métalliques. Transformez votre expérience de jeu de rôle avec nos accessoires artisanaux conçus au Québec.') ?>
       </p>
       
       <div class="flex flex-col md:flex-row gap-4 justify-center">
         <a href="<?= langUrl('boutique.php#triptyques') ?>" class="btn btn-primary text-lg px-6 py-4">
-          📁 Triptyques
+          <?= __('gameHelp.callToAction.buttons.triptychs', '📁 Triptyques') ?>
         </a>
         <a href="<?= langUrl('boutique.php#cartes') ?>" class="btn btn-primary text-lg px-6 py-4">
-          🃏 Cartes d'Équipement
+          <?= __('gameHelp.callToAction.buttons.cards', '🃏 Cartes d\'Équipement') ?>
         </a>
         <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-primary text-lg px-6 py-4">
-          🪙 Pièces Métalliques
+          <?= __('gameHelp.callToAction.buttons.coins', '🪙 Pièces Métalliques') ?>
         </a>
         <a href="<?= langUrl('boutique.php') ?>" class="btn btn-outline text-lg px-6 py-4">
-          🛒 Voir toute la boutique
+          <?= __('gameHelp.callToAction.buttons.shop', '🛒 Voir toute la boutique') ?>
         </a>
       </div>
     </div>
@@ -2239,14 +2156,14 @@ function downloadMoneySheet() {
         <div class="bg-gray-800 rounded-xl p-6 max-w-md w-full mx-4 border border-amber-600/30">
             <div class="text-center mb-6">
                 <div class="text-4xl mb-3">📥</div>
-                <h3 class="text-xl font-bold text-amber-400 mb-2">Télécharger la Fiche de Monnaie</h3>
+                <h3 class="text-xl font-bold text-amber-400 mb-2"><?= __('gameHelp.money.download.title', 'Télécharger la Fiche de Monnaie') ?></h3>
                 <p class="text-gray-300 text-sm">
                     Téléchargez l'image de la fiche de monnaie pour l'imprimer chez vous
                 </p>
             </div>
             
             <div class="bg-amber-900/20 p-4 rounded-lg border border-amber-600/30 mb-4">
-                <h4 class="font-bold text-amber-400 mb-2">💡 Conseil d'impression :</h4>
+                <h4 class="font-bold text-amber-400 mb-2"><?= __('gameHelp.money.download.printTip', '💡 Conseil d\'impression :') ?></h4>
                 <p class="text-sm text-gray-300">
                     Imprimez sur du papier cartonné (200-250g) pour une meilleure durabilité. 
                     Vous pouvez plastifier la fiche pour une utilisation répétée.
@@ -2442,7 +2359,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (runBasicTestsBtn) {
     runBasicTestsBtn.addEventListener('click', function() {
       if (window.CurrencyConverterTests) {
-        testResults.innerHTML = '<div class="text-yellow-400">Exécution des tests de base...</div>';
+        testResults.innerHTML = '<div class="text-yellow-400"><?= __('gameHelp.money.tests.runningBasic', 'Exécution des tests de base...') ?></div>';
         
         setTimeout(() => {
           const results = window.CurrencyConverterTests.runBasicTests();
@@ -2457,7 +2374,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (runAdvancedTestsBtn) {
     runAdvancedTestsBtn.addEventListener('click', function() {
       if (window.CurrencyConverterTests) {
-        testResults.innerHTML = '<div class="text-yellow-400">Exécution des tests avancés...</div>';
+        testResults.innerHTML = '<div class="text-yellow-400"><?= __('gameHelp.money.tests.runningAdvanced', 'Exécution des tests avancés...') ?></div>';
         
         setTimeout(() => {
           const results = window.CurrencyConverterTests.runAdvancedTests();
@@ -2471,13 +2388,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
   if (clearResultsBtn) {
     clearResultsBtn.addEventListener('click', function() {
-      testResults.innerHTML = '<div class="text-gray-400">Aucun test exécuté...</div>';
+      testResults.innerHTML = '<div class="text-gray-400"><?= __('gameHelp.money.tests.noTests', 'Aucun test exécuté...') ?></div>';
     });
   }
 
   function displayTestResults(results, testType) {
     if (!results) {
-      testResults.innerHTML = '<div class="text-red-400">❌ Erreur lors de l\'exécution des tests</div>';
+      testResults.innerHTML = '<div class="text-red-400"><?= __('gameHelp.money.tests.error', '❌ Erreur lors de l\'exécution des tests') ?></div>';
       return;
     }
 

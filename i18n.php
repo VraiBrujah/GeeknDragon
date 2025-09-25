@@ -40,7 +40,7 @@ function langUrl(string $url): string
 /**
  * Charge les traductions depuis le fichier JSON correspondant à la langue
  */
-$translations = json_decode(file_get_contents(__DIR__ . "/translations/$lang.json"), true) ?: [];
+$translations = json_decode(file_get_contents(__DIR__ . "/lang/$lang.json"), true) ?: [];
 
 /**
  * Alias global pour la fonction t() du helper
