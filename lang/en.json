@@ -557,105 +557,105 @@
       },
       "recommended": "Recommended pencil: Staedtler HB or 2H for precise and erasable lines."
     },
-    "backToMain": "⬆️ Back to main guides"
-  },
-  "cards": {
-    "mainTitle": "🃏 Geek & Dragon Playing Cards Guide",
-    "mainDescription": "Complete your triptychs with our detailed cards: Weapons, Armor, Equipment, Spells, Monsters and much more! Each card contains all the information needed to speed up your games.",
-    "title": "Equipment Cards",
-    "types": {
-      "equipment": {
-        "title": "Equipment Cards",
-        "weapons": "<strong>Weapons:</strong> Complete statistics, special properties",
-        "armor": "<strong>Armor:</strong> AC, weight, class restrictions",
-        "equipment": "<strong>Equipment:</strong> Adventure items and tools",
-        "magicItems": "<strong>Magic items:</strong> Powers and curses <span class=\"text-amber-300 text-xs italic\">(being created by our goblins in our forges...)</span>"
+    "backToMain": "⬆️ Back to main guides",
+    "cards": {
+      "mainTitle": "🃏 Geek & Dragon Playing Cards Guide",
+      "mainDescription": "Complete your triptychs with our detailed cards: Weapons, Armor, Equipment, Spells, Monsters and much more! Each card contains all the information needed to speed up your games.",
+      "title": "Equipment Cards",
+      "types": {
+        "equipment": {
+          "title": "Equipment Cards",
+          "weapons": "<strong>Weapons:</strong> Complete statistics, special properties",
+          "armor": "<strong>Armor:</strong> AC, weight, class restrictions",
+          "equipment": "<strong>Equipment:</strong> Adventure items and tools",
+          "magicItems": "<strong>Magic items:</strong> Powers and curses <span class=\"text-amber-300 text-xs italic\">(being created by our goblins in our forges...)</span>"
+        },
+        "rules": {
+          "title": "Rules Cards",
+          "special": "<strong>Special rules:</strong> Diseases, item crafting",
+          "services": "<strong>Services:</strong> Merchants, craftsmen, guides",
+          "vehicles": "<strong>Vehicles:</strong> Mounts, ships, vehicles",
+          "poisons": "<strong>Poisons:</strong> Effects and antidotes"
+        },
+        "gameplay": {
+          "title": "Gameplay Cards",
+          "spells": "<strong>Spells:</strong> Complete descriptions, components",
+          "monsters": "<strong>Monsters:</strong> Statistics, tactics, loot",
+          "packages": "<strong>Packages:</strong> Themed equipment kits",
+          "goods": "<strong>Goods:</strong> Trade and economy"
+        }
       },
-      "rules": {
-        "title": "Rules Cards",
-        "special": "<strong>Special rules:</strong> Diseases, item crafting",
-        "services": "<strong>Services:</strong> Merchants, craftsmen, guides",
-        "vehicles": "<strong>Vehicles:</strong> Mounts, ships, vehicles",
-        "poisons": "<strong>Poisons:</strong> Effects and antidotes"
+      "availability": {
+        "title": "📦 Card Availability",
+        "available": "<strong>All item cards are available</strong> in our shop! Customize your decks according to your needs and character.",
+        "comingSoon": "✨ Magic item cards coming soon, our goblins are working hard in our forges to create wonders for you!"
       },
-      "gameplay": {
-        "title": "Gameplay Cards",
-        "spells": "<strong>Spells:</strong> Complete descriptions, components",
-        "monsters": "<strong>Monsters:</strong> Statistics, tactics, loot",
-        "packages": "<strong>Packages:</strong> Themed equipment kits",
-        "goods": "<strong>Goods:</strong> Trade and economy"
-      }
-    },
-    "availability": {
-      "title": "📦 Card Availability",
-      "available": "<strong>All item cards are available</strong> in our shop! Customize your decks according to your needs and character.",
-      "comingSoon": "✨ Magic item cards coming soon, our goblins are working hard in our forges to create wonders for you!"
-    },
-    "examples": {
-      "title": "🎴 Card Examples",
-      "weapon": {
-        "title": "Weapon Card: Flintlock Pistol",
-        "front": "<strong>Front:</strong> Illustration, price, weight, attack bonus",
-        "back": "<strong>Back:</strong> Detailed rules, special properties"
+      "examples": {
+        "title": "🎴 Card Examples",
+        "weapon": {
+          "title": "Weapon Card: Flintlock Pistol",
+          "front": "<strong>Front:</strong> Illustration, price, weight, attack bonus",
+          "back": "<strong>Back:</strong> Detailed rules, special properties"
+        },
+        "armor": {
+          "title": "Armor Card: Leather Armor",
+          "front": "<strong>Front:</strong> Illustration, price, weight, base AC",
+          "back": "<strong>Back:</strong> Modifiers, restrictions, descriptions"
+        },
+        "tip": "💡 <strong>Tip:</strong> Click on cards to see front and back!"
       },
-      "armor": {
-        "title": "Armor Card: Leather Armor",
-        "front": "<strong>Front:</strong> Illustration, price, weight, base AC",
-        "back": "<strong>Back:</strong> Modifiers, restrictions, descriptions"
-      },
-      "tip": "💡 <strong>Tip:</strong> Click on cards to see front and back!"
-    },
-    "usage": {
-      "title": "📋 How to Use Your Cards",
-      "inGame": {
-        "title": "🎮 During the Game",
-        "quickAccess": {
-          "title": "1. Quick Access",
-          "list": {
-            "item1": "• Keep your equipment cards within reach",
-            "item2": "• Check special properties without slowing the game",
-            "item3": "• No need to open manuals during action"
+      "usage": {
+        "title": "📋 How to Use Your Cards",
+        "inGame": {
+          "title": "🎮 During the Game",
+          "quickAccess": {
+            "title": "1. Quick Access",
+            "list": {
+              "item1": "• Keep your equipment cards within reach",
+              "item2": "• Check special properties without slowing the game",
+              "item3": "• No need to open manuals during action"
+            }
+          },
+          "dmShare": {
+            "title": "2. Share with DM",
+            "list": {
+              "item1": "• Show your cards directly to the DM",
+              "item2": "• Immediate validation of rules and effects",
+              "item3": "• Quick clarification in case of doubt"
+            }
           }
         },
-        "dmShare": {
-          "title": "2. Share with DM",
-          "list": {
-            "item1": "• Show your cards directly to the DM",
-            "item2": "• Immediate validation of rules and effects",
-            "item3": "• Quick clarification in case of doubt"
-          }
-        }
-      },
-      "organization": {
-        "title": "🗂️ Organization",
-        "categorySort": {
-          "title": "1. Sort by Category",
-          "list": {
-            "item1": "• Separate: Weapons, Armor, Equipment, Spells",
-            "item2": "• Use dividers or sleeves",
-            "item3": "• Keep current cards on top"
+        "organization": {
+          "title": "🗂️ Organization",
+          "categorySort": {
+            "title": "1. Sort by Category",
+            "list": {
+              "item1": "• Separate: Weapons, Armor, Equipment, Spells",
+              "item2": "• Use dividers or sleeves",
+              "item3": "• Keep current cards on top"
+            }
+          },
+          "visualInventory": {
+            "title": "2. Visual Inventory",
+            "list": {
+              "item1": "• Spread out your current equipment cards",
+              "item2": "• Add/remove according to your acquisitions", 
+              "item3": "• Physical inventory = character inventory"
+            }
           }
         },
-        "visualInventory": {
-          "title": "2. Visual Inventory",
-          "list": {
-            "item1": "• Spread out your current equipment cards",
-            "item2": "• Add/remove according to your acquisitions", 
-            "item3": "• Physical inventory = character inventory"
+        "proTips": {
+          "title": "⭐ Pro Tips",
+          "rotation": "<strong>Rotation:</strong> Change your cards according to your adventures",
+          "protection": "<strong>Protection:</strong> Use transparent card sleeves",
+          "notes": {
+            "main": "<strong>Notes:</strong> Annotate in pencil for temporary modifications",
+            "tip": "Pro tip: Use Staedtler 8B or 9B pencils for optimal marking"
           }
         }
       },
-      "proTips": {
-        "title": "⭐ Pro Tips",
-        "rotation": "<strong>Rotation:</strong> Change your cards according to your adventures",
-        "protection": "<strong>Protection:</strong> Use transparent card sleeves",
-        "notes": {
-          "main": "<strong>Notes:</strong> Annotate in pencil for temporary modifications",
-          "tip": "Pro tip: Use Staedtler 8B or 9B pencils for optimal marking"
-        }
-      }
-    },
-    "backToMain": "⬆️ Back to main guides"
+      "backToMain": "⬆️ Back to main guides"
+    }
   },
   "money": {
     "title": "💰 D&D Currency Guide",
