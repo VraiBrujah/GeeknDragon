@@ -3,9 +3,21 @@ coin-custom-single;Pièce Personnalisée;Custom Coin;10;"### Pièce unique à vo
 
 Choisissez **le métal** (cuivre, argent, électrum, or, platine) et **le multiplicateur** (unitaire, ×10, ×100, ×1000, ×10000) pour créer votre pièce sur mesure.
 
+**Contenu :**
+- 1 pièce métallique personnalisable
+- Choix du métal : cuivre, argent, électrum, or, platine
+- Choix du multiplicateur : ×1, ×10, ×100, ×1000, ×10000
+- Finition selon le multiplicateur choisi
+
 *Parfait pour compléter une collection ou remplacer une pièce perdue.*";"### Single coin of your choice
 
 Select **the metal** (copper, silver, electrum, gold, platinum) and **multiplier** (unit, ×10, ×100, ×1000, ×10000) to create your custom coin.
+
+**Contents:**
+- 1 customizable metal coin
+- Metal choice: copper, silver, electrum, gold, platinum
+- Multiplier choice: ×1, ×10, ×100, ×1000, ×10000
+- Finish according to chosen multiplier
 
 *Perfect for completing a collection or replacing a lost coin.*";Pièce métallique personnalisable avec choix du métal et du multiplicateur.;Customizable metal coin with choice of metal and multiplier.;/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp;1|10|100|1000|10000;cuivre|argent|électrum|or|platine;copper|silver|electrum|gold|platinum;"{""copper"":1,""silver"":1,""electrum"":1,""gold"":1,""platinum"":1}";;VRAI;;;pieces
 coin-trio-customizable;Trio de Pièces;Trio of Coins;25;"### Trois pièces personnalisables

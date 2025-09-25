@@ -3,8 +3,8 @@
         "name": "Pièce Personnalisée",
         "name_en": "Custom Coin",
         "price": 10,
-        "description": "### Pièce unique à votre choix\n\nChoisissez **le métal** (cuivre, argent, électrum, or, platine) et **le multiplicateur** (unitaire, ×10, ×100, ×1000, ×10000) pour créer votre pièce sur mesure.\n\n**Contenu :**\n- 1 pièce métallique personnalisable\n- Choix du métal : cuivre, argent, électrum, or, platine\n- Choix du multiplicateur : ×1, ×10, ×100, ×1000, ×10000\n- Finition selon le multiplicateur choisi\n\n*Parfait pour compléter une collection ou remplacer une pièce perdue.*",
-        "description_en": "### Single coin of your choice\n\nSelect **the metal** (copper, silver, electrum, gold, platinum) and **multiplier** (unit, ×10, ×100, ×1000, ×10000) to create your custom coin.\n\n**Contents:**\n- 1 customizable metal coin\n- Metal choice: copper, silver, electrum, gold, platinum\n- Multiplier choice: ×1, ×10, ×100, ×1000, ×10000\n- Finish according to chosen multiplier\n\n*Perfect for completing a collection or replacing a lost coin.*",
+        "description": "### Pièce unique à votre choix\n\nChoisissez **le métal** (cuivre, argent, électrum, or, platine) et **le multiplicateur** (unitaire, ×10, ×100, ×1000, ×10000) pour créer votre pièce sur mesure.\n\n*Parfait pour compléter une collection ou remplacer une pièce perdue.*",
+        "description_en": "### Single coin of your choice\n\nSelect **the metal** (copper, silver, electrum, gold, platinum) and **multiplier** (unit, ×10, ×100, ×1000, ×10000) to create your custom coin.\n\n*Perfect for completing a collection or replacing a lost coin.*",
         "summary": "Pièce métallique personnalisable avec choix du métal et du multiplicateur.",
         "summary_en": "Customizable metal coin with choice of metal and multiplier.",
         "images": [
