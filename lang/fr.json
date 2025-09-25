@@ -152,6 +152,7 @@
       "multiplierLabel": "⚖️ Tableau multiplicateur (éditable)",
       "equivalences": "💼 Équivalences totales par métal",
       "recommendations": "✨ Recommandations optimales",
+      "currencyLabel": "Monnaie",
       "currency": {
         "copper": "Cuivre",
         "silver": "Argent",
@@ -729,7 +730,10 @@
         "feature3": "• <strong>Ambiance médiévale-fantastique</strong> renforcée"
       },
       "order": {
-        "title": "💰 Commandez vos Pièces"
+        "title": "💰 Commandez vos Pièces",
+        "description": "Découvrez notre collection complète de pièces métalliques et donnez vie à l'économie de vos parties !",
+        "shopButton": "🛒 Voir les Pièces en Boutique",
+        "treasuryButton": "⭐ Set Complet de Trésorerie"
       }
     },
     "tests": {
@@ -738,7 +742,11 @@
       "runningBasic": "Exécution des tests de base...",
       "runningAdvanced": "Exécution des tests avancés...",
       "noTests": "Aucun test exécuté...",
-      "error": "❌ Erreur lors de l'exécution des tests"
+      "error": "❌ Erreur lors de l'exécution des tests",
+      "successText": "tests réussis",
+      "errorLabel": "Erreur",
+      "performance": "Performance",
+      "totalTime": "Temps total"
     },
     "download": {
       "title": "Télécharger la Fiche de Monnaie",

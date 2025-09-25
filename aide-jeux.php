@@ -792,7 +792,7 @@ echo $snipcartInit;
       
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-bold mb-8" data-i18n="gameHelp.triptychGuide.title">
-          Les 3 Triptyques de votre Personnage
+          <?= __('gameHelp.triptychGuide.title', 'Les 3 Triptyques de votre Personnage') ?>
         </h2>
         <p class="text-xl text-gray-300 max-w-4xl mx-auto txt-court">
           <?= __('gameHelp.sections.detailsText', 'Découvrez en détail chaque type de triptyque. Cliquez sur les images pour voir le verso de chaque fiche.') ?>
@@ -1624,11 +1624,11 @@ echo $snipcartInit;
       <!-- ===== CONVERTISSEUR INTERACTIF ===== -->
       <!-- Convertisseur de monnaie Premium (identique à celui de boutique.php) -->
       <div class="mt-12" id="currency-converter-premium">
-        <h4 class="text-2xl font-bold text-center text-gray-200 mb-8" data-i18n="shop.converter.title">🧮 Convertisseur de monnaie</h4>
+        <h4 class="text-2xl font-bold text-center text-gray-200 mb-8" data-i18n="shop.converter.title"><?= __('shop.converter.title', '🧮 Convertisseur de monnaie') ?></h4>
         
         <!-- Section 1: Monnaies sources avec design premium -->
         <div class="mb-8">
-          <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.sourcesLabel">💰 Monnaies sources</h5>
+          <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.sourcesLabel"><?= __('shop.converter.sourcesLabel', '💰 Monnaies sources') ?></h5>
           <div class="currency-input-grid grid grid-cols-2 md:grid-cols-5 gap-4 max-w-6xl mx-auto">
             <div class="currency-input-card bg-gradient-to-br from-amber-900/20 to-orange-800/20 p-4 rounded-xl border border-amber-700/30">
               <label class="block text-amber-300 font-medium mb-2"><?= __('gameHelp.money.converter.labels.copper', '🪙 Cuivre') ?></label>
@@ -1660,13 +1660,13 @@ echo $snipcartInit;
 
         <!-- Section 2: Tableau multiplicateur interactif toujours visible -->
         <div class="mb-8">
-          <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.multiplierLabel">⚖️ Tableau multiplicateur (éditable)</h5>
+          <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.multiplierLabel"><?= __('shop.converter.multiplierLabel', '⚖️ Tableau multiplicateur (éditable)') ?></h5>
           <div class="bg-gray-800/50 rounded-xl p-6 max-w-6xl mx-auto border border-gray-700/30">
             <div class="overflow-x-auto">
               <table class="w-full text-gray-200" id="multiplier-table">
                 <thead>
                   <tr class="border-b border-gray-600/50">
-                    <th class="text-left p-3 text-gray-300">Monnaie</th>
+                    <th class="text-left p-3 text-gray-300"><?= __('shop.converter.currencyLabel', 'Monnaie') ?></th>
                     <th class="text-center p-3 text-gray-300">×1</th>
                     <th class="text-center p-3 text-gray-300">×10</th>
                     <th class="text-center p-3 text-gray-300">×100</th>
@@ -1723,7 +1723,7 @@ echo $snipcartInit;
 
         <!-- Section 3: Équivalences totales par métal avec recommandations optimales -->
         <div class="mb-8" id="metal-totals-section">
-          <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.equivalences">💼 Équivalences totales par métal</h5>
+          <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.equivalences"><?= __('shop.converter.equivalences', '💼 Équivalences totales par métal') ?></h5>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
             <!-- Première ligne: Cuivre, Argent, Électrum -->
             <div id="copper-card"></div>
@@ -1914,15 +1914,14 @@ echo $snipcartInit;
             <div class="bg-gradient-to-r from-yellow-900/30 to-amber-900/30 rounded-lg p-6 border border-yellow-600/50 text-center">
               <h4 class="text-xl font-bold mb-4 text-yellow-400"><?= __('gameHelp.money.physicalCoins.order.title', '💰 Commandez vos Pièces') ?></h4>
               <p class="text-gray-300 mb-6">
-                Découvrez notre collection complète de pièces métalliques 
-                et donnez vie à l'économie de vos parties !
+                <?= __('money.physicalCoins.order.description', 'Découvrez notre collection complète de pièces métalliques et donnez vie à l\'économie de vos parties !') ?>
               </p>
               <div class="space-y-4">
                 <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-primary w-full">
-                  🛒 Voir les Pièces en Boutique
+                  <?= __('money.physicalCoins.order.shopButton', '🛒 Voir les Pièces en Boutique') ?>
                 </a>
                 <a href="<?= langUrl('product.php?id=coin-lord-treasury-uniform&from=pieces') ?>" class="btn btn-outline w-full">
-                  ⭐ Set Complet de Trésorerie
+                  <?= __('money.physicalCoins.order.treasuryButton', '⭐ Set Complet de Trésorerie') ?>
                 </a>
               </div>
             </div>
@@ -2403,7 +2402,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let html = `<div class="mb-4">
       <div class="text-lg font-semibold ${success ? 'text-green-400' : 'text-red-400'}">
-        ${testType}: ${passed}/${total} tests réussis ${success ? '✅' : '❌'}
+        ${testType}: ${passed}/${total} <?= __('money.tests.successText', 'tests réussis') ?> ${success ? '✅' : '❌'}
       </div>
     </div>`;
 
@@ -2421,7 +2420,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       
       if (!result.passed && result.error) {
-        html += `<div class="text-red-300 text-xs mt-1 pl-4">Erreur: ${result.error}</div>`;
+        html += `<div class="text-red-300 text-xs mt-1 pl-4"><?= __('money.tests.errorLabel', 'Erreur') ?>: ${result.error}</div>`;
       }
       
       html += '</div>';
@@ -2431,8 +2430,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const timeData = results.find(r => r.timing);
     if (timeData && timeData.timing) {
       html += `<div class="mt-4 p-3 bg-blue-900/30 rounded text-blue-300">
-        <div class="font-semibold">⏱️ Performance</div>
-        <div class="text-xs">Temps total: ${timeData.timing}ms</div>
+        <div class="font-semibold">⏱️ <?= __('money.tests.performance', 'Performance') ?></div>
+        <div class="text-xs"><?= __('money.tests.totalTime', 'Temps total') ?>: ${timeData.timing}ms</div>
       </div>`;
     }
 

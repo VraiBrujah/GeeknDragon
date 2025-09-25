@@ -152,6 +152,7 @@
       "multiplierLabel": "⚖️ Multiplier table (editable)",
       "equivalences": "💼 Total equivalences by metal",
       "recommendations": "✨ Optimal recommendations",
+      "currencyLabel": "Currency",
       "currency": {
         "copper": "Copper",
         "silver": "Silver",
@@ -729,7 +730,10 @@
         "feature3": "• <strong>Enhanced medieval-fantasy</strong> atmosphere"
       },
       "order": {
-        "title": "💰 Order your Coins"
+        "title": "💰 Order your Coins",
+        "description": "Discover our complete collection of metal coins and bring your game economy to life!",
+        "shopButton": "🛒 See Coins in Shop",
+        "treasuryButton": "⭐ Complete Treasury Set"
       }
     },
     "tests": {
@@ -738,7 +742,11 @@
       "runningBasic": "Running basic tests...",
       "runningAdvanced": "Running advanced tests...",
       "noTests": "No tests executed...",
-      "error": "❌ Error during test execution"
+      "error": "❌ Error during test execution",
+      "successText": "tests passed",
+      "errorLabel": "Error",
+      "performance": "Performance",
+      "totalTime": "Total time"
     },
     "download": {
       "title": "Download the Money Sheet",
