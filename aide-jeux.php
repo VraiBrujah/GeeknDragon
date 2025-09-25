@@ -1751,7 +1751,7 @@ echo $snipcartInit;
           <div class="max-w-4xl mx-auto">
             <div class="text-center mb-6">
               <p class="text-gray-300 mb-4">
-                <?= __('money.lotsRecommendations.description', 'Voici les lots minimaux recommandés pour couvrir exactement vos besoins en pièces physiques :') ?>
+                <?= __('money.converter.lotsRecommendations.description', 'Voici les lots minimaux recommandés pour couvrir exactement vos besoins en pièces physiques :') ?>
               </p>
             </div>
             
@@ -1831,7 +1831,7 @@ echo $snipcartInit;
               </div>
               
               <div class="mt-4 text-center">
-                <p class="text-amber-300 font-medium mb-2">📄 Fiche de Monnaie officielle</p>
+                <p class="text-amber-300 font-medium mb-2"><?= __('money.download.subtitle', '📄 Fiche de Monnaie officielle') ?></p>
                 <p class="text-xs text-gray-400 mb-3"><?= __('money.download.instruction', 'Cliquez sur l\'image pour télécharger la fiche à imprimer') ?></p>
                 
                 <button onclick="downloadMoneySheet()" 
