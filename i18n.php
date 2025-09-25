@@ -11,7 +11,28 @@
 require_once __DIR__ . '/includes/i18n-helper.php';
 
 $availableLangs = ['fr', 'en'];
-$lang = $_GET['lang'] ?? ($_COOKIE['lang'] ?? 'fr');
+
+// Fonction pour détecter la langue préférée du navigateur
+function getBrowserLanguage($availableLangs) {
+    if (!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+        return 'fr'; // Défaut si pas d'en-tête
+    }
+    
+    $browserLangs = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+    foreach ($browserLangs as $browserLang) {
+        $lang = strtolower(trim(explode(';', $browserLang)[0]));
+        // Vérifier langue exacte (ex: "fr") ou préfixe (ex: "fr-CA")
+        foreach ($availableLangs as $availableLang) {
+            if ($lang === $availableLang || strpos($lang, $availableLang . '-') === 0) {
+                return $availableLang;
+            }
+        }
+    }
+    return 'fr'; // Défaut français si aucune langue supportée
+}
+
+// Résolution langue : URL > Cookie > Navigateur > Défaut
+$lang = $_GET['lang'] ?? ($_COOKIE['lang'] ?? getBrowserLanguage($availableLangs));
 if (!in_array($lang, $availableLangs, true)) {
     $lang = 'fr';
 }

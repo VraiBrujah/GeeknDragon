@@ -2207,7 +2207,7 @@ function confirmDownload() {
     closeDownloadPopup();
 }
 </script>
-<script src="/js/hero-videos-simple.js?v=<?= filemtime(__DIR__.'/js/hero-videos-simple.js') ?>"></script>
+<script src="/js/hero-videos.js?v=<?= filemtime(__DIR__.'/js/hero-videos.js') ?>"></script>
 <script src="/js/boutique-premium.js"></script>
 <script src="/js/snipcart-utils.js"></script>
 <script src="/js/coin-lot-optimizer.js"></script>

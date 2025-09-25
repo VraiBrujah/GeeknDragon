@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function loadTranslations(current) {
-    fetch(`/translations/${current}.json`)
+    fetch(`/lang/${current}.json`)
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
         if (!data) return;

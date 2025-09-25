@@ -160,6 +160,6 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
    
   <?php include 'footer.php'; ?>
   <script src="/js/app.js?v=<?= filemtime(__DIR__.'/js/app.js') ?>"></script>
-  <script src="/js/hero-videos-simple.js?v=<?= filemtime(__DIR__.'/js/hero-videos-simple.js') ?>"></script>
+  <script src="/js/hero-videos.js?v=<?= filemtime(__DIR__.'/js/hero-videos.js') ?>"></script>
 </body>
 </html>

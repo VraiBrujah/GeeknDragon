@@ -787,4 +787,63 @@
       }
     },
     "backToTop": "⬆️ Retour aux guides principaux"
+  },
+  "money": {
+    "title": "💰 Guide de la Monnaie D&D",
+    "subtitle": "Découvrez le système monétaire de D&D, nos pièces physiques Geek & Dragon, et utilisez notre convertisseur pour gérer facilement vos finances d'aventurier !",
+    "coinTypes": {
+      "title": "💎 Types de Pièces",
+      "platinum": {
+        "name": "Pièce de Platine (pp)",
+        "desc": "La plus précieuse • 1 pp = 10 po"
+      },
+      "gold": {
+        "name": "Pièce d'Or (po)",
+        "desc": "Monnaie de référence • 1 po = 10 pa"
+      },
+      "silver": {
+        "name": "Pièce d'Argent (pa)",
+        "desc": "Monnaie courante • 1 pa = 10 pe"
+      },
+      "electrum": {
+        "name": "Pièce d'Électrum (pe)",
+        "desc": "Alliage or-argent • 1 pe = 5 pc"
+      },
+      "copper": {
+        "name": "Pièce de Cuivre (pc)",
+        "desc": "Menue monnaie • La plus commune"
+      }
+    },
+    "conversionTable": {
+      "title": "🔄 Tableau de Conversion",
+      "coin": "Pièce",
+      "platinumRow": "Platine (pp)",
+      "goldRow": "Or (po)",
+      "silverRow": "Argent (pa)",
+      "electrumRow": "Électrum (pe)",
+      "copperRow": "Cuivre (pc)"
+    },
+    "interactiveConverter": {
+      "title": "🧮 Convertisseur de monnaie",
+      "copperLabel": "🪙 Cuivre",
+      "silverLabel": "🥈 Argent",
+      "electrumLabel": "⚡ Électrum",
+      "goldLabel": "🥇 Or",
+      "platinumLabel": "💎 Platine"
+    },
+    "lotsRecommendations": {
+      "title": "🛒 Lots de pièces recommandés",
+      "description": "Voici les lots minimaux recommandés pour couvrir exactement vos besoins en pièces physiques :",
+      "addAllButton": "Ajouter tous les lots au panier",
+      "optimizationNote": "Ces recommandations optimisent le nombre de lots nécessaires pour le prix le plus avantageux."
+    },
+    "debugSection": {
+      "title": "🔬 Tests du Système de Conversion",
+      "description": "Section de débogage pour valider les algorithmes métaheuristiques de conversion et recommandations de lots.",
+      "basicTests": "🧪 Tests de Base",
+      "advancedTests": "🔬 Tests Avancés",
+      "criticalTests": "⚗️ Tests Critiques",
+      "results": "📊 Résultats des Tests"
+    }
+  }
 }
