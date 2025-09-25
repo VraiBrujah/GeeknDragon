@@ -238,6 +238,14 @@ class SnipcartUtils {
      * Traduit les noms de métaux
      */
     static translateMetal(metal, lang = 'fr') {
+        // Utiliser le système de traduction global si disponible
+        const translationKey = `shop.converter.metals.${metal}`;
+        const translated = this.getTranslation(translationKey);
+        if (translated) {
+            return translated;
+        }
+        
+        // Fallback vers les traductions locales pour rétro-compatibilité
         const translations = {
             fr: {
                 copper: 'cuivre',

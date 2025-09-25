@@ -21,6 +21,20 @@ class DnDMusicPlayer {
         this.setupEventListeners();
     }
 
+    // Helper pour accéder aux traductions
+    getTranslation(key, fallback = '') {
+        if (window.i18n) {
+            const keys = key.split('.');
+            let value = window.i18n;
+            for (const k of keys) {
+                value = value?.[k];
+                if (value === undefined) break;
+            }
+            return typeof value === 'string' ? value : fallback;
+        }
+        return fallback;
+    }
+
     async initializePlayer() {
         try {
             await this.loadPlaylist();
@@ -102,7 +116,7 @@ class DnDMusicPlayer {
                     <div class="music-status-indicator"></div>
                     
                     <div class="music-volume-container">
-                        <button id="music-mute" class="music-btn volume-btn" title="Volume">
+                        <button id="music-mute" class="music-btn volume-btn" title="${this.getTranslation('ui.musicPlayer.volume', 'Volume')}">
                             <svg class="volume-icon" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77z"/>
                             </svg>
@@ -114,12 +128,12 @@ class DnDMusicPlayer {
                     </div>
                     
                     <div class="music-controls">
-                        <button id="music-prev" class="music-btn" title="Précédent">
+                        <button id="music-prev" class="music-btn" title="${this.getTranslation('ui.musicPlayer.previous', 'Précédent')}">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
                             </svg>
                         </button>
-                        <button id="music-play-pause" class="music-btn play-pause-btn" title="Lecture / Pause">
+                        <button id="music-play-pause" class="music-btn play-pause-btn" title="${this.getTranslation('ui.musicPlayer.playPause', 'Lecture / Pause')}">
                             <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M8 5v14l11-7z"/>
                             </svg>
@@ -127,7 +141,7 @@ class DnDMusicPlayer {
                                 <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
                             </svg>
                         </button>
-                        <button id="music-next" class="music-btn" title="Suivant">
+                        <button id="music-next" class="music-btn" title="${this.getTranslation('ui.musicPlayer.next', 'Suivant')}">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
                             </svg>

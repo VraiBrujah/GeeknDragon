@@ -161,6 +161,13 @@
         "gold": "Gold",
         "platinum": "Platinum"
       },
+      "metals": {
+        "copper": "copper",
+        "silver": "silver",
+        "electrum": "electrum",
+        "gold": "gold",
+        "platinum": "platinum"
+      },
       "enterAmounts": "Enter amounts to see optimal recommendations",
       "optimalConversion": "Optimal conversion",
       "total": "Total",
@@ -203,7 +210,13 @@
     "nextImage": "Next image",
     "loading": "Loading...",
     "error": "Error",
-    "close": "Close"
+    "close": "Close",
+    "musicPlayer": {
+      "previous": "Previous",
+      "playPause": "Play / Pause",
+      "next": "Next",
+      "volume": "Volume"
+    }
   },
   "testimonials": {
     "title": "Testimonials",
@@ -221,6 +234,14 @@
     "images": {
       "speciesAssimarFront": "Species Triptych Aasimar - Front",
       "speciesAssimarBack": "Species Triptych Aasimar - Back",
+      "classBarbarianFront": "Class Triptych Barbarian - Front",
+      "classBarbarianBack": "Class Triptych Barbarian - Back",
+      "backgroundAcolyteFront": "Background Triptych Acolyte - Front",
+      "backgroundAcolyteBack": "Background Triptych Acolyte - Back",
+      "weaponCardFront": "Weapon Card - Front",
+      "weaponCardBack": "Weapon Card - Back",
+      "armorCardFront": "Armor Card - Front",
+      "armorCardBack": "Armor Card - Back",
       "propertyCard": "Geek & Dragon coins property card"
     },
     "quotes": {
@@ -702,7 +723,16 @@
           "electrum": "⚡ Electrum",
           "gold": "🥇 Gold",
           "platinum": "💎 Platinum"
-        }
+        },
+        "multiplierTable": {
+          "copper": "🪙 Copper",
+          "silver": "🥈 Silver",
+          "electrum": "⚡ Electrum", 
+          "gold": "🥇 Gold",
+          "platinum": "💎 Platinum"
+        },
+        "lotsRecommendedTitle": "🛒 Recommended coin lots",
+        "productSummary": "D&D coin lot"
       },
       "physicalTreasure": {
         "title": "🏆 Why Physical Treasure?",
@@ -743,6 +773,11 @@
         "runningAdvanced": "Running advanced tests...",
         "noTests": "No tests executed...",
         "error": "❌ Error during test execution",
+        "notAvailable": "❌ CurrencyConverterTests not available",
+        "basic": "Basic Tests",
+        "advanced": "Advanced Tests",
+        "basicButton": "🧪 Basic Tests",
+        "advancedButton": "🔬 Advanced Tests",
         "successText": "tests passed",
         "errorLabel": "Error",
         "performance": "Performance",
@@ -768,11 +803,35 @@
         "lotsRecommendations": {
           "description": "Here are the minimal recommended lots to cover exactly your physical coin needs:",
           "addAllButton": "Add all lots to cart",
-          "optimizationNote": "These recommendations optimize the number of lots needed for the most advantageous price."
+          "optimizationNote": "These recommendations optimize the number of lots needed for the most advantageous price.",
+          "noLotsMessage": "No lots to add to cart."
+        },
+        "abbreviations": {
+          "copper": "cp",
+          "silver": "sp", 
+          "electrum": "ep",
+          "gold": "gp",
+          "platinum": "pp"
         },
         "debugSection": {
           "title": "Debug section to validate metaheuristic algorithms for conversion and lot recommendations."
         },
+        "labels": {
+          "copper": "🪙 Copper",
+          "silver": "🥈 Silver",
+          "electrum": "⚡ Electrum",
+          "gold": "🥇 Gold",
+          "platinum": "💎 Platinum"
+        },
+        "multiplierTable": {
+          "copper": "🪙 Copper",
+          "silver": "🥈 Silver",
+          "electrum": "⚡ Electrum",
+          "gold": "🥇 Gold",
+          "platinum": "💎 Platinum"
+        },
+        "lotsRecommendedTitle": "🛍️ Recommended coin lots",
+        "productSummary": "D&D coin lot",
         "coinDescription": {
           "faithfulReproduction": "Our metal coins faithfully reproduce the D&D monetary system. Each type of coin has its own design and unique finish."
         }

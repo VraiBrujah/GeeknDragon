@@ -161,6 +161,13 @@
         "gold": "Or",
         "platinum": "Platine"
       },
+      "metals": {
+        "copper": "cuivre",
+        "silver": "argent",
+        "electrum": "électrum",
+        "gold": "or",
+        "platinum": "platine"
+      },
       "enterAmounts": "Entrez des montants pour voir les recommandations optimales",
       "optimalConversion": "Conversion optimale",
       "total": "Total",
@@ -203,7 +210,13 @@
     "nextImage": "Image suivante",
     "loading": "Chargement...",
     "error": "Erreur",
-    "close": "Fermer"
+    "close": "Fermer",
+    "musicPlayer": {
+      "previous": "Précédent",
+      "playPause": "Lecture / Pause",
+      "next": "Suivant",
+      "volume": "Volume"
+    }
   },
   "testimonials": {
     "title": "Témoignages",
@@ -221,6 +234,14 @@
     "images": {
       "speciesAssimarFront": "Triptyque Espèce Aasimar - Recto",
       "speciesAssimarBack": "Triptyque Espèce Aasimar - Verso",
+      "classBarbarianFront": "Triptyque Classe Barbare - Recto",
+      "classBarbarianBack": "Triptyque Classe Barbare - Verso",
+      "backgroundAcolyteFront": "Triptyque Historique Acolyte - Recto",
+      "backgroundAcolyteBack": "Triptyque Historique Acolyte - Verso",
+      "weaponCardFront": "Carte Arme - Recto",
+      "weaponCardBack": "Carte Arme - Verso",
+      "armorCardFront": "Carte Armure - Recto",
+      "armorCardBack": "Carte Armure - Verso",
       "propertyCard": "Carte de propriété des pièces Geek & Dragon"
     },
     "quotes": {
@@ -703,7 +724,16 @@
         "electrum": "⚡ Électrum",
         "gold": "🥇 Or",
         "platinum": "💎 Platine"
-      }
+      },
+      "multiplierTable": {
+        "copper": "🪙 Cuivre",
+        "silver": "🥈 Argent",
+        "electrum": "⚡ Électrum", 
+        "gold": "🥇 Or",
+        "platinum": "💎 Platine"
+      },
+      "lotsRecommendedTitle": "🛒 Lots de pièces recommandés",
+      "productSummary": "Lot de pièces D&D"
     },
     "physicalTreasure": {
       "title": "🏆 Pourquoi le Trésor Physique ?",
@@ -744,6 +774,11 @@
       "runningAdvanced": "Exécution des tests avancés...",
       "noTests": "Aucun test exécuté...",
       "error": "❌ Erreur lors de l'exécution des tests",
+      "notAvailable": "❌ CurrencyConverterTests non disponible",
+      "basic": "Tests de Base",
+      "advanced": "Tests Avancés",
+      "basicButton": "🧪 Tests de Base",
+      "advancedButton": "🔬 Tests Avancés",
       "successText": "tests réussis",
       "errorLabel": "Erreur",
       "performance": "Performance",
@@ -769,11 +804,35 @@
       "lotsRecommendations": {
         "description": "Voici les lots minimaux recommandés pour couvrir exactement vos besoins en pièces physiques :",
         "addAllButton": "Ajouter tous les lots au panier",
-        "optimizationNote": "Ces recommandations optimisent le nombre de lots nécessaires pour le prix le plus avantageux."
+        "optimizationNote": "Ces recommandations optimisent le nombre de lots nécessaires pour le prix le plus avantageux.",
+        "noLotsMessage": "Aucun lot à ajouter au panier."
+      },
+      "abbreviations": {
+        "copper": "pc",
+        "silver": "pa", 
+        "electrum": "pe",
+        "gold": "po",
+        "platinum": "pp"
       },
       "debugSection": {
         "title": "Section de débogage pour valider les algorithmes métaheuristiques de conversion et recommandations de lots."
       },
+      "labels": {
+        "copper": "🪙 Cuivre",
+        "silver": "🥈 Argent",
+        "electrum": "⚡ Électrum",
+        "gold": "🥇 Or",
+        "platinum": "💎 Platine"
+      },
+      "multiplierTable": {
+        "copper": "🪙 Cuivre",
+        "silver": "🥈 Argent",
+        "electrum": "⚡ Électrum",
+        "gold": "🥇 Or",
+        "platinum": "💎 Platine"
+      },
+      "lotsRecommendedTitle": "🛍️ Lots de pièces recommandés",
+      "productSummary": "Lot de pièces D&D",
       "coinDescription": {
         "faithfulReproduction": "Nos pièces métalliques reproduisent fidèlement le système monétaire de D&D. Chaque type de pièce a son propre design et sa finition unique."
       }

@@ -886,10 +886,10 @@ echo $snipcartInit;
           <div class="flip-container" id="class-flip" onclick="flipCard('class-flip')">
             <div class="flipper">
               <div class="front">
-                <img src="/media/game/triptychs/examples/classe-barbare-recto.webp" alt="Triptyque Classe Barbare - Recto" class="triptych-preview">
+                <img src="/media/game/triptychs/examples/classe-barbare-recto.webp" alt="<?= __('gameHelp.images.classBarbarianFront', 'Triptyque Classe Barbare - Recto') ?>" class="triptych-preview">
               </div>
               <div class="back">
-                <img src="/media/game/triptychs/examples/classe-barbare-verso.webp" alt="Triptyque Classe Barbare - Verso" class="triptych-preview">
+                <img src="/media/game/triptychs/examples/classe-barbare-verso.webp" alt="<?= __('gameHelp.images.classBarbarianBack', 'Triptyque Classe Barbare - Verso') ?>" class="triptych-preview">
               </div>
             </div>
           </div>
@@ -917,10 +917,10 @@ echo $snipcartInit;
           <div class="flip-container" id="background-flip" onclick="flipCard('background-flip')">
             <div class="flipper">
               <div class="front">
-                <img src="/media/game/triptychs/examples/historique-acolyte-recto.webp" alt="Triptyque Historique Acolyte - Recto" class="triptych-preview">
+                <img src="/media/game/triptychs/examples/historique-acolyte-recto.webp" alt="<?= __('gameHelp.images.backgroundAcolyteFront', 'Triptyque Historique Acolyte - Recto') ?>" class="triptych-preview">
               </div>
               <div class="back">
-                <img src="/media/game/triptychs/examples/historique-acolyte-verso.webp" alt="Triptyque Historique Acolyte - Verso" class="triptych-preview">
+                <img src="/media/game/triptychs/examples/historique-acolyte-verso.webp" alt="<?= __('gameHelp.images.backgroundAcolyteBack', 'Triptyque Historique Acolyte - Verso') ?>" class="triptych-preview">
               </div>
             </div>
           </div>
@@ -1360,10 +1360,10 @@ echo $snipcartInit;
             <div class="flip-container-card" onclick="flipCardExample('weapon-card')">
               <div class="flipper-card" id="weapon-card">
                 <div class="front-card">
-                  <img src="/media/products/cards/arme-recto.webp" alt="Carte Arme - Recto" class="card-preview">
+                  <img src="/media/products/cards/arme-recto.webp" alt="<?= __('gameHelp.images.weaponCardFront', 'Carte Arme - Recto') ?>" class="card-preview">
                 </div>
                 <div class="back-card">
-                  <img src="/media/products/cards/arme-verso.webp" alt="Carte Arme - Verso" class="card-preview">
+                  <img src="/media/products/cards/arme-verso.webp" alt="<?= __('gameHelp.images.weaponCardBack', 'Carte Arme - Verso') ?>" class="card-preview">
                 </div>
               </div>
             </div>
@@ -1379,10 +1379,10 @@ echo $snipcartInit;
             <div class="flip-container-card" onclick="flipCardExample('armor-card')">
               <div class="flipper-card" id="armor-card">
                 <div class="front-card">
-                  <img src="/media/products/cards/armure-recto.webp" alt="Carte Armure - Recto" class="card-preview">
+                  <img src="/media/products/cards/armure-recto.webp" alt="<?= __('gameHelp.images.armorCardFront', 'Carte Armure - Recto') ?>" class="card-preview">
                 </div>
                 <div class="back-card">
-                  <img src="/media/products/cards/armure-verso.webp" alt="Carte Armure - Verso" class="card-preview">
+                  <img src="/media/products/cards/armure-verso.webp" alt="<?= __('gameHelp.images.armorCardBack', 'Carte Armure - Verso') ?>" class="card-preview">
                 </div>
               </div>
             </div>
@@ -1676,7 +1676,7 @@ echo $snipcartInit;
                 </thead>
                 <tbody>
                   <tr class="border-b border-gray-700/30" data-currency="platinum">
-                    <td class="p-3 text-cyan-300 font-medium">💎 Platine</td>
+                    <td class="p-3 text-cyan-300 font-medium"><?= __('gameHelp.money.converter.multiplierTable.platinum', '💎 Platine') ?></td>
                     <td class="p-2" data-label="×1"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
                     <td class="p-2" data-label="×10"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
                     <td class="p-2" data-label="×100"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
@@ -1684,7 +1684,7 @@ echo $snipcartInit;
                     <td class="p-2" data-label="×10000"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
                   </tr>
                   <tr class="border-b border-gray-700/30" data-currency="gold">
-                    <td class="p-3 text-yellow-300 font-medium">🥇 Or</td>
+                    <td class="p-3 text-yellow-300 font-medium"><?= __('gameHelp.money.converter.multiplierTable.gold', '🥇 Or') ?></td>
                     <td class="p-2" data-label="×1"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
                     <td class="p-2" data-label="×10"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
                     <td class="p-2" data-label="×100"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
@@ -1692,7 +1692,7 @@ echo $snipcartInit;
                     <td class="p-2" data-label="×10000"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
                   </tr>
                   <tr class="border-b border-gray-700/30" data-currency="electrum">
-                    <td class="p-3 text-yellow-300 font-medium">⚡ Électrum</td>
+                    <td class="p-3 text-yellow-300 font-medium"><?= __('gameHelp.money.converter.multiplierTable.electrum', '⚡ Électrum') ?></td>
                     <td class="p-2" data-label="×1"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
                     <td class="p-2" data-label="×10"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
                     <td class="p-2" data-label="×100"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
@@ -1700,7 +1700,7 @@ echo $snipcartInit;
                     <td class="p-2" data-label="×10000"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
                   </tr>
                   <tr class="border-b border-gray-700/30" data-currency="silver">
-                    <td class="p-3 text-gray-300 font-medium">🥈 Argent</td>
+                    <td class="p-3 text-gray-300 font-medium"><?= __('gameHelp.money.converter.multiplierTable.silver', '🥈 Argent') ?></td>
                     <td class="p-2" data-label="×1"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
                     <td class="p-2" data-label="×10"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
                     <td class="p-2" data-label="×100"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
@@ -1708,7 +1708,7 @@ echo $snipcartInit;
                     <td class="p-2" data-label="×10000"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
                   </tr>
                   <tr data-currency="copper">
-                    <td class="p-3 text-amber-300 font-medium">🪙 Cuivre</td>
+                    <td class="p-3 text-amber-300 font-medium"><?= __('gameHelp.money.converter.multiplierTable.copper', '🪙 Cuivre') ?></td>
                     <td class="p-2" data-label="×1"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
                     <td class="p-2" data-label="×10"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
                     <td class="p-2" data-label="×100"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
@@ -1745,7 +1745,7 @@ echo $snipcartInit;
       <div id="coin-lots-recommendations" class="mt-12 mb-16" style="display: block;">
         <div class="bg-gradient-to-r from-green-900/30 to-emerald-900/20 rounded-xl p-8 border border-green-700/50">
           <h4 class="text-2xl font-bold text-center text-gray-200 mb-8">
-            🛒 Lots de pièces recommandés
+            <?= __('gameHelp.money.converter.lotsRecommendedTitle', '🛒 Lots de pièces recommandés') ?>
           </h4>
           
           <div class="max-w-4xl mx-auto">
@@ -1788,10 +1788,10 @@ echo $snipcartInit;
           
           <div class="grid md:grid-cols-2 gap-6 mb-6">
             <button id="run-basic-tests" class="btn btn-primary">
-              🧪 Tests de Base
+              <?= __('gameHelp.money.tests.basicButton', '🧪 Tests de Base') ?>
             </button>
             <button id="run-advanced-tests" class="btn btn-secondary">
-              🔬 Tests Avancés
+              <?= __('gameHelp.money.tests.advancedButton', '🔬 Tests Avancés') ?>
             </button>
           </div>
           
@@ -1914,7 +1914,7 @@ echo $snipcartInit;
             <div class="bg-gradient-to-r from-yellow-900/30 to-amber-900/30 rounded-lg p-6 border border-yellow-600/50 text-center">
               <h4 class="text-xl font-bold mb-4 text-yellow-400"><?= __('gameHelp.money.physicalCoins.order.title', '💰 Commandez vos Pièces') ?></h4>
               <p class="text-gray-300 mb-6">
-                <?= __('money.physicalCoins.order.description', 'Découvrez notre collection complète de pièces métalliques et donnez vie à l\'économie de vos parties !') ?>
+                <?= __('gameHelp.money.physicalCoins.order.description', 'Découvrez notre collection complète de pièces métalliques et donnez vie à l\'économie de vos parties !') ?>
               </p>
               <div class="space-y-4">
                 <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-primary w-full">
@@ -1942,23 +1942,23 @@ echo $snipcartInit;
   <!-- ===== CALL TO ACTION ===== -->
   <section class="py-16 bg-gray-900/80">
     <div class="max-w-4xl mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold mb-6 text-indigo-400"><?= __('gameHelp.callToAction.title', 'Prêt à révolutionner vos parties ?') ?></h2>
+      <h2 class="text-3xl font-bold mb-6 text-indigo-400"><?= __('callToAction.title', 'Prêt à révolutionner vos parties ?') ?></h2>
       <p class="text-xl text-gray-300 mb-8 txt-court">
-        <?= __('gameHelp.callToAction.description', 'Découvrez notre collection complète : triptyques, cartes d\'équipement et pièces métalliques. Transformez votre expérience de jeu de rôle avec nos accessoires artisanaux conçus au Québec.') ?>
+        <?= __('callToAction.description', 'Découvrez notre collection complète : triptyques, cartes d\'équipement et pièces métalliques. Transformez votre expérience de jeu de rôle avec nos accessoires artisanaux conçus au Québec.') ?>
       </p>
       
       <div class="flex flex-col md:flex-row gap-4 justify-center">
         <a href="<?= langUrl('boutique.php#triptyques') ?>" class="btn btn-primary text-lg px-6 py-4">
-          <?= __('gameHelp.callToAction.buttons.triptychs', '📁 Triptyques') ?>
+          <?= __('callToAction.buttons.triptychs', '📁 Triptyques') ?>
         </a>
         <a href="<?= langUrl('boutique.php#cartes') ?>" class="btn btn-primary text-lg px-6 py-4">
-          <?= __('gameHelp.callToAction.buttons.cards', '🃏 Cartes d\'Équipement') ?>
+          <?= __('callToAction.buttons.cards', '🃏 Cartes d\'Équipement') ?>
         </a>
         <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-primary text-lg px-6 py-4">
-          <?= __('gameHelp.callToAction.buttons.coins', '🪙 Pièces Métalliques') ?>
+          <?= __('callToAction.buttons.coins', '🪙 Pièces Métalliques') ?>
         </a>
         <a href="<?= langUrl('boutique.php') ?>" class="btn btn-outline text-lg px-6 py-4">
-          <?= __('gameHelp.callToAction.buttons.shop', '🛒 Voir toute la boutique') ?>
+          <?= __('callToAction.buttons.shop', '🛒 Voir toute la boutique') ?>
         </a>
       </div>
     </div>
@@ -2013,12 +2013,21 @@ function convertCurrency(fromCurrency) {
     const totalGold = totalCopper / currencyRates.po;
     
     // Mettre à jour l'affichage
-    document.getElementById('total-po').textContent = `${totalGold.toLocaleString('fr-FR', {maximumFractionDigits: 2})} po`;
-    document.getElementById('result-pp').textContent = `${pp.toLocaleString('fr-FR')} pp`;
-    document.getElementById('result-po').textContent = `${po.toLocaleString('fr-FR')} po`;
-    document.getElementById('result-pa').textContent = `${pa.toLocaleString('fr-FR')} pa`;
-    document.getElementById('result-pe').textContent = `${pe.toLocaleString('fr-FR')} pe`;
-    document.getElementById('result-pc').textContent = `${pc.toLocaleString('fr-FR')} pc`;
+    const lang = document.documentElement.lang || 'fr';
+    const locale = lang === 'en' ? 'en-US' : 'fr-FR';
+    
+    // Obtenir les abréviations de monnaie selon la langue
+    const abbrevs = {
+      fr: { platinum: 'pp', gold: 'po', silver: 'pa', electrum: 'pe', copper: 'pc' },
+      en: { platinum: 'pp', gold: 'gp', silver: 'sp', electrum: 'ep', copper: 'cp' }
+    }[lang] || { platinum: 'pp', gold: 'po', silver: 'pa', electrum: 'pe', copper: 'pc' };
+    
+    document.getElementById('total-po').textContent = `${totalGold.toLocaleString(locale, {maximumFractionDigits: 2})} ${abbrevs.gold}`;
+    document.getElementById('result-pp').textContent = `${pp.toLocaleString(locale)} ${abbrevs.platinum}`;
+    document.getElementById('result-po').textContent = `${po.toLocaleString(locale)} ${abbrevs.gold}`;
+    document.getElementById('result-pa').textContent = `${pa.toLocaleString(locale)} ${abbrevs.silver}`;
+    document.getElementById('result-pe').textContent = `${pe.toLocaleString(locale)} ${abbrevs.electrum}`;
+    document.getElementById('result-pc').textContent = `${pc.toLocaleString(locale)} ${abbrevs.copper}`;
     
     // Effacer les autres champs (éviter la confusion)
     Object.keys(currencyRates).forEach(currency => {
@@ -2038,12 +2047,18 @@ function clearConverter() {
     });
     
     // Remettre à zéro l'affichage
-    document.getElementById('total-po').textContent = '0 po';
-    document.getElementById('result-pp').textContent = '0 pp';
-    document.getElementById('result-po').textContent = '0 po';
-    document.getElementById('result-pa').textContent = '0 pa';
-    document.getElementById('result-pe').textContent = '0 pe';
-    document.getElementById('result-pc').textContent = '0 pc';
+    const lang = document.documentElement.lang || 'fr';
+    const abbrevs = {
+      fr: { platinum: 'pp', gold: 'po', silver: 'pa', electrum: 'pe', copper: 'pc' },
+      en: { platinum: 'pp', gold: 'gp', silver: 'sp', electrum: 'ep', copper: 'cp' }
+    }[lang] || { platinum: 'pp', gold: 'po', silver: 'pa', electrum: 'pe', copper: 'pc' };
+    
+    document.getElementById('total-po').textContent = `0 ${abbrevs.gold}`;
+    document.getElementById('result-pp').textContent = `0 ${abbrevs.platinum}`;
+    document.getElementById('result-po').textContent = `0 ${abbrevs.gold}`;
+    document.getElementById('result-pa').textContent = `0 ${abbrevs.silver}`;
+    document.getElementById('result-pe').textContent = `0 ${abbrevs.electrum}`;
+    document.getElementById('result-pc').textContent = `0 ${abbrevs.copper}`;
 }
 
 // Fonctions pour le lanceur de dés
@@ -2223,7 +2238,9 @@ document.addEventListener('DOMContentLoaded', function() {
       
       if (lotsData.length === 0) {
         const lang = document.documentElement.lang || 'fr';
-        const message = lang === 'en' ? 'No lots to add to cart.' : 'Aucun lot à ajouter au panier.';
+        const message = lang === 'en' ? 
+          '<?= __('gameHelp.money.converter.lotsRecommendations.noLotsMessage', 'No lots to add to cart.') ?>' :
+          '<?= __('gameHelp.money.converter.lotsRecommendations.noLotsMessage', 'Aucun lot à ajouter au panier.') ?>';
         alert(message);
         return;
       }
@@ -2274,7 +2291,7 @@ document.addEventListener('DOMContentLoaded', function() {
           product: {
             id: lot.productId,
             name: product?.name || lot.productId, // Utiliser le nom de base du produit
-            summary: product?.summary || `Lot de pièces D&D - ${product?.name || lot.productId}`,
+            summary: product?.summary || `<?= __('gameHelp.money.converter.productSummary', 'Lot de pièces D&D') ?> - ${product?.name || lot.productId}`,
             price: lot.price,
             url: lot.url || `product.php?id=${encodeURIComponent(lot.productId)}`
           },
@@ -2360,10 +2377,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         setTimeout(() => {
           const results = window.CurrencyConverterTests.runBasicTests();
-          displayTestResults(results, 'Tests de Base');
+          displayTestResults(results, '<?= __('gameHelp.money.tests.basic', 'Tests de Base') ?>');
         }, 100);
       } else {
-        testResults.innerHTML = '<div class="text-red-400">❌ CurrencyConverterTests non disponible</div>';
+        testResults.innerHTML = '<div class="text-red-400"><?= __('gameHelp.money.tests.notAvailable', '❌ CurrencyConverterTests non disponible') ?></div>';
       }
     });
   }
@@ -2375,10 +2392,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         setTimeout(() => {
           const results = window.CurrencyConverterTests.runAdvancedTests();
-          displayTestResults(results, 'Tests Avancés');
+          displayTestResults(results, '<?= __('gameHelp.money.tests.advanced', 'Tests Avancés') ?>');
         }, 100);
       } else {
-        testResults.innerHTML = '<div class="text-red-400">❌ CurrencyConverterTests non disponible</div>';
+        testResults.innerHTML = '<div class="text-red-400"><?= __('gameHelp.money.tests.notAvailable', '❌ CurrencyConverterTests non disponible') ?></div>';
       }
     });
   }
