@@ -761,7 +761,7 @@ class CoinLotOptimizer {
     });
     
     // Compléter avec les pièces personnalisées pour le reste
-    const customVariations = variations.filter(v => v.type === 'normal' && v.productId === 'coin-custom-pieces');
+    const customVariations = variations.filter(v => v.type === 'normal' && v.productId === 'coin-custom-single');
     
     Object.entries(remainingNeeds).forEach(([coinKey, needed]) => {
       if (needed > 0) {
@@ -838,8 +838,8 @@ class CoinLotOptimizer {
     
     // Trouver les variations de pièces personnalisées
     const customVariations = [];
-    if (window.products && window.products['coin-custom-pieces']) {
-      const product = window.products['coin-custom-pieces'];
+    if (window.products && window.products['coin-custom-single']) {
+      const product = window.products['coin-custom-single'];
       const metals = product.metals_en || ['copper', 'silver', 'electrum', 'gold', 'platinum'];
       const multipliers = product.multipliers || [1, 10, 100, 1000, 10000];
       
@@ -847,7 +847,7 @@ class CoinLotOptimizer {
         multipliers.forEach(mult => {
           if (product.coin_lots[metal]) {
             customVariations.push({
-              productId: 'coin-custom-pieces',
+              productId: 'coin-custom-single',
               name: product.name,
               price: product.price,
               type: 'normal',

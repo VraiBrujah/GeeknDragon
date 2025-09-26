@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation Corrections CoinLotOptimizer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #fbbf24;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        .test-section {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 4px solid #10b981;
+        }
+        .test-title {
+            color: #34d399;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .test-result {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+        }
+        .success {
+            border-left: 4px solid #10b981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+        .error {
+            border-left: 4px solid #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+        .info {
+            border-left: 4px solid #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+        }
+        button {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin: 10px 10px 10px 0;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #fbbf24;
+        }
+        .emoji {
+            font-size: 1.5em;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Validation Corrections CoinLotOptimizer</h1>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value" id="testsRun">0</div>
+                <div>Tests Exécutés</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="testsSuccess">0</div>
+                <div>Succès</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="testsError">0</div>
+                <div>Erreurs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="avgTime">0ms</div>
+                <div>Temps Moyen</div>
+            </div>
+        </div>
+
+        <div>
+            <button onclick="runAllValidations()">🚀 Lancer Tous les Tests</button>
+            <button onclick="runSpecificTest('bugs')">🐛 Test Corrections Bugs</button>
+            <button onclick="runSpecificTest('complex')">🧩 Test Cas Complexes</button>
+            <button onclick="runSpecificTest('performance')">⚡ Test Performance</button>
+            <button onclick="clearResults()">🗑️ Effacer</button>
+        </div>
+
+        <div id="results"></div>
+    </div>
+
+    <!-- Charger les dépendances -->
+    <script src="js/coin-lot-optimizer.js"></script>
+    
+    <script>
+        // Simulation des données produits
+        window.products = {
+            'coin-custom-single': {
+                name: 'Pièce Personnalisée',
+                price: 10,
+                coin_lots: { copper: 1, silver: 1, electrum: 1, gold: 1, platinum: 1 },
+                multipliers: [1, 10, 100, 1000, 10000],
+                metals_en: ['copper', 'silver', 'electrum', 'gold', 'platinum'],
+                customizable: true,
+                category: 'pieces'
+            },
+            'coin-trio-customizable': {
+                name: 'Trio de Pièces',
+                price: 25,
+                coin_lots: { copper: 3, silver: 3, electrum: 3, gold: 3, platinum: 3 },
+                multipliers: [1, 10, 100, 1000, 10000],
+                metals_en: ['copper', 'silver', 'electrum', 'gold', 'platinum'],
+                customizable: true,
+                category: 'pieces'
+            },
+            'coin-quintessence-metals': {
+                name: 'Quintessence Métallique',
+                price: 35,
+                coin_lots: { copper: 1, silver: 1, electrum: 1, gold: 1, platinum: 1 },
+                multipliers: [1, 10, 100, 1000, 10000],
+                customizable: true,
+                category: 'pieces'
+            },
+            'coin-septuple-free': {
+                name: 'Septuple Libre',
+                price: 50,
+                coin_lots: { copper: 7, silver: 7, electrum: 7, gold: 7, platinum: 7 },
+                multipliers: [1, 10, 100, 1000, 10000],
+                metals_en: ['copper', 'silver', 'electrum', 'gold', 'platinum'],
+                customizable: true,
+                category: 'pieces'
+            }
+        };
+
+        let stats = {
+            testsRun: 0,
+            testsSuccess: 0,
+            testsError: 0,
+            totalTime: 0
+        };
+
+        function updateStats() {
+            document.getElementById('testsRun').textContent = stats.testsRun;
+            document.getElementById('testsSuccess').textContent = stats.testsSuccess;
+            document.getElementById('testsError').textContent = stats.testsError;
+            const avgTime = stats.testsRun > 0 ? (stats.totalTime / stats.testsRun).toFixed(1) : 0;
+            document.getElementById('avgTime').textContent = avgTime + 'ms';
+        }
+
+        function addResult(title, content, type = 'info') {
+            const resultsDiv = document.getElementById('results');
+            const section = document.createElement('div');
+            section.className = 'test-section';
+            
+            const titleDiv = document.createElement('div');
+            titleDiv.className = 'test-title';
+            titleDiv.textContent = title;
+            
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `test-result ${type}`;
+            resultDiv.innerHTML = content;
+            
+            section.appendChild(titleDiv);
+            section.appendChild(resultDiv);
+            resultsDiv.appendChild(section);
+        }
+
+        function runTest(name, testFunc) {
+            const startTime = performance.now();
+            stats.testsRun++;
+            
+            try {
+                const result = testFunc();
+                const endTime = performance.now();
+                const duration = endTime - startTime;
+                stats.totalTime += duration;
+                
+                if (result.success) {
+                    stats.testsSuccess++;
+                    addResult(
+                        `✅ ${name}`,
+                        `${result.message}<br><small>Temps: ${duration.toFixed(2)}ms</small>`,
+                        'success'
+                    );
+                } else {
+                    stats.testsError++;
+                    addResult(
+                        `❌ ${name}`,
+                        `${result.message}<br><small>Temps: ${duration.toFixed(2)}ms</small>`,
+                        'error'
+                    );
+                }
+            } catch (error) {
+                const endTime = performance.now();
+                stats.totalTime += (endTime - startTime);
+                stats.testsError++;
+                addResult(
+                    `💥 ${name} - CRASH`,
+                    `Erreur: ${error.message}<br><pre>${error.stack}</pre>`,
+                    'error'
+                );
+            }
+            
+            updateStats();
+        }
+
+        function testBugCorrections() {
+            const optimizer = new CoinLotOptimizer();
+            
+            // Test 1: buildMultiPatternSolution avec pattern partiel
+            const patterns = [{
+                multiplier: 1,
+                matches: 4,
+                matchingMetals: ['copper', 'silver', 'gold', 'electrum'],
+                isComplete: false,
+                isPartial: true
+            }];
+            
+            const needs = {
+                "copper_1": 1, "silver_1": 1, "gold_1": 1, "electrum_1": 1, "platinum_10": 1
+            };
+            
+            const variations = optimizer.generateAllProductVariations();
+            const solution = optimizer.buildMultiPatternSolution(needs, patterns, variations);
+            
+            if (solution && solution.length > 0) {
+                return {
+                    success: true,
+                    message: `✅ buildMultiPatternSolution fonctionne<br>
+                             📦 ${solution.length} produits dans la solution<br>
+                             💰 Coût total: ${solution.reduce((sum, item) => sum + (item.variation.price * item.quantity), 0)}$`
+                };
+            } else {
+                return {
+                    success: false,
+                    message: "❌ buildMultiPatternSolution ne retourne aucune solution"
+                };
+            }
+        }
+
+        function testCompleteWithCustomPieces() {
+            const optimizer = new CoinLotOptimizer();
+            const partialSolution = [];
+            const remainingNeeds = {"copper_1": 2, "silver_10": 1};
+            
+            const completeSolution = optimizer.completeWithCustomPieces(partialSolution, remainingNeeds);
+            
+            if (completeSolution && completeSolution.length > 0) {
+                return {
+                    success: true,
+                    message: `✅ completeWithCustomPieces fonctionne<br>
+                             📦 ${completeSolution.length} produits dans la solution complète<br>
+                             💰 Coût total: ${completeSolution.reduce((sum, item) => sum + (item.variation.price * item.quantity), 0)}$`
+                };
+            } else {
+                return {
+                    success: false,
+                    message: "❌ completeWithCustomPieces ne retourne aucune solution"
+                };
+            }
+        }
+
+        function testDoubleQuintessence() {
+            const optimizer = new CoinLotOptimizer();
+            
+            const complexNeeds = {
+                "copper_1": 1, "silver_1": 1, "electrum_1": 1, "gold_1": 1, "platinum_1": 1,
+                "copper_10": 1, "silver_10": 1, "electrum_10": 1, "gold_10": 1, "platinum_10": 1
+            };
+            
+            const result = optimizer.findOptimalProductCombination(complexNeeds);
+            
+            if (result.length > 0) {
+                const totalCost = result.reduce((sum, item) => sum + item.totalCost, 0);
+                const isOptimal = totalCost <= 80; // 2 Quintessences = 70$, avec marge
+                
+                const details = result.map((item, i) => 
+                    `&nbsp;&nbsp;${i+1}. ${item.displayName} x${item.quantity} = ${item.totalCost}$`
+                ).join('<br>');
+                
+                return {
+                    success: isOptimal,
+                    message: `${isOptimal ? '✅' : '⚠️'} Double Quintessence ${isOptimal ? 'OPTIMAL' : 'SOUS-OPTIMAL'}<br>
+                             💰 Coût total: ${totalCost}$ (optimal attendu ≤ 80$)<br>
+                             📦 Solutions trouvées:<br>${details}`
+                };
+            } else {
+                return {
+                    success: false,
+                    message: "❌ Aucune solution pour double Quintessence"
+                };
+            }
+        }
+
+        function testPerformance() {
+            const tests = [
+                { name: 'Simple', needs: {"copper_1": 1}, maxMs: 10 },
+                { name: 'Modéré', needs: {"copper_1": 3, "silver_10": 2, "gold_100": 1}, maxMs: 50 },
+                { name: 'Complexe', needs: {
+                    "copper_1": 5, "silver_10": 3, "gold_100": 2,
+                    "electrum_1": 2, "platinum_10": 1, "copper_100": 1
+                }, maxMs: 100 }
+            ];
+            
+            const results = [];
+            let allPassed = true;
+            
+            tests.forEach(test => {
+                const optimizer = new CoinLotOptimizer();
+                const iterations = 5;
+                let totalTime = 0;
+                
+                for (let i = 0; i < iterations; i++) {
+                    const start = performance.now();
+                    optimizer.findOptimalProductCombination(test.needs);
+                    totalTime += (performance.now() - start);
+                }
+                
+                const avgTime = totalTime / iterations;
+                const passed = avgTime <= test.maxMs;
+                if (!passed) allPassed = false;
+                
+                results.push(`${passed ? '✅' : '⚠️'} ${test.name}: ${avgTime.toFixed(2)}ms (max: ${test.maxMs}ms)`);
+            });
+            
+            return {
+                success: allPassed,
+                message: results.join('<br>')
+            };
+        }
+
+        function runAllValidations() {
+            clearResults();
+            
+            addResult(
+                '🎯 Validation des Corrections CoinLotOptimizer',
+                `Tests des bugs critiques identifiés dans l'analyse précédente.<br>
+                 <strong>Corrections appliquées:</strong><br>
+                 • Ligne 764: coin-custom-pieces → coin-custom-single<br>
+                 • Lignes 841-842: coin-custom-pieces → coin-custom-single<br>
+                 • Ligne 850: productId corrigé`,
+                'info'
+            );
+            
+            runTest('Test Corrections Bug buildMultiPatternSolution', testBugCorrections);
+            runTest('Test Corrections completeWithCustomPieces', testCompleteWithCustomPieces);
+            runTest('Test Cas Complexe Double Quintessence', testDoubleQuintessence);
+            runTest('Test Performance Multi-Niveaux', testPerformance);
+            
+            setTimeout(() => {
+                const successRate = ((stats.testsSuccess / stats.testsRun) * 100).toFixed(1);
+                addResult(
+                    '📊 Rapport Final',
+                    `<strong>Taux de réussite: ${successRate}%</strong><br>
+                     ${stats.testsSuccess}/${stats.testsRun} tests réussis<br>
+                     Temps moyen: ${(stats.totalTime / stats.testsRun).toFixed(2)}ms<br><br>
+                     ${successRate >= 75 ? 
+                        '🎉 <strong>CORRECTIONS VALIDÉES!</strong><br>CoinLotOptimizer fonctionne maintenant correctement.' :
+                        '⚠️ <strong>PROBLÈMES PERSISTANTS</strong><br>Certaines corrections nécessitent plus d\'attention.'
+                     }`,
+                    successRate >= 75 ? 'success' : 'error'
+                );
+            }, 100);
+        }
+
+        function runSpecificTest(type) {
+            switch(type) {
+                case 'bugs':
+                    clearResults();
+                    runTest('Corrections buildMultiPatternSolution', testBugCorrections);
+                    runTest('Corrections completeWithCustomPieces', testCompleteWithCustomPieces);
+                    break;
+                case 'complex':
+                    clearResults();
+                    runTest('Double Quintessence', testDoubleQuintessence);
+                    break;
+                case 'performance':
+                    clearResults();
+                    runTest('Performance Multi-Niveaux', testPerformance);
+                    break;
+            }
+        }
+
+        function clearResults() {
+            document.getElementById('results').innerHTML = '';
+            stats = { testsRun: 0, testsSuccess: 0, testsError: 0, totalTime: 0 };
+            updateStats();
+        }
+
+        // Initialisation
+        updateStats();
+        
+        // Auto-test au chargement si debug
+        if (window.location.hash === '#debug') {
+            setTimeout(() => runAllValidations(), 1000);
+        }
+    </script>
+</body>
+</html>
