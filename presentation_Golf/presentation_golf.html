@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Présentation - Contrats de Location Batteries Golf | EDS Québec</title>
+    <style>
+        :root {
+            --primary-blue: #3b82f6;
+            --secondary-green: #10b981;
+            --accent-light-blue: #60a5fa;
+            --accent-light-green: #34d399;
+            --text-dark: #f9fafb;
+            --text-light: #d1d5db;
+            --background-dark: #0f172a;
+            --background-card: #1e293b;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--background-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            margin: 60px 0;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--background-card);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-top: -30px;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            padding: 60px;
+        }
+
+        .hero-text h2 {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.4rem;
+            color: var(--secondary-green);
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .hero-image {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Problem Section */
+        .problem-section {
+            background: linear-gradient(135deg, #fee2e2, #fef3c7);
+            border-radius: 20px;
+            padding: 60px;
+            margin: 60px 0;
+        }
+
+        .problem-title {
+            font-size: 2.5rem;
+            color: #dc2626;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            justify-items: center;
+        }
+
+        @media (max-width: 1024px) {
+            .problems-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .problems-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .problem-card {
+            background: var(--background-card);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-left: 5px solid #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .problem-card h3 {
+            color: #dc2626;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .problem-card h3::before {
+            content: "❌";
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        /* Solution Section */
+        .solution-section {
+            background: linear-gradient(135deg, #dcfdf7, #dbeafe);
+            border-radius: 20px;
+            padding: 60px;
+            margin: 60px 0;
+        }
+
+        .solution-title {
+            font-size: 2.5rem;
+            color: var(--secondary-green);
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .solution-features {
+            display: grid;
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: var(--background-card);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            border-left: 5px solid var(--secondary-green);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .feature-card h3 {
+            color: var(--secondary-green);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-card h3::before {
+            content: "✅";
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            background: var(--background-card);
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .pricing-title {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .pricing-card {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-light-blue));
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 70px rgba(0,0,0,0.2);
+        }
+
+        .pricing-card.premium {
+            background: linear-gradient(135deg, var(--secondary-green), var(--accent-light-green));
+        }
+
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .pricing-card .price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .pricing-card .period {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .savings {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        /* Comparison Table */
+        .comparison-section {
+            background: var(--background-card);
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            margin: 60px 0;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .comparison-title {
+            font-size: 2.2rem;
+            color: var(--primary-blue);
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            color: white;
+            padding: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 20px;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        .comparison-table .old-tech {
+            color: #dc2626;
+            font-weight: 600;
+        }
+
+        .comparison-table .new-tech {
+            color: var(--secondary-green);
+            font-weight: 600;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            background: linear-gradient(135deg, #fef3c7, #dcfdf7);
+            border-radius: 20px;
+            padding: 60px;
+            margin: 60px 0;
+        }
+
+        .benefits-title {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            justify-items: center;
+        }
+
+        @media (max-width: 1024px) {
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .benefit-card {
+            background: var(--background-card);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-card .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .benefit-card h3 {
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* Testimonial */
+        .testimonial-section {
+            background: var(--background-card);
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            text-align: center;
+            margin: 60px 0;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .testimonial-quote {
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            font-style: italic;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .testimonial-quote::before,
+        .testimonial-quote::after {
+            content: '"';
+            font-size: 2rem;
+            color: var(--secondary-green);
+            font-weight: bold;
+        }
+
+        .testimonial-author {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+
+        .testimonial-title {
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+
+        .testimonial-company {
+            color: var(--secondary-green);
+            font-weight: 600;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            color: white;
+            border-radius: 20px;
+            padding: 60px;
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .contact-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .contact-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+            justify-items: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 768px) {
+            .contact-info {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        .contact-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .contact-card p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--background-card);
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80%;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.5);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: var(--text-dark);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+        }
+
+        .close:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                padding: 40px 30px;
+            }
+
+            .hero-text h2 {
+                font-size: 2.2rem;
+            }
+
+            .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .solution-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .problems-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section {
+                margin: 40px 0;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        /* Boutons de langue */
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-size: 14px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .flag-icon {
+            width: 24px;
+            height: 16px;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.7);
+            font-weight: bold;
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Fade in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="language-switcher">
+            <button class="lang-btn active" onclick="switchLanguage('fr')" data-lang="fr">
+                <img src="flags/france.svg" alt="Français" class="flag-icon">
+                FR
+            </button>
+            <button class="lang-btn" onclick="switchLanguage('en')" data-lang="en">
+                <img src="flags/england.svg" alt="English" class="flag-icon">
+                EN
+            </button>
+        </div>
+        <div class="container">
+            <h1 id="company-name">Chargement...</h1>
+            <p class="tagline" id="company-tagline">Chargement...</p>
+            <p class="subtitle" id="company-subtitle">Chargement...</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero fade-in">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2 id="hero-title">Chargement...</h2>
+                    <p class="subtitle" id="hero-subtitle">Chargement...</p>
+                </div>
+                <div class="hero-image">
+                    <img id="hero-image" src="images/golf_cart_sunset.jpg" alt="Voiturette de golf moderne">
+                </div>
+            </div>
+        </section>
+
+        <!-- Problem Section -->
+        <section class="problem-section fade-in">
+            <h2 class="problem-title" id="problem-title">Chargement...</h2>
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <h3>Coûts Cachés Massifs</h3>
+                    <p><strong id="cost-replacement">Chargement...</strong> de remplacement fréquent</p>
+                    <p>Coût total sur 10 ans : <strong id="cost-10-years">Chargement...</strong></p>
+                </div>
+                <div class="problem-card">
+                    <h3>Maintenance Extrêmement Coûteuse</h3>
+                    <p><strong id="maintenance-hours">Chargement...</strong> par année</p>
+                    <p>Coût annuel : <strong id="maintenance-cost">Chargement...</strong></p>
+                </div>
+                <div class="problem-card">
+                    <h3>Performances Dégradées</h3>
+                    <p><strong id="performance-issue">Chargement...</strong></p>
+                    <p>Temps de recharge : <strong id="charging-time">Chargement...</strong></p>
+                </div>
+                <div class="problem-card">
+                    <h3>Poids Excessif</h3>
+                    <p>Plus de <strong id="weight-old">Chargement...</strong></p>
+                    <p>Consommation <strong id="extra-consumption">Chargement...</strong></p>
+                </div>
+                <div class="problem-card">
+                    <h3>Risques Environnementaux</h3>
+                    <p><strong id="environmental-risk">Chargement...</strong></p>
+                    <p>Formation sécurité obligatoire du personnel</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Sécurité Compromise</h3>
+                    <p><strong id="safety-concerns">Chargement...</strong></p>
+                    <p>Risques pour l'équipement et le terrain</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solution Section -->
+        <section class="solution-section fade-in">
+            <h2 class="solution-title" id="solution-title">Chargement...</h2>
+            <div class="solution-grid">
+                <div class="solution-features">
+                    <div class="feature-card">
+                        <h3>Autonomie Fiable</h3>
+                        <p id="autonomy">Chargement...</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Durée de Vie Exceptionnelle</h3>
+                        <p><strong id="cycles">Chargement...</strong> - Durée de vie : <strong id="lifespan">Chargement...</strong></p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Charge Rapide</h3>
+                        <p>Recharge complète en <strong id="charge-time">Chargement...</strong></p>
+                        <p><strong id="maintenance">Chargement...</strong></p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Poids Réduit</h3>
+                        <p>Seulement <strong id="weight">Chargement...</strong></p>
+                    </div>
+                </div>
+                <div class="solution-image">
+                    <img src="images/battery_pack.jpg" alt="Pack de batteries lithium EDS Québec" style="width: 100%; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.2);">
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Table -->
+        <section class="comparison-section fade-in">
+            <h2 class="comparison-title">Comparaison Technologies</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Critère</th>
+                        <th>Batteries Plomb (Actuelles)</th>
+                        <th>Solution EDS Lithium</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Coût 10 ans</strong></td>
+                        <td class="old-tech" id="lead-batteries-10-years">Chargement...</td>
+                        <td class="new-tech" id="contract-10-total">Chargement...</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Remplacements</strong></td>
+                        <td class="old-tech" id="lead-replacements">Chargement...</td>
+                        <td class="new-tech" id="lithium-replacements">Chargement...</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Maintenance</strong></td>
+                        <td class="old-tech" id="lead-maintenance">Chargement...</td>
+                        <td class="new-tech" id="lithium-maintenance">Chargement...</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Temps de recharge</strong></td>
+                        <td class="old-tech" id="lead-charging">Chargement...</td>
+                        <td class="new-tech" id="lithium-charging">Chargement...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="pricing-section fade-in">
+            <h2 class="pricing-title">Nos Offres Exclusives</h2>
+            <div class="pricing-cards">
+                <div class="pricing-card" onclick="showPricingDetails('10')">
+                    <h3 id="contract-10-title">Chargement...</h3>
+                    <div class="price" id="contract-10-monthly">Chargement...</div>
+                    <div class="period">par voiturette / mois</div>
+                    <div class="savings">
+                        Économie : <strong id="savings-10-years">Chargement...</strong> sur 10 ans
+                    </div>
+                </div>
+                <div class="pricing-card premium" onclick="showPricingDetails('20')">
+                    <h3 id="contract-20-title">Chargement...</h3>
+                    <div class="price" id="contract-20-monthly">Chargement...</div>
+                    <div class="period">par voiturette / mois</div>
+                    <div class="savings">
+                        Économie MASSIVE : <strong id="savings-20-years">Chargement...</strong> sur 20 ans
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits-section fade-in">
+            <h2 class="benefits-title">Pourquoi Choisir EDS Québec ?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <span class="icon">🔋</span>
+                    <h3>Fiabilité</h3>
+                    <p id="benefit-1">Chargement...</p>
+                </div>
+                <div class="benefit-card">
+                    <span class="icon">🔧</span>
+                    <h3>Simplicité</h3>
+                    <p id="benefit-2">Chargement...</p>
+                </div>
+                <div class="benefit-card">
+                    <span class="icon">🚀</span>
+                    <h3>Performance</h3>
+                    <p id="benefit-3">Chargement...</p>
+                </div>
+                <div class="benefit-card">
+                    <span class="icon">💰</span>
+                    <h3>Économie</h3>
+                    <p id="benefit-4">Chargement...</p>
+                </div>
+                <div class="benefit-card">
+                    <span class="icon">🤝</span>
+                    <h3>Partenariat</h3>
+                    <p id="benefit-5">Chargement...</p>
+                </div>
+                <div class="benefit-card">
+                    <span class="icon">🌱</span>
+                    <h3>Écologie</h3>
+                    <p id="benefit-6">Chargement...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial Section -->
+        <section class="testimonial-section fade-in">
+            <p class="testimonial-quote" id="testimonial-quote">Chargement...</p>
+            <div class="testimonial-author" id="testimonial-author">Chargement...</div>
+            <div class="testimonial-title" id="testimonial-title">Chargement...</div>
+            <div class="testimonial-company" id="testimonial-company">Chargement...</div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section fade-in">
+            <h2 class="contact-title">Contactez Notre Spécialiste</h2>
+            <p class="contact-subtitle">Planifiez votre démonstration gratuite dès aujourd'hui !</p>
+            <div class="contact-info">
+                <div class="contact-card">
+                    <h3 id="specialist-name">Chargement...</h3>
+                    <p id="specialist-title">Chargement...</p>
+                </div>
+                <div class="contact-card">
+                    <h3>Téléphone</h3>
+                    <p id="specialist-phone">Chargement...</p>
+                </div>
+                <div class="contact-card">
+                    <h3>Email</h3>
+                    <p id="specialist-email">Chargement...</p>
+                </div>
+                <div class="contact-card">
+                    <h3>Site Web</h3>
+                    <p id="website">Chargement...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal pour détails de prix -->
+    <div id="pricingModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title">Détails du Contrat</h2>
+            <div id="modal-content">
+                <!-- Le contenu sera chargé dynamiquement -->
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Données vides - tout sera chargé depuis le CSV
+        let data = {};
+        let currentLanguage = 'fr'; // Langue par défaut
+
+        // Fonction pour changer de langue
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+
+            // Mettre à jour les boutons actifs
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Recharger les données dans la nouvelle langue
+            loadDataFromCSV();
+        }
+
+        // Fonction pour charger les données depuis le CSV
+        async function loadDataFromCSV() {
+            try {
+                const csvFile = currentLanguage === 'fr' ? 'data.csv' : 'data_en.csv';
+                const response = await fetch(csvFile + '?t=' + Date.now()); // Cache busting
+
+                if (!response.ok) {
+                    throw new Error(`Erreur HTTP: ${response.status}`);
+                }
+                const csvText = await response.text();
+
+                const lines = csvText.split('\n');
+                data = {}; // Reset des données
+
+                for (let i = 1; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    if (line && !line.startsWith('#')) {
+                        // Parser CSV simple
+                        const parts = line.split(',');
+                        if (parts.length >= 3) {
+                            const section = parts[0].trim();
+                            const key = parts[1].trim();
+                            let value = parts.slice(2).join(',').trim();
+
+                            // Enlever les guillemets si présents
+                            if (value.startsWith('"') && value.endsWith('"')) {
+                                value = value.slice(1, -1);
+                            }
+
+                            if (section && key) {
+                                if (!data[section]) {
+                                    data[section] = {};
+                                }
+                                data[section][key] = value;
+                            }
+                        }
+                    }
+                }
+
+                console.log(`Données ${currentLanguage.toUpperCase()} chargées:`, data);
+                updateContent();
+
+            } catch (error) {
+                console.error('Erreur lors du chargement des données:', error);
+                // En cas d'erreur, essayer de charger le français par défaut
+                if (currentLanguage !== 'fr') {
+                    currentLanguage = 'fr';
+                    loadDataFromCSV();
+                }
+            }
+        }
+
+
+        // Fonction utilitaire pour mettre à jour un élément de façon sécurisée
+        function safeUpdateElement(id, value) {
+            const element = document.getElementById(id);
+            if (element && value) {
+                element.textContent = value;
+            } else if (!element) {
+                console.warn(`Élément non trouvé: ${id}`);
+            }
+        }
+
+        // Mettre à jour le contenu de la page
+        function updateContent() {
+            // Header
+            safeUpdateElement('company-name', data.header?.company_name);
+            safeUpdateElement('company-tagline', data.header?.company_tagline);
+            safeUpdateElement('company-subtitle', data.header?.company_subtitle);
+
+            // Hero
+            safeUpdateElement('hero-title', data.hero?.main_title);
+            safeUpdateElement('hero-subtitle', data.hero?.subtitle);
+
+            // Problem
+            safeUpdateElement('problem-title', data.problem?.title);
+            safeUpdateElement('cost-replacement', data.problem?.cost_replacement);
+            safeUpdateElement('cost-10-years', data.problem?.cost_10_years);
+            safeUpdateElement('maintenance-hours', data.problem?.maintenance_hours);
+            safeUpdateElement('maintenance-cost', data.problem?.maintenance_cost);
+            safeUpdateElement('performance-issue', data.problem?.performance_issue);
+            safeUpdateElement('charging-time', data.problem?.charging_time);
+            safeUpdateElement('weight-old', data.problem?.weight);
+            safeUpdateElement('extra-consumption', data.problem?.extra_consumption);
+            safeUpdateElement('environmental-risk', data.problem?.environmental_risk);
+            safeUpdateElement('safety-concerns', data.problem?.safety_concerns);
+
+            // Solution
+            safeUpdateElement('solution-title', data.solution?.title);
+            safeUpdateElement('autonomy', data.solution?.autonomy);
+            safeUpdateElement('cycles', data.solution?.cycles);
+            safeUpdateElement('lifespan', data.solution?.lifespan);
+            safeUpdateElement('charge-time', data.solution?.charge_time);
+            safeUpdateElement('maintenance', data.solution?.maintenance);
+            safeUpdateElement('weight', data.solution?.weight);
+
+            // Pricing
+            safeUpdateElement('contract-10-title', data.pricing?.contract_10_title);
+            safeUpdateElement('contract-10-monthly', data.pricing?.contract_10_monthly);
+            safeUpdateElement('contract-10-total', data.pricing?.contract_10_total);
+            safeUpdateElement('savings-10-years', data.pricing?.savings_10_years);
+            safeUpdateElement('contract-20-title', data.pricing?.contract_20_title);
+            safeUpdateElement('contract-20-monthly', data.pricing?.contract_20_monthly);
+            safeUpdateElement('savings-20-years', data.pricing?.savings_20_years);
+
+            // Comparison
+            safeUpdateElement('lead-batteries-10-years', data.comparison?.lead_batteries_10_years);
+            safeUpdateElement('lead-replacements', data.comparison?.lead_replacements);
+            safeUpdateElement('lead-maintenance', data.comparison?.lead_maintenance);
+            safeUpdateElement('lead-charging', data.comparison?.lead_charging);
+            safeUpdateElement('lithium-replacements', data.comparison?.lithium_replacements);
+            safeUpdateElement('lithium-maintenance', data.comparison?.lithium_maintenance);
+            safeUpdateElement('lithium-charging', data.comparison?.lithium_charging);
+
+            // Benefits
+            safeUpdateElement('benefit-1', data.benefits?.benefit_1);
+            safeUpdateElement('benefit-2', data.benefits?.benefit_2);
+            safeUpdateElement('benefit-3', data.benefits?.benefit_3);
+            safeUpdateElement('benefit-4', data.benefits?.benefit_4);
+            safeUpdateElement('benefit-5', data.benefits?.benefit_5);
+            safeUpdateElement('benefit-6', data.benefits?.benefit_6);
+
+            // Testimonial
+            safeUpdateElement('testimonial-quote', data.testimonial?.quote);
+            safeUpdateElement('testimonial-author', data.testimonial?.author);
+            safeUpdateElement('testimonial-title', data.testimonial?.title);
+            safeUpdateElement('testimonial-company', data.testimonial?.company);
+
+            // Contact
+            safeUpdateElement('specialist-name', data.contact?.specialist_name);
+            safeUpdateElement('specialist-title', data.contact?.specialist_title);
+            safeUpdateElement('specialist-phone', data.contact?.specialist_phone);
+            safeUpdateElement('specialist-email', data.contact?.specialist_email);
+            safeUpdateElement('website', data.contact?.website);
+
+            console.log('Contenu mis à jour avec succès');
+        }
+
+        // Afficher les détails de prix dans une modal
+        function showPricingDetails(contractType) {
+            const modal = document.getElementById('pricingModal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+
+            if (contractType === '10') {
+                modalTitle.textContent = data.pricing?.contract_10_title || 'Contrat 10 ans';
+                modalContent.innerHTML = `
+                    <h3>Détails du Contrat 10 ans</h3>
+                    <p><strong>Tarif mensuel :</strong> ${data.pricing?.contract_10_monthly || ''} par voiturette</p>
+                    <p><strong>Coût total :</strong> ${data.pricing?.contract_10_total || ''}</p>
+                    <p><strong>Économies vs batteries plomb :</strong> ${data.pricing?.savings_10_years || ''}</p>
+                    <br>
+                    <h4>Ce qui est inclus :</h4>
+                    <ul>
+                        <li>10 kits lithium LiFePO₄ 48V 105Ah complets</li>
+                        <li>Installation professionnelle sur site</li>
+                        <li>Monitoring proactif 24/7</li>
+                        <li>Maintenance préventive et corrective</li>
+                        <li>Remplacement immédiat en cas de défaillance</li>
+                        <li>Support technique prioritaire</li>
+                    </ul>
+                `;
+            } else {
+                modalTitle.textContent = data.pricing?.contract_20_title || 'Contrat 20 ans';
+                modalContent.innerHTML = `
+                    <h3>Détails du Contrat 20 ans - RECOMMANDÉ</h3>
+                    <p><strong>Tarif mensuel :</strong> ${data.pricing?.contract_20_monthly || ''} par voiturette</p>
+                    <p><strong>Coût total :</strong> ${data.pricing?.contract_20_total || ''}</p>
+                    <p><strong>Économies MASSIVES :</strong> ${data.pricing?.savings_20_years || ''}</p>
+                    <br>
+                    <h4>Avantages exclusifs du contrat 20 ans :</h4>
+                    <ul>
+                        <li><strong>Réduction de 25%</strong> pour engagement long terme</li>
+                        <li>Stabilité tarifaire garantie sur 2 décennies</li>
+                        <li>Partenariat à long terme avec support prioritaire</li>
+                        <li>Amortissement optimal de l'investissement</li>
+                    </ul>
+                    <br>
+                    <div style="background: linear-gradient(135deg, #059669, #10b981); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                        <h4>💰 ROI Exceptionnel : 52% d'économies vs batteries plomb</h4>
+                        <p>Soit 13,11 $ d'économie par jour pour 10 voiturettes !</p>
+                    </div>
+                `;
+            }
+
+            modal.style.display = 'block';
+        }
+
+        // Fermer la modal
+        function closeModal() {
+            document.getElementById('pricingModal').style.display = 'none';
+        }
+
+        // Fermer la modal en cliquant en dehors
+        window.onclick = function(event) {
+            const modal = document.getElementById('pricingModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Chargement automatique des données CSV au démarrage de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page chargée, initialisation du chargement CSV...');
+            loadDataFromCSV();
+        });
+    </script>
+</body>
+</html>

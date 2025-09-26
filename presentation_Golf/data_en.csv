@@ -1,0 +1,146 @@
+section,key,value
+header,company_name,EDS QUEBEC
+header,company_tagline,Energy Development System
+header,company_subtitle,Quebec's Leading Lithium Solutions
+header,company_address,"195, rue Brissette, local A7, Sainte-Agathe-des-Monts"
+header,company_phone,+1 (819) 323-7859
+header,company_email,contact@edsquebec.com
+
+hero,main_title,TRANSFORM YOUR GOLF COURSE WITH LITHIUM TECHNOLOGY
+hero,subtitle,LiFePO₄ Lithium Kit 48V 105Ah - Designed and Made in Canada
+hero,hero_image,images/golf_cart_sunset.jpg
+
+problem,title,YOUR CURRENT CHALLENGE: LEAD BATTERY LIMITATIONS
+problem,cost_replacement,2 000 $ per battery every 2-5 years
+problem,cost_10_years,80 000 $ purchase cost
+problem,maintenance_hours,120 hours of annual maintenance
+problem,maintenance_cost,3 600 $/year
+problem,maintenance_10_years,36 000 $
+problem,performance_issue,Power loss at end of charge
+problem,charging_time,8-10 hours
+problem,weight,300+ kg
+problem,extra_consumption,25% higher
+problem,environmental_risk,Toxic lead handling
+problem,safety_concerns,Dangerous acid leaks
+
+solution,title,OUR REVOLUTIONARY SOLUTION
+solution,product_name,LiFePO₄ Lithium Kit 48V 105Ah
+solution,autonomy,Consistent performance up to 95% discharge
+solution,cycles,Over 8 000 cycles
+solution,lifespan,15-20 years
+solution,charge_time,2 hours
+solution,maintenance,Zero maintenance required
+solution,weight,40 kg
+solution,chemistry,LiFePO₄ Grade A+
+solution,voltage,51.2 V
+solution,capacity,105 Ah
+solution,efficiency,> 96%
+
+pricing,contract_10_title,10-YEAR CONTRACT - PREMIUM SOLUTION
+pricing,contract_10_monthly,97.64 $
+pricing,contract_10_total,117 168 $
+pricing,savings_10_years,24 232 $
+
+pricing,contract_20_title,20-YEAR CONTRACT - OPTIMIZED SOLUTION
+pricing,contract_20_monthly,76.84 $
+pricing,contract_20_total,184 416 $
+pricing,savings_20_years,95 584 $
+
+comparison,lead_batteries_10_years,141 400 $
+comparison,lead_batteries_20_years,280 000 $
+comparison,lead_replacements,4 replacements over 10 years
+comparison,lead_maintenance,120 hours/year
+comparison,lead_charging,8-10 hours
+comparison,lithium_replacements,0 replacement
+comparison,lithium_maintenance,0 hours
+comparison,lithium_charging,2 hours
+
+benefits,benefit_1,Single battery for the entire contract duration
+benefits,benefit_2,120 hours of annual maintenance savings
+benefits,benefit_3,Lighter and more reliable golf carts
+benefits,benefit_4,Fixed and predictable monthly budget
+benefits,benefit_5,Dedicated technical partner throughout
+benefits,benefit_6,Eco-friendly and sustainable technology
+
+testimonial,quote,"Since installing EDS Quebec batteries, we have eliminated 95% of our golf cart problems. Our golfers are delighted and our maintenance team can finally focus on the course!"
+testimonial,author,Jean-François Lavoie
+testimonial,title,General Manager
+testimonial,company,Golf Le Mirage, Mont-Tremblant
+
+contact,specialist_name,Marie-Claude Dubois
+contact,specialist_title,Golf Solutions Specialist - EDS Quebec
+contact,specialist_phone,+1 (819) 323-7859
+contact,specialist_email,marie-claude.dubois@edsquebec.com
+contact,website,www.edsquebec.com
+
+# Textes fixes de l'interface
+ui,hero_image_alt,Modern golf cart
+ui,problem_card_1_title,Hidden Massive Costs
+ui,problem_card_1_suffix,frequent replacement cost
+ui,problem_card_1_total_prefix,Total cost over 10 years:
+ui,problem_card_2_title,Extremely Expensive Maintenance
+ui,problem_card_2_suffix,per year
+ui,problem_card_2_cost_prefix,Annual cost:
+ui,problem_card_3_title,Degraded Performance
+ui,problem_card_3_charging_prefix,Charging time:
+ui,problem_card_4_title,Excessive Weight
+ui,problem_card_4_weight_prefix,Over
+ui,problem_card_4_consumption_prefix,Consumption
+ui,problem_card_5_title,Environmental Risks
+ui,problem_card_5_training,Mandatory safety training for staff
+ui,problem_card_6_title,Compromised Safety
+ui,problem_card_6_risks,Risks to equipment and course
+
+ui,solution_card_1_title,Reliable Autonomy
+ui,solution_card_2_title,Exceptional Lifespan
+ui,solution_card_2_lifespan_separator,- Lifespan:
+ui,solution_card_3_title,Fast Charging
+ui,solution_card_3_charge_prefix,Full charge in
+ui,solution_card_4_title,Reduced Weight
+ui,solution_card_4_weight_prefix,Only
+
+ui,comparison_title,Technology Comparison
+ui,comparison_criterion,Criterion
+ui,comparison_lead_batteries,Lead Batteries (Current)
+ui,comparison_eds_solution,EDS Lithium Solution
+ui,comparison_cost_10_years,10-year cost
+ui,comparison_replacements,Replacements
+ui,comparison_maintenance,Maintenance
+ui,comparison_charging_time,Charging time
+
+ui,pricing_title,Our Exclusive Offers
+ui,pricing_monthly_suffix,per cart / month
+ui,pricing_savings_prefix,Savings:
+ui,pricing_savings_10_suffix,over 10 years
+ui,pricing_savings_20_prefix,MASSIVE Savings:
+ui,pricing_savings_20_suffix,over 20 years
+
+ui,benefits_title,Why Choose EDS Quebec?
+ui,benefits_reliability,Reliability
+ui,benefits_simplicity,Simplicity
+ui,benefits_performance,Performance
+ui,benefits_economy,Economy
+ui,benefits_partnership,Partnership
+ui,benefits_ecology,Ecology
+
+ui,contact_title,Contact Our Specialist
+ui,contact_subtitle,Schedule your free demonstration today!
+ui,contact_phone_label,Phone
+ui,contact_email_label,Email
+ui,contact_website_label,Website
+
+images,hero_golf_cart,images/golf_cart_sunset.jpg
+images,battery_pack,images/battery_pack.jpg
+images,old_batteries,images/old_batteries.jpg
+images,comparison_chart,images/comparison.jpg
+images,golf_course,images/golf_course.jpg
+
+colors,primary_blue,#3b82f6
+colors,secondary_green,#10b981
+colors,accent_light_blue,#60a5fa
+colors,accent_light_green,#34d399
+colors,text_dark,#f9fafb
+colors,text_light,#d1d5db
+colors,background_dark,#0f172a
+colors,background_card,#1e293b
+colors,white,#ffffff
