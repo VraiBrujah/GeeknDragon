@@ -321,7 +321,8 @@
             border-collapse: collapse;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            background-color: var(--background-card) !important;
         }
 
         .comparison-table th {
@@ -337,16 +338,20 @@
             border-bottom: 1px solid rgba(59, 130, 246, 0.2);
             text-align: center;
             font-size: 1rem;
-            color: var(--text-dark);
-            background-color: var(--background-card);
+            color: var(--text-dark) !important;
+            background-color: var(--background-card) !important;
         }
 
         .comparison-table tr:nth-child(even) td {
-            background-color: rgba(59, 130, 246, 0.05);
+            background-color: rgba(59, 130, 246, 0.1) !important;
         }
 
         .comparison-table tr:nth-child(odd) td {
-            background-color: var(--background-card);
+            background-color: var(--background-card) !important;
+        }
+
+        .comparison-table tr {
+            background-color: transparent !important;
         }
 
         .comparison-table .old-tech {
