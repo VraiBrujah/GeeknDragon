@@ -55,7 +55,8 @@
       "Bash(python:*)",
       "WebFetch(domain:docs.snipcart.com)",
       "Bash(curl:*)",
-      "WebFetch(domain:192.168.2.33)"
+      "WebFetch(domain:192.168.2.33)",
+      "Bash(expr:*)"
     ],
     "deny": [],
     "ask": []

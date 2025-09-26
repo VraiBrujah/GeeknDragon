@@ -1,14 +1,14 @@
 // hero-videos.js
-// Rotation robuste des vidéos "hero" avec crossfade et boucle fiable
-// - 1 seule source : un seul <video> en loop, jamais recréé.
-// - Plusieurs sources : double-buffer + préchargement, on ne retire l'ancien
+// Rotation robuste des videos "hero" avec crossfade et boucle fiable
+// - 1 seule source : un seul <video> en loop, jamais recree.
+// - Plusieurs sources : double-buffer + prechargement, on ne retire l'ancien
 //   qu'après que le nouveau joue vraiment (plus d'écran vide).
 
 // Protection contre les conflits d'extensions
 (function() {
   'use strict';
   
-  // Éviter l'exécution multiple et les conflits d'extensions
+  // Eviter l'execution multiple et les conflits d'extensions
   if (window.__heroVideosInitialized) {
     return;
   }
@@ -16,7 +16,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   const FADE_MS = 1000;
-  const LOAD_AHEAD_SECONDS = 10; // Augmenté pour les vidéos lourdes
+  const LOAD_AHEAD_SECONDS = 10; // Augmenté pour les videos lourdes
   const supportsMatchMedia = typeof window.matchMedia === 'function';
   const reduceMotionQuery = supportsMatchMedia
     ? window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Gestion paresseuse du préchargement : charge la prochaine vidéo seulement
+  // Gestion paresseuse du prechargement : charge la prochaine vidéo seulement
   // lorsque l'utilisateur interagit ou quand la lecture courante approche de sa fin.
   const createLazyManager = ({ container, getNext, thresholdSeconds }) => {
     const primed = new WeakMap();
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   document.querySelectorAll('.hero-videos').forEach((container) => {
-    // PROTECTION : Marquer le container comme géré par hero-videos.js
+    // PROTECTION : Marquer le container comme gere par hero-videos.js
     container.setAttribute('data-managed-by', 'hero-videos');
     container.style.setProperty('--hero-managed', 'true');
     const prefersReducedMotion = readMediaQuery(reduceMotionQuery);
@@ -182,9 +182,9 @@ document.addEventListener('DOMContentLoaded', () => {
       v.muted = true;
       v.playsInline = true;
       v.setAttribute('playsinline', ''); // iOS
-      v.preload = 'metadata'; // Optimisation: charge seulement les métadonnées
+      v.preload = 'metadata'; // Optimisation: charge seulement les metadonnees
       v.autoplay = autoPlayAllowed;
-      v.loop = false; // géré au cas par cas
+      v.loop = false; // gere au cas par cas
       // Layout + anim
       v.style.position = 'absolute';
       v.style.inset = '0';
@@ -295,13 +295,13 @@ document.addEventListener('DOMContentLoaded', () => {
         lazy.prime();
 
         const startTransition = () => {
-          // Attendre que la vidéo soit vraiment prête pour les gros fichiers
+          // Attendre que la vidéo soit vraiment prete pour les gros fichiers
           const ensureVideoReady = (video, callback) => {
             if (video.readyState >= 3) { // HAVE_FUTURE_DATA ou plus
               callback();
             } else {
               video.addEventListener('canplaythrough', callback, { once: true });
-              // Timeout de sécurité pour éviter les blocages
+              // Timeout de securite pour éviter les blocages
               setTimeout(callback, 5000);
             }
           };
@@ -386,7 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
         reveal();
       }, { once: true });
 
-      // Filets de sécurité : si loop est ignoré (certains contextes/sommeil d’onglet)
+      // Filets de securite : si loop est ignoré (certains contextes/sommeil d’onglet)
       vid.addEventListener('ended', () => {
         vid.currentTime = 0;
         if (autoPlayAllowed) {
@@ -411,10 +411,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      return; // terminé pour le cas 1 vidéo
+      return; // termine pour le cas 1 vidéo
     }
 
-    // Cas B — plusieurs vidéos : double-buffer avec précharge
+    // Cas B — plusieurs videos : double-buffer avec precharge
     let idx = 0;
     let current = makeVideo(list[idx], true);
     container.appendChild(current);
@@ -500,13 +500,13 @@ document.addEventListener('DOMContentLoaded', () => {
       lazy.prime();
 
       const startTransition = () => {
-        // Attendre que la vidéo soit vraiment prête pour les gros fichiers
+        // Attendre que la vidéo soit vraiment prete pour les gros fichiers
         const ensureVideoReady = (video, callback) => {
           if (video.readyState >= 3) { // HAVE_FUTURE_DATA ou plus
             callback();
           } else {
             video.addEventListener('canplaythrough', callback, { once: true });
-            // Timeout de sécurité pour éviter les blocages
+            // Timeout de securite pour éviter les blocages
             setTimeout(callback, 5000);
           }
         };

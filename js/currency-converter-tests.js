@@ -224,7 +224,7 @@ class CurrencyConverterTests {
     }
 
     /**
-     * Exécution d'un test de conversion optimale
+     * Execution d'un test de conversion optimale
      */
     runOptimalBreakdownTest(testCase) {
         const startTime = Date.now();
@@ -531,7 +531,7 @@ class CurrencyConverterTests {
 // Export pour utilisation
 window.CurrencyConverterTests = CurrencyConverterTests;
 
-// Fonction d'exécution rapide
+// Fonction d'execution rapide
 window.runConverterTests = () => {
     const tests = new CurrencyConverterTests();
     tests.runAllTests();
