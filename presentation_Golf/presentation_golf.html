@@ -334,13 +334,19 @@
 
         .comparison-table td {
             padding: 20px;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
             text-align: center;
             font-size: 1rem;
+            color: var(--text-dark);
+            background-color: var(--background-card);
         }
 
-        .comparison-table tr:nth-child(even) {
-            background-color: #f9fafb;
+        .comparison-table tr:nth-child(even) td {
+            background-color: rgba(59, 130, 246, 0.05);
+        }
+
+        .comparison-table tr:nth-child(odd) td {
+            background-color: var(--background-card);
         }
 
         .comparison-table .old-tech {
@@ -714,34 +720,34 @@
             <h2 class="problem-title" id="problem-title">Chargement...</h2>
             <div class="problems-grid">
                 <div class="problem-card">
-                    <h3>Coûts Cachés Massifs</h3>
-                    <p><strong id="cost-replacement">Chargement...</strong> de remplacement fréquent</p>
-                    <p>Coût total sur 10 ans : <strong id="cost-10-years">Chargement...</strong></p>
+                    <h3 id="problem-card-1-title">Chargement...</h3>
+                    <p><strong id="cost-replacement">Chargement...</strong> <span id="problem-card-1-suffix">Chargement...</span></p>
+                    <p><span id="problem-card-1-total-prefix">Chargement...</span> <strong id="cost-10-years">Chargement...</strong></p>
                 </div>
                 <div class="problem-card">
-                    <h3>Maintenance Extrêmement Coûteuse</h3>
-                    <p><strong id="maintenance-hours">Chargement...</strong> par année</p>
-                    <p>Coût annuel : <strong id="maintenance-cost">Chargement...</strong></p>
+                    <h3 id="problem-card-2-title">Chargement...</h3>
+                    <p><strong id="maintenance-hours">Chargement...</strong> <span id="problem-card-2-suffix">Chargement...</span></p>
+                    <p><span id="problem-card-2-cost-prefix">Chargement...</span> <strong id="maintenance-cost">Chargement...</strong></p>
                 </div>
                 <div class="problem-card">
-                    <h3>Performances Dégradées</h3>
+                    <h3 id="problem-card-3-title">Chargement...</h3>
                     <p><strong id="performance-issue">Chargement...</strong></p>
-                    <p>Temps de recharge : <strong id="charging-time">Chargement...</strong></p>
+                    <p><span id="problem-card-3-charging-prefix">Chargement...</span> <strong id="charging-time">Chargement...</strong></p>
                 </div>
                 <div class="problem-card">
-                    <h3>Poids Excessif</h3>
-                    <p>Plus de <strong id="weight-old">Chargement...</strong></p>
-                    <p>Consommation <strong id="extra-consumption">Chargement...</strong></p>
+                    <h3 id="problem-card-4-title">Chargement...</h3>
+                    <p><span id="problem-card-4-weight-prefix">Chargement...</span> <strong id="weight-old">Chargement...</strong></p>
+                    <p><span id="problem-card-4-consumption-prefix">Chargement...</span> <strong id="extra-consumption">Chargement...</strong></p>
                 </div>
                 <div class="problem-card">
-                    <h3>Risques Environnementaux</h3>
+                    <h3 id="problem-card-5-title">Chargement...</h3>
                     <p><strong id="environmental-risk">Chargement...</strong></p>
-                    <p>Formation sécurité obligatoire du personnel</p>
+                    <p id="problem-card-5-training">Chargement...</p>
                 </div>
                 <div class="problem-card">
-                    <h3>Sécurité Compromise</h3>
+                    <h3 id="problem-card-6-title">Chargement...</h3>
                     <p><strong id="safety-concerns">Chargement...</strong></p>
-                    <p>Risques pour l'équipement et le terrain</p>
+                    <p id="problem-card-6-risks">Chargement...</p>
                 </div>
             </div>
         </section>
@@ -752,21 +758,21 @@
             <div class="solution-grid">
                 <div class="solution-features">
                     <div class="feature-card">
-                        <h3>Autonomie Fiable</h3>
+                        <h3 id="solution-card-1-title">Chargement...</h3>
                         <p id="autonomy">Chargement...</p>
                     </div>
                     <div class="feature-card">
-                        <h3>Durée de Vie Exceptionnelle</h3>
-                        <p><strong id="cycles">Chargement...</strong> - Durée de vie : <strong id="lifespan">Chargement...</strong></p>
+                        <h3 id="solution-card-2-title">Chargement...</h3>
+                        <p><strong id="cycles">Chargement...</strong><span id="solution-card-2-lifespan-separator">Chargement...</span> <strong id="lifespan">Chargement...</strong></p>
                     </div>
                     <div class="feature-card">
-                        <h3>Charge Rapide</h3>
-                        <p>Recharge complète en <strong id="charge-time">Chargement...</strong></p>
+                        <h3 id="solution-card-3-title">Chargement...</h3>
+                        <p><span id="solution-card-3-charge-prefix">Chargement...</span> <strong id="charge-time">Chargement...</strong></p>
                         <p><strong id="maintenance">Chargement...</strong></p>
                     </div>
                     <div class="feature-card">
-                        <h3>Poids Réduit</h3>
-                        <p>Seulement <strong id="weight">Chargement...</strong></p>
+                        <h3 id="solution-card-4-title">Chargement...</h3>
+                        <p><span id="solution-card-4-weight-prefix">Chargement...</span> <strong id="weight">Chargement...</strong></p>
                     </div>
                 </div>
                 <div class="solution-image">
@@ -777,33 +783,33 @@
 
         <!-- Comparison Table -->
         <section class="comparison-section fade-in">
-            <h2 class="comparison-title">Comparaison Technologies</h2>
+            <h2 class="comparison-title" id="comparison-title">Chargement...</h2>
             <table class="comparison-table">
                 <thead>
                     <tr>
-                        <th>Critère</th>
-                        <th>Batteries Plomb (Actuelles)</th>
-                        <th>Solution EDS Lithium</th>
+                        <th id="comparison-criterion">Chargement...</th>
+                        <th id="comparison-lead-batteries">Chargement...</th>
+                        <th id="comparison-eds-solution">Chargement...</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>Coût 10 ans</strong></td>
+                        <td><strong id="comparison-cost-10-years">Chargement...</strong></td>
                         <td class="old-tech" id="lead-batteries-10-years">Chargement...</td>
                         <td class="new-tech" id="contract-10-total">Chargement...</td>
                     </tr>
                     <tr>
-                        <td><strong>Remplacements</strong></td>
+                        <td><strong id="comparison-replacements">Chargement...</strong></td>
                         <td class="old-tech" id="lead-replacements">Chargement...</td>
                         <td class="new-tech" id="lithium-replacements">Chargement...</td>
                     </tr>
                     <tr>
-                        <td><strong>Maintenance</strong></td>
+                        <td><strong id="comparison-maintenance">Chargement...</strong></td>
                         <td class="old-tech" id="lead-maintenance">Chargement...</td>
                         <td class="new-tech" id="lithium-maintenance">Chargement...</td>
                     </tr>
                     <tr>
-                        <td><strong>Temps de recharge</strong></td>
+                        <td><strong id="comparison-charging-time">Chargement...</strong></td>
                         <td class="old-tech" id="lead-charging">Chargement...</td>
                         <td class="new-tech" id="lithium-charging">Chargement...</td>
                     </tr>
@@ -813,22 +819,22 @@
 
         <!-- Pricing Section -->
         <section class="pricing-section fade-in">
-            <h2 class="pricing-title">Nos Offres Exclusives</h2>
+            <h2 class="pricing-title" id="pricing-title">Chargement...</h2>
             <div class="pricing-cards">
                 <div class="pricing-card" onclick="showPricingDetails('10')">
                     <h3 id="contract-10-title">Chargement...</h3>
                     <div class="price" id="contract-10-monthly">Chargement...</div>
-                    <div class="period">par voiturette / mois</div>
+                    <div class="period" id="pricing-monthly-suffix">Chargement...</div>
                     <div class="savings">
-                        Économie : <strong id="savings-10-years">Chargement...</strong> sur 10 ans
+                        <span id="pricing-savings-prefix">Chargement...</span> <strong id="savings-10-years">Chargement...</strong> <span id="pricing-savings-10-suffix">Chargement...</span>
                     </div>
                 </div>
                 <div class="pricing-card premium" onclick="showPricingDetails('20')">
                     <h3 id="contract-20-title">Chargement...</h3>
                     <div class="price" id="contract-20-monthly">Chargement...</div>
-                    <div class="period">par voiturette / mois</div>
+                    <div class="period" id="pricing-monthly-suffix-2">Chargement...</div>
                     <div class="savings">
-                        Économie MASSIVE : <strong id="savings-20-years">Chargement...</strong> sur 20 ans
+                        <span id="pricing-savings-20-prefix">Chargement...</span> <strong id="savings-20-years">Chargement...</strong> <span id="pricing-savings-20-suffix">Chargement...</span>
                     </div>
                 </div>
             </div>
@@ -836,36 +842,36 @@
 
         <!-- Benefits Section -->
         <section class="benefits-section fade-in">
-            <h2 class="benefits-title">Pourquoi Choisir EDS Québec ?</h2>
+            <h2 class="benefits-title" id="benefits-title">Chargement...</h2>
             <div class="benefits-grid">
                 <div class="benefit-card">
                     <span class="icon">🔋</span>
-                    <h3>Fiabilité</h3>
+                    <h3 id="benefits-reliability">Chargement...</h3>
                     <p id="benefit-1">Chargement...</p>
                 </div>
                 <div class="benefit-card">
                     <span class="icon">🔧</span>
-                    <h3>Simplicité</h3>
+                    <h3 id="benefits-simplicity">Chargement...</h3>
                     <p id="benefit-2">Chargement...</p>
                 </div>
                 <div class="benefit-card">
                     <span class="icon">🚀</span>
-                    <h3>Performance</h3>
+                    <h3 id="benefits-performance">Chargement...</h3>
                     <p id="benefit-3">Chargement...</p>
                 </div>
                 <div class="benefit-card">
                     <span class="icon">💰</span>
-                    <h3>Économie</h3>
+                    <h3 id="benefits-economy">Chargement...</h3>
                     <p id="benefit-4">Chargement...</p>
                 </div>
                 <div class="benefit-card">
                     <span class="icon">🤝</span>
-                    <h3>Partenariat</h3>
+                    <h3 id="benefits-partnership">Chargement...</h3>
                     <p id="benefit-5">Chargement...</p>
                 </div>
                 <div class="benefit-card">
                     <span class="icon">🌱</span>
-                    <h3>Écologie</h3>
+                    <h3 id="benefits-ecology">Chargement...</h3>
                     <p id="benefit-6">Chargement...</p>
                 </div>
             </div>
@@ -881,23 +887,23 @@
 
         <!-- Contact Section -->
         <section class="contact-section fade-in">
-            <h2 class="contact-title">Contactez Notre Spécialiste</h2>
-            <p class="contact-subtitle">Planifiez votre démonstration gratuite dès aujourd'hui !</p>
+            <h2 class="contact-title" id="contact-title">Chargement...</h2>
+            <p class="contact-subtitle" id="contact-subtitle">Chargement...</p>
             <div class="contact-info">
                 <div class="contact-card">
                     <h3 id="specialist-name">Chargement...</h3>
                     <p id="specialist-title">Chargement...</p>
                 </div>
                 <div class="contact-card">
-                    <h3>Téléphone</h3>
+                    <h3 id="contact-phone-label">Chargement...</h3>
                     <p id="specialist-phone">Chargement...</p>
                 </div>
                 <div class="contact-card">
-                    <h3>Email</h3>
+                    <h3 id="contact-email-label">Chargement...</h3>
                     <p id="specialist-email">Chargement...</p>
                 </div>
                 <div class="contact-card">
-                    <h3>Site Web</h3>
+                    <h3 id="contact-website-label">Chargement...</h3>
                     <p id="website">Chargement...</p>
                 </div>
             </div>
@@ -1024,6 +1030,23 @@
             safeUpdateElement('environmental-risk', data.problem?.environmental_risk);
             safeUpdateElement('safety-concerns', data.problem?.safety_concerns);
 
+            // Problem UI elements
+            safeUpdateElement('problem-card-1-title', data.ui?.problem_card_1_title);
+            safeUpdateElement('problem-card-1-suffix', data.ui?.problem_card_1_suffix);
+            safeUpdateElement('problem-card-1-total-prefix', data.ui?.problem_card_1_total_prefix);
+            safeUpdateElement('problem-card-2-title', data.ui?.problem_card_2_title);
+            safeUpdateElement('problem-card-2-suffix', data.ui?.problem_card_2_suffix);
+            safeUpdateElement('problem-card-2-cost-prefix', data.ui?.problem_card_2_cost_prefix);
+            safeUpdateElement('problem-card-3-title', data.ui?.problem_card_3_title);
+            safeUpdateElement('problem-card-3-charging-prefix', data.ui?.problem_card_3_charging_prefix);
+            safeUpdateElement('problem-card-4-title', data.ui?.problem_card_4_title);
+            safeUpdateElement('problem-card-4-weight-prefix', data.ui?.problem_card_4_weight_prefix);
+            safeUpdateElement('problem-card-4-consumption-prefix', data.ui?.problem_card_4_consumption_prefix);
+            safeUpdateElement('problem-card-5-title', data.ui?.problem_card_5_title);
+            safeUpdateElement('problem-card-5-training', data.ui?.problem_card_5_training);
+            safeUpdateElement('problem-card-6-title', data.ui?.problem_card_6_title);
+            safeUpdateElement('problem-card-6-risks', data.ui?.problem_card_6_risks);
+
             // Solution
             safeUpdateElement('solution-title', data.solution?.title);
             safeUpdateElement('autonomy', data.solution?.autonomy);
@@ -1033,16 +1056,24 @@
             safeUpdateElement('maintenance', data.solution?.maintenance);
             safeUpdateElement('weight', data.solution?.weight);
 
-            // Pricing
-            safeUpdateElement('contract-10-title', data.pricing?.contract_10_title);
-            safeUpdateElement('contract-10-monthly', data.pricing?.contract_10_monthly);
-            safeUpdateElement('contract-10-total', data.pricing?.contract_10_total);
-            safeUpdateElement('savings-10-years', data.pricing?.savings_10_years);
-            safeUpdateElement('contract-20-title', data.pricing?.contract_20_title);
-            safeUpdateElement('contract-20-monthly', data.pricing?.contract_20_monthly);
-            safeUpdateElement('savings-20-years', data.pricing?.savings_20_years);
+            // Solution UI elements
+            safeUpdateElement('solution-card-1-title', data.ui?.solution_card_1_title);
+            safeUpdateElement('solution-card-2-title', data.ui?.solution_card_2_title);
+            safeUpdateElement('solution-card-2-lifespan-separator', data.ui?.solution_card_2_lifespan_separator);
+            safeUpdateElement('solution-card-3-title', data.ui?.solution_card_3_title);
+            safeUpdateElement('solution-card-3-charge-prefix', data.ui?.solution_card_3_charge_prefix);
+            safeUpdateElement('solution-card-4-title', data.ui?.solution_card_4_title);
+            safeUpdateElement('solution-card-4-weight-prefix', data.ui?.solution_card_4_weight_prefix);
 
             // Comparison
+            safeUpdateElement('comparison-title', data.ui?.comparison_title);
+            safeUpdateElement('comparison-criterion', data.ui?.comparison_criterion);
+            safeUpdateElement('comparison-lead-batteries', data.ui?.comparison_lead_batteries);
+            safeUpdateElement('comparison-eds-solution', data.ui?.comparison_eds_solution);
+            safeUpdateElement('comparison-cost-10-years', data.ui?.comparison_cost_10_years);
+            safeUpdateElement('comparison-replacements', data.ui?.comparison_replacements);
+            safeUpdateElement('comparison-maintenance', data.ui?.comparison_maintenance);
+            safeUpdateElement('comparison-charging-time', data.ui?.comparison_charging_time);
             safeUpdateElement('lead-batteries-10-years', data.comparison?.lead_batteries_10_years);
             safeUpdateElement('lead-replacements', data.comparison?.lead_replacements);
             safeUpdateElement('lead-maintenance', data.comparison?.lead_maintenance);
@@ -1051,7 +1082,30 @@
             safeUpdateElement('lithium-maintenance', data.comparison?.lithium_maintenance);
             safeUpdateElement('lithium-charging', data.comparison?.lithium_charging);
 
+            // Pricing
+            safeUpdateElement('pricing-title', data.ui?.pricing_title);
+            safeUpdateElement('contract-10-title', data.pricing?.contract_10_title);
+            safeUpdateElement('contract-10-monthly', data.pricing?.contract_10_monthly);
+            safeUpdateElement('contract-10-total', data.pricing?.contract_10_total);
+            safeUpdateElement('savings-10-years', data.pricing?.savings_10_years);
+            safeUpdateElement('contract-20-title', data.pricing?.contract_20_title);
+            safeUpdateElement('contract-20-monthly', data.pricing?.contract_20_monthly);
+            safeUpdateElement('savings-20-years', data.pricing?.savings_20_years);
+            safeUpdateElement('pricing-monthly-suffix', data.ui?.pricing_monthly_suffix);
+            safeUpdateElement('pricing-monthly-suffix-2', data.ui?.pricing_monthly_suffix);
+            safeUpdateElement('pricing-savings-prefix', data.ui?.pricing_savings_prefix);
+            safeUpdateElement('pricing-savings-10-suffix', data.ui?.pricing_savings_10_suffix);
+            safeUpdateElement('pricing-savings-20-prefix', data.ui?.pricing_savings_20_prefix);
+            safeUpdateElement('pricing-savings-20-suffix', data.ui?.pricing_savings_20_suffix);
+
             // Benefits
+            safeUpdateElement('benefits-title', data.ui?.benefits_title);
+            safeUpdateElement('benefits-reliability', data.ui?.benefits_reliability);
+            safeUpdateElement('benefits-simplicity', data.ui?.benefits_simplicity);
+            safeUpdateElement('benefits-performance', data.ui?.benefits_performance);
+            safeUpdateElement('benefits-economy', data.ui?.benefits_economy);
+            safeUpdateElement('benefits-partnership', data.ui?.benefits_partnership);
+            safeUpdateElement('benefits-ecology', data.ui?.benefits_ecology);
             safeUpdateElement('benefit-1', data.benefits?.benefit_1);
             safeUpdateElement('benefit-2', data.benefits?.benefit_2);
             safeUpdateElement('benefit-3', data.benefits?.benefit_3);
@@ -1066,11 +1120,16 @@
             safeUpdateElement('testimonial-company', data.testimonial?.company);
 
             // Contact
+            safeUpdateElement('contact-title', data.ui?.contact_title);
+            safeUpdateElement('contact-subtitle', data.ui?.contact_subtitle);
             safeUpdateElement('specialist-name', data.contact?.specialist_name);
             safeUpdateElement('specialist-title', data.contact?.specialist_title);
             safeUpdateElement('specialist-phone', data.contact?.specialist_phone);
             safeUpdateElement('specialist-email', data.contact?.specialist_email);
             safeUpdateElement('website', data.contact?.website);
+            safeUpdateElement('contact-phone-label', data.ui?.contact_phone_label);
+            safeUpdateElement('contact-email-label', data.ui?.contact_email_label);
+            safeUpdateElement('contact-website-label', data.ui?.contact_website_label);
 
             console.log('Contenu mis à jour avec succès');
         }
