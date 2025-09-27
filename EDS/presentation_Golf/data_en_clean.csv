@@ -1,8 +1,8 @@
 section,key,value,color
 header,company_name,EDS QUEBEC,#1e40af
 header,company_tagline,Energy Development System,#059669
-header,company_subtitle,Quebec's Leading Lithium Solutions,#6b7280
-header,company_address,"195, rue Brissette, local A7, Sainte-Agathe-des-Monts",#6b7280
+header,company_subtitle,Quebec's Leading Lithium Solutions,#d1d5db
+header,company_address,"195, rue Brissette, local A7, Sainte-Agathe-des-Monts",#d1d5db
 header,company_phone,+1 (819) 323-7859,#1e40af
 header,company_email,contact@edsquebec.com,#1e40af
 
@@ -23,15 +23,15 @@ problem,safety_concerns,Dangerous acid leaks,#dc2626
 
 # Explanatory subsections for hidden costs
 problem_details,section_1_title,💸 Explosive Replacement Costs,#dc2626
-problem_details,section_1_subtitle,Why lead batteries cost so much,#6b7280
+problem_details,section_1_subtitle,Why lead batteries cost so much,#d1d5db
 problem_details,section_1_point_1,Frequent replacement every 2-5 years,#dc2626
 problem_details,section_1_point_2,{{lead_cost_replacement_unit}}$ per cart at each replacement,#dc2626
 problem_details,section_1_point_3,4 replacements needed over 10 years (4-year cycle),#dc2626
-problem_details,section_1_point_4,Including 1 free warranty replacement + 20% premature failure risk,#6b7280
+problem_details,section_1_point_4,Including 1 free warranty replacement + 20% premature failure risk,#d1d5db
 problem_details,section_1_calculation,{{lead_replacement_calculation_10y}},#dc2626
 
 problem_details,section_2_title,⚙️ Specialized Expensive Maintenance,#d97706
-problem_details,section_2_subtitle,Hidden costs of constant upkeep,#6b7280
+problem_details,section_2_subtitle,Hidden costs of constant upkeep,#d1d5db
 problem_details,section_2_point_1,12 hours of mandatory maintenance per year,#d97706
 problem_details,section_2_point_2,Specialized technician at {{lead_technician_hourly_rate}}$ per hour,#d97706
 problem_details,section_2_point_3,Weekly distilled water verification,#d97706
@@ -39,7 +39,7 @@ problem_details,section_2_point_4,Terminal cleaning and inspection,#d97706
 problem_details,section_2_calculation,{{lead_maintenance_calculation_10y}},#d97706
 
 problem_details,section_3_title,🚨 Operational Risks and Losses,#7c3aed
-problem_details,section_3_subtitle,Costs nobody tells you about,#6b7280
+problem_details,section_3_subtitle,Costs nobody tells you about,#d1d5db
 problem_details,section_3_point_1,Mid-course breakdowns = customer refunds,#7c3aed
 problem_details,section_3_point_2,25% electrical overconsumption,#7c3aed
 problem_details,section_3_point_3,Increased insurance for hazardous materials,#7c3aed
@@ -47,7 +47,7 @@ problem_details,section_3_point_4,Recycling and toxic handling fees,#7c3aed
 problem_details,section_3_calculation,{{operational_risks_breakdown}},#7c3aed
 
 problem_details,section_4_title,💰 TOTAL Real Hidden Costs,#991b1b
-problem_details,section_4_subtitle,The true explosive cost of lead batteries,#6b7280
+problem_details,section_4_subtitle,The true explosive cost of lead batteries,#d1d5db
 problem_details,section_4_point_1,Replacements + maintenance + risks,#991b1b
 problem_details,section_4_point_2,{{total_breakdown_calculation_10y}},#991b1b
 problem_details,section_4_point_3,Over {{total_cost_simplified_10y}}$ per cart actually,#991b1b
@@ -91,64 +91,64 @@ benefits,benefit_4,Fixed and predictable monthly budget,#059669
 benefits,benefit_5,Dedicated technical partner throughout,#059669
 benefits,benefit_6,Eco-friendly and sustainable technology,#059669
 
-testimonial,quote,"Since installing EDS Quebec batteries, we have eliminated 95% of our golf cart problems. Our golfers are delighted and our maintenance team can finally focus on the course!",#1f2937
+testimonial,quote,"Since installing EDS Quebec batteries, we have eliminated 95% of our golf cart problems. Our golfers are delighted and our maintenance team can finally focus on the course!",#ffffff
 testimonial,author,Jean-Michel RIBERA,#1e40af
-testimonial,title,General Manager,#6b7280
-testimonial,company,Tina Golf, New Caledonia,#6b7280
+testimonial,title,General Manager,#d1d5db
+testimonial,company,Tina Golf, New Caledonia,#d1d5db
 
 contact,specialist_name,Jean-Marc Bucher,#1e40af
-contact,specialist_title,Golf Solutions Specialist - EDS Quebec,#6b7280
+contact,specialist_title,Golf Solutions Specialist - EDS Quebec,#d1d5db
 contact,specialist_phone,+1 (819) 323-7859,#1e40af
 contact,specialist_email,commande@edsquebec.com,#1e40af
 contact,website,www.edsquebec.com,#1e40af
 
 # Modern vs batteries comparison section
 vs_batteries,section_title,LEAD vs LiFePO₄: WHY CHANGE?,#1e40af
-vs_batteries,section_subtitle,Detailed technical and economic comparison,#6b7280
+vs_batteries,section_subtitle,Detailed technical and economic comparison,#d1d5db
 vs_batteries,lead_title,Current Lead Batteries,#dc2626
-vs_batteries,lead_subtitle,Obsolete expensive technology,#6b7280
+vs_batteries,lead_subtitle,Obsolete expensive technology,#d1d5db
 vs_batteries,lifepo4_title,EDS LiFePO₄ Batteries,#059669
-vs_batteries,lifepo4_subtitle,Modern Canadian technology,#6b7280
+vs_batteries,lifepo4_subtitle,Modern Canadian technology,#d1d5db
 
 # Comparative technical characteristics
-vs_batteries,tech_lifespan_label,Lifespan,#1f2937
+vs_batteries,tech_lifespan_label,Lifespan,#ffffff
 vs_batteries,tech_lifespan_lead,2-5 years maximum,#dc2626
 vs_batteries,tech_lifespan_lifepo4,15-20 years guaranteed,#059669
-vs_batteries,tech_cycles_label,Charge cycles,#1f2937
+vs_batteries,tech_cycles_label,Charge cycles,#ffffff
 vs_batteries,tech_cycles_lead,300-500 cycles,#dc2626
 vs_batteries,tech_cycles_lifepo4,8000+ cycles,#059669
-vs_batteries,tech_charge_label,Charging time,#1f2937
+vs_batteries,tech_charge_label,Charging time,#ffffff
 vs_batteries,tech_charge_lead,8-10 hours,#dc2626
 vs_batteries,tech_charge_lifepo4,2 hours only,#059669
-vs_batteries,tech_weight_label,Weight per cart,#1f2937
+vs_batteries,tech_weight_label,Weight per cart,#ffffff
 vs_batteries,tech_weight_lead,300+ kg,#dc2626
 vs_batteries,tech_weight_lifepo4,40 kg,#059669
-vs_batteries,tech_maintenance_label,Maintenance,#1f2937
+vs_batteries,tech_maintenance_label,Maintenance,#ffffff
 vs_batteries,tech_maintenance_lead,12h/year mandatory,#dc2626
 vs_batteries,tech_maintenance_lifepo4,Zero maintenance,#059669
-vs_batteries,tech_performance_label,Consistent performance,#1f2937
+vs_batteries,tech_performance_label,Consistent performance,#ffffff
 vs_batteries,tech_performance_lead,50% degradation in 5 years,#dc2626
 vs_batteries,tech_performance_lifepo4,95% until complete discharge,#059669
 
 # Comparative costs
-vs_batteries,cost_initial_label,Initial investment,#1f2937
+vs_batteries,cost_initial_label,Initial investment,#ffffff
 vs_batteries,cost_initial_lead,{{lead_cost_replacement_unit}}$ per cart,#dc2626
 vs_batteries,cost_initial_lifepo4,Rental 76-97$/month,#059669
-vs_batteries,cost_replacement_label,10-year replacements,#1f2937
+vs_batteries,cost_replacement_label,10-year replacements,#ffffff
 vs_batteries,cost_replacement_lead,4 replacements = {{lead_replacement_cost_with_risk_10y}}$,#dc2626
 vs_batteries,cost_replacement_lifepo4,No replacement,#059669
-vs_batteries,cost_maintenance_label,10-year maintenance,#1f2937
+vs_batteries,cost_maintenance_label,10-year maintenance,#ffffff
 vs_batteries,cost_maintenance_lead,{{lead_maintenance_total_10y}}$ per cart (10 years),#dc2626
 vs_batteries,cost_maintenance_lifepo4,0$ maintenance,#059669
-vs_batteries,cost_total_label,TOTAL 10-YEAR COST,#1f2937
+vs_batteries,cost_total_label,TOTAL 10-YEAR COST,#ffffff
 vs_batteries,cost_total_lead,{{lead_total_10y_per_cart}}$ per cart (10 years),#dc2626
 vs_batteries,cost_total_lifepo4,{{lifepo4_total_10y_per_cart}}$ per cart (10 years),#059669
 
 # Advantages/Disadvantages
 vs_batteries,advantages_label,ADVANTAGES,#059669
 vs_batteries,disadvantages_label,DISADVANTAGES,#dc2626
-vs_batteries,lead_advantage_1,Known technology,#6b7280
-vs_batteries,lead_advantage_2,Staggered initial investment,#6b7280
+vs_batteries,lead_advantage_1,Known technology,#d1d5db
+vs_batteries,lead_advantage_2,Staggered initial investment,#d1d5db
 vs_batteries,lead_disadvantage_1,Explosive hidden costs,#dc2626
 vs_batteries,lead_disadvantage_2,Constant maintenance required,#dc2626
 vs_batteries,lead_disadvantage_3,Degraded performance,#dc2626
@@ -160,20 +160,20 @@ vs_batteries,lifepo4_advantage_3,Consistent performance 15+ years,#059669
 vs_batteries,lifepo4_advantage_4,Eco-friendly technology,#059669
 vs_batteries,lifepo4_advantage_5,Dedicated technical support,#059669
 vs_batteries,lifepo4_advantage_6,Fixed predictable budget,#059669
-vs_batteries,lifepo4_disadvantage_1,New technology,#6b7280
-vs_batteries,lifepo4_disadvantage_2,Contractual commitment,#6b7280
+vs_batteries,lifepo4_disadvantage_1,New technology,#d1d5db
+vs_batteries,lifepo4_disadvantage_2,Contractual commitment,#d1d5db
 
 # Call to action
 vs_batteries,cta_title,READY FOR THE REVOLUTION?,#1e40af
-vs_batteries,cta_subtitle,Switch to LiFePO₄ batteries today,#6b7280
+vs_batteries,cta_subtitle,Switch to LiFePO₄ batteries today,#d1d5db
 vs_batteries,cta_savings_prefix,Save,#059669
-vs_batteries,cta_savings_suffix,per cart over 10 years,#6b7280
+vs_batteries,cta_savings_suffix,per cart over 10 years,#d1d5db
 vs_batteries,cta_button_text,Request a demonstration,#ffffff
 
 # Background colors for sections
 backgrounds,hero_section,#111827
 backgrounds,problem_section,rgba(220, 38, 38, 0.08)
-backgrounds,vs_batteries_section,#1f2937
+backgrounds,vs_batteries_section,#1e293b
 backgrounds,solution_section,rgba(5, 150, 105, 0.08)
 backgrounds,pricing_section,#0f172a
 backgrounds,benefits_section,rgba(30, 64, 175, 0.08)
@@ -196,11 +196,11 @@ backgrounds,pricing_card_fleet,rgba(124, 58, 237, 0.05)
 # Interface fixed texts
 ui,hero_image_alt,Modern golf cart,
 ui,problem_card_1_title,Explosive Hidden Costs,#dc2626
-ui,problem_card_1_suffix,+ premature failure risks,#6b7280
-ui,problem_card_1_total_prefix,Real total cost:,#1f2937
+ui,problem_card_1_suffix,+ premature failure risks,#d1d5db
+ui,problem_card_1_total_prefix,Real total cost:,#ffffff
 ui,problem_card_2_title,Specialized Expensive Maintenance,#d97706
-ui,problem_card_2_suffix,,#6b7280
-ui,problem_card_2_cost_prefix,Total annual cost:,#1f2937
+ui,problem_card_2_suffix,,#d1d5db
+ui,problem_card_2_cost_prefix,Total annual cost:,#ffffff
 ui,problem_card_3_title,Charging Time & Fleet Impact,#7c3aed
 ui,problem_card_3_charging_prefix,8-10h charge = +40% carts required:,#7c3aed
 ui,problem_card_4_title,Excessive Weight & Overconsumption,#991b1b
@@ -213,31 +213,31 @@ ui,problem_card_6_risks,{{revenue_loss_yearly}}$/year revenue losses from client
 
 ui,solution_card_1_title,Reliable Autonomy,#059669
 ui,solution_card_2_title,Exceptional Lifespan,#059669
-ui,solution_card_2_lifespan_separator,- Lifespan:,#6b7280
+ui,solution_card_2_lifespan_separator,- Lifespan:,#d1d5db
 ui,solution_card_3_title,Fast Charging,#059669
-ui,solution_card_3_charge_prefix,Full charge in,#6b7280
+ui,solution_card_3_charge_prefix,Full charge in,#d1d5db
 ui,solution_card_4_title,Reduced Weight,#059669
-ui,solution_card_4_weight_prefix,Only,#6b7280
+ui,solution_card_4_weight_prefix,Only,#d1d5db
 
-ui,comparison_title,Technology Comparison
-ui,comparison_criterion,Criterion,#1f2937
+ui,comparison_title,Technology Comparison,#1e40af
+ui,comparison_criterion,Criterion,#ffffff
 ui,comparison_lead_batteries,Lead Batteries (Current),#dc2626
 ui,comparison_eds_solution,EDS Lithium Solution,#059669
-ui,comparison_cost_10_years,10-year cost,#1f2937
-ui,comparison_replacements,Replacements,#1f2937
-ui,comparison_maintenance,Maintenance,#1f2937
-ui,comparison_charging_time,Charging time,#1f2937
+ui,comparison_cost_10_years,20-year cost,#ffffff
+ui,comparison_replacements,Replacements,#ffffff
+ui,comparison_maintenance,Maintenance,#ffffff
+ui,comparison_charging_time,Charging time,#ffffff
 
 ui,pricing_title,Our Exclusive Offers,#1e40af
-ui,pricing_monthly_suffix,per cart / month,#6b7280
-ui,pricing_total_suffix,/ month,#6b7280
+ui,pricing_monthly_suffix,per cart / month,#d1d5db
+ui,pricing_total_suffix,/ month,#d1d5db
 ui,pricing_savings_prefix,Savings:,#059669
-ui,pricing_savings_10_suffix,over 10 years,#6b7280
+ui,pricing_savings_10_suffix,over 10 years,#d1d5db
 ui,pricing_savings_20_prefix,MASSIVE Savings:,#059669
-ui,pricing_savings_20_suffix,over 20 years,#6b7280
+ui,pricing_savings_20_suffix,over 20 years,#d1d5db
 ui,pricing_savings_fleet_prefix,PREMIUM Savings:,#059669
-ui,pricing_savings_fleet_suffix,over 20 years,#6b7280
-ui,fleet_minimum_text,Minimum 30 carts,#6b7280
+ui,pricing_savings_fleet_suffix,over 20 years,#d1d5db
+ui,fleet_minimum_text,Minimum 30 carts,#d1d5db
 
 ui,benefits_title,Why Choose EDS Quebec?,#1e40af
 ui,benefits_reliability,Reliability,#1e40af
@@ -248,17 +248,17 @@ ui,benefits_partnership,Partnership,#1e40af
 ui,benefits_ecology,Ecology,#1e40af
 
 ui,contact_title,Contact Our Specialist,#1e40af
-ui,contact_subtitle,Schedule your free demonstration today!,#6b7280
-ui,contact_phone_label,Phone,#1f2937
-ui,contact_email_label,Email,#1f2937
-ui,contact_website_label,Website,#1f2937
+ui,contact_subtitle,Schedule your free demonstration today!,#d1d5db
+ui,contact_phone_label,Phone,#ffffff
+ui,contact_email_label,Email,#ffffff
+ui,contact_website_label,Website,#ffffff
 
 ui,cart_calculator_title,Fleet Calculator
-ui,cart_calculator_subtitle,Adjust the number of golf carts to see your savings,#6b7280
-ui,cart_count_label,Number of golf carts:,#1f2937
-ui,cart_unit_suffix,cart(s),#6b7280
-ui,technician_cost_label,Technician cost:,#1f2937
-ui,technician_rate_unit,$/hour,#6b7280
+ui,cart_calculator_subtitle,Adjust the number of golf carts to see your savings,#d1d5db
+ui,cart_count_label,Number of golf carts:,#ffffff
+ui,cart_unit_suffix,cart(s),#d1d5db
+ui,technician_cost_label,Technician cost:,#ffffff
+ui,technician_rate_unit,$/hour,#d1d5db
 
 images,hero_golf_cart,images/golf_cart_sunset.jpg,
 images,battery_pack,images/battery_pack.jpg,
@@ -270,8 +270,8 @@ colors,primary_blue,#1e40af
 colors,secondary_green,#059669
 colors,accent_light_blue,#3b82f6
 colors,accent_light_green,#10b981
-colors,text_dark,#1f2937
-colors,text_light,#6b7280
+colors,text_dark,#ffffff
+colors,text_light,#d1d5db
 colors,background_light,#f8fafc
 colors,background_dark,#0f172a
 colors,background_card,#1e293b
@@ -282,12 +282,12 @@ table_colors,header_bg,linear-gradient(135deg, #1e40af, #059669)
 table_colors,header_text,#ffffff
 table_colors,cell_bg_primary,#1e293b
 table_colors,cell_bg_secondary,#374151
-table_colors,cell_text,#e5e7eb
+table_colors,cell_text,#ffffff
 table_colors,cell_border,rgba(99, 102, 241, 0.3)
 table_colors,old_tech,#dc2626
 table_colors,new_tech,#059669
 table_colors,comparison_title,#1e40af
-table_colors,comparison_subtitle,#6b7280
+table_colors,comparison_subtitle,#d1d5db
 
 # Pricing section colors
 pricing_colors,section_bg,#0f172a
@@ -297,7 +297,7 @@ pricing_colors,card_bg_fleet,#1e293b
 pricing_colors,card_border_10,rgba(30, 64, 175, 0.3)
 pricing_colors,card_border_20,rgba(5, 150, 105, 0.3)
 pricing_colors,card_border_fleet,rgba(124, 58, 237, 0.3)
-pricing_colors,card_text,#e5e7eb
+pricing_colors,card_text,#ffffff
 pricing_colors,card_title,#ffffff
 pricing_colors,price_text,#059669
 pricing_colors,savings_text,#10b981
@@ -326,7 +326,7 @@ calculs,lead_battery_cost_detail,Lead battery unit cost + replacement,#dc2626
 calculs,lead_replacement_schedule,Replacement required every 2-5 years (average 3.5 years),#dc2626
 calculs,lead_maintenance_detail,{{lead_maintenance_hours_unit}}h/year maintenance × {{lead_technician_hourly_rate}}$/h specialized technician,#d97706
 calculs,lithium_advantage,No replacement for 15-20 years + zero maintenance,#059669
-calculs,total_cost_formula,Monthly rental price x number of carts x duration,#1f2937
+calculs,total_cost_formula,Monthly rental price x number of carts x duration,#ffffff
 calculs,savings_formula,Lead battery cost - Lithium solution cost,#059669
 
 # ROI and profitability
