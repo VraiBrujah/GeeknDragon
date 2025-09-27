@@ -1,14 +1,14 @@
 {
   "files": [
-    "Ethereal Drift (1).mp3",
-    "Ethereal Drift.mp3",
-    "Ethereal Glow (1).mp3",
-    "Ethereal Glow.mp3",
-    "Whispered Horizons (1).mp3",
-    "Whispered Horizons.mp3",
-    "Whispering Horizon (1).mp3",
-    "Whispering Horizon.mp3"
+    "ethereal-drift-1.mp3",
+    "ethereal-drift.mp3",
+    "ethereal-glow-1.mp3",
+    "ethereal-glow.mp3",
+    "whispered-horizons-1.mp3",
+    "whispered-horizons.mp3",
+    "whispering-horizon-1.mp3",
+    "whispering-horizon.mp3"
   ],
-  "lastUpdated": "2025-01-26",
-  "note": "Liste des fichiers MP3 réellement présents dans le dossier musique"
+  "lastUpdated": "2025-09-27",
+  "note": "Liste des fichiers MP3 réellement présents dans le dossier musique (noms optimisés sans espaces)"
 }

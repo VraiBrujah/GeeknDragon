@@ -6,6 +6,103 @@
 
 **Répertoire de Travail** : `E:\GitHub\GeeknDragon`
 
+## 🌐 DIRECTIVES DE DÉVELOPPEMENT FUNDAMENTALES
+
+### 📢 Communication & Langue
+- **Communication exclusive en français** : Toutes les interactions, explications et retours doivent être en français
+- **Documentation française** : Tous les commentaires, docstrings, et documentation technique en français
+- **Variables/fonctions** : Noms explicites en français ou anglais technique selon le contexte
+
+### 🏗️ Principes d'Architecture & Génie Logiciel
+
+#### Extensibilité & Modularité
+- **Architecture extensible** : Tout composant doit être facilement extensible sans casser l'existant
+- **Modules autonomes** : Chaque module doit fonctionner indépendamment (standalone)
+- **Interfaces claires** : Contrats bien définis entre modules (patterns Strategy, Factory, Observer)
+- **Injection de dépendances** : Éviter les couplages forts
+
+#### Programmation Orientée Objet
+- **Encapsulation stricte** : Propriétés privées avec accesseurs appropriés
+- **Héritage maîtrisé** : Composition préférée à l'héritage quand approprié
+- **Polymorphisme** : Interfaces et classes abstraites pour flexibilité
+- **SOLID principles** : Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion
+
+#### Clean Code & Qualité
+- **Fonctions courtes** : Maximum 20-30 lignes par fonction
+- **Noms explicites** : Variables et fonctions auto-documentées
+- **Éviter la répétition** : DRY (Don't Repeat Yourself)
+- **Tests unitaires** : Couverture minimale 80% pour logique métier
+- **Refactoring continu** : Amélioration constante sans casser la fonctionnalité
+
+### 🔒 Autonomie & Isolation
+
+#### Fonctionnement Standalone
+- **Aucune dépendance réseau durant l'exécution** : Pas d'API externes, CDN, ou services distants
+- **APIs locales uniquement** : Seuls les téléchargements de modèles IA/LLM locaux autorisés
+- **Données auto-contenues** : Configuration et données dans le projet
+- **Mode offline** : Application fonctionnelle sans connexion internet
+
+#### Sécurité des Données
+- **Aucune fuite de données** : Pas de télémétrie, analytics externes, ou tracking
+- **Confidentialité totale** : Toutes les données restent dans l'environnement local
+- **Variables d'environnement** : Secrets et configurations sensibles externalisées
+
+### 🚫 Interdictions Strictes
+
+#### Données & Configuration
+- **Pas de hardcodage** : Aucune valeur codée en dur dans le code source
+- **Pas de données simulées** : Toutes les données doivent être réelles ou configurables
+- **Pas de valeurs par défaut arbitraires** : Configuration explicite requise
+- **Pas de données de test en production** : Séparation claire dev/prod
+
+#### Dépendances Externes
+- **Pas d'APIs tierces** : Aucun appel vers des services externes pendant l'exécution
+- **Pas de CDN** : Assets locaux uniquement
+- **Pas de tracking** : Google Analytics, Facebook Pixel, etc. interdits
+- **Pas de fonts externes** : Polices auto-hébergées uniquement
+
+### 📚 Documentation & Maintenance
+
+#### Standards Documentation
+```php
+/**
+ * Convertit un montant en cuivre vers la répartition optimale de pièces
+ *
+ * @param int $montantCuivre Montant total en pièces de cuivre
+ * @param array $multiplicateursDisponibles Liste des multiplicateurs possibles
+ * @return array Répartition optimale par métal et multiplicateur
+ * @throws InvalidArgumentException Si le montant est négatif
+ *
+ * @example
+ * $resultat = $convertisseur->convertirMontant(1661, [1, 10, 100, 1000, 10000]);
+ * // Retourne: ['platinum_1' => 1, 'gold_100' => 6, 'electrum_10' => 1, ...]
+ */
+public function convertirMontant(int $montantCuivre, array $multiplicateursDisponibles): array
+{
+    // Implémentation...
+}
+```
+
+#### Commentaires & Maintenance
+- **Docstrings complets** : Tous les paramètres, retours et exceptions documentés
+- **Commentaires explicatifs** : Logique complexe expliquée en français
+- **Exemples concrets** : Cases d'usage dans la documentation
+- **Historique des modifications** : Changelog maintenu
+
+### ✅ Validation & Tests
+
+#### Tests Obligatoires
+- **Tests unitaires** : Chaque classe et méthode publique
+- **Tests d'intégration** : Interaction entre modules
+- **Tests de régression** : Éviter les régressions lors des modifications
+- **Tests de performance** : Validation des temps de réponse
+
+#### Critères d'Acceptance
+- **Fonctionnement offline** : Application complètement autonome
+- **Configuration externalisée** : Aucune valeur hardcodée
+- **Documentation française** : 100% des commentaires et docs
+- **Architecture extensible** : Nouveaux modules ajoutables sans impact
+
 ## Spécialisation E-commerce & D&D
 
 ### 🎯 Expertise Requise
@@ -381,6 +478,49 @@ Avant chaque déploiement :
 - Maintenabilité long terme
 - Évolutivité fonctionnalités
 - Robustesse e-commerce
+
+---
+
+## ⚠️ DIRECTIVES CRITIQUES - RESPECT OBLIGATOIRE
+
+### 🔴 Règles de Développement Non-Négociables
+
+#### 📁 Gestion des Fichiers
+- **JAMAIS créer de nouveaux fichiers** sauf si absolument nécessaire pour atteindre l'objectif
+- **TOUJOURS privilégier la modification** des fichiers existants
+- **Nettoyer le projet** en consolidant et optimisant le code existant
+- **Réutilisation maximale** : Une fonction = un endroit, réutilisée partout
+
+#### 🏗️ Architecture & Design Patterns
+- **Patrons de conception obligatoires** : Strategy, Factory, Observer, Singleton selon le contexte
+- **Clean Code strictement appliqué** : Fonctions courtes, noms explicites, responsabilité unique
+- **Docstrings complètes** : Paramètres, retours, exceptions, exemples en français
+- **Orienté objet** quand pertinent : Encapsulation, héritage, polymorphisme maîtrisés
+
+#### 🌐 Communication & Documentation
+- **Documentation française exclusive** : Commentaires, docstrings, messages d'erreur en français
+- **Variables/méthodes explicites** : Noms auto-documentés en français ou anglais technique
+- **Exemples concrets** : Cas d'usage réels dans la documentation
+
+#### 🔒 Autonomie & Sécurité Absolue
+- **Projet modulaire autonome** : Fonctionne sans dépendances externes
+- **AUCUNE fuite de données** : Pas de télémétrie, tracking, analytics
+- **AUCUNE donnée réseau** durant l'exécution (sauf téléchargement modèles IA/LLM locaux)
+- **Mode offline complet** : Application fonctionnelle sans internet
+
+#### 🚫 Interdictions Absolues
+- **Hardcodage interdit** : Aucune valeur codée en dur
+- **Données simulées interdites** : Données réelles ou configurables uniquement
+- **APIs externes interdites** : Pas d'appels réseau pendant l'exécution
+- **CDN/Services externes interdits** : Assets et fonctionnalités locales uniquement
+
+#### ✅ Validation Obligatoire
+- **Tests automatisés** : Couverture minimale 80% logique métier
+- **Architecture extensible** : Nouveaux modules sans impact sur l'existant
+- **Configuration externalisée** : Variables d'environnement pour tous les paramètres
+- **Documentation complète** : Chaque fonction publique documentée en français
+
+**CES RÈGLES SONT NON-NÉGOCIABLES ET DOIVENT ÊTRE RESPECTÉES À 100%**
 
 ---
 

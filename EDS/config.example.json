@@ -1,0 +1,13 @@
+{
+  "presentation_dir": "presentation_Golf",
+  "entry_html": "presentation_golf.html",
+  "asset_dirs": ["images", "flags", "musique"],
+  "data_files": [
+    "data_clean.csv",
+    "data_en_clean.csv",
+    "formulas.csv",
+    "variables.csv"
+  ],
+  "default_locale": "fr"
+}
+

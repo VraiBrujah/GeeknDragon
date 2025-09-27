@@ -75,6 +75,45 @@ if (is_string($gaMeasurementId)) {
   <?php endif; ?>
   <link rel="stylesheet" href="/css/snipcart.css?v=<?= filemtime(__DIR__.'/css/snipcart.css') ?>">
   <link rel="stylesheet" href="/css/snipcart-custom.css?v=<?= filemtime(__DIR__.'/css/snipcart-custom.css') ?>">
+
+  <!-- Système de Monitoring Local Geek & Dragon -->
+  <script src="/js/monitoring-system.js?v=<?= filemtime(__DIR__.'/js/monitoring-system.js') ?>"></script>
+  <script>
+    // Configuration du monitoring selon l'environnement
+    document.addEventListener('DOMContentLoaded', function() {
+      // Détecter l'environnement (développement vs production)
+      const isDevelopment = window.location.hostname === 'localhost' ||
+                           window.location.hostname.includes('127.0.0.1') ||
+                           window.location.search.includes('debug=1');
+
+      // Configuration adaptée à l'environnement
+      const configMonitoring = {
+        modeDebug: isDevelopment,
+        urlSynchronisation: '/api/monitoring/sync',
+        intervaleSynchronisation: isDevelopment ? 10000 : 30000, // 10s en dev, 30s en prod
+        metriquesActivees: {
+          performance: true,
+          erreurs: true,
+          interactions: true,
+          conversion: true,
+          technique: !isDevelopment // Désactiver les métriques techniques lourdes en dev
+        }
+      };
+
+      // Initialiser le monitoring
+      try {
+        initMonitoringGeekDragon(configMonitoring);
+
+        // Log de démarrage réussi
+        if (window.monitoringGD) {
+          window.monitoringGD.debug('✅ Système de monitoring Geek & Dragon initialisé');
+        }
+      } catch (error) {
+        console.error('❌ Erreur initialisation monitoring:', error);
+      }
+    });
+  </script>
+
   <?php if (!empty($extraHead)) echo $extraHead; ?>
 </head>
 
