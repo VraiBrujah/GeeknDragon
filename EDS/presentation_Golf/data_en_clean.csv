@@ -1,47 +1,47 @@
 section,key,value,color,gradient_color_1,gradient_color_2
 header,company_name,EDS QUEBEC,#1e40af
-header,company_tagline,Energy Development System,#059669
-header,company_subtitle,Quebec's Leading Lithium Solutions,#d1d5db
-header,company_address,"195, rue Brissette, local A7, Sainte-Agathe-des-Monts",#d1d5db
+header,company_tagline,Energy Development System,#BFF2EB
+header,company_subtitle,Quebec's Leading Lithium Solutions,##6795CF
+header,company_address,"195, rue Brissette, local A7, Sainte-Agathe-des-Monts",##6795CF
 header,company_phone,+1 (819) 323-7859,#1e40af
 header,company_email,contact@edsquebec.com,#1e40af
 
 hero,main_title,TRANSFORM YOUR GOLF COURSE WITH LITHIUM TECHNOLOGY,#1e40af
-hero,subtitle,LiFePO₄ Lithium Kit 48V 105Ah - Designed and Made in Canada,#059669
+hero,subtitle,LiFePO₄ Lithium Kit 48V 105Ah - Designed and Made in Canada,#BFF2EB
 hero,hero_image,images/golf_cart_sunset.jpg
 
-problem,title,YOUR CURRENT CHALLENGE: LEAD BATTERY LIMITATIONS,#dc2626
+problem,title,YOUR CURRENT CHALLENGE: LEAD BATTERY LIMITATIONS,#FF0000
 problem,background_gradient,,#2d1b69,#1e1b4b
 problem,background_color,#1e1b4b,#1e1b4b
-problem,performance_issue,Power loss at end of charge - critical impact on operations,#dc2626
+problem,performance_issue,Power loss at end of charge - critical impact on operations,#BFF2EB
 problem,autonomy_new,6-8 hours (new battery),#d97706
-problem,autonomy_degraded,3-4 hours (after 5 years degradation),#dc2626
-problem,autonomy_loss,50% autonomy loss over 5 years,#dc2626
+problem,autonomy_degraded,3-4 hours (after 5 years degradation),#BFF2EB
+problem,autonomy_loss,50% autonomy loss over 5 years,#BFF2EB
 problem,charging_time,8-10 hours,#d97706
 problem,weight,300+ kg,#991b1b
-problem,extra_consumption,25% higher,#dc2626
+problem,extra_consumption,25% higher,#BFF2EB
 problem,environmental_risk,Toxic lead handling,#0891b2
-problem,safety_concerns,Dangerous acid leaks,#dc2626
+problem,safety_concerns,Dangerous acid leaks,#BFF2EB
 
 # Explanatory subsections for hidden costs
-problem_details,section_1_title,💸 Explosive Replacement Costs,#dc2626
-problem_details,section_1_subtitle,Why lead batteries cost so much,#d1d5db
-problem_details,section_1_point_1,Frequent replacement every 2-5 years,#dc2626
-problem_details,section_1_point_2,{{lead_cost_replacement_unit}}$ per cart at each replacement,#dc2626
-problem_details,section_1_point_3,4 replacements needed over 10 years (4-year cycle),#dc2626
-problem_details,section_1_point_4,Including 1 free warranty replacement + 20% premature failure risk,#d1d5db
-problem_details,section_1_calculation,{{lead_replacement_calculation_10y}},#dc2626
+problem_details,section_1_title,💸 Explosive Replacement Costs,#002766
+problem_details,section_1_subtitle,Why lead batteries cost so much,#6795CF
+problem_details,section_1_point_1,Frequent replacement every 2-5 years,#BFF2EB
+problem_details,section_1_point_2,{{lead_cost_replacement_unit}}$ per cart at each replacement,#BFF2EB
+problem_details,section_1_point_3,4 replacements needed over 10 years (4-year cycle),#BFF2EB
+problem_details,section_1_point_4,Including 1 free warranty replacement + 20% premature failure risk,##6795CF
+problem_details,section_1_calculation,{{lead_replacement_calculation_10y}},#BFF2EB
 
 problem_details,section_2_title,⚙️ Specialized Expensive Maintenance,#d97706
-problem_details,section_2_subtitle,Hidden costs of constant upkeep,#d1d5db
+problem_details,section_2_subtitle,Hidden costs of constant upkeep,#6795CF
 problem_details,section_2_point_1,12 hours of mandatory maintenance per year,#d97706
 problem_details,section_2_point_2,Specialized technician at {{lead_technician_hourly_rate}}$ per hour,#d97706
 problem_details,section_2_point_3,Weekly distilled water verification,#d97706
 problem_details,section_2_point_4,Terminal cleaning and inspection,#d97706
-problem_details,section_2_calculation,{{lead_maintenance_calculation_10y}},#d97706
+problem_details,section_2_calculation,{{lead_maintenance_calculation_10y}},#F54005
 
 problem_details,section_3_title,🚨 Operational Risks and Losses,#7c3aed
-problem_details,section_3_subtitle,Costs nobody tells you about,#d1d5db
+problem_details,section_3_subtitle,Costs nobody tells you about,##6795CF
 problem_details,section_3_point_1,Mid-course breakdowns = customer refunds,#7c3aed
 problem_details,section_3_point_2,25% electrical overconsumption,#7c3aed
 problem_details,section_3_point_3,Increased insurance for hazardous materials,#7c3aed
@@ -56,20 +56,20 @@ problem_details,section_4_point_3,Over {{total_cost_simplified_10y}}$ per cart a
 problem_details,section_4_point_4,Vs EDS lithium: predictable monthly fixed cost,#059669
 problem_details,section_4_calculation,{{total_cost_final_calculation_10y}},#991b1b
 
-solution,title,OUR REVOLUTIONARY SOLUTION,#059669
+solution,title,OUR REVOLUTIONARY SOLUTION,#014278
 solution,product_name,LiFePO₄ Lithium Kit 48V 105Ah,#1e40af
-solution,autonomy,Consistent performance up to 95% discharge,#059669
-solution,autonomy_hours,10-12 hours constant usage,#059669
-solution,autonomy_degraded,No degradation over 15+ years,#059669
-solution,cycles,Over 8 000 cycles,#059669
-solution,lifespan,15-20 years,#059669
-solution,charge_time,2 hours,#059669
-solution,maintenance,Zero maintenance required,#059669
-solution,weight,40 kg,#059669
+solution,autonomy,Consistent performance up to 95% discharge,#BFF2EB
+solution,autonomy_hours,10-12 hours constant usage,#BFF2EB
+solution,autonomy_degraded,No degradation over 15+ years,#BFF2EB
+solution,cycles,Over 8 000 cycles,#BFF2EB
+solution,lifespan,15-20 years,#BFF2EB
+solution,charge_time,2 hours,#BFF2EB
+solution,maintenance,Zero maintenance required,#BFF2EB
+solution,weight,40 kg,#BFF2EB
 solution,chemistry,LiFePO₄ Grade A+,#1e40af
 solution,voltage,51.2 V,#1e40af
 solution,capacity,105 Ah,#1e40af
-solution,efficiency,> 96%,#059669
+solution,efficiency,> 96%,#BFF2EB
 
 pricing,contract_10_title,10-YEAR CONTRACT - PREMIUM SOLUTION,#1e40af
 pricing,contract_20_title,20-YEAR CONTRACT - OPTIMIZED SOLUTION,#1e40af
@@ -95,11 +95,11 @@ benefits,benefit_6,Eco-friendly and sustainable technology,#059669
 
 testimonial,quote,"Since installing EDS Quebec batteries, we have eliminated 95% of our golf cart problems. Our golfers are delighted and our maintenance team can finally focus on the course!",#ffffff
 testimonial,author,Jean-Michel RIBERA,#1e40af
-testimonial,title,General Manager,#d1d5db
-testimonial,company,Tina Golf, New Caledonia,#d1d5db
+testimonial,title,General Manager,##6795CF
+testimonial,company,Tina Golf, New Caledonia,##6795CF
 
 contact,specialist_name,Jean-Marc Bucher,#1e40af
-contact,specialist_title,Golf Solutions Specialist - EDS Quebec,#d1d5db
+contact,specialist_title,Golf Solutions Specialist - EDS Quebec,##6795CF
 contact,specialist_phone,+1 (819) 323-7859,#1e40af
 contact,specialist_email,commande@edsquebec.com,#1e40af
 contact,website,www.edsquebec.com,#1e40af
@@ -199,11 +199,11 @@ backgrounds,pricing_card_fleet,rgba(124, 58, 237, 0.05)
 
 # Interface fixed texts
 ui,hero_image_alt,Modern golf cart,
-ui,problem_card_1_title,Explosive Hidden Costs,#dc2626
-ui,problem_card_1_suffix,+ premature failure risks,#d1d5db
+ui,problem_card_1_title,Explosive Hidden Costs,#BFF2EB
+ui,problem_card_1_suffix,+ premature failure risks,##6795CF
 ui,problem_card_1_total_prefix,Real total cost:,#ffffff
 ui,problem_card_2_title,Specialized Expensive Maintenance,#d97706
-ui,problem_card_2_suffix,,#d1d5db
+ui,problem_card_2_suffix,,##6795CF
 ui,problem_card_2_cost_prefix,Total annual cost:,#ffffff
 ui,problem_card_3_title,Charging Time & Fleet Impact,#7c3aed
 ui,problem_card_3_charging_prefix,8-10h charge = +40% carts required:,#7c3aed
@@ -212,36 +212,36 @@ ui,problem_card_4_weight_prefix,Over,#991b1b
 ui,problem_card_4_consumption_prefix,25% overconsumption,#991b1b
 ui,problem_card_5_title,Hazardous Materials,#0891b2
 ui,problem_card_5_training,Recycling {{recycling_disposal_cost}}$/unit + increased insurance,#0891b2
-ui,problem_card_6_title,Breakdowns & Refunds,#dc2626
-ui,problem_card_6_risks,{{revenue_loss_yearly}}$/year revenue losses from clients,#dc2626
+ui,problem_card_6_title,Breakdowns & Refunds,#BFF2EB
+ui,problem_card_6_risks,{{revenue_loss_yearly}}$/year revenue losses from clients,#BFF2EB
 
-ui,solution_card_1_title,Reliable Autonomy,#059669
-ui,solution_card_2_title,Exceptional Lifespan,#059669
-ui,solution_card_2_lifespan_separator,- Lifespan:,#d1d5db
-ui,solution_card_3_title,Fast Charging,#059669
-ui,solution_card_3_charge_prefix,Full charge in,#d1d5db
-ui,solution_card_4_title,Reduced Weight,#059669
-ui,solution_card_4_weight_prefix,Only,#d1d5db
+ui,solution_card_1_title,Reliable Autonomy,#BFF2EB
+ui,solution_card_2_title,Exceptional Lifespan,#BFF2EB
+ui,solution_card_2_lifespan_separator,- Lifespan:,##6795CF
+ui,solution_card_3_title,Fast Charging,#BFF2EB
+ui,solution_card_3_charge_prefix,Full charge in,##6795CF
+ui,solution_card_4_title,Reduced Weight,#BFF2EB
+ui,solution_card_4_weight_prefix,Only,##6795CF
 
 ui,comparison_title,Technology Comparison,#1e40af
 ui,comparison_criterion,Criterion,#ffffff
 ui,comparison_lead_batteries,Lead Batteries (Current),#dc2626
-ui,comparison_eds_solution,EDS Lithium Solution,#059669
+ui,comparison_eds_solution,EDS Lithium Solution,#000208
 ui,comparison_cost_10_years,20-year cost,#ffffff
 ui,comparison_replacements,Replacements,#ffffff
 ui,comparison_maintenance,Maintenance,#ffffff
 ui,comparison_charging_time,Charging time,#ffffff
 
 ui,pricing_title,Our Exclusive Offers,#1e40af
-ui,pricing_monthly_suffix,per cart / month,#d1d5db
-ui,pricing_total_suffix,/ month,#d1d5db
-ui,pricing_savings_prefix,Savings:,#059669
-ui,pricing_savings_10_suffix,over 10 years,#d1d5db
-ui,pricing_savings_20_prefix,MASSIVE Savings:,#059669
-ui,pricing_savings_20_suffix,over 20 years,#d1d5db
-ui,pricing_savings_fleet_prefix,PREMIUM Savings:,#059669
-ui,pricing_savings_fleet_suffix,over 20 years,#d1d5db
-ui,fleet_minimum_text,Minimum 30 carts,#d1d5db
+ui,pricing_monthly_suffix,per cart / month,##6795CF
+ui,pricing_total_suffix,/ month,##6795CF
+ui,pricing_savings_prefix,Savings:,#BFF2EB
+ui,pricing_savings_10_suffix,over 10 years,##6795CF
+ui,pricing_savings_20_prefix,MASSIVE Savings:,#BFF2EB
+ui,pricing_savings_20_suffix,over 20 years,##6795CF
+ui,pricing_savings_fleet_prefix,PREMIUM Savings:,#BFF2EB
+ui,pricing_savings_fleet_suffix,over 20 years,##6795CF
+ui,fleet_minimum_text,Minimum 30 carts,##6795CF
 
 ui,benefits_title,Why Choose EDS Quebec?,#1e40af
 ui,benefits_reliability,Reliability,#1e40af
@@ -252,7 +252,7 @@ ui,benefits_partnership,Partnership,#1e40af
 ui,benefits_ecology,Ecology,#1e40af
 
 ui,contact_title,Contact Our Specialist,#1e40af
-ui,contact_subtitle,Schedule your free demonstration today!,#d1d5db
+ui,contact_subtitle,Schedule your free demonstration today!,##6795CF
 ui,contact_phone_label,Phone,#ffffff
 ui,contact_email_label,Email,#ffffff
 ui,contact_website_label,Website,#ffffff
