@@ -11,12 +11,15 @@ hero,subtitle,Kit Lithium LiFePO₄ 48V 105Ah - Conçu et Fabriqué au Canada
 hero,hero_image,images/golf_cart_sunset.jpg
 
 problem,title,VOTRE DÉFI ACTUEL : LES LIMITES DES BATTERIES PLOMB
-problem,cost_replacement,2 000 $ par batterie tous les 2-5 ans
-problem,cost_10_years,80 000 $ d'achat
-problem,maintenance_hours,120 heures de maintenance annuelle
-problem,maintenance_cost,3 600 $/an
-problem,maintenance_10_years,36 000 $
+problem,cost_replacement_unit,200
+problem,cost_10_years_unit,8000
+problem,maintenance_hours_unit,12
+problem,maintenance_cost_unit,360
+problem,maintenance_10_years_unit,3600
 problem,performance_issue,Perte de puissance en fin de charge
+problem,autonomy_new,6-8 heures (batterie neuve)
+problem,autonomy_degraded,3-4 heures (après 5 ans de dégradation)
+problem,autonomy_loss,50% de perte d'autonomie sur 5 ans
 problem,charging_time,8-10 heures
 problem,weight,300+ kg
 problem,extra_consumption,25% supérieure
@@ -26,6 +29,8 @@ problem,safety_concerns,Fuites d'acide dangereuses
 solution,title,NOTRE SOLUTION RÉVOLUTIONNAIRE
 solution,product_name,Kit Lithium LiFePO₄ 48V 105Ah
 solution,autonomy,Performance constante jusqu'à 95% de décharge
+solution,autonomy_hours,10-12 heures d'utilisation constante
+solution,autonomy_degraded,Aucune dégradation sur 15+ ans
 solution,cycles,Plus de 8 000 cycles
 solution,lifespan,15-20 ans
 solution,charge_time,2 heures
@@ -37,19 +42,25 @@ solution,capacity,105 Ah
 solution,efficiency,> 96%
 
 pricing,contract_10_title,CONTRAT 10 ANS - SOLUTION PREMIUM
-pricing,contract_10_monthly,97,64 $
-pricing,contract_10_total,117 168 $
-pricing,savings_10_years,24 232 $
+pricing,contract_10_monthly_unit,97.64
+pricing,contract_10_total_unit,11716.8
+pricing,savings_10_years_unit,2423.2
 
 pricing,contract_20_title,CONTRAT 20 ANS - SOLUTION OPTIMISÉE
-pricing,contract_20_monthly,76,84 $
-pricing,contract_20_total,184 416 $
-pricing,savings_20_years,95 584 $
+pricing,contract_20_monthly_unit,84.36
+pricing,contract_20_total_unit,20246.4
+pricing,savings_20_years_unit,9558.4
 
-comparison,lead_batteries_10_years,141 400 $
-comparison,lead_batteries_20_years,280 000 $
+pricing,contract_20_fleet_title,CONTRAT 20 ANS - FLOTTE 30+ VOITURETTES
+pricing,contract_20_fleet_monthly_unit,76.73
+pricing,contract_20_fleet_total_unit,18415.2
+pricing,contract_20_fleet_savings_unit,9558.4
+pricing,contract_20_fleet_minimum,30
+
+comparison,lead_batteries_10_years_unit,14140
+comparison,lead_batteries_20_years_unit,28000
 comparison,lead_replacements,4 remplacements sur 10 ans
-comparison,lead_maintenance,120 heures/an
+comparison,lead_maintenance,12 heures/an
 comparison,lead_charging,8-10 heures
 comparison,lithium_replacements,0 remplacement
 comparison,lithium_maintenance,0 heure
@@ -63,14 +74,14 @@ benefits,benefit_5,Partenaire technique dédié sur toute la durée
 benefits,benefit_6,Technologie écologique et durable
 
 testimonial,quote,"Depuis l'installation des batteries EDS Québec, nous avons éliminé 95% de nos problèmes de voiturettes. Nos golfeurs sont ravis et notre équipe d'entretien peut enfin se concentrer sur le parcours !"
-testimonial,author,Jean-François Lavoie
+testimonial,author,Jean-Michel RIBERA
 testimonial,title,Directeur Général
-testimonial,company,Golf Le Mirage, Mont-Tremblant
+testimonial,company,Tina Golf, Nouvelle-Calédonie
 
-contact,specialist_name,Marie-Claude Dubois
+contact,specialist_name,Jean-Marc Bucher
 contact,specialist_title,Spécialiste Solutions Golf - EDS Québec
 contact,specialist_phone,+1 (819) 323-7859
-contact,specialist_email,marie-claude.dubois@edsquebec.com
+contact,specialist_email,commande@edsquebec.com
 contact,website,www.edsquebec.com
 
 # Textes fixes de l'interface
@@ -110,10 +121,14 @@ ui,comparison_charging_time,Temps de recharge
 
 ui,pricing_title,Nos Offres Exclusives
 ui,pricing_monthly_suffix,par voiturette / mois
+ui,pricing_total_suffix,/ mois
 ui,pricing_savings_prefix,Économie :
 ui,pricing_savings_10_suffix,sur 10 ans
 ui,pricing_savings_20_prefix,Économie MASSIVE :
 ui,pricing_savings_20_suffix,sur 20 ans
+ui,pricing_savings_fleet_prefix,Économie PREMIUM :
+ui,pricing_savings_fleet_suffix,sur 20 ans
+ui,fleet_minimum_text,Minimum 30 voiturettes
 
 ui,benefits_title,Pourquoi Choisir EDS Québec ?
 ui,benefits_reliability,Fiabilité
@@ -128,6 +143,11 @@ ui,contact_subtitle,Planifiez votre démonstration gratuite dès aujourd'hui !
 ui,contact_phone_label,Téléphone
 ui,contact_email_label,Email
 ui,contact_website_label,Site Web
+
+ui,cart_calculator_title,Calculateur de Flotte
+ui,cart_calculator_subtitle,Ajustez le nombre de voiturettes pour voir vos économies
+ui,cart_count_label,Nombre de voiturettes :
+ui,cart_unit_suffix,voiturette(s)
 
 images,hero_golf_cart,images/golf_cart_sunset.jpg
 images,battery_pack,images/battery_pack.jpg

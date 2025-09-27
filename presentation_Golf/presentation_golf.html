@@ -228,6 +228,93 @@
             font-size: 1.3rem;
         }
 
+        /* Cart Calculator Section */
+        .cart-calculator-section {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 60px 0;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .cart-calculator-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .cart-calculator-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .cart-slider-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .cart-count-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .cart-slider {
+            width: 300px;
+            height: 8px;
+            border-radius: 5px;
+            background: rgba(255,255,255,0.3);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .cart-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .cart-slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .cart-value-display {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            min-width: 150px;
+        }
+
+        @media (max-width: 768px) {
+            .cart-slider-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .cart-slider {
+                width: 250px;
+            }
+        }
+
         /* Pricing Section */
         .pricing-section {
             background: var(--background-card);
@@ -247,8 +334,15 @@
 
         .pricing-cards {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        @media (max-width: 1024px) {
+            .pricing-cards {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
         }
 
         .pricing-card {
@@ -270,6 +364,26 @@
 
         .pricing-card.premium {
             background: linear-gradient(135deg, var(--secondary-green), var(--accent-light-green));
+        }
+
+        .pricing-card.fleet {
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            position: relative;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .pricing-card.fleet::before {
+            content: "💼 OFFRE FLOTTE";
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #7c3aed;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 700;
         }
 
         .pricing-card h3 {
@@ -533,6 +647,205 @@
             opacity: 0.9;
         }
 
+        /* Calculateur Flottant */
+        .floating-calculator {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 998;
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 15px;
+            padding: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            min-width: 250px;
+            transition: all 0.3s ease;
+        }
+
+        .floating-calculator h4 {
+            color: var(--primary-blue);
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .cart-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .cart-slider-floating {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .cart-slider-floating::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .cart-slider-floating::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        .cart-display {
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .pricing-preview {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            font-size: 11px;
+        }
+
+        .pricing-mini {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .pricing-mini .title {
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .pricing-mini .price {
+            color: white;
+            font-weight: 700;
+        }
+
+        .pricing-mini.fleet-inactive {
+            opacity: 0.5;
+        }
+
+        .pricing-mini.disabled {
+            opacity: 0.4;
+            background: rgba(107, 114, 128, 0.2);
+        }
+
+        .pricing-mini.disabled .title {
+            color: #6b7280;
+        }
+
+        .pricing-mini.disabled .price {
+            color: #9ca3af;
+        }
+
+        /* Audio Controller */
+        .audio-controller {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            padding: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .volume-control {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+            pointer-events: none;
+        }
+
+        .audio-controller:hover .volume-control {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+
+        .volume-slider {
+            width: 80px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            outline: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        .play-pause-btn {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .play-pause-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .track-info {
+            margin-top: 8px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            max-width: 100px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-weight: 500;
+        }
+
         /* Modal */
         .modal {
             display: none;
@@ -684,6 +997,70 @@
                 transform: translateY(0);
             }
         }
+
+        /* Autonomy Comparison Styles */
+        .autonomy-comparison {
+            margin-top: 15px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.05));
+            border-radius: 12px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .autonomy-row {
+            display: grid;
+            grid-template-columns: 40px 1fr auto;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .autonomy-row:last-of-type {
+            border-bottom: none;
+            margin-bottom: 10px;
+        }
+
+        .autonomy-icon {
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .autonomy-label {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .autonomy-value {
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 4px 8px;
+            border-radius: 6px;
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .autonomy-row.lithium .autonomy-value {
+            background: var(--secondary-green);
+            color: white;
+        }
+
+        .autonomy-row.lead-new .autonomy-value,
+        .autonomy-row.lead-old .autonomy-value {
+            background: #dc2626;
+            color: white;
+        }
+
+        .autonomy-summary {
+            text-align: center;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -716,6 +1093,19 @@
                 </div>
                 <div class="hero-image">
                     <img id="hero-image" src="images/golf_cart_sunset.jpg" alt="Voiturette de golf moderne">
+                </div>
+            </div>
+        </section>
+
+        <!-- Cart Calculator Section -->
+        <section class="cart-calculator-section fade-in">
+            <h2 class="cart-calculator-title" id="cart-calculator-title">Chargement...</h2>
+            <p class="cart-calculator-subtitle" id="cart-calculator-subtitle">Chargement...</p>
+            <div class="cart-slider-container">
+                <label class="cart-count-label" id="cart-count-label">Chargement...</label>
+                <input type="range" min="1" max="100" value="10" class="cart-slider" id="cartSlider">
+                <div class="cart-value-display">
+                    <span id="cart-count">10</span> <span id="cart-unit-suffix">Chargement...</span>
                 </div>
             </div>
         </section>
@@ -765,6 +1155,26 @@
                     <div class="feature-card">
                         <h3 id="solution-card-1-title">Chargement...</h3>
                         <p id="autonomy">Chargement...</p>
+                        <div class="autonomy-comparison">
+                            <div class="autonomy-row lithium">
+                                <div class="autonomy-icon">🔋</div>
+                                <div class="autonomy-label">EDS Lithium</div>
+                                <div class="autonomy-value" id="autonomy-hours">Chargement...</div>
+                            </div>
+                            <div class="autonomy-row lead-new">
+                                <div class="autonomy-icon">⚡</div>
+                                <div class="autonomy-label">Plomb (neuf)</div>
+                                <div class="autonomy-value" id="autonomy-new">Chargement...</div>
+                            </div>
+                            <div class="autonomy-row lead-old">
+                                <div class="autonomy-icon">📉</div>
+                                <div class="autonomy-label">Plomb (5 ans)</div>
+                                <div class="autonomy-value" id="autonomy-degraded">Chargement...</div>
+                            </div>
+                            <div class="autonomy-summary">
+                                <span id="autonomy-loss">Chargement...</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="feature-card">
                         <h3 id="solution-card-2-title">Chargement...</h3>
@@ -829,7 +1239,7 @@
                 <div class="pricing-card" onclick="showPricingDetails('10')">
                     <h3 id="contract-10-title">Chargement...</h3>
                     <div class="price" id="contract-10-monthly">Chargement...</div>
-                    <div class="period" id="pricing-monthly-suffix">Chargement...</div>
+                    <div class="period" id="pricing-total-suffix">Chargement...</div>
                     <div class="savings">
                         <span id="pricing-savings-prefix">Chargement...</span> <strong id="savings-10-years">Chargement...</strong> <span id="pricing-savings-10-suffix">Chargement...</span>
                     </div>
@@ -837,9 +1247,20 @@
                 <div class="pricing-card premium" onclick="showPricingDetails('20')">
                     <h3 id="contract-20-title">Chargement...</h3>
                     <div class="price" id="contract-20-monthly">Chargement...</div>
-                    <div class="period" id="pricing-monthly-suffix-2">Chargement...</div>
+                    <div class="period" id="pricing-total-suffix-2">Chargement...</div>
                     <div class="savings">
                         <span id="pricing-savings-20-prefix">Chargement...</span> <strong id="savings-20-years">Chargement...</strong> <span id="pricing-savings-20-suffix">Chargement...</span>
+                    </div>
+                </div>
+                <div class="pricing-card fleet" onclick="showPricingDetails('fleet')">
+                    <h3 id="contract-20-fleet-title">Chargement...</h3>
+                    <div class="price" id="contract-20-fleet-monthly">Chargement...</div>
+                    <div class="period" id="pricing-total-suffix-3">Chargement...</div>
+                    <div class="savings">
+                        <span id="pricing-savings-fleet-prefix">Chargement...</span> <strong id="savings-20-fleet">Chargement...</strong> <span id="pricing-savings-fleet-suffix">Chargement...</span>
+                    </div>
+                    <div style="margin-top: 15px; font-size: 0.9rem; opacity: 0.9;">
+                        <span id="fleet-minimum-text">Minimum 30 voiturettes</span>
                     </div>
                 </div>
             </div>
@@ -915,6 +1336,43 @@
         </section>
     </main>
 
+    <!-- Calculateur Flottant -->
+    <div id="floatingCalculator" class="floating-calculator">
+        <h4 id="floating-calc-title">Calculateur de Flotte</h4>
+        <div class="cart-controls">
+            <input type="range" id="cartSliderFloating" min="1" max="100" value="10" class="cart-slider-floating">
+            <div class="cart-display">
+                <span id="cart-count-floating">10</span> <span id="cart-unit-floating">voiturettes</span>
+            </div>
+        </div>
+        <div class="pricing-preview">
+            <div class="pricing-mini">
+                <div class="title">10 ans</div>
+                <div class="price" id="price-10-floating">976 $</div>
+            </div>
+            <div class="pricing-mini">
+                <div class="title">20 ans</div>
+                <div class="price" id="price-20-floating">843 $</div>
+            </div>
+            <div class="pricing-mini" id="price-fleet-card">
+                <div class="title">Flotte</div>
+                <div class="price" id="price-fleet-floating">767 $</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contrôleur Audio -->
+    <div id="audioController" class="audio-controller">
+        <div id="volumeControl" class="volume-control">
+            <input type="range" id="volumeSlider" min="0" max="100" value="15" class="volume-slider">
+        </div>
+        <button id="playPauseBtn" class="play-pause-btn">
+            <span id="playIcon">▶</span>
+            <span id="pauseIcon" style="display: none;">⏸</span>
+        </button>
+        <div id="trackInfo" class="track-info">♪</div>
+    </div>
+
     <!-- Modal pour détails de prix -->
     <div id="pricingModal" class="modal">
         <div class="modal-content">
@@ -987,7 +1445,7 @@
                     }
                 }
 
-                console.log(`Données ${currentLanguage.toUpperCase()} chargées:`, data);
+                // Données chargées
                 updateContent();
 
             } catch (error) {
@@ -1055,11 +1513,17 @@
             // Solution
             safeUpdateElement('solution-title', data.solution?.title);
             safeUpdateElement('autonomy', data.solution?.autonomy);
+            safeUpdateElement('autonomy-hours', data.solution?.autonomy_hours);
             safeUpdateElement('cycles', data.solution?.cycles);
             safeUpdateElement('lifespan', data.solution?.lifespan);
             safeUpdateElement('charge-time', data.solution?.charge_time);
             safeUpdateElement('maintenance', data.solution?.maintenance);
             safeUpdateElement('weight', data.solution?.weight);
+
+            // Autonomy comparison data
+            safeUpdateElement('autonomy-new', data.problem?.autonomy_new);
+            safeUpdateElement('autonomy-degraded', data.problem?.autonomy_degraded);
+            safeUpdateElement('autonomy-loss', data.problem?.autonomy_loss);
 
             // Solution UI elements
             safeUpdateElement('solution-card-1-title', data.ui?.solution_card_1_title);
@@ -1090,18 +1554,18 @@
             // Pricing
             safeUpdateElement('pricing-title', data.ui?.pricing_title);
             safeUpdateElement('contract-10-title', data.pricing?.contract_10_title);
-            safeUpdateElement('contract-10-monthly', data.pricing?.contract_10_monthly);
-            safeUpdateElement('contract-10-total', data.pricing?.contract_10_total);
-            safeUpdateElement('savings-10-years', data.pricing?.savings_10_years);
             safeUpdateElement('contract-20-title', data.pricing?.contract_20_title);
-            safeUpdateElement('contract-20-monthly', data.pricing?.contract_20_monthly);
-            safeUpdateElement('savings-20-years', data.pricing?.savings_20_years);
-            safeUpdateElement('pricing-monthly-suffix', data.ui?.pricing_monthly_suffix);
-            safeUpdateElement('pricing-monthly-suffix-2', data.ui?.pricing_monthly_suffix);
+            safeUpdateElement('contract-20-fleet-title', data.pricing?.contract_20_fleet_title);
+            safeUpdateElement('pricing-total-suffix', data.ui?.pricing_total_suffix);
+            safeUpdateElement('pricing-total-suffix-2', data.ui?.pricing_total_suffix);
+            safeUpdateElement('pricing-total-suffix-3', data.ui?.pricing_total_suffix);
             safeUpdateElement('pricing-savings-prefix', data.ui?.pricing_savings_prefix);
             safeUpdateElement('pricing-savings-10-suffix', data.ui?.pricing_savings_10_suffix);
             safeUpdateElement('pricing-savings-20-prefix', data.ui?.pricing_savings_20_prefix);
             safeUpdateElement('pricing-savings-20-suffix', data.ui?.pricing_savings_20_suffix);
+            safeUpdateElement('pricing-savings-fleet-prefix', data.ui?.pricing_savings_fleet_prefix);
+            safeUpdateElement('pricing-savings-fleet-suffix', data.ui?.pricing_savings_fleet_suffix);
+            safeUpdateElement('fleet-minimum-text', data.ui?.fleet_minimum_text);
 
             // Benefits
             safeUpdateElement('benefits-title', data.ui?.benefits_title);
@@ -1136,7 +1600,17 @@
             safeUpdateElement('contact-email-label', data.ui?.contact_email_label);
             safeUpdateElement('contact-website-label', data.ui?.contact_website_label);
 
-            console.log('Contenu mis à jour avec succès');
+            // Cart Calculator
+            safeUpdateElement('cart-calculator-title', data.ui?.cart_calculator_title);
+            safeUpdateElement('cart-calculator-subtitle', data.ui?.cart_calculator_subtitle);
+            safeUpdateElement('cart-count-label', data.ui?.cart_count_label);
+            safeUpdateElement('cart-unit-suffix', data.ui?.cart_unit_suffix);
+
+            // Initialize cart calculation
+            updateCartCalculation();
+            updateFloatingCalculator();
+
+            // Contenu mis à jour
         }
 
         // Afficher les détails de prix dans une modal
@@ -1149,13 +1623,12 @@
                 modalTitle.textContent = data.pricing?.contract_10_title || 'Contrat 10 ans';
                 modalContent.innerHTML = `
                     <h3>Détails du Contrat 10 ans</h3>
-                    <p><strong>Tarif mensuel :</strong> ${data.pricing?.contract_10_monthly || ''} par voiturette</p>
-                    <p><strong>Coût total :</strong> ${data.pricing?.contract_10_total || ''}</p>
-                    <p><strong>Économies vs batteries plomb :</strong> ${data.pricing?.savings_10_years || ''}</p>
+                    <p><strong>Tarif mensuel :</strong> 97,64 $ par voiturette</p>
+                    <p><strong>Économies vs batteries plomb :</strong> Importantes sur 10 ans</p>
                     <br>
                     <h4>Ce qui est inclus :</h4>
                     <ul>
-                        <li>10 kits lithium LiFePO₄ 48V 105Ah complets</li>
+                        <li>Kits lithium LiFePO₄ 48V 105Ah complets</li>
                         <li>Installation professionnelle sur site</li>
                         <li>Monitoring proactif 24/7</li>
                         <li>Maintenance préventive et corrective</li>
@@ -1163,25 +1636,46 @@
                         <li>Support technique prioritaire</li>
                     </ul>
                 `;
-            } else {
+            } else if (contractType === '20') {
                 modalTitle.textContent = data.pricing?.contract_20_title || 'Contrat 20 ans';
                 modalContent.innerHTML = `
                     <h3>Détails du Contrat 20 ans - RECOMMANDÉ</h3>
-                    <p><strong>Tarif mensuel :</strong> ${data.pricing?.contract_20_monthly || ''} par voiturette</p>
-                    <p><strong>Coût total :</strong> ${data.pricing?.contract_20_total || ''}</p>
-                    <p><strong>Économies MASSIVES :</strong> ${data.pricing?.savings_20_years || ''}</p>
+                    <p><strong>Tarif mensuel :</strong> 84,36 $ par voiturette</p>
+                    <p><strong>Économies MASSIVES :</strong> Très importantes sur 20 ans</p>
                     <br>
                     <h4>Avantages exclusifs du contrat 20 ans :</h4>
                     <ul>
-                        <li><strong>Réduction de 25%</strong> pour engagement long terme</li>
+                        <li><strong>Réduction significative</strong> pour engagement long terme</li>
                         <li>Stabilité tarifaire garantie sur 2 décennies</li>
                         <li>Partenariat à long terme avec support prioritaire</li>
                         <li>Amortissement optimal de l'investissement</li>
                     </ul>
                     <br>
                     <div style="background: linear-gradient(135deg, #059669, #10b981); color: white; padding: 20px; border-radius: 10px; text-align: center;">
-                        <h4>💰 ROI Exceptionnel : 52% d'économies vs batteries plomb</h4>
-                        <p>Soit 13,11 $ d'économie par jour pour 10 voiturettes !</p>
+                        <h4>💰 ROI Exceptionnel vs batteries plomb</h4>
+                        <p>Économies substantielles garanties !</p>
+                    </div>
+                `;
+            } else if (contractType === 'fleet') {
+                modalTitle.textContent = data.pricing?.contract_20_fleet_title || 'Contrat Flotte 20 ans';
+                modalContent.innerHTML = `
+                    <h3>Détails du Contrat Flotte 20 ans - MEILLEUR PRIX</h3>
+                    <p><strong>Tarif mensuel :</strong> 76,73 $ par voiturette (minimum 30)</p>
+                    <p><strong>Économies PREMIUM :</strong> Maximales pour grandes flottes</p>
+                    <br>
+                    <h4>Avantages exclusifs de l'offre flotte :</h4>
+                    <ul>
+                        <li><strong>🏆 MEILLEUR PRIX</strong> pour flottes 30+ voiturettes</li>
+                        <li><strong>Réduction premium</strong> de 9% vs contrat standard</li>
+                        <li>Support dédié avec gestionnaire de compte</li>
+                        <li>Priorité absolue pour interventions</li>
+                        <li>Formation personnalisée de votre équipe</li>
+                        <li>Rapport de performance mensuel</li>
+                    </ul>
+                    <br>
+                    <div style="background: linear-gradient(135deg, #7c3aed, #a855f7); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                        <h4>🚀 ROI PREMIUM : Économies maximales</h4>
+                        <p>L'offre la plus avantageuse pour les grandes flottes !</p>
                     </div>
                 `;
             }
@@ -1202,10 +1696,498 @@
             }
         }
 
+        // Variables globales pour le calculateur
+        let currentCartCount = 10;
+
+        // Fonction pour formater les nombres avec espaces comme séparateurs de milliers
+        function formatNumber(num) {
+            return Math.round(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        }
+
+        // Fonction pour mettre à jour les calculs basés sur le nombre de voiturettes
+        function updateCartCalculation() {
+            if (!data.pricing || !data.problem || !data.comparison) return;
+
+            const currency = ' $';
+
+            // SECTION PROBLÈMES - Calculs dynamiques
+            const costReplacement = parseFloat(data.problem.cost_replacement_unit) * currentCartCount;
+            const cost10Years = parseFloat(data.problem.cost_10_years_unit) * currentCartCount;
+            const maintenanceHours = parseFloat(data.problem.maintenance_hours_unit) * currentCartCount;
+            const maintenanceCost = parseFloat(data.problem.maintenance_cost_unit) * currentCartCount;
+            const maintenance10Years = parseFloat(data.problem.maintenance_10_years_unit) * currentCartCount;
+
+            safeUpdateElement('cost-replacement', formatNumber(costReplacement) + currency);
+            safeUpdateElement('cost-10-years', formatNumber(cost10Years) + currency);
+            safeUpdateElement('maintenance-hours', maintenanceHours + ' heures');
+            safeUpdateElement('maintenance-cost', formatNumber(maintenanceCost) + currency);
+
+            // SECTION TARIFICATION - Calculs dynamiques
+            const monthly10 = parseFloat(data.pricing.contract_10_monthly_unit) * currentCartCount;
+            const savings10 = parseFloat(data.pricing.savings_10_years_unit) * currentCartCount;
+
+            const monthly20 = parseFloat(data.pricing.contract_20_monthly_unit) * currentCartCount;
+            const savings20 = parseFloat(data.pricing.savings_20_years_unit) * currentCartCount;
+
+            // Calcul pour l'offre flotte (même prix que 20 ans mais avantages premium pour 30+)
+            const monthlyFleet = parseFloat(data.pricing.contract_20_fleet_monthly_unit) * currentCartCount;
+            const savingsFleet = parseFloat(data.pricing.contract_20_fleet_savings_unit) * currentCartCount;
+
+            safeUpdateElement('contract-10-monthly', formatNumber(monthly10) + currency);
+            safeUpdateElement('savings-10-years', formatNumber(savings10) + currency);
+            safeUpdateElement('contract-20-monthly', formatNumber(monthly20) + currency);
+            safeUpdateElement('savings-20-years', formatNumber(savings20) + currency);
+            safeUpdateElement('contract-20-fleet-monthly', formatNumber(monthlyFleet) + currency);
+            safeUpdateElement('savings-20-fleet', formatNumber(savingsFleet) + currency);
+
+            // Gestion de l'affichage de l'offre flotte (30+ voiturettes)
+            const fleetCard = document.querySelector('.pricing-card.fleet');
+            const premiumCard = document.querySelector('.pricing-card.premium');
+            const fleetMinimumElement = document.getElementById('fleet-minimum-text');
+
+            if (currentCartCount >= 30) {
+                // Activer l'offre flotte
+                if (fleetCard) {
+                    fleetCard.style.opacity = '1';
+                    fleetCard.style.transform = 'scale(1)';
+                }
+
+                // Désactiver l'offre 20 ans (solution optimisée)
+                if (premiumCard) {
+                    premiumCard.style.opacity = '0.6';
+                    premiumCard.style.transform = 'scale(0.95)';
+                    premiumCard.style.filter = 'grayscale(0.3)';
+                }
+
+                if (fleetMinimumElement) {
+                    fleetMinimumElement.style.color = '#10b981';
+                    fleetMinimumElement.style.background = 'rgba(16, 185, 129, 0.2)';
+                    fleetMinimumElement.style.padding = '5px 10px';
+                    fleetMinimumElement.style.borderRadius = '8px';
+                    fleetMinimumElement.innerHTML = '✅ Offre flotte activée !';
+                }
+            } else {
+                // Désactiver l'offre flotte
+                if (fleetCard) {
+                    fleetCard.style.opacity = '0.7';
+                    fleetCard.style.transform = 'scale(0.95)';
+                }
+
+                // Réactiver l'offre 20 ans
+                if (premiumCard) {
+                    premiumCard.style.opacity = '1';
+                    premiumCard.style.transform = 'scale(1)';
+                    premiumCard.style.filter = 'none';
+                }
+
+                if (fleetMinimumElement) {
+                    fleetMinimumElement.style.color = '#ffffff';
+                    fleetMinimumElement.style.background = 'rgba(220, 38, 38, 0.8)';
+                    fleetMinimumElement.style.padding = '5px 10px';
+                    fleetMinimumElement.style.borderRadius = '8px';
+                    fleetMinimumElement.innerHTML = `❌ Minimum 30 voiturettes (actuellement: ${currentCartCount})`;
+                }
+            }
+
+            // SECTION COMPARAISON - Calculs dynamiques
+            const leadBatteries10 = parseFloat(data.comparison.lead_batteries_10_years_unit) * currentCartCount;
+            const leadBatteries20 = parseFloat(data.comparison.lead_batteries_20_years_unit) * currentCartCount;
+
+            safeUpdateElement('lead-batteries-10-years', formatNumber(leadBatteries10) + currency);
+
+            // Mettre à jour les heures de maintenance dans la comparaison
+            const leadMaintenanceHours = parseFloat(data.problem.maintenance_hours_unit) * currentCartCount;
+            safeUpdateElement('lead-maintenance', leadMaintenanceHours + (currentLanguage === 'fr' ? ' heures/an' : ' hours/year'));
+
+            // Mettre à jour l'affichage du nombre de voiturettes
+            safeUpdateElement('cart-count', currentCartCount.toString());
+
+            // Calculs mis à jour
+        }
+
+        // Event listener pour le slider
+        function setupCartSlider() {
+            const slider = document.getElementById('cartSlider');
+            if (slider) {
+                slider.addEventListener('input', function() {
+                    currentCartCount = parseInt(this.value);
+                    updateCartCalculation();
+                    updateFloatingCalculator();
+                });
+            }
+        }
+
+        // Setup du calculateur flottant
+        function setupFloatingCalculator() {
+            const floatingSlider = document.getElementById('cartSliderFloating');
+            if (floatingSlider) {
+                floatingSlider.addEventListener('input', function() {
+                    currentCartCount = parseInt(this.value);
+
+                    // Synchroniser avec le slider principal
+                    const mainSlider = document.getElementById('cartSlider');
+                    if (mainSlider) {
+                        mainSlider.value = currentCartCount;
+                    }
+
+                    updateCartCalculation();
+                    updateFloatingCalculator();
+                });
+            }
+        }
+
+        // Mettre à jour le calculateur flottant
+        function updateFloatingCalculator() {
+            if (!data.pricing) return;
+
+            const currency = ' $';
+
+            // Calculs
+            const monthly10 = parseFloat(data.pricing.contract_10_monthly_unit) * currentCartCount;
+            const monthly20 = parseFloat(data.pricing.contract_20_monthly_unit) * currentCartCount;
+            const monthlyFleet = parseFloat(data.pricing.contract_20_fleet_monthly_unit) * currentCartCount;
+
+            // Mise à jour des affichages
+            safeUpdateElement('cart-count-floating', currentCartCount.toString());
+            safeUpdateElement('price-10-floating', formatNumber(monthly10) + currency);
+            safeUpdateElement('price-20-floating', formatNumber(monthly20) + currency);
+            safeUpdateElement('price-fleet-floating', formatNumber(monthlyFleet) + currency);
+
+            // Synchroniser le slider flottant
+            const floatingSlider = document.getElementById('cartSliderFloating');
+            if (floatingSlider) {
+                floatingSlider.value = currentCartCount;
+            }
+
+            // Gestion visuelle de l'offre flotte dans le calculateur flottant
+            const fleetCard = document.getElementById('price-fleet-card');
+            const premiumFloatingCard = document.querySelector('.floating-calculator .pricing-mini:nth-child(2)');
+
+            if (fleetCard) {
+                if (currentCartCount >= 30) {
+                    // Activer flotte, désactiver 20 ans
+                    fleetCard.classList.remove('fleet-inactive');
+                    fleetCard.classList.remove('disabled');
+                    fleetCard.title = 'Offre flotte activée !';
+
+                    if (premiumFloatingCard) {
+                        premiumFloatingCard.classList.add('disabled');
+                        premiumFloatingCard.title = 'Offre remplacée par la flotte';
+                    }
+                } else {
+                    // Désactiver flotte, réactiver 20 ans
+                    fleetCard.classList.add('fleet-inactive');
+                    fleetCard.classList.remove('disabled');
+                    fleetCard.title = `Minimum 30 voiturettes (actuellement: ${currentCartCount})`;
+
+                    if (premiumFloatingCard) {
+                        premiumFloatingCard.classList.remove('disabled');
+                        premiumFloatingCard.title = 'Contrat 20 ans - Solution optimisée';
+                    }
+                }
+            }
+
+            // Mettre à jour les textes selon la langue
+            if (data.ui) {
+                safeUpdateElement('cart-unit-floating', currentCartCount > 1 ?
+                    (currentLanguage === 'fr' ? 'voiturettes' : 'carts') :
+                    (currentLanguage === 'fr' ? 'voiturette' : 'cart'));
+
+                safeUpdateElement('floating-calc-title', data.ui.cart_calculator_title || 'Calculateur de Flotte');
+            }
+        }
+
+        // Système de lecteur audio
+        class AudioPlayer {
+            constructor() {
+                this.musicFolder = 'musique/';
+                this.tracks = [];
+                this.currentTrackIndex = 0;
+                this.currentAudio = null;
+                this.nextAudio = null;
+                this.isPlaying = false;
+                this.userInteracted = false;
+                this.volume = 0.15; // 15% par défaut
+
+                this.playBtn = document.getElementById('playPauseBtn');
+                this.playIcon = document.getElementById('playIcon');
+                this.pauseIcon = document.getElementById('pauseIcon');
+                this.volumeSlider = document.getElementById('volumeSlider');
+                this.trackInfo = document.getElementById('trackInfo');
+
+                this.init();
+            }
+
+            async init() {
+                // Charger la liste des musiques de façon non-bloquante
+                setTimeout(() => this.loadTrackList(), 100);
+
+                // Setup des contrôles
+                this.setupControls();
+
+                // Écouter les interactions utilisateur pour démarrer la musique
+                this.setupUserInteractionListener();
+            }
+
+            async loadTrackList() {
+                try {
+                    this.tracks = await this.scanMusicFolder();
+
+                    if (this.tracks.length > 0) {
+                        this.shuffleTracks();
+                        setTimeout(() => {
+                            this.updateTrackInfo();
+                        }, 100);
+                    } else {
+                        setTimeout(() => {
+                            if (this.trackInfo) {
+                                this.trackInfo.textContent = '♪';
+                            }
+                        }, 100);
+                    }
+                } catch (error) {
+                    if (this.trackInfo) {
+                        this.trackInfo.textContent = '♪';
+                    }
+                }
+            }
+
+            async scanMusicFolder() {
+                try {
+                    // Charger l'index JSON avec les vrais fichiers
+                    const indexResponse = await fetch(this.musicFolder + 'index.json');
+                    if (indexResponse.ok) {
+                        const indexData = await indexResponse.json();
+                        if (indexData.files && indexData.files.length > 0) {
+                            return indexData.files;
+                        }
+                    }
+
+                    // Scanner le listing HTML du serveur
+                    const response = await fetch(this.musicFolder);
+                    const html = await response.text();
+
+                    // Parser le HTML pour extraire les liens vers les fichiers .mp3
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const links = Array.from(doc.querySelectorAll('a[href]'));
+
+                    const mp3Files = links
+                        .map(link => link.getAttribute('href'))
+                        .filter(href => href && href.toLowerCase().endsWith('.mp3'))
+                        .map(href => {
+                            // Nettoyer le nom du fichier
+                            const decoded = decodeURIComponent(href);
+                            return decoded.split('/').pop();
+                        })
+                        .filter(filename => !filename.includes('..') && filename !== '' && filename.endsWith('.mp3'))
+                        .sort(); // Trier alphabétiquement
+
+                    return mp3Files;
+
+                } catch (error) {
+                    return []; // Retourner tableau vide si aucune méthode ne fonctionne
+                }
+            }
+
+
+            shuffleTracks() {
+                for (let i = this.tracks.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [this.tracks[i], this.tracks[j]] = [this.tracks[j], this.tracks[i]];
+                }
+                this.currentTrackIndex = 0;
+            }
+
+            setupUserInteractionListener() {
+                const startMusic = () => {
+                    if (!this.userInteracted && this.tracks.length > 0) {
+                        this.userInteracted = true;
+                        this.preloadCurrentAndNext();
+                        this.startPlayback();
+
+                        document.removeEventListener('click', startMusic, true);
+                        document.removeEventListener('keydown', startMusic, true);
+                        document.removeEventListener('touchstart', startMusic, true);
+                    }
+                };
+
+                document.addEventListener('click', startMusic, true);
+                document.addEventListener('keydown', startMusic, true);
+                document.addEventListener('touchstart', startMusic, true);
+            }
+
+            setupControls() {
+                this.playBtn.addEventListener('click', () => this.togglePlayPause());
+
+                this.volumeSlider.addEventListener('input', (e) => {
+                    this.volume = e.target.value / 100;
+                    if (this.currentAudio) {
+                        this.currentAudio.volume = this.volume;
+                    }
+                });
+            }
+
+            preloadCurrentAndNext() {
+                if (this.tracks.length === 0) return;
+
+                // Nettoyer les objets audio existants
+                this.cleanupAudio();
+
+                // Précharger la musique actuelle
+                this.loadTrack(this.currentTrackIndex, true);
+
+                // Précharger la suivante seulement s'il y a plus d'une piste
+                if (this.tracks.length > 1) {
+                    const nextIndex = (this.currentTrackIndex + 1) % this.tracks.length;
+                    setTimeout(() => this.loadTrack(nextIndex, false), 500);
+                }
+            }
+
+            cleanupAudio() {
+                // Nettoyer l'audio actuel
+                if (this.currentAudio) {
+                    this.currentAudio.pause();
+                    this.currentAudio.src = '';
+                    this.currentAudio.load();
+                    this.currentAudio = null;
+                }
+
+                // Nettoyer l'audio suivant
+                if (this.nextAudio) {
+                    this.nextAudio.src = '';
+                    this.nextAudio.load();
+                    this.nextAudio = null;
+                }
+            }
+
+            loadTrack(index, isCurrent = true) {
+                if (!this.tracks[index]) return null;
+
+                const audio = new Audio();
+                audio.src = this.musicFolder + this.tracks[index];
+                audio.volume = this.volume;
+                audio.preload = isCurrent ? 'auto' : 'metadata';
+
+                if (isCurrent) {
+                    this.currentAudio = audio;
+                    this.setupCurrentTrackEvents();
+                } else {
+                    this.nextAudio = audio;
+                }
+
+                return audio;
+            }
+
+            setupCurrentTrackEvents() {
+                if (!this.currentAudio) return;
+
+                this.currentAudio.addEventListener('ended', () => {
+                    this.nextTrack();
+                });
+
+                this.currentAudio.addEventListener('error', () => {
+                    // Erreur de chargement, passer au suivant
+                    this.nextTrack();
+                });
+
+                this.updateTrackInfo();
+            }
+
+            async startPlayback() {
+                if (!this.currentAudio || this.isPlaying) return;
+
+                try {
+                    await this.currentAudio.play();
+                    this.isPlaying = true;
+                    this.updatePlayButton();
+                } catch (error) {
+                    // Échec silencieux
+                }
+            }
+
+            async togglePlayPause() {
+                if (!this.userInteracted) {
+                    this.userInteracted = true;
+                    this.preloadCurrentAndNext();
+                }
+
+                if (!this.currentAudio) return;
+
+                if (this.isPlaying) {
+                    this.currentAudio.pause();
+                    this.isPlaying = false;
+                } else {
+                    try {
+                        await this.currentAudio.play();
+                        this.isPlaying = true;
+                    } catch (error) {
+                        // Échec silencieux
+                    }
+                }
+
+                this.updatePlayButton();
+            }
+
+            nextTrack() {
+                // Passer à la musique suivante
+                this.currentAudio = this.nextAudio;
+                this.currentTrackIndex = (this.currentTrackIndex + 1) % this.tracks.length;
+
+                // Mettre à jour l'affichage
+                this.updateTrackInfo();
+
+                // Précharger la nouvelle musique suivante
+                const nextIndex = (this.currentTrackIndex + 1) % this.tracks.length;
+                this.nextAudio = this.loadTrack(nextIndex, false);
+
+                this.setupCurrentTrackEvents();
+
+                if (this.isPlaying && this.currentAudio) {
+                    this.currentAudio.play().catch(() => {});
+                }
+            }
+
+            updatePlayButton() {
+                if (this.isPlaying) {
+                    this.playIcon.style.display = 'none';
+                    this.pauseIcon.style.display = 'inline';
+                } else {
+                    this.playIcon.style.display = 'inline';
+                    this.pauseIcon.style.display = 'none';
+                }
+            }
+
+            updateTrackInfo() {
+                // Toujours afficher juste le symbole musical
+                if (!this.trackInfo) {
+                    this.trackInfo = document.getElementById('trackInfo');
+                }
+
+                if (this.trackInfo) {
+                    this.trackInfo.textContent = '♪';
+                    this.trackInfo.title = 'Lecteur audio';
+                }
+            }
+        }
+
+        // Initialiser le lecteur audio
+        let audioPlayer;
+
         // Chargement automatique des données CSV au démarrage de la page
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Page chargée, initialisation du chargement CSV...');
+            // Page chargée, initialisation du chargement CSV
             loadDataFromCSV();
+
+            // Setup des sliders après un petit délai pour s'assurer que le DOM est prêt
+            setTimeout(() => {
+                setupCartSlider();
+                setupFloatingCalculator();
+                updateFloatingCalculator();
+            }, 100);
+
+            // Initialiser le lecteur audio
+            audioPlayer = new AudioPlayer();
         });
     </script>
 </body>
