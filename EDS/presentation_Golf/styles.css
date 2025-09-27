@@ -589,8 +589,7 @@ body {
 }
 
 .pricing-card {
-    background: linear-gradient(135deg, var(--primary-blue), var(--accent-light-blue));
-    color: white;
+    /* Couleurs gérées par le CSV via JavaScript */
     border-radius: 20px;
     padding: 40px;
     text-align: center;
@@ -606,11 +605,11 @@ body {
 }
 
 .pricing-card.premium {
-    background: linear-gradient(135deg, var(--secondary-green), var(--accent-light-green));
+    /* Couleurs gérées par le CSV via JavaScript */
 }
 
 .pricing-card.fleet {
-    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    /* Couleurs gérées par le CSV via JavaScript */
     position: relative;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
@@ -679,12 +678,11 @@ body {
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    background-color: var(--background-card) !important;
+    /* Couleurs gérées par le CSV via JavaScript */
 }
 
 .comparison-table th {
-    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
-    color: white;
+    /* Couleurs gérées par le CSV via JavaScript */
     padding: 20px;
     font-size: 1.1rem;
     font-weight: 600;
@@ -692,19 +690,17 @@ body {
 
 .comparison-table td {
     padding: 20px;
-    border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+    /* Couleurs gérées par le CSV via JavaScript */
     text-align: center;
     font-size: 1rem;
-    color: var(--text-dark) !important;
-    background-color: var(--background-card) !important;
 }
 
 .comparison-table tr:nth-child(even) td {
-    background-color: rgba(59, 130, 246, 0.1) !important;
+    /* Couleurs gérées par le CSV via JavaScript */
 }
 
 .comparison-table tr:nth-child(odd) td {
-    background-color: var(--background-card) !important;
+    /* Couleurs gérées par le CSV via JavaScript */
 }
 
 .comparison-table tr {
@@ -712,12 +708,12 @@ body {
 }
 
 .comparison-table .old-tech {
-    color: #dc2626;
+    /* Couleurs gérées par le CSV via JavaScript */
     font-weight: 600;
 }
 
 .comparison-table .new-tech {
-    color: var(--secondary-green);
+    /* Couleurs gérées par le CSV via JavaScript */
     font-weight: 600;
 }
 

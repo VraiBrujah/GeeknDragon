@@ -289,6 +289,10 @@ async function loadAllData() {
         applyColorsFromCSV();
         console.log('🎨 Couleurs appliquées depuis le CSV');
 
+        // Appliquer les arrière-plans depuis le CSV
+        applyBackgroundColors();
+        console.log('🎨 Arrière-plans appliqués depuis le CSV');
+
     } catch (error) {
         console.error('❌ Erreur lors du chargement:', error);
         console.error('Stack trace:', error.stack);
@@ -374,6 +378,110 @@ function applyColorsFromCSV() {
     styleElement.textContent = cssRules;
 
     console.log('Couleurs appliquées depuis le CSV:', cssRules);
+}
+
+// Fonction pour appliquer les arrière-plans des sections depuis les CSV
+function applyBackgroundColors() {
+    if (!data.backgrounds) return;
+
+    console.log('Application des arrière-plans depuis les CSV...');
+
+    // Mappage des clés CSV vers les IDs/sélecteurs HTML
+    const backgroundMapping = {
+        'hero_section': '.hero-section, #hero',
+        'problem_section': '.problem-section, #problem',
+        'vs_batteries_section': '.vs-batteries-section, #vs-batteries',
+        'solution_section': '.solution-section, #solution',
+        'pricing_section': '.pricing-section, #pricing',
+        'benefits_section': '.benefits-section, #benefits',
+        'testimonial_section': '.testimonial-section, #testimonial',
+        'contact_section': '.contact-section, #contact',
+        'calculator_section': '.calculator-section, #calculator',
+        'problem_details_section_1': '.problem-details-1, #problem-details-section-1',
+        'problem_details_section_2': '.problem-details-2, #problem-details-section-2',
+        'problem_details_section_3': '.problem-details-3, #problem-details-section-3',
+        'problem_details_section_4': '.problem-details-4, #problem-details-section-4',
+        'vs_lead_card': '.vs-lead-card, .lead-battery-card',
+        'vs_lifepo4_card': '.vs-lifepo4-card, .lifepo4-battery-card',
+        'comparison_table': '.comparison-table, #comparison',
+        'pricing_card_10': '.pricing-card-10',
+        'pricing_card_20': '.pricing-card-20',
+        'pricing_card_fleet': '.pricing-card-fleet'
+    };
+
+    // Créer ou mettre à jour l'élément style pour les arrière-plans
+    let bgStyleElement = document.getElementById('dynamic-backgrounds');
+    if (!bgStyleElement) {
+        bgStyleElement = document.createElement('style');
+        bgStyleElement.id = 'dynamic-backgrounds';
+        document.head.appendChild(bgStyleElement);
+    }
+
+    let cssRules = '';
+
+    // Appliquer chaque arrière-plan
+    Object.keys(backgroundMapping).forEach(bgKey => {
+        const color = data.backgrounds[bgKey];
+        const selectors = backgroundMapping[bgKey];
+
+        if (color && selectors) {
+            cssRules += `${selectors} { background-color: ${color} !important; }\n`;
+            console.log(`Arrière-plan appliqué: ${selectors} -> ${color}`);
+        }
+    });
+
+    // Ajouter les couleurs des tableaux
+    if (data.table_colors) {
+        cssRules += `
+        .comparison-table th {
+            background: ${data.table_colors.header_bg} !important;
+            color: ${data.table_colors.header_text} !important;
+        }
+        .comparison-table tbody tr:nth-child(odd) td {
+            background-color: ${data.table_colors.cell_bg_primary} !important;
+            color: ${data.table_colors.cell_text} !important;
+            border-bottom: 1px solid ${data.table_colors.cell_border} !important;
+        }
+        .comparison-table tbody tr:nth-child(even) td {
+            background-color: ${data.table_colors.cell_bg_secondary} !important;
+            color: ${data.table_colors.cell_text} !important;
+            border-bottom: 1px solid ${data.table_colors.cell_border} !important;
+        }
+        .comparison-table .old-tech { color: ${data.table_colors.old_tech} !important; }
+        .comparison-table .new-tech { color: ${data.table_colors.new_tech} !important; }
+        .comparison-title { color: ${data.table_colors.comparison_title} !important; }
+        `;
+    }
+
+    // Ajouter les couleurs des sections pricing
+    if (data.pricing_colors) {
+        cssRules += `
+        .pricing-section { background-color: ${data.pricing_colors.section_bg} !important; }
+        .pricing-card {
+            background: linear-gradient(135deg, #1e293b, #374151) !important;
+            color: ${data.pricing_colors.card_text} !important;
+            border: 2px solid rgba(59, 130, 246, 0.3) !important;
+        }
+        .pricing-card.premium {
+            background: linear-gradient(135deg, #065f46, #059669) !important;
+            color: ${data.pricing_colors.card_text} !important;
+            border: 2px solid rgba(5, 150, 105, 0.5) !important;
+        }
+        .pricing-card.fleet {
+            background: linear-gradient(135deg, #581c87, #7c3aed) !important;
+            color: ${data.pricing_colors.card_text} !important;
+            border: 2px solid rgba(124, 58, 237, 0.5) !important;
+        }
+        .pricing-card h3 { color: ${data.pricing_colors.card_title} !important; }
+        .pricing-card .price { color: ${data.pricing_colors.price_text} !important; }
+        .pricing-card .savings { color: ${data.pricing_colors.savings_text} !important; }
+        `;
+    }
+
+    // Appliquer le CSS
+    bgStyleElement.textContent = cssRules;
+
+    console.log('Arrière-plans et couleurs appliqués depuis les CSV');
 }
 
 // Fonction helper pour récupérer la couleur d'un élément depuis les données CSV
@@ -532,8 +640,8 @@ function populateProblemDetailsSections() {
     if (!data.problem_details) return;
 
     // Section 1 - Coûts de Remplacement Explosifs
-    safeUpdateElement('problem-details-section-1-title', data.problem_details?.section_1_title);
-    safeUpdateElement('problem-details-section-1-subtitle', data.problem_details?.section_1_subtitle);
+    safeUpdateElementWithColor('problem-details-section-1-title', 'problem_details', 'section_1_title', data.problem_details?.section_1_title);
+    safeUpdateElementWithColor('problem-details-section-1-subtitle', 'problem_details', 'section_1_subtitle', data.problem_details?.section_1_subtitle);
     safeUpdateElement('problem-details-section-1-point-1', data.problem_details?.section_1_point_1);
     safeUpdateElement('problem-details-section-1-point-2', replaceTemplates(data.problem_details?.section_1_point_2));
     safeUpdateElement('problem-details-section-1-point-3', replaceTemplates(data.problem_details?.section_1_point_3));
@@ -541,8 +649,8 @@ function populateProblemDetailsSections() {
     safeUpdateElementWithColor('problem-details-section-1-calculation', 'problem_details', 'section_1_calculation', replaceTemplates(data.problem_details?.section_1_calculation));
 
     // Section 2 - Maintenance Spécialisée Coûteuse (avec templates dynamiques)
-    safeUpdateElement('problem-details-section-2-title', data.problem_details?.section_2_title);
-    safeUpdateElement('problem-details-section-2-subtitle', data.problem_details?.section_2_subtitle);
+    safeUpdateElementWithColor('problem-details-section-2-title', 'problem_details', 'section_2_title', data.problem_details?.section_2_title);
+    safeUpdateElementWithColor('problem-details-section-2-subtitle', 'problem_details', 'section_2_subtitle', data.problem_details?.section_2_subtitle);
     safeUpdateElement('problem-details-section-2-point-1', data.problem_details?.section_2_point_1);
     safeUpdateElement('problem-details-section-2-point-2', replaceTemplates(data.problem_details?.section_2_point_2));
     safeUpdateElement('problem-details-section-2-point-3', data.problem_details?.section_2_point_3);
@@ -550,8 +658,8 @@ function populateProblemDetailsSections() {
     safeUpdateElementWithColor('problem-details-section-2-calculation', 'problem_details', 'section_2_calculation', replaceTemplates(data.problem_details?.section_2_calculation));
 
     // Section 3 - Risques et Pertes Opérationnelles (avec templates dynamiques)
-    safeUpdateElement('problem-details-section-3-title', data.problem_details?.section_3_title);
-    safeUpdateElement('problem-details-section-3-subtitle', data.problem_details?.section_3_subtitle);
+    safeUpdateElementWithColor('problem-details-section-3-title', 'problem_details', 'section_3_title', data.problem_details?.section_3_title);
+    safeUpdateElementWithColor('problem-details-section-3-subtitle', 'problem_details', 'section_3_subtitle', data.problem_details?.section_3_subtitle);
     safeUpdateElement('problem-details-section-3-point-1', data.problem_details?.section_3_point_1);
     safeUpdateElement('problem-details-section-3-point-2', data.problem_details?.section_3_point_2);
     safeUpdateElement('problem-details-section-3-point-3', data.problem_details?.section_3_point_3);
@@ -559,8 +667,8 @@ function populateProblemDetailsSections() {
     safeUpdateElementWithColor('problem-details-section-3-calculation', 'problem_details', 'section_3_calculation', replaceTemplates(data.problem_details?.section_3_calculation));
 
     // Section 4 - TOTAL des Coûts Cachés Réels (avec templates dynamiques)
-    safeUpdateElement('problem-details-section-4-title', data.problem_details?.section_4_title);
-    safeUpdateElement('problem-details-section-4-subtitle', data.problem_details?.section_4_subtitle);
+    safeUpdateElementWithColor('problem-details-section-4-title', 'problem_details', 'section_4_title', data.problem_details?.section_4_title);
+    safeUpdateElementWithColor('problem-details-section-4-subtitle', 'problem_details', 'section_4_subtitle', data.problem_details?.section_4_subtitle);
     safeUpdateElement('problem-details-section-4-point-1', data.problem_details?.section_4_point_1);
     safeUpdateElement('problem-details-section-4-point-2', replaceTemplates(data.problem_details?.section_4_point_2));
     safeUpdateElement('problem-details-section-4-point-3', replaceTemplates(data.problem_details?.section_4_point_3));
@@ -573,14 +681,14 @@ function populateVsBatteriesSection() {
     if (!data.vs_batteries) return;
 
     // En-tête de section
-    safeUpdateElement('vs-section-title', data.vs_batteries?.section_title);
-    safeUpdateElement('vs-section-subtitle', data.vs_batteries?.section_subtitle);
+    safeUpdateElementWithColor('vs-section-title', 'vs_batteries', 'section_title', data.vs_batteries?.section_title);
+    safeUpdateElementWithColor('vs-section-subtitle', 'vs_batteries', 'section_subtitle', data.vs_batteries?.section_subtitle);
 
     // Titres des cartes
-    safeUpdateElement('vs-lead-title', data.vs_batteries?.lead_title);
-    safeUpdateElement('vs-lead-subtitle', data.vs_batteries?.lead_subtitle);
-    safeUpdateElement('vs-lifepo4-title', data.vs_batteries?.lifepo4_title);
-    safeUpdateElement('vs-lifepo4-subtitle', data.vs_batteries?.lifepo4_subtitle);
+    safeUpdateElementWithColor('vs-lead-title', 'vs_batteries', 'lead_title', data.vs_batteries?.lead_title);
+    safeUpdateElementWithColor('vs-lead-subtitle', 'vs_batteries', 'lead_subtitle', data.vs_batteries?.lead_subtitle);
+    safeUpdateElementWithColor('vs-lifepo4-title', 'vs_batteries', 'lifepo4_title', data.vs_batteries?.lifepo4_title);
+    safeUpdateElementWithColor('vs-lifepo4-subtitle', 'vs_batteries', 'lifepo4_subtitle', data.vs_batteries?.lifepo4_subtitle);
 
     // Spécifications techniques (labels et valeurs)
     safeUpdateElement('vs-tech-lifespan-label', data.vs_batteries?.tech_lifespan_label);
@@ -614,16 +722,16 @@ function populateVsBatteriesSection() {
     safeUpdateElement('vs-tech-performance-lifepo4', data.vs_batteries?.tech_performance_lifepo4);
 
     // Coûts totaux
-    safeUpdateElement('vs-cost-total-label', data.vs_batteries?.cost_total_label);
-    safeUpdateElement('vs-cost-total-label-2', data.vs_batteries?.cost_total_label);
-    safeUpdateElement('vs-cost-total-lead', replaceTemplates(data.vs_batteries?.cost_total_lead));
-    safeUpdateElement('vs-cost-total-lifepo4', replaceTemplates(data.vs_batteries?.cost_total_lifepo4));
+    safeUpdateElementWithColor('vs-cost-total-label', 'vs_batteries', 'cost_total_label', data.vs_batteries?.cost_total_label);
+    safeUpdateElementWithColor('vs-cost-total-label-2', 'vs_batteries', 'cost_total_label', data.vs_batteries?.cost_total_label);
+    safeUpdateElementWithColor('vs-cost-total-lead', 'vs_batteries', 'cost_total_lead', replaceTemplates(data.vs_batteries?.cost_total_lead));
+    safeUpdateElementWithColor('vs-cost-total-lifepo4', 'vs_batteries', 'cost_total_lifepo4', replaceTemplates(data.vs_batteries?.cost_total_lifepo4));
 
     // Avantages/Inconvénients
-    safeUpdateElement('vs-advantages-label', data.vs_batteries?.advantages_label);
-    safeUpdateElement('vs-advantages-label-2', data.vs_batteries?.advantages_label);
-    safeUpdateElement('vs-disadvantages-label', data.vs_batteries?.disadvantages_label);
-    safeUpdateElement('vs-disadvantages-label-2', data.vs_batteries?.disadvantages_label);
+    safeUpdateElementWithColor('vs-advantages-label', 'vs_batteries', 'advantages_label', data.vs_batteries?.advantages_label);
+    safeUpdateElementWithColor('vs-advantages-label-2', 'vs_batteries', 'advantages_label', data.vs_batteries?.advantages_label);
+    safeUpdateElementWithColor('vs-disadvantages-label', 'vs_batteries', 'disadvantages_label', data.vs_batteries?.disadvantages_label);
+    safeUpdateElementWithColor('vs-disadvantages-label-2', 'vs_batteries', 'disadvantages_label', data.vs_batteries?.disadvantages_label);
 
     // Avantages batteries plomb
     safeUpdateElement('vs-lead-advantage-1', data.vs_batteries?.lead_advantage_1);
@@ -638,7 +746,7 @@ function populateVsBatteriesSection() {
     safeUpdateElement('vs-lead-disadvantage-5', data.vs_batteries?.lead_disadvantage_5);
 
     // Avantages LiFePO4
-    safeUpdateElement('vs-lifepo4-advantage-1', replaceTemplates(data.vs_batteries?.lifepo4_advantage_1));
+    safeUpdateElementWithColor('vs-lifepo4-advantage-1', 'vs_batteries', 'lifepo4_advantage_1', replaceTemplates(data.vs_batteries?.lifepo4_advantage_1));
     safeUpdateElementWithColor('vs-lifepo4-advantage-2', 'vs_batteries', 'lifepo4_advantage_2', data.vs_batteries?.lifepo4_advantage_2);
     safeUpdateElement('vs-lifepo4-advantage-3', data.vs_batteries?.lifepo4_advantage_3);
     safeUpdateElement('vs-lifepo4-advantage-4', data.vs_batteries?.lifepo4_advantage_4);
@@ -652,13 +760,13 @@ function populateVsBatteriesSection() {
     safeUpdateElement('vs-lifepo4-disadvantage-2', data.vs_batteries?.lifepo4_disadvantage_2);
 
     // Call to Action
-    safeUpdateElement('vs-cta-title', data.vs_batteries?.cta_title);
-    safeUpdateElement('vs-cta-subtitle', data.vs_batteries?.cta_subtitle);
-    safeUpdateElement('vs-cta-savings-prefix', replaceTemplates(data.vs_batteries?.cta_savings_prefix));
+    safeUpdateElementWithColor('vs-cta-title', 'vs_batteries', 'cta_title', data.vs_batteries?.cta_title);
+    safeUpdateElementWithColor('vs-cta-subtitle', 'vs_batteries', 'cta_subtitle', data.vs_batteries?.cta_subtitle);
+    safeUpdateElementWithColor('vs-cta-savings-prefix', 'vs_batteries', 'cta_savings_prefix', replaceTemplates(data.vs_batteries?.cta_savings_prefix));
     // Le montant et suffix sont déjà inclus dans le prefix via le template
     safeUpdateElement('vs-cta-savings-amount', ''); // Vide pour éviter doublon
     safeUpdateElement('vs-cta-savings-suffix', ''); // Vide pour éviter doublon
-    safeUpdateElement('vs-cta-button-text', data.vs_batteries?.cta_button_text);
+    safeUpdateElementWithColor('vs-cta-button-text', 'vs_batteries', 'cta_button_text', data.vs_batteries?.cta_button_text);
 }
 
 // Mettre à jour le contenu de la page
@@ -669,40 +777,40 @@ function updateContent() {
     safeUpdateElement('company-subtitle', data.header?.company_subtitle);
 
     // Hero
-    safeUpdateElement('hero-title', data.hero?.main_title);
-    safeUpdateElement('hero-subtitle', data.hero?.subtitle);
+    safeUpdateElementWithColor('hero-title', 'hero', 'main_title', data.hero?.main_title);
+    safeUpdateElementWithColor('hero-subtitle', 'hero', 'subtitle', data.hero?.subtitle);
 
     // Problem
-    safeUpdateElement('problem-title', data.problem?.title);
+    safeUpdateElementWithColor('problem-title', 'problem', 'title', data.problem?.title);
     // cost-replacement et cost-10-years seront mis à jour par updateCartCalculation()
     // safeUpdateElement('cost-replacement', data.problem?.cost_replacement);
     // safeUpdateElement('cost-10-years', data.problem?.cost_10_years);
     // maintenance-hours et maintenance-cost seront aussi mis à jour par updateCartCalculation()
     // safeUpdateElement('maintenance-hours', data.problem?.maintenance_hours);
     // safeUpdateElement('maintenance-cost', data.problem?.maintenance_cost);
-    safeUpdateElement('performance-issue', data.problem?.performance_issue);
+    safeUpdateElementWithColor('performance-issue', 'problem', 'performance_issue', data.problem?.performance_issue);
     // charging-time sera mis à jour par updateCartCalculation()
-    safeUpdateElement('weight-old', data.problem?.weight);
-    safeUpdateElement('extra-consumption', data.problem?.extra_consumption);
-    safeUpdateElement('environmental-risk', data.problem?.environmental_risk);
-    safeUpdateElement('safety-concerns', data.problem?.safety_concerns);
+    safeUpdateElementWithColor('weight-old', 'problem', 'weight', data.problem?.weight);
+    safeUpdateElementWithColor('extra-consumption', 'problem', 'extra_consumption', data.problem?.extra_consumption);
+    safeUpdateElementWithColor('environmental-risk', 'problem', 'environmental_risk', data.problem?.environmental_risk);
+    safeUpdateElementWithColor('safety-concerns', 'problem', 'safety_concerns', data.problem?.safety_concerns);
 
     // Problem UI elements
-    safeUpdateElement('problem-card-1-title', data.ui?.problem_card_1_title);
+    safeUpdateElementWithColor('problem-card-1-title', 'ui', 'problem_card_1_title', data.ui?.problem_card_1_title);
     safeUpdateElement('problem-card-1-suffix', data.ui?.problem_card_1_suffix);
     safeUpdateElement('problem-card-1-total-prefix', data.ui?.problem_card_1_total_prefix);
-    safeUpdateElement('problem-card-2-title', data.ui?.problem_card_2_title);
+    safeUpdateElementWithColor('problem-card-2-title', 'ui', 'problem_card_2_title', data.ui?.problem_card_2_title);
     safeUpdateElement('problem-card-2-suffix', data.ui?.problem_card_2_suffix);
     safeUpdateElement('problem-card-2-cost-prefix', data.ui?.problem_card_2_cost_prefix);
-    safeUpdateElement('problem-card-3-title', data.ui?.problem_card_3_title);
+    safeUpdateElementWithColor('problem-card-3-title', 'ui', 'problem_card_3_title', data.ui?.problem_card_3_title);
     safeUpdateElement('problem-card-3-charging-prefix', data.ui?.problem_card_3_charging_prefix);
-    safeUpdateElement('problem-card-4-title', data.ui?.problem_card_4_title);
+    safeUpdateElementWithColor('problem-card-4-title', 'ui', 'problem_card_4_title', data.ui?.problem_card_4_title);
     safeUpdateElement('problem-card-4-weight-prefix', data.ui?.problem_card_4_weight_prefix);
     safeUpdateElement('problem-card-4-consumption-prefix', data.ui?.problem_card_4_consumption_prefix);
-    safeUpdateElement('problem-card-5-title', data.ui?.problem_card_5_title);
+    safeUpdateElementWithColor('problem-card-5-title', 'ui', 'problem_card_5_title', data.ui?.problem_card_5_title);
     // CORRECTION: Appliquer replaceTemplates pour les cartes avec templates
     safeUpdateElement('problem-card-5-training', replaceTemplates(data.ui?.problem_card_5_training));
-    safeUpdateElement('problem-card-6-title', data.ui?.problem_card_6_title);
+    safeUpdateElementWithColor('problem-card-6-title', 'ui', 'problem_card_6_title', data.ui?.problem_card_6_title);
     safeUpdateElement('problem-card-6-risks', replaceTemplates(data.ui?.problem_card_6_risks));
 
     // Problem Details Sections (par voiturette - ne changent PAS avec le slider)
@@ -713,30 +821,30 @@ function updateContent() {
 
     // Solution
     safeUpdateElementWithColor('solution-title', 'solution', 'title', data.solution?.title);
-    safeUpdateElement('autonomy', data.solution?.autonomy);
-    safeUpdateElement('autonomy-hours', data.solution?.autonomy_hours);
-    safeUpdateElement('cycles', data.solution?.cycles);
-    safeUpdateElement('lifespan', data.solution?.lifespan);
-    safeUpdateElement('charge-time', data.solution?.charge_time);
-    safeUpdateElement('maintenance', data.solution?.maintenance);
-    safeUpdateElement('weight', data.solution?.weight);
+    safeUpdateElementWithColor('autonomy', 'solution', 'autonomy', data.solution?.autonomy);
+    safeUpdateElementWithColor('autonomy-hours', 'solution', 'autonomy_hours', data.solution?.autonomy_hours);
+    safeUpdateElementWithColor('cycles', 'solution', 'cycles', data.solution?.cycles);
+    safeUpdateElementWithColor('lifespan', 'solution', 'lifespan', data.solution?.lifespan);
+    safeUpdateElementWithColor('charge-time', 'solution', 'charge_time', data.solution?.charge_time);
+    safeUpdateElementWithColor('maintenance', 'solution', 'maintenance', data.solution?.maintenance);
+    safeUpdateElementWithColor('weight', 'solution', 'weight', data.solution?.weight);
 
     // Autonomy comparison data
-    safeUpdateElement('autonomy-new', data.problem?.autonomy_new);
-    safeUpdateElement('autonomy-degraded', data.problem?.autonomy_degraded);
-    safeUpdateElement('autonomy-loss', data.problem?.autonomy_loss);
+    safeUpdateElementWithColor('autonomy-new', 'problem', 'autonomy_new', data.problem?.autonomy_new);
+    safeUpdateElementWithColor('autonomy-degraded', 'problem', 'autonomy_degraded', data.problem?.autonomy_degraded);
+    safeUpdateElementWithColor('autonomy-loss', 'problem', 'autonomy_loss', data.problem?.autonomy_loss);
 
     // Solution UI elements
-    safeUpdateElement('solution-card-1-title', data.ui?.solution_card_1_title);
-    safeUpdateElement('solution-card-2-title', data.ui?.solution_card_2_title);
+    safeUpdateElementWithColor('solution-card-1-title', 'ui', 'solution_card_1_title', data.ui?.solution_card_1_title);
+    safeUpdateElementWithColor('solution-card-2-title', 'ui', 'solution_card_2_title', data.ui?.solution_card_2_title);
     safeUpdateElement('solution-card-2-lifespan-separator', data.ui?.solution_card_2_lifespan_separator);
-    safeUpdateElement('solution-card-3-title', data.ui?.solution_card_3_title);
+    safeUpdateElementWithColor('solution-card-3-title', 'ui', 'solution_card_3_title', data.ui?.solution_card_3_title);
     safeUpdateElement('solution-card-3-charge-prefix', data.ui?.solution_card_3_charge_prefix);
-    safeUpdateElement('solution-card-4-title', data.ui?.solution_card_4_title);
+    safeUpdateElementWithColor('solution-card-4-title', 'ui', 'solution_card_4_title', data.ui?.solution_card_4_title);
     safeUpdateElement('solution-card-4-weight-prefix', data.ui?.solution_card_4_weight_prefix);
 
     // Comparison
-    safeUpdateElement('comparison-title', data.ui?.comparison_title);
+    safeUpdateElementWithColor('comparison-title', 'ui', 'comparison_title', data.ui?.comparison_title);
     safeUpdateElement('comparison-criterion', data.ui?.comparison_criterion);
     safeUpdateElement('comparison-lead-batteries', data.ui?.comparison_lead_batteries);
     safeUpdateElement('comparison-eds-solution', data.ui?.comparison_eds_solution);
@@ -757,10 +865,10 @@ function updateContent() {
     safeUpdateElement('lithium-advantage', data.calculs?.lithium_advantage);
 
     // Pricing
-    safeUpdateElement('pricing-title', data.ui?.pricing_title);
-    safeUpdateElement('contract-10-title', data.pricing?.contract_10_title);
-    safeUpdateElement('contract-20-title', data.pricing?.contract_20_title);
-    safeUpdateElement('contract-20-fleet-title', data.pricing?.contract_20_fleet_title);
+    safeUpdateElementWithColor('pricing-title', 'ui', 'pricing_title', data.ui?.pricing_title);
+    safeUpdateElementWithColor('contract-10-title', 'pricing', 'contract_10_title', data.pricing?.contract_10_title);
+    safeUpdateElementWithColor('contract-20-title', 'pricing', 'contract_20_title', data.pricing?.contract_20_title);
+    safeUpdateElementWithColor('contract-20-fleet-title', 'pricing', 'contract_20_fleet_title', data.pricing?.contract_20_fleet_title);
     safeUpdateElement('pricing-total-suffix', data.ui?.pricing_total_suffix);
     safeUpdateElement('pricing-total-suffix-2', data.ui?.pricing_total_suffix);
     safeUpdateElement('pricing-total-suffix-3', data.ui?.pricing_total_suffix);
@@ -773,31 +881,31 @@ function updateContent() {
     safeUpdateElement('fleet-minimum-text', data.ui?.fleet_minimum_text);
 
     // Benefits
-    safeUpdateElement('benefits-title', data.ui?.benefits_title);
-    safeUpdateElement('benefits-reliability', data.ui?.benefits_reliability);
-    safeUpdateElement('benefits-simplicity', data.ui?.benefits_simplicity);
-    safeUpdateElement('benefits-performance', data.ui?.benefits_performance);
-    safeUpdateElement('benefits-economy', data.ui?.benefits_economy);
-    safeUpdateElement('benefits-partnership', data.ui?.benefits_partnership);
-    safeUpdateElement('benefits-ecology', data.ui?.benefits_ecology);
-    safeUpdateElement('benefit-1', data.benefits?.benefit_1);
-    safeUpdateElement('benefit-2', data.benefits?.benefit_2);
-    safeUpdateElement('benefit-3', data.benefits?.benefit_3);
-    safeUpdateElement('benefit-4', data.benefits?.benefit_4);
-    safeUpdateElement('benefit-5', data.benefits?.benefit_5);
-    safeUpdateElement('benefit-6', data.benefits?.benefit_6);
+    safeUpdateElementWithColor('benefits-title', 'ui', 'benefits_title', data.ui?.benefits_title);
+    safeUpdateElementWithColor('benefits-reliability', 'ui', 'benefits_reliability', data.ui?.benefits_reliability);
+    safeUpdateElementWithColor('benefits-simplicity', 'ui', 'benefits_simplicity', data.ui?.benefits_simplicity);
+    safeUpdateElementWithColor('benefits-performance', 'ui', 'benefits_performance', data.ui?.benefits_performance);
+    safeUpdateElementWithColor('benefits-economy', 'ui', 'benefits_economy', data.ui?.benefits_economy);
+    safeUpdateElementWithColor('benefits-partnership', 'ui', 'benefits_partnership', data.ui?.benefits_partnership);
+    safeUpdateElementWithColor('benefits-ecology', 'ui', 'benefits_ecology', data.ui?.benefits_ecology);
+    safeUpdateElementWithColor('benefit-1', 'benefits', 'benefit_1', data.benefits?.benefit_1);
+    safeUpdateElementWithColor('benefit-2', 'benefits', 'benefit_2', data.benefits?.benefit_2);
+    safeUpdateElementWithColor('benefit-3', 'benefits', 'benefit_3', data.benefits?.benefit_3);
+    safeUpdateElementWithColor('benefit-4', 'benefits', 'benefit_4', data.benefits?.benefit_4);
+    safeUpdateElementWithColor('benefit-5', 'benefits', 'benefit_5', data.benefits?.benefit_5);
+    safeUpdateElementWithColor('benefit-6', 'benefits', 'benefit_6', data.benefits?.benefit_6);
 
     // Testimonial
-    safeUpdateElement('testimonial-quote', data.testimonial?.quote);
-    safeUpdateElement('testimonial-author', data.testimonial?.author);
-    safeUpdateElement('testimonial-title', data.testimonial?.title);
-    safeUpdateElement('testimonial-company', data.testimonial?.company);
+    safeUpdateElementWithColor('testimonial-quote', 'testimonial', 'quote', data.testimonial?.quote);
+    safeUpdateElementWithColor('testimonial-author', 'testimonial', 'author', data.testimonial?.author);
+    safeUpdateElementWithColor('testimonial-title', 'testimonial', 'title', data.testimonial?.title);
+    safeUpdateElementWithColor('testimonial-company', 'testimonial', 'company', data.testimonial?.company);
 
     // Contact
-    safeUpdateElement('contact-title', data.ui?.contact_title);
-    safeUpdateElement('contact-subtitle', data.ui?.contact_subtitle);
-    safeUpdateElement('specialist-name', data.contact?.specialist_name);
-    safeUpdateElement('specialist-title', data.contact?.specialist_title);
+    safeUpdateElementWithColor('contact-title', 'ui', 'contact_title', data.ui?.contact_title);
+    safeUpdateElementWithColor('contact-subtitle', 'ui', 'contact_subtitle', data.ui?.contact_subtitle);
+    safeUpdateElementWithColor('specialist-name', 'contact', 'specialist_name', data.contact?.specialist_name);
+    safeUpdateElementWithColor('specialist-title', 'contact', 'specialist_title', data.contact?.specialist_title);
     safeUpdateElement('specialist-phone', data.contact?.specialist_phone);
     safeUpdateElement('specialist-email', data.contact?.specialist_email);
     safeUpdateElement('website', data.contact?.website);
@@ -806,7 +914,7 @@ function updateContent() {
     safeUpdateElement('contact-website-label', data.ui?.contact_website_label);
 
     // Cart Calculator
-    safeUpdateElement('cart-calculator-title', data.ui?.cart_calculator_title);
+    safeUpdateElementWithColor('cart-calculator-title', 'ui', 'cart_calculator_title', data.ui?.cart_calculator_title);
     safeUpdateElement('cart-calculator-subtitle', data.ui?.cart_calculator_subtitle);
     safeUpdateElement('cart-count-label', data.ui?.cart_count_label);
     safeUpdateElement('cart-unit-suffix', data.ui?.cart_unit_suffix);
@@ -1015,6 +1123,15 @@ function updateCartCalculation() {
     // SECTION COMPARAISON - Totaux flotte (variables centralisées) sur 20 ans
     const leadBatteries20 = calculateFormula('lead_total_20y_per_cart') * currentCartCount;
     const lithium20 = calculateFormula('lifepo4_total_20y_per_cart') * currentCartCount;
+
+    // Debug: vérifier les valeurs calculées
+    console.log('Valeurs comparaison:', {
+        leadBatteries20: leadBatteries20,
+        lithium20: lithium20,
+        currentCartCount: currentCartCount,
+        leadFormula: calculateFormula('lead_total_20y_per_cart'),
+        lithiumFormula: calculateFormula('lifepo4_total_20y_per_cart')
+    });
 
     // CHANGEMENT: Utiliser les valeurs 20 ans pour la comparaison principale
     safeUpdateElement('lead-batteries-10-years', formatNumber(leadBatteries20) + currency);
