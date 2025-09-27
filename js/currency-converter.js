@@ -5,6 +5,13 @@ class CurrencyConverterPremium {
     this.multipliers = [1, 10, 100, 1000, 10000];
     this.nf = new Intl.NumberFormat('fr-FR');
     this.editMode = true;
+
+    // Prix dynamiques des lots (chargés depuis products.json)
+    this.productPrices = {
+      single: 10,    // coin-custom-single
+      trio: 25,      // coin-trio-customizable
+      septuple: 50   // coin-septuple-free
+    };
     
     // Références dynamiques aux éléments DOM
     this.sourceInputs = null;
@@ -25,14 +32,30 @@ class CurrencyConverterPremium {
     
     this.init();
   }
-  
+
   init() {
+    this.loadProductPrices(); // Chargement dynamique des prix
+    this.addTranslationSupport(); // Support nouvelles traductions
     this.refreshDOMReferences();
     this.setupEventListeners();
     this.updateDisplay();
-    
+
     // Afficher le message par défaut des recommandations dès l'initialisation
     this.displayDefaultRecommendationMessage();
+  }
+
+  // Chargement dynamique non-bloquant des prix depuis products.json
+  async loadProductPrices() {
+    try {
+      if (window.products) {
+        // Si products.json déjà chargé, utiliser les prix
+        this.productPrices.single = window.products['coin-custom-single']?.price || 10;
+        this.productPrices.trio = window.products['coin-trio-customizable']?.price || 25;
+        this.productPrices.septuple = window.products['coin-septuple-free']?.price || 50;
+      }
+    } catch (error) {
+      console.warn('Impossible de charger les prix dynamiques, utilisation des prix par défaut');
+    }
   }
   
   // Méthode pour rafraîchir dynamiquement les références DOM
@@ -185,15 +208,11 @@ class CurrencyConverterPremium {
   
   updateFromSources() {
     const baseValue = this.getTotalBaseValue();
-    
-    // Mettre à jour le tableau multiplicateur
-    this.multiplierInputs.forEach(input => {
-      const currency = input.closest('tr').dataset.currency;
-      const multiplier = parseInt(input.dataset.multiplier);
-      const value = Math.floor(baseValue / (this.rates[currency] * multiplier));
-      input.value = value > 0 ? this.nf.format(value) : '';
-    });
-    
+
+    // Mettre à jour le tableau multiplicateur avec les NOUVELLES RÈGLES d'optimisation
+    // Priorité métal > multiplicateur + lots 3/7 pour conversions automatiques
+    this.updateMultiplierTableWithOptimization(baseValue);
+
     this.updateMetalCards(baseValue);
     this.updateOptimalRecommendations(baseValue);
     this.updateCoinLotsRecommendations(baseValue);
@@ -208,20 +227,52 @@ class CurrencyConverterPremium {
       const quantity = parseInt(input.value.replace(/\s/g, '')) || 0;
       totalValue += quantity * this.rates[currency] * multiplier;
     });
-    
+
     // Mettre à jour les sources
     this.sourceInputs.forEach(input => {
       input.value = '0';
     });
-    
-    // NOUVELLE LOGIQUE : Garder les valeurs utilisateur du tableau multiplicateur
+
+    // COMPORTEMENT ORIGINAL RESTAURÉ : Garder les valeurs utilisateur du tableau multiplicateur
     // au lieu de les redistribuer de manière optimale
     this.distributeOptimally(totalValue);
     this.updateMetalCards(totalValue);
-    
+
     // Utiliser les valeurs utilisateur pour les recommandations optimales
     this.updateOptimalRecommendationsFromUser(totalValue);
     this.updateCoinLotsRecommendations(totalValue, true); // true = utiliser valeurs utilisateur
+  }
+
+  // NOUVELLE MÉTHODE: Mise à jour tableau avec optimisations (conversions automatiques uniquement)
+  updateMultiplierTableWithOptimization(baseValue) {
+    if (baseValue === 0) {
+      // Vider le tableau si pas de valeur
+      this.multiplierInputs.forEach(input => {
+        input.value = '';
+      });
+      return;
+    }
+
+    // Appliquer les nouvelles règles d'optimisation pour conversion automatique
+    const optimizedSolution = this.findMinimalCoins(baseValue, false); // false = conversion auto
+
+    // D'abord, vider tout le tableau
+    this.multiplierInputs.forEach(input => {
+      input.value = '';
+    });
+
+    // Puis, remplir avec la solution optimisée
+    optimizedSolution.forEach(item => {
+      const targetInput = Array.from(this.multiplierInputs).find(input => {
+        const currency = input.closest('tr').dataset.currency;
+        const multiplier = parseInt(input.dataset.multiplier);
+        return currency === item.currency && multiplier === item.multiplier;
+      });
+
+      if (targetInput && item.quantity > 0) {
+        targetInput.value = this.nf.format(item.quantity);
+      }
+    });
   }
   
   distributeOptimally(totalValue) {
@@ -325,33 +376,275 @@ class CurrencyConverterPremium {
   
   getOptimalBreakdown(value) {
     if (value <= 0) return '';
-    
-    // Métaheuristique : Algorithme glouton avec recherche locale limitée
-    const bestSolution = this.findMinimalCoins(value);
-    
+
+    // NOUVELLE LOGIQUE : Utiliser l'algorithme optimisé avec lots 3/7
+    const bestSolution = this.findMinimalCoins(value, false);
+
     if (!bestSolution || bestSolution.length === 0) return '';
-    
-    // Formater l'affichage
-    const formatted = bestSolution.map(item => {
-      const data = this.currencyData[item.currency];
-      if (item.multiplier === 1) {
-        return `${this.nf.format(item.quantity)} ${data.emoji} ${this.getCurrencyName(item.currency).toLowerCase()}`;
-      } else {
-        return `${this.nf.format(item.quantity)} ${data.emoji} ${this.getCurrencyName(item.currency).toLowerCase()}(×${this.nf.format(item.multiplier)})`;
-      }
-    });
-    
-    // Joindre avec "et"
-    if (formatted.length > 1) {
-      const last = formatted.pop();
-      return formatted.join(', ') + ` ${this.getTranslation('shop.converter.and', 'et')} ` + last;
-    }
-    
-    return formatted.join('');
+
+    // Utiliser la nouvelle méthode de formatage
+    return this.formatSolutionForDisplay(bestSolution);
   }
   
-  findMinimalCoins(targetValue) {
-    // Créer toutes les dénominations possibles
+  findMinimalCoins(targetValue, preserveMetals = false) {
+    // NOUVELLE ARCHITECTURE: Priorité métal > multiplicateur + lots 3/7
+
+    let bestSolution = null;
+    let minCost = Infinity;
+
+    // STRATÉGIE 1: Optimisation coût avec lots 3/7 (prioritaire)
+    const costOptimalSolution = this.findCostOptimalSolution(targetValue, preserveMetals);
+    if (costOptimalSolution && costOptimalSolution.length > 0) {
+      const cost = this.calculateSolutionCost(costOptimalSolution);
+      if (cost < minCost) {
+        minCost = cost;
+        bestSolution = costOptimalSolution;
+      }
+    }
+
+    // STRATÉGIE 2: Priorité métal > multiplicateur (nouvelle règle)
+    const metalPrioritySolution = this.findMetalPrioritySolution(targetValue, preserveMetals);
+    if (metalPrioritySolution && metalPrioritySolution.length > 0) {
+      const cost = this.calculateSolutionCost(metalPrioritySolution);
+      if (cost < minCost) {
+        minCost = cost;
+        bestSolution = metalPrioritySolution;
+      }
+    }
+
+    // STRATÉGIE 3: Fallback - Anciennes métaheuristiques
+    const fallbackSolution = this.findFallbackSolution(targetValue);
+    if (fallbackSolution && fallbackSolution.length > 0) {
+      const cost = this.calculateSolutionCost(fallbackSolution);
+      if (cost < minCost || !bestSolution) {
+        bestSolution = fallbackSolution;
+      }
+    }
+
+    return bestSolution;
+  }
+  
+  // NOUVELLE MÉTHODE: Optimisation coût avec lots 3/7
+  findCostOptimalSolution(targetValue, preserveMetals = false) {
+    const breakdown = this.convertValueToCoins(targetValue, preserveMetals);
+
+    // Appliquer la logique des lots 3/7 pour économiser
+    const optimizedBreakdown = this.applyBulkDiscounts(breakdown);
+
+    return optimizedBreakdown;
+  }
+
+  // NOUVELLE MÉTHODE: Priorité métal > multiplicateur
+  findMetalPrioritySolution(targetValue, preserveMetals = false) {
+    const result = [];
+    let remaining = targetValue;
+
+    // Ordre de priorité des métaux (plus précieux d'abord)
+    const metalPriority = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
+
+    if (preserveMetals) {
+      // Mode tableau utilisateur : utiliser directement les valeurs saisies sans modification
+      // L'utilisateur peut mettre plusieurs multiplicateurs pour le même métal
+      return this.getUserMultiplierBreakdown();
+    }
+
+    // Mode conversion automatique : priorité métal > multiplicateur
+    metalPriority.forEach(metal => {
+      if (remaining <= 0) return;
+
+      const metalRate = this.rates[metal];
+
+      // Essayer les multiplicateurs du plus petit au plus grand
+      for (const multiplier of this.multipliers) {
+        const coinValue = metalRate * multiplier;
+
+        if (remaining >= coinValue) {
+          const quantity = Math.floor(remaining / coinValue);
+          if (quantity > 0) {
+            // Appliquer logique lots 3/7 avant d'ajouter
+            const optimizedQuantity = this.optimizeQuantityForBulk(quantity, metal, multiplier);
+
+            result.push({
+              currency: metal,
+              multiplier,
+              quantity: optimizedQuantity.quantity,
+              value: coinValue
+            });
+
+            remaining -= optimizedQuantity.totalValue;
+            break; // Passer au métal suivant
+          }
+        }
+      }
+    });
+
+    return result;
+  }
+
+  // NOUVELLE MÉTHODE: Appliquer les remises sur les lots 3/7
+  applyBulkDiscounts(breakdown) {
+    const result = [];
+
+    breakdown.forEach(item => {
+      const { currency, multiplier, quantity } = item;
+
+      if (quantity >= 7) {
+        // Logique lots de 7: 8→7+1, 10→7+3, etc.
+        const septupleCount = Math.floor(quantity / 7);
+        const remaining = quantity % 7;
+
+        // Ajouter les septuples
+        if (septupleCount > 0) {
+          result.push({
+            ...item,
+            quantity: septupleCount,
+            lotType: 'septuple',
+            economyGained: septupleCount * (7 * this.productPrices.single - this.productPrices.septuple)
+          });
+        }
+
+        // Traiter le reste avec logique trio si applicable
+        if (remaining >= 3) {
+          const trioCount = Math.floor(remaining / 3);
+          const finalRemaining = remaining % 3;
+
+          if (trioCount > 0) {
+            result.push({
+              ...item,
+              quantity: trioCount,
+              lotType: 'trio',
+              economyGained: trioCount * (3 * this.productPrices.single - this.productPrices.trio)
+            });
+          }
+
+          if (finalRemaining > 0) {
+            result.push({ ...item, quantity: finalRemaining, lotType: 'single' });
+          }
+        } else if (remaining > 0) {
+          result.push({ ...item, quantity: remaining, lotType: 'single' });
+        }
+
+      } else if (quantity >= 3) {
+        // Logique lots de 3: 4→3+1, 6→3+3, etc.
+        const trioCount = Math.floor(quantity / 3);
+        const remaining = quantity % 3;
+
+        result.push({
+          ...item,
+          quantity: trioCount,
+          lotType: 'trio',
+          economyGained: trioCount * (3 * this.productPrices.single - this.productPrices.trio)
+        });
+
+        if (remaining > 0) {
+          result.push({ ...item, quantity: remaining, lotType: 'single' });
+        }
+
+      } else {
+        // Quantité < 3 : pièces unitaires
+        result.push({ ...item, lotType: 'single' });
+      }
+    });
+
+    return result;
+  }
+  
+  // NOUVELLE MÉTHODE: Calcul du coût d'une solution avec lots
+  calculateSolutionCost(solution) {
+    return solution.reduce((total, item) => {
+      const { quantity, lotType } = item;
+
+      switch (lotType) {
+        case 'septuple':
+          return total + (quantity * this.productPrices.septuple);
+        case 'trio':
+          return total + (quantity * this.productPrices.trio);
+        case 'single':
+        default:
+          return total + (quantity * this.productPrices.single);
+      }
+    }, 0);
+  }
+
+  // NOUVELLE MÉTHODE: Conversion valeur en pièces avec priorité métal
+  convertValueToCoins(targetValue, preserveMetals = false) {
+    const result = [];
+    let remaining = targetValue;
+
+    // Priorité métal > multiplicateur
+    const metalPriority = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
+
+    metalPriority.forEach(metal => {
+      if (remaining <= 0) return;
+
+      const metalRate = this.rates[metal];
+
+      // Pour chaque métal, utiliser le plus petit multiplicateur possible
+      for (const multiplier of this.multipliers) {
+        const coinValue = metalRate * multiplier;
+
+        if (remaining >= coinValue) {
+          const quantity = Math.floor(remaining / coinValue);
+          if (quantity > 0) {
+            result.push({
+              currency: metal,
+              multiplier,
+              quantity,
+              value: coinValue
+            });
+            remaining -= quantity * coinValue;
+            break; // Passer au métal suivant
+          }
+        }
+      }
+    });
+
+    return result;
+  }
+
+  // NOUVELLE MÉTHODE: Optimiser quantité pour lots économiques
+  optimizeQuantityForBulk(quantity, metal, multiplier) {
+    const coinValue = this.rates[metal] * multiplier;
+
+    // Si quantité >= 7, privilégier les septuples
+    if (quantity >= 7) {
+      return {
+        quantity,
+        totalValue: quantity * coinValue,
+        hasBulkDiscount: true
+      };
+    }
+
+    // Si quantité >= 3, privilégier les trios
+    if (quantity >= 3) {
+      return {
+        quantity,
+        totalValue: quantity * coinValue,
+        hasBulkDiscount: true
+      };
+    }
+
+    return {
+      quantity,
+      totalValue: quantity * coinValue,
+      hasBulkDiscount: false
+    };
+  }
+
+  // MÉTHODE AJOUTÉE: Support des nouvelles traductions
+  addTranslationSupport() {
+    // Ajouter les nouvelles clés de traduction si elles n'existent pas
+    if (window.i18n && window.i18n.shop && window.i18n.shop.converter) {
+      const converter = window.i18n.shop.converter;
+      if (!converter.cost) converter.cost = 'Coût';
+      if (!converter.economy) converter.economy = 'Économie';
+      if (!converter.bulkDiscount) converter.bulkDiscount = 'Remise sur quantité';
+      if (!converter.lotType) converter.lotType = 'Type de lot';
+    }
+  }
+
+  // Ancienne stratégie conservée pour fallback
+  findFallbackSolution(targetValue) {
     const denoms = [];
     ['platinum', 'gold', 'electrum', 'silver', 'copper'].forEach(currency => {
       this.multipliers.forEach(multiplier => {
@@ -362,107 +655,30 @@ class CurrencyConverterPremium {
         });
       });
     });
-    
-    // Trier par valeur décroissante
+
     denoms.sort((a, b) => b.value - a.value);
-    
-    let bestSolution = null;
-    let minPieces = Infinity;
-    
-    // NOUVELLE STRATÉGIE : Répartition équilibrée (1 pièce par métal/multiplicateur)
-    const balancedSolution = this.balancedDistributionStrategy(targetValue, denoms);
-    if (balancedSolution && balancedSolution.length > 0) {
-      const pieces = balancedSolution.reduce((sum, item) => sum + item.quantity, 0);
-      if (pieces < minPieces) {
-        minPieces = pieces;
-        bestSolution = balancedSolution;
-      }
-    }
-    
-    // Essayer plusieurs stratégies gloutonnes comme fallback
-    for (let strategy = 0; strategy < 3; strategy++) {
-      const solution = this.greedyStrategy(targetValue, denoms, strategy);
-      const pieces = solution.reduce((sum, item) => sum + item.quantity, 0);
-      
-      if (pieces < minPieces) {
-        minPieces = pieces;
-        bestSolution = solution;
-      }
-    }
-    
-    return bestSolution;
+
+    return this.greedyFallback(targetValue, denoms);
   }
-  
-  greedyStrategy(targetValue, denoms, strategy) {
+
+  greedyFallback(targetValue, denoms) {
     const result = [];
     let remaining = targetValue;
-    
-    switch (strategy) {
-      case 0: // Standard greedy : plus grosse valeur d'abord
-        denoms.forEach(denom => {
-          if (remaining >= denom.value) {
-            const qty = Math.floor(remaining / denom.value);
-            if (qty > 0) {
-              result.push({ ...denom, quantity: qty });
-              remaining -= qty * denom.value;
-            }
-          }
-        });
-        break;
-        
-      case 1: // Greedy modifié : éviter les gros multiplicateurs si possible
-        denoms.forEach(denom => {
-          if (remaining >= denom.value && denom.multiplier <= 100) {
-            const qty = Math.floor(remaining / denom.value);
-            if (qty > 0) {
-              result.push({ ...denom, quantity: qty });
-              remaining -= qty * denom.value;
-            }
-          }
-        });
-        // Compléter avec les gros multiplicateurs si nécessaire
-        denoms.forEach(denom => {
-          if (remaining >= denom.value) {
-            const qty = Math.floor(remaining / denom.value);
-            if (qty > 0) {
-              result.push({ ...denom, quantity: qty });
-              remaining -= qty * denom.value;
-            }
-          }
-        });
-        break;
-        
-      case 2: // Greedy par devise : une seule pièce par devise si possible
-        ['platinum', 'gold', 'electrum', 'silver', 'copper'].forEach(currency => {
-          const currencyDenoms = denoms.filter(d => d.currency === currency);
-          for (const denom of currencyDenoms) {
-            if (remaining >= denom.value) {
-              const qty = Math.min(1, Math.floor(remaining / denom.value));
-              if (qty > 0) {
-                result.push({ ...denom, quantity: qty });
-                remaining -= qty * denom.value;
-                break; // Une seule pièce de cette devise
-              }
-            }
-          }
-        });
-        // Compléter avec l'algorithme standard
-        denoms.forEach(denom => {
-          if (remaining >= denom.value) {
-            const qty = Math.floor(remaining / denom.value);
-            if (qty > 0) {
-              result.push({ ...denom, quantity: qty });
-              remaining -= qty * denom.value;
-            }
-          }
-        });
-        break;
-    }
-    
+
+    denoms.forEach(denom => {
+      if (remaining >= denom.value) {
+        const qty = Math.floor(remaining / denom.value);
+        if (qty > 0) {
+          result.push({ ...denom, quantity: qty });
+          remaining -= qty * denom.value;
+        }
+      }
+    });
+
     return result;
   }
-  
-  // Nouvelle stratégie : Répartition équilibrée (1 pièce par métal/multiplicateur)
+
+  // Ancienne méthode conservée pour compatibilité
   balancedDistributionStrategy(targetValue, denoms) {
     const result = [];
     let remaining = targetValue;
@@ -608,22 +824,26 @@ class CurrencyConverterPremium {
     if (!this.bestDisplay) {
       this.refreshDOMReferences();
     }
-    
+
     if (!this.bestDisplay) return;
-    
+
     if (baseValue === 0) {
       const enterAmountsText = this.getTranslation('shop.converter.enterAmounts', 'Entrez des montants pour voir les recommandations optimales');
       this.bestDisplay.innerHTML = enterAmountsText;
       return;
     }
-    
-    const optimal = this.getOptimalBreakdown(baseValue);
-    const totalPieces = this.calculateTotalPieces(baseValue);
-    
+
+    // NOUVELLE LOGIQUE: Utiliser l'algorithme optimisé avec lots 3/7
+    const optimalSolution = this.findMinimalCoins(baseValue, false); // false = conversion automatique
+    const optimal = this.formatSolutionForDisplay(optimalSolution);
+    const totalPieces = this.calculateTotalPiecesFromSolution(optimalSolution);
+    const totalCost = this.calculateSolutionCost(optimalSolution);
+    const economyGained = this.calculateEconomyGained(optimalSolution);
+
     // Calcul de la valeur en or avec reste
     const goldValue = Math.floor(baseValue / this.rates.gold);
     const goldRemainder = baseValue % this.rates.gold;
-    
+
     let goldValueDisplay = '';
     if (goldValue > 0) {
       goldValueDisplay = `${this.nf.format(goldValue)} 🥇 ${this.getCurrencyName('gold').toLowerCase()}`;
@@ -634,32 +854,98 @@ class CurrencyConverterPremium {
     } else {
       goldValueDisplay = this.getOptimalBreakdown(baseValue);
     }
-    
+
     const optimalConversionText = this.getTranslation('shop.converter.optimalConversion', 'Conversion optimale');
     const totalText = this.getTranslation('shop.converter.total', 'Total');
+    const costText = this.getTranslation('shop.converter.cost', 'Coût');
+    const economyText = this.getTranslation('shop.converter.economy', 'Économie');
     const valueText = this.getTranslation('shop.converter.value', 'Valeur');
-    
+
+    let economyDisplay = '';
+    if (economyGained > 0) {
+      economyDisplay = `<p class="text-sm text-green-400">💰 ${economyText}: $${economyGained.toFixed(2)}</p>`;
+    }
+
     this.bestDisplay.innerHTML = `
       <div class="text-center">
-        <p class="text-lg mb-2"><strong>${optimalConversionText}:</strong></p>
+        <p class="text-lg mb-2"><strong>${optimalConversionText}:</strong> 🎯</p>
         <p class="text-indigo-300 font-medium mb-2">${optimal}</p>
         <p class="text-sm text-gray-400">${totalText}: ${this.nf.format(totalPieces)} ${this.getTranslation('shop.converter.coins', 'pièces')}</p>
+        <p class="text-sm text-gray-400">${costText}: $${totalCost.toFixed(2)}</p>
+        ${economyDisplay}
         <p class="text-sm text-gray-400"><br>${valueText}: ${goldValueDisplay}</p>
       </div>
     `;
   }
+
+  // NOUVELLE MÉTHODE: Formater solution pour affichage
+  formatSolutionForDisplay(solution) {
+    if (!solution || solution.length === 0) return '';
+
+    const grouped = {};
+
+    solution.forEach(item => {
+      const key = `${item.currency}_${item.multiplier}`;
+      if (!grouped[key]) {
+        grouped[key] = {
+          currency: item.currency,
+          multiplier: item.multiplier,
+          totalQuantity: 0,
+          lotTypes: []
+        };
+      }
+
+      grouped[key].totalQuantity += item.quantity;
+      if (item.lotType) {
+        grouped[key].lotTypes.push(item.lotType);
+      }
+    });
+
+    const formatted = Object.values(grouped).map(item => {
+      const data = this.currencyData[item.currency];
+      const hasLots = item.lotTypes.some(type => type === 'trio' || type === 'septuple');
+      const lotIndicator = hasLots ? '📦' : '';
+
+      if (item.multiplier === 1) {
+        return `${this.nf.format(item.totalQuantity)} ${data.emoji} ${this.getCurrencyName(item.currency).toLowerCase()} ${lotIndicator}`;
+      } else {
+        return `${this.nf.format(item.totalQuantity)} ${data.emoji} ${this.getCurrencyName(item.currency).toLowerCase()}(×${this.nf.format(item.multiplier)}) ${lotIndicator}`;
+      }
+    });
+
+    if (formatted.length > 1) {
+      const last = formatted.pop();
+      return formatted.join(', ') + ` ${this.getTranslation('shop.converter.and', 'et')} ` + last;
+    }
+
+    return formatted.join('');
+  }
+
+  // NOUVELLE MÉTHODE: Calculer nombre total de pièces depuis solution
+  calculateTotalPiecesFromSolution(solution) {
+    if (!solution || solution.length === 0) return 0;
+    return solution.reduce((sum, item) => sum + item.quantity, 0);
+  }
+
+  // NOUVELLE MÉTHODE: Calculer économie gagnée avec lots
+  calculateEconomyGained(solution) {
+    if (!solution || solution.length === 0) return 0;
+    return solution.reduce((sum, item) => sum + (item.economyGained || 0), 0);
+  }
   
   calculateTotalPieces(baseValue) {
     if (baseValue <= 0) return 0;
-    
-    // Utiliser la même métaheuristique que getOptimalBreakdown
-    const bestSolution = this.findMinimalCoins(baseValue);
-    
+
+    // Utiliser la nouvelle métaheuristique avec lots 3/7
+    const bestSolution = this.findMinimalCoins(baseValue, false);
+
     if (!bestSolution || bestSolution.length === 0) return 0;
-    
-    return bestSolution.reduce((sum, item) => sum + item.quantity, 0);
+
+    return this.calculateTotalPiecesFromSolution(bestSolution);
   }
-  
+
+  // MÉTHODE COMMENTÉE - Conservée pour référence future
+  // Les optimisations s'appliquent aux conversions automatiques, le tableau utilisateur reste libre
 
   updateCoinLotsRecommendations(baseValue, useUserValues = false) {
     // Logique déplacée vers CoinLotOptimizer pour séparation des responsabilités
@@ -682,15 +968,15 @@ class CurrencyConverterPremium {
           let needs = {};
           
           if (useUserValues) {
-            // Utiliser les valeurs du tableau multiplicateur utilisateur
+            // Utiliser les valeurs du tableau multiplicateur utilisateur (optimisées)
             const userBreakdown = this.getUserMultiplierBreakdown();
             userBreakdown.forEach(item => {
               const key = `${item.currency}_${item.multiplier}`;
               needs[key] = (needs[key] || 0) + item.quantity;
             });
           } else {
-            // Utiliser la solution algorithmique standard
-            const optimalSolution = this.findMinimalCoins(baseValue);
+            // Utiliser la solution algorithmique nouvelle avec lots 3/7
+            const optimalSolution = this.findMinimalCoins(baseValue, false);
             optimalSolution.forEach(item => {
               const key = `${item.currency}_${item.multiplier}`;
               needs[key] = (needs[key] || 0) + item.quantity;
@@ -914,12 +1200,12 @@ class CurrencyConverterPremium {
       return;
     }
     
-    // Récupérer les valeurs du tableau multiplicateur (choix utilisateur)
+    // Récupérer les valeurs du tableau multiplicateur (choix utilisateur optimisé)
     const userBreakdown = this.getUserMultiplierBreakdown();
     const userTotalCoins = userBreakdown.reduce((sum, item) => sum + item.quantity, 0);
-    
-    // Comparer avec l'algorithme optimal
-    const algorithmBreakdown = this.findMinimalCoins(baseValue);
+
+    // Comparer avec l'algorithme optimal avec lots 3/7
+    const algorithmBreakdown = this.findMinimalCoins(baseValue, false);
     const algorithmTotalCoins = algorithmBreakdown ? algorithmBreakdown.reduce((sum, item) => sum + item.quantity, 0) : Infinity;
     
     // Utiliser les valeurs utilisateur si elles sont équivalentes ou meilleures
@@ -981,19 +1267,38 @@ window.addEventListener('beforeunload', () => {
   }
 });
 
+// Fonction utilitaire pour afficher les nouvelles règles d'optimisation
+function logOptimizationInfo() {
+  console.log('💰 Nouvelles règles d\'optimisation activées:');
+  console.log('1. 📦 Lots 3/7 pièces: 4→(3+1), 6→(3+3), 8→(7+1), 10→(7+3)');
+  console.log('2. 🥇 Priorité métal > multiplicateur: Platine > Or > Électrum > Argent > Cuivre');
+  console.log('3. ✏️ Mode tableau: préserve métaux utilisateur, optimise multiplicateurs');
+  console.log('4. 💸 Économies: Trio 25$ vs 30$, Septuple 50$ vs 70$');
+}
+
+// Afficher les infos au chargement en mode debug
+if (window.location.hash === '#debug' || window.location.search.includes('debug=1')) {
+  setTimeout(logOptimizationInfo, 1000);
+}
+
 // Initialisation paresseuse du convertisseur - ne charge que si l'utilisateur interagit
 let converterInitialized = false;
 
 const initConverter = () => {
   if (converterInitialized) return;
   converterInitialized = true;
-  
+
   // Petite priorité au héro - délai de 100ms
   setTimeout(() => {
     if (document.getElementById('currency-converter-premium')) {
       window.converterInstance = new CurrencyConverterPremium();
       // Référence globale simplifiée pour les boutons
       window.currencyConverter = window.converterInstance;
+
+      // Log des nouvelles fonctionnalités en mode debug
+      if (window.location.hash === '#debug' || window.location.search.includes('debug=1')) {
+        console.log('✅ CurrencyConverterPremium initialisé avec nouvelles règles d\'optimisation');
+      }
     }
   }, 100);
 };

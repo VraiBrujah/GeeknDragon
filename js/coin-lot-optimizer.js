@@ -234,7 +234,12 @@ class CoinLotOptimizer {
     
     const solutions = [];
     
-    // ÉTAPE 1: Solutions à produit unique
+    // ÉTAPE 1: BRUTE-FORCE INTELLIGENT (NOUVEAU - Prioritaire)
+    // Tester quantités multiples pour trouver le panier le moins cher
+    const bruteForceResults = this.findBruteForceOptimal(needs, variations);
+    bruteForceResults.forEach(solution => solutions.push(solution));
+    
+    // ÉTAPE 2: Solutions à produit unique (améliorée mais secondaire)
     // Chercher si un seul produit peut couvrir tous les besoins
     variations.forEach(variation => {
       if (this.canCoverAllNeeds(variation, needs)) {
@@ -250,21 +255,6 @@ class CoinLotOptimizer {
         this.debugLog(`💡 CoinLotOptimizer: Solution unique: ${variation.name} (${variation.type}) x${quantity} = ${cost}$`);
       }
     });
-    
-    // ÉTAPE 2: Solution avec pièces personnalisées multiples
-    // Générer une solution exacte avec des pièces personnalisées
-    const customSolution = this.findCustomCoinsSolution(needs, variations);
-    if (customSolution && customSolution.length > 0) {
-      const totalCost = customSolution.reduce((sum, item) => sum + (item.variation.price * item.quantity), 0);
-      
-      solutions.push({
-        items: customSolution,
-        totalCost,
-        type: 'custom_multiple'
-      });
-      
-      this.debugLog(`🔧 CoinLotOptimizer: Solution pièces personnalisées: ${totalCost}$ (${customSolution.length} produits)`);
-    }
     
     // ÉTAPE 3: Combinaisons multiples de Quintessence
     // Tester toutes les combinaisons possibles de Quintessence ensemble
@@ -323,19 +313,60 @@ class CoinLotOptimizer {
       }
     });
     
-    // ÉTAPE 6: Filtrer les solutions complètes et sélectionner la meilleure
+    // ÉTAPE 6: Solution avec pièces personnalisées (EN DERNIER RECOURS)
+    // Seulement si aucune solution optimale trouvée ou très peu de solutions
+    if (solutions.length < 3) {
+      const customSolution = this.findCustomCoinsSolution(needs, variations);
+      if (customSolution && customSolution.length > 0) {
+        const totalCost = customSolution.reduce((sum, item) => sum + (item.variation.price * item.quantity), 0);
+        
+        solutions.push({
+          items: customSolution,
+          totalCost,
+          type: 'custom_fallback'
+        });
+        
+        this.debugLog(`🔧 CoinLotOptimizer: Solution pièces personnalisées (fallback): ${totalCost}$ (${customSolution.length} produits)`);
+      }
+    }
+    
+    // ÉTAPE 6.5: NOUVELLE - Optimisation spécifique des lots trio/septuple
+    // Analyser si on peut remplacer des pièces identiques par des lots économiques
+    const bulkOptimizedSolutions = this.findBulkOptimizedSolutions(needs, variations);
+    bulkOptimizedSolutions.forEach(solution => {
+      solutions.push({
+        items: solution,
+        totalCost: solution.reduce((sum, item) => sum + (item.variation.price * item.quantity), 0),
+        type: 'bulk_optimized'
+      });
+    });
+
+    // ÉTAPE 7: Filtrer les solutions complètes et sélectionner la meilleure
     const completeSolutions = solutions.filter(solution => {
       return this.validateSolution(solution.items, needs);
     });
-    
-    completeSolutions.sort((a, b) => a.totalCost - b.totalCost);
-    
-    if (completeSolutions.length > 0) {
-      const best = completeSolutions[0];
+
+    // ÉTAPE 7.5: NOUVELLE - Post-traitement pour optimiser les lots dans toutes les solutions
+    const optimizedSolutions = completeSolutions.map(solution => {
+      const optimizedItems = this.optimizeWithBulkLots(solution.items, variations);
+      const optimizedCost = this.calculateSolutionCost(optimizedItems);
+      return {
+        ...solution,
+        items: optimizedItems,
+        totalCost: optimizedCost,
+        type: solution.type + '_bulk_optimized'
+      };
+    });
+
+    // Tri par coût total uniquement (objectif: panier moins cher)
+    optimizedSolutions.sort((a, b) => a.totalCost - b.totalCost);
+
+    if (optimizedSolutions.length > 0) {
+      const best = optimizedSolutions[0];
       this.debugLog(`🏆 CoinLotOptimizer: Solution optimale: ${best.totalCost}$ (${best.type})`);
       return best.items;
     }
-    
+
     // Aucune solution trouvée - retour vide silencieux
     return [];
   }
@@ -412,6 +443,139 @@ class CoinLotOptimizer {
     }
     
     return remaining;
+  }
+
+  /**
+   * NOUVELLE MÉTHODE: Brute-force intelligent pour trouver le panier le moins cher
+   * Teste quantités multiples et combinaisons simples
+   * @param {Object} needs - Besoins exacts
+   * @param {Array} variations - Variations disponibles
+   * @returns {Array} Solutions trouvées triées par coût
+   */
+  findBruteForceOptimal(needs, variations) {
+    this.debugLog('🚀 CoinLotOptimizer: Brute-force intelligent...');
+    
+    const solutions = [];
+    const maxQuantity = this.calculateMaxReasonableQuantity(needs);
+    
+    this.debugLog(`🔍 CoinLotOptimizer: Test quantités jusqu'à ${maxQuantity} par produit`);
+    
+    // Test 1: Solutions à produit unique avec quantités multiples
+    variations.forEach(variation => {
+      for (let qty = 1; qty <= maxQuantity; qty++) {
+        if (this.canCoverWithQuantity(variation, needs, qty)) {
+          const cost = variation.price * qty;
+          
+          solutions.push({
+            items: [{ variation, quantity: qty }],
+            totalCost: cost,
+            type: 'brute_force_single'
+          });
+          
+          this.debugLog(`✅ CoinLotOptimizer: ${variation.name} x${qty} = ${cost}$ (couvre avec surplus autorisé)`);
+        }
+      }
+    });
+    
+    // Test 2: Combinaisons de 2 produits pour cas complexes
+    if (Object.keys(needs).length > 1 && solutions.length < 5) {
+      this.findBruteForce2Products(needs, variations, solutions, maxQuantity);
+    }
+    
+    return solutions.sort((a, b) => a.totalCost - b.totalCost);
+  }
+
+  /**
+   * Test combinaisons de 2 produits (limité pour performance)
+   */
+  findBruteForce2Products(needs, variations, solutions, maxQuantity) {
+    const limit = Math.min(variations.length, 10); // Limite pour performance
+    
+    for (let i = 0; i < limit; i++) {
+      for (let j = i + 1; j < limit; j++) {
+        const var1 = variations[i];
+        const var2 = variations[j];
+        
+        // Tester quelques combinaisons prometteuses
+        for (let qty1 = 1; qty1 <= 3; qty1++) {
+          for (let qty2 = 1; qty2 <= 3; qty2++) {
+            if (this.canCoverWith2Products(var1, qty1, var2, qty2, needs)) {
+              const cost = (var1.price * qty1) + (var2.price * qty2);
+              
+              solutions.push({
+                items: [
+                  { variation: var1, quantity: qty1 },
+                  { variation: var2, quantity: qty2 }
+                ],
+                totalCost: cost,
+                type: 'brute_force_double'
+              });
+              
+              this.debugLog(`✅ CoinLotOptimizer: ${var1.name} x${qty1} + ${var2.name} x${qty2} = ${cost}$`);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * Vérifie si une variation avec quantité spécifique peut couvrir tous les besoins
+   * @param {Object} variation - Variation à tester
+   * @param {Object} needs - Besoins
+   * @param {number} quantity - Quantité à tester
+   * @returns {boolean}
+   */
+  canCoverWithQuantity(variation, needs, quantity) {
+    const coverage = {};
+    
+    // Calculer ce que cette quantité couvre
+    Object.entries(variation.capacity).forEach(([coinKey, capacity]) => {
+      coverage[coinKey] = capacity * quantity;
+    });
+    
+    // Vérifier que TOUS les besoins sont couverts (surplus autorisé)
+    return Object.entries(needs).every(([coinKey, needed]) => {
+      const covered = coverage[coinKey] || 0;
+      return needed <= covered;
+    });
+  }
+
+  /**
+   * Vérifie si 2 produits peuvent couvrir ensemble tous les besoins
+   */
+  canCoverWith2Products(var1, qty1, var2, qty2, needs) {
+    const coverage = {};
+    
+    // Couverture produit 1
+    Object.entries(var1.capacity).forEach(([coinKey, capacity]) => {
+      coverage[coinKey] = (coverage[coinKey] || 0) + (capacity * qty1);
+    });
+    
+    // Couverture produit 2
+    Object.entries(var2.capacity).forEach(([coinKey, capacity]) => {
+      coverage[coinKey] = (coverage[coinKey] || 0) + (capacity * qty2);
+    });
+    
+    // Vérifier couverture complète
+    return Object.entries(needs).every(([coinKey, needed]) => {
+      return needed <= (coverage[coinKey] || 0);
+    });
+  }
+
+  /**
+   * Calcule une limite raisonnable pour les quantités à tester
+   * @param {Object} needs - Besoins
+   * @returns {number} Quantité maximum à tester
+   */
+  calculateMaxReasonableQuantity(needs) {
+    const totalNeeds = Object.values(needs).reduce((sum, val) => sum + val, 0);
+    
+    // Limites raisonnables basées sur la complexité
+    if (totalNeeds <= 5) return 8;      // Petits besoins: test plus exhaustif
+    if (totalNeeds <= 10) return 5;     // Besoins moyens: test modéré
+    if (totalNeeds <= 20) return 3;     // Gros besoins: test limité
+    return 2;                           // Très gros besoins: test minimal
   }
 
   /**
@@ -827,6 +991,222 @@ class CoinLotOptimizer {
     return true;
   }
   
+  /**
+   * NOUVELLE MÉTHODE: Trouve des solutions optimisées avec lots trio/septuple
+   * @param {Object} needs - Besoins exacts
+   * @param {Array} variations - Toutes les variations disponibles
+   * @returns {Array} Solutions optimisées avec lots
+   */
+  findBulkOptimizedSolutions(needs, variations) {
+    this.debugLog('🎯 CoinLotOptimizer: Recherche solutions avec lots trio/septuple...');
+
+    const solutions = [];
+
+    // Analyser chaque besoin pour les opportunités de lots
+    const groupedNeeds = this.groupIdenticalNeeds(needs);
+
+    Object.entries(groupedNeeds).forEach(([coinKey, quantity]) => {
+      if (quantity >= 3) {
+        const [metal, multiplier] = coinKey.split('_');
+        const bulkSolution = this.findBestBulkSolution(metal, parseInt(multiplier), quantity, variations);
+
+        if (bulkSolution && bulkSolution.length > 0) {
+          // Créer une solution complète pour ce besoin spécifique
+          const remainingNeeds = { ...needs };
+          delete remainingNeeds[coinKey];
+
+          // Compléter avec d'autres besoins si nécessaire
+          const complementSolution = this.findComplementSolution(remainingNeeds, variations);
+
+          if (complementSolution) {
+            solutions.push([...bulkSolution, ...complementSolution]);
+          } else if (Object.keys(remainingNeeds).length === 0) {
+            solutions.push(bulkSolution);
+          }
+        }
+      }
+    });
+
+    return solutions;
+  }
+
+  /**
+   * NOUVELLE MÉTHODE: Groupe les besoins identiques pour détecter les lots
+   * @param {Object} needs - Besoins originaux
+   * @returns {Object} Besoins groupés
+   */
+  groupIdenticalNeeds(needs) {
+    // Les besoins sont déjà au bon format: {"copper_100": 3}
+    return needs;
+  }
+
+  /**
+   * NOUVELLE MÉTHODE: Trouve la meilleure solution de lots pour un métal/multiplicateur
+   * @param {string} metal - Métal (copper, silver, etc.)
+   * @param {number} multiplier - Multiplicateur (1, 10, 100, etc.)
+   * @param {number} quantity - Quantité nécessaire
+   * @param {Array} variations - Variations disponibles
+   * @returns {Array} Meilleure solution de lots
+   */
+  findBestBulkSolution(metal, multiplier, quantity, variations) {
+    const solutions = [];
+
+    // Trouver les variations de lots pour ce métal/multiplicateur
+    const trioVariation = variations.find(v =>
+      v.productId === 'coin-trio-customizable' &&
+      v.metal === metal &&
+      v.multiplier === multiplier
+    );
+
+    const septupleVariation = variations.find(v =>
+      v.productId === 'coin-septuple-free' &&
+      v.metal === metal &&
+      v.multiplier === multiplier
+    );
+
+    const singleVariation = variations.find(v =>
+      v.productId === 'coin-custom-single' &&
+      v.metal === metal &&
+      v.multiplier === multiplier
+    );
+
+    // Tester différentes combinaisons de lots
+    if (quantity >= 7 && septupleVariation) {
+      // Stratégie avec septuples
+      const septuples = Math.floor(quantity / 7);
+      const remaining = quantity % 7;
+
+      const solution = [];
+      if (septuples > 0) {
+        solution.push({ variation: septupleVariation, quantity: septuples });
+      }
+
+      if (remaining >= 3 && trioVariation) {
+        const trios = Math.floor(remaining / 3);
+        const finalRemaining = remaining % 3;
+
+        if (trios > 0) {
+          solution.push({ variation: trioVariation, quantity: trios });
+        }
+        if (finalRemaining > 0 && singleVariation) {
+          solution.push({ variation: singleVariation, quantity: finalRemaining });
+        }
+      } else if (remaining > 0 && singleVariation) {
+        solution.push({ variation: singleVariation, quantity: remaining });
+      }
+
+      solutions.push(solution);
+    }
+
+    if (quantity >= 3 && trioVariation) {
+      // Stratégie avec trios uniquement
+      const trios = Math.floor(quantity / 3);
+      const remaining = quantity % 3;
+
+      const solution = [];
+      if (trios > 0) {
+        solution.push({ variation: trioVariation, quantity: trios });
+      }
+      if (remaining > 0 && singleVariation) {
+        solution.push({ variation: singleVariation, quantity: remaining });
+      }
+
+      solutions.push(solution);
+    }
+
+    // Stratégie pièces individuelles (fallback)
+    if (singleVariation) {
+      solutions.push([{ variation: singleVariation, quantity }]);
+    }
+
+    // Retourner la solution la moins chère
+    if (solutions.length > 0) {
+      const bestSolution = solutions.reduce((best, current) => {
+        const currentCost = current.reduce((sum, item) => sum + (item.variation.price * item.quantity), 0);
+        const bestCost = best.reduce((sum, item) => sum + (item.variation.price * item.quantity), 0);
+        return currentCost < bestCost ? current : best;
+      });
+
+      const cost = bestSolution.reduce((sum, item) => sum + (item.variation.price * item.quantity), 0);
+      const singleCost = quantity * (singleVariation?.price || 10);
+
+      this.debugLog(`💰 CoinLotOptimizer: ${metal}×${multiplier} x${quantity} - Lots: ${cost}$ vs Individuelles: ${singleCost}$`);
+
+      return bestSolution;
+    }
+
+    return null;
+  }
+
+  /**
+   * NOUVELLE MÉTHODE: Optimise une solution existante en remplaçant par des lots
+   * @param {Array} solution - Solution existante
+   * @param {Array} variations - Variations disponibles
+   * @returns {Array} Solution optimisée
+   */
+  optimizeWithBulkLots(solution, variations) {
+    // Grouper les pièces identiques dans la solution
+    const grouped = {};
+
+    solution.forEach(item => {
+      const key = `${item.variation.productId}_${item.variation.metal || 'none'}_${item.variation.multiplier || 'none'}`;
+
+      if (!grouped[key]) {
+        grouped[key] = {
+          variation: item.variation,
+          totalQuantity: 0,
+          items: []
+        };
+      }
+
+      grouped[key].totalQuantity += item.quantity;
+      grouped[key].items.push(item);
+    });
+
+    const optimizedSolution = [];
+
+    // Pour chaque groupe, vérifier s'il peut être optimisé avec des lots
+    Object.values(grouped).forEach(group => {
+      const { variation, totalQuantity } = group;
+
+      // Seulement optimiser les pièces personnalisées individuelles
+      if (variation.productId === 'coin-custom-single' && totalQuantity >= 3) {
+        const metal = variation.metal;
+        const multiplier = variation.multiplier;
+
+        if (metal && multiplier) {
+          const bulkSolution = this.findBestBulkSolution(metal, multiplier, totalQuantity, variations);
+
+          if (bulkSolution) {
+            // Calculer le coût pour voir si c'est avantageux
+            const bulkCost = bulkSolution.reduce((sum, item) => sum + (item.variation.price * item.quantity), 0);
+            const originalCost = totalQuantity * variation.price;
+
+            if (bulkCost < originalCost) {
+              this.debugLog(`🎯 CoinLotOptimizer: Optimisation ${metal}×${multiplier} x${totalQuantity}: ${originalCost}$ → ${bulkCost}$ (économie ${originalCost - bulkCost}$)`);
+              optimizedSolution.push(...bulkSolution);
+              return;
+            }
+          }
+        }
+      }
+
+      // Si pas d'optimisation possible, garder les items originaux
+      optimizedSolution.push(...group.items);
+    });
+
+    return optimizedSolution;
+  }
+
+  /**
+   * NOUVELLE MÉTHODE: Calcule le coût d'une solution
+   * @param {Array} solution - Solution à évaluer
+   * @returns {number} Coût total
+   */
+  calculateSolutionCost(solution) {
+    return solution.reduce((sum, item) => sum + (item.variation.price * item.quantity), 0);
+  }
+
   /**
    * Complète une solution partielle avec des pièces personnalisées
    * @param {Array} partialSolution - Solution partielle avec Quintessences
