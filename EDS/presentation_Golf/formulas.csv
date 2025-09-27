@@ -22,6 +22,7 @@ savings_20y_per_cart,"lead_total_20y_per_cart - lifepo4_total_20y_per_cart","lea
 savings_fleet_per_cart,"lead_total_20y_per_cart - lifepo4_total_fleet_per_cart","lead_total_20y_per_cart,lifepo4_total_fleet_per_cart","Économies par voiturette offre flotte sur 20 ans","Savings per cart fleet offer over 20 years","Calcul économies flotte"
 savings_fleet_10y,"savings_10y_per_cart * current_cart_count","savings_10y_per_cart,current_cart_count","Économies totales flotte sur 10 ans","Total fleet savings over 10 years","Affichage économies flotte"
 savings_percentage_10y,"(savings_10y_per_cart / lead_total_10y_per_cart) * 100","savings_10y_per_cart,lead_total_10y_per_cart","Pourcentage d'économies sur 10 ans","Percentage of savings over 10 years","Calcul pourcentage"
+savings_percentage_20y,"(savings_20y_per_cart / lead_total_20y_per_cart) * 100","savings_20y_per_cart,lead_total_20y_per_cart","Pourcentage d'économies sur 20 ans","Percentage of savings over 20 years","Calcul pourcentage 20 ans"
 
 # CALCULS IMPACT TEMPS DE CHARGE
 extra_carts_needed,"ROUND(current_cart_count * fleet_overhead_percent / 100)","current_cart_count,fleet_overhead_percent","Nombre de voiturettes supplémentaires nécessaires","Number of additional carts needed","Impact temps charge"

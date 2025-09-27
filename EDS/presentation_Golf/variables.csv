@@ -6,7 +6,7 @@ lead_technician_hourly_rate,100,$,Taux horaire technicien Canada,Canadian techni
 # lead_maintenance_cost_unit SUPPRIMÉ - Calculé dynamiquement : lead_maintenance_hours_unit × lead_technician_hourly_rate
 # lead_maintenance_10y_unit SUPPRIMÉ - Calculé par formule : lead_maintenance_total_10y (utilise taux horaire dynamique)
 # lead_total_cost_10y_unit SUPPRIMÉ - Calculé par formule depuis variables de base
-lead_replacement_cycle_years,2.5,years,Cycle remplacement plomb,Lead replacement cycle,Durée moyenne entre remplacements batteries plomb (réaliste),Average duration between lead battery replacements (realistic)
+lead_replacement_cycle_years,5,years,Cycle remplacement plomb,Lead replacement cycle,Durée moyenne entre remplacements batteries plomb (réaliste),Average duration between lead battery replacements (realistic)
 lead_lifespan_max,5,years,Durée vie max plomb,Lead max lifespan,Durée de vie maximale batteries plomb,Maximum lifespan of lead batteries
 lead_weight_kg,300,kg,Poids batteries plomb,Lead battery weight,Poids total des batteries plomb par voiturette,Total weight of lead batteries per cart
 lead_charging_hours,9,hours,Temps charge plomb,Lead charging time,Temps de charge moyen batteries plomb,Average charging time for lead batteries

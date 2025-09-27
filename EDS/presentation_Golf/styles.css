@@ -8,6 +8,88 @@
     --background-dark: #0f172a;
     --background-card: #1e293b;
     --white: #ffffff;
+
+    /* Couleurs pour groupement des calculs */
+    --cost-replacement: #dc2626;     /* Rouge pour remplacements */
+    --cost-maintenance: #d97706;     /* Orange pour maintenance (plus foncé) */
+    --cost-operational: #7c3aed;    /* Violet pour risques opérationnels */
+    --cost-recycling: #0891b2;      /* Cyan pour recyclage (plus foncé) */
+    --cost-total: #991b1b;          /* Rouge très foncé pour total */
+
+    /* Arrière-plans colorés (transparents) */
+    --bg-replacement: rgba(220, 38, 38, 0.1);
+    --bg-maintenance: rgba(217, 119, 6, 0.1);
+    --bg-operational: rgba(124, 58, 237, 0.1);
+    --bg-recycling: rgba(8, 145, 178, 0.1);
+    --bg-total: rgba(153, 27, 27, 0.15);
+}
+
+/* Classes pour regroupement visuel des calculs */
+.calc-replacement {
+    background-color: var(--bg-replacement);
+    border-left: 4px solid var(--cost-replacement);
+    padding: 8px 12px;
+    margin: 4px 0;
+    border-radius: 4px;
+}
+
+.calc-maintenance {
+    background-color: var(--bg-maintenance);
+    border-left: 4px solid var(--cost-maintenance);
+    padding: 8px 12px;
+    margin: 4px 0;
+    border-radius: 4px;
+}
+
+.calc-operational {
+    background-color: var(--bg-operational);
+    border-left: 4px solid var(--cost-operational);
+    padding: 8px 12px;
+    margin: 4px 0;
+    border-radius: 4px;
+}
+
+.calc-recycling {
+    background-color: var(--bg-recycling);
+    border-left: 4px solid var(--cost-recycling);
+    padding: 8px 12px;
+    margin: 4px 0;
+    border-radius: 4px;
+}
+
+.calc-total {
+    background-color: var(--bg-total);
+    border-left: 4px solid var(--cost-total);
+    padding: 12px 16px;
+    margin: 8px 0;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+/* Couleurs pour les valeurs numériques correspondantes */
+.value-replacement { color: var(--cost-replacement); }
+.value-maintenance {
+    color: var(--cost-maintenance);
+    font-weight: 600; /* Améliore la lisibilité */
+}
+.value-operational { color: var(--cost-operational); }
+.value-recycling { color: var(--cost-recycling); }
+.value-total { color: var(--cost-total); font-weight: bold; }
+
+/* Amélioration contraste pour texte maintenance sur fond replacement */
+.calc-replacement .value-maintenance {
+    color: #d97706; /* Orange plus foncé pour meilleur contraste */
+    font-weight: 700;
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+/* Amélioration contraste pour tous les textes colorés sur fonds colorés */
+.calc-replacement *,
+.calc-maintenance *,
+.calc-operational *,
+.calc-recycling *,
+.calc-total * {
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
 }
 
 * {
@@ -184,6 +266,43 @@ body {
     border-radius: 15px;
     padding: 30px;
     transition: all 0.3s ease;
+}
+
+/* Styles spécifiques par type de coût pour améliorer la lisibilité */
+.problem-detail-card.cost-replacement {
+    background: var(--bg-replacement);
+    border-color: var(--cost-replacement);
+}
+
+.problem-detail-card.cost-replacement h3 {
+    color: var(--cost-replacement);
+}
+
+.problem-detail-card.cost-maintenance {
+    background: var(--bg-maintenance);
+    border-color: var(--cost-maintenance);
+}
+
+.problem-detail-card.cost-maintenance h3 {
+    color: var(--cost-maintenance);
+}
+
+.problem-detail-card.cost-operational {
+    background: var(--bg-operational);
+    border-color: var(--cost-operational);
+}
+
+.problem-detail-card.cost-operational h3 {
+    color: var(--cost-operational);
+}
+
+.problem-detail-card.cost-recycling {
+    background: var(--bg-recycling);
+    border-color: var(--cost-recycling);
+}
+
+.problem-detail-card.cost-recycling h3 {
+    color: var(--cost-recycling);
 }
 
 .problem-detail-card:hover {

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Simple</title>
+</head>
+<body>
+    <h1>Debug du Chargement</h1>
+    <pre id="log"></pre>
+
+    <script>
+    const logElement = document.getElementById('log');
+    function log(message) {
+        console.log(message);
+        logElement.textContent += message + '\n';
+    }
+
+    // Test direct du chargement
+    async function testDirect() {
+        try {
+            log('1. Démarrage du test...');
+
+            // Test fetch simple
+            log('2. Test fetch data_clean.csv...');
+            const response = await fetch('data_clean.csv');
+            log(`3. Statut: ${response.status} ${response.statusText}`);
+
+            if (!response.ok) {
+                throw new Error(`HTTP Error: ${response.status}`);
+            }
+
+            const text = await response.text();
+            log(`4. Taille des données: ${text.length} caractères`);
+            log(`5. Début du fichier: ${text.substring(0, 200)}...`);
+
+            // Test parsing simple
+            const lines = text.split('\n');
+            log(`6. Nombre de lignes: ${lines.length}`);
+
+            const result = {};
+            for (let i = 1; i < Math.min(lines.length, 10); i++) {
+                const line = lines[i].trim();
+                if (line && !line.startsWith('#')) {
+                    const [section, key, value] = line.split(',');
+                    if (section && key && value) {
+                        if (!result[section]) result[section] = {};
+                        result[section][key] = value;
+                    }
+                }
+            }
+
+            log(`7. Données parsées (échantillon): ${JSON.stringify(result, null, 2)}`);
+            log('8. ✅ Test réussi!');
+
+        } catch (error) {
+            log(`❌ Erreur: ${error.message}`);
+            log(`Stack: ${error.stack}`);
+        }
+    }
+
+    // Lancer le test
+    testDirect();
+    </script>
+</body>
+</html>
