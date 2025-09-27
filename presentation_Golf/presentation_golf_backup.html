@@ -2174,10 +2174,8 @@
 
 
     <script>
-        // Données centralisées - architecture optimisée
+        // Données vides - tout sera chargé depuis le CSV
         let data = {};
-        let variables = {};
-        let formulas = {};
         let currentLanguage = 'fr'; // Langue par défaut
 
         // Fonction pour changer de langue
@@ -2193,117 +2191,57 @@
             });
 
             // Recharger les données dans la nouvelle langue
-            loadAllData();
+            loadDataFromCSV();
         }
 
-        // Fonction pour charger un fichier CSV (helper)
-        async function loadCSV(filename) {
-            const response = await fetch(filename + '?t=' + Date.now()); // Cache busting
-            if (!response.ok) {
-                throw new Error(`Erreur HTTP: ${response.status} pour ${filename}`);
-            }
-            const csvText = await response.text();
-            const lines = csvText.split('\n');
-            const result = {};
+        // Fonction pour charger les données depuis le CSV
+        async function loadDataFromCSV() {
+            try {
+                const csvFile = currentLanguage === 'fr' ? 'data.csv' : 'data_en.csv';
+                const response = await fetch(csvFile + '?t=' + Date.now()); // Cache busting
 
-            // Déterminer si c'est un fichier structuré (variables/formulas) ou un fichier de données texte
-            const firstLine = lines[0];
-            const isStructuredFile = firstLine.includes('variable_id') || firstLine.includes('formula_id');
-
-            if (isStructuredFile) {
-                // Parser pour variables.csv et formulas.csv
-                const headers = firstLine.split(',').map(h => h.trim());
-
-                for (let i = 1; i < lines.length; i++) {
-                    const line = lines[i].trim();
-                    if (line && !line.startsWith('#')) {
-                        const parts = line.split(',');
-                        if (parts.length >= headers.length) {
-                            const row = {};
-                            headers.forEach((header, index) => {
-                                let value = parts[index] ? parts[index].trim() : '';
-                                if (value.startsWith('"') && value.endsWith('"')) {
-                                    value = value.slice(1, -1);
-                                }
-                                row[header] = value;
-                            });
-
-                            if (row.variable_id || row.formula_id) {
-                                result[row.variable_id || row.formula_id] = row;
-                            }
-                        }
-                    }
+                if (!response.ok) {
+                    throw new Error(`Erreur HTTP: ${response.status}`);
                 }
-            } else {
-                // Parser pour data_clean.csv (section,key,value)
+                const csvText = await response.text();
+
+                const lines = csvText.split('\n');
+                data = {}; // Reset des données
+
                 for (let i = 1; i < lines.length; i++) {
                     const line = lines[i].trim();
                     if (line && !line.startsWith('#')) {
+                        // Parser CSV simple
                         const parts = line.split(',');
                         if (parts.length >= 3) {
                             const section = parts[0].trim();
                             const key = parts[1].trim();
                             let value = parts.slice(2).join(',').trim();
 
+                            // Enlever les guillemets si présents
                             if (value.startsWith('"') && value.endsWith('"')) {
                                 value = value.slice(1, -1);
                             }
 
                             if (section && key) {
-                                if (!result[section]) {
-                                    result[section] = {};
+                                if (!data[section]) {
+                                    data[section] = {};
                                 }
-                                result[section][key] = value;
+                                data[section][key] = value;
                             }
                         }
                     }
                 }
-            }
 
-            return result;
-        }
-
-        // Fonction pour récupérer une variable numérique centralisée
-        function getVariable(variableId) {
-            const variable = variables[variableId];
-            if (!variable) {
-                console.warn(`Variable non trouvée: ${variableId}`);
-                return 0;
-            }
-            return parseFloat(variable.value) || 0;
-        }
-
-        // Fonction principale pour charger toutes les données
-        async function loadAllData() {
-            try {
-                console.log('🚀 Chargement architecture centralisée...');
-
-                // Charger en parallèle les 3 fichiers
-                const [textData, variablesData, formulasData] = await Promise.all([
-                    loadCSV(currentLanguage === 'fr' ? 'data_clean.csv' : 'data_en_clean.csv'),
-                    loadCSV('variables.csv'),
-                    loadCSV('formulas.csv')
-                ]);
-
-                // Stocker les données
-                data = textData;
-                variables = variablesData;
-                formulas = formulasData;
-
-                console.log('✅ Architecture chargée:', {
-                    textSections: Object.keys(textData).length,
-                    variables: Object.keys(variables).length,
-                    formulas: Object.keys(formulas).length
-                });
-
+                // Données chargées
                 updateContent();
 
             } catch (error) {
-                console.error('❌ Erreur lors du chargement:', error);
+                console.error('Erreur lors du chargement des données:', error);
                 // En cas d'erreur, essayer de charger le français par défaut
                 if (currentLanguage !== 'fr') {
                     currentLanguage = 'fr';
-                    loadAllData();
+                    loadDataFromCSV();
                 }
             }
         }
@@ -2701,14 +2639,14 @@
 
             const currency = ' $';
 
-            // SECTION PROBLÈMES - Coûts explosifs réels du plomb (variables centralisées)
-            const costReplacement = getVariable('lead_cost_replacement_unit') * currentCartCount;
-            const maintenanceHours = getVariable('lead_maintenance_hours_unit') * currentCartCount;
-            const maintenanceCost = getVariable('lead_maintenance_cost_unit') * currentCartCount;
-            const maintenance10Years = getVariable('lead_maintenance_10y_unit') * currentCartCount;
+            // SECTION PROBLÈMES - Coûts explosifs réels du plomb (selon document de proposition)
+            const costReplacement = parseFloat(data.problem.cost_replacement_unit) * currentCartCount; // 2000$ par voiturette
+            const maintenanceHours = parseFloat(data.problem.maintenance_hours_unit) * currentCartCount; // 120h/an
+            const maintenanceCost = parseFloat(data.problem.maintenance_cost_unit) * currentCartCount; // 360$/an par voiturette
+            const maintenance10Years = parseFloat(data.problem.maintenance_10_years_unit) * currentCartCount; // 3600$/10ans
 
-            // Coût total réel selon l'architecture centralisée
-            const totalRealCost10YearsPerUnit = getVariable('lead_total_cost_10y_unit');
+            // Utilisation du coût réel total selon le document (141,400$ pour 10 voiturettes sur 10 ans)
+            const totalRealCost10YearsPerUnit = parseFloat(data.problem.total_real_cost_10y_unit) || 14140; // 14,140$ par voiturette
             const cost10YearsReal = totalRealCost10YearsPerUnit * currentCartCount;
 
             safeUpdateElement('cost-replacement', formatNumber(costReplacement) + currency + ' (par voiturette)');
@@ -2716,26 +2654,26 @@
             safeUpdateElement('maintenance-hours', maintenanceHours + ' heures/an');
             safeUpdateElement('maintenance-cost', formatNumber(maintenanceCost) + currency + ' (par voiturette/an)');
 
-            // Mise à jour dynamique de l'impact temps de charge (variables centralisées)
-            const baseChargingTime = data.problem?.charging_time || `${getVariable('lead_charging_hours')} heures`;
-            const fleetOverhead = getVariable('fleet_overhead_percent');
-            const extraCostPerCart = getVariable('extra_fleet_cost_per_cart');
+            // Mise à jour dynamique de l'impact temps de charge
+            const baseChargingTime = data.problem?.charging_time || "8-10 heures";
+            const fleetOverhead = parseFloat(data.problem?.fleet_overhead_percent || 40);
+            const extraCostPerCart = parseFloat(data.problem?.extra_fleet_cost_per_cart || 800);
             const fleetImpact = Math.round(currentCartCount * fleetOverhead / 100);
             const totalExtraCost = fleetImpact * extraCostPerCart;
 
             const chargingImpactText = `${baseChargingTime} = +${fleetImpact} voiturettes (${formatNumber(totalExtraCost)}$)`;
             safeUpdateElement('charging-time', chargingImpactText);
 
-            // SECTION TARIFICATION - Calculs dynamiques (variables centralisées)
-            const monthly10 = getVariable('lifepo4_monthly_10y') * currentCartCount;
-            const savings10 = getVariable('savings_10y_unit') * currentCartCount;
+            // SECTION TARIFICATION - Calculs dynamiques
+            const monthly10 = parseFloat(data.pricing.contract_10_monthly_unit) * currentCartCount;
+            const savings10 = parseFloat(data.pricing.savings_10_years_unit) * currentCartCount;
 
-            const monthly20 = getVariable('lifepo4_monthly_20y') * currentCartCount;
-            const savings20 = getVariable('savings_20y_unit') * currentCartCount;
+            const monthly20 = parseFloat(data.pricing.contract_20_monthly_unit) * currentCartCount;
+            const savings20 = parseFloat(data.pricing.savings_20_years_unit) * currentCartCount;
 
-            // Calcul pour l'offre flotte (variables centralisées)
-            const monthlyFleet = getVariable('lifepo4_monthly_fleet') * currentCartCount;
-            const savingsFleet = getVariable('savings_20y_unit') * currentCartCount;
+            // Calcul pour l'offre flotte (même prix que 20 ans mais avantages premium pour 30+)
+            const monthlyFleet = parseFloat(data.pricing.contract_20_fleet_monthly_unit) * currentCartCount;
+            const savingsFleet = parseFloat(data.pricing.contract_20_fleet_savings_unit) * currentCartCount;
 
             safeUpdateElement('contract-10-monthly', formatNumber(monthly10) + currency);
             safeUpdateElement('savings-10-years', formatNumber(savings10) + currency);
@@ -2749,7 +2687,7 @@
             const premiumCard = document.querySelector('.pricing-card.premium');
             const fleetMinimumElement = document.getElementById('fleet-minimum-text');
 
-            if (currentCartCount >= getVariable('fleet_minimum_carts')) {
+            if (currentCartCount >= 30) {
                 // Activer l'offre flotte
                 if (fleetCard) {
                     fleetCard.style.opacity = '1';
@@ -2793,15 +2731,16 @@
                 }
             }
 
-            // SECTION COMPARAISON - Totaux flotte (variables centralisées)
-            const leadBatteries10 = getVariable('lead_total_cost_10y_unit') * currentCartCount;
-            const lithium10 = getVariable('lifepo4_total_10y_unit') * currentCartCount;
+            // SECTION COMPARAISON - Calculs dynamiques
+            const leadBatteries10 = parseFloat(data.comparison.lead_batteries_10_years_unit) * currentCartCount;
+            const leadBatteries20 = parseFloat(data.comparison.lead_batteries_20_years_unit) * currentCartCount;
+            const lithium10 = parseFloat(data.comparison.lithium_10_years_unit) * currentCartCount;
 
             safeUpdateElement('lead-batteries-10-years', formatNumber(leadBatteries10) + currency);
             safeUpdateElement('contract-10-total', formatNumber(lithium10) + currency);
 
-            // Mettre à jour les heures de maintenance dans la comparaison (variables centralisées)
-            const leadMaintenanceHours = getVariable('lead_maintenance_hours_unit') * currentCartCount;
+            // Mettre à jour les heures de maintenance dans la comparaison
+            const leadMaintenanceHours = parseFloat(data.problem.maintenance_hours_unit) * currentCartCount;
             safeUpdateElement('lead-maintenance', leadMaintenanceHours + (currentLanguage === 'fr' ? ' heures/an' : ' hours/year'));
 
             // Mettre à jour l'affichage du nombre de voiturettes
@@ -2855,7 +2794,7 @@
 
             // Coûts lithium selon la flotte sur 20 ans
             let lithium20, selectedMonthlyRate;
-            if (currentCartCount >= getVariable('fleet_minimum_carts')) {
+            if (currentCartCount >= 30) {
                 selectedMonthlyRate = lithiumFleetMonthly;
                 lithium20 = selectedMonthlyRate * 12 * 20 * currentCartCount;
             } else {
@@ -2941,7 +2880,12 @@
             safeUpdateElement('per-cart-monthly-savings',
                 `${formatNumber(perCartMonthlySavings)}${currency}/voiturette/mois économisés`);
 
-            // NOTE: Tableau comparaison maintenant géré par l'architecture centralisée dans populateVsBatteriesSection()
+            // Mise à jour tableau comparaison (garder 10 ans pour la compatibilité)
+            const leadTotal10 = (leadReplacementCost * Math.ceil(10 / replacementCycle) + leadMaintenanceCost * 10) * currentCartCount;
+            const lithium10 = currentCartCount >= 30 ? lithiumFleetMonthly * 12 * 10 * currentCartCount : lithiumMonthly10 * 12 * 10 * currentCartCount;
+
+            safeUpdateElement('lead-batteries-10-years', formatNumber(leadTotal10) + currency);
+            safeUpdateElement('contract-10-total', formatNumber(lithium10) + currency);
 
             // Mise à jour autres données comparaison
             safeUpdateElement('lead-replacements', `${Math.ceil(10 / replacementCycle)} remplacements sur 10 ans`);
@@ -3011,7 +2955,7 @@
             const premiumFloatingCard = document.querySelector('.floating-calculator .pricing-mini:nth-child(2)');
 
             if (fleetCard) {
-                if (currentCartCount >= getVariable('fleet_minimum_carts')) {
+                if (currentCartCount >= 30) {
                     // Activer flotte, désactiver 20 ans
                     fleetCard.classList.remove('fleet-inactive');
                     fleetCard.classList.remove('disabled');
@@ -3323,8 +3267,8 @@
 
         // Chargement automatique des données CSV au démarrage de la page
         document.addEventListener('DOMContentLoaded', function() {
-            // Page chargée, initialisation du chargement CSV avec architecture centralisée
-            loadAllData();
+            // Page chargée, initialisation du chargement CSV
+            loadDataFromCSV();
 
             // Setup des sliders après un petit délai pour s'assurer que le DOM est prêt
             setTimeout(() => {

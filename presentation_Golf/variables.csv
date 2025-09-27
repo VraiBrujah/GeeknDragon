@@ -1,0 +1,48 @@
+variable_id,value,unit,name_fr,name_en,description_fr,description_en
+# COÛTS BATTERIES PLOMB (par voiturette)
+lead_cost_replacement_unit,2000,$,Coût remplacement batterie plomb,Lead battery replacement cost,Coût d'une batterie plomb de remplacement par voiturette,Cost of one lead battery replacement per cart
+lead_maintenance_hours_unit,120,hours,Heures maintenance annuelle plomb,Lead annual maintenance hours,Heures de maintenance obligatoire par an pour batteries plomb,Mandatory maintenance hours per year for lead batteries
+lead_maintenance_cost_unit,360,$,Coût maintenance annuel plomb,Lead annual maintenance cost,Coût de maintenance annuel par voiturette (120h × 30$/h),Annual maintenance cost per cart (120h × 30$/h)
+lead_maintenance_10y_unit,3600,$,Coût maintenance 10 ans plomb,Lead 10-year maintenance cost,Coût total maintenance sur 10 ans par voiturette,Total maintenance cost over 10 years per cart
+lead_total_cost_10y_unit,14140,$,Coût total réel 10 ans plomb,Lead real total 10-year cost,Coût réel total par voiturette sur 10 ans (rempl + maint + risques),Real total cost per cart over 10 years (repl + maint + risks)
+lead_replacement_cycle_years,3.5,years,Cycle remplacement plomb,Lead replacement cycle,Durée moyenne entre remplacements batteries plomb,Average duration between lead battery replacements
+lead_lifespan_max,5,years,Durée vie max plomb,Lead max lifespan,Durée de vie maximale batteries plomb,Maximum lifespan of lead batteries
+lead_weight_kg,300,kg,Poids batteries plomb,Lead battery weight,Poids total des batteries plomb par voiturette,Total weight of lead batteries per cart
+lead_charging_hours,9,hours,Temps charge plomb,Lead charging time,Temps de charge moyen batteries plomb,Average charging time for lead batteries
+lead_cycles_max,500,cycles,Cycles max plomb,Lead max cycles,Nombre maximum de cycles de charge batteries plomb,Maximum charge cycles for lead batteries
+
+# COÛTS BATTERIES LIFEPO4 (par voiturette)
+lifepo4_monthly_10y,97.64,$,Prix mensuel LiFePO4 10 ans,LiFePO4 monthly price 10 years,Prix de location mensuel par voiturette contrat 10 ans,Monthly rental price per cart for 10-year contract
+lifepo4_monthly_20y,84.36,$,Prix mensuel LiFePO4 20 ans,LiFePO4 monthly price 20 years,Prix de location mensuel par voiturette contrat 20 ans,Monthly rental price per cart for 20-year contract
+lifepo4_monthly_fleet,76.73,$,Prix mensuel LiFePO4 flotte,LiFePO4 monthly fleet price,Prix de location mensuel par voiturette offre flotte 30+,Monthly rental price per cart for fleet offer 30+
+lifepo4_total_10y_unit,11716.8,$,Coût total LiFePO4 10 ans,LiFePO4 total 10-year cost,Coût total par voiturette sur 10 ans en location,Total cost per cart over 10 years rental
+lifepo4_total_20y_unit,20246.4,$,Coût total LiFePO4 20 ans,LiFePO4 total 20-year cost,Coût total par voiturette sur 20 ans en location,Total cost per cart over 20 years rental
+lifepo4_total_fleet_unit,18415.2,$,Coût total LiFePO4 flotte,LiFePO4 total fleet cost,Coût total par voiturette sur 20 ans offre flotte,Total cost per cart over 20 years fleet offer
+lifepo4_weight_kg,40,kg,Poids batteries LiFePO4,LiFePO4 battery weight,Poids total des batteries LiFePO4 par voiturette,Total weight of LiFePO4 batteries per cart
+lifepo4_charging_hours,2,hours,Temps charge LiFePO4,LiFePO4 charging time,Temps de charge batteries LiFePO4,Charging time for LiFePO4 batteries
+lifepo4_cycles_min,8000,cycles,Cycles min LiFePO4,LiFePO4 min cycles,Nombre minimum de cycles garantis LiFePO4,Minimum guaranteed cycles for LiFePO4
+lifepo4_lifespan_min,15,years,Durée vie min LiFePO4,LiFePO4 min lifespan,Durée de vie minimale garantie LiFePO4,Minimum guaranteed lifespan for LiFePO4
+lifepo4_lifespan_max,20,years,Durée vie max LiFePO4,LiFePO4 max lifespan,Durée de vie maximale LiFePO4,Maximum lifespan for LiFePO4
+
+# ÉCONOMIES ET COMPARAISONS
+savings_10y_unit,2423.2,$,Économies 10 ans par voiturette,Savings 10 years per cart,Économies réalisées par voiturette sur 10 ans vs plomb,Savings achieved per cart over 10 years vs lead
+savings_20y_unit,9558.4,$,Économies 20 ans par voiturette,Savings 20 years per cart,Économies réalisées par voiturette sur 20 ans vs plomb,Savings achieved per cart over 20 years vs lead
+fleet_minimum_carts,30,units,Minimum voiturettes flotte,Fleet minimum carts,Nombre minimum de voiturettes pour offre flotte,Minimum number of carts for fleet offer
+
+# TEMPS ET IMPACTS OPÉRATIONNELS
+fleet_overhead_percent,40,%,Surcoût flotte temps charge,Fleet overhead charging time,Pourcentage voiturettes supplémentaires pour temps charge long,Percentage of additional carts needed for long charging time
+extra_fleet_cost_per_cart,800,$,Coût voiturette supplémentaire,Extra cart cost,Coût d'une voiturette supplémentaire pour rotation,Cost of one additional cart for rotation
+charging_downtime_hours,8.5,hours,Temps indisponibilité charge,Charging downtime hours,Temps moyen d'indisponibilité pendant charge,Average downtime during charging
+
+# RISQUES ET COÛTS CACHÉS PLOMB
+premature_failure_risk,1200,$,Risque bris prématuré,Premature failure risk,Coût risque de bris prématuré par voiturette,Cost risk of premature failure per cart
+recycling_disposal_cost,300,$,Coût recyclage,Recycling cost,Coût de recyclage et disposal par voiturette,Recycling and disposal cost per cart
+revenue_loss_yearly,800,$,Perte revenus annuelle,Annual revenue loss,Perte de revenus annuelle par pannes et remboursements,Annual revenue loss from breakdowns and refunds
+overconsumption_percent,25,%,Surconsommation électrique,Electrical overconsumption,Pourcentage de surconsommation électrique vs LiFePO4,Percentage of electrical overconsumption vs LiFePO4
+overconsumption_cost_yearly,240,$,Coût surconsommation annuel,Annual overconsumption cost,Coût annuel de la surconsommation électrique,Annual cost of electrical overconsumption
+insurance_increase_yearly,500,$,Majoration assurance annuelle,Annual insurance increase,Majoration annuelle assurance matières dangereuses,Annual insurance increase for hazardous materials
+
+# CONSTANTS TECHNIQUES
+technician_hourly_rate,30,$,Taux horaire technicien,Technician hourly rate,Taux horaire d'un technicien spécialisé,Hourly rate of specialized technician
+autonomy_degradation_5y,50,%,Dégradation autonomie 5 ans,5-year autonomy degradation,Pourcentage de perte d'autonomie après 5 ans (plomb),Percentage of autonomy loss after 5 years (lead)
+performance_until_discharge,95,%,Performance jusqu'à décharge,Performance until discharge,Pourcentage de performance maintenue jusqu'à décharge (LiFePO4),Percentage of performance maintained until discharge (LiFePO4)
