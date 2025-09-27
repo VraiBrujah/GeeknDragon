@@ -11,11 +11,50 @@ hero,subtitle,LiFePO₄ Lithium Kit 48V 105Ah - Designed and Made in Canada
 hero,hero_image,images/golf_cart_sunset.jpg
 
 problem,title,YOUR CURRENT CHALLENGE: LEAD BATTERY LIMITATIONS
-problem,cost_replacement_unit,200
-problem,cost_10_years_unit,8000
-problem,maintenance_hours_unit,12
+problem,cost_replacement_unit,2000
+problem,cost_10_years_unit,80000
+problem,maintenance_hours_unit,120
 problem,maintenance_cost_unit,360
 problem,maintenance_10_years_unit,3600
+problem,premature_failure_risk,1200
+problem,recycling_disposal_cost,30
+problem,revenue_loss_yearly,80
+problem,overconsumption_cost_yearly,24
+problem,insurance_increase_yearly,50
+problem,total_real_cost_10y_unit,14140
+
+# Explanatory subsections for hidden costs
+problem_details,section_1_title,💸 Explosive Replacement Costs
+problem_details,section_1_subtitle,Why lead batteries cost so much
+problem_details,section_1_point_1,Frequent replacement every 2-5 years
+problem_details,section_1_point_2,2000$ per cart at each replacement
+problem_details,section_1_point_3,4 minimum replacements over 10 years
+problem_details,section_1_point_4,15-20% risk of premature failure
+problem_details,section_1_calculation,4 × 2000$ = 8000$ per cart over 10 years
+
+problem_details,section_2_title,⚙️ Specialized Expensive Maintenance
+problem_details,section_2_subtitle,Hidden costs of constant upkeep
+problem_details,section_2_point_1,120 hours of mandatory maintenance per year
+problem_details,section_2_point_2,Specialized technician at 30$ per hour
+problem_details,section_2_point_3,Weekly distilled water verification
+problem_details,section_2_point_4,Terminal cleaning and inspection
+problem_details,section_2_calculation,120h × 30$ × 10 years = 36000$ per fleet
+
+problem_details,section_3_title,🚨 Operational Risks and Losses
+problem_details,section_3_subtitle,Costs nobody tells you about
+problem_details,section_3_point_1,Mid-course breakdowns = customer refunds
+problem_details,section_3_point_2,25% electrical overconsumption
+problem_details,section_3_point_3,Increased insurance for hazardous materials
+problem_details,section_3_point_4,Recycling and toxic handling fees
+problem_details,section_3_calculation,800$ + 240$ + 500$ + 300$ = 1840$ per year
+
+problem_details,section_4_title,💰 TOTAL Real Hidden Costs
+problem_details,section_4_subtitle,The true explosive cost of lead batteries
+problem_details,section_4_point_1,Replacements + maintenance + risks
+problem_details,section_4_point_2,8000$ + 3600$ + 1840$ per cart over 10 years
+problem_details,section_4_point_3,Over 14000$ per cart actually
+problem_details,section_4_point_4,Vs EDS lithium: predictable monthly fixed cost
+problem_details,section_4_calculation,REAL TOTAL: 14140$ per cart over 10 years
 problem,performance_issue,Power loss at end of charge
 problem,autonomy_new,6-8 hours (new battery)
 problem,autonomy_degraded,3-4 hours (after 5 years degradation)
@@ -62,9 +101,14 @@ comparison,lead_batteries_20_years_unit,28000
 comparison,lead_replacements,4 replacements over 10 years
 comparison,lead_maintenance,12 hours/year
 comparison,lead_charging,8-10 hours
+comparison,lead_replacement_frequency,Replacement required every 2-5 years
+comparison,lead_replacement_detail,High and frequent cost - rapid degradation
+comparison,lithium_10_years_unit,11716.8
 comparison,lithium_replacements,0 replacement
 comparison,lithium_maintenance,0 hours
 comparison,lithium_charging,2 hours
+comparison,lithium_lifespan,15-20 years without replacement
+comparison,lithium_detail,One-time investment - constant performance
 
 benefits,benefit_1,Single battery for the entire contract duration
 benefits,benefit_2,120 hours of annual maintenance savings
@@ -86,21 +130,21 @@ contact,website,www.edsquebec.com
 
 # Textes fixes de l'interface
 ui,hero_image_alt,Modern golf cart
-ui,problem_card_1_title,Hidden Massive Costs
-ui,problem_card_1_suffix,frequent replacement cost
-ui,problem_card_1_total_prefix,Total cost over 10 years:
-ui,problem_card_2_title,Extremely Expensive Maintenance
-ui,problem_card_2_suffix,per year
-ui,problem_card_2_cost_prefix,Annual cost:
-ui,problem_card_3_title,Degraded Performance
-ui,problem_card_3_charging_prefix,Charging time:
-ui,problem_card_4_title,Excessive Weight
+ui,problem_card_1_title,Explosive Hidden Costs
+ui,problem_card_1_suffix,per cart + premature failure risks
+ui,problem_card_1_total_prefix,Real total cost over 10 years:
+ui,problem_card_2_title,Specialized Expensive Maintenance
+ui,problem_card_2_suffix,hours/year
+ui,problem_card_2_cost_prefix,Real annual cost:
+ui,problem_card_3_title,Degraded Performance & Losses
+ui,problem_card_3_charging_prefix,Charging time + revenue losses:
+ui,problem_card_4_title,Excessive Weight & Overconsumption
 ui,problem_card_4_weight_prefix,Over
-ui,problem_card_4_consumption_prefix,Consumption
-ui,problem_card_5_title,Environmental Risks
-ui,problem_card_5_training,Mandatory safety training for staff
-ui,problem_card_6_title,Compromised Safety
-ui,problem_card_6_risks,Risks to equipment and course
+ui,problem_card_4_consumption_prefix,25% overconsumption
+ui,problem_card_5_title,Hazardous Materials
+ui,problem_card_5_training,Recycling 300$/unit + increased insurance
+ui,problem_card_6_title,Breakdowns & Refunds
+ui,problem_card_6_risks,2000$/year revenue losses from clients
 
 ui,solution_card_1_title,Reliable Autonomy
 ui,solution_card_2_title,Exceptional Lifespan
@@ -129,6 +173,22 @@ ui,pricing_savings_20_suffix,over 20 years
 ui,pricing_savings_fleet_prefix,PREMIUM Savings:
 ui,pricing_savings_fleet_suffix,over 20 years
 ui,fleet_minimum_text,Minimum 30 carts
+
+# Calculation details
+calculs,lead_battery_cost_detail,Lead battery unit cost + replacement
+calculs,lead_replacement_schedule,Replacement required every 2-5 years (average 3.5 years)
+calculs,lead_maintenance_detail,12h/year maintenance x technician hourly rate
+calculs,lithium_advantage,No replacement for 15-20 years + zero maintenance
+calculs,total_cost_formula,Monthly rental price x number of carts x duration
+calculs,savings_formula,Lead battery cost - Lithium solution cost
+
+# ROI and profitability
+roi,break_even_title,Break-even point reached from
+roi,break_even_period,1st year
+roi,roi_percentage_20y,ROI over 20 years
+roi,monthly_savings_description,Average monthly savings per cart
+roi,yearly_savings_description,Annual savings per cart
+roi,payback_description,Investment payback period
 
 ui,benefits_title,Why Choose EDS Quebec?
 ui,benefits_reliability,Reliability

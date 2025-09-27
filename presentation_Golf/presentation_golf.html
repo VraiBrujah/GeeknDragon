@@ -177,6 +177,109 @@
             font-size: 1.5rem;
         }
 
+        /* Problem Details Section */
+        .problem-details-section {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .problem-detail-card {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid rgba(239, 68, 68, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .problem-detail-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.5);
+        }
+
+        .problem-detail-card h3 {
+            color: #dc2626;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .detail-subtitle {
+            color: #4b5563; /* Gris foncé pour meilleur contraste */
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .detail-points {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        .detail-points li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #1f2937; /* Couleur foncée pour contraste */
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .detail-points li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: 8px;
+        }
+
+        .calculation-box {
+            background: rgba(239, 68, 68, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #991b1b; /* Rouge plus foncé pour contraste */
+            border: 2px solid rgba(239, 68, 68, 0.6);
+            font-weight: 700;
+        }
+
+        /* Section Total avec style distinct */
+        .problem-detail-card.total-section {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.1));
+            border: 3px solid #dc2626;
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
+        }
+
+        .problem-detail-card.total-section h3 {
+            color: #991b1b;
+            font-size: 1.6rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .calculation-box.total-calculation {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.4), rgba(220, 38, 38, 0.3));
+            border: 3px solid #dc2626;
+            color: #7f1d1d; /* Rouge très foncé */
+            font-size: 1.3rem;
+            font-weight: 800;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        }
+
+        @media (max-width: 768px) {
+            .problem-details-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .problem-detail-card {
+                padding: 20px;
+            }
+        }
+
         /* Solution Section */
         .solution-section {
             background: linear-gradient(135deg, #dcfdf7, #dbeafe);
@@ -754,6 +857,114 @@
             color: #9ca3af;
         }
 
+        /* Calculation Details Section */
+        .calculation-details-section {
+            background: var(--background-card);
+            border-radius: 20px;
+            padding: 60px;
+            margin: 60px 0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .details-title {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .detail-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .detail-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .lead-detail {
+            border-color: rgba(220, 38, 38, 0.3);
+        }
+
+        .lead-detail h3 {
+            color: #fca5a5;
+        }
+
+        .lithium-detail {
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .lithium-detail h3 {
+            color: #6ee7b7;
+        }
+
+        .savings-detail {
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .savings-detail h3 {
+            color: #fcd34d;
+        }
+
+        .roi-detail {
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .roi-detail h3 {
+            color: #a5b4fc;
+        }
+
+        .detail-item {
+            margin-bottom: 15px;
+        }
+
+        .detail-item strong {
+            color: var(--text-dark);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .detail-item p {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .detail-item strong[id$="-calc"],
+        .detail-item strong[id$="-display"] {
+            color: var(--secondary-green);
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .calculation-details-section {
+                padding: 40px 20px;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .details-title {
+                font-size: 2rem;
+            }
+        }
+
         /* Audio Controller */
         .audio-controller {
             position: fixed;
@@ -1103,7 +1314,7 @@
             <p class="cart-calculator-subtitle" id="cart-calculator-subtitle">Chargement...</p>
             <div class="cart-slider-container">
                 <label class="cart-count-label" id="cart-count-label">Chargement...</label>
-                <input type="range" min="1" max="100" value="10" class="cart-slider" id="cartSlider">
+                <input type="range" min="10" max="100" value="10" class="cart-slider" id="cartSlider">
                 <div class="cart-value-display">
                     <span id="cart-count">10</span> <span id="cart-unit-suffix">Chargement...</span>
                 </div>
@@ -1143,6 +1354,65 @@
                     <h3 id="problem-card-6-title">Chargement...</h3>
                     <p><strong id="safety-concerns">Chargement...</strong></p>
                     <p id="problem-card-6-risks">Chargement...</p>
+                </div>
+            </div>
+
+            <!-- Detailed explanations of hidden costs -->
+            <div class="problem-details-section">
+                <div class="problem-detail-card">
+                    <h3 id="problem-details-section-1-title">Chargement...</h3>
+                    <p class="detail-subtitle" id="problem-details-section-1-subtitle">Chargement...</p>
+                    <ul class="detail-points">
+                        <li id="problem-details-section-1-point-1">Chargement...</li>
+                        <li id="problem-details-section-1-point-2">Chargement...</li>
+                        <li id="problem-details-section-1-point-3">Chargement...</li>
+                        <li id="problem-details-section-1-point-4">Chargement...</li>
+                    </ul>
+                    <div class="calculation-box">
+                        <strong id="problem-details-section-1-calculation">Chargement...</strong>
+                    </div>
+                </div>
+
+                <div class="problem-detail-card">
+                    <h3 id="problem-details-section-2-title">Chargement...</h3>
+                    <p class="detail-subtitle" id="problem-details-section-2-subtitle">Chargement...</p>
+                    <ul class="detail-points">
+                        <li id="problem-details-section-2-point-1">Chargement...</li>
+                        <li id="problem-details-section-2-point-2">Chargement...</li>
+                        <li id="problem-details-section-2-point-3">Chargement...</li>
+                        <li id="problem-details-section-2-point-4">Chargement...</li>
+                    </ul>
+                    <div class="calculation-box">
+                        <strong id="problem-details-section-2-calculation">Chargement...</strong>
+                    </div>
+                </div>
+
+                <div class="problem-detail-card">
+                    <h3 id="problem-details-section-3-title">Chargement...</h3>
+                    <p class="detail-subtitle" id="problem-details-section-3-subtitle">Chargement...</p>
+                    <ul class="detail-points">
+                        <li id="problem-details-section-3-point-1">Chargement...</li>
+                        <li id="problem-details-section-3-point-2">Chargement...</li>
+                        <li id="problem-details-section-3-point-3">Chargement...</li>
+                        <li id="problem-details-section-3-point-4">Chargement...</li>
+                    </ul>
+                    <div class="calculation-box">
+                        <strong id="problem-details-section-3-calculation">Chargement...</strong>
+                    </div>
+                </div>
+
+                <div class="problem-detail-card total-section">
+                    <h3 id="problem-details-section-4-title">Chargement...</h3>
+                    <p class="detail-subtitle" id="problem-details-section-4-subtitle">Chargement...</p>
+                    <ul class="detail-points">
+                        <li id="problem-details-section-4-point-1">Chargement...</li>
+                        <li id="problem-details-section-4-point-2">Chargement...</li>
+                        <li id="problem-details-section-4-point-3">Chargement...</li>
+                        <li id="problem-details-section-4-point-4">Chargement...</li>
+                    </ul>
+                    <div class="calculation-box total-calculation">
+                        <strong id="problem-details-section-4-calculation">Chargement...</strong>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1266,6 +1536,104 @@
             </div>
         </section>
 
+        <!-- Calculation Details Section -->
+        <section class="calculation-details-section fade-in">
+            <div class="container">
+                <h2 class="details-title">💡 Détails des Calculs (20 ans)</h2>
+
+                <div class="details-grid">
+                    <!-- 1. Batteries plomb - Coûts cachés -->
+                    <div class="detail-card lead-detail">
+                        <h3>⚠️ Batteries Plomb - Coûts Cachés</h3>
+                        <div class="detail-item">
+                            <strong>Cycle de remplacement :</strong>
+                            <p id="lead-replacement-schedule">Chargement...</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Nombre de remplacements sur 20 ans :</strong>
+                            <p id="lead-replacements-20y">Chargement...</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Coût total sur 20 ans :</strong>
+                            <p>
+                                <span id="lead-cost-breakdown-20y">Chargement...</span> =
+                                <strong id="lead-total-calc-20y">Chargement...</strong>
+                            </p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Maintenance sur 20 ans :</strong>
+                            <p id="lead-maintenance-total-20y">Chargement...</p>
+                        </div>
+                    </div>
+
+                    <!-- 2. Solution lithium - Avantages -->
+                    <div class="detail-card lithium-detail">
+                        <h3>✅ Solution Lithium - Avantages</h3>
+                        <div class="detail-item">
+                            <strong>Durée de vie :</strong>
+                            <p id="lithium-lifespan">Chargement...</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Remplacements sur 20 ans :</strong>
+                            <p id="lithium-replacements-20y">Chargement...</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Coût total sur 20 ans :</strong>
+                            <p>
+                                <span id="lithium-cost-breakdown-20y">Chargement...</span> =
+                                <strong id="lithium-total-calc-20y">Chargement...</strong>
+                            </p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Avantage clé :</strong>
+                            <p id="lithium-advantage">Chargement...</p>
+                        </div>
+                    </div>
+
+                    <!-- 3. Comparaison et économies -->
+                    <div class="detail-card savings-detail">
+                        <h3>💰 Comparaison & Économies</h3>
+                        <div class="detail-item">
+                            <strong>Économie brute sur 20 ans :</strong>
+                            <p>
+                                <span id="detailed-savings-calc-20y">Chargement...</span> =
+                                <strong id="total-savings-display-20y">Chargement...</strong>
+                            </p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Fourchette selon remplacement :</strong>
+                            <p id="savings-range-20y">Chargement...</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Pourcentage d'économie :</strong>
+                            <p id="savings-percentage-20y">Chargement...</p>
+                        </div>
+                    </div>
+
+                    <!-- 4. ROI et rentabilité -->
+                    <div class="detail-card roi-detail">
+                        <h3>📈 ROI & Rentabilité</h3>
+                        <div class="detail-item">
+                            <strong>Retour sur investissement :</strong>
+                            <p id="roi-calculation">Chargement...</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Seuil de rentabilité :</strong>
+                            <p id="break-even-point">Chargement...</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Économie mensuelle moyenne :</strong>
+                            <p id="monthly-savings-average">Chargement...</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Économie par voiturette/mois :</strong>
+                            <p id="per-cart-monthly-savings">Chargement...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Benefits Section -->
         <section class="benefits-section fade-in">
             <h2 class="benefits-title" id="benefits-title">Chargement...</h2>
@@ -1340,7 +1708,7 @@
     <div id="floatingCalculator" class="floating-calculator">
         <h4 id="floating-calc-title">Calculateur de Flotte</h4>
         <div class="cart-controls">
-            <input type="range" id="cartSliderFloating" min="1" max="100" value="10" class="cart-slider-floating">
+            <input type="range" id="cartSliderFloating" min="10" max="100" value="10" class="cart-slider-floating">
             <div class="cart-display">
                 <span id="cart-count-floating">10</span> <span id="cart-unit-floating">voiturettes</span>
             </div>
@@ -1482,10 +1850,12 @@
 
             // Problem
             safeUpdateElement('problem-title', data.problem?.title);
-            safeUpdateElement('cost-replacement', data.problem?.cost_replacement);
-            safeUpdateElement('cost-10-years', data.problem?.cost_10_years);
-            safeUpdateElement('maintenance-hours', data.problem?.maintenance_hours);
-            safeUpdateElement('maintenance-cost', data.problem?.maintenance_cost);
+            // cost-replacement et cost-10-years seront mis à jour par updateCartCalculation()
+            // safeUpdateElement('cost-replacement', data.problem?.cost_replacement);
+            // safeUpdateElement('cost-10-years', data.problem?.cost_10_years);
+            // maintenance-hours et maintenance-cost seront aussi mis à jour par updateCartCalculation()
+            // safeUpdateElement('maintenance-hours', data.problem?.maintenance_hours);
+            // safeUpdateElement('maintenance-cost', data.problem?.maintenance_cost);
             safeUpdateElement('performance-issue', data.problem?.performance_issue);
             safeUpdateElement('charging-time', data.problem?.charging_time);
             safeUpdateElement('weight-old', data.problem?.weight);
@@ -1509,6 +1879,39 @@
             safeUpdateElement('problem-card-5-training', data.ui?.problem_card_5_training);
             safeUpdateElement('problem-card-6-title', data.ui?.problem_card_6_title);
             safeUpdateElement('problem-card-6-risks', data.ui?.problem_card_6_risks);
+
+            // Problem Details Sections
+            safeUpdateElement('problem-details-section-1-title', data.problem_details?.section_1_title);
+            safeUpdateElement('problem-details-section-1-subtitle', data.problem_details?.section_1_subtitle);
+            safeUpdateElement('problem-details-section-1-point-1', data.problem_details?.section_1_point_1);
+            safeUpdateElement('problem-details-section-1-point-2', data.problem_details?.section_1_point_2);
+            safeUpdateElement('problem-details-section-1-point-3', data.problem_details?.section_1_point_3);
+            safeUpdateElement('problem-details-section-1-point-4', data.problem_details?.section_1_point_4);
+            safeUpdateElement('problem-details-section-1-calculation', data.problem_details?.section_1_calculation);
+
+            safeUpdateElement('problem-details-section-2-title', data.problem_details?.section_2_title);
+            safeUpdateElement('problem-details-section-2-subtitle', data.problem_details?.section_2_subtitle);
+            safeUpdateElement('problem-details-section-2-point-1', data.problem_details?.section_2_point_1);
+            safeUpdateElement('problem-details-section-2-point-2', data.problem_details?.section_2_point_2);
+            safeUpdateElement('problem-details-section-2-point-3', data.problem_details?.section_2_point_3);
+            safeUpdateElement('problem-details-section-2-point-4', data.problem_details?.section_2_point_4);
+            safeUpdateElement('problem-details-section-2-calculation', data.problem_details?.section_2_calculation);
+
+            safeUpdateElement('problem-details-section-3-title', data.problem_details?.section_3_title);
+            safeUpdateElement('problem-details-section-3-subtitle', data.problem_details?.section_3_subtitle);
+            safeUpdateElement('problem-details-section-3-point-1', data.problem_details?.section_3_point_1);
+            safeUpdateElement('problem-details-section-3-point-2', data.problem_details?.section_3_point_2);
+            safeUpdateElement('problem-details-section-3-point-3', data.problem_details?.section_3_point_3);
+            safeUpdateElement('problem-details-section-3-point-4', data.problem_details?.section_3_point_4);
+            safeUpdateElement('problem-details-section-3-calculation', data.problem_details?.section_3_calculation);
+
+            safeUpdateElement('problem-details-section-4-title', data.problem_details?.section_4_title);
+            safeUpdateElement('problem-details-section-4-subtitle', data.problem_details?.section_4_subtitle);
+            safeUpdateElement('problem-details-section-4-point-1', data.problem_details?.section_4_point_1);
+            safeUpdateElement('problem-details-section-4-point-2', data.problem_details?.section_4_point_2);
+            safeUpdateElement('problem-details-section-4-point-3', data.problem_details?.section_4_point_3);
+            safeUpdateElement('problem-details-section-4-point-4', data.problem_details?.section_4_point_4);
+            safeUpdateElement('problem-details-section-4-calculation', data.problem_details?.section_4_calculation);
 
             // Solution
             safeUpdateElement('solution-title', data.solution?.title);
@@ -1550,6 +1953,13 @@
             safeUpdateElement('lithium-replacements', data.comparison?.lithium_replacements);
             safeUpdateElement('lithium-maintenance', data.comparison?.lithium_maintenance);
             safeUpdateElement('lithium-charging', data.comparison?.lithium_charging);
+
+            // Calculation details
+            safeUpdateElement('lead-replacement-schedule', data.comparison?.lead_replacement_frequency);
+            safeUpdateElement('lead-maintenance-detail', data.calculs?.lead_maintenance_detail);
+            safeUpdateElement('lithium-lifespan', data.comparison?.lithium_lifespan);
+            safeUpdateElement('lithium-advantage', data.calculs?.lithium_advantage);
+            safeUpdateElement('savings-formula', data.calculs?.savings_formula);
 
             // Pricing
             safeUpdateElement('pricing-title', data.ui?.pricing_title);
@@ -1710,17 +2120,20 @@
 
             const currency = ' $';
 
-            // SECTION PROBLÈMES - Calculs dynamiques
-            const costReplacement = parseFloat(data.problem.cost_replacement_unit) * currentCartCount;
-            const cost10Years = parseFloat(data.problem.cost_10_years_unit) * currentCartCount;
-            const maintenanceHours = parseFloat(data.problem.maintenance_hours_unit) * currentCartCount;
-            const maintenanceCost = parseFloat(data.problem.maintenance_cost_unit) * currentCartCount;
-            const maintenance10Years = parseFloat(data.problem.maintenance_10_years_unit) * currentCartCount;
+            // SECTION PROBLÈMES - Coûts explosifs réels du plomb (selon document de proposition)
+            const costReplacement = parseFloat(data.problem.cost_replacement_unit) * currentCartCount; // 2000$ par voiturette
+            const maintenanceHours = parseFloat(data.problem.maintenance_hours_unit) * currentCartCount; // 120h/an
+            const maintenanceCost = parseFloat(data.problem.maintenance_cost_unit) * currentCartCount; // 360$/an par voiturette
+            const maintenance10Years = parseFloat(data.problem.maintenance_10_years_unit) * currentCartCount; // 3600$/10ans
 
-            safeUpdateElement('cost-replacement', formatNumber(costReplacement) + currency);
-            safeUpdateElement('cost-10-years', formatNumber(cost10Years) + currency);
-            safeUpdateElement('maintenance-hours', maintenanceHours + ' heures');
-            safeUpdateElement('maintenance-cost', formatNumber(maintenanceCost) + currency);
+            // Utilisation du coût réel total selon le document (141,400$ pour 10 voiturettes sur 10 ans)
+            const totalRealCost10YearsPerUnit = parseFloat(data.problem.total_real_cost_10y_unit) || 14140; // 14,140$ par voiturette
+            const cost10YearsReal = totalRealCost10YearsPerUnit * currentCartCount;
+
+            safeUpdateElement('cost-replacement', formatNumber(costReplacement) + currency + ' (par voiturette)');
+            safeUpdateElement('cost-10-years', formatNumber(cost10YearsReal) + currency + ' (coût total réel)');
+            safeUpdateElement('maintenance-hours', maintenanceHours + ' heures/an');
+            safeUpdateElement('maintenance-cost', formatNumber(maintenanceCost) + currency + ' (par voiturette/an)');
 
             // SECTION TARIFICATION - Calculs dynamiques
             const monthly10 = parseFloat(data.pricing.contract_10_monthly_unit) * currentCartCount;
@@ -1792,8 +2205,10 @@
             // SECTION COMPARAISON - Calculs dynamiques
             const leadBatteries10 = parseFloat(data.comparison.lead_batteries_10_years_unit) * currentCartCount;
             const leadBatteries20 = parseFloat(data.comparison.lead_batteries_20_years_unit) * currentCartCount;
+            const lithium10 = parseFloat(data.comparison.lithium_10_years_unit) * currentCartCount;
 
             safeUpdateElement('lead-batteries-10-years', formatNumber(leadBatteries10) + currency);
+            safeUpdateElement('contract-10-total', formatNumber(lithium10) + currency);
 
             // Mettre à jour les heures de maintenance dans la comparaison
             const leadMaintenanceHours = parseFloat(data.problem.maintenance_hours_unit) * currentCartCount;
@@ -1802,7 +2217,154 @@
             // Mettre à jour l'affichage du nombre de voiturettes
             safeUpdateElement('cart-count', currentCartCount.toString());
 
+            // SECTION DÉTAILS DES CALCULS
+            updateCalculationDetails();
+
             // Calculs mis à jour
+        }
+
+        // Mettre à jour les détails des calculs (focus 20 ans - COÛTS RÉELS PLOMB)
+        function updateCalculationDetails() {
+            if (!data.comparison || !data.pricing || !data.problem) return;
+
+            const currency = ' $';
+
+            // Données de base - COÛTS RÉELS selon document de proposition (par voiturette)
+            const leadReplacementCost = parseFloat(data.problem.cost_replacement_unit) || 2000; // 2000$ par voiturette par remplacement
+            const leadMaintenanceCost = parseFloat(data.problem.maintenance_cost_unit) || 360; // 360$/an par voiturette
+            const prematureFailureRisk = parseFloat(data.problem.premature_failure_risk) || 1200; // 12,000$ ÷ 10 = 1200$ par voiturette
+            const recyclingCost = parseFloat(data.problem.recycling_disposal_cost) || 30; // 300$ ÷ 10 = 30$ par voiturette
+            const revenueLossYearly = parseFloat(data.problem.revenue_loss_yearly) || 80; // 800$ ÷ 10 = 80$ par voiturette/an
+            const overconsumptionYearly = parseFloat(data.problem.overconsumption_cost_yearly) || 24; // 240$ ÷ 10 = 24$ par voiturette/an
+            const insuranceIncreaseYearly = parseFloat(data.problem.insurance_increase_yearly) || 50; // Estimation par voiturette/an
+
+            const lithiumMonthly10 = parseFloat(data.pricing.contract_10_monthly_unit) || 97.64;
+            const lithiumMonthly20 = parseFloat(data.pricing.contract_20_monthly_unit) || 84.36;
+            const lithiumFleetMonthly = parseFloat(data.pricing.contract_20_fleet_monthly_unit) || 76.73;
+
+            // Calculs remplacements batterie plomb (cycle 2-5 ans, moyenne 3.5 ans)
+            const replacementCycle = 3.5;
+            const replacements20Years = Math.ceil(20 / replacementCycle); // 6 remplacements
+
+            // COÛTS TOTAUX RÉELS BATTERIES PLOMB sur 20 ans (par voiturette)
+            const leadBatteryCost20 = leadReplacementCost * replacements20Years; // 2000$ × 6 = 12,000$ par voiturette
+            const leadMaintenanceCost20 = leadMaintenanceCost * 20; // 360$ × 20 = 7,200$ par voiturette
+            const leadRecyclingCost20 = recyclingCost * replacements20Years; // 30$ × 6 = 180$ par voiturette
+            const leadRevenueLoss20 = revenueLossYearly * 20; // 80$ × 20 = 1,600$ par voiturette
+            const leadOverconsumption20 = overconsumptionYearly * 20; // 24$ × 20 = 480$ par voiturette
+            const leadInsuranceIncrease20 = insuranceIncreaseYearly * 20; // 50$ × 20 = 1,000$ par voiturette
+            const leadPrematureFailure20 = prematureFailureRisk * 2; // 1200$ × 2 = 2,400$ par voiturette sur 20 ans
+
+            // COÛT TOTAL RÉEL PLOMB par voiturette sur 20 ans
+            const leadTotalPerCart20 = leadBatteryCost20 + leadMaintenanceCost20 + leadRecyclingCost20 +
+                                     leadRevenueLoss20 + leadOverconsumption20 + leadInsuranceIncrease20 + leadPrematureFailure20;
+            // = 12,000 + 7,200 + 180 + 1,600 + 480 + 1,000 + 2,400 = 24,860$ par voiturette sur 20 ans
+
+            // COÛT TOTAL PLOMB pour la flotte
+            const leadTotal20 = leadTotalPerCart20 * currentCartCount;
+
+            // Coûts lithium selon la flotte sur 20 ans
+            let lithium20, selectedMonthlyRate;
+            if (currentCartCount >= 30) {
+                selectedMonthlyRate = lithiumFleetMonthly;
+                lithium20 = selectedMonthlyRate * 12 * 20 * currentCartCount;
+            } else {
+                lithium20 = lithiumMonthly20 * 12 * 20 * currentCartCount;
+                selectedMonthlyRate = lithiumMonthly20;
+            }
+
+            // ÉCONOMIES RÉELLES sur 20 ans (plomb coûte BEAUCOUP plus cher que lithium)
+            const totalSavings20 = leadTotal20 - lithium20;
+            const savingsPercentage20 = ((totalSavings20 / leadTotal20) * 100).toFixed(1);
+
+            // Fourchette intelligente (variation selon cycle 2-5 ans au lieu de 3.5)
+            const minReplacements20 = Math.ceil(20 / 5); // 4 remplacements (batterie dure 5 ans)
+            const maxReplacements20 = Math.ceil(20 / 2); // 10 remplacements (batterie dure 2 ans)
+
+            const minLeadCostPerCart20 = leadReplacementCost * minReplacements20 + leadMaintenanceCost * 20 +
+                                       leadRecyclingCost20 + leadRevenueLoss20 + leadOverconsumption20 + leadInsuranceIncrease20;
+            const maxLeadCostPerCart20 = leadReplacementCost * maxReplacements20 + leadMaintenanceCost * 20 +
+                                       leadRecyclingCost20 + leadRevenueLoss20 + leadOverconsumption20 + leadInsuranceIncrease20;
+
+            const minSavings20 = (minLeadCostPerCart20 * currentCartCount) - lithium20;
+            const maxSavings20 = (maxLeadCostPerCart20 * currentCartCount) - lithium20;
+
+            // Calculs ROI (lithium vs coûts explosifs plomb)
+            const roiPercentage = ((totalSavings20 / lithium20) * 100).toFixed(1);
+            const monthlySavingsAverage = totalSavings20 / (20 * 12);
+            const perCartMonthlySavings = monthlySavingsAverage / currentCartCount;
+            const annualSavingsPerCart = perCartMonthlySavings * 12;
+
+            // === 1. SECTION BATTERIES PLOMB (COÛTS RÉELS selon document) ===
+            safeUpdateElement('lead-replacement-schedule', data.calculs?.lead_replacement_schedule || 'Remplacement nécessaire tous les 2-5 ans');
+            safeUpdateElement('lead-replacements-20y', `${replacements20Years} remplacements à 2 000$ par voiturette`);
+
+            // Détail complet des coûts cachés du plomb (par voiturette)
+            const leadBreakdownText = currentLanguage === 'fr'
+                ? `${formatNumber(leadBatteryCost20)}${currency} (batteries) + ${formatNumber(leadMaintenanceCost20)}${currency} (maintenance) + ${formatNumber(leadRecyclingCost20 + leadRevenueLoss20 + leadOverconsumption20 + leadInsuranceIncrease20 + leadPrematureFailure20)}${currency} (coûts cachés) par voiturette`
+                : `${formatNumber(leadBatteryCost20)}${currency} (batteries) + ${formatNumber(leadMaintenanceCost20)}${currency} (maintenance) + ${formatNumber(leadRecyclingCost20 + leadRevenueLoss20 + leadOverconsumption20 + leadInsuranceIncrease20 + leadPrematureFailure20)}${currency} (hidden costs) per cart`;
+
+            safeUpdateElement('lead-cost-breakdown-20y', leadBreakdownText);
+            safeUpdateElement('lead-total-calc-20y', formatNumber(leadTotal20) + currency);
+
+            const maintenanceDetailText = currentLanguage === 'fr'
+                ? `${formatNumber(leadMaintenanceCost20 * currentCartCount)}${currency} (120h/an × 30$/h ÷ 10 voiturettes × 20 ans)`
+                : `${formatNumber(leadMaintenanceCost20 * currentCartCount)}${currency} (120h/year × 30$/h ÷ 10 carts × 20 years)`;
+            safeUpdateElement('lead-maintenance-total-20y', maintenanceDetailText);
+
+            // === 2. SECTION LITHIUM (SOLUTION ÉCONOMIQUE) ===
+            safeUpdateElement('lithium-replacements-20y',
+                currentLanguage === 'fr' ? '0 remplacement nécessaire - 15-20 ans de durée de vie' : '0 replacement needed - 15-20 years lifespan');
+
+            const lithiumBreakdownText = currentLanguage === 'fr'
+                ? `${formatNumber(lithium20)}${currency} (location ${selectedMonthlyRate}${currency}/mois) + 0${currency} (maintenance) + 0${currency} (recyclage) + 0${currency} (pertes revenus)`
+                : `${formatNumber(lithium20)}${currency} (rental ${selectedMonthlyRate}${currency}/month) + 0${currency} (maintenance) + 0${currency} (recycling) + 0${currency} (revenue loss)`;
+
+            safeUpdateElement('lithium-cost-breakdown-20y', lithiumBreakdownText);
+            safeUpdateElement('lithium-total-calc-20y', formatNumber(lithium20) + currency);
+
+            // === 3. SECTION ÉCONOMIES (LITHIUM FAIT ÉCONOMISER) ===
+            safeUpdateElement('detailed-savings-calc-20y',
+                `${formatNumber(leadTotal20)}${currency} (plomb) - ${formatNumber(lithium20)}${currency} (lithium)`);
+            safeUpdateElement('total-savings-display-20y', formatNumber(totalSavings20) + currency);
+
+            const rangeText20 = currentLanguage === 'fr'
+                ? `Entre ${formatNumber(minSavings20)}${currency} et ${formatNumber(maxSavings20)}${currency} selon fréquence remplacement plomb`
+                : `Between ${formatNumber(minSavings20)}${currency} and ${formatNumber(maxSavings20)}${currency} depending on lead replacement frequency`;
+            safeUpdateElement('savings-range-20y', rangeText20);
+
+            const savingsText = currentLanguage === 'fr'
+                ? `${savingsPercentage20}% d'économie avec lithium vs plomb`
+                : `${savingsPercentage20}% savings with lithium vs lead`;
+            safeUpdateElement('savings-percentage-20y', savingsText);
+
+            // === 4. SECTION ROI (RETOUR SUR INVESTISSEMENT LITHIUM) ===
+            const roiText = currentLanguage === 'fr'
+                ? `${roiPercentage}% ROI - Lithium se paie par ses économies`
+                : `${roiPercentage}% ROI - Lithium pays for itself through savings`;
+            safeUpdateElement('roi-calculation', roiText);
+
+            safeUpdateElement('break-even-point',
+                currentLanguage === 'fr' ? 'Rentabilité immédiate vs coûts plomb' : 'Immediate profitability vs lead costs');
+            safeUpdateElement('monthly-savings-average',
+                `${formatNumber(monthlySavingsAverage)}${currency}/mois économisés`);
+            safeUpdateElement('per-cart-monthly-savings',
+                `${formatNumber(perCartMonthlySavings)}${currency}/voiturette/mois économisés`);
+
+            // Mise à jour tableau comparaison (garder 10 ans pour la compatibilité)
+            const leadTotal10 = (leadReplacementCost * Math.ceil(10 / replacementCycle) + leadMaintenanceCost * 10) * currentCartCount;
+            const lithium10 = currentCartCount >= 30 ? lithiumFleetMonthly * 12 * 10 * currentCartCount : lithiumMonthly10 * 12 * 10 * currentCartCount;
+
+            safeUpdateElement('lead-batteries-10-years', formatNumber(leadTotal10) + currency);
+            safeUpdateElement('contract-10-total', formatNumber(lithium10) + currency);
+
+            // Mise à jour autres données comparaison
+            safeUpdateElement('lead-replacements', `${Math.ceil(10 / replacementCycle)} remplacements sur 10 ans`);
+            safeUpdateElement('lithium-replacements', data.comparison.lithium_replacements || '0 remplacement');
+            safeUpdateElement('lead-maintenance', data.comparison.lead_maintenance || '12 heures/an');
+            safeUpdateElement('lithium-maintenance', data.comparison.lithium_maintenance || '0 heure');
+            safeUpdateElement('lead-charging', data.comparison.lead_charging || '8-10 heures');
+            safeUpdateElement('lithium-charging', data.comparison.lithium_charging || '2 heures');
         }
 
         // Event listener pour le slider

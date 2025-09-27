@@ -11,11 +11,50 @@ hero,subtitle,Kit Lithium LiFePO₄ 48V 105Ah - Conçu et Fabriqué au Canada
 hero,hero_image,images/golf_cart_sunset.jpg
 
 problem,title,VOTRE DÉFI ACTUEL : LES LIMITES DES BATTERIES PLOMB
-problem,cost_replacement_unit,200
-problem,cost_10_years_unit,8000
-problem,maintenance_hours_unit,12
+problem,cost_replacement_unit,2000
+problem,cost_10_years_unit,80000
+problem,maintenance_hours_unit,120
 problem,maintenance_cost_unit,360
 problem,maintenance_10_years_unit,3600
+problem,premature_failure_risk,1200
+problem,recycling_disposal_cost,30
+problem,revenue_loss_yearly,80
+problem,overconsumption_cost_yearly,24
+problem,insurance_increase_yearly,50
+problem,total_real_cost_10y_unit,14140
+
+# Sous-sections explicatives coûts cachés
+problem_details,section_1_title,💸 Coûts de Remplacement Explosifs
+problem_details,section_1_subtitle,Pourquoi les batteries plomb coûtent si cher
+problem_details,section_1_point_1,Remplacement fréquent tous les 2-5 ans
+problem_details,section_1_point_2,2 000$ par voiturette à chaque remplacement
+problem_details,section_1_point_3,4 remplacements minimum sur 10 ans
+problem_details,section_1_point_4,Risque de bris prématuré de 15-20%
+problem_details,section_1_calculation,4 × 2 000$ = 8 000$ par voiturette sur 10 ans
+
+problem_details,section_2_title,⚙️ Maintenance Spécialisée Coûteuse
+problem_details,section_2_subtitle,Les frais cachés de l'entretien constant
+problem_details,section_2_point_1,120 heures de maintenance par an obligatoires
+problem_details,section_2_point_2,Technicien spécialisé à 30$ de l'heure
+problem_details,section_2_point_3,Vérification hebdomadaire eau distillée
+problem_details,section_2_point_4,Nettoyage et inspection des bornes
+problem_details,section_2_calculation,120h × 30$ × 10 ans = 36 000$ par flotte
+
+problem_details,section_3_title,🚨 Risques et Pertes Opérationnelles
+problem_details,section_3_subtitle,Les coûts que personne ne vous dit
+problem_details,section_3_point_1,Pannes en plein parcours = remboursements clients
+problem_details,section_3_point_2,Surconsommation électrique de 25%
+problem_details,section_3_point_3,Assurances majorées pour matières dangereuses
+problem_details,section_3_point_4,Frais de recyclage et manipulation toxique
+problem_details,section_3_calculation,800$ + 240$ + 500$ + 300$ = 1 840$ par an
+
+problem_details,section_4_title,💰 TOTAL des Coûts Cachés Réels
+problem_details,section_4_subtitle,Le vrai coût explosif des batteries plomb
+problem_details,section_4_point_1,Remplacements + maintenance + risques
+problem_details,section_4_point_2,8 000$ + 3 600$ + 1 840$ par voiturette sur 10 ans
+problem_details,section_4_point_3,Plus de 14 000$ par voiturette réellement
+problem_details,section_4_point_4,Vs lithium EDS : coût fixe prévisible mensuel
+problem_details,section_4_calculation,TOTAL RÉEL : 14 140$ par voiturette sur 10 ans
 problem,performance_issue,Perte de puissance en fin de charge
 problem,autonomy_new,6-8 heures (batterie neuve)
 problem,autonomy_degraded,3-4 heures (après 5 ans de dégradation)
@@ -62,9 +101,14 @@ comparison,lead_batteries_20_years_unit,28000
 comparison,lead_replacements,4 remplacements sur 10 ans
 comparison,lead_maintenance,12 heures/an
 comparison,lead_charging,8-10 heures
+comparison,lead_replacement_frequency,Remplacement nécessaire tous les 2-5 ans
+comparison,lead_replacement_detail,Coût élevé et fréquent - dégradation rapide
+comparison,lithium_10_years_unit,11716.8
 comparison,lithium_replacements,0 remplacement
 comparison,lithium_maintenance,0 heure
 comparison,lithium_charging,2 heures
+comparison,lithium_lifespan,15-20 ans sans remplacement
+comparison,lithium_detail,Investissement unique - performance constante
 
 benefits,benefit_1,Une seule batterie pour toute la durée du contrat
 benefits,benefit_2,120 heures de maintenance annuelle économisées
@@ -86,21 +130,21 @@ contact,website,www.edsquebec.com
 
 # Textes fixes de l'interface
 ui,hero_image_alt,Voiturette de golf moderne
-ui,problem_card_1_title,Coûts Cachés Massifs
-ui,problem_card_1_suffix,de remplacement fréquent
-ui,problem_card_1_total_prefix,Coût total sur 10 ans :
-ui,problem_card_2_title,Maintenance Extrêmement Coûteuse
-ui,problem_card_2_suffix,par année
-ui,problem_card_2_cost_prefix,Coût annuel :
-ui,problem_card_3_title,Performances Dégradées
-ui,problem_card_3_charging_prefix,Temps de recharge :
-ui,problem_card_4_title,Poids Excessif
+ui,problem_card_1_title,Coûts Cachés Explosifs
+ui,problem_card_1_suffix,par voiturette + risques bris prématuré
+ui,problem_card_1_total_prefix,Coût total réel sur 10 ans :
+ui,problem_card_2_title,Maintenance Spécialisée Coûteuse
+ui,problem_card_2_suffix,heures/an
+ui,problem_card_2_cost_prefix,Coût annuel réel :
+ui,problem_card_3_title,Performances Dégradées & Pertes
+ui,problem_card_3_charging_prefix,Temps de recharge + pertes revenus :
+ui,problem_card_4_title,Poids Excessif & Surconsommation
 ui,problem_card_4_weight_prefix,Plus de
-ui,problem_card_4_consumption_prefix,Consommation
-ui,problem_card_5_title,Risques Environnementaux
-ui,problem_card_5_training,Formation sécurité obligatoire du personnel
-ui,problem_card_6_title,Sécurité Compromise
-ui,problem_card_6_risks,Risques pour l'équipement et le terrain
+ui,problem_card_4_consumption_prefix,Surconsommation 25%
+ui,problem_card_5_title,Matières Dangereuses
+ui,problem_card_5_training,Recyclage 300$/unité + assurances majorées
+ui,problem_card_6_title,Pannes & Remboursements
+ui,problem_card_6_risks,2000$/an pertes revenus clients
 
 ui,solution_card_1_title,Autonomie Fiable
 ui,solution_card_2_title,Durée de Vie Exceptionnelle
@@ -129,6 +173,22 @@ ui,pricing_savings_20_suffix,sur 20 ans
 ui,pricing_savings_fleet_prefix,Économie PREMIUM :
 ui,pricing_savings_fleet_suffix,sur 20 ans
 ui,fleet_minimum_text,Minimum 30 voiturettes
+
+# Détails des calculs
+calculs,lead_battery_cost_detail,Coût unitaire batteries plomb + remplacement
+calculs,lead_replacement_schedule,Remplacement nécessaire tous les 2-5 ans (moyenne 3.5 ans)
+calculs,lead_maintenance_detail,12h/an de maintenance x coût horaire technicien
+calculs,lithium_advantage,Aucun remplacement sur 15-20 ans + maintenance zéro
+calculs,total_cost_formula,Prix location mensuel x nombre de voiturettes x durée
+calculs,savings_formula,Coût batteries plomb - Coût solution lithium
+
+# ROI et rentabilité
+roi,break_even_title,Seuil de rentabilité atteint dès la
+roi,break_even_period,1ère année
+roi,roi_percentage_20y,ROI sur 20 ans
+roi,monthly_savings_description,Économie mensuelle moyenne par voiturette
+roi,yearly_savings_description,Économie annuelle par voiturette
+roi,payback_description,Amortissement de l'investissement
 
 ui,benefits_title,Pourquoi Choisir EDS Québec ?
 ui,benefits_reliability,Fiabilité
