@@ -59,7 +59,7 @@ async function loadCSV(filename) {
             }
         }
     } else {
-        // Parser pour data_clean.csv (section,key,value)
+        // Parser pour data_clean.csv (section,key,value,color)
         for (let i = 1; i < lines.length; i++) {
             const line = lines[i].trim();
             if (line && !line.startsWith('#')) {
@@ -67,7 +67,27 @@ async function loadCSV(filename) {
                 if (parts.length >= 3) {
                     const section = parts[0].trim();
                     const key = parts[1].trim();
-                    let value = parts.slice(2).join(',').trim();
+
+                    // Gérer la valeur (peut contenir des virgules)
+                    let value, color;
+
+                    if (parts.length >= 4) {
+                        // Vérifier si la dernière partie ressemble à une couleur
+                        const lastPart = parts[parts.length - 1].trim();
+                        if (lastPart.startsWith('#') && lastPart.length >= 4) {
+                            // 4ème colonne couleur présente
+                            color = lastPart;
+                            value = parts.slice(2, parts.length - 1).join(',').trim();
+                        } else {
+                            // Pas de couleur, joindre toutes les parties comme valeur
+                            value = parts.slice(2).join(',').trim();
+                            color = null;
+                        }
+                    } else {
+                        // Pas de 4ème colonne
+                        value = parts.slice(2).join(',').trim();
+                        color = null;
+                    }
 
                     if (value.startsWith('"') && value.endsWith('"')) {
                         value = value.slice(1, -1);
@@ -78,6 +98,14 @@ async function loadCSV(filename) {
                             result[section] = {};
                         }
                         result[section][key] = value;
+
+                        // Stocker la couleur si présente
+                        if (color && color.startsWith('#')) {
+                            if (!result[section + '_colors']) {
+                                result[section + '_colors'] = {};
+                            }
+                            result[section + '_colors'][key] = color;
+                        }
                     }
                 }
             }
@@ -257,6 +285,10 @@ async function loadAllData() {
         updateContent();
         console.log('🎉 updateContent() terminé');
 
+        // Appliquer les couleurs du CSV au CSS
+        applyColorsFromCSV();
+        console.log('🎨 Couleurs appliquées depuis le CSV');
+
     } catch (error) {
         console.error('❌ Erreur lors du chargement:', error);
         console.error('Stack trace:', error.stack);
@@ -307,16 +339,71 @@ function parseMarkdownAndHTML(text) {
     return text;
 }
 
+// Fonction pour appliquer les couleurs du CSV au CSS
+function applyColorsFromCSV() {
+    if (!data.colors) return;
+
+    // Obtenir ou créer l'élément style pour les couleurs dynamiques
+    let styleElement = document.getElementById('dynamic-colors');
+    if (!styleElement) {
+        styleElement = document.createElement('style');
+        styleElement.id = 'dynamic-colors';
+        document.head.appendChild(styleElement);
+    }
+
+    // Construire le CSS avec les couleurs du CSV
+    let cssRules = ':root {\n';
+
+    // Couleurs principales des sections
+    if (data.colors.cost_replacement) cssRules += `    --cost-replacement: ${data.colors.cost_replacement};\n`;
+    if (data.colors.cost_maintenance) cssRules += `    --cost-maintenance: ${data.colors.cost_maintenance};\n`;
+    if (data.colors.cost_operational) cssRules += `    --cost-operational: ${data.colors.cost_operational};\n`;
+    if (data.colors.cost_recycling) cssRules += `    --cost-recycling: ${data.colors.cost_recycling};\n`;
+    if (data.colors.cost_total) cssRules += `    --cost-total: ${data.colors.cost_total};\n`;
+
+    // Arrière-plans des sections
+    if (data.colors.bg_replacement) cssRules += `    --bg-replacement: ${data.colors.bg_replacement};\n`;
+    if (data.colors.bg_maintenance) cssRules += `    --bg-maintenance: ${data.colors.bg_maintenance};\n`;
+    if (data.colors.bg_operational) cssRules += `    --bg-operational: ${data.colors.bg_operational};\n`;
+    if (data.colors.bg_recycling) cssRules += `    --bg-recycling: ${data.colors.bg_recycling};\n`;
+    if (data.colors.bg_total) cssRules += `    --bg-total: ${data.colors.bg_total};\n`;
+
+    cssRules += '}';
+
+    // Appliquer le CSS
+    styleElement.textContent = cssRules;
+
+    console.log('Couleurs appliquées depuis le CSV:', cssRules);
+}
+
+// Fonction helper pour récupérer la couleur d'un élément depuis les données CSV
+function getElementColor(section, key) {
+    const colorsSection = section + '_colors';
+    return data[colorsSection] && data[colorsSection][key] || null;
+}
+
 // Fonction utilitaire pour mettre à jour un élément de façon sécurisée
-function safeUpdateElement(id, value) {
+function safeUpdateElement(id, value, color = null) {
     const element = document.getElementById(id);
     if (element && value !== undefined && value !== null) {
         // Applique le parsing Markdown/HTML puis met à jour avec innerHTML
         const parsedValue = parseMarkdownAndHTML(value.toString());
         element.innerHTML = parsedValue;
+
+        // Appliquer la couleur si spécifiée
+        if (color && color.startsWith('#')) {
+            element.style.color = color;
+            console.log(`Couleur appliquée à ${id}: ${color}`);
+        }
     } else if (!element) {
         console.warn(`Élément non trouvé: ${id}`);
     }
+}
+
+// Fonction utilitaire avancée qui récupère automatiquement la couleur du CSV
+function safeUpdateElementWithColor(id, section, key, value) {
+    const color = getElementColor(section, key);
+    safeUpdateElement(id, value, color);
 }
 
 // Fonction pour remplacer les templates {{variable}} par les valeurs calculées
@@ -451,7 +538,7 @@ function populateProblemDetailsSections() {
     safeUpdateElement('problem-details-section-1-point-2', replaceTemplates(data.problem_details?.section_1_point_2));
     safeUpdateElement('problem-details-section-1-point-3', replaceTemplates(data.problem_details?.section_1_point_3));
     safeUpdateElement('problem-details-section-1-point-4', data.problem_details?.section_1_point_4);
-    safeUpdateElement('problem-details-section-1-calculation', replaceTemplates(data.problem_details?.section_1_calculation));
+    safeUpdateElementWithColor('problem-details-section-1-calculation', 'problem_details', 'section_1_calculation', replaceTemplates(data.problem_details?.section_1_calculation));
 
     // Section 2 - Maintenance Spécialisée Coûteuse (avec templates dynamiques)
     safeUpdateElement('problem-details-section-2-title', data.problem_details?.section_2_title);
@@ -460,7 +547,7 @@ function populateProblemDetailsSections() {
     safeUpdateElement('problem-details-section-2-point-2', replaceTemplates(data.problem_details?.section_2_point_2));
     safeUpdateElement('problem-details-section-2-point-3', data.problem_details?.section_2_point_3);
     safeUpdateElement('problem-details-section-2-point-4', data.problem_details?.section_2_point_4);
-    safeUpdateElement('problem-details-section-2-calculation', replaceTemplates(data.problem_details?.section_2_calculation));
+    safeUpdateElementWithColor('problem-details-section-2-calculation', 'problem_details', 'section_2_calculation', replaceTemplates(data.problem_details?.section_2_calculation));
 
     // Section 3 - Risques et Pertes Opérationnelles (avec templates dynamiques)
     safeUpdateElement('problem-details-section-3-title', data.problem_details?.section_3_title);
@@ -469,7 +556,7 @@ function populateProblemDetailsSections() {
     safeUpdateElement('problem-details-section-3-point-2', data.problem_details?.section_3_point_2);
     safeUpdateElement('problem-details-section-3-point-3', data.problem_details?.section_3_point_3);
     safeUpdateElement('problem-details-section-3-point-4', data.problem_details?.section_3_point_4);
-    safeUpdateElement('problem-details-section-3-calculation', replaceTemplates(data.problem_details?.section_3_calculation));
+    safeUpdateElementWithColor('problem-details-section-3-calculation', 'problem_details', 'section_3_calculation', replaceTemplates(data.problem_details?.section_3_calculation));
 
     // Section 4 - TOTAL des Coûts Cachés Réels (avec templates dynamiques)
     safeUpdateElement('problem-details-section-4-title', data.problem_details?.section_4_title);
@@ -478,7 +565,7 @@ function populateProblemDetailsSections() {
     safeUpdateElement('problem-details-section-4-point-2', replaceTemplates(data.problem_details?.section_4_point_2));
     safeUpdateElement('problem-details-section-4-point-3', replaceTemplates(data.problem_details?.section_4_point_3));
     safeUpdateElement('problem-details-section-4-point-4', data.problem_details?.section_4_point_4);
-    safeUpdateElement('problem-details-section-4-calculation', replaceTemplates(data.problem_details?.section_4_calculation));
+    safeUpdateElementWithColor('problem-details-section-4-calculation', 'problem_details', 'section_4_calculation', replaceTemplates(data.problem_details?.section_4_calculation));
 }
 
 // Fonction pour peupler la section VS Batteries (statique)
@@ -552,7 +639,7 @@ function populateVsBatteriesSection() {
 
     // Avantages LiFePO4
     safeUpdateElement('vs-lifepo4-advantage-1', replaceTemplates(data.vs_batteries?.lifepo4_advantage_1));
-    safeUpdateElement('vs-lifepo4-advantage-2', data.vs_batteries?.lifepo4_advantage_2);
+    safeUpdateElementWithColor('vs-lifepo4-advantage-2', 'vs_batteries', 'lifepo4_advantage_2', data.vs_batteries?.lifepo4_advantage_2);
     safeUpdateElement('vs-lifepo4-advantage-3', data.vs_batteries?.lifepo4_advantage_3);
     safeUpdateElement('vs-lifepo4-advantage-4', data.vs_batteries?.lifepo4_advantage_4);
     safeUpdateElement('vs-lifepo4-advantage-5', data.vs_batteries?.lifepo4_advantage_5);
@@ -625,7 +712,7 @@ function updateContent() {
     populateVsBatteriesSection();
 
     // Solution
-    safeUpdateElement('solution-title', data.solution?.title);
+    safeUpdateElementWithColor('solution-title', 'solution', 'title', data.solution?.title);
     safeUpdateElement('autonomy', data.solution?.autonomy);
     safeUpdateElement('autonomy-hours', data.solution?.autonomy_hours);
     safeUpdateElement('cycles', data.solution?.cycles);

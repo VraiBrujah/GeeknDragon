@@ -1,4 +1,4 @@
-section,key,value
+section,key,value,color
 header,company_name,EDS QUEBEC
 header,company_tagline,Energy Development System
 header,company_subtitle,Quebec's Leading Lithium Solutions
@@ -36,7 +36,7 @@ problem_details,section_2_point_1,12 hours of mandatory maintenance per year
 problem_details,section_2_point_2,Specialized technician at {{lead_technician_hourly_rate}}$ per hour
 problem_details,section_2_point_3,Weekly distilled water verification
 problem_details,section_2_point_4,Terminal cleaning and inspection
-problem_details,section_2_calculation,{{lead_maintenance_calculation_10y}}
+problem_details,section_2_calculation,{{lead_maintenance_calculation_10y}},#d97706
 
 problem_details,section_3_title,🚨 Operational Risks and Losses
 problem_details,section_3_subtitle,Costs nobody tells you about
@@ -44,7 +44,7 @@ problem_details,section_3_point_1,Mid-course breakdowns = customer refunds
 problem_details,section_3_point_2,25% electrical overconsumption
 problem_details,section_3_point_3,Increased insurance for hazardous materials
 problem_details,section_3_point_4,Recycling and toxic handling fees
-problem_details,section_3_calculation,{{operational_risks_breakdown}}
+problem_details,section_3_calculation,{{operational_risks_breakdown}},#7c3aed
 
 problem_details,section_4_title,💰 TOTAL Real Hidden Costs
 problem_details,section_4_subtitle,The true explosive cost of lead batteries
@@ -52,7 +52,7 @@ problem_details,section_4_point_1,Replacements + maintenance + risks
 problem_details,section_4_point_2,{{total_breakdown_calculation_10y}}
 problem_details,section_4_point_3,Over {{total_cost_simplified_10y}}$ per cart actually
 problem_details,section_4_point_4,Vs EDS lithium: predictable monthly fixed cost
-problem_details,section_4_calculation,{{total_cost_final_calculation_10y}}
+problem_details,section_4_calculation,{{total_cost_final_calculation_10y}},#991b1b
 
 solution,title,OUR REVOLUTIONARY SOLUTION
 solution,product_name,LiFePO₄ Lithium Kit 48V 105Ah
@@ -253,6 +253,25 @@ colors,background_light,#f8fafc
 colors,background_dark,#0f172a
 colors,background_card,#1e293b
 colors,white,#ffffff
+
+# Cost section colors (customizable)
+colors,cost_replacement,#dc2626
+colors,cost_replacement_name,Red for replacements
+colors,cost_maintenance,#d97706
+colors,cost_maintenance_name,Orange for maintenance
+colors,cost_operational,#7c3aed
+colors,cost_operational_name,Purple for operational risks
+colors,cost_recycling,#0891b2
+colors,cost_recycling_name,Cyan for recycling
+colors,cost_total,#991b1b
+colors,cost_total_name,Dark red for total
+
+# Section backgrounds (10-15% transparency)
+colors,bg_replacement,rgba(220, 38, 38, 0.1)
+colors,bg_maintenance,rgba(217, 119, 6, 0.1)
+colors,bg_operational,rgba(124, 58, 237, 0.1)
+colors,bg_recycling,rgba(8, 145, 178, 0.1)
+colors,bg_total,rgba(153, 27, 27, 0.15)
 
 # Calculation details
 calculs,lead_battery_cost_detail,Lead battery unit cost + replacement

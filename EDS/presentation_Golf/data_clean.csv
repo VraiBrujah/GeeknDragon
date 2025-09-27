@@ -1,4 +1,4 @@
-section,key,value
+section,key,value,color
 header,company_name,EDS QUÉBEC
 header,company_tagline,Énergie Développement Système
 header,company_subtitle,Solutions Lithium Québécoises de Pointe
@@ -28,7 +28,7 @@ problem_details,section_1_point_1,Remplacement fréquent tous les 2-5 ans
 problem_details,section_1_point_2,{{lead_cost_replacement_unit}}$ par voiturette à chaque remplacement
 problem_details,section_1_point_3,{{lead_replacements_20y}} remplacements nécessaires sur 20 ans (cycle {{lead_replacement_cycle_years}} ans)
 problem_details,section_1_point_4,Dont 1 remplacement gratuit sous garantie + risque bris prématuré 20%
-problem_details,section_1_calculation,{{lead_replacements_paid_20y}} remplacements payants × {{lead_cost_replacement_unit}}$ + {{premature_failure_percent}}% risque = {{lead_replacement_cost_with_risk_20y}}$ sur 20 ans
+problem_details,section_1_calculation,{{lead_replacements_paid_20y}} remplacements payants × {{lead_cost_replacement_unit}}$ + {{premature_failure_percent}}% risque = {{lead_replacement_cost_with_risk_20y}}$ sur 20 ans,#dc2626
 
 problem_details,section_2_title,⚙️ Maintenance Spécialisée Coûteuse
 problem_details,section_2_subtitle,Les frais cachés de l'entretien constant
@@ -36,7 +36,7 @@ problem_details,section_2_point_1,12 heures de maintenance par an obligatoires
 problem_details,section_2_point_2,Technicien spécialisé à {{lead_technician_hourly_rate}}$ de l'heure
 problem_details,section_2_point_3,Vérification hebdomadaire eau distillée
 problem_details,section_2_point_4,Nettoyage et inspection des bornes
-problem_details,section_2_calculation,{{lead_maintenance_hours_unit}}h × {{lead_technician_hourly_rate}}$ × 20 ans = {{lead_maintenance_total_20y}}$ par voiturette sur 20 ans
+problem_details,section_2_calculation,{{lead_maintenance_hours_unit}}h × {{lead_technician_hourly_rate}}$ × 20 ans = {{lead_maintenance_total_20y}}$ par voiturette sur 20 ans,#F54005
 
 problem_details,section_3_title,🚨 Risques et Pertes Opérationnelles
 problem_details,section_3_subtitle,Coûts de sécurité et responsabilité civile réels
@@ -44,7 +44,7 @@ problem_details,section_3_point_1,Pannes en parcours : remboursements clients + 
 problem_details,section_3_point_2,Surconsommation électrique *25%* : coût énergétique sup.
 problem_details,section_3_point_3,**Accidents travail** + blessures clients (acide) : responsabilité civile
 problem_details,section_3_point_4,Formation sécurité + équipements protection + recyclage spécialisé
-problem_details,section_3_calculation,Pertes revenus {{revenue_loss_yearly}}$ + Surconsommation {{overconsumption_cost_yearly}}$ + Responsabilité civile {{insurance_increase_yearly}}$ + Formations/EPI/recyclage {{recycling_disposal_cost}}$ = {{operational_risks_calculation_yearly}}$ par voiturette par an
+problem_details,section_3_calculation,Pertes revenus {{revenue_loss_yearly}}$ + Surconsommation {{overconsumption_cost_yearly}}$ + Responsabilité civile {{insurance_increase_yearly}}$ + Formations/EPI/recyclage {{recycling_disposal_cost}}$ = {{operational_risks_calculation_yearly}}$ par voiturette par an,#7c3aed
 
 problem_details,section_4_title,💰 TOTAL des Coûts Cachés Réels
 problem_details,section_4_subtitle,Le vrai coût explosif des batteries plomb
@@ -52,7 +52,7 @@ problem_details,section_4_point_1,Remplacements + maintenance + risques
 problem_details,section_4_point_2,Remplacements avec risque: {{lead_replacement_cost_with_risk_20y}}$ + Maintenance: {{lead_maintenance_total_20y}}$ + Risques opérationnels: {{operational_risks_calculation_yearly}}$ × 20 ans = {{operational_risks_calculation_yearly * 20}}$ + Recyclage: {{recycling_disposal_cost * lead_replacements_20y}}$
 problem_details,section_4_point_3,Plus de {{lead_total_20y_per_cart}}$ par voiturette réellement
 problem_details,section_4_point_4,Vs lithium EDS : coût fixe prévisible mensuel
-problem_details,section_4_calculation,**TOTAL RÉEL** avec risque de bris prématuré : **{{lead_total_20y_per_cart}}$** par voiturette sur<br>**20 ans**
+problem_details,section_4_calculation,**TOTAL RÉEL** avec risque de bris prématuré : **{{lead_total_20y_per_cart}}$** par voiturette sur<br>**20 ans**,#991b1b
 
 solution,title,NOTRE SOLUTION RÉVOLUTIONNAIRE
 solution,product_name,Kit Li-Kart LiFePO₄ 48V 105Ah - EDS Québec
@@ -256,6 +256,25 @@ colors,background_light,#f8fafc
 colors,background_dark,#0f172a
 colors,background_card,#1e293b
 colors,white,#ffffff
+
+# Couleurs des sections de coûts (modifiable)
+colors,cost_replacement,#dc2626
+colors,cost_replacement_name,Rouge pour remplacements
+colors,cost_maintenance,#d97706
+colors,cost_maintenance_name,Orange pour maintenance
+colors,cost_operational,#7c3aed
+colors,cost_operational_name,Violet pour risques opérationnels
+colors,cost_recycling,#0891b2
+colors,cost_recycling_name,Cyan pour recyclage
+colors,cost_total,#991b1b
+colors,cost_total_name,Rouge très foncé pour total
+
+# Arrière-plans des sections (transparence 10-15%)
+colors,bg_replacement,rgba(220, 38, 38, 0.1)
+colors,bg_maintenance,rgba(217, 119, 6, 0.1)
+colors,bg_operational,rgba(124, 58, 237, 0.1)
+colors,bg_recycling,rgba(8, 145, 178, 0.1)
+colors,bg_total,rgba(153, 27, 27, 0.15)
 
 # Détails des calculs
 calculs,lead_battery_cost_detail,Coût unitaire batteries plomb + remplacement
