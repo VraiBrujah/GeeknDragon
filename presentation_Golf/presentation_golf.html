@@ -581,6 +581,280 @@
             font-weight: 600;
         }
 
+        /* VS Batteries Comparison Section */
+        .vs-batteries-section {
+            background: linear-gradient(135deg, #1e40af, #059669);
+            border-radius: 25px;
+            padding: 80px 60px;
+            margin: 80px 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vs-batteries-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .vs-section-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .vs-section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #60a5fa, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .vs-section-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .vs-comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .vs-battery-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .vs-battery-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .vs-battery-card.lead {
+            border-left: 5px solid #ef4444;
+        }
+
+        .vs-battery-card.lifepo4 {
+            border-left: 5px solid #10b981;
+        }
+
+        .vs-card-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .vs-card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .vs-card-subtitle {
+            font-size: 1rem;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .vs-versus {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fbbf24;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .vs-tech-specs {
+            margin-bottom: 30px;
+        }
+
+        .vs-spec-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .vs-spec-label {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .vs-spec-value {
+            font-weight: 500;
+            text-align: right;
+        }
+
+        .vs-spec-value.good {
+            color: #34d399;
+        }
+
+        .vs-spec-value.bad {
+            color: #f87171;
+        }
+
+        .vs-cost-summary {
+            background: rgba(0,0,0,0.2);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .vs-cost-total {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .vs-cost-total.expensive {
+            color: #f87171;
+        }
+
+        .vs-cost-total.savings {
+            color: #34d399;
+        }
+
+        .vs-advantages-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .vs-advantages-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .vs-advantages-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .vs-advantage-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .vs-advantage-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .vs-advantage-item.pro::before {
+            content: '✅';
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .vs-advantage-item.con::before {
+            content: '❌';
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .vs-cta {
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 2;
+        }
+
+        .vs-cta-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: #fbbf24;
+        }
+
+        .vs-cta-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .vs-cta-savings {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #34d399;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .vs-cta-button {
+            background: linear-gradient(45deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        .vs-cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4);
+        }
+
+        @media (max-width: 1024px) {
+            .vs-comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .vs-versus {
+                order: -1;
+                transform: rotate(90deg);
+                font-size: 2rem;
+                margin: 20px 0;
+            }
+
+            .vs-advantages-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .vs-section-title {
+                font-size: 2.2rem;
+            }
+        }
+
         /* Benefits Section */
         .benefits-section {
             background: linear-gradient(135deg, #fef3c7, #dcfdf7);
@@ -1634,6 +1908,152 @@
             </div>
         </section>
 
+        <!-- VS Batteries Comparison Section -->
+        <section class="vs-batteries-section fade-in">
+            <div class="vs-section-header">
+                <h2 class="vs-section-title" id="vs-section-title">Chargement...</h2>
+                <p class="vs-section-subtitle" id="vs-section-subtitle">Chargement...</p>
+            </div>
+
+            <!-- Comparaison technique principale -->
+            <div class="vs-comparison-grid">
+                <!-- Batteries Plomb -->
+                <div class="vs-battery-card lead">
+                    <div class="vs-card-header">
+                        <h3 class="vs-card-title" id="vs-lead-title">Chargement...</h3>
+                        <p class="vs-card-subtitle" id="vs-lead-subtitle">Chargement...</p>
+                    </div>
+
+                    <div class="vs-tech-specs">
+                        <div class="vs-spec-row">
+                            <span class="vs-spec-label" id="vs-tech-lifespan-label">Chargement...</span>
+                            <span class="vs-spec-value bad" id="vs-tech-lifespan-lead">Chargement...</span>
+                        </div>
+                        <div class="vs-spec-row">
+                            <span class="vs-spec-label" id="vs-tech-cycles-label">Chargement...</span>
+                            <span class="vs-spec-value bad" id="vs-tech-cycles-lead">Chargement...</span>
+                        </div>
+                        <div class="vs-spec-row">
+                            <span class="vs-spec-label" id="vs-tech-charge-label">Chargement...</span>
+                            <span class="vs-spec-value bad" id="vs-tech-charge-lead">Chargement...</span>
+                        </div>
+                        <div class="vs-spec-row">
+                            <span class="vs-spec-label" id="vs-tech-weight-label">Chargement...</span>
+                            <span class="vs-spec-value bad" id="vs-tech-weight-lead">Chargement...</span>
+                        </div>
+                        <div class="vs-spec-row">
+                            <span class="vs-spec-label" id="vs-tech-maintenance-label">Chargement...</span>
+                            <span class="vs-spec-value bad" id="vs-tech-maintenance-lead">Chargement...</span>
+                        </div>
+                        <div class="vs-spec-row">
+                            <span class="vs-spec-label" id="vs-tech-performance-label">Chargement...</span>
+                            <span class="vs-spec-value bad" id="vs-tech-performance-lead">Chargement...</span>
+                        </div>
+                    </div>
+
+                    <div class="vs-cost-summary">
+                        <div class="vs-cost-total expensive" id="vs-cost-total-lead">Chargement...</div>
+                        <small id="vs-cost-total-label">Chargement...</small>
+                    </div>
+                </div>
+
+                <!-- VS -->
+                <div class="vs-versus">VS</div>
+
+                <!-- Batteries LiFePO4 -->
+                <div class="vs-battery-card lifepo4">
+                    <div class="vs-card-header">
+                        <h3 class="vs-card-title" id="vs-lifepo4-title">Chargement...</h3>
+                        <p class="vs-card-subtitle" id="vs-lifepo4-subtitle">Chargement...</p>
+                    </div>
+
+                    <div class="vs-tech-specs">
+                        <div class="vs-spec-row">
+                            <span class="vs-spec-label" id="vs-tech-lifespan-label-2">Chargement...</span>
+                            <span class="vs-spec-value good" id="vs-tech-lifespan-lifepo4">Chargement...</span>
+                        </div>
+                        <div class="vs-spec-row">
+                            <span class="vs-spec-label" id="vs-tech-cycles-label-2">Chargement...</span>
+                            <span class="vs-spec-value good" id="vs-tech-cycles-lifepo4">Chargement...</span>
+                        </div>
+                        <div class="vs-spec-row">
+                            <span class="vs-spec-label" id="vs-tech-charge-label-2">Chargement...</span>
+                            <span class="vs-spec-value good" id="vs-tech-charge-lifepo4">Chargement...</span>
+                        </div>
+                        <div class="vs-spec-row">
+                            <span class="vs-spec-label" id="vs-tech-weight-label-2">Chargement...</span>
+                            <span class="vs-spec-value good" id="vs-tech-weight-lifepo4">Chargement...</span>
+                        </div>
+                        <div class="vs-spec-row">
+                            <span class="vs-spec-label" id="vs-tech-maintenance-label-2">Chargement...</span>
+                            <span class="vs-spec-value good" id="vs-tech-maintenance-lifepo4">Chargement...</span>
+                        </div>
+                        <div class="vs-spec-row">
+                            <span class="vs-spec-label" id="vs-tech-performance-label-2">Chargement...</span>
+                            <span class="vs-spec-value good" id="vs-tech-performance-lifepo4">Chargement...</span>
+                        </div>
+                    </div>
+
+                    <div class="vs-cost-summary">
+                        <div class="vs-cost-total savings" id="vs-cost-total-lifepo4">Chargement...</div>
+                        <small id="vs-cost-total-label-2">Chargement...</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avantages/Inconvénients -->
+            <div class="vs-advantages-grid">
+                <!-- Batteries Plomb -->
+                <div class="vs-advantages-card">
+                    <h4 class="vs-advantages-title" id="vs-advantages-label">Chargement...</h4>
+                    <ul class="vs-advantage-list">
+                        <li class="vs-advantage-item pro" id="vs-lead-advantage-1">Chargement...</li>
+                        <li class="vs-advantage-item pro" id="vs-lead-advantage-2">Chargement...</li>
+                    </ul>
+                    <h4 class="vs-advantages-title" id="vs-disadvantages-label">Chargement...</h4>
+                    <ul class="vs-advantage-list">
+                        <li class="vs-advantage-item con" id="vs-lead-disadvantage-1">Chargement...</li>
+                        <li class="vs-advantage-item con" id="vs-lead-disadvantage-2">Chargement...</li>
+                        <li class="vs-advantage-item con" id="vs-lead-disadvantage-3">Chargement...</li>
+                        <li class="vs-advantage-item con" id="vs-lead-disadvantage-4">Chargement...</li>
+                        <li class="vs-advantage-item con" id="vs-lead-disadvantage-5">Chargement...</li>
+                    </ul>
+                </div>
+
+                <!-- Batteries LiFePO4 -->
+                <div class="vs-advantages-card">
+                    <h4 class="vs-advantages-title" id="vs-advantages-label-2">Chargement...</h4>
+                    <ul class="vs-advantage-list">
+                        <li class="vs-advantage-item pro" id="vs-lifepo4-advantage-1">Chargement...</li>
+                        <li class="vs-advantage-item pro" id="vs-lifepo4-advantage-2">Chargement...</li>
+                        <li class="vs-advantage-item pro" id="vs-lifepo4-advantage-3">Chargement...</li>
+                        <li class="vs-advantage-item pro" id="vs-lifepo4-advantage-4">Chargement...</li>
+                        <li class="vs-advantage-item pro" id="vs-lifepo4-advantage-5">Chargement...</li>
+                        <li class="vs-advantage-item pro" id="vs-lifepo4-advantage-6">Chargement...</li>
+                    </ul>
+                    <h4 class="vs-advantages-title" id="vs-disadvantages-label-2">Chargement...</h4>
+                    <ul class="vs-advantage-list">
+                        <li class="vs-advantage-item con" id="vs-lifepo4-disadvantage-1">Chargement...</li>
+                        <li class="vs-advantage-item con" id="vs-lifepo4-disadvantage-2">Chargement...</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="vs-cta">
+                <h3 class="vs-cta-title" id="vs-cta-title">Chargement...</h3>
+                <p class="vs-cta-subtitle" id="vs-cta-subtitle">Chargement...</p>
+                <div class="vs-cta-savings">
+                    <span id="vs-cta-savings-prefix">Chargement...</span>
+                    <span id="vs-cta-savings-amount">2 423$</span>
+                    <span id="vs-cta-savings-suffix">Chargement...</span>
+                </div>
+                <button class="vs-cta-button" id="vs-cta-button" onclick="window.location.href='#contact'">
+                    <span id="vs-cta-button-text">Chargement...</span>
+                </button>
+            </div>
+        </section>
+
         <!-- Benefits Section -->
         <section class="benefits-section fade-in">
             <h2 class="benefits-title" id="benefits-title">Chargement...</h2>
@@ -1837,6 +2257,135 @@
             }
         }
 
+        // Fonction pour peupler les sections de détails des problèmes (statiques par voiturette)
+        function populateProblemDetailsSections() {
+            if (!data.problem_details) return;
+
+            // Section 1 - Coûts de Remplacement Explosifs
+            safeUpdateElement('problem-details-section-1-title', data.problem_details?.section_1_title);
+            safeUpdateElement('problem-details-section-1-subtitle', data.problem_details?.section_1_subtitle);
+            safeUpdateElement('problem-details-section-1-point-1', data.problem_details?.section_1_point_1);
+            safeUpdateElement('problem-details-section-1-point-2', data.problem_details?.section_1_point_2);
+            safeUpdateElement('problem-details-section-1-point-3', data.problem_details?.section_1_point_3);
+            safeUpdateElement('problem-details-section-1-point-4', data.problem_details?.section_1_point_4);
+            safeUpdateElement('problem-details-section-1-calculation', data.problem_details?.section_1_calculation);
+
+            // Section 2 - Maintenance Spécialisée Coûteuse
+            safeUpdateElement('problem-details-section-2-title', data.problem_details?.section_2_title);
+            safeUpdateElement('problem-details-section-2-subtitle', data.problem_details?.section_2_subtitle);
+            safeUpdateElement('problem-details-section-2-point-1', data.problem_details?.section_2_point_1);
+            safeUpdateElement('problem-details-section-2-point-2', data.problem_details?.section_2_point_2);
+            safeUpdateElement('problem-details-section-2-point-3', data.problem_details?.section_2_point_3);
+            safeUpdateElement('problem-details-section-2-point-4', data.problem_details?.section_2_point_4);
+            safeUpdateElement('problem-details-section-2-calculation', data.problem_details?.section_2_calculation);
+
+            // Section 3 - Risques et Pertes Opérationnelles
+            safeUpdateElement('problem-details-section-3-title', data.problem_details?.section_3_title);
+            safeUpdateElement('problem-details-section-3-subtitle', data.problem_details?.section_3_subtitle);
+            safeUpdateElement('problem-details-section-3-point-1', data.problem_details?.section_3_point_1);
+            safeUpdateElement('problem-details-section-3-point-2', data.problem_details?.section_3_point_2);
+            safeUpdateElement('problem-details-section-3-point-3', data.problem_details?.section_3_point_3);
+            safeUpdateElement('problem-details-section-3-point-4', data.problem_details?.section_3_point_4);
+            safeUpdateElement('problem-details-section-3-calculation', data.problem_details?.section_3_calculation);
+
+            // Section 4 - TOTAL des Coûts Cachés Réels
+            safeUpdateElement('problem-details-section-4-title', data.problem_details?.section_4_title);
+            safeUpdateElement('problem-details-section-4-subtitle', data.problem_details?.section_4_subtitle);
+            safeUpdateElement('problem-details-section-4-point-1', data.problem_details?.section_4_point_1);
+            safeUpdateElement('problem-details-section-4-point-2', data.problem_details?.section_4_point_2);
+            safeUpdateElement('problem-details-section-4-point-3', data.problem_details?.section_4_point_3);
+            safeUpdateElement('problem-details-section-4-point-4', data.problem_details?.section_4_point_4);
+            safeUpdateElement('problem-details-section-4-calculation', data.problem_details?.section_4_calculation);
+        }
+
+        // Fonction pour peupler la section VS Batteries (statique)
+        function populateVsBatteriesSection() {
+            if (!data.vs_batteries) return;
+
+            // En-tête de section
+            safeUpdateElement('vs-section-title', data.vs_batteries?.section_title);
+            safeUpdateElement('vs-section-subtitle', data.vs_batteries?.section_subtitle);
+
+            // Titres des cartes
+            safeUpdateElement('vs-lead-title', data.vs_batteries?.lead_title);
+            safeUpdateElement('vs-lead-subtitle', data.vs_batteries?.lead_subtitle);
+            safeUpdateElement('vs-lifepo4-title', data.vs_batteries?.lifepo4_title);
+            safeUpdateElement('vs-lifepo4-subtitle', data.vs_batteries?.lifepo4_subtitle);
+
+            // Spécifications techniques (labels et valeurs)
+            safeUpdateElement('vs-tech-lifespan-label', data.vs_batteries?.tech_lifespan_label);
+            safeUpdateElement('vs-tech-lifespan-label-2', data.vs_batteries?.tech_lifespan_label);
+            safeUpdateElement('vs-tech-lifespan-lead', data.vs_batteries?.tech_lifespan_lead);
+            safeUpdateElement('vs-tech-lifespan-lifepo4', data.vs_batteries?.tech_lifespan_lifepo4);
+
+            safeUpdateElement('vs-tech-cycles-label', data.vs_batteries?.tech_cycles_label);
+            safeUpdateElement('vs-tech-cycles-label-2', data.vs_batteries?.tech_cycles_label);
+            safeUpdateElement('vs-tech-cycles-lead', data.vs_batteries?.tech_cycles_lead);
+            safeUpdateElement('vs-tech-cycles-lifepo4', data.vs_batteries?.tech_cycles_lifepo4);
+
+            safeUpdateElement('vs-tech-charge-label', data.vs_batteries?.tech_charge_label);
+            safeUpdateElement('vs-tech-charge-label-2', data.vs_batteries?.tech_charge_label);
+            safeUpdateElement('vs-tech-charge-lead', data.vs_batteries?.tech_charge_lead);
+            safeUpdateElement('vs-tech-charge-lifepo4', data.vs_batteries?.tech_charge_lifepo4);
+
+            safeUpdateElement('vs-tech-weight-label', data.vs_batteries?.tech_weight_label);
+            safeUpdateElement('vs-tech-weight-label-2', data.vs_batteries?.tech_weight_label);
+            safeUpdateElement('vs-tech-weight-lead', data.vs_batteries?.tech_weight_lead);
+            safeUpdateElement('vs-tech-weight-lifepo4', data.vs_batteries?.tech_weight_lifepo4);
+
+            safeUpdateElement('vs-tech-maintenance-label', data.vs_batteries?.tech_maintenance_label);
+            safeUpdateElement('vs-tech-maintenance-label-2', data.vs_batteries?.tech_maintenance_label);
+            safeUpdateElement('vs-tech-maintenance-lead', data.vs_batteries?.tech_maintenance_lead);
+            safeUpdateElement('vs-tech-maintenance-lifepo4', data.vs_batteries?.tech_maintenance_lifepo4);
+
+            safeUpdateElement('vs-tech-performance-label', data.vs_batteries?.tech_performance_label);
+            safeUpdateElement('vs-tech-performance-label-2', data.vs_batteries?.tech_performance_label);
+            safeUpdateElement('vs-tech-performance-lead', data.vs_batteries?.tech_performance_lead);
+            safeUpdateElement('vs-tech-performance-lifepo4', data.vs_batteries?.tech_performance_lifepo4);
+
+            // Coûts totaux
+            safeUpdateElement('vs-cost-total-label', data.vs_batteries?.cost_total_label);
+            safeUpdateElement('vs-cost-total-label-2', data.vs_batteries?.cost_total_label);
+            safeUpdateElement('vs-cost-total-lead', data.vs_batteries?.cost_total_lead);
+            safeUpdateElement('vs-cost-total-lifepo4', data.vs_batteries?.cost_total_lifepo4);
+
+            // Avantages/Inconvénients
+            safeUpdateElement('vs-advantages-label', data.vs_batteries?.advantages_label);
+            safeUpdateElement('vs-advantages-label-2', data.vs_batteries?.advantages_label);
+            safeUpdateElement('vs-disadvantages-label', data.vs_batteries?.disadvantages_label);
+            safeUpdateElement('vs-disadvantages-label-2', data.vs_batteries?.disadvantages_label);
+
+            // Avantages batteries plomb
+            safeUpdateElement('vs-lead-advantage-1', data.vs_batteries?.lead_advantage_1);
+            safeUpdateElement('vs-lead-advantage-2', data.vs_batteries?.lead_advantage_2);
+
+            // Inconvénients batteries plomb
+            safeUpdateElement('vs-lead-disadvantage-1', data.vs_batteries?.lead_disadvantage_1);
+            safeUpdateElement('vs-lead-disadvantage-2', data.vs_batteries?.lead_disadvantage_2);
+            safeUpdateElement('vs-lead-disadvantage-3', data.vs_batteries?.lead_disadvantage_3);
+            safeUpdateElement('vs-lead-disadvantage-4', data.vs_batteries?.lead_disadvantage_4);
+            safeUpdateElement('vs-lead-disadvantage-5', data.vs_batteries?.lead_disadvantage_5);
+
+            // Avantages LiFePO4
+            safeUpdateElement('vs-lifepo4-advantage-1', data.vs_batteries?.lifepo4_advantage_1);
+            safeUpdateElement('vs-lifepo4-advantage-2', data.vs_batteries?.lifepo4_advantage_2);
+            safeUpdateElement('vs-lifepo4-advantage-3', data.vs_batteries?.lifepo4_advantage_3);
+            safeUpdateElement('vs-lifepo4-advantage-4', data.vs_batteries?.lifepo4_advantage_4);
+            safeUpdateElement('vs-lifepo4-advantage-5', data.vs_batteries?.lifepo4_advantage_5);
+            safeUpdateElement('vs-lifepo4-advantage-6', data.vs_batteries?.lifepo4_advantage_6);
+
+            // Inconvénients LiFePO4
+            safeUpdateElement('vs-lifepo4-disadvantage-1', data.vs_batteries?.lifepo4_disadvantage_1);
+            safeUpdateElement('vs-lifepo4-disadvantage-2', data.vs_batteries?.lifepo4_disadvantage_2);
+
+            // Call to Action
+            safeUpdateElement('vs-cta-title', data.vs_batteries?.cta_title);
+            safeUpdateElement('vs-cta-subtitle', data.vs_batteries?.cta_subtitle);
+            safeUpdateElement('vs-cta-savings-prefix', data.vs_batteries?.cta_savings_prefix);
+            safeUpdateElement('vs-cta-savings-suffix', data.vs_batteries?.cta_savings_suffix);
+            safeUpdateElement('vs-cta-button-text', data.vs_batteries?.cta_button_text);
+        }
+
         // Mettre à jour le contenu de la page
         function updateContent() {
             // Header
@@ -1857,7 +2406,7 @@
             // safeUpdateElement('maintenance-hours', data.problem?.maintenance_hours);
             // safeUpdateElement('maintenance-cost', data.problem?.maintenance_cost);
             safeUpdateElement('performance-issue', data.problem?.performance_issue);
-            safeUpdateElement('charging-time', data.problem?.charging_time);
+            // charging-time sera mis à jour par updateCartCalculation()
             safeUpdateElement('weight-old', data.problem?.weight);
             safeUpdateElement('extra-consumption', data.problem?.extra_consumption);
             safeUpdateElement('environmental-risk', data.problem?.environmental_risk);
@@ -1880,38 +2429,11 @@
             safeUpdateElement('problem-card-6-title', data.ui?.problem_card_6_title);
             safeUpdateElement('problem-card-6-risks', data.ui?.problem_card_6_risks);
 
-            // Problem Details Sections
-            safeUpdateElement('problem-details-section-1-title', data.problem_details?.section_1_title);
-            safeUpdateElement('problem-details-section-1-subtitle', data.problem_details?.section_1_subtitle);
-            safeUpdateElement('problem-details-section-1-point-1', data.problem_details?.section_1_point_1);
-            safeUpdateElement('problem-details-section-1-point-2', data.problem_details?.section_1_point_2);
-            safeUpdateElement('problem-details-section-1-point-3', data.problem_details?.section_1_point_3);
-            safeUpdateElement('problem-details-section-1-point-4', data.problem_details?.section_1_point_4);
-            safeUpdateElement('problem-details-section-1-calculation', data.problem_details?.section_1_calculation);
+            // Problem Details Sections (par voiturette - ne changent PAS avec le slider)
+            populateProblemDetailsSections();
 
-            safeUpdateElement('problem-details-section-2-title', data.problem_details?.section_2_title);
-            safeUpdateElement('problem-details-section-2-subtitle', data.problem_details?.section_2_subtitle);
-            safeUpdateElement('problem-details-section-2-point-1', data.problem_details?.section_2_point_1);
-            safeUpdateElement('problem-details-section-2-point-2', data.problem_details?.section_2_point_2);
-            safeUpdateElement('problem-details-section-2-point-3', data.problem_details?.section_2_point_3);
-            safeUpdateElement('problem-details-section-2-point-4', data.problem_details?.section_2_point_4);
-            safeUpdateElement('problem-details-section-2-calculation', data.problem_details?.section_2_calculation);
-
-            safeUpdateElement('problem-details-section-3-title', data.problem_details?.section_3_title);
-            safeUpdateElement('problem-details-section-3-subtitle', data.problem_details?.section_3_subtitle);
-            safeUpdateElement('problem-details-section-3-point-1', data.problem_details?.section_3_point_1);
-            safeUpdateElement('problem-details-section-3-point-2', data.problem_details?.section_3_point_2);
-            safeUpdateElement('problem-details-section-3-point-3', data.problem_details?.section_3_point_3);
-            safeUpdateElement('problem-details-section-3-point-4', data.problem_details?.section_3_point_4);
-            safeUpdateElement('problem-details-section-3-calculation', data.problem_details?.section_3_calculation);
-
-            safeUpdateElement('problem-details-section-4-title', data.problem_details?.section_4_title);
-            safeUpdateElement('problem-details-section-4-subtitle', data.problem_details?.section_4_subtitle);
-            safeUpdateElement('problem-details-section-4-point-1', data.problem_details?.section_4_point_1);
-            safeUpdateElement('problem-details-section-4-point-2', data.problem_details?.section_4_point_2);
-            safeUpdateElement('problem-details-section-4-point-3', data.problem_details?.section_4_point_3);
-            safeUpdateElement('problem-details-section-4-point-4', data.problem_details?.section_4_point_4);
-            safeUpdateElement('problem-details-section-4-calculation', data.problem_details?.section_4_calculation);
+            // VS Batteries Section (statique)
+            populateVsBatteriesSection();
 
             // Solution
             safeUpdateElement('solution-title', data.solution?.title);
@@ -1954,12 +2476,9 @@
             safeUpdateElement('lithium-maintenance', data.comparison?.lithium_maintenance);
             safeUpdateElement('lithium-charging', data.comparison?.lithium_charging);
 
-            // Calculation details
-            safeUpdateElement('lead-replacement-schedule', data.comparison?.lead_replacement_frequency);
-            safeUpdateElement('lead-maintenance-detail', data.calculs?.lead_maintenance_detail);
+            // Calculation details (lead-replacement-schedule mis à jour par updateCalculationDetails)
             safeUpdateElement('lithium-lifespan', data.comparison?.lithium_lifespan);
             safeUpdateElement('lithium-advantage', data.calculs?.lithium_advantage);
-            safeUpdateElement('savings-formula', data.calculs?.savings_formula);
 
             // Pricing
             safeUpdateElement('pricing-title', data.ui?.pricing_title);
@@ -2134,6 +2653,16 @@
             safeUpdateElement('cost-10-years', formatNumber(cost10YearsReal) + currency + ' (coût total réel)');
             safeUpdateElement('maintenance-hours', maintenanceHours + ' heures/an');
             safeUpdateElement('maintenance-cost', formatNumber(maintenanceCost) + currency + ' (par voiturette/an)');
+
+            // Mise à jour dynamique de l'impact temps de charge
+            const baseChargingTime = data.problem?.charging_time || "8-10 heures";
+            const fleetOverhead = parseFloat(data.problem?.fleet_overhead_percent || 40);
+            const extraCostPerCart = parseFloat(data.problem?.extra_fleet_cost_per_cart || 800);
+            const fleetImpact = Math.round(currentCartCount * fleetOverhead / 100);
+            const totalExtraCost = fleetImpact * extraCostPerCart;
+
+            const chargingImpactText = `${baseChargingTime} = +${fleetImpact} voiturettes (${formatNumber(totalExtraCost)}$)`;
+            safeUpdateElement('charging-time', chargingImpactText);
 
             // SECTION TARIFICATION - Calculs dynamiques
             const monthly10 = parseFloat(data.pricing.contract_10_monthly_unit) * currentCartCount;

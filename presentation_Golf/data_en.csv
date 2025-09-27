@@ -55,11 +55,14 @@ problem_details,section_4_point_2,8000$ + 3600$ + 1840$ per cart over 10 years
 problem_details,section_4_point_3,Over 14000$ per cart actually
 problem_details,section_4_point_4,Vs EDS lithium: predictable monthly fixed cost
 problem_details,section_4_calculation,REAL TOTAL: 14140$ per cart over 10 years
-problem,performance_issue,Power loss at end of charge
+problem,performance_issue,Power loss at end of charge - critical impact on operations
 problem,autonomy_new,6-8 hours (new battery)
 problem,autonomy_degraded,3-4 hours (after 5 years degradation)
 problem,autonomy_loss,50% autonomy loss over 5 years
 problem,charging_time,8-10 hours
+problem,fleet_overhead_percent,40
+problem,extra_fleet_cost_per_cart,800
+problem,charging_downtime_hours,8.5
 problem,weight,300+ kg
 problem,extra_consumption,25% higher
 problem,environmental_risk,Toxic lead handling
@@ -136,8 +139,8 @@ ui,problem_card_1_total_prefix,Real total cost over 10 years:
 ui,problem_card_2_title,Specialized Expensive Maintenance
 ui,problem_card_2_suffix,hours/year
 ui,problem_card_2_cost_prefix,Real annual cost:
-ui,problem_card_3_title,Degraded Performance & Losses
-ui,problem_card_3_charging_prefix,Charging time + revenue losses:
+ui,problem_card_3_title,Charging Time & Fleet Impact
+ui,problem_card_3_charging_prefix,8-10h charge = +40% carts required:
 ui,problem_card_4_title,Excessive Weight & Overconsumption
 ui,problem_card_4_weight_prefix,Over
 ui,problem_card_4_consumption_prefix,25% overconsumption
@@ -162,6 +165,74 @@ ui,comparison_cost_10_years,10-year cost
 ui,comparison_replacements,Replacements
 ui,comparison_maintenance,Maintenance
 ui,comparison_charging_time,Charging time
+
+# Modern vs batteries comparison section
+vs_batteries,section_title,LEAD vs LiFePO₄: WHY CHANGE?
+vs_batteries,section_subtitle,Detailed technical and economic comparison
+vs_batteries,lead_title,Current Lead Batteries
+vs_batteries,lead_subtitle,Obsolete expensive technology
+vs_batteries,lifepo4_title,EDS LiFePO₄ Batteries
+vs_batteries,lifepo4_subtitle,Modern Canadian technology
+
+# Comparative technical characteristics
+vs_batteries,tech_lifespan_label,Lifespan
+vs_batteries,tech_lifespan_lead,2-5 years maximum
+vs_batteries,tech_lifespan_lifepo4,15-20 years guaranteed
+vs_batteries,tech_cycles_label,Charge cycles
+vs_batteries,tech_cycles_lead,300-500 cycles
+vs_batteries,tech_cycles_lifepo4,8000+ cycles
+vs_batteries,tech_charge_label,Charging time
+vs_batteries,tech_charge_lead,8-10 hours
+vs_batteries,tech_charge_lifepo4,2 hours only
+vs_batteries,tech_weight_label,Weight per cart
+vs_batteries,tech_weight_lead,300+ kg
+vs_batteries,tech_weight_lifepo4,40 kg
+vs_batteries,tech_maintenance_label,Maintenance
+vs_batteries,tech_maintenance_lead,120h/year mandatory
+vs_batteries,tech_maintenance_lifepo4,Zero maintenance
+vs_batteries,tech_performance_label,Consistent performance
+vs_batteries,tech_performance_lead,50% degradation in 5 years
+vs_batteries,tech_performance_lifepo4,95% until complete discharge
+
+# Comparative costs
+vs_batteries,cost_initial_label,Initial investment
+vs_batteries,cost_initial_lead,2000$ per cart
+vs_batteries,cost_initial_lifepo4,Rental 76-97$/month
+vs_batteries,cost_replacement_label,10-year replacements
+vs_batteries,cost_replacement_lead,4 replacements = 8000$
+vs_batteries,cost_replacement_lifepo4,No replacement
+vs_batteries,cost_maintenance_label,10-year maintenance
+vs_batteries,cost_maintenance_lead,3600$ per cart
+vs_batteries,cost_maintenance_lifepo4,0$ maintenance
+vs_batteries,cost_total_label,TOTAL 10-YEAR COST
+vs_batteries,cost_total_lead,14140$ per cart
+vs_batteries,cost_total_lifepo4,11717$ per cart
+
+# Advantages/Disadvantages
+vs_batteries,advantages_label,ADVANTAGES
+vs_batteries,disadvantages_label,DISADVANTAGES
+vs_batteries,lead_advantage_1,Known technology
+vs_batteries,lead_advantage_2,Staggered initial investment
+vs_batteries,lead_disadvantage_1,Explosive hidden costs
+vs_batteries,lead_disadvantage_2,Constant maintenance required
+vs_batteries,lead_disadvantage_3,Degraded performance
+vs_batteries,lead_disadvantage_4,Dangerous toxic materials
+vs_batteries,lead_disadvantage_5,Frequent breakdowns
+vs_batteries,lifepo4_advantage_1,Savings 2423$ over 10 years
+vs_batteries,lifepo4_advantage_2,No maintenance
+vs_batteries,lifepo4_advantage_3,Consistent performance 15+ years
+vs_batteries,lifepo4_advantage_4,Eco-friendly technology
+vs_batteries,lifepo4_advantage_5,Dedicated technical support
+vs_batteries,lifepo4_advantage_6,Fixed predictable budget
+vs_batteries,lifepo4_disadvantage_1,New technology
+vs_batteries,lifepo4_disadvantage_2,Contractual commitment
+
+# Call to action
+vs_batteries,cta_title,READY FOR THE REVOLUTION?
+vs_batteries,cta_subtitle,Switch to LiFePO₄ batteries today
+vs_batteries,cta_savings_prefix,Save
+vs_batteries,cta_savings_suffix,per cart over 10 years
+vs_batteries,cta_button_text,Request a demonstration
 
 ui,pricing_title,Our Exclusive Offers
 ui,pricing_monthly_suffix,per cart / month

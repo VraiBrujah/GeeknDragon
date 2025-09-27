@@ -55,11 +55,14 @@ problem_details,section_4_point_2,8 000$ + 3 600$ + 1 840$ par voiturette sur 10
 problem_details,section_4_point_3,Plus de 14 000$ par voiturette réellement
 problem_details,section_4_point_4,Vs lithium EDS : coût fixe prévisible mensuel
 problem_details,section_4_calculation,TOTAL RÉEL : 14 140$ par voiturette sur 10 ans
-problem,performance_issue,Perte de puissance en fin de charge
+problem,performance_issue,Perte de puissance en fin de charge - impact critique sur opérations
 problem,autonomy_new,6-8 heures (batterie neuve)
 problem,autonomy_degraded,3-4 heures (après 5 ans de dégradation)
 problem,autonomy_loss,50% de perte d'autonomie sur 5 ans
 problem,charging_time,8-10 heures
+problem,fleet_overhead_percent,40
+problem,extra_fleet_cost_per_cart,800
+problem,charging_downtime_hours,8.5
 problem,weight,300+ kg
 problem,extra_consumption,25% supérieure
 problem,environmental_risk,Manipulation de plomb toxique
@@ -136,8 +139,8 @@ ui,problem_card_1_total_prefix,Coût total réel sur 10 ans :
 ui,problem_card_2_title,Maintenance Spécialisée Coûteuse
 ui,problem_card_2_suffix,heures/an
 ui,problem_card_2_cost_prefix,Coût annuel réel :
-ui,problem_card_3_title,Performances Dégradées & Pertes
-ui,problem_card_3_charging_prefix,Temps de recharge + pertes revenus :
+ui,problem_card_3_title,Temps de Charge & Impact Flotte
+ui,problem_card_3_charging_prefix,8-10h charge = +40% voiturettes requis :
 ui,problem_card_4_title,Poids Excessif & Surconsommation
 ui,problem_card_4_weight_prefix,Plus de
 ui,problem_card_4_consumption_prefix,Surconsommation 25%
@@ -162,6 +165,74 @@ ui,comparison_cost_10_years,Coût 10 ans
 ui,comparison_replacements,Remplacements
 ui,comparison_maintenance,Maintenance
 ui,comparison_charging_time,Temps de recharge
+
+# Section de comparaison moderne vs batteries
+vs_batteries,section_title,PLOMB vs LiFePO₄ : POURQUOI CHANGER ?
+vs_batteries,section_subtitle,Comparaison technique et économique détaillée
+vs_batteries,lead_title,Batteries Plomb Actuelles
+vs_batteries,lead_subtitle,Technologie obsolète coûteuse
+vs_batteries,lifepo4_title,Batteries LiFePO₄ EDS
+vs_batteries,lifepo4_subtitle,Technologie moderne canadienne
+
+# Caractéristiques techniques comparatives
+vs_batteries,tech_lifespan_label,Durée de vie
+vs_batteries,tech_lifespan_lead,2-5 ans maximum
+vs_batteries,tech_lifespan_lifepo4,15-20 ans garantis
+vs_batteries,tech_cycles_label,Cycles de charge
+vs_batteries,tech_cycles_lead,300-500 cycles
+vs_batteries,tech_cycles_lifepo4,8 000+ cycles
+vs_batteries,tech_charge_label,Temps de charge
+vs_batteries,tech_charge_lead,8-10 heures
+vs_batteries,tech_charge_lifepo4,2 heures seulement
+vs_batteries,tech_weight_label,Poids par voiturette
+vs_batteries,tech_weight_lead,300+ kg
+vs_batteries,tech_weight_lifepo4,40 kg
+vs_batteries,tech_maintenance_label,Maintenance
+vs_batteries,tech_maintenance_lead,120h/an obligatoire
+vs_batteries,tech_maintenance_lifepo4,Zéro maintenance
+vs_batteries,tech_performance_label,Performance constante
+vs_batteries,tech_performance_lead,Dégradation 50% en 5 ans
+vs_batteries,tech_performance_lifepo4,95% jusqu'à décharge complète
+
+# Coûts comparatifs
+vs_batteries,cost_initial_label,Investissement initial
+vs_batteries,cost_initial_lead,2 000$ par voiturette
+vs_batteries,cost_initial_lifepo4,Location 76-97$/mois
+vs_batteries,cost_replacement_label,Remplacements 10 ans
+vs_batteries,cost_replacement_lead,4 remplacements = 8 000$
+vs_batteries,cost_replacement_lifepo4,Aucun remplacement
+vs_batteries,cost_maintenance_label,Maintenance 10 ans
+vs_batteries,cost_maintenance_lead,3 600$ par voiturette
+vs_batteries,cost_maintenance_lifepo4,0$ maintenance
+vs_batteries,cost_total_label,COÛT TOTAL 10 ANS
+vs_batteries,cost_total_lead,14 140$ par voiturette
+vs_batteries,cost_total_lifepo4,11 717$ par voiturette
+
+# Avantages/Inconvénients
+vs_batteries,advantages_label,AVANTAGES
+vs_batteries,disadvantages_label,INCONVÉNIENTS
+vs_batteries,lead_advantage_1,Technologie connue
+vs_batteries,lead_advantage_2,Investissement initial fractionné
+vs_batteries,lead_disadvantage_1,Coûts explosifs cachés
+vs_batteries,lead_disadvantage_2,Maintenance constante requise
+vs_batteries,lead_disadvantage_3,Performances dégradées
+vs_batteries,lead_disadvantage_4,Matières toxiques dangereuses
+vs_batteries,lead_disadvantage_5,Pannes fréquentes
+vs_batteries,lifepo4_advantage_1,Économies 2 423$ sur 10 ans
+vs_batteries,lifepo4_advantage_2,Aucune maintenance
+vs_batteries,lifepo4_advantage_3,Performance constante 15+ ans
+vs_batteries,lifepo4_advantage_4,Technologie écologique
+vs_batteries,lifepo4_advantage_5,Support technique dédié
+vs_batteries,lifepo4_advantage_6,Budget prévisible fixe
+vs_batteries,lifepo4_disadvantage_1,Nouveauté technologique
+vs_batteries,lifepo4_disadvantage_2,Engagement contractuel
+
+# Call to action
+vs_batteries,cta_title,PRÊT POUR LA RÉVOLUTION ?
+vs_batteries,cta_subtitle,Passez aux batteries LiFePO₄ dès aujourd'hui
+vs_batteries,cta_savings_prefix,Économisez
+vs_batteries,cta_savings_suffix,par voiturette sur 10 ans
+vs_batteries,cta_button_text,Demander une démonstration
 
 ui,pricing_title,Nos Offres Exclusives
 ui,pricing_monthly_suffix,par voiturette / mois
