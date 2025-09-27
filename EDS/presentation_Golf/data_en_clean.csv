@@ -25,18 +25,18 @@ problem,safety_concerns,Dangerous acid leaks
 problem_details,section_1_title,💸 Explosive Replacement Costs
 problem_details,section_1_subtitle,Why lead batteries cost so much
 problem_details,section_1_point_1,Frequent replacement every 2-5 years
-problem_details,section_1_point_2,2000$ per cart at each replacement
-problem_details,section_1_point_3,4 minimum replacements over 10 years
-problem_details,section_1_point_4,15-20% risk of premature failure
-problem_details,section_1_calculation,4 × 2000$ = 8000$ per cart over 10 years
+problem_details,section_1_point_2,{{lead_cost_replacement_unit}}$ per cart at each replacement
+problem_details,section_1_point_3,4 replacements needed over 10 years (4-year cycle)
+problem_details,section_1_point_4,Including 1 free warranty replacement + 20% premature failure risk
+problem_details,section_1_calculation,{{lead_replacement_calculation_10y}}
 
 problem_details,section_2_title,⚙️ Specialized Expensive Maintenance
 problem_details,section_2_subtitle,Hidden costs of constant upkeep
-problem_details,section_2_point_1,120 hours of mandatory maintenance per year
-problem_details,section_2_point_2,Specialized technician at 30$ per hour
+problem_details,section_2_point_1,12 hours of mandatory maintenance per year
+problem_details,section_2_point_2,Specialized technician at {{lead_technician_hourly_rate}}$ per hour
 problem_details,section_2_point_3,Weekly distilled water verification
 problem_details,section_2_point_4,Terminal cleaning and inspection
-problem_details,section_2_calculation,120h × 30$ × 10 years = 36000$ per fleet
+problem_details,section_2_calculation,{{lead_maintenance_calculation_10y}}
 
 problem_details,section_3_title,🚨 Operational Risks and Losses
 problem_details,section_3_subtitle,Costs nobody tells you about
@@ -44,15 +44,15 @@ problem_details,section_3_point_1,Mid-course breakdowns = customer refunds
 problem_details,section_3_point_2,25% electrical overconsumption
 problem_details,section_3_point_3,Increased insurance for hazardous materials
 problem_details,section_3_point_4,Recycling and toxic handling fees
-problem_details,section_3_calculation,800$ + 240$ + 500$ + 300$ = 1840$ per year
+problem_details,section_3_calculation,{{operational_risks_breakdown}}
 
 problem_details,section_4_title,💰 TOTAL Real Hidden Costs
 problem_details,section_4_subtitle,The true explosive cost of lead batteries
 problem_details,section_4_point_1,Replacements + maintenance + risks
-problem_details,section_4_point_2,8000$ + 3600$ + 1840$ per cart over 10 years
-problem_details,section_4_point_3,Over 14000$ per cart actually
+problem_details,section_4_point_2,{{total_breakdown_calculation_10y}}
+problem_details,section_4_point_3,Over {{total_cost_simplified_10y}}$ per cart actually
 problem_details,section_4_point_4,Vs EDS lithium: predictable monthly fixed cost
-problem_details,section_4_calculation,REAL TOTAL: 14140$ per cart over 10 years
+problem_details,section_4_calculation,{{total_cost_final_calculation_10y}}
 
 solution,title,OUR REVOLUTIONARY SOLUTION
 solution,product_name,LiFePO₄ Lithium Kit 48V 105Ah
@@ -85,7 +85,7 @@ comparison,lithium_lifespan,15-20 years without replacement
 comparison,lithium_detail,One-time investment - constant performance
 
 benefits,benefit_1,Single battery for the entire contract duration
-benefits,benefit_2,120 hours of annual maintenance savings
+benefits,benefit_2,12 hours of annual maintenance savings
 benefits,benefit_3,Lighter and more reliable golf carts
 benefits,benefit_4,Fixed and predictable monthly budget
 benefits,benefit_5,Dedicated technical partner throughout
@@ -124,7 +124,7 @@ vs_batteries,tech_weight_label,Weight per cart
 vs_batteries,tech_weight_lead,300+ kg
 vs_batteries,tech_weight_lifepo4,40 kg
 vs_batteries,tech_maintenance_label,Maintenance
-vs_batteries,tech_maintenance_lead,120h/year mandatory
+vs_batteries,tech_maintenance_lead,12h/year mandatory
 vs_batteries,tech_maintenance_lifepo4,Zero maintenance
 vs_batteries,tech_performance_label,Consistent performance
 vs_batteries,tech_performance_lead,50% degradation in 5 years
@@ -132,17 +132,17 @@ vs_batteries,tech_performance_lifepo4,95% until complete discharge
 
 # Comparative costs
 vs_batteries,cost_initial_label,Initial investment
-vs_batteries,cost_initial_lead,2000$ per cart
+vs_batteries,cost_initial_lead,{{lead_cost_replacement_unit}}$ per cart
 vs_batteries,cost_initial_lifepo4,Rental 76-97$/month
 vs_batteries,cost_replacement_label,10-year replacements
-vs_batteries,cost_replacement_lead,4 replacements = 8000$
+vs_batteries,cost_replacement_lead,4 replacements = {{lead_replacement_cost_with_risk_10y}}$
 vs_batteries,cost_replacement_lifepo4,No replacement
 vs_batteries,cost_maintenance_label,10-year maintenance
-vs_batteries,cost_maintenance_lead,3600$ per cart
+vs_batteries,cost_maintenance_lead,{{lead_maintenance_total_10y}}$ per cart (10 years)
 vs_batteries,cost_maintenance_lifepo4,0$ maintenance
 vs_batteries,cost_total_label,TOTAL 10-YEAR COST
-vs_batteries,cost_total_lead,14140$ per cart
-vs_batteries,cost_total_lifepo4,11717$ per cart
+vs_batteries,cost_total_lead,{{lead_total_10y_per_cart}}$ per cart (10 years)
+vs_batteries,cost_total_lifepo4,{{lifepo4_total_10y_per_cart}}$ per cart (10 years)
 
 # Advantages/Disadvantages
 vs_batteries,advantages_label,ADVANTAGES
@@ -154,7 +154,7 @@ vs_batteries,lead_disadvantage_2,Constant maintenance required
 vs_batteries,lead_disadvantage_3,Degraded performance
 vs_batteries,lead_disadvantage_4,Dangerous toxic materials
 vs_batteries,lead_disadvantage_5,Frequent breakdowns
-vs_batteries,lifepo4_advantage_1,Savings 2423$ over 10 years
+vs_batteries,lifepo4_advantage_1,Savings {{savings_10y_per_cart}}$ over 10 years ({{savings_percentage_10y}}%)
 vs_batteries,lifepo4_advantage_2,No maintenance
 vs_batteries,lifepo4_advantage_3,Consistent performance 15+ years
 vs_batteries,lifepo4_advantage_4,Eco-friendly technology
@@ -173,20 +173,20 @@ vs_batteries,cta_button_text,Request a demonstration
 # Interface fixed texts
 ui,hero_image_alt,Modern golf cart
 ui,problem_card_1_title,Explosive Hidden Costs
-ui,problem_card_1_suffix,per cart + premature failure risks
-ui,problem_card_1_total_prefix,Real total cost over 10 years:
+ui,problem_card_1_suffix,+ premature failure risks
+ui,problem_card_1_total_prefix,Real total cost:
 ui,problem_card_2_title,Specialized Expensive Maintenance
-ui,problem_card_2_suffix,hours/year
-ui,problem_card_2_cost_prefix,Real annual cost:
+ui,problem_card_2_suffix,
+ui,problem_card_2_cost_prefix,Total annual cost:
 ui,problem_card_3_title,Charging Time & Fleet Impact
 ui,problem_card_3_charging_prefix,8-10h charge = +40% carts required:
 ui,problem_card_4_title,Excessive Weight & Overconsumption
 ui,problem_card_4_weight_prefix,Over
 ui,problem_card_4_consumption_prefix,25% overconsumption
 ui,problem_card_5_title,Hazardous Materials
-ui,problem_card_5_training,Recycling 300$/unit + increased insurance
+ui,problem_card_5_training,Recycling {{recycling_disposal_cost}}$/unit + increased insurance
 ui,problem_card_6_title,Breakdowns & Refunds
-ui,problem_card_6_risks,2000$/year revenue losses from clients
+ui,problem_card_6_risks,{{revenue_loss_yearly}}$/year revenue losses from clients
 
 ui,solution_card_1_title,Reliable Autonomy
 ui,solution_card_2_title,Exceptional Lifespan
@@ -234,6 +234,8 @@ ui,cart_calculator_title,Fleet Calculator
 ui,cart_calculator_subtitle,Adjust the number of golf carts to see your savings
 ui,cart_count_label,Number of golf carts:
 ui,cart_unit_suffix,cart(s)
+ui,technician_cost_label,Technician cost:
+ui,technician_rate_unit,$/hour
 
 images,hero_golf_cart,images/golf_cart_sunset.jpg
 images,battery_pack,images/battery_pack.jpg
@@ -247,6 +249,7 @@ colors,accent_light_blue,#60a5fa
 colors,accent_light_green,#34d399
 colors,text_dark,#f9fafb
 colors,text_light,#d1d5db
+colors,background_light,#f8fafc
 colors,background_dark,#0f172a
 colors,background_card,#1e293b
 colors,white,#ffffff
@@ -254,7 +257,7 @@ colors,white,#ffffff
 # Calculation details
 calculs,lead_battery_cost_detail,Lead battery unit cost + replacement
 calculs,lead_replacement_schedule,Replacement required every 2-5 years (average 3.5 years)
-calculs,lead_maintenance_detail,12h/year maintenance x technician hourly rate
+calculs,lead_maintenance_detail,{{lead_maintenance_hours_unit}}h/year maintenance × {{lead_technician_hourly_rate}}$/h specialized technician
 calculs,lithium_advantage,No replacement for 15-20 years + zero maintenance
 calculs,total_cost_formula,Monthly rental price x number of carts x duration
 calculs,savings_formula,Lead battery cost - Lithium solution cost

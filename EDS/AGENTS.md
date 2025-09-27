@@ -13,6 +13,7 @@
 - Lancer les tests: `python tests/smoke_test.py` (tests de fumée hors réseau).
 - Lancer tous les tests (Windows/PowerShell): `./scripts/run_tests.ps1`.
 - Valider les liens HTML: `python tests/validate_links.py`.
+- Installer le hook pré-commit: `./scripts/install_precommit.ps1` (bloque le commit si les tests échouent).
 
 ## Style de code et conventions
 - Langue du code: identifiants, API et noms de fichiers en anglais; documentation, commentaires, commits et PRs en français.

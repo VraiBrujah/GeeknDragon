@@ -1082,6 +1082,64 @@ body {
     text-align: center;
 }
 
+/* Contrôles du technicien */
+.technician-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-top: 5px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.technician-label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    font-weight: 500;
+    min-width: 85px;
+}
+
+.technician-slider {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.technician-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.technician-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+.technician-display {
+    color: #fbbf24;
+    font-weight: 600;
+    font-size: 14px;
+    min-width: 70px;
+    text-align: center;
+}
+
+.technician-unit {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+}
+
 .pricing-preview {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

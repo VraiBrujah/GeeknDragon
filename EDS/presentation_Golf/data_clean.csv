@@ -25,18 +25,18 @@ problem,safety_concerns,Fuites d'acide dangereuses
 problem_details,section_1_title,💸 Coûts de Remplacement Explosifs
 problem_details,section_1_subtitle,Pourquoi les batteries plomb coûtent si cher
 problem_details,section_1_point_1,Remplacement fréquent tous les 2-5 ans
-problem_details,section_1_point_2,2 000$ par voiturette à chaque remplacement
-problem_details,section_1_point_3,4 remplacements minimum sur 10 ans
-problem_details,section_1_point_4,Risque de bris prématuré de 15-20%
-problem_details,section_1_calculation,4 × 2 000$ = 8 000$ par voiturette sur 10 ans
+problem_details,section_1_point_2,{{lead_cost_replacement_unit}}$ par voiturette à chaque remplacement
+problem_details,section_1_point_3,4 remplacements nécessaires sur 10 ans (cycle 4 ans)
+problem_details,section_1_point_4,Dont 1 remplacement gratuit sous garantie + risque bris prématuré 20%
+problem_details,section_1_calculation,{{lead_replacement_calculation_10y}}
 
 problem_details,section_2_title,⚙️ Maintenance Spécialisée Coûteuse
 problem_details,section_2_subtitle,Les frais cachés de l'entretien constant
-problem_details,section_2_point_1,120 heures de maintenance par an obligatoires
-problem_details,section_2_point_2,Technicien spécialisé à 30$ de l'heure
+problem_details,section_2_point_1,12 heures de maintenance par an obligatoires
+problem_details,section_2_point_2,Technicien spécialisé à {{lead_technician_hourly_rate}}$ de l'heure
 problem_details,section_2_point_3,Vérification hebdomadaire eau distillée
 problem_details,section_2_point_4,Nettoyage et inspection des bornes
-problem_details,section_2_calculation,120h × 30$ × 10 ans = 36 000$ par flotte
+problem_details,section_2_calculation,{{lead_maintenance_calculation_10y}}
 
 problem_details,section_3_title,🚨 Risques et Pertes Opérationnelles
 problem_details,section_3_subtitle,Les coûts que personne ne vous dit
@@ -44,15 +44,15 @@ problem_details,section_3_point_1,Pannes en plein parcours = remboursements clie
 problem_details,section_3_point_2,Surconsommation électrique de 25%
 problem_details,section_3_point_3,Assurances majorées pour matières dangereuses
 problem_details,section_3_point_4,Frais de recyclage et manipulation toxique
-problem_details,section_3_calculation,800$ + 240$ + 500$ + 300$ = 1 840$ par an
+problem_details,section_3_calculation,{{operational_risks_breakdown}}
 
 problem_details,section_4_title,💰 TOTAL des Coûts Cachés Réels
 problem_details,section_4_subtitle,Le vrai coût explosif des batteries plomb
 problem_details,section_4_point_1,Remplacements + maintenance + risques
-problem_details,section_4_point_2,8 000$ + 3 600$ + 1 840$ par voiturette sur 10 ans
-problem_details,section_4_point_3,Plus de 14 000$ par voiturette réellement
+problem_details,section_4_point_2,{{total_breakdown_calculation_10y}}
+problem_details,section_4_point_3,Plus de {{total_cost_simplified_10y}}$ par voiturette réellement
 problem_details,section_4_point_4,Vs lithium EDS : coût fixe prévisible mensuel
-problem_details,section_4_calculation,TOTAL RÉEL : 14 140$ par voiturette sur 10 ans
+problem_details,section_4_calculation,{{total_cost_final_calculation_10y}}
 
 solution,title,NOTRE SOLUTION RÉVOLUTIONNAIRE
 solution,product_name,Kit Lithium LiFePO₄ 48V 105Ah
@@ -85,7 +85,7 @@ comparison,lithium_lifespan,15-20 ans sans remplacement
 comparison,lithium_detail,Investissement unique - performance constante
 
 benefits,benefit_1,Une seule batterie pour toute la durée du contrat
-benefits,benefit_2,120 heures de maintenance annuelle économisées
+benefits,benefit_2,12 heures de maintenance annuelle économisées
 benefits,benefit_3,Voiturettes plus légères et plus fiables
 benefits,benefit_4,Budget mensuel fixe et prévisible
 benefits,benefit_5,Partenaire technique dédié sur toute la durée
@@ -124,7 +124,7 @@ vs_batteries,tech_weight_label,Poids par voiturette
 vs_batteries,tech_weight_lead,300+ kg
 vs_batteries,tech_weight_lifepo4,40 kg
 vs_batteries,tech_maintenance_label,Maintenance
-vs_batteries,tech_maintenance_lead,120h/an obligatoire
+vs_batteries,tech_maintenance_lead,12h/an obligatoire
 vs_batteries,tech_maintenance_lifepo4,Zéro maintenance
 vs_batteries,tech_performance_label,Performance constante
 vs_batteries,tech_performance_lead,Dégradation 50% en 5 ans
@@ -132,17 +132,17 @@ vs_batteries,tech_performance_lifepo4,95% jusqu'à décharge complète
 
 # Coûts comparatifs
 vs_batteries,cost_initial_label,Investissement initial
-vs_batteries,cost_initial_lead,2 000$ par voiturette
+vs_batteries,cost_initial_lead,{{lead_cost_replacement_unit}}$ par voiturette
 vs_batteries,cost_initial_lifepo4,Location 76-97$/mois
 vs_batteries,cost_replacement_label,Remplacements 10 ans
-vs_batteries,cost_replacement_lead,4 remplacements = 8 000$
+vs_batteries,cost_replacement_lead,4 remplacements = {{lead_replacement_cost_with_risk_10y}}$
 vs_batteries,cost_replacement_lifepo4,Aucun remplacement
 vs_batteries,cost_maintenance_label,Maintenance 10 ans
-vs_batteries,cost_maintenance_lead,3 600$ par voiturette
+vs_batteries,cost_maintenance_lead,{{lead_maintenance_total_10y}}$ par voiturette (10 ans)
 vs_batteries,cost_maintenance_lifepo4,0$ maintenance
 vs_batteries,cost_total_label,COÛT TOTAL 10 ANS
-vs_batteries,cost_total_lead,14 140$ par voiturette
-vs_batteries,cost_total_lifepo4,11 717$ par voiturette
+vs_batteries,cost_total_lead,{{lead_total_10y_per_cart}}$ par voiturette (10 ans)
+vs_batteries,cost_total_lifepo4,{{lifepo4_total_10y_per_cart}}$ par voiturette (10 ans)
 
 # Avantages/Inconvénients
 vs_batteries,advantages_label,AVANTAGES
@@ -154,7 +154,7 @@ vs_batteries,lead_disadvantage_2,Maintenance constante requise
 vs_batteries,lead_disadvantage_3,Performances dégradées
 vs_batteries,lead_disadvantage_4,Matières toxiques dangereuses
 vs_batteries,lead_disadvantage_5,Pannes fréquentes
-vs_batteries,lifepo4_advantage_1,Économies 2 423$ sur 10 ans
+vs_batteries,lifepo4_advantage_1,Économies {{savings_10y_per_cart}}$ sur 10 ans ({{savings_percentage_10y}}%)
 vs_batteries,lifepo4_advantage_2,Aucune maintenance
 vs_batteries,lifepo4_advantage_3,Performance constante 15+ ans
 vs_batteries,lifepo4_advantage_4,Technologie écologique
@@ -166,27 +166,27 @@ vs_batteries,lifepo4_disadvantage_2,Engagement contractuel
 # Call to action
 vs_batteries,cta_title,PRÊT POUR LA RÉVOLUTION ?
 vs_batteries,cta_subtitle,Passez aux batteries LiFePO₄ dès aujourd'hui
-vs_batteries,cta_savings_prefix,Économisez
-vs_batteries,cta_savings_suffix,par voiturette sur 10 ans
+vs_batteries,cta_savings_prefix,Économisez {{savings_10y_per_cart}}$
+vs_batteries,cta_savings_suffix,par voiturette sur 10 ans (52% d'économies)
 vs_batteries,cta_button_text,Demander une démonstration
 
 # Textes fixes de l'interface
 ui,hero_image_alt,Voiturette de golf moderne
 ui,problem_card_1_title,Coûts Cachés Explosifs
-ui,problem_card_1_suffix,par voiturette + risques bris prématuré
-ui,problem_card_1_total_prefix,Coût total réel sur 10 ans :
+ui,problem_card_1_suffix,+ risques bris prématuré
+ui,problem_card_1_total_prefix,Coût total réel :
 ui,problem_card_2_title,Maintenance Spécialisée Coûteuse
-ui,problem_card_2_suffix,heures/an
-ui,problem_card_2_cost_prefix,Coût annuel réel :
+ui,problem_card_2_suffix,
+ui,problem_card_2_cost_prefix,Coût annuel total :
 ui,problem_card_3_title,Temps de Charge & Impact Flotte
 ui,problem_card_3_charging_prefix,8-10h charge = +40% voiturettes requis :
 ui,problem_card_4_title,Poids Excessif & Surconsommation
 ui,problem_card_4_weight_prefix,Plus de
 ui,problem_card_4_consumption_prefix,Surconsommation 25%
 ui,problem_card_5_title,Matières Dangereuses
-ui,problem_card_5_training,Recyclage 300$/unité + assurances majorées
+ui,problem_card_5_training,Recyclage {{recycling_disposal_cost}}$/unité + assurances majorées
 ui,problem_card_6_title,Pannes & Remboursements
-ui,problem_card_6_risks,2000$/an pertes revenus clients
+ui,problem_card_6_risks,{{revenue_loss_yearly}}$/an pertes revenus clients
 
 ui,solution_card_1_title,Autonomie Fiable
 ui,solution_card_2_title,Durée de Vie Exceptionnelle
@@ -234,6 +234,8 @@ ui,cart_calculator_title,Calculateur de Flotte
 ui,cart_calculator_subtitle,Ajustez le nombre de voiturettes pour voir vos économies
 ui,cart_count_label,Nombre de voiturettes :
 ui,cart_unit_suffix,voiturette(s)
+ui,technician_cost_label,Coût technicien :
+ui,technician_rate_unit,$/heure
 
 images,hero_golf_cart,images/golf_cart_sunset.jpg
 images,battery_pack,images/battery_pack.jpg
@@ -248,12 +250,14 @@ colors,accent_light_green,#10b981
 colors,text_dark,#1f2937
 colors,text_light,#6b7280
 colors,background_light,#f8fafc
+colors,background_dark,#0f172a
+colors,background_card,#1e293b
 colors,white,#ffffff
 
 # Détails des calculs
 calculs,lead_battery_cost_detail,Coût unitaire batteries plomb + remplacement
 calculs,lead_replacement_schedule,Remplacement nécessaire tous les 2-5 ans (moyenne 3.5 ans)
-calculs,lead_maintenance_detail,12h/an de maintenance x coût horaire technicien
+calculs,lead_maintenance_detail,{{lead_maintenance_hours_unit}}h/an de maintenance × {{lead_technician_hourly_rate}}$/h technicien spécialisé
 calculs,lithium_advantage,Aucun remplacement sur 15-20 ans + maintenance zéro
 calculs,total_cost_formula,Prix location mensuel x nombre de voiturettes x durée
 calculs,savings_formula,Coût batteries plomb - Coût solution lithium

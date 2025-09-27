@@ -89,12 +89,131 @@ async function loadCSV(filename) {
 
 // Fonction pour récupérer une variable numérique centralisée
 function getVariable(variableId) {
+    // Override dynamique pour le taux horaire du technicien
+    if (variableId === 'lead_technician_hourly_rate') {
+        return currentTechnicianRate;
+    }
+
     const variable = variables[variableId];
     if (!variable) {
         console.warn(`Variable non trouvée: ${variableId}`);
         return 0;
     }
     return parseFloat(variable.value) || 0;
+}
+
+// Fonction pour calculer une formule depuis formulas.csv avec les variables actuelles
+function calculateFormula(formulaId) {
+    // Formules calculées dynamiquement pour éviter hardcodage
+    switch (formulaId) {
+        // FORMULE UNIVERSELLE pour coût remplacements avec risque
+        case 'lead_replacement_cost_with_risk_10y':
+            const leadCost = getVariable('lead_cost_replacement_unit');
+            const cycle = getVariable('lead_replacement_cycle_years');
+            const warrantyFree = getVariable('warranty_replacements');
+            const riskPercent = getVariable('premature_failure_percent');
+
+            // UTILISE LA FORMULE DU CSV : FLOOR(10 / cycle) pour cohérence
+            const totalReplacements = Math.floor(10 / cycle); // Formule CSV existante
+            const paidReplacements = Math.max(0, totalReplacements - warrantyFree); // Moins 1 gratuit garantie
+            const baseCost = paidReplacements * leadCost;
+            const riskCost = baseCost * (riskPercent / 100); // +20% risque bris prématuré
+
+            return baseCost + riskCost;
+
+        case 'lead_replacement_cost_with_risk_20y':
+            const leadCost20 = getVariable('lead_cost_replacement_unit');
+            const cycle20 = getVariable('lead_replacement_cycle_years');
+            const warrantyFree20 = getVariable('warranty_replacements');
+            const riskPercent20 = getVariable('premature_failure_percent');
+
+            // UTILISE LA FORMULE DU CSV : FLOOR(20 / cycle) pour cohérence
+            const totalReplacements20 = Math.floor(20 / cycle20); // Formule CSV existante
+            const paidReplacements20 = Math.max(0, totalReplacements20 - warrantyFree20); // Moins 1 gratuit
+            const baseCost20 = paidReplacements20 * leadCost20;
+            const riskCost20 = baseCost20 * (riskPercent20 / 100); // +20% risque bris prématuré
+
+            return baseCost20 + riskCost20;
+        // ===== COÛTS TOTAUX UTILISANT LA FORMULE UNIVERSELLE =====
+        case 'lead_total_10y_per_cart':
+            // Utilise la formule universelle avec risque pour les remplacements
+            return calculateFormula('lead_replacement_cost_with_risk_10y') +
+                   calculateFormula('lead_maintenance_total_10y') +
+                   getVariable('recycling_disposal_cost') +
+                   ((getVariable('revenue_loss_yearly') + getVariable('overconsumption_cost_yearly') + getVariable('insurance_increase_yearly')) * 10);
+
+        case 'lead_total_20y_per_cart':
+            // Utilise la formule universelle avec risque pour les remplacements
+            const totalReplacements20Years = Math.floor(20 / getVariable('lead_replacement_cycle_years')); // Formule CSV
+            return calculateFormula('lead_replacement_cost_with_risk_20y') +
+                   calculateFormula('lead_maintenance_total_20y') +
+                   (getVariable('recycling_disposal_cost') * totalReplacements20Years) +
+                   ((getVariable('revenue_loss_yearly') + getVariable('overconsumption_cost_yearly') + getVariable('insurance_increase_yearly')) * 20);
+
+        case 'lead_replacements_20y':
+            return Math.floor(20 / getVariable('lead_replacement_cycle_years')); // Formule CSV
+
+        case 'lead_replacements_paid_20y':
+            return Math.max(0, Math.floor(20 / getVariable('lead_replacement_cycle_years')) - 1); // Formule CSV
+
+        case 'lifepo4_total_10y_per_cart':
+            return getVariable('lifepo4_monthly_10y') * 12 * 10;
+
+        case 'lifepo4_total_20y_per_cart':
+            return getVariable('lifepo4_monthly_20y') * 12 * 20;
+
+        case 'lifepo4_total_fleet_per_cart':
+            return getVariable('lifepo4_monthly_fleet') * 12 * 20;
+
+        case 'savings_10y_per_cart':
+            return calculateFormula('lead_total_10y_per_cart') - calculateFormula('lifepo4_total_10y_per_cart');
+
+        case 'savings_20y_per_cart':
+            return calculateFormula('lead_total_20y_per_cart') - calculateFormula('lifepo4_total_20y_per_cart');
+
+        case 'savings_fleet_per_cart':
+            return calculateFormula('lead_total_20y_per_cart') - calculateFormula('lifepo4_total_fleet_per_cart');
+
+        // FORMULES DE TEXTE - Section TOTAL des Coûts Cachés Réels
+        case 'operational_risks_breakdown':
+            const revenueLoss = getVariable('revenue_loss_yearly');
+            const overconsumption = getVariable('overconsumption_cost_yearly');
+            const insurance = getVariable('insurance_increase_yearly');
+            const recycling = getVariable('recycling_disposal_cost');
+            const total = revenueLoss + overconsumption + insurance + recycling;
+            return `${Math.round(revenueLoss)}$ + ${Math.round(overconsumption)}$ + ${Math.round(insurance)}$ + ${Math.round(recycling)}$ = ${Math.round(total)}$ par voiturette par an`;
+
+        case 'total_breakdown_calculation_10y':
+            const replacementCost = calculateFormula('lead_replacement_cost_with_risk_10y');
+            const maintenanceCost = calculateFormula('lead_maintenance_total_10y');
+            const operationalRisks = calculateFormula('operational_risks_calculation_yearly') * 10;
+            const recyclingCost = getVariable('recycling_disposal_cost');
+            return `Remplacements avec risque: ${Math.round(replacementCost)}$ + Maintenance: ${Math.round(maintenanceCost)}$ + Risques opérationnels: ${Math.round(operationalRisks)}$ + Recyclage: ${Math.round(recyclingCost)}$`;
+
+        case 'total_cost_simplified_10y':
+            const replacementCost10 = calculateFormula('lead_replacement_cost_with_risk_10y');
+            const maintenanceCost10 = calculateFormula('lead_maintenance_total_10y');
+            const operationalRisks10 = calculateFormula('operational_risks_calculation_yearly') * 10;
+            const recyclingCost10 = getVariable('recycling_disposal_cost');
+            return replacementCost10 + maintenanceCost10 + operationalRisks10 + recyclingCost10;
+
+        case 'total_cost_final_calculation_10y':
+            const totalCost = calculateFormula('total_cost_simplified_10y');
+            return `TOTAL RÉEL avec risque de bris prématuré : ${Math.round(totalCost)}$ par voiturette sur 10 ans`;
+
+        case 'operational_risks_calculation_yearly':
+            return getVariable('revenue_loss_yearly') + getVariable('overconsumption_cost_yearly') + getVariable('insurance_increase_yearly');
+
+        case 'lead_maintenance_total_10y':
+            return getVariable('lead_maintenance_hours_unit') * 10 * getVariable('lead_technician_hourly_rate');
+
+        case 'lead_maintenance_total_20y':
+            return getVariable('lead_maintenance_hours_unit') * 20 * getVariable('lead_technician_hourly_rate');
+
+        default:
+            console.warn(`Formule '${formulaId}' non trouvée`);
+            return 0;
+    }
 }
 
 // Fonction principale pour charger toutes les données
@@ -143,6 +262,119 @@ function safeUpdateElement(id, value) {
     }
 }
 
+// Fonction pour remplacer les templates {{variable}} par les valeurs calculées
+function replaceTemplates(text) {
+    if (!text) return text;
+
+    // Remplace {{lead_cost_replacement_unit}} par la valeur actuelle
+    text = text.replace(/\{\{lead_cost_replacement_unit\}\}/g, formatNumber(getVariable('lead_cost_replacement_unit')));
+
+    // Remplace {{lead_technician_hourly_rate}} par la valeur actuelle
+    text = text.replace(/\{\{lead_technician_hourly_rate\}\}/g, formatNumber(getVariable('lead_technician_hourly_rate')));
+
+    // Templates pour les nouvelles variables
+    text = text.replace(/\{\{lead_maintenance_hours_unit\}\}/g, formatNumber(getVariable('lead_maintenance_hours_unit')));
+    text = text.replace(/\{\{recycling_disposal_cost\}\}/g, formatNumber(getVariable('recycling_disposal_cost')));
+    text = text.replace(/\{\{revenue_loss_yearly\}\}/g, formatNumber(getVariable('revenue_loss_yearly')));
+    text = text.replace(/\{\{lead_replacement_cost_with_risk_10y\}\}/g, formatNumber(calculateFormula('lead_replacement_cost_with_risk_10y')));
+    text = text.replace(/\{\{lead_maintenance_total_10y\}\}/g, formatNumber(calculateFormula('lead_maintenance_total_10y')));
+    text = text.replace(/\{\{lead_total_10y_per_cart\}\}/g, formatNumber(calculateFormula('lead_total_10y_per_cart')));
+    text = text.replace(/\{\{lifepo4_total_10y_per_cart\}\}/g, formatNumber(calculateFormula('lifepo4_total_10y_per_cart')));
+    text = text.replace(/\{\{savings_10y_per_cart\}\}/g, formatNumber(calculateFormula('savings_10y_per_cart')));
+    text = text.replace(/\{\{savings_percentage_10y\}\}/g, ((calculateFormula('savings_10y_per_cart') / calculateFormula('lead_total_10y_per_cart')) * 100).toFixed(1));
+
+    // Remplace {{lead_replacement_calculation_10y}} par le calcul correct
+    if (text.includes('{{lead_replacement_calculation_10y}}')) {
+        // UTILISE LA FORMULE UNIVERSELLE AVEC RISQUE ET GARANTIE
+        const totalCost = calculateFormula('lead_replacement_cost_with_risk_10y');
+        const leadCost = getVariable('lead_cost_replacement_unit');
+        const cycle = getVariable('lead_replacement_cycle_years');
+        const warrantyFree = getVariable('warranty_replacements');
+        const riskPercent = getVariable('premature_failure_percent');
+
+        const totalReplacements = Math.floor(10 / cycle); // Formule CSV cohérente
+        const paidReplacements = Math.max(0, totalReplacements - warrantyFree);
+
+        const calculationText = currentLanguage === 'fr'
+            ? `${totalReplacements} remplacements nécessaires - ${warrantyFree} gratuit (garantie) = ${paidReplacements} payants × ${formatNumber(leadCost)}$ + ${riskPercent}% risque bris prématuré = ${formatNumber(totalCost)}$ par voiturette`
+            : `${totalReplacements} replacements needed - ${warrantyFree} free (warranty) = ${paidReplacements} paid × ${formatNumber(leadCost)}$ + ${riskPercent}% premature failure risk = ${formatNumber(totalCost)}$ per cart`;
+
+        text = text.replace(/\{\{lead_replacement_calculation_10y\}\}/g, calculationText);
+    }
+
+    // Remplace {{lead_maintenance_calculation_10y}} par le calcul correct
+    if (text.includes('{{lead_maintenance_calculation_10y}}')) {
+        const hours = getVariable('lead_maintenance_hours_unit');
+        const rate = getVariable('lead_technician_hourly_rate');
+        const costPerYear = hours * rate;
+        const cost10Y = costPerYear * 10;
+
+        const calculationText = currentLanguage === 'fr'
+            ? `${hours}h × ${formatNumber(rate)}$ × 10 ans = ${formatNumber(cost10Y)}$ par voiturette sur 10 ans`
+            : `${hours}h × ${formatNumber(rate)}$ × 10 years = ${formatNumber(cost10Y)}$ per cart over 10 years`;
+
+        text = text.replace(/\{\{lead_maintenance_calculation_10y\}\}/g, calculationText);
+    }
+
+    // Remplace {{operational_risks_calculation_yearly}} par le calcul correct
+    if (text.includes('{{operational_risks_calculation_yearly}}')) {
+        const revenue = getVariable('revenue_loss_yearly');
+        const overconsumption = getVariable('overconsumption_cost_yearly');
+        const insurance = getVariable('insurance_increase_yearly');
+        const recycling = getVariable('recycling_disposal_cost');
+        const total = revenue + overconsumption + insurance + recycling;
+
+        const calculationText = currentLanguage === 'fr'
+            ? `${formatNumber(revenue)}$ + ${formatNumber(overconsumption)}$ + ${formatNumber(insurance)}$ + ${formatNumber(recycling)}$ = ${formatNumber(total)}$ par an`
+            : `${formatNumber(revenue)}$ + ${formatNumber(overconsumption)}$ + ${formatNumber(insurance)}$ + ${formatNumber(recycling)}$ = ${formatNumber(total)}$ per year`;
+
+        text = text.replace(/\{\{operational_risks_calculation_yearly\}\}/g, calculationText);
+    }
+
+    // Section 4 - Calculs totaux consolidés sur 10 ans
+    if (text.includes('{{total_breakdown_calculation_10y}}')) {
+        // UTILISE LA FORMULE UNIVERSELLE POUR TOTAL BREAKDOWN
+        const costReplacements = calculateFormula('lead_replacement_cost_with_risk_10y');
+        const costMaintenance = calculateFormula('lead_maintenance_total_10y');
+        const costRecycling = getVariable('recycling_disposal_cost');
+        const costRisksYearly = getVariable('revenue_loss_yearly') + getVariable('overconsumption_cost_yearly') + getVariable('insurance_increase_yearly');
+        const costRisks10 = costRisksYearly * 10;
+
+        const calculationText = currentLanguage === 'fr'
+            ? `Remplacements avec risque: ${formatNumber(costReplacements)}$ + Maintenance: ${formatNumber(costMaintenance)}$ + Risques opérationnels: ${formatNumber(costRisks10)}$ + Recyclage: ${formatNumber(costRecycling)}$`
+            : `Replacements with risk: ${formatNumber(costReplacements)}$ + Maintenance: ${formatNumber(costMaintenance)}$ + Operational risks: ${formatNumber(costRisks10)}$ + Recycling: ${formatNumber(costRecycling)}$`;
+
+        text = text.replace(/\{\{total_breakdown_calculation_10y\}\}/g, calculationText);
+    }
+
+    if (text.includes('{{total_cost_simplified_10y}}')) {
+        // UTILISE LA FORMULE UNIVERSELLE POUR TOTAL SIMPLIFIÉ
+        const total = calculateFormula('lead_total_10y_per_cart');
+
+        // Arrondi à la centaine supérieure pour "Plus de X$"
+        const roundedTotal = Math.ceil(total / 100) * 100;
+        text = text.replace(/\{\{total_cost_simplified_10y\}\}/g, formatNumber(roundedTotal));
+    }
+
+    if (text.includes('{{total_cost_final_calculation_10y}}')) {
+        // UTILISE LA FORMULE UNIVERSELLE POUR CALCUL FINAL
+        const total = calculateFormula('lead_total_10y_per_cart');
+
+        const calculationText = currentLanguage === 'fr'
+            ? `TOTAL RÉEL avec risque de bris prématuré : ${formatNumber(total)}$ par voiturette sur 10 ans`
+            : `REAL TOTAL with premature failure risk: ${formatNumber(total)}$ per cart over 10 years`;
+
+        text = text.replace(/\{\{total_cost_final_calculation_10y\}\}/g, calculationText);
+    }
+
+    // Support pour les nouvelles formules de breakdown
+    if (text.includes('{{operational_risks_breakdown}}')) {
+        text = text.replace(/\{\{operational_risks_breakdown\}\}/g, calculateFormula('operational_risks_breakdown'));
+    }
+
+    return text;
+}
+
 // Fonction pour peupler les sections de détails des problèmes (statiques par voiturette)
 function populateProblemDetailsSections() {
     if (!data.problem_details) return;
@@ -151,37 +383,37 @@ function populateProblemDetailsSections() {
     safeUpdateElement('problem-details-section-1-title', data.problem_details?.section_1_title);
     safeUpdateElement('problem-details-section-1-subtitle', data.problem_details?.section_1_subtitle);
     safeUpdateElement('problem-details-section-1-point-1', data.problem_details?.section_1_point_1);
-    safeUpdateElement('problem-details-section-1-point-2', data.problem_details?.section_1_point_2);
+    safeUpdateElement('problem-details-section-1-point-2', replaceTemplates(data.problem_details?.section_1_point_2));
     safeUpdateElement('problem-details-section-1-point-3', data.problem_details?.section_1_point_3);
     safeUpdateElement('problem-details-section-1-point-4', data.problem_details?.section_1_point_4);
-    safeUpdateElement('problem-details-section-1-calculation', data.problem_details?.section_1_calculation);
+    safeUpdateElement('problem-details-section-1-calculation', replaceTemplates(data.problem_details?.section_1_calculation));
 
-    // Section 2 - Maintenance Spécialisée Coûteuse
+    // Section 2 - Maintenance Spécialisée Coûteuse (avec templates dynamiques)
     safeUpdateElement('problem-details-section-2-title', data.problem_details?.section_2_title);
     safeUpdateElement('problem-details-section-2-subtitle', data.problem_details?.section_2_subtitle);
     safeUpdateElement('problem-details-section-2-point-1', data.problem_details?.section_2_point_1);
-    safeUpdateElement('problem-details-section-2-point-2', data.problem_details?.section_2_point_2);
+    safeUpdateElement('problem-details-section-2-point-2', replaceTemplates(data.problem_details?.section_2_point_2));
     safeUpdateElement('problem-details-section-2-point-3', data.problem_details?.section_2_point_3);
     safeUpdateElement('problem-details-section-2-point-4', data.problem_details?.section_2_point_4);
-    safeUpdateElement('problem-details-section-2-calculation', data.problem_details?.section_2_calculation);
+    safeUpdateElement('problem-details-section-2-calculation', replaceTemplates(data.problem_details?.section_2_calculation));
 
-    // Section 3 - Risques et Pertes Opérationnelles
+    // Section 3 - Risques et Pertes Opérationnelles (avec templates dynamiques)
     safeUpdateElement('problem-details-section-3-title', data.problem_details?.section_3_title);
     safeUpdateElement('problem-details-section-3-subtitle', data.problem_details?.section_3_subtitle);
     safeUpdateElement('problem-details-section-3-point-1', data.problem_details?.section_3_point_1);
     safeUpdateElement('problem-details-section-3-point-2', data.problem_details?.section_3_point_2);
     safeUpdateElement('problem-details-section-3-point-3', data.problem_details?.section_3_point_3);
     safeUpdateElement('problem-details-section-3-point-4', data.problem_details?.section_3_point_4);
-    safeUpdateElement('problem-details-section-3-calculation', data.problem_details?.section_3_calculation);
+    safeUpdateElement('problem-details-section-3-calculation', replaceTemplates(data.problem_details?.section_3_calculation));
 
-    // Section 4 - TOTAL des Coûts Cachés Réels
+    // Section 4 - TOTAL des Coûts Cachés Réels (avec templates dynamiques)
     safeUpdateElement('problem-details-section-4-title', data.problem_details?.section_4_title);
     safeUpdateElement('problem-details-section-4-subtitle', data.problem_details?.section_4_subtitle);
     safeUpdateElement('problem-details-section-4-point-1', data.problem_details?.section_4_point_1);
-    safeUpdateElement('problem-details-section-4-point-2', data.problem_details?.section_4_point_2);
-    safeUpdateElement('problem-details-section-4-point-3', data.problem_details?.section_4_point_3);
+    safeUpdateElement('problem-details-section-4-point-2', replaceTemplates(data.problem_details?.section_4_point_2));
+    safeUpdateElement('problem-details-section-4-point-3', replaceTemplates(data.problem_details?.section_4_point_3));
     safeUpdateElement('problem-details-section-4-point-4', data.problem_details?.section_4_point_4);
-    safeUpdateElement('problem-details-section-4-calculation', data.problem_details?.section_4_calculation);
+    safeUpdateElement('problem-details-section-4-calculation', replaceTemplates(data.problem_details?.section_4_calculation));
 }
 
 // Fonction pour peupler la section VS Batteries (statique)
@@ -232,8 +464,8 @@ function populateVsBatteriesSection() {
     // Coûts totaux
     safeUpdateElement('vs-cost-total-label', data.vs_batteries?.cost_total_label);
     safeUpdateElement('vs-cost-total-label-2', data.vs_batteries?.cost_total_label);
-    safeUpdateElement('vs-cost-total-lead', data.vs_batteries?.cost_total_lead);
-    safeUpdateElement('vs-cost-total-lifepo4', data.vs_batteries?.cost_total_lifepo4);
+    safeUpdateElement('vs-cost-total-lead', replaceTemplates(data.vs_batteries?.cost_total_lead));
+    safeUpdateElement('vs-cost-total-lifepo4', replaceTemplates(data.vs_batteries?.cost_total_lifepo4));
 
     // Avantages/Inconvénients
     safeUpdateElement('vs-advantages-label', data.vs_batteries?.advantages_label);
@@ -253,7 +485,7 @@ function populateVsBatteriesSection() {
     safeUpdateElement('vs-lead-disadvantage-5', data.vs_batteries?.lead_disadvantage_5);
 
     // Avantages LiFePO4
-    safeUpdateElement('vs-lifepo4-advantage-1', data.vs_batteries?.lifepo4_advantage_1);
+    safeUpdateElement('vs-lifepo4-advantage-1', replaceTemplates(data.vs_batteries?.lifepo4_advantage_1));
     safeUpdateElement('vs-lifepo4-advantage-2', data.vs_batteries?.lifepo4_advantage_2);
     safeUpdateElement('vs-lifepo4-advantage-3', data.vs_batteries?.lifepo4_advantage_3);
     safeUpdateElement('vs-lifepo4-advantage-4', data.vs_batteries?.lifepo4_advantage_4);
@@ -267,7 +499,10 @@ function populateVsBatteriesSection() {
     // Call to Action
     safeUpdateElement('vs-cta-title', data.vs_batteries?.cta_title);
     safeUpdateElement('vs-cta-subtitle', data.vs_batteries?.cta_subtitle);
-    safeUpdateElement('vs-cta-savings-prefix', data.vs_batteries?.cta_savings_prefix);
+    safeUpdateElement('vs-cta-savings-prefix', replaceTemplates(data.vs_batteries?.cta_savings_prefix));
+    // Montant des économies dynamique basé sur variables.csv
+    const savingsAmount = formatNumber(calculateFormula('savings_10y_per_cart')) + ' $';
+    safeUpdateElement('vs-cta-savings-amount', savingsAmount);
     safeUpdateElement('vs-cta-savings-suffix', data.vs_batteries?.cta_savings_suffix);
     safeUpdateElement('vs-cta-button-text', data.vs_batteries?.cta_button_text);
 }
@@ -513,6 +748,7 @@ window.onclick = function(event) {
 
 // Variables globales pour le calculateur
 let currentCartCount = 10;
+let currentTechnicianRate = 100; // Taux horaire par défaut du technicien spécialisé
 
 // Fonction pour formater les nombres avec espaces comme séparateurs de milliers
 function formatNumber(num) {
@@ -525,20 +761,23 @@ function updateCartCalculation() {
 
     const currency = ' $';
 
-    // SECTION PROBLÈMES - Coûts explosifs réels du plomb (variables centralisées)
-    const costReplacement = getVariable('lead_cost_replacement_unit') * currentCartCount;
-    const maintenanceHours = getVariable('lead_maintenance_hours_unit') * currentCartCount;
-    const maintenanceCost = getVariable('lead_maintenance_cost_unit') * currentCartCount;
-    const maintenance10Years = getVariable('lead_maintenance_10y_unit') * currentCartCount;
+    // SECTION PROBLÈMES - Affichage cohérent par voiturette vs total flotte
+    const costReplacementPerUnit = getVariable('lead_cost_replacement_unit');
+    const costReplacementTotal = costReplacementPerUnit * currentCartCount;
+    const maintenanceHoursPerUnit = getVariable('lead_maintenance_hours_unit');
+    const maintenanceHoursTotal = maintenanceHoursPerUnit * currentCartCount;
+    const maintenanceCostPerUnit = getVariable('lead_maintenance_hours_unit') * getVariable('lead_technician_hourly_rate');
+    const maintenanceCostTotal = maintenanceCostPerUnit * currentCartCount;
 
-    // Coût total réel selon l'architecture centralisée
-    const totalRealCost10YearsPerUnit = getVariable('lead_total_cost_10y_unit');
-    const cost10YearsReal = totalRealCost10YearsPerUnit * currentCartCount;
+    // Coût total réel selon l'architecture centralisée (calculé depuis formules)
+    const totalRealCost10YearsPerUnit = calculateFormula('lead_total_10y_per_cart');
+    const cost10YearsTotal = totalRealCost10YearsPerUnit * currentCartCount;
 
-    safeUpdateElement('cost-replacement', formatNumber(costReplacement) + currency + ' (par voiturette)');
-    safeUpdateElement('cost-10-years', formatNumber(cost10YearsReal) + currency + ' (coût total réel)');
-    safeUpdateElement('maintenance-hours', maintenanceHours + ' heures/an');
-    safeUpdateElement('maintenance-cost', formatNumber(maintenanceCost) + currency + ' (par voiturette/an)');
+    // Affichage cohérent : total flotte avec précision du nombre
+    safeUpdateElement('cost-replacement', formatNumber(costReplacementTotal) + currency + ` pour ${currentCartCount} voiturette${currentCartCount > 1 ? 's' : ''}`);
+    safeUpdateElement('cost-10-years', formatNumber(cost10YearsTotal) + currency + ` pour ${currentCartCount} voiturette${currentCartCount > 1 ? 's' : ''} sur 10 ans`);
+    safeUpdateElement('maintenance-hours', maintenanceHoursTotal + ` heures/an pour ${currentCartCount} voiturette${currentCartCount > 1 ? 's' : ''}`);
+    safeUpdateElement('maintenance-cost', formatNumber(maintenanceCostTotal) + currency + ` /an pour ${currentCartCount} voiturette${currentCartCount > 1 ? 's' : ''}`);
 
     // Mise à jour dynamique de l'impact temps de charge (variables centralisées)
     const baseChargingTime = data.problem?.charging_time || `${getVariable('lead_charging_hours')} heures`;
@@ -552,14 +791,15 @@ function updateCartCalculation() {
 
     // SECTION TARIFICATION - Calculs dynamiques (variables centralisées)
     const monthly10 = getVariable('lifepo4_monthly_10y') * currentCartCount;
-    const savings10 = getVariable('savings_10y_unit') * currentCartCount;
+    const savings10 = calculateFormula('savings_10y_per_cart') * currentCartCount;
 
     const monthly20 = getVariable('lifepo4_monthly_20y') * currentCartCount;
-    const savings20 = getVariable('savings_20y_unit') * currentCartCount;
+    const savings20 = calculateFormula('savings_20y_per_cart') * currentCartCount;
 
     // Calcul pour l'offre flotte (variables centralisées)
     const monthlyFleet = getVariable('lifepo4_monthly_fleet') * currentCartCount;
-    const savingsFleet = getVariable('savings_20y_unit') * currentCartCount;
+    // Économies flotte calculées depuis formules (pas de variables hardcodées)
+    const savingsFleet = calculateFormula('savings_fleet_per_cart') * currentCartCount;
 
     safeUpdateElement('contract-10-monthly', formatNumber(monthly10) + currency);
     safeUpdateElement('savings-10-years', formatNumber(savings10) + currency);
@@ -618,8 +858,8 @@ function updateCartCalculation() {
     }
 
     // SECTION COMPARAISON - Totaux flotte (variables centralisées)
-    const leadBatteries10 = getVariable('lead_total_cost_10y_unit') * currentCartCount;
-    const lithium10 = getVariable('lifepo4_total_10y_unit') * currentCartCount;
+    const leadBatteries10 = calculateFormula('lead_total_10y_per_cart') * currentCartCount;
+    const lithium10 = calculateFormula('lifepo4_total_10y_per_cart') * currentCartCount;
 
     safeUpdateElement('lead-batteries-10-years', formatNumber(leadBatteries10) + currency);
     safeUpdateElement('contract-10-total', formatNumber(lithium10) + currency);
@@ -637,42 +877,44 @@ function updateCartCalculation() {
     // Calculs mis à jour
 }
 
-// Mettre à jour les détails des calculs (focus 20 ans - COÛTS RÉELS PLOMB)
+// Mettre à jour les détails des calculs (source unique : variables.csv)
 function updateCalculationDetails() {
-    if (!data.comparison || !data.pricing || !data.problem) return;
+    if (!variables || Object.keys(variables).length === 0) return;
 
     const currency = ' $';
 
-    // Données de base - COÛTS RÉELS selon document de proposition (par voiturette)
-    const leadReplacementCost = parseFloat(data.problem.cost_replacement_unit) || 2000; // 2000$ par voiturette par remplacement
-    const leadMaintenanceCost = parseFloat(data.problem.maintenance_cost_unit) || 360; // 360$/an par voiturette
-    const prematureFailureRisk = parseFloat(data.problem.premature_failure_risk) || 1200; // 12,000$ ÷ 10 = 1200$ par voiturette
-    const recyclingCost = parseFloat(data.problem.recycling_disposal_cost) || 30; // 300$ ÷ 10 = 30$ par voiturette
-    const revenueLossYearly = parseFloat(data.problem.revenue_loss_yearly) || 80; // 800$ ÷ 10 = 80$ par voiturette/an
-    const overconsumptionYearly = parseFloat(data.problem.overconsumption_cost_yearly) || 24; // 240$ ÷ 10 = 24$ par voiturette/an
-    const insuranceIncreaseYearly = parseFloat(data.problem.insurance_increase_yearly) || 50; // Estimation par voiturette/an
+    // Données de base - Toutes depuis variables.csv (source unique de vérité)
+    const leadReplacementCost = getVariable('lead_cost_replacement_unit');
+    const leadMaintenanceCostAnnual = getVariable('lead_maintenance_hours_unit') * getVariable('lead_technician_hourly_rate');
+    const prematureFailureRisk = getVariable('premature_failure_risk');
+    const recyclingCost = getVariable('recycling_disposal_cost');
+    const revenueLossYearly = getVariable('revenue_loss_yearly');
+    const overconsumptionYearly = getVariable('overconsumption_cost_yearly');
+    const insuranceIncreaseYearly = getVariable('insurance_increase_yearly');
+    const replacementCycle = getVariable('lead_replacement_cycle_years');
 
-    const lithiumMonthly10 = parseFloat(data.pricing.contract_10_monthly_unit) || 97.64;
-    const lithiumMonthly20 = parseFloat(data.pricing.contract_20_monthly_unit) || 84.36;
-    const lithiumFleetMonthly = parseFloat(data.pricing.contract_20_fleet_monthly_unit) || 76.73;
+    const lithiumMonthly10 = getVariable('lifepo4_monthly_10y');
+    const lithiumMonthly20 = getVariable('lifepo4_monthly_20y');
+    const lithiumFleetMonthly = getVariable('lifepo4_monthly_fleet');
 
-    // Calculs remplacements batterie plomb (cycle 2-5 ans, moyenne 3.5 ans)
-    const replacementCycle = 3.5;
-    const replacements20Years = Math.ceil(20 / replacementCycle); // 6 remplacements
+    // Calculs remplacements batterie plomb (directement depuis formules)
+    const replacements20Years = calculateFormula('lead_replacements_20y');
 
-    // COÛTS TOTAUX RÉELS BATTERIES PLOMB sur 20 ans (par voiturette)
-    const leadBatteryCost20 = leadReplacementCost * replacements20Years; // 2000$ × 6 = 12,000$ par voiturette
-    const leadMaintenanceCost20 = leadMaintenanceCost * 20; // 360$ × 20 = 7,200$ par voiturette
-    const leadRecyclingCost20 = recyclingCost * replacements20Years; // 30$ × 6 = 180$ par voiturette
-    const leadRevenueLoss20 = revenueLossYearly * 20; // 80$ × 20 = 1,600$ par voiturette
-    const leadOverconsumption20 = overconsumptionYearly * 20; // 24$ × 20 = 480$ par voiturette
-    const leadInsuranceIncrease20 = insuranceIncreaseYearly * 20; // 50$ × 20 = 1,000$ par voiturette
-    const leadPrematureFailure20 = prematureFailureRisk * 2; // 1200$ × 2 = 2,400$ par voiturette sur 20 ans
+    // COÛTS TOTAUX RÉELS BATTERIES PLOMB sur 20 ans (directement depuis variables.csv)
+    // Calcul simplifié : coût 10 ans × 2 (approximation réaliste)
+    const leadTotalCost20 = calculateFormula('lead_total_20y_per_cart');
 
-    // COÛT TOTAL RÉEL PLOMB par voiturette sur 20 ans
-    const leadTotalPerCart20 = leadBatteryCost20 + leadMaintenanceCost20 + leadRecyclingCost20 +
-                             leadRevenueLoss20 + leadOverconsumption20 + leadInsuranceIncrease20 + leadPrematureFailure20;
-    // = 12,000 + 7,200 + 180 + 1,600 + 480 + 1,000 + 2,400 = 24,860$ par voiturette sur 20 ans
+    // COÛT TOTAL RÉEL PLOMB par voiturette sur 20 ans (depuis variables.csv)
+    const leadTotalPerCart20 = leadTotalCost20;
+
+    // Variables calculées manquantes pour les détails (calculées depuis formules)
+    const leadMaintenanceCost20 = leadMaintenanceCostAnnual * 20;
+    const leadBatteryCost20 = leadReplacementCost * calculateFormula('lead_replacements_paid_20y');
+    const leadRecyclingCost20 = recyclingCost * replacements20Years;
+    const leadRevenueLoss20 = revenueLossYearly * 20;
+    const leadOverconsumption20 = overconsumptionYearly * 20;
+    const leadInsuranceIncrease20 = insuranceIncreaseYearly * 20;
+    const leadPrematureFailure20 = prematureFailureRisk * 2; // Risque sur 20 ans
 
     // COÛT TOTAL PLOMB pour la flotte
     const leadTotal20 = leadTotalPerCart20 * currentCartCount;
@@ -691,14 +933,16 @@ function updateCalculationDetails() {
     const totalSavings20 = leadTotal20 - lithium20;
     const savingsPercentage20 = ((totalSavings20 / leadTotal20) * 100).toFixed(1);
 
-    // Fourchette intelligente (variation selon cycle 2-5 ans au lieu de 3.5)
-    const minReplacements20 = Math.ceil(20 / 5); // 4 remplacements (batterie dure 5 ans)
-    const maxReplacements20 = Math.ceil(20 / 2); // 10 remplacements (batterie dure 2 ans)
+    // Fourchette intelligente (variation selon cycle min/max des batteries plomb)
+    const minLifespan = 5; // Années (meilleur cas)
+    const maxLifespan = 3; // Années (cas dégradé)
+    const minReplacements20 = Math.floor(20 / minLifespan); // 20/5 = 4 remplacements minimum
+    const maxReplacements20 = Math.floor(20 / maxLifespan); // 20/3 = 6.67 → 7 remplacements maximum
 
-    const minLeadCostPerCart20 = leadReplacementCost * minReplacements20 + leadMaintenanceCost * 20 +
-                               leadRecyclingCost20 + leadRevenueLoss20 + leadOverconsumption20 + leadInsuranceIncrease20;
-    const maxLeadCostPerCart20 = leadReplacementCost * maxReplacements20 + leadMaintenanceCost * 20 +
-                               leadRecyclingCost20 + leadRevenueLoss20 + leadOverconsumption20 + leadInsuranceIncrease20;
+    const minLeadCostPerCart20 = leadReplacementCost * minReplacements20 + leadMaintenanceCost20 +
+                               (recyclingCost * minReplacements20) + leadRevenueLoss20 + leadOverconsumption20 + leadInsuranceIncrease20;
+    const maxLeadCostPerCart20 = leadReplacementCost * maxReplacements20 + leadMaintenanceCost20 +
+                               (recyclingCost * maxReplacements20) + leadRevenueLoss20 + leadOverconsumption20 + leadInsuranceIncrease20;
 
     const minSavings20 = (minLeadCostPerCart20 * currentCartCount) - lithium20;
     const maxSavings20 = (maxLeadCostPerCart20 * currentCartCount) - lithium20;
@@ -711,19 +955,22 @@ function updateCalculationDetails() {
 
     // === 1. SECTION BATTERIES PLOMB (COÛTS RÉELS selon document) ===
     safeUpdateElement('lead-replacement-schedule', data.calculs?.lead_replacement_schedule || 'Remplacement nécessaire tous les 2-5 ans');
-    safeUpdateElement('lead-replacements-20y', `${replacements20Years} remplacements à 2 000$ par voiturette`);
+    safeUpdateElement('lead-replacements-20y', `${replacements20Years} remplacements à ${formatNumber(leadReplacementCost)}$ par voiturette`);
 
-    // Détail complet des coûts cachés du plomb (par voiturette)
+    // Détail complet des coûts cachés du plomb (par voiturette) - Basé sur variables.csv
+    const hiddenCosts20 = leadRecyclingCost20 + leadRevenueLoss20 + leadOverconsumption20 + leadInsuranceIncrease20 + leadPrematureFailure20;
     const leadBreakdownText = currentLanguage === 'fr'
-        ? `${formatNumber(leadBatteryCost20)}${currency} (batteries) + ${formatNumber(leadMaintenanceCost20)}${currency} (maintenance) + ${formatNumber(leadRecyclingCost20 + leadRevenueLoss20 + leadOverconsumption20 + leadInsuranceIncrease20 + leadPrematureFailure20)}${currency} (coûts cachés) par voiturette`
-        : `${formatNumber(leadBatteryCost20)}${currency} (batteries) + ${formatNumber(leadMaintenanceCost20)}${currency} (maintenance) + ${formatNumber(leadRecyclingCost20 + leadRevenueLoss20 + leadOverconsumption20 + leadInsuranceIncrease20 + leadPrematureFailure20)}${currency} (hidden costs) per cart`;
+        ? `${formatNumber(leadBatteryCost20)}${currency} (batteries) + ${formatNumber(leadMaintenanceCost20)}${currency} (maintenance) + ${formatNumber(hiddenCosts20)}${currency} (coûts cachés) par voiturette`
+        : `${formatNumber(leadBatteryCost20)}${currency} (batteries) + ${formatNumber(leadMaintenanceCost20)}${currency} (maintenance) + ${formatNumber(hiddenCosts20)}${currency} (hidden costs) per cart`;
 
     safeUpdateElement('lead-cost-breakdown-20y', leadBreakdownText);
     safeUpdateElement('lead-total-calc-20y', formatNumber(leadTotal20) + currency);
 
+    const maintenanceHours = getVariable('lead_maintenance_hours_unit');
+    const technicianRate = getVariable('lead_technician_hourly_rate');
     const maintenanceDetailText = currentLanguage === 'fr'
-        ? `${formatNumber(leadMaintenanceCost20 * currentCartCount)}${currency} (120h/an × 30$/h ÷ 10 voiturettes × 20 ans)`
-        : `${formatNumber(leadMaintenanceCost20 * currentCartCount)}${currency} (120h/year × 30$/h ÷ 10 carts × 20 years)`;
+        ? `${formatNumber(leadMaintenanceCost20 * currentCartCount)}${currency} (${maintenanceHours}h/an × ${technicianRate}$/h × ${currentCartCount} voiturettes × 20 ans)`
+        : `${formatNumber(leadMaintenanceCost20 * currentCartCount)}${currency} (${maintenanceHours}h/year × ${technicianRate}$/h × ${currentCartCount} carts × 20 years)`;
     safeUpdateElement('lead-maintenance-total-20y', maintenanceDetailText);
 
     // === 2. SECTION LITHIUM (SOLUTION ÉCONOMIQUE) ===
@@ -790,6 +1037,7 @@ function setupCartSlider() {
 
 // Setup du calculateur flottant
 function setupFloatingCalculator() {
+    // Gestion du slider du nombre de voiturettes
     const floatingSlider = document.getElementById('cartSliderFloating');
     if (floatingSlider) {
         floatingSlider.addEventListener('input', function() {
@@ -803,6 +1051,23 @@ function setupFloatingCalculator() {
 
             updateCartCalculation();
             updateFloatingCalculator();
+        });
+    }
+
+    // Gestion du slider du taux horaire du technicien
+    const technicianSlider = document.getElementById('technicianRateSlider');
+    const technicianDisplay = document.getElementById('technician-rate-display');
+
+    if (technicianSlider && technicianDisplay) {
+        technicianSlider.addEventListener('input', function() {
+            currentTechnicianRate = parseInt(this.value);
+            technicianDisplay.textContent = currentTechnicianRate;
+
+            // Mettre à jour TOUS les calculs qui dépendent du taux horaire
+            updateCartCalculation();
+            updateFloatingCalculator();
+            populateProblemDetailsSections(); // Mettre à jour les sections de détails
+            populateVsBatteriesSection(); // Mettre à jour la section de comparaison
         });
     }
 }
@@ -824,10 +1089,17 @@ function updateFloatingCalculator() {
     safeUpdateElement('price-20-floating', formatNumber(monthly20) + currency);
     safeUpdateElement('price-fleet-floating', formatNumber(monthlyFleet) + currency);
 
-    // Synchroniser le slider flottant
+    // Synchroniser les sliders flottants
     const floatingSlider = document.getElementById('cartSliderFloating');
     if (floatingSlider) {
         floatingSlider.value = currentCartCount;
+    }
+
+    const technicianSlider = document.getElementById('technicianRateSlider');
+    const technicianDisplay = document.getElementById('technician-rate-display');
+    if (technicianSlider && technicianDisplay) {
+        technicianSlider.value = currentTechnicianRate;
+        technicianDisplay.textContent = currentTechnicianRate;
     }
 
     // Gestion visuelle de l'offre flotte dans le calculateur flottant
@@ -865,6 +1137,8 @@ function updateFloatingCalculator() {
             (currentLanguage === 'fr' ? 'voiturette' : 'cart'));
 
         safeUpdateElement('floating-calc-title', data.ui.cart_calculator_title || 'Calculateur de Flotte');
+        safeUpdateElement('technician-cost-label', data.ui.technician_cost_label || 'Coût technicien :');
+        safeUpdateElement('technician-rate-unit', data.ui.technician_rate_unit || '$/heure');
     }
 }
 
