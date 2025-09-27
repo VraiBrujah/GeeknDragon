@@ -507,6 +507,7 @@ function populateVsBatteriesSection() {
     // Avantages batteries plomb
     safeUpdateElement('vs-lead-advantage-1', data.vs_batteries?.lead_advantage_1);
     safeUpdateElement('vs-lead-advantage-2', data.vs_batteries?.lead_advantage_2);
+    safeUpdateElement('vs-lead-advantage-3', data.vs_batteries?.lead_advantage_3);
 
     // Inconvénients batteries plomb
     safeUpdateElement('vs-lead-disadvantage-1', data.vs_batteries?.lead_disadvantage_1);
@@ -522,6 +523,8 @@ function populateVsBatteriesSection() {
     safeUpdateElement('vs-lifepo4-advantage-4', data.vs_batteries?.lifepo4_advantage_4);
     safeUpdateElement('vs-lifepo4-advantage-5', data.vs_batteries?.lifepo4_advantage_5);
     safeUpdateElement('vs-lifepo4-advantage-6', data.vs_batteries?.lifepo4_advantage_6);
+    safeUpdateElement('vs-lifepo4-advantage-7', data.vs_batteries?.lifepo4_advantage_7);
+    safeUpdateElement('vs-lifepo4-advantage-8', data.vs_batteries?.lifepo4_advantage_8);
 
     // Inconvénients LiFePO4
     safeUpdateElement('vs-lifepo4-disadvantage-1', data.vs_batteries?.lifepo4_disadvantage_1);

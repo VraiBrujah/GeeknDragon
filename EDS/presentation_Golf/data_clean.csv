@@ -39,12 +39,12 @@ problem_details,section_2_point_4,Nettoyage et inspection des bornes
 problem_details,section_2_calculation,{{lead_maintenance_hours_unit}}h × {{lead_technician_hourly_rate}}$ × 20 ans = {{lead_maintenance_total_20y}}$ par voiturette sur 20 ans
 
 problem_details,section_3_title,🚨 Risques et Pertes Opérationnelles
-problem_details,section_3_subtitle,Les coûts que personne ne vous dit
-problem_details,section_3_point_1,Pannes en plein parcours = remboursements clients
-problem_details,section_3_point_2,Surconsommation électrique de 25%
-problem_details,section_3_point_3,Assurances majorées pour matières dangereuses
-problem_details,section_3_point_4,Frais de recyclage et manipulation toxique
-problem_details,section_3_calculation,{{revenue_loss_yearly}}$ + {{overconsumption_cost_yearly}}$ + {{insurance_increase_yearly}}$ + {{recycling_disposal_cost}}$ = {{operational_risks_calculation_yearly}}$ par voiturette par an
+problem_details,section_3_subtitle,Coûts de sécurité et responsabilité civile réels
+problem_details,section_3_point_1,Pannes en parcours : remboursements clients + perte revenus
+problem_details,section_3_point_2,Surconsommation électrique 25% : coût énergétique sup.
+problem_details,section_3_point_3,Accidents travail + blessures clients (acide) : responsabilité civile
+problem_details,section_3_point_4,Formation sécurité + équipements protection + recyclage spécialisé
+problem_details,section_3_calculation,Pertes revenus {{revenue_loss_yearly}}$ + Surconsommation {{overconsumption_cost_yearly}}$ + Responsabilité civile {{insurance_increase_yearly}}$ + Formations/EPI/recyclage {{recycling_disposal_cost}}$ = {{operational_risks_calculation_yearly}}$ par voiturette par an
 
 problem_details,section_4_title,💰 TOTAL des Coûts Cachés Réels
 problem_details,section_4_subtitle,Le vrai coût explosif des batteries plomb
@@ -52,7 +52,7 @@ problem_details,section_4_point_1,Remplacements + maintenance + risques
 problem_details,section_4_point_2,Remplacements avec risque: {{lead_replacement_cost_with_risk_20y}}$ + Maintenance: {{lead_maintenance_total_20y}}$ + Risques opérationnels: {{operational_risks_calculation_yearly}}$ × 20 ans = {{operational_risks_calculation_yearly * 20}}$ + Recyclage: {{recycling_disposal_cost * lead_replacements_20y}}$
 problem_details,section_4_point_3,Plus de {{lead_total_20y_per_cart}}$ par voiturette réellement
 problem_details,section_4_point_4,Vs lithium EDS : coût fixe prévisible mensuel
-problem_details,section_4_calculation,TOTAL RÉEL avec risque de bris prématuré : {{lead_total_20y_per_cart}}$ par voiturette sur 20 ans
+problem_details,section_4_calculation,TOTAL RÉEL avec risque de bris prématuré : {{lead_total_20y_per_cart}}$ par voiturette sur<br>20 ans
 
 solution,title,NOTRE SOLUTION RÉVOLUTIONNAIRE
 solution,product_name,Kit Li-Kart LiFePO₄ 48V 105Ah - EDS Québec
@@ -132,8 +132,8 @@ vs_batteries,tech_performance_lifepo4,95% jusqu'à décharge complète
 
 # Coûts comparatifs
 vs_batteries,cost_initial_label,Investissement initial
-vs_batteries,cost_initial_lead,{{lead_cost_replacement_unit}}$ par voiturette
-vs_batteries,cost_initial_lifepo4,Location 76-97$/mois
+vs_batteries,cost_initial_lead,{{lead_cost_replacement_unit}}$ achat cash par voiturette
+vs_batteries,cost_initial_lifepo4,{{lifepo4_monthly_20y}}$/mois en location
 vs_batteries,cost_replacement_label,Remplacements 20 ans
 vs_batteries,cost_replacement_lead,{{lead_replacements_20y}} remplacements = {{lead_replacement_cost_with_risk_20y}}$
 vs_batteries,cost_replacement_lifepo4,Aucun remplacement
@@ -148,7 +148,8 @@ vs_batteries,cost_total_lifepo4,{{lifepo4_total_20y_per_cart}}$ par voiturette
 vs_batteries,advantages_label,AVANTAGES
 vs_batteries,disadvantages_label,INCONVÉNIENTS
 vs_batteries,lead_advantage_1,Technologie connue
-vs_batteries,lead_advantage_2,Disponibilité immédiate pièces de rechange
+vs_batteries,lead_advantage_2,Aucun engagement contractuel
+vs_batteries,lead_advantage_3,Disponibilité immédiate pièces de rechange
 vs_batteries,lead_disadvantage_1,Coûts explosifs cachés
 vs_batteries,lead_disadvantage_2,Maintenance constante requise
 vs_batteries,lead_disadvantage_3,Performances dégradées
@@ -161,8 +162,9 @@ vs_batteries,lifepo4_advantage_4,Technologie écologique
 vs_batteries,lifepo4_advantage_5,Support technique dédié
 vs_batteries,lifepo4_advantage_6,Budget prévisible fixe
 vs_batteries,lifepo4_advantage_7,Investissement initial minimal (location)
-vs_batteries,lifepo4_disadvantage_1,Nouveauté technologique
-vs_batteries,lifepo4_disadvantage_2,Engagement contractuel
+vs_batteries,lifepo4_advantage_8,Technologie moderne éprouvée
+vs_batteries,lifepo4_disadvantage_1,Engagement contractuel long terme
+vs_batteries,lifepo4_disadvantage_2,Technologie moins familière pour certains techniciens
 
 # Call to action
 vs_batteries,cta_title,PRÊT POUR LA RÉVOLUTION ?
