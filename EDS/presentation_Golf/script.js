@@ -255,7 +255,7 @@ async function loadAllData() {
 // Fonction utilitaire pour mettre à jour un élément de façon sécurisée
 function safeUpdateElement(id, value) {
     const element = document.getElementById(id);
-    if (element && value) {
+    if (element && value !== undefined && value !== null) {
         element.textContent = value;
     } else if (!element) {
         console.warn(`Élément non trouvé: ${id}`);
@@ -500,10 +500,9 @@ function populateVsBatteriesSection() {
     safeUpdateElement('vs-cta-title', data.vs_batteries?.cta_title);
     safeUpdateElement('vs-cta-subtitle', data.vs_batteries?.cta_subtitle);
     safeUpdateElement('vs-cta-savings-prefix', replaceTemplates(data.vs_batteries?.cta_savings_prefix));
-    // Montant des économies dynamique basé sur variables.csv
-    const savingsAmount = formatNumber(calculateFormula('savings_10y_per_cart')) + ' $';
-    safeUpdateElement('vs-cta-savings-amount', savingsAmount);
-    safeUpdateElement('vs-cta-savings-suffix', data.vs_batteries?.cta_savings_suffix);
+    // Le montant et suffix sont déjà inclus dans le prefix via le template
+    safeUpdateElement('vs-cta-savings-amount', ''); // Vide pour éviter doublon
+    safeUpdateElement('vs-cta-savings-suffix', ''); // Vide pour éviter doublon
     safeUpdateElement('vs-cta-button-text', data.vs_batteries?.cta_button_text);
 }
 

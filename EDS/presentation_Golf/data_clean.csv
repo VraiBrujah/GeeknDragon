@@ -138,11 +138,11 @@ vs_batteries,cost_replacement_label,Remplacements 10 ans
 vs_batteries,cost_replacement_lead,4 remplacements = {{lead_replacement_cost_with_risk_10y}}$
 vs_batteries,cost_replacement_lifepo4,Aucun remplacement
 vs_batteries,cost_maintenance_label,Maintenance 10 ans
-vs_batteries,cost_maintenance_lead,{{lead_maintenance_total_10y}}$ par voiturette (10 ans)
+vs_batteries,cost_maintenance_lead,{{lead_maintenance_total_10y}}$ par voiturette
 vs_batteries,cost_maintenance_lifepo4,0$ maintenance
 vs_batteries,cost_total_label,COÛT TOTAL 10 ANS
-vs_batteries,cost_total_lead,{{lead_total_10y_per_cart}}$ par voiturette (10 ans)
-vs_batteries,cost_total_lifepo4,{{lifepo4_total_10y_per_cart}}$ par voiturette (10 ans)
+vs_batteries,cost_total_lead,{{lead_total_10y_per_cart}}$ par voiturette
+vs_batteries,cost_total_lifepo4,{{lifepo4_total_10y_per_cart}}$ par voiturette
 
 # Avantages/Inconvénients
 vs_batteries,advantages_label,AVANTAGES
@@ -166,8 +166,8 @@ vs_batteries,lifepo4_disadvantage_2,Engagement contractuel
 # Call to action
 vs_batteries,cta_title,PRÊT POUR LA RÉVOLUTION ?
 vs_batteries,cta_subtitle,Passez aux batteries LiFePO₄ dès aujourd'hui
-vs_batteries,cta_savings_prefix,Économisez {{savings_10y_per_cart}}$
-vs_batteries,cta_savings_suffix,par voiturette sur 10 ans (52% d'économies)
+vs_batteries,cta_savings_prefix,Économisez {{savings_10y_per_cart}}$ par voiturette sur 10 ans ({{savings_percentage_10y}}% d'économies)
+vs_batteries,cta_savings_suffix,
 vs_batteries,cta_button_text,Demander une démonstration
 
 # Textes fixes de l'interface
