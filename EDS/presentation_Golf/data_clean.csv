@@ -40,9 +40,9 @@ problem_details,section_2_calculation,{{lead_maintenance_hours_unit}}h × {{lead
 
 problem_details,section_3_title,🚨 Risques et Pertes Opérationnelles
 problem_details,section_3_subtitle,Coûts de sécurité et responsabilité civile réels
-problem_details,section_3_point_1,Pannes en parcours : remboursements clients + perte revenus
-problem_details,section_3_point_2,Surconsommation électrique 25% : coût énergétique sup.
-problem_details,section_3_point_3,Accidents travail + blessures clients (acide) : responsabilité civile
+problem_details,section_3_point_1,Pannes en parcours : remboursements clients + **perte revenus**
+problem_details,section_3_point_2,Surconsommation électrique *25%* : coût énergétique sup.
+problem_details,section_3_point_3,**Accidents travail** + blessures clients (acide) : responsabilité civile
 problem_details,section_3_point_4,Formation sécurité + équipements protection + recyclage spécialisé
 problem_details,section_3_calculation,Pertes revenus {{revenue_loss_yearly}}$ + Surconsommation {{overconsumption_cost_yearly}}$ + Responsabilité civile {{insurance_increase_yearly}}$ + Formations/EPI/recyclage {{recycling_disposal_cost}}$ = {{operational_risks_calculation_yearly}}$ par voiturette par an
 
@@ -52,7 +52,7 @@ problem_details,section_4_point_1,Remplacements + maintenance + risques
 problem_details,section_4_point_2,Remplacements avec risque: {{lead_replacement_cost_with_risk_20y}}$ + Maintenance: {{lead_maintenance_total_20y}}$ + Risques opérationnels: {{operational_risks_calculation_yearly}}$ × 20 ans = {{operational_risks_calculation_yearly * 20}}$ + Recyclage: {{recycling_disposal_cost * lead_replacements_20y}}$
 problem_details,section_4_point_3,Plus de {{lead_total_20y_per_cart}}$ par voiturette réellement
 problem_details,section_4_point_4,Vs lithium EDS : coût fixe prévisible mensuel
-problem_details,section_4_calculation,TOTAL RÉEL avec risque de bris prématuré : {{lead_total_20y_per_cart}}$ par voiturette sur<br>20 ans
+problem_details,section_4_calculation,**TOTAL RÉEL** avec risque de bris prématuré : **{{lead_total_20y_per_cart}}$** par voiturette sur<br>**20 ans**
 
 solution,title,NOTRE SOLUTION RÉVOLUTIONNAIRE
 solution,product_name,Kit Li-Kart LiFePO₄ 48V 105Ah - EDS Québec
@@ -156,7 +156,7 @@ vs_batteries,lead_disadvantage_3,Performances dégradées
 vs_batteries,lead_disadvantage_4,Matières toxiques dangereuses
 vs_batteries,lead_disadvantage_5,Pannes fréquentes
 vs_batteries,lifepo4_advantage_1,Économies {{savings_20y_per_cart}}$ sur 20 ans ({{savings_percentage_20y}}%)
-vs_batteries,lifepo4_advantage_2,Aucune maintenance
+vs_batteries,lifepo4_advantage_2,**Aucune maintenance** requise
 vs_batteries,lifepo4_advantage_3,Performance constante 15+ ans
 vs_batteries,lifepo4_advantage_4,Technologie écologique
 vs_batteries,lifepo4_advantage_5,Support technique dédié

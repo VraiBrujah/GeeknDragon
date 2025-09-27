@@ -275,11 +275,45 @@ async function loadAllData() {
 }
 
 
+// Fonction pour parser le Markdown et HTML basique dans les textes
+function parseMarkdownAndHTML(text) {
+    if (!text) return text;
+
+    // Support Markdown basique
+    // Gras **texte** ou __texte__
+    text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    text = text.replace(/__(.*?)__/g, '<strong>$1</strong>');
+
+    // Italique *texte* ou _texte_
+    text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    text = text.replace(/_(.*?)_/g, '<em>$1</em>');
+
+    // Support retours à la ligne
+    // <br> reste tel quel (déjà du HTML)
+    // \n devient <br>
+    text = text.replace(/\\n/g, '<br>');
+    // Doubles retours à la ligne pour nouveaux paragraphes
+    text = text.replace(/\n\n/g, '</p><p>');
+    text = text.replace(/\n/g, '<br>');
+
+    // Support listes simples
+    // - item devient <li>item</li> (dans des <ul>)
+    text = text.replace(/^- (.+)$/gm, '<li>$1</li>');
+    text = text.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+
+    // Support code inline `code`
+    text = text.replace(/`(.*?)`/g, '<code>$1</code>');
+
+    return text;
+}
+
 // Fonction utilitaire pour mettre à jour un élément de façon sécurisée
 function safeUpdateElement(id, value) {
     const element = document.getElementById(id);
     if (element && value !== undefined && value !== null) {
-        element.textContent = value;
+        // Applique le parsing Markdown/HTML puis met à jour avec innerHTML
+        const parsedValue = parseMarkdownAndHTML(value.toString());
+        element.innerHTML = parsedValue;
     } else if (!element) {
         console.warn(`Élément non trouvé: ${id}`);
     }
