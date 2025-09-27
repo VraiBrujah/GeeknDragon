@@ -4,6 +4,27 @@ let variables = {};
 let formulas = {};
 let currentLanguage = 'fr'; // Langue par défaut
 
+// Fonction helper pour générer un gradient CSS depuis les couleurs CSV
+function generateGradientCSS(key, section) {
+    if (!section._colors || !section._colors[key]) {
+        return null;
+    }
+
+    const colorInfo = section._colors[key];
+
+    // Si on a 2 couleurs de gradient, créer un linear-gradient
+    if (colorInfo.gradientColor1 && colorInfo.gradientColor2) {
+        return `linear-gradient(135deg, ${colorInfo.gradientColor1}, ${colorInfo.gradientColor2})`;
+    }
+
+    // Sinon utiliser la couleur simple si présente
+    if (colorInfo.color) {
+        return colorInfo.color;
+    }
+
+    return null;
+}
+
 // Fonction pour changer de langue
 function switchLanguage(lang) {
     currentLanguage = lang;
@@ -59,7 +80,7 @@ async function loadCSV(filename) {
             }
         }
     } else {
-        // Parser pour data_clean.csv (section,key,value,color)
+        // Parser pour data_clean.csv (section,key,value,color,gradient_color_1,gradient_color_2)
         for (let i = 1; i < lines.length; i++) {
             const line = lines[i].trim();
             if (line && !line.startsWith('#')) {
@@ -68,27 +89,13 @@ async function loadCSV(filename) {
                     const section = parts[0].trim();
                     const key = parts[1].trim();
 
-                    // Gérer la valeur (peut contenir des virgules)
-                    let value, color;
+                    // Parser les 6 colonnes: section,key,value,color,gradient_color_1,gradient_color_2
+                    let value = parts[2] ? parts[2].trim() : '';
+                    let color = parts[3] ? parts[3].trim() : '';
+                    let gradientColor1 = parts[4] ? parts[4].trim() : '';
+                    let gradientColor2 = parts[5] ? parts[5].trim() : '';
 
-                    if (parts.length >= 4) {
-                        // Vérifier si la dernière partie ressemble à une couleur
-                        const lastPart = parts[parts.length - 1].trim();
-                        if (lastPart.startsWith('#') && lastPart.length >= 4) {
-                            // 4ème colonne couleur présente
-                            color = lastPart;
-                            value = parts.slice(2, parts.length - 1).join(',').trim();
-                        } else {
-                            // Pas de couleur, joindre toutes les parties comme valeur
-                            value = parts.slice(2).join(',').trim();
-                            color = null;
-                        }
-                    } else {
-                        // Pas de 4ème colonne
-                        value = parts.slice(2).join(',').trim();
-                        color = null;
-                    }
-
+                    // Nettoyer les guillemets
                     if (value.startsWith('"') && value.endsWith('"')) {
                         value = value.slice(1, -1);
                     }
@@ -97,7 +104,21 @@ async function loadCSV(filename) {
                         if (!result[section]) {
                             result[section] = {};
                         }
+
+                        // Stocker la valeur
                         result[section][key] = value;
+
+                        // Stocker les informations de couleur si présentes
+                        if (color || gradientColor1 || gradientColor2) {
+                            if (!result[section]._colors) {
+                                result[section]._colors = {};
+                            }
+                            result[section]._colors[key] = {
+                                color: color || null,
+                                gradientColor1: gradientColor1 || null,
+                                gradientColor2: gradientColor2 || null
+                            };
+                        }
 
                         // Stocker la couleur si présente
                         if (color && color.startsWith('#')) {
@@ -430,26 +451,88 @@ function applyBackgroundColors() {
         }
     });
 
-    // Ajouter les couleurs des tableaux
+    // Ajouter les couleurs des tableaux (règles ultra-spécifiques)
     if (data.table_colors) {
         cssRules += `
+        /* Structure tableau de base */
+        .comparison-table {
+            width: 100% !important;
+            border-collapse: collapse !important;
+            border-radius: 10px !important;
+            overflow: hidden !important;
+            margin: 2rem 0 !important;
+        }
+
+        /* En-têtes tableau - FORCÉ */
+        .comparison-table thead th,
         .comparison-table th {
             background: ${data.table_colors.header_bg} !important;
             color: ${data.table_colors.header_text} !important;
+            padding: 20px 15px !important;
+            font-weight: bold !important;
+            font-size: 1.1rem !important;
+            text-align: center !important;
+            border: none !important;
         }
-        .comparison-table tbody tr:nth-child(odd) td {
+
+        /* Lignes alternées - FORCÉ avec spécificité max */
+        .comparison-table tbody tr:nth-child(1) td {
             background-color: ${data.table_colors.cell_bg_primary} !important;
             color: ${data.table_colors.cell_text} !important;
-            border-bottom: 1px solid ${data.table_colors.cell_border} !important;
         }
-        .comparison-table tbody tr:nth-child(even) td {
+        .comparison-table tbody tr:nth-child(2) td {
             background-color: ${data.table_colors.cell_bg_secondary} !important;
             color: ${data.table_colors.cell_text} !important;
-            border-bottom: 1px solid ${data.table_colors.cell_border} !important;
         }
-        .comparison-table .old-tech { color: ${data.table_colors.old_tech} !important; }
-        .comparison-table .new-tech { color: ${data.table_colors.new_tech} !important; }
-        .comparison-title { color: ${data.table_colors.comparison_title} !important; }
+        .comparison-table tbody tr:nth-child(3) td {
+            background-color: ${data.table_colors.cell_bg_primary} !important;
+            color: ${data.table_colors.cell_text} !important;
+        }
+        .comparison-table tbody tr:nth-child(4) td {
+            background-color: ${data.table_colors.cell_bg_secondary} !important;
+            color: ${data.table_colors.cell_text} !important;
+        }
+
+        /* Toutes les cellules - style de base */
+        .comparison-table td {
+            padding: 15px !important;
+            text-align: center !important;
+            border: 1px solid ${data.table_colors.cell_border} !important;
+            color: ${data.table_colors.cell_text} !important;
+        }
+
+        /* Première colonne (critères) */
+        .comparison-table td:first-child,
+        .comparison-table td:nth-child(1) {
+            text-align: left !important;
+            font-weight: bold !important;
+            color: #ffffff !important;
+            background-color: rgba(30, 64, 175, 0.9) !important;
+        }
+
+        /* Valeurs technologie ancienne (rouge) */
+        .comparison-table .old-tech,
+        .comparison-table td.old-tech {
+            color: ${data.table_colors.old_tech} !important;
+            font-weight: bold !important;
+            background-color: rgba(239, 68, 68, 0.1) !important;
+        }
+
+        /* Valeurs nouvelle technologie (cyan) */
+        .comparison-table .new-tech,
+        .comparison-table td.new-tech {
+            color: ${data.table_colors.new_tech} !important;
+            font-weight: bold !important;
+            background-color: rgba(34, 211, 238, 0.1) !important;
+        }
+
+        /* Titre de la comparaison */
+        .comparison-title {
+            color: ${data.table_colors.comparison_title} !important;
+            font-size: 2rem !important;
+            margin-bottom: 2rem !important;
+            text-align: center !important;
+        }
         `;
     }
 
@@ -478,10 +561,539 @@ function applyBackgroundColors() {
         `;
     }
 
+    // Ajouter les nouvelles couleurs optimisées pour toutes les sections (visuels 3-8)
+    if (data.defis_section) {
+        cssRules += `
+        .defis-section, #defis, .challenges-section {
+            background: ${data.defis_section.background_gradient} !important;
+        }
+        .defis-section h2, .challenges-section h2 {
+            color: ${data.defis_section.title_color} !important;
+        }
+        .defis-section h3, .challenges-section h3 {
+            color: ${data.defis_section.subtitle_color} !important;
+        }
+        .defis-section .card, .challenges-section .card {
+            background-color: ${data.defis_section.card_background} !important;
+            border: 2px solid ${data.defis_section.card_border} !important;
+            color: ${data.defis_section.problem_text} !important;
+        }
+        .defis-section .cost-highlight, .challenges-section .cost-highlight {
+            color: ${data.defis_section.cost_highlight} !important;
+        }
+        `;
+    }
+
+    if (data.solutions_section) {
+        cssRules += `
+        .solutions-section, #solutions {
+            background: ${data.solutions_section.background_gradient} !important;
+        }
+        .solutions-section h2 {
+            color: ${data.solutions_section.title_color} !important;
+        }
+        .solutions-section h3 {
+            color: ${data.solutions_section.subtitle_color} !important;
+        }
+        .solutions-section .card {
+            background-color: ${data.solutions_section.card_background} !important;
+            border: 2px solid ${data.solutions_section.card_border} !important;
+            color: ${data.solutions_section.advantage_text} !important;
+        }
+        .solutions-section .advantage-icon {
+            color: ${data.solutions_section.advantage_icon} !important;
+        }
+        `;
+    }
+
+    if (data.comparison_section) {
+        cssRules += `
+        /* SECTION COMPARISON - RENFORCEMENT */
+        .comparison-section, #comparison {
+            background: ${data.comparison_section.background_gradient} !important;
+            padding: 3rem 0 !important;
+        }
+        .comparison-section h2 {
+            color: ${data.comparison_section.title_color} !important;
+            text-align: center !important;
+            margin-bottom: 2rem !important;
+        }
+        .comparison-section h3 {
+            color: ${data.comparison_section.subtitle_color} !important;
+        }
+
+        /* TABLEAU COMPARISON - ULTRA SPÉCIFIQUE */
+        .comparison-section .comparison-table {
+            width: 100% !important;
+            border-collapse: collapse !important;
+            margin: 2rem auto !important;
+            max-width: 1200px !important;
+        }
+
+        /* EN-TÊTES - GRADIENT FORCÉ */
+        .comparison-section .comparison-table thead th,
+        .comparison-section .comparison-table th {
+            background: ${data.comparison_section.table_header_bg} !important;
+            color: ${data.comparison_section.table_header_text} !important;
+            padding: 20px 15px !important;
+            font-weight: bold !important;
+            font-size: 1.2rem !important;
+            text-align: center !important;
+            border: none !important;
+        }
+
+        /* LIGNES SPÉCIFIQUES - ALTERNANCE FORCÉE */
+        .comparison-section .comparison-table tbody tr:nth-child(1) td {
+            background-color: ${data.comparison_section.table_cell_bg_primary} !important;
+            color: ${data.comparison_section.table_cell_text} !important;
+        }
+        .comparison-section .comparison-table tbody tr:nth-child(2) td {
+            background-color: ${data.comparison_section.table_cell_bg_secondary} !important;
+            color: ${data.comparison_section.table_cell_text} !important;
+        }
+        .comparison-section .comparison-table tbody tr:nth-child(3) td {
+            background-color: ${data.comparison_section.table_cell_bg_primary} !important;
+            color: ${data.comparison_section.table_cell_text} !important;
+        }
+        .comparison-section .comparison-table tbody tr:nth-child(4) td {
+            background-color: ${data.comparison_section.table_cell_bg_secondary} !important;
+            color: ${data.comparison_section.table_cell_text} !important;
+        }
+
+        /* CELLULES GÉNÉRALES */
+        .comparison-section .comparison-table td {
+            padding: 15px !important;
+            text-align: center !important;
+            border: 1px solid ${data.comparison_section.table_border} !important;
+            color: ${data.comparison_section.table_cell_text} !important;
+        }
+
+        /* PREMIÈRE COLONNE */
+        .comparison-section .comparison-table td:first-child {
+            text-align: left !important;
+            font-weight: bold !important;
+            color: #ffffff !important;
+            background-color: rgba(30, 64, 175, 0.9) !important;
+        }
+
+        /* VALEURS COLORÉES */
+        .comparison-section .comparison-table .lead-values,
+        .comparison-section .comparison-table .old-tech {
+            color: ${data.comparison_section.lead_values} !important;
+            font-weight: bold !important;
+            background-color: rgba(239, 68, 68, 0.15) !important;
+        }
+
+        .comparison-section .comparison-table .lithium-values,
+        .comparison-section .comparison-table .new-tech {
+            color: ${data.comparison_section.lithium_values} !important;
+            font-weight: bold !important;
+            background-color: rgba(34, 211, 238, 0.15) !important;
+        }
+        `;
+    }
+
+    if (data.offres_section) {
+        cssRules += `
+        .offres-section, .pricing-section, #pricing {
+            background: ${data.offres_section.background_gradient} !important;
+        }
+        .offres-section h2, .pricing-section h2 {
+            color: ${data.offres_section.title_color} !important;
+        }
+        .offres-section h3, .pricing-section h3 {
+            color: ${data.offres_section.subtitle_color} !important;
+        }
+        .pricing-card.premium {
+            background-color: ${data.offres_section.card_background_premium} !important;
+            border: 2px solid ${data.offres_section.card_border_premium} !important;
+        }
+        .pricing-card.premium h3 {
+            color: ${data.offres_section.card_title_premium} !important;
+        }
+        .pricing-card.premium .price {
+            color: ${data.offres_section.price_premium} !important;
+        }
+        .pricing-card.optimise {
+            background-color: ${data.offres_section.card_background_optimise} !important;
+            border: 2px solid ${data.offres_section.card_border_optimise} !important;
+        }
+        .pricing-card.optimise h3 {
+            color: ${data.offres_section.card_title_optimise} !important;
+        }
+        .pricing-card.optimise .price {
+            color: ${data.offres_section.price_optimise} !important;
+        }
+        .pricing-card.fleet {
+            background-color: ${data.offres_section.card_background_flotte} !important;
+            border: 2px solid ${data.offres_section.card_border_flotte} !important;
+        }
+        .pricing-card.fleet h3 {
+            color: ${data.offres_section.card_title_flotte} !important;
+        }
+        .pricing-card.fleet .price {
+            color: ${data.offres_section.price_flotte} !important;
+        }
+        .offer-badge {
+            background-color: ${data.offres_section.offer_badge} !important;
+            color: ${data.offres_section.offer_badge_text} !important;
+        }
+        `;
+    }
+
+    if (data.details_section) {
+        cssRules += `
+        .details-section, #details {
+            background: ${data.details_section.background_gradient} !important;
+        }
+        .details-section h2 {
+            color: ${data.details_section.title_color} !important;
+        }
+        .details-section .icon-ampoule {
+            color: ${data.details_section.icon_ampoule} !important;
+        }
+        .details-section .card.plomb {
+            background-color: ${data.details_section.card_plomb_background} !important;
+            border: 2px solid ${data.details_section.card_plomb_border} !important;
+            color: ${data.details_section.card_plomb_text} !important;
+        }
+        .details-section .card.plomb h3 {
+            color: ${data.details_section.card_plomb_title} !important;
+        }
+        .details-section .card.lithium {
+            background-color: ${data.details_section.card_lithium_background} !important;
+            border: 2px solid ${data.details_section.card_lithium_border} !important;
+            color: ${data.details_section.card_lithium_text} !important;
+        }
+        .details-section .card.lithium h3 {
+            color: ${data.details_section.card_lithium_title} !important;
+        }
+        .details-section .card.comparison {
+            background-color: ${data.details_section.card_comparison_background} !important;
+            border: 2px solid ${data.details_section.card_comparison_border} !important;
+            color: ${data.details_section.card_comparison_text} !important;
+        }
+        .details-section .card.roi {
+            background-color: ${data.details_section.card_roi_background} !important;
+            border: 2px solid ${data.details_section.card_roi_border} !important;
+            color: ${data.details_section.card_roi_text} !important;
+        }
+        `;
+    }
+
+    if (data.temoignage_section) {
+        cssRules += `
+        .temoignage-section, .testimonial-section, #testimonial {
+            background: ${data.temoignage_section.background_gradient} !important;
+        }
+        .temoignage-section h2, .testimonial-section h2 {
+            color: ${data.temoignage_section.title_color} !important;
+        }
+        .temoignage-section h3, .testimonial-section h3 {
+            color: ${data.temoignage_section.subtitle_color} !important;
+        }
+        .temoignage-section .advantage-card, .testimonial-section .advantage-card {
+            background-color: ${data.temoignage_section.card_background} !important;
+            border: 2px solid ${data.temoignage_section.card_border} !important;
+            color: ${data.temoignage_section.card_text} !important;
+        }
+        .temoignage-section .advantage-card h4, .testimonial-section .advantage-card h4 {
+            color: ${data.temoignage_section.card_title} !important;
+        }
+        .testimonial-quote {
+            background-color: ${data.temoignage_section.testimonial_background} !important;
+            border: 2px solid ${data.temoignage_section.testimonial_border} !important;
+            color: ${data.temoignage_section.testimonial_text} !important;
+        }
+        .testimonial-author {
+            color: ${data.temoignage_section.author_name} !important;
+        }
+        .testimonial-title {
+            color: ${data.temoignage_section.author_title} !important;
+        }
+        .icon-fiabilite { color: ${data.temoignage_section.icon_fiabilite} !important; }
+        .icon-simplicite { color: ${data.temoignage_section.icon_simplicite} !important; }
+        .icon-performance { color: ${data.temoignage_section.icon_performance} !important; }
+        .icon-economie { color: ${data.temoignage_section.icon_economie} !important; }
+        .icon-partenariat { color: ${data.temoignage_section.icon_partenariat} !important; }
+        .icon-ecologie { color: ${data.temoignage_section.icon_ecologie} !important; }
+        `;
+    }
+
+    // Ajouter les couleurs complémentaires commerciales
+    if (data.commercial_colors) {
+        cssRules += `
+        .success-primary { color: ${data.commercial_colors.success_primary} !important; }
+        .success-secondary { color: ${data.commercial_colors.success_secondary} !important; }
+        .warning-primary { color: ${data.commercial_colors.warning_primary} !important; }
+        .warning-secondary { color: ${data.commercial_colors.warning_secondary} !important; }
+        .error-primary { color: ${data.commercial_colors.error_primary} !important; }
+        .error-secondary { color: ${data.commercial_colors.error_secondary} !important; }
+        .info-primary { color: ${data.commercial_colors.info_primary} !important; }
+        .info-secondary { color: ${data.commercial_colors.info_secondary} !important; }
+        `;
+    }
+
+    // Ajouter les couleurs de contraste
+    if (data.contrast_colors) {
+        cssRules += `
+        .text-on-dark { color: ${data.contrast_colors.text_on_dark} !important; }
+        .text-on-light { color: ${data.contrast_colors.text_on_light} !important; }
+        .text-muted-dark { color: ${data.contrast_colors.text_muted_dark} !important; }
+        .text-muted-light { color: ${data.contrast_colors.text_muted_light} !important; }
+        .border-subtle { border-color: ${data.contrast_colors.border_subtle} !important; }
+        .border-prominent { border-color: ${data.contrast_colors.border_prominent} !important; }
+        `;
+    }
+
+    // Ajouter les couleurs d'interaction
+    if (data.interaction_colors) {
+        cssRules += `
+        .focus-ring:focus { outline: 2px solid ${data.interaction_colors.focus_ring} !important; }
+        .hover-overlay:hover { background-color: ${data.interaction_colors.hover_overlay} !important; }
+        .active-state:active { background-color: ${data.interaction_colors.active_state} !important; }
+        .disabled-state:disabled { color: ${data.interaction_colors.disabled_state} !important; }
+        `;
+    }
+
+    // Ajouter des règles générales pour corriger la visibilité
+    cssRules += `
+    /* Correction générale du contraste texte sur fond sombre */
+    body, html {
+        background-color: #0f172a !important;
+        color: #ffffff !important;
+    }
+
+    /* Tous les textes gris deviennent blancs */
+    .text-gray-400, .text-gray-500, .text-gray-600, .text-gray-700 {
+        color: #e5e7eb !important;
+    }
+
+    /* Titre principal toujours visible */
+    h1, h2, h3, h4, h5, h6 {
+        color: #ffffff !important;
+    }
+
+    /* Paragraphes et textes par défaut */
+    p, span, div {
+        color: #e5e7eb !important;
+    }
+
+    /* Améliorer tous les éléments du tableau */
+    table, .table {
+        border-collapse: collapse !important;
+    }
+
+    table th, table td, .table th, .table td {
+        border: 1px solid rgba(59, 130, 246, 0.3) !important;
+        padding: 12px !important;
+    }
+
+    /* Assurer que tous les tableaux ont un contraste visible */
+    .comparison-table tbody tr td {
+        color: #ffffff !important;
+        min-height: 50px !important;
+    }
+
+    /* Valeurs importantes en couleur */
+    .old-tech, .lead-values {
+        color: #ef4444 !important;
+        font-weight: bold !important;
+    }
+
+    .new-tech, .lithium-values {
+        color: #22d3ee !important;
+        font-weight: bold !important;
+    }
+    `;
+
     // Appliquer le CSS
     bgStyleElement.textContent = cssRules;
 
-    console.log('Arrière-plans et couleurs appliqués depuis les CSV');
+    console.log('Couleurs optimisées e-commerce appliquées avec correction de visibilité complète');
+
+    // Appliquer les couleurs des sections avec gradients depuis CSV
+    let sectionStyles = '';
+
+    // Section problem (VOTRE DÉFI ACTUEL)
+    if (data.problem_section) {
+        const bgGradient = generateGradientCSS('background_gradient', data.problem_section);
+        if (bgGradient) {
+            sectionStyles += `.problem-section { background: ${bgGradient} !important; }\n`;
+        }
+    }
+
+    // Section solution (NOTRE SOLUTION RÉVOLUTIONNAIRE)
+    if (data.solution_section) {
+        const bgGradient = generateGradientCSS('background_gradient', data.solution_section);
+        if (bgGradient) {
+            sectionStyles += `.solution-section { background: ${bgGradient} !important; }\n`;
+        }
+    }
+
+    // Section benefits (Pourquoi Choisir EDS Québec)
+    if (data.benefits_section) {
+        const bgGradient = generateGradientCSS('background_gradient', data.benefits_section);
+        if (bgGradient) {
+            sectionStyles += `.benefits-section { background: ${bgGradient} !important; }\n`;
+        }
+    }
+
+    // Section comparison avec tableau - COULEURS DEPUIS CSV
+    if (data.comparison_section) {
+        const bgGradient = generateGradientCSS('background_gradient', data.comparison_section);
+        const tableHeaderGradient = generateGradientCSS('table_header_bg_gradient', data.comparison_section);
+
+        if (bgGradient) {
+            sectionStyles += `.comparison-section { background: ${bgGradient} !important; }\n`;
+        }
+
+        if (tableHeaderGradient) {
+            sectionStyles += `
+            .comparison-table thead th, .comparison-table th {
+                background: ${tableHeaderGradient} !important;
+                color: #ffffff !important;
+                padding: 20px !important;
+                font-weight: bold !important;
+                border: none !important;
+            }\n`;
+        }
+
+        // Couleurs alternées du tableau depuis CSV
+        if (data.comparison_section.table_cell_bg_primary) {
+            sectionStyles += `
+            .comparison-table tbody tr:nth-child(odd) td {
+                background-color: ${data.comparison_section.table_cell_bg_primary} !important;
+                color: #ffffff !important;
+                padding: 15px !important;
+                border: 1px solid rgba(59, 130, 246, 0.3) !important;
+            }\n`;
+        }
+
+        if (data.comparison_section.table_cell_bg_secondary) {
+            sectionStyles += `
+            .comparison-table tbody tr:nth-child(even) td {
+                background-color: ${data.comparison_section.table_cell_bg_secondary} !important;
+                color: #ffffff !important;
+                padding: 15px !important;
+                border: 1px solid rgba(59, 130, 246, 0.3) !important;
+            }\n`;
+        }
+
+        // Première colonne (critères)
+        sectionStyles += `
+        .comparison-table td:first-child {
+            background-color: rgba(30, 64, 175, 0.9) !important;
+            color: #ffffff !important;
+            font-weight: bold !important;
+            text-align: left !important;
+        }\n`;
+
+        // Colonnes old-tech et new-tech avec couleurs CSV
+        if (data.comparison_section.lead_values) {
+            sectionStyles += `
+            .comparison-table .old-tech {
+                color: ${data.comparison_section.lead_values} !important;
+                font-weight: bold !important;
+                background-color: rgba(239, 68, 68, 0.1) !important;
+            }\n`;
+        }
+
+        if (data.comparison_section.lithium_values) {
+            sectionStyles += `
+            .comparison-table .new-tech {
+                color: ${data.comparison_section.lithium_values} !important;
+                font-weight: bold !important;
+                background-color: rgba(34, 211, 238, 0.1) !important;
+            }\n`;
+        }
+    }
+
+    // Ajouter les styles des sections
+    if (sectionStyles) {
+        cssRules += sectionStyles;
+    }
+
+    console.log('✅ Couleurs et gradients appliqués depuis CSV (fini l\'injection hardcodée)');
+
+    // INJECTION CSS D'URGENCE - Couleurs maintenant éditables via CSV
+    // Récupérer les couleurs depuis CSV ou utiliser des valeurs par défaut
+    const headerGrad1 = (data.comparison_section && data.comparison_section._colors && data.comparison_section._colors.table_header_bg_gradient) ?
+        data.comparison_section._colors.table_header_bg_gradient.gradientColor1 || '#1e40af' : '#1e40af';
+    const headerGrad2 = (data.comparison_section && data.comparison_section._colors && data.comparison_section._colors.table_header_bg_gradient) ?
+        data.comparison_section._colors.table_header_bg_gradient.gradientColor2 || '#BFF2EB' : '#BFF2EB';
+
+    const cellPrimary = data.comparison_section?.table_cell_bg_primary || '#1e293b';
+    const cellSecondary = data.comparison_section?.table_cell_bg_secondary || '#374151';
+    const leadColor = data.comparison_section?.lead_values || '#ef4444';
+    const lithiumColor = data.comparison_section?.lithium_values || '#22d3ee';
+
+    const emergencyTableCSS = `
+    <style id="force-table-colors" type="text/css">
+    /* FORCE TABLEAU - COULEURS CSV-ÉDITABLES */
+    .comparison-table thead th, .comparison-table th {
+        background: linear-gradient(135deg, ${headerGrad1}, ${headerGrad2}) !important;
+        padding: 20px !important;
+        font-weight: bold !important;
+        border: none !important;
+    }
+
+    /* Les couleurs de texte viennent du CSV via JavaScript, pas CSS */
+
+    .comparison-table tbody tr:nth-child(1) td {
+        background-color: ${cellPrimary} !important;
+        color: #ffffff !important;
+        padding: 15px !important;
+        border: 1px solid rgba(59, 130, 246, 0.3) !important;
+    }
+
+    .comparison-table tbody tr:nth-child(2) td {
+        background-color: ${cellSecondary} !important;
+        color: #ffffff !important;
+        padding: 15px !important;
+        border: 1px solid rgba(59, 130, 246, 0.3) !important;
+    }
+
+    .comparison-table tbody tr:nth-child(3) td {
+        background-color: ${cellPrimary} !important;
+        color: #ffffff !important;
+        padding: 15px !important;
+        border: 1px solid rgba(59, 130, 246, 0.3) !important;
+    }
+
+    .comparison-table tbody tr:nth-child(4) td {
+        background-color: ${cellSecondary} !important;
+        color: #ffffff !important;
+        padding: 15px !important;
+        border: 1px solid rgba(59, 130, 246, 0.3) !important;
+    }
+
+    .comparison-table td:first-child {
+        background-color: rgba(30, 64, 175, 0.9) !important;
+        color: #ffffff !important;
+        font-weight: bold !important;
+        text-align: left !important;
+    }
+
+    .comparison-table .old-tech {
+        color: ${leadColor} !important;
+        font-weight: bold !important;
+        background-color: rgba(239, 68, 68, 0.1) !important;
+    }
+
+    .comparison-table .new-tech {
+        color: ${lithiumColor} !important;
+        font-weight: bold !important;
+        background-color: rgba(34, 211, 238, 0.1) !important;
+    }
+    </style>
+    `;
+
+    // Injecter le CSS d'urgence dans le head
+    if (!document.getElementById('force-table-colors')) {
+        document.head.insertAdjacentHTML('beforeend', emergencyTableCSS);
+        console.log('🔧 CSS d\'urgence RE-injecté pour forcer les couleurs du tableau');
+    }
 }
 
 // Fonction helper pour récupérer la couleur d'un élément depuis les données CSV
@@ -845,9 +1457,9 @@ function updateContent() {
 
     // Comparison
     safeUpdateElementWithColor('comparison-title', 'ui', 'comparison_title', data.ui?.comparison_title);
-    safeUpdateElement('comparison-criterion', data.ui?.comparison_criterion);
-    safeUpdateElement('comparison-lead-batteries', data.ui?.comparison_lead_batteries);
-    safeUpdateElement('comparison-eds-solution', data.ui?.comparison_eds_solution);
+    safeUpdateElementWithColor('comparison-criterion', 'ui', 'comparison_criterion', data.ui?.comparison_criterion);
+    safeUpdateElementWithColor('comparison-lead-batteries', 'ui', 'comparison_lead_batteries', data.ui?.comparison_lead_batteries);
+    safeUpdateElementWithColor('comparison-eds-solution', 'ui', 'comparison_eds_solution', data.ui?.comparison_eds_solution);
     safeUpdateElement('comparison-cost-10-years', data.ui?.comparison_cost_10_years);
     safeUpdateElement('comparison-replacements', data.ui?.comparison_replacements);
     safeUpdateElement('comparison-maintenance', data.ui?.comparison_maintenance);
