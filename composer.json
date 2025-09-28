@@ -6,7 +6,5 @@
         "symfony/polyfill-mbstring": "^1.28",
         "symfony/polyfill-php80": "^1.28"
     },
-    "config": {
-        "disable-tls": true
-    }
+    "config": {}
 }
