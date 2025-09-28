@@ -88,6 +88,11 @@ Make sure that the domain you are using is allowed in your Snipcart dashboard; o
 
 The Snipcart webhooks (`shipping.php` and `decrement-stock.php`) must be reachable via HTTPS. When testing locally you can expose your development server with a tool such as ngrok.
 
+### Contraintes d'URL Snipcart
+
+- Les boutons d'ajout au panier reposent sur l'attribut `data-item-url`. Grâce au helper PHP `gd_build_absolute_url()`, cette URL canonique est désormais générée automatiquement en fonction du schéma réellement utilisé (`http` ou `https`).
+- En local, si vous servez le site en HTTP simple (par exemple avec `php -S localhost:8000`), Snipcart recevra bien des URL en `http://...` et acceptera les ajouts au panier. En production derrière un proxy HTTPS, les en-têtes `X-Forwarded-Proto` sont pris en charge pour conserver le schéma `https`.
+
 ## Error logging
 
 PHP errors are not displayed in the browser. Inspect the `error.log` file at the project root to diagnose problems.
