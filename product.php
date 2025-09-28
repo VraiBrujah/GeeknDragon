@@ -23,6 +23,7 @@ if (!$id || !isset($data[$id])) {
     exit;
 }
 $product = $data[$id];
+$canonicalProductUrl = gd_build_absolute_url('product.php?id=' . urlencode($id));
 
 // CORRECTION DASHBOARD SNIPCART : Détecter les vrais crawlers Snipcart
 $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
@@ -48,7 +49,7 @@ if ($isSnipcartCrawler) {
             'id' => $id,
             'name' => $productName,
             'price' => floatval($product['price'] ?? 0),
-            'url' => "https://geekndragon.com/product.php?id=" . $id,
+            'url' => $canonicalProductUrl,
             'description' => $productSummary
         ];
         
@@ -108,8 +109,7 @@ $summary = $lang === 'en' ? $summaryEn : $summaryFr;
 
 $title  = $productName . ' | Geek & Dragon';
 $metaDescription = $productDesc;
-$host = $_SERVER['HTTP_HOST'] ?? 'geekndragon.com';
-$metaUrl = 'https://' . $host . '/product.php?id=' . urlencode($id);
+$metaUrl = $canonicalProductUrl;
 $from = preg_replace('/[^a-z0-9_-]/i', '', $_GET['from'] ?? 'pieces');
 
 /**

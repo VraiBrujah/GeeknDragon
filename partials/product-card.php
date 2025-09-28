@@ -54,6 +54,11 @@ $summary = $lang === 'en' ? $summaryEn : $summaryFr;
 
 $img = $product['img'] ?? ($product['images'][0] ?? '');
 $url = $product['url'] ?? ('product.php?id=' . urlencode($id));
+$canonicalUrl = function_exists('gd_build_absolute_url')
+    ? gd_build_absolute_url('product.php?id=' . urlencode($id))
+    : (((isset($_SERVER['HTTPS']) && strtolower((string) $_SERVER['HTTPS']) !== 'off' && $_SERVER['HTTPS'] !== '') ? 'https' : 'http')
+        . '://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com')
+        . '/product.php?id=' . urlencode($id));
 $price = number_format((float) ($product['price'] ?? 0), 2, '.', '');
 $multipliers = $product['multipliers'] ?? [];
 $metals = $product['metals'] ?? [];
@@ -278,7 +283,7 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
                 data-item-description-fr="<?= htmlspecialchars($summaryFr) ?>"
                 data-item-description-en="<?= htmlspecialchars($summaryEn) ?>"
                 data-item-price="<?= htmlspecialchars($price) ?>"
-                data-item-url="<?= htmlspecialchars($url) ?>"
+                data-item-url="<?= htmlspecialchars($canonicalUrl) ?>"
                 data-item-quantity="1"
                 <?php if ($triptychFieldIndex !== null) : ?>
                   data-item-custom<?= (int) $triptychFieldIndex ?>-name="<?= htmlspecialchars($triptychLabel ?? 'Option') ?>"
