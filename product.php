@@ -8,6 +8,14 @@ $id = preg_replace('/[^a-z0-9_-]/i', '', $_GET['id'] ?? '');
 $data = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true) ?? [];
 $stockData = json_decode(file_get_contents(__DIR__ . '/data/stock.json'), true) ?? [];
 $snipcartSecret = $config['snipcart_secret_api_key'] ?? null;
+$snipcartSyncRaw = $_ENV['SNIPCART_SYNC'] ?? null;
+$forceOfflineStock = false;
+if ($snipcartSyncRaw !== null) {
+    $syncFlag = filter_var($snipcartSyncRaw, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+    if ($syncFlag === false) {
+        $forceOfflineStock = true;
+    }
+}
 
 if (!$id || !isset($data[$id])) {
     http_response_code(404);
@@ -104,27 +112,30 @@ $host = $_SERVER['HTTP_HOST'] ?? 'geekndragon.com';
 $metaUrl = 'https://' . $host . '/product.php?id=' . urlencode($id);
 $from = preg_replace('/[^a-z0-9_-]/i', '', $_GET['from'] ?? 'pieces');
 
+/**
+ * Retourne le stock courant d'un produit Snipcart avec repli local.
+ */
 function getStock(string $id): ?int
 {
-    global $snipcartSecret, $stockData;
+    global $snipcartSecret, $stockData, $forceOfflineStock;
     static $cache = [];
     if (isset($cache[$id])) {
         return $cache[$id];
     }
-    if ($snipcartSecret) {
+    if ($snipcartSecret && !$forceOfflineStock) {
         $ch = curl_init('https://app.snipcart.com/api/inventory/' . urlencode($id));
         curl_setopt_array($ch, [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_USERPWD => $snipcartSecret . ':',
+            CURLOPT_TIMEOUT => 2,
         ]);
         $res = curl_exec($ch);
         $status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
         curl_close($ch);
-        if ($res === false || $status >= 400) {
-            return $cache[$id] = null;
+        if ($res !== false && $status < 400) {
+            $inv = json_decode($res, true);
+            return $cache[$id] = $inv['stock'] ?? $inv['available'] ?? null;
         }
-        $inv = json_decode($res, true);
-        return $cache[$id] = $inv['stock'] ?? $inv['available'] ?? null;
     }
     return $cache[$id] = $stockData[$id] ?? null;
 }
