@@ -269,8 +269,13 @@ header nav a[aria-current="page"]{
   text-decoration-thickness: 2px;
 }
 
-/* 4) Le header peut revenir sur 2 lignes sans se casser */
-header .max-w-7xl{ flex-wrap: wrap; }
+/* 4) Le header reste en une seule ligne sur mobile ;
+      on laisse Tailwind gérer l'éventuel wrap sur grands écrans si besoin */
+header .max-w-7xl{ flex-wrap: nowrap; }
+
+@media (min-width: 768px){
+  header .max-w-7xl{ flex-wrap: wrap; }
+}
 
 /* 5) Icônes Snipcart (compte + panier) — style cohérent */
 .snipcart-btn{
@@ -309,9 +314,10 @@ header .max-w-7xl{ flex-wrap: wrap; }
   font-size: 0.75rem; line-height: 1rem; font-weight: 700; color:#fff;
 }
 
-/* 6) Empilement vertical (si le conteneur n’a pas déjà flex-col)
-   => applique un petit décalage entre les deux boutons */
-header .snipcart-btn + .snipcart-btn{ margin-top:.5rem; }
+@media (min-width: 768px){
+  /* 6) Décalage vertical uniquement lorsque les boutons repassent en colonne */
+  header .snipcart-btn + .snipcart-btn{ margin-top:.5rem; }
+}
 
 /* 7) États “actifs” globaux (liens & boutons) */
 .is-active,
