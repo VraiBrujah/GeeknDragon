@@ -16,38 +16,46 @@ HTML;
 /* ───── STOCK ───── */
 $snipcartSecret = $config['snipcart_secret_api_key'] ?? null;
 $stockData = json_decode(file_get_contents(__DIR__ . '/data/stock.json'), true) ?? [];
+$snipcartSyncRaw = $_ENV['SNIPCART_SYNC'] ?? null;
+$forceOfflineStock = false;
+if ($snipcartSyncRaw !== null) {
+    $syncFlag = filter_var($snipcartSyncRaw, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+    if ($syncFlag === false) {
+        $forceOfflineStock = true;
+    }
+}
+/**
+ * Récupère le stock d'un produit via Snipcart lorsque disponible,
+ * sinon utilise la valeur locale issue de stock.json.
+ */
 function getStock(string $id): ?int
 {
-    global $snipcartSecret, $stockData;
+    global $snipcartSecret, $stockData, $forceOfflineStock;
     static $cache = [];
     if (isset($cache[$id])) {
         return $cache[$id];
     }
-    
-    // Mode développement : utilise uniquement les données locales (rapide)
-    // En production, activez la synchronisation API en définissant SNIPCART_SYNC=true
-    $useApiSync = ($_ENV['SNIPCART_SYNC'] ?? false) && $snipcartSecret;
-    
-    if ($useApiSync) {
-        // Appel API Snipcart (lent mais précis)
+
+    $shouldUseApi = !$forceOfflineStock && $snipcartSecret;
+
+    if ($shouldUseApi) {
         $ch = curl_init('https://app.snipcart.com/api/inventory/' . urlencode($id));
         curl_setopt_array($ch, [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_USERPWD => $snipcartSecret . ':',
-            CURLOPT_TIMEOUT => 2, // Timeout rapide pour éviter les blocages
+            CURLOPT_TIMEOUT => 2,
         ]);
         $res = curl_exec($ch);
         $status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
         curl_close($ch);
-        
+
         if ($res !== false && $status < 400) {
             $inv = json_decode($res, true);
             return $cache[$id] = $inv['stock'] ?? $inv['available'] ?? null;
         }
-        // En cas d'erreur API, fallback vers les données locales
     }
-    
-    // Utilise les données locales (par défaut)
+
+    // Repli local sur stock.json si l'API est indisponible ou désactivée
     return $cache[$id] = $stockData[$id] ?? null;
 }
 function inStock(string $id): bool

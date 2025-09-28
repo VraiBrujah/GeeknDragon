@@ -2,21 +2,31 @@
 
 ## Fonctionnement
 
-### Mode Développement (Par défaut)
-- Utilise `data/stock.json` pour les vérifications de stock
-- **Rapide** : Pas d'appels API
-- **Parfait** pour le développement et les tests
+### Priorité des sources de stock
+- **API Snipcart** : utilisée automatiquement dès qu'une clé secrète (`snipcart_secret_api_key`) est configurée.
+- **Cache local (`data/stock.json`)** : sert de repli si l'appel API échoue ou si le mode hors ligne est forcé.
 
-### Mode Production avec Synchronisation
-Pour activer la synchronisation temps réel avec Snipcart :
+### Mode Développement (Par défaut)
+- Aucune variable d'environnement n'est requise.
+- L'API est appelée dès qu'une clé secrète est disponible pour reproduire le comportement de production.
+- Pour travailler hors ligne, forcez l'utilisation du cache local :
 
 ```bash
 # Linux/Mac
-export SNIPCART_SYNC=true
+export SNIPCART_SYNC=false
 
-# Windows
-set SNIPCART_SYNC=true
+# Windows (PowerShell)
+$env:SNIPCART_SYNC="false"
+
+# Windows (Invite de commandes)
+set SNIPCART_SYNC=false
 ```
+
+> Toute valeur évaluée à `false` (`0`, `false`, `off`, etc.) désactive l'appel API.
+
+### Production
+- Aucun drapeau supplémentaire n'est nécessaire : la clé secrète suffit.
+- `SNIPCART_SYNC` peut être omise en production.
 
 ### Synchronisation Périodique (Recommandé)
 Exécutez `sync-stock.php` régulièrement via cron :
