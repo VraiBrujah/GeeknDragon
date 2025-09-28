@@ -88,6 +88,13 @@ Make sure that the domain you are using is allowed in your Snipcart dashboard; o
 
 The Snipcart webhooks (`shipping.php` and `decrement-stock.php`) must be reachable via HTTPS. When testing locally you can expose your development server with a tool such as ngrok.
 
+#### Test manuel du webhook Snipcart
+
+1. Définir la variable d'environnement `SNIPCART_SECRET_API_KEY` (ou la valeur équivalente dans `config.php`) avec votre clé secrète Snipcart.
+2. Rejouer un webhook depuis le tableau de bord Snipcart ou simuler une requête HTTP `POST` sur `https://votre-domaine/snipcart-webhook-validation.php` en fournissant un corps JSON et un en-tête `X-Snipcart-RequestToken` incorrect (`curl` permet de le faire facilement).
+3. Vérifier que la réponse est un statut HTTP `401` accompagné d'un corps JSON indiquant que la signature est invalide.
+4. Relancer le webhook avec la signature HMAC SHA-256 correcte pour confirmer que la réponse repasse à `200` et que l'entrée est consignée dans les logs.
+
 ### Contraintes d'URL Snipcart
 
 - Les boutons d'ajout au panier reposent sur l'attribut `data-item-url`. Grâce au helper PHP `gd_build_absolute_url()`, cette URL canonique est désormais générée automatiquement en fonction du schéma réellement utilisé (`http` ou `https`).
