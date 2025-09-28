@@ -3,32 +3,25 @@ let data = {};
 let variables = {};
 let formulas = {};
 let currentLanguage = 'fr'; // Langue par défaut
-
 // Fonction helper pour générer un gradient CSS depuis les couleurs CSV
 function generateGradientCSS(key, section) {
     if (!section._colors || !section._colors[key]) {
         return null;
     }
-
     const colorInfo = section._colors[key];
-
     // Si on a 2 couleurs de gradient, créer un linear-gradient
     if (colorInfo.gradientColor1 && colorInfo.gradientColor2) {
         return `linear-gradient(135deg, ${colorInfo.gradientColor1}, ${colorInfo.gradientColor2})`;
     }
-
     // Sinon utiliser la couleur simple si présente
     if (colorInfo.color) {
         return colorInfo.color;
     }
-
     return null;
 }
-
 // Fonction pour changer de langue
 function switchLanguage(lang) {
     currentLanguage = lang;
-
     // Mettre à jour les boutons actifs
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.remove('active');
@@ -36,11 +29,9 @@ function switchLanguage(lang) {
             btn.classList.add('active');
         }
     });
-
     // Recharger les données dans la nouvelle langue
     loadAllData();
 }
-
 // Fonction pour charger un fichier CSV (helper)
 async function loadCSV(filename) {
     const response = await fetch(filename + '?t=' + Date.now()); // Cache busting
@@ -50,15 +41,12 @@ async function loadCSV(filename) {
     const csvText = await response.text();
     const lines = csvText.split('\n');
     const result = {};
-
     // Déterminer si c'est un fichier structuré (variables/formulas) ou un fichier de données texte
     const firstLine = lines[0];
     const isStructuredFile = firstLine.includes('variable_id') || firstLine.includes('formula_id');
-
     if (isStructuredFile) {
         // Parser pour variables.csv et formulas.csv
         const headers = firstLine.split(',').map(h => h.trim());
-
         for (let i = 1; i < lines.length; i++) {
             const line = lines[i].trim();
             if (line && !line.startsWith('#')) {
@@ -72,7 +60,6 @@ async function loadCSV(filename) {
                         }
                         row[header] = value;
                     });
-
                     if (row.variable_id || row.formula_id) {
                         result[row.variable_id || row.formula_id] = row;
                     }
@@ -88,26 +75,21 @@ async function loadCSV(filename) {
                 if (parts.length >= 3) {
                     const section = parts[0].trim();
                     const key = parts[1].trim();
-
                     // Parser les 6 colonnes: section,key,value,color,gradient_color_1,gradient_color_2
                     let value = parts[2] ? parts[2].trim() : '';
                     let color = parts[3] ? parts[3].trim() : '';
                     let gradientColor1 = parts[4] ? parts[4].trim() : '';
                     let gradientColor2 = parts[5] ? parts[5].trim() : '';
-
                     // Nettoyer les guillemets
                     if (value.startsWith('"') && value.endsWith('"')) {
                         value = value.slice(1, -1);
                     }
-
                     if (section && key) {
                         if (!result[section]) {
                             result[section] = {};
                         }
-
                         // Stocker la valeur
                         result[section][key] = value;
-
                         // Stocker les informations de couleur si présentes
                         if (color || gradientColor1 || gradientColor2) {
                             if (!result[section]._colors) {
@@ -119,7 +101,6 @@ async function loadCSV(filename) {
                                 gradientColor2: gradientColor2 || null
                             };
                         }
-
                         // Stocker la couleur si présente
                         if (color && color.startsWith('#')) {
                             if (!result[section + '_colors']) {
@@ -132,17 +113,14 @@ async function loadCSV(filename) {
             }
         }
     }
-
     return result;
 }
-
 // Fonction pour récupérer une variable numérique centralisée
 function getVariable(variableId) {
     // Override dynamique pour le taux horaire du technicien
     if (variableId === 'lead_technician_hourly_rate') {
         return currentTechnicianRate;
     }
-
     const variable = variables[variableId];
     if (!variable) {
         console.warn(`Variable non trouvée: ${variableId}`);
@@ -150,7 +128,6 @@ function getVariable(variableId) {
     }
     return parseFloat(variable.value) || 0;
 }
-
 // Fonction pour calculer une formule depuis formulas.csv avec les variables actuelles
 function calculateFormula(formulaId) {
     // Formules calculées dynamiquement pour éviter hardcodage
@@ -161,27 +138,22 @@ function calculateFormula(formulaId) {
             const cycle = getVariable('lead_replacement_cycle_years');
             const warrantyFree = getVariable('warranty_replacements');
             const riskPercent = getVariable('premature_failure_percent');
-
             // UTILISE LA FORMULE DU CSV : FLOOR(10 / cycle) pour cohérence
             const totalReplacements = Math.floor(10 / cycle); // Formule CSV existante
             const paidReplacements = Math.max(0, totalReplacements - warrantyFree); // Moins 1 gratuit garantie
             const baseCost = paidReplacements * leadCost;
             const riskCost = baseCost * (riskPercent / 100); // +20% risque bris prématuré
-
             return baseCost + riskCost;
-
         case 'lead_replacement_cost_with_risk_20y':
             const leadCost20 = getVariable('lead_cost_replacement_unit');
             const cycle20 = getVariable('lead_replacement_cycle_years');
             const warrantyFree20 = getVariable('warranty_replacements');
             const riskPercent20 = getVariable('premature_failure_percent');
-
             // UTILISE LA FORMULE DU CSV : FLOOR(20 / cycle) pour cohérence
             const totalReplacements20 = Math.floor(20 / cycle20); // Formule CSV existante
             const paidReplacements20 = Math.max(0, totalReplacements20 - warrantyFree20); // Moins 1 gratuit
             const baseCost20 = paidReplacements20 * leadCost20;
             const riskCost20 = baseCost20 * (riskPercent20 / 100); // +20% risque bris prématuré
-
             return baseCost20 + riskCost20;
         // ===== COÛTS TOTAUX UTILISANT LA FORMULE UNIVERSELLE =====
         case 'lead_total_10y_per_cart':
@@ -190,7 +162,6 @@ function calculateFormula(formulaId) {
                    calculateFormula('lead_maintenance_total_10y') +
                    getVariable('recycling_disposal_cost') +
                    ((getVariable('revenue_loss_yearly') + getVariable('overconsumption_cost_yearly') + getVariable('insurance_increase_yearly')) * 10);
-
         case 'lead_total_20y_per_cart':
             // Utilise la formule universelle avec risque pour les remplacements
             const totalReplacements20Years = Math.floor(20 / getVariable('lead_replacement_cycle_years')); // Formule CSV
@@ -198,31 +169,22 @@ function calculateFormula(formulaId) {
                    calculateFormula('lead_maintenance_total_20y') +
                    (getVariable('recycling_disposal_cost') * totalReplacements20Years) +
                    ((getVariable('revenue_loss_yearly') + getVariable('overconsumption_cost_yearly') + getVariable('insurance_increase_yearly')) * 20);
-
         case 'lead_replacements_20y':
             return Math.floor(20 / getVariable('lead_replacement_cycle_years')); // Formule CSV
-
         case 'lead_replacements_paid_20y':
             return Math.max(0, Math.floor(20 / getVariable('lead_replacement_cycle_years')) - 1); // Formule CSV
-
         case 'lifepo4_total_10y_per_cart':
             return getVariable('lifepo4_monthly_10y') * 12 * 10;
-
         case 'lifepo4_total_20y_per_cart':
             return getVariable('lifepo4_monthly_20y') * 12 * 20;
-
         case 'lifepo4_total_fleet_per_cart':
             return getVariable('lifepo4_monthly_fleet') * 12 * 20;
-
         case 'savings_10y_per_cart':
             return calculateFormula('lead_total_10y_per_cart') - calculateFormula('lifepo4_total_10y_per_cart');
-
         case 'savings_20y_per_cart':
             return calculateFormula('lead_total_20y_per_cart') - calculateFormula('lifepo4_total_20y_per_cart');
-
         case 'savings_fleet_per_cart':
             return calculateFormula('lead_total_20y_per_cart') - calculateFormula('lifepo4_total_fleet_per_cart');
-
         // FORMULES DE TEXTE - Section TOTAL des Coûts Cachés Réels
         case 'operational_risks_breakdown':
             const revenueLoss = getVariable('revenue_loss_yearly');
@@ -231,70 +193,57 @@ function calculateFormula(formulaId) {
             const recycling = getVariable('recycling_disposal_cost');
             const total = revenueLoss + overconsumption + insurance + recycling;
             return `${Math.round(revenueLoss)}$ + ${Math.round(overconsumption)}$ + ${Math.round(insurance)}$ + ${Math.round(recycling)}$ = ${Math.round(total)}$ par voiturette par an`;
-
         case 'total_breakdown_calculation_10y':
             const replacementCost = calculateFormula('lead_replacement_cost_with_risk_10y');
             const maintenanceCost = calculateFormula('lead_maintenance_total_10y');
             const operationalRisks = calculateFormula('operational_risks_calculation_yearly') * 10;
             const recyclingCost = getVariable('recycling_disposal_cost');
             return `Remplacements avec risque: ${Math.round(replacementCost)}$ + Maintenance: ${Math.round(maintenanceCost)}$ + Risques opérationnels: ${Math.round(operationalRisks)}$ + Recyclage: ${Math.round(recyclingCost)}$`;
-
         case 'total_cost_simplified_10y':
             const replacementCost10 = calculateFormula('lead_replacement_cost_with_risk_10y');
             const maintenanceCost10 = calculateFormula('lead_maintenance_total_10y');
             const operationalRisks10 = calculateFormula('operational_risks_calculation_yearly') * 10;
             const recyclingCost10 = getVariable('recycling_disposal_cost');
             return replacementCost10 + maintenanceCost10 + operationalRisks10 + recyclingCost10;
-
         case 'total_cost_final_calculation_10y':
             // CHANGEMENT: Utiliser 20 ans pour les calculs principaux
             const totalCost = calculateFormula('lead_total_20y_per_cart');
             return `TOTAL RÉEL avec risque de bris prématuré : ${Math.round(totalCost)}$ par voiturette sur 20 ans`;
-
         case 'operational_risks_calculation_yearly':
             return getVariable('revenue_loss_yearly') + getVariable('overconsumption_cost_yearly') + getVariable('insurance_increase_yearly');
-
         case 'lead_maintenance_total_10y':
             return getVariable('lead_maintenance_hours_unit') * 10 * getVariable('lead_technician_hourly_rate');
-
         case 'lead_maintenance_total_20y':
             return getVariable('lead_maintenance_hours_unit') * 20 * getVariable('lead_technician_hourly_rate');
-
         default:
             console.warn(`Formule '${formulaId}' non trouvée`);
             return 0;
     }
 }
-
 // Fonction principale pour charger toutes les données
 async function loadAllData() {
     try {
-        console.log('🚀 Chargement architecture centralisée...');
-
+        // Chargement architecture centralisée
         // Charger en parallèle les 3 fichiers
         const [textData, variablesData, formulasData] = await Promise.all([
-            loadCSV(currentLanguage === 'fr' ? 'data_clean.csv' : 'data_en_clean.csv'),
-            loadCSV('variables.csv'),
-            loadCSV('formulas.csv')
+            loadCSV(currentLanguage === 'fr' ? 'data/data_clean.csv' : 'data/data_en_clean.csv'),
+            loadCSV('data/variables.csv'),
+            loadCSV('data/formulas.csv')
         ]);
-
         // Stocker les données
         data = textData;
         variables = variablesData;
         formulas = formulasData;
-
         console.log('✅ Architecture chargée:', {
             textSections: Object.keys(textData).length,
             variables: Object.keys(variables).length,
             formulas: Object.keys(formulas).length
         });
-
         console.log('📝 Données sample:', {
             textSample: Object.keys(data).slice(0, 3),
             variablesSample: Object.keys(variables).slice(0, 3),
             formulasSample: Object.keys(formulas).slice(0, 3)
         });
-
         // Test rapide pour vérifier si les données sont accessibles
         console.log('🧪 Test accès données:', {
             headerExists: !!data.header,
@@ -302,25 +251,16 @@ async function loadAllData() {
             companyName: data.header?.company_name,
             heroTitle: data.hero?.main_title
         });
-
         updateContent();
-        console.log('🎉 updateContent() terminé');
-
         // Appliquer les couleurs du CSV au CSS
         applyColorsFromCSV();
-        console.log('🎨 Couleurs appliquées depuis le CSV');
-
         // Appliquer les arrière-plans depuis le CSV
         applyBackgroundColors();
-        console.log('🎨 Arrière-plans appliqués depuis le CSV');
-
     } catch (error) {
         console.error('❌ Erreur lors du chargement:', error);
         console.error('Stack trace:', error.stack);
-
         // En cas d'erreur, essayer de charger le français par défaut
         if (currentLanguage !== 'fr') {
-            console.log('⚠️ Tentative de fallback vers français...');
             currentLanguage = 'fr';
             await loadAllData();
         } else {
@@ -330,21 +270,16 @@ async function loadAllData() {
         }
     }
 }
-
-
 // Fonction pour parser le Markdown et HTML basique dans les textes
 function parseMarkdownAndHTML(text) {
     if (!text) return text;
-
     // Support Markdown basique
     // Gras **texte** ou __texte__
     text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     text = text.replace(/__(.*?)__/g, '<strong>$1</strong>');
-
     // Italique *texte* ou _texte_
     text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
     text = text.replace(/_(.*?)_/g, '<em>$1</em>');
-
     // Support retours à la ligne
     // <br> reste tel quel (déjà du HTML)
     // \n devient <br>
@@ -352,22 +287,17 @@ function parseMarkdownAndHTML(text) {
     // Doubles retours à la ligne pour nouveaux paragraphes
     text = text.replace(/\n\n/g, '</p><p>');
     text = text.replace(/\n/g, '<br>');
-
     // Support listes simples
     // - item devient <li>item</li> (dans des <ul>)
     text = text.replace(/^- (.+)$/gm, '<li>$1</li>');
     text = text.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
-
     // Support code inline `code`
     text = text.replace(/`(.*?)`/g, '<code>$1</code>');
-
     return text;
 }
-
 // Fonction pour appliquer les couleurs du CSV au CSS
 function applyColorsFromCSV() {
     if (!data.colors) return;
-
     // Obtenir ou créer l'élément style pour les couleurs dynamiques
     let styleElement = document.getElementById('dynamic-colors');
     if (!styleElement) {
@@ -375,38 +305,27 @@ function applyColorsFromCSV() {
         styleElement.id = 'dynamic-colors';
         document.head.appendChild(styleElement);
     }
-
     // Construire le CSS avec les couleurs du CSV
     let cssRules = ':root {\n';
-
     // Couleurs principales des sections
     if (data.colors.cost_replacement) cssRules += `    --cost-replacement: ${data.colors.cost_replacement};\n`;
     if (data.colors.cost_maintenance) cssRules += `    --cost-maintenance: ${data.colors.cost_maintenance};\n`;
     if (data.colors.cost_operational) cssRules += `    --cost-operational: ${data.colors.cost_operational};\n`;
     if (data.colors.cost_recycling) cssRules += `    --cost-recycling: ${data.colors.cost_recycling};\n`;
     if (data.colors.cost_total) cssRules += `    --cost-total: ${data.colors.cost_total};\n`;
-
     // Arrière-plans des sections
     if (data.colors.bg_replacement) cssRules += `    --bg-replacement: ${data.colors.bg_replacement};\n`;
     if (data.colors.bg_maintenance) cssRules += `    --bg-maintenance: ${data.colors.bg_maintenance};\n`;
     if (data.colors.bg_operational) cssRules += `    --bg-operational: ${data.colors.bg_operational};\n`;
     if (data.colors.bg_recycling) cssRules += `    --bg-recycling: ${data.colors.bg_recycling};\n`;
     if (data.colors.bg_total) cssRules += `    --bg-total: ${data.colors.bg_total};\n`;
-
     cssRules += '}';
-
     // Appliquer le CSS
     styleElement.textContent = cssRules;
-
-    console.log('Couleurs appliquées depuis le CSV:', cssRules);
 }
-
 // Fonction pour appliquer les arrière-plans des sections depuis les CSV
 function applyBackgroundColors() {
     if (!data.backgrounds) return;
-
-    console.log('Application des arrière-plans depuis les CSV...');
-
     // Mappage des clés CSV vers les IDs/sélecteurs HTML
     const backgroundMapping = {
         'hero_section': '.hero-section, #hero',
@@ -429,7 +348,6 @@ function applyBackgroundColors() {
         'pricing_card_20': '.pricing-card-20',
         'pricing_card_fleet': '.pricing-card-fleet'
     };
-
     // Créer ou mettre à jour l'élément style pour les arrière-plans
     let bgStyleElement = document.getElementById('dynamic-backgrounds');
     if (!bgStyleElement) {
@@ -437,20 +355,15 @@ function applyBackgroundColors() {
         bgStyleElement.id = 'dynamic-backgrounds';
         document.head.appendChild(bgStyleElement);
     }
-
     let cssRules = '';
-
     // Appliquer chaque arrière-plan
     Object.keys(backgroundMapping).forEach(bgKey => {
         const color = data.backgrounds[bgKey];
         const selectors = backgroundMapping[bgKey];
-
         if (color && selectors) {
             cssRules += `${selectors} { background-color: ${color} !important; }\n`;
-            console.log(`Arrière-plan appliqué: ${selectors} -> ${color}`);
         }
     });
-
     // Ajouter les couleurs des tableaux (règles ultra-spécifiques)
     if (data.table_colors) {
         cssRules += `
@@ -462,7 +375,6 @@ function applyBackgroundColors() {
             overflow: hidden !important;
             margin: 2rem 0 !important;
         }
-
         /* En-têtes tableau - FORCÉ */
         .comparison-table thead th,
         .comparison-table th {
@@ -474,7 +386,6 @@ function applyBackgroundColors() {
             text-align: center !important;
             border: none !important;
         }
-
         /* Lignes alternées - FORCÉ avec spécificité max */
         .comparison-table tbody tr:nth-child(1) td {
             background-color: ${data.table_colors.cell_bg_primary} !important;
@@ -492,7 +403,6 @@ function applyBackgroundColors() {
             background-color: ${data.table_colors.cell_bg_secondary} !important;
             color: ${data.table_colors.cell_text} !important;
         }
-
         /* Toutes les cellules - style de base */
         .comparison-table td {
             padding: 15px !important;
@@ -500,7 +410,6 @@ function applyBackgroundColors() {
             border: 1px solid ${data.table_colors.cell_border} !important;
             color: ${data.table_colors.cell_text} !important;
         }
-
         /* Première colonne (critères) */
         .comparison-table td:first-child,
         .comparison-table td:nth-child(1) {
@@ -509,7 +418,6 @@ function applyBackgroundColors() {
             color: #ffffff !important;
             background-color: rgba(30, 64, 175, 0.9) !important;
         }
-
         /* Valeurs technologie ancienne (rouge) */
         .comparison-table .old-tech,
         .comparison-table td.old-tech {
@@ -517,7 +425,6 @@ function applyBackgroundColors() {
             font-weight: bold !important;
             background-color: rgba(239, 68, 68, 0.1) !important;
         }
-
         /* Valeurs nouvelle technologie (cyan) */
         .comparison-table .new-tech,
         .comparison-table td.new-tech {
@@ -525,7 +432,6 @@ function applyBackgroundColors() {
             font-weight: bold !important;
             background-color: rgba(34, 211, 238, 0.1) !important;
         }
-
         /* Titre de la comparaison */
         .comparison-title {
             color: ${data.table_colors.comparison_title} !important;
@@ -535,7 +441,6 @@ function applyBackgroundColors() {
         }
         `;
     }
-
     // Ajouter les couleurs des sections pricing
     if (data.pricing_colors) {
         cssRules += `
@@ -560,7 +465,6 @@ function applyBackgroundColors() {
         .pricing-card .savings { color: ${data.pricing_colors.savings_text} !important; }
         `;
     }
-
     // Ajouter les nouvelles couleurs optimisées pour toutes les sections (visuels 3-8)
     if (data.defis_section) {
         cssRules += `
@@ -583,7 +487,6 @@ function applyBackgroundColors() {
         }
         `;
     }
-
     if (data.solutions_section) {
         cssRules += `
         .solutions-section, #solutions {
@@ -605,7 +508,6 @@ function applyBackgroundColors() {
         }
         `;
     }
-
     if (data.comparison_section) {
         cssRules += `
         /* SECTION COMPARISON - RENFORCEMENT */
@@ -621,7 +523,6 @@ function applyBackgroundColors() {
         .comparison-section h3 {
             color: ${data.comparison_section.subtitle_color} !important;
         }
-
         /* TABLEAU COMPARISON - ULTRA SPÉCIFIQUE */
         .comparison-section .comparison-table {
             width: 100% !important;
@@ -629,7 +530,6 @@ function applyBackgroundColors() {
             margin: 2rem auto !important;
             max-width: 1200px !important;
         }
-
         /* EN-TÊTES - GRADIENT FORCÉ */
         .comparison-section .comparison-table thead th,
         .comparison-section .comparison-table th {
@@ -641,7 +541,6 @@ function applyBackgroundColors() {
             text-align: center !important;
             border: none !important;
         }
-
         /* LIGNES SPÉCIFIQUES - ALTERNANCE FORCÉE */
         .comparison-section .comparison-table tbody tr:nth-child(1) td {
             background-color: ${data.comparison_section.table_cell_bg_primary} !important;
@@ -659,7 +558,6 @@ function applyBackgroundColors() {
             background-color: ${data.comparison_section.table_cell_bg_secondary} !important;
             color: ${data.comparison_section.table_cell_text} !important;
         }
-
         /* CELLULES GÉNÉRALES */
         .comparison-section .comparison-table td {
             padding: 15px !important;
@@ -667,7 +565,6 @@ function applyBackgroundColors() {
             border: 1px solid ${data.comparison_section.table_border} !important;
             color: ${data.comparison_section.table_cell_text} !important;
         }
-
         /* PREMIÈRE COLONNE */
         .comparison-section .comparison-table td:first-child {
             text-align: left !important;
@@ -675,7 +572,6 @@ function applyBackgroundColors() {
             color: #ffffff !important;
             background-color: rgba(30, 64, 175, 0.9) !important;
         }
-
         /* VALEURS COLORÉES */
         .comparison-section .comparison-table .lead-values,
         .comparison-section .comparison-table .old-tech {
@@ -683,7 +579,6 @@ function applyBackgroundColors() {
             font-weight: bold !important;
             background-color: rgba(239, 68, 68, 0.15) !important;
         }
-
         .comparison-section .comparison-table .lithium-values,
         .comparison-section .comparison-table .new-tech {
             color: ${data.comparison_section.lithium_values} !important;
@@ -692,7 +587,6 @@ function applyBackgroundColors() {
         }
         `;
     }
-
     if (data.offres_section) {
         cssRules += `
         .offres-section, .pricing-section, #pricing {
@@ -740,7 +634,6 @@ function applyBackgroundColors() {
         }
         `;
     }
-
     if (data.details_section) {
         cssRules += `
         .details-section, #details {
@@ -780,7 +673,6 @@ function applyBackgroundColors() {
         }
         `;
     }
-
     if (data.temoignage_section) {
         cssRules += `
         .temoignage-section, .testimonial-section, #testimonial {
@@ -819,7 +711,6 @@ function applyBackgroundColors() {
         .icon-ecologie { color: ${data.temoignage_section.icon_ecologie} !important; }
         `;
     }
-
     // Ajouter les couleurs complémentaires commerciales
     if (data.commercial_colors) {
         cssRules += `
@@ -833,7 +724,6 @@ function applyBackgroundColors() {
         .info-secondary { color: ${data.commercial_colors.info_secondary} !important; }
         `;
     }
-
     // Ajouter les couleurs de contraste
     if (data.contrast_colors) {
         cssRules += `
@@ -845,7 +735,6 @@ function applyBackgroundColors() {
         .border-prominent { border-color: ${data.contrast_colors.border_prominent} !important; }
         `;
     }
-
     // Ajouter les couleurs d'interaction
     if (data.interaction_colors) {
         cssRules += `
@@ -855,7 +744,6 @@ function applyBackgroundColors() {
         .disabled-state:disabled { color: ${data.interaction_colors.disabled_state} !important; }
         `;
     }
-
     // Ajouter des règles générales pour corriger la visibilité
     cssRules += `
     /* Correction générale du contraste texte sur fond sombre */
@@ -863,58 +751,45 @@ function applyBackgroundColors() {
         background-color: #0f172a !important;
         color: #ffffff !important;
     }
-
     /* Tous les textes gris deviennent blancs */
     .text-gray-400, .text-gray-500, .text-gray-600, .text-gray-700 {
         color: #e5e7eb !important;
     }
-
     /* Titre principal toujours visible */
     h1, h2, h3, h4, h5, h6 {
         color: #ffffff !important;
     }
-
     /* Paragraphes et textes par défaut */
     p, span, div {
         color: #e5e7eb !important;
     }
-
     /* Améliorer tous les éléments du tableau */
     table, .table {
         border-collapse: collapse !important;
     }
-
     table th, table td, .table th, .table td {
         border: 1px solid rgba(59, 130, 246, 0.3) !important;
         padding: 12px !important;
     }
-
     /* Assurer que tous les tableaux ont un contraste visible */
     .comparison-table tbody tr td {
         color: #ffffff !important;
         min-height: 50px !important;
     }
-
     /* Valeurs importantes en couleur */
     .old-tech, .lead-values {
         color: #ef4444 !important;
         font-weight: bold !important;
     }
-
     .new-tech, .lithium-values {
         color: #22d3ee !important;
         font-weight: bold !important;
     }
     `;
-
     // Appliquer le CSS
     bgStyleElement.textContent = cssRules;
-
-    console.log('Couleurs optimisées e-commerce appliquées avec correction de visibilité complète');
-
     // Appliquer les couleurs des sections avec gradients depuis CSV
     let sectionStyles = '';
-
     // Section problem (VOTRE DÉFI ACTUEL)
     if (data.problem_section) {
         const bgGradient = generateGradientCSS('background_gradient', data.problem_section);
@@ -922,7 +797,6 @@ function applyBackgroundColors() {
             sectionStyles += `.problem-section { background: ${bgGradient} !important; }\n`;
         }
     }
-
     // Section solution (NOTRE SOLUTION RÉVOLUTIONNAIRE)
     if (data.solution_section) {
         const bgGradient = generateGradientCSS('background_gradient', data.solution_section);
@@ -930,7 +804,6 @@ function applyBackgroundColors() {
             sectionStyles += `.solution-section { background: ${bgGradient} !important; }\n`;
         }
     }
-
     // Section benefits (Pourquoi Choisir EDS Québec)
     if (data.benefits_section) {
         const bgGradient = generateGradientCSS('background_gradient', data.benefits_section);
@@ -938,16 +811,13 @@ function applyBackgroundColors() {
             sectionStyles += `.benefits-section { background: ${bgGradient} !important; }\n`;
         }
     }
-
     // Section comparison avec tableau - COULEURS DEPUIS CSV
     if (data.comparison_section) {
         const bgGradient = generateGradientCSS('background_gradient', data.comparison_section);
         const tableHeaderGradient = generateGradientCSS('table_header_bg_gradient', data.comparison_section);
-
         if (bgGradient) {
             sectionStyles += `.comparison-section { background: ${bgGradient} !important; }\n`;
         }
-
         if (tableHeaderGradient) {
             sectionStyles += `
             .comparison-table thead th, .comparison-table th {
@@ -958,7 +828,6 @@ function applyBackgroundColors() {
                 border: none !important;
             }\n`;
         }
-
         // Couleurs alternées du tableau depuis CSV
         if (data.comparison_section.table_cell_bg_primary) {
             sectionStyles += `
@@ -969,7 +838,6 @@ function applyBackgroundColors() {
                 border: 1px solid rgba(59, 130, 246, 0.3) !important;
             }\n`;
         }
-
         if (data.comparison_section.table_cell_bg_secondary) {
             sectionStyles += `
             .comparison-table tbody tr:nth-child(even) td {
@@ -979,7 +847,6 @@ function applyBackgroundColors() {
                 border: 1px solid rgba(59, 130, 246, 0.3) !important;
             }\n`;
         }
-
         // Première colonne (critères)
         sectionStyles += `
         .comparison-table td:first-child {
@@ -988,7 +855,6 @@ function applyBackgroundColors() {
             font-weight: bold !important;
             text-align: left !important;
         }\n`;
-
         // Colonnes old-tech et new-tech avec couleurs CSV
         if (data.comparison_section.lead_values) {
             sectionStyles += `
@@ -998,7 +864,6 @@ function applyBackgroundColors() {
                 background-color: rgba(239, 68, 68, 0.1) !important;
             }\n`;
         }
-
         if (data.comparison_section.lithium_values) {
             sectionStyles += `
             .comparison-table .new-tech {
@@ -1008,26 +873,20 @@ function applyBackgroundColors() {
             }\n`;
         }
     }
-
     // Ajouter les styles des sections
     if (sectionStyles) {
         cssRules += sectionStyles;
     }
-
-    console.log('✅ Couleurs et gradients appliqués depuis CSV (fini l\'injection hardcodée)');
-
     // INJECTION CSS D'URGENCE - Couleurs maintenant éditables via CSV
     // Récupérer les couleurs depuis CSV ou utiliser des valeurs par défaut
     const headerGrad1 = (data.comparison_section && data.comparison_section._colors && data.comparison_section._colors.table_header_bg_gradient) ?
         data.comparison_section._colors.table_header_bg_gradient.gradientColor1 || '#1e40af' : '#1e40af';
     const headerGrad2 = (data.comparison_section && data.comparison_section._colors && data.comparison_section._colors.table_header_bg_gradient) ?
         data.comparison_section._colors.table_header_bg_gradient.gradientColor2 || '#BFF2EB' : '#BFF2EB';
-
     const cellPrimary = data.comparison_section?.table_cell_bg_primary || '#1e293b';
     const cellSecondary = data.comparison_section?.table_cell_bg_secondary || '#374151';
     const leadColor = data.comparison_section?.lead_values || '#ef4444';
     const lithiumColor = data.comparison_section?.lithium_values || '#22d3ee';
-
     const emergencyTableCSS = `
     <style id="force-table-colors" type="text/css">
     /* FORCE TABLEAU - COULEURS CSV-ÉDITABLES */
@@ -1037,50 +896,42 @@ function applyBackgroundColors() {
         font-weight: bold !important;
         border: none !important;
     }
-
     /* Les couleurs de texte viennent du CSV via JavaScript, pas CSS */
-
     .comparison-table tbody tr:nth-child(1) td {
         background-color: ${cellPrimary} !important;
         color: #ffffff !important;
         padding: 15px !important;
         border: 1px solid rgba(59, 130, 246, 0.3) !important;
     }
-
     .comparison-table tbody tr:nth-child(2) td {
         background-color: ${cellSecondary} !important;
         color: #ffffff !important;
         padding: 15px !important;
         border: 1px solid rgba(59, 130, 246, 0.3) !important;
     }
-
     .comparison-table tbody tr:nth-child(3) td {
         background-color: ${cellPrimary} !important;
         color: #ffffff !important;
         padding: 15px !important;
         border: 1px solid rgba(59, 130, 246, 0.3) !important;
     }
-
     .comparison-table tbody tr:nth-child(4) td {
         background-color: ${cellSecondary} !important;
         color: #ffffff !important;
         padding: 15px !important;
         border: 1px solid rgba(59, 130, 246, 0.3) !important;
     }
-
     .comparison-table td:first-child {
         background-color: rgba(30, 64, 175, 0.9) !important;
         color: #ffffff !important;
         font-weight: bold !important;
         text-align: left !important;
     }
-
     .comparison-table .old-tech {
         color: ${leadColor} !important;
         font-weight: bold !important;
         background-color: rgba(239, 68, 68, 0.1) !important;
     }
-
     .comparison-table .new-tech {
         color: ${lithiumColor} !important;
         font-weight: bold !important;
@@ -1088,20 +939,16 @@ function applyBackgroundColors() {
     }
     </style>
     `;
-
     // Injecter le CSS d'urgence dans le head
     if (!document.getElementById('force-table-colors')) {
         document.head.insertAdjacentHTML('beforeend', emergencyTableCSS);
-        console.log('🔧 CSS d\'urgence RE-injecté pour forcer les couleurs du tableau');
     }
 }
-
 // Fonction helper pour récupérer la couleur d'un élément depuis les données CSV
 function getElementColor(section, key) {
     const colorsSection = section + '_colors';
     return data[colorsSection] && data[colorsSection][key] || null;
 }
-
 // Fonction utilitaire pour mettre à jour un élément de façon sécurisée
 function safeUpdateElement(id, value, color = null) {
     const element = document.getElementById(id);
@@ -1109,33 +956,26 @@ function safeUpdateElement(id, value, color = null) {
         // Applique le parsing Markdown/HTML puis met à jour avec innerHTML
         const parsedValue = parseMarkdownAndHTML(value.toString());
         element.innerHTML = parsedValue;
-
         // Appliquer la couleur si spécifiée
         if (color && color.startsWith('#')) {
             element.style.color = color;
-            console.log(`Couleur appliquée à ${id}: ${color}`);
         }
     } else if (!element) {
         console.warn(`Élément non trouvé: ${id}`);
     }
 }
-
 // Fonction utilitaire avancée qui récupère automatiquement la couleur du CSV
 function safeUpdateElementWithColor(id, section, key, value) {
     const color = getElementColor(section, key);
     safeUpdateElement(id, value, color);
 }
-
 // Fonction pour remplacer les templates {{variable}} par les valeurs calculées
 function replaceTemplates(text) {
     if (!text) return text;
-
     // Remplace {{lead_cost_replacement_unit}} par la valeur actuelle
     text = text.replace(/\{\{lead_cost_replacement_unit\}\}/g, formatNumber(getVariable('lead_cost_replacement_unit')));
-
     // Remplace {{lead_technician_hourly_rate}} par la valeur actuelle
     text = text.replace(/\{\{lead_technician_hourly_rate\}\}/g, formatNumber(getVariable('lead_technician_hourly_rate')));
-
     // Templates pour les nouvelles variables
     text = text.replace(/\{\{lead_maintenance_hours_unit\}\}/g, formatNumber(getVariable('lead_maintenance_hours_unit')));
     text = text.replace(/\{\{recycling_disposal_cost\}\}/g, formatNumber(getVariable('recycling_disposal_cost')));
@@ -1144,7 +984,6 @@ function replaceTemplates(text) {
     text = text.replace(/\{\{insurance_increase_yearly\}\}/g, formatNumber(getVariable('insurance_increase_yearly')));
     text = text.replace(/\{\{premature_failure_percent\}\}/g, formatNumber(getVariable('premature_failure_percent')));
     text = text.replace(/\{\{lead_replacement_cycle_years\}\}/g, formatNumber(getVariable('lead_replacement_cycle_years')));
-
     // Templates formules 10 ans (legacy)
     text = text.replace(/\{\{lead_replacement_cost_with_risk_10y\}\}/g, formatNumber(calculateFormula('lead_replacement_cost_with_risk_10y')));
     text = text.replace(/\{\{lead_maintenance_total_10y\}\}/g, formatNumber(calculateFormula('lead_maintenance_total_10y')));
@@ -1152,7 +991,6 @@ function replaceTemplates(text) {
     text = text.replace(/\{\{lifepo4_total_10y_per_cart\}\}/g, formatNumber(calculateFormula('lifepo4_total_10y_per_cart')));
     text = text.replace(/\{\{savings_10y_per_cart\}\}/g, formatNumber(calculateFormula('savings_10y_per_cart')));
     text = text.replace(/\{\{savings_percentage_10y\}\}/g, ((calculateFormula('savings_10y_per_cart') / calculateFormula('lead_total_10y_per_cart')) * 100).toFixed(1));
-
     // AJOUT: Templates formules 20 ans
     text = text.replace(/\{\{lead_replacements_20y\}\}/g, formatNumber(calculateFormula('lead_replacements_20y')));
     text = text.replace(/\{\{lead_replacements_paid_20y\}\}/g, formatNumber(calculateFormula('lead_replacements_paid_20y')));
@@ -1163,11 +1001,9 @@ function replaceTemplates(text) {
     text = text.replace(/\{\{savings_20y_per_cart\}\}/g, formatNumber(calculateFormula('savings_20y_per_cart')));
     text = text.replace(/\{\{savings_percentage_20y\}\}/g, ((calculateFormula('savings_20y_per_cart') / calculateFormula('lead_total_20y_per_cart')) * 100).toFixed(1));
     text = text.replace(/\{\{operational_risks_calculation_yearly\}\}/g, formatNumber(calculateFormula('operational_risks_calculation_yearly')));
-
     // Templates avec calculs multiples (expressions)
     text = text.replace(/\{\{operational_risks_calculation_yearly \* 20\}\}/g, formatNumber(calculateFormula('operational_risks_calculation_yearly') * 20));
     text = text.replace(/\{\{recycling_disposal_cost \* lead_replacements_20y\}\}/g, formatNumber(getVariable('recycling_disposal_cost') * calculateFormula('lead_replacements_20y')));
-
     // Remplace {{lead_replacement_calculation_10y}} par le calcul correct
     if (text.includes('{{lead_replacement_calculation_10y}}')) {
         // UTILISE LA FORMULE UNIVERSELLE AVEC RISQUE ET GARANTIE
@@ -1176,33 +1012,25 @@ function replaceTemplates(text) {
         const cycle = getVariable('lead_replacement_cycle_years');
         const warrantyFree = getVariable('warranty_replacements');
         const riskPercent = getVariable('premature_failure_percent');
-
         const totalReplacements = Math.floor(10 / cycle); // Formule CSV cohérente
         const paidReplacements = Math.max(0, totalReplacements - warrantyFree);
-
         const calculationText = currentLanguage === 'fr'
             ? `${totalReplacements} remplacements nécessaires - ${warrantyFree} gratuit (garantie) = ${paidReplacements} payants × ${formatNumber(leadCost)}$ + ${riskPercent}% risque bris prématuré = ${formatNumber(totalCost)}$ par voiturette`
             : `${totalReplacements} replacements needed - ${warrantyFree} free (warranty) = ${paidReplacements} paid × ${formatNumber(leadCost)}$ + ${riskPercent}% premature failure risk = ${formatNumber(totalCost)}$ per cart`;
-
         text = text.replace(/\{\{lead_replacement_calculation_10y\}\}/g, calculationText);
     }
-
     // Remplace {{lead_maintenance_calculation_10y}} par le calcul correct sur 20 ans
     if (text.includes('{{lead_maintenance_calculation_10y}}')) {
         const hours = getVariable('lead_maintenance_hours_unit');
         const rate = getVariable('lead_technician_hourly_rate');
         const costPerYear = hours * rate;
         const cost20Y = costPerYear * 20; // CHANGEMENT: 20 ans au lieu de 10
-
         const calculationText = currentLanguage === 'fr'
             ? `${hours}h × ${formatNumber(rate)}$ × 20 ans = ${formatNumber(cost20Y)}$ par voiturette sur 20 ans`
             : `${hours}h × ${formatNumber(rate)}$ × 20 years = ${formatNumber(cost20Y)}$ per cart over 20 years`;
-
         text = text.replace(/\{\{lead_maintenance_calculation_10y\}\}/g, calculationText);
     }
-
     // Note: operational_risks_calculation_yearly est maintenant géré dans les templates principaux
-
     // Section 4 - Calculs totaux consolidés sur 20 ans
     if (text.includes('{{total_breakdown_calculation_10y}}')) {
         // CHANGEMENT: UTILISE LES FORMULES 20 ANS POUR TOTAL BREAKDOWN
@@ -1211,46 +1039,35 @@ function replaceTemplates(text) {
         const costRecycling = getVariable('recycling_disposal_cost') * calculateFormula('lead_replacements_20y');
         const costRisksYearly = getVariable('revenue_loss_yearly') + getVariable('overconsumption_cost_yearly') + getVariable('insurance_increase_yearly');
         const costRisks20 = costRisksYearly * 20; // 20 ans au lieu de 10
-
         const calculationText = currentLanguage === 'fr'
             ? `Remplacements avec risque: ${formatNumber(costReplacements)}$ + Maintenance: ${formatNumber(costMaintenance)}$ + Risques opérationnels: ${formatNumber(costRisks20)}$ + Recyclage: ${formatNumber(costRecycling)}$`
             : `Replacements with risk: ${formatNumber(costReplacements)}$ + Maintenance: ${formatNumber(costMaintenance)}$ + Operational risks: ${formatNumber(costRisks20)}$ + Recycling: ${formatNumber(costRecycling)}$`;
-
         text = text.replace(/\{\{total_breakdown_calculation_10y\}\}/g, calculationText);
     }
-
     if (text.includes('{{total_cost_simplified_10y}}')) {
         // CHANGEMENT: UTILISE LA FORMULE 20 ANS POUR TOTAL SIMPLIFIÉ
         const total = calculateFormula('lead_total_20y_per_cart');
-
         // Arrondi à la centaine supérieure pour "Plus de X$"
         const roundedTotal = Math.ceil(total / 100) * 100;
         text = text.replace(/\{\{total_cost_simplified_10y\}\}/g, formatNumber(roundedTotal));
     }
-
     if (text.includes('{{total_cost_final_calculation_10y}}')) {
         // CHANGEMENT: UTILISE LA FORMULE 20 ANS POUR CALCUL FINAL
         const total = calculateFormula('lead_total_20y_per_cart');
-
         const calculationText = currentLanguage === 'fr'
             ? `TOTAL RÉEL avec risque de bris prématuré : ${formatNumber(total)}$ par voiturette sur 20 ans`
             : `REAL TOTAL with premature failure risk: ${formatNumber(total)}$ per cart over 20 years`;
-
         text = text.replace(/\{\{total_cost_final_calculation_10y\}\}/g, calculationText);
     }
-
     // Support pour les nouvelles formules de breakdown
     if (text.includes('{{operational_risks_breakdown}}')) {
         text = text.replace(/\{\{operational_risks_breakdown\}\}/g, calculateFormula('operational_risks_breakdown'));
     }
-
     return text;
 }
-
 // Fonction pour peupler les sections de détails des problèmes (statiques par voiturette)
 function populateProblemDetailsSections() {
     if (!data.problem_details) return;
-
     // Section 1 - Coûts de Remplacement Explosifs
     safeUpdateElementWithColor('problem-details-section-1-title', 'problem_details', 'section_1_title', data.problem_details?.section_1_title);
     safeUpdateElementWithColor('problem-details-section-1-subtitle', 'problem_details', 'section_1_subtitle', data.problem_details?.section_1_subtitle);
@@ -1259,7 +1076,6 @@ function populateProblemDetailsSections() {
     safeUpdateElement('problem-details-section-1-point-3', replaceTemplates(data.problem_details?.section_1_point_3));
     safeUpdateElement('problem-details-section-1-point-4', data.problem_details?.section_1_point_4);
     safeUpdateElementWithColor('problem-details-section-1-calculation', 'problem_details', 'section_1_calculation', replaceTemplates(data.problem_details?.section_1_calculation));
-
     // Section 2 - Maintenance Spécialisée Coûteuse (avec templates dynamiques)
     safeUpdateElementWithColor('problem-details-section-2-title', 'problem_details', 'section_2_title', data.problem_details?.section_2_title);
     safeUpdateElementWithColor('problem-details-section-2-subtitle', 'problem_details', 'section_2_subtitle', data.problem_details?.section_2_subtitle);
@@ -1268,7 +1084,6 @@ function populateProblemDetailsSections() {
     safeUpdateElement('problem-details-section-2-point-3', data.problem_details?.section_2_point_3);
     safeUpdateElement('problem-details-section-2-point-4', data.problem_details?.section_2_point_4);
     safeUpdateElementWithColor('problem-details-section-2-calculation', 'problem_details', 'section_2_calculation', replaceTemplates(data.problem_details?.section_2_calculation));
-
     // Section 3 - Risques et Pertes Opérationnelles (avec templates dynamiques)
     safeUpdateElementWithColor('problem-details-section-3-title', 'problem_details', 'section_3_title', data.problem_details?.section_3_title);
     safeUpdateElementWithColor('problem-details-section-3-subtitle', 'problem_details', 'section_3_subtitle', data.problem_details?.section_3_subtitle);
@@ -1277,7 +1092,6 @@ function populateProblemDetailsSections() {
     safeUpdateElement('problem-details-section-3-point-3', data.problem_details?.section_3_point_3);
     safeUpdateElement('problem-details-section-3-point-4', data.problem_details?.section_3_point_4);
     safeUpdateElementWithColor('problem-details-section-3-calculation', 'problem_details', 'section_3_calculation', replaceTemplates(data.problem_details?.section_3_calculation));
-
     // Section 4 - TOTAL des Coûts Cachés Réels (avec templates dynamiques)
     safeUpdateElementWithColor('problem-details-section-4-title', 'problem_details', 'section_4_title', data.problem_details?.section_4_title);
     safeUpdateElementWithColor('problem-details-section-4-subtitle', 'problem_details', 'section_4_subtitle', data.problem_details?.section_4_subtitle);
@@ -1287,76 +1101,62 @@ function populateProblemDetailsSections() {
     safeUpdateElement('problem-details-section-4-point-4', data.problem_details?.section_4_point_4);
     safeUpdateElementWithColor('problem-details-section-4-calculation', 'problem_details', 'section_4_calculation', replaceTemplates(data.problem_details?.section_4_calculation));
 }
-
 // Fonction pour peupler la section VS Batteries (statique)
 function populateVsBatteriesSection() {
     if (!data.vs_batteries) return;
-
     // En-tête de section
     safeUpdateElementWithColor('vs-section-title', 'vs_batteries', 'section_title', data.vs_batteries?.section_title);
     safeUpdateElementWithColor('vs-section-subtitle', 'vs_batteries', 'section_subtitle', data.vs_batteries?.section_subtitle);
-
     // Titres des cartes
     safeUpdateElementWithColor('vs-lead-title', 'vs_batteries', 'lead_title', data.vs_batteries?.lead_title);
     safeUpdateElementWithColor('vs-lead-subtitle', 'vs_batteries', 'lead_subtitle', data.vs_batteries?.lead_subtitle);
     safeUpdateElementWithColor('vs-lifepo4-title', 'vs_batteries', 'lifepo4_title', data.vs_batteries?.lifepo4_title);
     safeUpdateElementWithColor('vs-lifepo4-subtitle', 'vs_batteries', 'lifepo4_subtitle', data.vs_batteries?.lifepo4_subtitle);
-
     // Spécifications techniques (labels et valeurs)
     safeUpdateElement('vs-tech-lifespan-label', data.vs_batteries?.tech_lifespan_label);
     safeUpdateElement('vs-tech-lifespan-label-2', data.vs_batteries?.tech_lifespan_label);
     safeUpdateElement('vs-tech-lifespan-lead', data.vs_batteries?.tech_lifespan_lead);
     safeUpdateElement('vs-tech-lifespan-lifepo4', data.vs_batteries?.tech_lifespan_lifepo4);
-
     safeUpdateElement('vs-tech-cycles-label', data.vs_batteries?.tech_cycles_label);
     safeUpdateElement('vs-tech-cycles-label-2', data.vs_batteries?.tech_cycles_label);
     safeUpdateElement('vs-tech-cycles-lead', data.vs_batteries?.tech_cycles_lead);
     safeUpdateElement('vs-tech-cycles-lifepo4', data.vs_batteries?.tech_cycles_lifepo4);
-
     safeUpdateElement('vs-tech-charge-label', data.vs_batteries?.tech_charge_label);
     safeUpdateElement('vs-tech-charge-label-2', data.vs_batteries?.tech_charge_label);
     safeUpdateElement('vs-tech-charge-lead', data.vs_batteries?.tech_charge_lead);
     safeUpdateElement('vs-tech-charge-lifepo4', data.vs_batteries?.tech_charge_lifepo4);
-
     safeUpdateElement('vs-tech-weight-label', data.vs_batteries?.tech_weight_label);
     safeUpdateElement('vs-tech-weight-label-2', data.vs_batteries?.tech_weight_label);
     safeUpdateElement('vs-tech-weight-lead', data.vs_batteries?.tech_weight_lead);
     safeUpdateElement('vs-tech-weight-lifepo4', data.vs_batteries?.tech_weight_lifepo4);
-
     safeUpdateElement('vs-tech-maintenance-label', data.vs_batteries?.tech_maintenance_label);
     safeUpdateElement('vs-tech-maintenance-label-2', data.vs_batteries?.tech_maintenance_label);
     safeUpdateElement('vs-tech-maintenance-lead', data.vs_batteries?.tech_maintenance_lead);
     safeUpdateElement('vs-tech-maintenance-lifepo4', data.vs_batteries?.tech_maintenance_lifepo4);
-
     safeUpdateElement('vs-tech-performance-label', data.vs_batteries?.tech_performance_label);
     safeUpdateElement('vs-tech-performance-label-2', data.vs_batteries?.tech_performance_label);
     safeUpdateElement('vs-tech-performance-lead', data.vs_batteries?.tech_performance_lead);
     safeUpdateElement('vs-tech-performance-lifepo4', data.vs_batteries?.tech_performance_lifepo4);
-
     // Coûts totaux
     safeUpdateElementWithColor('vs-cost-total-label', 'vs_batteries', 'cost_total_label', data.vs_batteries?.cost_total_label);
     safeUpdateElementWithColor('vs-cost-total-label-2', 'vs_batteries', 'cost_total_label', data.vs_batteries?.cost_total_label);
     safeUpdateElementWithColor('vs-cost-total-lead', 'vs_batteries', 'cost_total_lead', replaceTemplates(data.vs_batteries?.cost_total_lead));
     safeUpdateElementWithColor('vs-cost-total-lifepo4', 'vs_batteries', 'cost_total_lifepo4', replaceTemplates(data.vs_batteries?.cost_total_lifepo4));
-
     // Avantages/Inconvénients
     safeUpdateElementWithColor('vs-advantages-label', 'vs_batteries', 'advantages_label', data.vs_batteries?.advantages_label);
     safeUpdateElementWithColor('vs-advantages-label-2', 'vs_batteries', 'advantages_label', data.vs_batteries?.advantages_label);
     safeUpdateElementWithColor('vs-disadvantages-label', 'vs_batteries', 'disadvantages_label', data.vs_batteries?.disadvantages_label);
     safeUpdateElementWithColor('vs-disadvantages-label-2', 'vs_batteries', 'disadvantages_label', data.vs_batteries?.disadvantages_label);
-
     // Avantages batteries plomb
     safeUpdateElement('vs-lead-advantage-1', data.vs_batteries?.lead_advantage_1);
     safeUpdateElement('vs-lead-advantage-2', data.vs_batteries?.lead_advantage_2);
     safeUpdateElement('vs-lead-advantage-3', data.vs_batteries?.lead_advantage_3);
-
     // Inconvénients batteries plomb
     safeUpdateElement('vs-lead-disadvantage-1', data.vs_batteries?.lead_disadvantage_1);
     safeUpdateElement('vs-lead-disadvantage-2', data.vs_batteries?.lead_disadvantage_2);
     safeUpdateElement('vs-lead-disadvantage-3', data.vs_batteries?.lead_disadvantage_3);
     safeUpdateElement('vs-lead-disadvantage-4', data.vs_batteries?.lead_disadvantage_4);
     safeUpdateElement('vs-lead-disadvantage-5', data.vs_batteries?.lead_disadvantage_5);
-
     // Avantages LiFePO4
     safeUpdateElementWithColor('vs-lifepo4-advantage-1', 'vs_batteries', 'lifepo4_advantage_1', replaceTemplates(data.vs_batteries?.lifepo4_advantage_1));
     safeUpdateElementWithColor('vs-lifepo4-advantage-2', 'vs_batteries', 'lifepo4_advantage_2', data.vs_batteries?.lifepo4_advantage_2);
@@ -1366,11 +1166,9 @@ function populateVsBatteriesSection() {
     safeUpdateElement('vs-lifepo4-advantage-6', data.vs_batteries?.lifepo4_advantage_6);
     safeUpdateElement('vs-lifepo4-advantage-7', data.vs_batteries?.lifepo4_advantage_7);
     safeUpdateElement('vs-lifepo4-advantage-8', data.vs_batteries?.lifepo4_advantage_8);
-
     // Inconvénients LiFePO4
     safeUpdateElement('vs-lifepo4-disadvantage-1', data.vs_batteries?.lifepo4_disadvantage_1);
     safeUpdateElement('vs-lifepo4-disadvantage-2', data.vs_batteries?.lifepo4_disadvantage_2);
-
     // Call to Action
     safeUpdateElementWithColor('vs-cta-title', 'vs_batteries', 'cta_title', data.vs_batteries?.cta_title);
     safeUpdateElementWithColor('vs-cta-subtitle', 'vs_batteries', 'cta_subtitle', data.vs_batteries?.cta_subtitle);
@@ -1380,18 +1178,15 @@ function populateVsBatteriesSection() {
     safeUpdateElement('vs-cta-savings-suffix', ''); // Vide pour éviter doublon
     safeUpdateElementWithColor('vs-cta-button-text', 'vs_batteries', 'cta_button_text', data.vs_batteries?.cta_button_text);
 }
-
 // Mettre à jour le contenu de la page
 function updateContent() {
     // Header
     safeUpdateElement('company-name', data.header?.company_name);
     safeUpdateElement('company-tagline', data.header?.company_tagline);
     safeUpdateElement('company-subtitle', data.header?.company_subtitle);
-
     // Hero
     safeUpdateElementWithColor('hero-title', 'hero', 'main_title', data.hero?.main_title);
     safeUpdateElementWithColor('hero-subtitle', 'hero', 'subtitle', data.hero?.subtitle);
-
     // Problem
     safeUpdateElementWithColor('problem-title', 'problem', 'title', data.problem?.title);
     // cost-replacement et cost-10-years seront mis à jour par updateCartCalculation()
@@ -1406,7 +1201,6 @@ function updateContent() {
     safeUpdateElementWithColor('extra-consumption', 'problem', 'extra_consumption', data.problem?.extra_consumption);
     safeUpdateElementWithColor('environmental-risk', 'problem', 'environmental_risk', data.problem?.environmental_risk);
     safeUpdateElementWithColor('safety-concerns', 'problem', 'safety_concerns', data.problem?.safety_concerns);
-
     // Problem UI elements
     safeUpdateElementWithColor('problem-card-1-title', 'ui', 'problem_card_1_title', data.ui?.problem_card_1_title);
     safeUpdateElement('problem-card-1-suffix', data.ui?.problem_card_1_suffix);
@@ -1424,13 +1218,10 @@ function updateContent() {
     safeUpdateElement('problem-card-5-training', replaceTemplates(data.ui?.problem_card_5_training));
     safeUpdateElementWithColor('problem-card-6-title', 'ui', 'problem_card_6_title', data.ui?.problem_card_6_title);
     safeUpdateElement('problem-card-6-risks', replaceTemplates(data.ui?.problem_card_6_risks));
-
     // Problem Details Sections (par voiturette - ne changent PAS avec le slider)
     populateProblemDetailsSections();
-
     // VS Batteries Section (statique)
     populateVsBatteriesSection();
-
     // Solution
     safeUpdateElementWithColor('solution-title', 'solution', 'title', data.solution?.title);
     safeUpdateElementWithColor('autonomy', 'solution', 'autonomy', data.solution?.autonomy);
@@ -1440,12 +1231,10 @@ function updateContent() {
     safeUpdateElementWithColor('charge-time', 'solution', 'charge_time', data.solution?.charge_time);
     safeUpdateElementWithColor('maintenance', 'solution', 'maintenance', data.solution?.maintenance);
     safeUpdateElementWithColor('weight', 'solution', 'weight', data.solution?.weight);
-
     // Autonomy comparison data
     safeUpdateElementWithColor('autonomy-new', 'problem', 'autonomy_new', data.problem?.autonomy_new);
     safeUpdateElementWithColor('autonomy-degraded', 'problem', 'autonomy_degraded', data.problem?.autonomy_degraded);
     safeUpdateElementWithColor('autonomy-loss', 'problem', 'autonomy_loss', data.problem?.autonomy_loss);
-
     // Solution UI elements
     safeUpdateElementWithColor('solution-card-1-title', 'ui', 'solution_card_1_title', data.ui?.solution_card_1_title);
     safeUpdateElementWithColor('solution-card-2-title', 'ui', 'solution_card_2_title', data.ui?.solution_card_2_title);
@@ -1454,7 +1243,6 @@ function updateContent() {
     safeUpdateElement('solution-card-3-charge-prefix', data.ui?.solution_card_3_charge_prefix);
     safeUpdateElementWithColor('solution-card-4-title', 'ui', 'solution_card_4_title', data.ui?.solution_card_4_title);
     safeUpdateElement('solution-card-4-weight-prefix', data.ui?.solution_card_4_weight_prefix);
-
     // Comparison
     safeUpdateElementWithColor('comparison-title', 'ui', 'comparison_title', data.ui?.comparison_title);
     safeUpdateElementWithColor('comparison-criterion', 'ui', 'comparison_criterion', data.ui?.comparison_criterion);
@@ -1471,11 +1259,9 @@ function updateContent() {
     safeUpdateElement('lithium-replacements', data.comparison?.lithium_replacements);
     safeUpdateElement('lithium-maintenance', data.comparison?.lithium_maintenance);
     safeUpdateElement('lithium-charging', data.comparison?.lithium_charging);
-
     // Calculation details (lead-replacement-schedule mis à jour par updateCalculationDetails)
     safeUpdateElement('lithium-lifespan', data.comparison?.lithium_lifespan);
     safeUpdateElement('lithium-advantage', data.calculs?.lithium_advantage);
-
     // Pricing
     safeUpdateElementWithColor('pricing-title', 'ui', 'pricing_title', data.ui?.pricing_title);
     safeUpdateElementWithColor('contract-10-title', 'pricing', 'contract_10_title', data.pricing?.contract_10_title);
@@ -1491,7 +1277,6 @@ function updateContent() {
     safeUpdateElement('pricing-savings-fleet-prefix', data.ui?.pricing_savings_fleet_prefix);
     safeUpdateElement('pricing-savings-fleet-suffix', data.ui?.pricing_savings_fleet_suffix);
     safeUpdateElement('fleet-minimum-text', data.ui?.fleet_minimum_text);
-
     // Benefits
     safeUpdateElementWithColor('benefits-title', 'ui', 'benefits_title', data.ui?.benefits_title);
     safeUpdateElementWithColor('benefits-reliability', 'ui', 'benefits_reliability', data.ui?.benefits_reliability);
@@ -1506,13 +1291,11 @@ function updateContent() {
     safeUpdateElementWithColor('benefit-4', 'benefits', 'benefit_4', data.benefits?.benefit_4);
     safeUpdateElementWithColor('benefit-5', 'benefits', 'benefit_5', data.benefits?.benefit_5);
     safeUpdateElementWithColor('benefit-6', 'benefits', 'benefit_6', data.benefits?.benefit_6);
-
     // Testimonial
     safeUpdateElementWithColor('testimonial-quote', 'testimonial', 'quote', data.testimonial?.quote);
     safeUpdateElementWithColor('testimonial-author', 'testimonial', 'author', data.testimonial?.author);
     safeUpdateElementWithColor('testimonial-title', 'testimonial', 'title', data.testimonial?.title);
     safeUpdateElementWithColor('testimonial-company', 'testimonial', 'company', data.testimonial?.company);
-
     // Contact
     safeUpdateElementWithColor('contact-title', 'ui', 'contact_title', data.ui?.contact_title);
     safeUpdateElementWithColor('contact-subtitle', 'ui', 'contact_subtitle', data.ui?.contact_subtitle);
@@ -1524,26 +1307,21 @@ function updateContent() {
     safeUpdateElement('contact-phone-label', data.ui?.contact_phone_label);
     safeUpdateElement('contact-email-label', data.ui?.contact_email_label);
     safeUpdateElement('contact-website-label', data.ui?.contact_website_label);
-
     // Cart Calculator
     safeUpdateElementWithColor('cart-calculator-title', 'ui', 'cart_calculator_title', data.ui?.cart_calculator_title);
     safeUpdateElement('cart-calculator-subtitle', data.ui?.cart_calculator_subtitle);
     safeUpdateElement('cart-count-label', data.ui?.cart_count_label);
     safeUpdateElement('cart-unit-suffix', data.ui?.cart_unit_suffix);
-
     // Initialize cart calculation
     updateCartCalculation();
     updateFloatingCalculator();
-
     // Contenu mis à jour
 }
-
 // Afficher les détails de prix dans une modal
 function showPricingDetails(contractType) {
     const modal = document.getElementById('pricingModal');
     const modalTitle = document.getElementById('modal-title');
     const modalContent = document.getElementById('modal-content');
-
     if (contractType === '10') {
         modalTitle.textContent = data.pricing?.contract_10_title || 'Contrat 10 ans';
         modalContent.innerHTML = `
@@ -1604,15 +1382,12 @@ function showPricingDetails(contractType) {
             </div>
         `;
     }
-
     modal.style.display = 'block';
 }
-
 // Fermer la modal
 function closeModal() {
     document.getElementById('pricingModal').style.display = 'none';
 }
-
 // Fermer la modal en cliquant en dehors
 window.onclick = function(event) {
     const modal = document.getElementById('pricingModal');
@@ -1620,22 +1395,17 @@ window.onclick = function(event) {
         modal.style.display = 'none';
     }
 }
-
 // Variables globales pour le calculateur
 let currentCartCount = 10;
 let currentTechnicianRate = 100; // Taux horaire par défaut du technicien spécialisé
-
 // Fonction pour formater les nombres avec espaces comme séparateurs de milliers
 function formatNumber(num) {
     return Math.round(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
-
 // Fonction pour mettre à jour les calculs basés sur le nombre de voiturettes
 function updateCartCalculation() {
     if (!data.pricing || !data.problem || !data.comparison) return;
-
     const currency = ' $';
-
     // SECTION PROBLÈMES - Affichage cohérent par voiturette vs total flotte
     const costReplacementPerUnit = getVariable('lead_cost_replacement_unit');
     const costReplacementTotal = costReplacementPerUnit * currentCartCount;
@@ -1643,65 +1413,53 @@ function updateCartCalculation() {
     const maintenanceHoursTotal = maintenanceHoursPerUnit * currentCartCount;
     const maintenanceCostPerUnit = getVariable('lead_maintenance_hours_unit') * getVariable('lead_technician_hourly_rate');
     const maintenanceCostTotal = maintenanceCostPerUnit * currentCartCount;
-
     // CHANGEMENT: Coût total réel selon l'architecture centralisée sur 20 ans
     const totalRealCost20YearsPerUnit = calculateFormula('lead_total_20y_per_cart');
     const cost20YearsTotal = totalRealCost20YearsPerUnit * currentCartCount;
-
     // CORRECTION: Affichage du coût total réel (pas seulement remplacement initial)
     safeUpdateElement('cost-replacement', formatNumber(cost20YearsTotal) + currency + ` pour ${currentCartCount} voiturette${currentCartCount > 1 ? 's' : ''} (coût total réel)`);
     safeUpdateElement('cost-10-years', formatNumber(cost20YearsTotal) + currency + ` pour ${currentCartCount} voiturette${currentCartCount > 1 ? 's' : ''} sur 20 ans`);
     safeUpdateElement('maintenance-hours', maintenanceHoursTotal + ` heures/an pour ${currentCartCount} voiturette${currentCartCount > 1 ? 's' : ''}`);
     safeUpdateElement('maintenance-cost', formatNumber(maintenanceCostTotal) + currency + ` /an pour ${currentCartCount} voiturette${currentCartCount > 1 ? 's' : ''}`);
-
     // Mise à jour dynamique de l'impact temps de charge (variables centralisées)
     const baseChargingTime = data.problem?.charging_time || `${getVariable('lead_charging_hours')} heures`;
     const fleetOverhead = getVariable('fleet_overhead_percent');
     const extraCostPerCart = getVariable('extra_fleet_cost_per_cart');
     const fleetImpact = Math.round(currentCartCount * fleetOverhead / 100);
     const totalExtraCost = fleetImpact * extraCostPerCart;
-
     const chargingImpactText = `${baseChargingTime} = +${fleetImpact} voiturettes (${formatNumber(totalExtraCost)}$)`;
     safeUpdateElement('charging-time', chargingImpactText);
-
     // SECTION TARIFICATION - Calculs dynamiques (variables centralisées)
     const monthly10 = getVariable('lifepo4_monthly_10y') * currentCartCount;
     const savings10 = calculateFormula('savings_10y_per_cart') * currentCartCount;
-
     const monthly20 = getVariable('lifepo4_monthly_20y') * currentCartCount;
     const savings20 = calculateFormula('savings_20y_per_cart') * currentCartCount;
-
     // Calcul pour l'offre flotte (variables centralisées)
     const monthlyFleet = getVariable('lifepo4_monthly_fleet') * currentCartCount;
     // Économies flotte calculées depuis formules (pas de variables hardcodées)
     const savingsFleet = calculateFormula('savings_fleet_per_cart') * currentCartCount;
-
     safeUpdateElement('contract-10-monthly', formatNumber(monthly10) + currency);
     safeUpdateElement('savings-10-years', formatNumber(savings10) + currency);
     safeUpdateElement('contract-20-monthly', formatNumber(monthly20) + currency);
     safeUpdateElement('savings-20-years', formatNumber(savings20) + currency);
     safeUpdateElement('contract-20-fleet-monthly', formatNumber(monthlyFleet) + currency);
     safeUpdateElement('savings-20-fleet', formatNumber(savingsFleet) + currency);
-
     // Gestion de l'affichage de l'offre flotte (30+ voiturettes)
     const fleetCard = document.querySelector('.pricing-card.fleet');
     const premiumCard = document.querySelector('.pricing-card.premium');
     const fleetMinimumElement = document.getElementById('fleet-minimum-text');
-
     if (currentCartCount >= getVariable('fleet_minimum_carts')) {
         // Activer l'offre flotte
         if (fleetCard) {
             fleetCard.style.opacity = '1';
             fleetCard.style.transform = 'scale(1)';
         }
-
         // Désactiver l'offre 20 ans (solution optimisée)
         if (premiumCard) {
             premiumCard.style.opacity = '0.6';
             premiumCard.style.transform = 'scale(0.95)';
             premiumCard.style.filter = 'grayscale(0.3)';
         }
-
         if (fleetMinimumElement) {
             fleetMinimumElement.style.color = '#10b981';
             fleetMinimumElement.style.background = 'rgba(16, 185, 129, 0.2)';
@@ -1715,14 +1473,12 @@ function updateCartCalculation() {
             fleetCard.style.opacity = '0.7';
             fleetCard.style.transform = 'scale(0.95)';
         }
-
         // Réactiver l'offre 20 ans
         if (premiumCard) {
             premiumCard.style.opacity = '1';
             premiumCard.style.transform = 'scale(1)';
             premiumCard.style.filter = 'none';
         }
-
         if (fleetMinimumElement) {
             fleetMinimumElement.style.color = '#ffffff';
             fleetMinimumElement.style.background = 'rgba(220, 38, 38, 0.8)';
@@ -1731,11 +1487,9 @@ function updateCartCalculation() {
             fleetMinimumElement.innerHTML = `❌ Minimum 30 voiturettes (actuellement: ${currentCartCount})`;
         }
     }
-
     // SECTION COMPARAISON - Totaux flotte (variables centralisées) sur 20 ans
     const leadBatteries20 = calculateFormula('lead_total_20y_per_cart') * currentCartCount;
     const lithium20 = calculateFormula('lifepo4_total_20y_per_cart') * currentCartCount;
-
     // Debug: vérifier les valeurs calculées
     console.log('Valeurs comparaison:', {
         leadBatteries20: leadBatteries20,
@@ -1744,30 +1498,22 @@ function updateCartCalculation() {
         leadFormula: calculateFormula('lead_total_20y_per_cart'),
         lithiumFormula: calculateFormula('lifepo4_total_20y_per_cart')
     });
-
     // CHANGEMENT: Utiliser les valeurs 20 ans pour la comparaison principale
     safeUpdateElement('lead-batteries-10-years', formatNumber(leadBatteries20) + currency);
     safeUpdateElement('contract-10-total', formatNumber(lithium20) + currency);
-
     // Mettre à jour les heures de maintenance dans la comparaison (variables centralisées)
     const leadMaintenanceHours = getVariable('lead_maintenance_hours_unit') * currentCartCount;
     safeUpdateElement('lead-maintenance', leadMaintenanceHours + (currentLanguage === 'fr' ? ' heures/an' : ' hours/year'));
-
     // Mettre à jour l'affichage du nombre de voiturettes
     safeUpdateElement('cart-count', currentCartCount.toString());
-
     // SECTION DÉTAILS DES CALCULS
     updateCalculationDetails();
-
     // Calculs mis à jour
 }
-
 // Mettre à jour les détails des calculs (source unique : variables.csv)
 function updateCalculationDetails() {
     if (!variables || Object.keys(variables).length === 0) return;
-
     const currency = ' $';
-
     // Données de base - Toutes depuis variables.csv (source unique de vérité)
     const leadReplacementCost = getVariable('lead_cost_replacement_unit');
     const leadMaintenanceCostAnnual = getVariable('lead_maintenance_hours_unit') * getVariable('lead_technician_hourly_rate');
@@ -1777,20 +1523,15 @@ function updateCalculationDetails() {
     const overconsumptionYearly = getVariable('overconsumption_cost_yearly');
     const insuranceIncreaseYearly = getVariable('insurance_increase_yearly');
     const replacementCycle = getVariable('lead_replacement_cycle_years');
-
     const lithiumMonthly10 = getVariable('lifepo4_monthly_10y');
     const lithiumMonthly20 = getVariable('lifepo4_monthly_20y');
     const lithiumFleetMonthly = getVariable('lifepo4_monthly_fleet');
-
     // Calculs remplacements batterie plomb (directement depuis formules)
     const replacements20Years = calculateFormula('lead_replacements_20y');
-
     // COÛTS TOTAUX RÉELS BATTERIES PLOMB sur 20 ans (directement depuis formules 20y)
     const leadTotalCost20 = calculateFormula('lead_total_20y_per_cart');
-
     // COÛT TOTAL RÉEL PLOMB par voiturette sur 20 ans (depuis variables.csv)
     const leadTotalPerCart20 = leadTotalCost20;
-
     // Variables calculées manquantes pour les détails (calculées depuis formules)
     const leadMaintenanceCost20 = leadMaintenanceCostAnnual * 20;
     const leadBatteryCost20 = leadReplacementCost * calculateFormula('lead_replacements_paid_20y');
@@ -1799,10 +1540,8 @@ function updateCalculationDetails() {
     const leadOverconsumption20 = overconsumptionYearly * 20;
     const leadInsuranceIncrease20 = insuranceIncreaseYearly * 20;
     const leadPrematureFailure20 = prematureFailureRisk * 2; // Risque sur 20 ans
-
     // COÛT TOTAL PLOMB pour la flotte
     const leadTotal20 = leadTotalPerCart20 * currentCartCount;
-
     // Coûts lithium selon la flotte sur 20 ans
     let lithium20, selectedMonthlyRate;
     if (currentCartCount >= getVariable('fleet_minimum_carts')) {
@@ -1812,92 +1551,73 @@ function updateCalculationDetails() {
         lithium20 = lithiumMonthly20 * 12 * 20 * currentCartCount;
         selectedMonthlyRate = lithiumMonthly20;
     }
-
     // ÉCONOMIES RÉELLES sur 20 ans (plomb coûte BEAUCOUP plus cher que lithium)
     const totalSavings20 = leadTotal20 - lithium20;
     const savingsPercentage20 = ((totalSavings20 / leadTotal20) * 100).toFixed(1);
-
     // Fourchette intelligente (variation selon cycle min/max des batteries plomb)
     const minLifespan = 5; // Années (meilleur cas)
     const maxLifespan = 3; // Années (cas dégradé)
     const minReplacements20 = Math.floor(20 / minLifespan); // 20/5 = 4 remplacements minimum
     const maxReplacements20 = Math.floor(20 / maxLifespan); // 20/3 = 6.67 → 7 remplacements maximum
-
     const minLeadCostPerCart20 = leadReplacementCost * minReplacements20 + leadMaintenanceCost20 +
                                (recyclingCost * minReplacements20) + leadRevenueLoss20 + leadOverconsumption20 + leadInsuranceIncrease20;
     const maxLeadCostPerCart20 = leadReplacementCost * maxReplacements20 + leadMaintenanceCost20 +
                                (recyclingCost * maxReplacements20) + leadRevenueLoss20 + leadOverconsumption20 + leadInsuranceIncrease20;
-
     const minSavings20 = (minLeadCostPerCart20 * currentCartCount) - lithium20;
     const maxSavings20 = (maxLeadCostPerCart20 * currentCartCount) - lithium20;
-
     // Calculs ROI (lithium vs coûts explosifs plomb)
     const roiPercentage = ((totalSavings20 / lithium20) * 100).toFixed(1);
     const monthlySavingsAverage = totalSavings20 / (20 * 12);
     const perCartMonthlySavings = monthlySavingsAverage / currentCartCount;
     const annualSavingsPerCart = perCartMonthlySavings * 12;
-
     // === 1. SECTION BATTERIES PLOMB (COÛTS RÉELS selon document) ===
     safeUpdateElement('lead-replacement-schedule', data.calculs?.lead_replacement_schedule || 'Remplacement nécessaire tous les 2-5 ans');
     safeUpdateElement('lead-replacements-20y', `${replacements20Years} remplacements à ${formatNumber(leadReplacementCost)}$ par voiturette`);
-
     // Détail complet des coûts cachés du plomb (par voiturette) - Basé sur variables.csv
     const hiddenCosts20 = leadRecyclingCost20 + leadRevenueLoss20 + leadOverconsumption20 + leadInsuranceIncrease20 + leadPrematureFailure20;
     const leadBreakdownText = currentLanguage === 'fr'
         ? `${formatNumber(leadBatteryCost20)}${currency} (batteries) + ${formatNumber(leadMaintenanceCost20)}${currency} (maintenance) + ${formatNumber(hiddenCosts20)}${currency} (coûts cachés) par voiturette`
         : `${formatNumber(leadBatteryCost20)}${currency} (batteries) + ${formatNumber(leadMaintenanceCost20)}${currency} (maintenance) + ${formatNumber(hiddenCosts20)}${currency} (hidden costs) per cart`;
-
     safeUpdateElement('lead-cost-breakdown-20y', leadBreakdownText);
     safeUpdateElement('lead-total-calc-20y', formatNumber(leadTotal20) + currency);
-
     const maintenanceHours = getVariable('lead_maintenance_hours_unit');
     const technicianRate = getVariable('lead_technician_hourly_rate');
     const maintenanceDetailText = currentLanguage === 'fr'
         ? `${formatNumber(leadMaintenanceCost20 * currentCartCount)}${currency} (${maintenanceHours}h/an × ${technicianRate}$/h × ${currentCartCount} voiturettes × 20 ans)`
         : `${formatNumber(leadMaintenanceCost20 * currentCartCount)}${currency} (${maintenanceHours}h/year × ${technicianRate}$/h × ${currentCartCount} carts × 20 years)`;
     safeUpdateElement('lead-maintenance-total-20y', maintenanceDetailText);
-
     // === 2. SECTION LITHIUM (SOLUTION ÉCONOMIQUE) ===
     safeUpdateElement('lithium-replacements-20y',
         currentLanguage === 'fr' ? '0 remplacement nécessaire - 15-20 ans de durée de vie' : '0 replacement needed - 15-20 years lifespan');
-
     const lithiumBreakdownText = currentLanguage === 'fr'
         ? `${formatNumber(lithium20)}${currency} (location ${selectedMonthlyRate}${currency}/mois) + 0${currency} (maintenance) + 0${currency} (recyclage) + 0${currency} (pertes revenus)`
         : `${formatNumber(lithium20)}${currency} (rental ${selectedMonthlyRate}${currency}/month) + 0${currency} (maintenance) + 0${currency} (recycling) + 0${currency} (revenue loss)`;
-
     safeUpdateElement('lithium-cost-breakdown-20y', lithiumBreakdownText);
     safeUpdateElement('lithium-total-calc-20y', formatNumber(lithium20) + currency);
-
     // === 3. SECTION ÉCONOMIES (LITHIUM FAIT ÉCONOMISER) ===
     safeUpdateElement('detailed-savings-calc-20y',
         `${formatNumber(leadTotal20)}${currency} (plomb) - ${formatNumber(lithium20)}${currency} (lithium)`);
     safeUpdateElement('total-savings-display-20y', formatNumber(totalSavings20) + currency);
-
     const rangeText20 = currentLanguage === 'fr'
         ? `Entre ${formatNumber(minSavings20)}${currency} et ${formatNumber(maxSavings20)}${currency} selon fréquence remplacement plomb`
         : `Between ${formatNumber(minSavings20)}${currency} and ${formatNumber(maxSavings20)}${currency} depending on lead replacement frequency`;
     safeUpdateElement('savings-range-20y', rangeText20);
-
     const savingsText = currentLanguage === 'fr'
         ? `${savingsPercentage20}% d'économie avec lithium vs plomb`
         : `${savingsPercentage20}% savings with lithium vs lead`;
     safeUpdateElement('savings-percentage-20y', savingsText);
-
     // === 4. SECTION ROI (RETOUR SUR INVESTISSEMENT LITHIUM) ===
     const roiText = currentLanguage === 'fr'
         ? `${roiPercentage}% ROI - Lithium se paie par ses économies`
         : `${roiPercentage}% ROI - Lithium pays for itself through savings`;
     safeUpdateElement('roi-calculation', roiText);
-
     safeUpdateElement('break-even-point',
         currentLanguage === 'fr' ? 'Rentabilité immédiate vs coûts plomb' : 'Immediate profitability vs lead costs');
     safeUpdateElement('monthly-savings-average',
         `${formatNumber(monthlySavingsAverage)}${currency}/mois économisés`);
     safeUpdateElement('per-cart-monthly-savings',
         `${formatNumber(perCartMonthlySavings)}${currency}/voiturette/mois économisés`);
-
     // NOTE: Tableau comparaison maintenant géré par l'architecture centralisée dans populateVsBatteriesSection()
-
     // CHANGEMENT: Mise à jour autres données comparaison pour 20 ans
     safeUpdateElement('lead-replacements', `${Math.ceil(20 / replacementCycle)} remplacements sur 20 ans`);
     safeUpdateElement('lithium-replacements', data.comparison.lithium_replacements || '0 remplacement');
@@ -1906,7 +1626,6 @@ function updateCalculationDetails() {
     safeUpdateElement('lead-charging', data.comparison.lead_charging || '8-10 heures');
     safeUpdateElement('lithium-charging', data.comparison.lithium_charging || '2 heures');
 }
-
 // Event listener pour le slider
 function setupCartSlider() {
     const slider = document.getElementById('cartSlider');
@@ -1918,7 +1637,6 @@ function setupCartSlider() {
         });
     }
 }
-
 // Setup du calculateur flottant
 function setupFloatingCalculator() {
     // Gestion du slider du nombre de voiturettes
@@ -1926,27 +1644,22 @@ function setupFloatingCalculator() {
     if (floatingSlider) {
         floatingSlider.addEventListener('input', function() {
             currentCartCount = parseInt(this.value);
-
             // Synchroniser avec le slider principal
             const mainSlider = document.getElementById('cartSlider');
             if (mainSlider) {
                 mainSlider.value = currentCartCount;
             }
-
             updateCartCalculation();
             updateFloatingCalculator();
         });
     }
-
     // Gestion du slider du taux horaire du technicien
     const technicianSlider = document.getElementById('technicianRateSlider');
     const technicianDisplay = document.getElementById('technician-rate-display');
-
     if (technicianSlider && technicianDisplay) {
         technicianSlider.addEventListener('input', function() {
             currentTechnicianRate = parseInt(this.value);
             technicianDisplay.textContent = currentTechnicianRate;
-
             // Mettre à jour TOUS les calculs qui dépendent du taux horaire
             updateCartCalculation();
             updateFloatingCalculator();
@@ -1955,48 +1668,39 @@ function setupFloatingCalculator() {
         });
     }
 }
-
 // Mettre à jour le calculateur flottant
 function updateFloatingCalculator() {
     if (!data.pricing) return;
-
     const currency = ' $';
-
     // CORRECTION: Calculs utilisant les variables CSV correctes
     const monthly10 = getVariable('lifepo4_monthly_10y') * currentCartCount;
     const monthly20 = getVariable('lifepo4_monthly_20y') * currentCartCount;
     const monthlyFleet = getVariable('lifepo4_monthly_fleet') * currentCartCount;
-
     // Mise à jour des affichages
     safeUpdateElement('cart-count-floating', currentCartCount.toString());
     safeUpdateElement('price-10-floating', formatNumber(monthly10) + currency);
     safeUpdateElement('price-20-floating', formatNumber(monthly20) + currency);
     safeUpdateElement('price-fleet-floating', formatNumber(monthlyFleet) + currency);
-
     // Synchroniser les sliders flottants
     const floatingSlider = document.getElementById('cartSliderFloating');
     if (floatingSlider) {
         floatingSlider.value = currentCartCount;
     }
-
     const technicianSlider = document.getElementById('technicianRateSlider');
     const technicianDisplay = document.getElementById('technician-rate-display');
     if (technicianSlider && technicianDisplay) {
         technicianSlider.value = currentTechnicianRate;
         technicianDisplay.textContent = currentTechnicianRate;
     }
-
     // Gestion visuelle de l'offre flotte dans le calculateur flottant
     const fleetCard = document.getElementById('price-fleet-card');
     const premiumFloatingCard = document.querySelector('.floating-calculator .pricing-mini:nth-child(2)');
-
     if (fleetCard) {
         if (currentCartCount >= getVariable('fleet_minimum_carts')) {
             // Activer flotte, désactiver 20 ans
             fleetCard.classList.remove('fleet-inactive');
             fleetCard.classList.remove('disabled');
             fleetCard.title = 'Offre flotte activée !';
-
             if (premiumFloatingCard) {
                 premiumFloatingCard.classList.add('disabled');
                 premiumFloatingCard.title = 'Offre remplacée par la flotte';
@@ -2006,30 +1710,26 @@ function updateFloatingCalculator() {
             fleetCard.classList.add('fleet-inactive');
             fleetCard.classList.remove('disabled');
             fleetCard.title = `Minimum 30 voiturettes (actuellement: ${currentCartCount})`;
-
             if (premiumFloatingCard) {
                 premiumFloatingCard.classList.remove('disabled');
                 premiumFloatingCard.title = 'Contrat 20 ans - Solution optimisée';
             }
         }
     }
-
     // Mettre à jour les textes selon la langue
     if (data.ui) {
         safeUpdateElement('cart-unit-floating', currentCartCount > 1 ?
             (currentLanguage === 'fr' ? 'voiturettes' : 'carts') :
             (currentLanguage === 'fr' ? 'voiturette' : 'cart'));
-
         safeUpdateElement('floating-calc-title', data.ui.cart_calculator_title || 'Calculateur de Flotte');
         safeUpdateElement('technician-cost-label', data.ui.technician_cost_label || 'Coût technicien :');
         safeUpdateElement('technician-rate-unit', data.ui.technician_rate_unit || '$/heure');
     }
 }
-
 // Système de lecteur audio
 class AudioPlayer {
     constructor() {
-        this.musicFolder = 'musique/';
+        this.musicFolder = 'assets/audio/';
         this.tracks = [];
         this.currentTrackIndex = 0;
         this.currentAudio = null;
@@ -2037,19 +1737,15 @@ class AudioPlayer {
         this.isPlaying = false;
         this.userInteracted = false;
         this.volume = 0.15; // 15% par défaut
-
         this.playBtn = document.getElementById('playPauseBtn');
         this.playIcon = document.getElementById('playIcon');
         this.pauseIcon = document.getElementById('pauseIcon');
         this.volumeSlider = document.getElementById('volumeSlider');
         this.trackInfo = document.getElementById('trackInfo');
-
         // Nettoyer le cache audio au démarrage pour éviter les anciens noms
         this.clearAudioCache();
-
         this.init();
     }
-
     // Nettoyer le cache audio pour éviter les anciens noms de fichiers
     clearAudioCache() {
         try {
@@ -2057,34 +1753,24 @@ class AudioPlayer {
             if (window.audioCache) {
                 window.audioCache.clear();
             }
-
             // Créer une liste propre pour le cache
             window.audioCache = new Map();
-
-            console.log('🧹 Cache audio nettoyé - nouveaux noms de fichiers');
         } catch (error) {
             console.warn('⚠️ Impossible de nettoyer le cache audio:', error);
         }
     }
-
     async init() {
         // Charger la liste des musiques de façon non-bloquante
         setTimeout(() => this.loadTrackList(), 100);
-
         // Setup des contrôles
         this.setupControls();
-
         // Écouter les interactions utilisateur pour démarrer la musique
         this.setupUserInteractionListener();
     }
-
     async loadTrackList() {
         try {
             this.tracks = await this.scanMusicFolder();
-
             // Debug: afficher les fichiers détectés
-            console.log('🎵 Liste des fichiers audio détectés:', this.tracks);
-
             if (this.tracks.length > 0) {
                 this.shuffleTracks();
                 setTimeout(() => {
@@ -2105,7 +1791,6 @@ class AudioPlayer {
             }
         }
     }
-
     async scanMusicFolder() {
         try {
             // Liste de fichiers en dur comme fallback principal
@@ -2119,7 +1804,6 @@ class AudioPlayer {
                 'whispering-horizon-1.mp3',
                 'whispering-horizon.mp3'
             ];
-
             // Essayer de charger l'index JSON d'abord
             try {
                 const indexResponse = await fetch(this.musicFolder + 'index.json');
@@ -2128,7 +1812,6 @@ class AudioPlayer {
                     if (contentType && contentType.includes('application/json')) {
                         const indexData = await indexResponse.json();
                         if (indexData.files && indexData.files.length > 0) {
-                            console.log('🎵 Fichiers audio chargés depuis index.json:', indexData.files);
                             return indexData.files;
                         }
                     }
@@ -2136,28 +1819,23 @@ class AudioPlayer {
             } catch (fetchError) {
                 console.warn('⚠️ Impossible de charger index.json, utilisation du fallback');
             }
-
             // Vérifier si les fichiers fallback existent en testant le premier
             try {
                 const testResponse = await fetch(this.musicFolder + fallbackFiles[0]);
                 if (testResponse.ok) {
-                    console.log('🎵 Utilisation de la liste de fichiers intégrée:', fallbackFiles);
                     return fallbackFiles;
                 }
             } catch (testError) {
                 console.warn('⚠️ Fichiers fallback non accessibles');
             }
-
             // En dernier recours, scanner le listing HTML du serveur
             try {
                 const response = await fetch(this.musicFolder);
                 const html = await response.text();
-
                 // Parser le HTML pour extraire les liens vers les fichiers .mp3
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(html, 'text/html');
                 const links = Array.from(doc.querySelectorAll('a[href]'));
-
                 const mp3Files = links
                     .map(link => link.getAttribute('href'))
                     .filter(href => href && href.toLowerCase().endsWith('.mp3'))
@@ -2168,19 +1846,14 @@ class AudioPlayer {
                     })
                     .filter(filename => !filename.includes('..') && filename !== '' && filename.endsWith('.mp3'))
                     .sort(); // Trier alphabétiquement
-
                 if (mp3Files.length > 0) {
-                    console.log('🎵 Fichiers trouvés via scan HTML:', mp3Files);
                     return mp3Files;
                 }
             } catch (scanError) {
                 console.warn('⚠️ Scan HTML échoué');
             }
-
             // Si tout échoue, retourner le fallback
-            console.log('🎵 Retour au fallback intégré');
             return fallbackFiles;
-
         } catch (error) {
             console.error('❌ Erreur complète dans scanMusicFolder:', error);
             // Fallback final en cas d'erreur totale
@@ -2196,8 +1869,6 @@ class AudioPlayer {
             ];
         }
     }
-
-
     shuffleTracks() {
         for (let i = this.tracks.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -2205,28 +1876,23 @@ class AudioPlayer {
         }
         this.currentTrackIndex = 0;
     }
-
     setupUserInteractionListener() {
         const startMusic = () => {
             if (!this.userInteracted && this.tracks.length > 0) {
                 this.userInteracted = true;
                 this.preloadCurrentAndNext();
                 this.startPlayback();
-
                 document.removeEventListener('click', startMusic, true);
                 document.removeEventListener('keydown', startMusic, true);
                 document.removeEventListener('touchstart', startMusic, true);
             }
         };
-
         document.addEventListener('click', startMusic, true);
         document.addEventListener('keydown', startMusic, true);
         document.addEventListener('touchstart', startMusic, true);
     }
-
     setupControls() {
         this.playBtn.addEventListener('click', () => this.togglePlayPause());
-
         this.volumeSlider.addEventListener('input', (e) => {
             this.volume = e.target.value / 100;
             if (this.currentAudio) {
@@ -2234,23 +1900,18 @@ class AudioPlayer {
             }
         });
     }
-
     preloadCurrentAndNext() {
         if (this.tracks.length === 0) return;
-
         // Nettoyer les objets audio existants
         this.cleanupAudio();
-
         // Précharger la musique actuelle
         this.loadTrack(this.currentTrackIndex, true);
-
         // Précharger la suivante seulement s'il y a plus d'une piste
         if (this.tracks.length > 1) {
             const nextIndex = (this.currentTrackIndex + 1) % this.tracks.length;
             setTimeout(() => this.loadTrack(nextIndex, false), 500);
         }
     }
-
     cleanupAudio() {
         // Nettoyer l'audio actuel
         if (this.currentAudio) {
@@ -2259,7 +1920,6 @@ class AudioPlayer {
             this.currentAudio.load();
             this.currentAudio = null;
         }
-
         // Nettoyer l'audio suivant
         if (this.nextAudio) {
             this.nextAudio.src = '';
@@ -2267,48 +1927,36 @@ class AudioPlayer {
             this.nextAudio = null;
         }
     }
-
     loadTrack(index, isCurrent = true) {
         if (!this.tracks[index]) return null;
-
         const audio = new Audio();
         // Ajouter un paramètre cache-busting pour forcer le rechargement
         const timestamp = Date.now();
         audio.src = this.musicFolder + this.tracks[index] + '?v=' + timestamp;
         audio.volume = this.volume;
         audio.preload = isCurrent ? 'auto' : 'metadata';
-
         // Debug: logger le fichier qu'on essaie de charger
-        console.log('🎵 Chargement:', this.tracks[index], 'URL complète:', audio.src);
-
         if (isCurrent) {
             this.currentAudio = audio;
             this.setupCurrentTrackEvents();
         } else {
             this.nextAudio = audio;
         }
-
         return audio;
     }
-
     setupCurrentTrackEvents() {
         if (!this.currentAudio) return;
-
         this.currentAudio.addEventListener('ended', () => {
             this.nextTrack();
         });
-
         this.currentAudio.addEventListener('error', () => {
             // Erreur de chargement, passer au suivant
             this.nextTrack();
         });
-
         this.updateTrackInfo();
     }
-
     async startPlayback() {
         if (!this.currentAudio || this.isPlaying) return;
-
         try {
             await this.currentAudio.play();
             this.isPlaying = true;
@@ -2317,15 +1965,12 @@ class AudioPlayer {
             // Échec silencieux
         }
     }
-
     async togglePlayPause() {
         if (!this.userInteracted) {
             this.userInteracted = true;
             this.preloadCurrentAndNext();
         }
-
         if (!this.currentAudio) return;
-
         if (this.isPlaying) {
             this.currentAudio.pause();
             this.isPlaying = false;
@@ -2337,29 +1982,22 @@ class AudioPlayer {
                 // Échec silencieux
             }
         }
-
         this.updatePlayButton();
     }
-
     nextTrack() {
         // Passer à la musique suivante
         this.currentAudio = this.nextAudio;
         this.currentTrackIndex = (this.currentTrackIndex + 1) % this.tracks.length;
-
         // Mettre à jour l'affichage
         this.updateTrackInfo();
-
         // Précharger la nouvelle musique suivante
         const nextIndex = (this.currentTrackIndex + 1) % this.tracks.length;
         this.nextAudio = this.loadTrack(nextIndex, false);
-
         this.setupCurrentTrackEvents();
-
         if (this.isPlaying && this.currentAudio) {
             this.currentAudio.play().catch(() => {});
         }
     }
-
     updatePlayButton() {
         if (this.isPlaying) {
             this.playIcon.style.display = 'none';
@@ -2369,23 +2007,19 @@ class AudioPlayer {
             this.pauseIcon.style.display = 'none';
         }
     }
-
     updateTrackInfo() {
         // Toujours afficher juste le symbole musical
         if (!this.trackInfo) {
             this.trackInfo = document.getElementById('trackInfo');
         }
-
         if (this.trackInfo) {
             this.trackInfo.textContent = '♪';
             this.trackInfo.title = 'Lecteur audio';
         }
     }
 }
-
 // Initialiser le lecteur audio
 let audioPlayer;
-
 // Gestionnaire global d'erreurs pour ignorer les erreurs d'extensions
 window.addEventListener('error', function(event) {
     // Ignorer les erreurs d'extensions de navigateur
@@ -2400,7 +2034,6 @@ window.addEventListener('error', function(event) {
         return true;
     }
 });
-
 // Gestionnaire pour les promesses rejetées
 window.addEventListener('unhandledrejection', function(event) {
     if (event.reason && event.reason.message && (
@@ -2412,19 +2045,16 @@ window.addEventListener('unhandledrejection', function(event) {
         return true;
     }
 });
-
 // Chargement automatique des données CSV au démarrage de la page
 document.addEventListener('DOMContentLoaded', function() {
     // Page chargée, initialisation du chargement CSV avec architecture centralisée
     loadAllData();
-
     // Setup des sliders après un petit délai pour s'assurer que le DOM est prêt
     setTimeout(() => {
         setupCartSlider();
         setupFloatingCalculator();
         updateFloatingCalculator();
     }, 100);
-
     // Initialiser le lecteur audio
     audioPlayer = new AudioPlayer();
 });

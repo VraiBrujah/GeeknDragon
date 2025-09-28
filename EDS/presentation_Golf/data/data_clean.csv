@@ -1,14 +1,14 @@
 section,key,value,color,gradient_color_1,gradient_color_2
 header,company_name,EDS QUÉBEC,#1e40af
 header,company_tagline,Énergie Développement Système,#BFF2EB
-header,company_subtitle,Solutions Lithium Québécoises de Pointe,##6795CF
-header,company_address,"195, rue Brissette, local A7, Sainte-Agathe-des-Monts",##6795CF
+header,company_subtitle,Solutions Lithium Québécoises de Pointe,#6795CF
+header,company_address,"195, rue Brissette, local A7, Sainte-Agathe-des-Monts",#6795CF
 header,company_phone,+1 (819) 323-7859,#1e40af
 header,company_email,contact@edsquebec.com,#1e40af
 
 hero,main_title,TRANSFORMEZ VOTRE TERRAIN DE GOLF AVEC LA TECHNOLOGIE LITHIUM,#1e40af
 hero,subtitle,Kit Li-Kart LiFePO₄ 48V 105Ah - Conçu et Fabriqué au Québec,#BFF2EB
-hero,hero_image,images/golf_cart_sunset.jpg,
+hero,hero_image,assets/images/golf_cart_sunset.jpg,
 
 problem,title,VOTRE DÉFI ACTUEL : LES LIMITES DES BATTERIES PLOMB,#FF0000
 problem,background_gradient,,#2d1b69,#1e1b4b
@@ -29,7 +29,7 @@ problem_details,section_1_subtitle,Pourquoi les batteries plomb coûtent si cher
 problem_details,section_1_point_1,Remplacement fréquent tous les 2-5 ans,#BFF2EB
 problem_details,section_1_point_2,{{lead_cost_replacement_unit}}$ par voiturette à chaque remplacement,#BFF2EB
 problem_details,section_1_point_3,{{lead_replacements_20y}} remplacements nécessaires sur 20 ans (cycle {{lead_replacement_cycle_years}} ans),#BFF2EB
-problem_details,section_1_point_4,Dont 1 remplacement gratuit sous garantie + risque bris prématuré 20%,##6795CF
+problem_details,section_1_point_4,Dont 1 remplacement gratuit sous garantie + risque bris prématuré 20%,#6795CF
 problem_details,section_1_calculation,{{lead_replacements_paid_20y}} remplacements payants × {{lead_cost_replacement_unit}}$ + {{premature_failure_percent}}% risque = {{lead_replacement_cost_with_risk_20y}}$ sur 20 ans,#BFF2EB
 
 problem_details,section_2_title,⚙️ Maintenance Spécialisée Coûteuse,#d97706
@@ -41,7 +41,7 @@ problem_details,section_2_point_4,Nettoyage et inspection des bornes,#d97706
 problem_details,section_2_calculation,{{lead_maintenance_hours_unit}}h × {{lead_technician_hourly_rate}}$ × 20 ans = {{lead_maintenance_total_20y}}$ par voiturette sur 20 ans,#F54005
 
 problem_details,section_3_title,🚨 Risques et Pertes Opérationnelles,#7c3aed
-problem_details,section_3_subtitle,Coûts de sécurité et responsabilité civile réels,##6795CF
+problem_details,section_3_subtitle,Coûts de sécurité et responsabilité civile réels,#6795CF
 problem_details,section_3_point_1,Pannes en parcours : remboursements clients + **perte revenus**,#7c3aed
 problem_details,section_3_point_2,Surconsommation électrique *25%* : coût énergétique sup.,#7c3aed
 problem_details,section_3_point_3,**Accidents travail** + blessures clients (acide) : responsabilité civile,#7c3aed
@@ -94,23 +94,23 @@ benefits,benefit_5,Partenaire technique dédié sur toute la durée,#BFF2EB
 benefits,benefit_6,Technologie écologique et durable,#BFF2EB
 
 testimonial,quote,"Depuis l'installation des batteries EDS Québec, nous avons éliminé 95% de nos problèmes de voiturettes. Nos golfeurs sont ravis et notre équipe d'entretien peut enfin se concentrer sur le parcours !",#ffffff,#ffffff
-testimonial,author,Jean-Michel RIBERA,#1e40af
-testimonial,title,Directeur Général,##6795CF
-testimonial,company,Tina Golf, Nouvelle-Calédonie,##6795CF,##6795CF
+testimonial,author,Jean-Michel RIBERA,#81B7E3
+testimonial,title,Directeur Général,#6795CF
+testimonial,company,Tina Golf, Nouvelle-Calédonie,#6795CF,#6795CF
 
 contact,specialist_name,Jean-Marc Bucher,#1e40af
-contact,specialist_title,Spécialiste Solutions Golf - EDS Québec,##6795CF
+contact,specialist_title,Spécialiste Solutions Golf - EDS Québec,#6795CF
 contact,specialist_phone,+1 (819) 323-7859,#1e40af
 contact,specialist_email,commande@edsquebec.com,#1e40af
 contact,website,www.edsquebec.com,#1e40af
 
 # Section de comparaison moderne vs batteries
 vs_batteries,section_title,PLOMB vs LiFePO₄ : POURQUOI CHANGER ?,#1e40af
-vs_batteries,section_subtitle,Comparaison technique et économique détaillée,##6795CF
+vs_batteries,section_subtitle,Comparaison technique et économique détaillée,#6795CF
 vs_batteries,lead_title,Batteries Plomb Actuelles,#BFF2EB
-vs_batteries,lead_subtitle,Technologie obsolète coûteuse,##6795CF
+vs_batteries,lead_subtitle,Technologie obsolète coûteuse,#6795CF
 vs_batteries,lifepo4_title,Batteries Li-Kart LiFePO₄ EDS,#BFF2EB
-vs_batteries,lifepo4_subtitle,Technologie moderne canadienne,##6795CF
+vs_batteries,lifepo4_subtitle,Technologie moderne canadienne,#6795CF
 
 # Caractéristiques techniques comparatives
 vs_batteries,tech_lifespan_label,Durée de vie,#ffffff
@@ -149,28 +149,28 @@ vs_batteries,cost_total_lifepo4,{{lifepo4_total_20y_per_cart}}$ par voiturette,#
 # Avantages/Inconvénients
 vs_batteries,advantages_label,AVANTAGES,#BFF2EB
 vs_batteries,disadvantages_label,INCONVÉNIENTS,#BFF2EB
-vs_batteries,lead_advantage_1,Technologie connue,##6795CF
-vs_batteries,lead_advantage_2,Aucun engagement contractuel,##6795CF
-vs_batteries,lead_advantage_3,Disponibilité immédiate pièces de rechange,##6795CF
+vs_batteries,lead_advantage_1,Technologie connue,#6795CF
+vs_batteries,lead_advantage_2,Aucun engagement contractuel,#6795CF
+vs_batteries,lead_advantage_3,Disponibilité immédiate pièces de rechange,#6795CF
 vs_batteries,lead_disadvantage_1,Coûts explosifs cachés,#BFF2EB
 vs_batteries,lead_disadvantage_2,Maintenance constante requise,#BFF2EB
 vs_batteries,lead_disadvantage_3,Performances dégradées,#BFF2EB
 vs_batteries,lead_disadvantage_4,Matières toxiques dangereuses,#BFF2EB
 vs_batteries,lead_disadvantage_5,Pannes fréquentes,#BFF2EB
 vs_batteries,lifepo4_advantage_1,Économies {{savings_20y_per_cart}}$ sur 20 ans ({{savings_percentage_20y}}%),#BFF2EB
-vs_batteries,lifepo4_advantage_2,**Aucune maintenance** requise,#BFF2EB
+vs_batteries,lifepo4_advantage_2,Aucune maintenance requise,#BFF2EB
 vs_batteries,lifepo4_advantage_3,Performance constante 15+ ans,#BFF2EB
 vs_batteries,lifepo4_advantage_4,Technologie écologique,#BFF2EB
 vs_batteries,lifepo4_advantage_5,Support technique dédié,#BFF2EB
 vs_batteries,lifepo4_advantage_6,Budget prévisible fixe,#BFF2EB
 vs_batteries,lifepo4_advantage_7,Investissement initial minimal (location),#BFF2EB
 vs_batteries,lifepo4_advantage_8,Technologie moderne éprouvée,#BFF2EB
-vs_batteries,lifepo4_disadvantage_1,Engagement contractuel long terme,##6795CF
-vs_batteries,lifepo4_disadvantage_2,Technologie moins familière pour certains techniciens,##6795CF
+vs_batteries,lifepo4_disadvantage_1,Engagement contractuel long terme,#6795CF
+vs_batteries,lifepo4_disadvantage_2,Technologie moins familière pour certains techniciens,#6795CF
 
 # Call to action
 vs_batteries,cta_title,PRÊT POUR LA RÉVOLUTION ?,#1e40af
-vs_batteries,cta_subtitle,Passez aux batteries Li-Kart LiFePO₄ dès aujourd'hui,##6795CF
+vs_batteries,cta_subtitle,Passez aux batteries Li-Kart LiFePO₄ dès aujourd'hui,#BFF2EB
 vs_batteries,cta_savings_prefix,Économisez {{savings_20y_per_cart}}$ par voiturette sur 20 ans ({{savings_percentage_20y}}% d'économies),#BFF2EB
 vs_batteries,cta_savings_suffix,,
 vs_batteries,cta_button_text,Demander une démonstration,#ffffff
@@ -203,10 +203,10 @@ backgrounds,pricing_card_fleet,rgba(124, 58, 237, 0.05)
 # Textes fixes de l'interface
 ui,hero_image_alt,Voiturette de golf moderne,
 ui,problem_card_1_title,Coûts Cachés Explosifs,#BFF2EB
-ui,problem_card_1_suffix,incluant remplacements + maintenance + risques,##6795CF
+ui,problem_card_1_suffix,incluant remplacements + maintenance + risques,#6795CF
 ui,problem_card_1_total_prefix,Coût total réel :,#ffffff
 ui,problem_card_2_title,Maintenance Spécialisée Coûteuse,#d97706
-ui,problem_card_2_suffix,,##6795CF
+ui,problem_card_2_suffix,,#6795CF
 ui,problem_card_2_cost_prefix,Coût annuel total :,#ffffff
 ui,problem_card_3_title,Temps de Charge & Impact Flotte,#7c3aed
 ui,problem_card_3_charging_prefix,8-10h charge = +40% voiturettes requis :,#7c3aed
@@ -220,11 +220,11 @@ ui,problem_card_6_risks,{{revenue_loss_yearly}}$/an pertes revenus clients,#BFF2
 
 ui,solution_card_1_title,Autonomie Fiable,#BFF2EB
 ui,solution_card_2_title,Durée de Vie Exceptionnelle,#BFF2EB
-ui,solution_card_2_lifespan_separator,- Durée de vie :,##6795CF
+ui,solution_card_2_lifespan_separator,- Durée de vie :,#6795CF
 ui,solution_card_3_title,Charge Rapide,#BFF2EB
-ui,solution_card_3_charge_prefix,Recharge complète en,##6795CF
+ui,solution_card_3_charge_prefix,Recharge complète en,#6795CF
 ui,solution_card_4_title,Poids Réduit,#BFF2EB
-ui,solution_card_4_weight_prefix,Seulement,##6795CF
+ui,solution_card_4_weight_prefix,Seulement,#6795CF
 
 ui,comparison_title,Comparaison Technologies,#1e40af
 ui,comparison_criterion,Critère,#000208
@@ -236,15 +236,15 @@ ui,comparison_maintenance,Maintenance,#ffffff
 ui,comparison_charging_time,Temps de recharge,#ffffff
 
 ui,pricing_title,Nos Offres Exclusives,#1e40af
-ui,pricing_monthly_suffix,par voiturette / mois,##6795CF
-ui,pricing_total_suffix,/ mois,##6795CF
+ui,pricing_monthly_suffix,par voiturette / mois,#6795CF
+ui,pricing_total_suffix,/ mois,#6795CF
 ui,pricing_savings_prefix,Économie :,#BFF2EB
-ui,pricing_savings_10_suffix,sur 10 ans,##6795CF
+ui,pricing_savings_10_suffix,sur 10 ans,#6795CF
 ui,pricing_savings_20_prefix,Économie MASSIVE :,#BFF2EB
-ui,pricing_savings_20_suffix,sur 20 ans,##6795CF
+ui,pricing_savings_20_suffix,sur 20 ans,#6795CF
 ui,pricing_savings_fleet_prefix,Économie PREMIUM :,#BFF2EB
-ui,pricing_savings_fleet_suffix,sur 20 ans,##6795CF
-ui,fleet_minimum_text,Minimum 30 voiturettes,##6795CF
+ui,pricing_savings_fleet_suffix,sur 20 ans,#6795CF
+ui,fleet_minimum_text,Minimum 30 voiturettes,#6795CF
 
 ui,benefits_title,Pourquoi Choisir EDS Québec ?,#1e40af
 ui,benefits_reliability,Fiabilité,#1e40af
@@ -255,30 +255,30 @@ ui,benefits_partnership,Partenariat,#1e40af
 ui,benefits_ecology,Écologie,#1e40af
 
 ui,contact_title,Contactez Notre Spécialiste,#1e40af
-ui,contact_subtitle,Planifiez votre démonstration gratuite dès aujourd'hui !,##6795CF
+ui,contact_subtitle,Planifiez votre démonstration gratuite dès aujourd'hui !,#6795CF
 ui,contact_phone_label,Téléphone,#ffffff
 ui,contact_email_label,Email,#ffffff
 ui,contact_website_label,Site Web,#ffffff
 
 ui,cart_calculator_title,Calculateur de Flotte,#1e40af
-ui,cart_calculator_subtitle,Ajustez le nombre de voiturettes pour voir vos économies,##6795CF
+ui,cart_calculator_subtitle,Ajustez le nombre de voiturettes pour voir vos économies,#6795CF
 ui,cart_count_label,Nombre de voiturettes :,#ffffff
-ui,cart_unit_suffix,voiturette(s),##6795CF
+ui,cart_unit_suffix,voiturette(s),#6795CF
 ui,technician_cost_label,Coût technicien :,#ffffff
-ui,technician_rate_unit,$/heure,##6795CF
+ui,technician_rate_unit,$/heure,#6795CF
 
-images,hero_golf_cart,images/golf_cart_sunset.jpg,
-images,battery_pack,images/battery_pack.jpg,
-images,old_batteries,images/old_batteries.jpg,
-images,comparison_chart,images/comparison.jpg,
-images,golf_course,images/golf_course.jpg,
+images,hero_golf_cart,assets/images/golf_cart_sunset.jpg,
+images,battery_pack,assets/images/battery_pack.jpg,
+images,old_batteries,assets/images/old_batteries.jpg,
+images,comparison_chart,assets/images/comparison.jpg,
+images,golf_course,assets/images/golf_course.jpg,
 
 colors,primary_blue,#1e40af
 colors,secondary_green,#BFF2EB
 colors,accent_light_blue,#3b82f6
 colors,accent_light_green,#10b981
 colors,text_dark,#ffffff
-colors,text_light,##6795CF
+colors,text_light,#6795CF
 colors,background_light,#f8fafc
 colors,background_dark,#0f172a
 colors,background_card,#1e293b
@@ -563,7 +563,7 @@ commercial_colors,info_secondary,#60a5fa
 # Couleurs de contraste pour lisibilité
 contrast_colors,text_on_dark,#ffffff
 contrast_colors,text_on_light,#1f2937
-contrast_colors,text_muted_dark,##6795CF
+contrast_colors,text_muted_dark,#6795CF
 contrast_colors,text_muted_light,#6b7280
 contrast_colors,border_subtle,rgba(255, 255, 255, 0.1)
 contrast_colors,border_prominent,rgba(255, 255, 255, 0.3)

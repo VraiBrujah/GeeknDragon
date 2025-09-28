@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vérification du Projet - EDS Québec</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #1a1a1a; color: #fff; }
+        .check { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .success { background: #2d5a27; }
+        .error { background: #7f1d1d; }
+        .warning { background: #92400e; }
+        pre { background: #374151; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        h1 { color: #3b82f6; }
+        h2 { color: #10b981; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Vérification du Projet EDS Québec</h1>
+
+    <div id="checks"></div>
+
+    <script>
+        const checksContainer = document.getElementById('checks');
+
+        async function runChecks() {
+            const checks = [
+                { name: 'CSV Français', url: 'data/data_clean.csv' },
+                { name: 'CSV Anglais', url: 'data/data_en_clean.csv' },
+                { name: 'Variables', url: 'data/variables.csv' },
+                { name: 'Formules', url: 'data/formulas.csv' },
+                { name: 'JavaScript', url: 'assets/js/script.js' },
+                { name: 'CSS', url: 'assets/css/styles.css' },
+                { name: 'Image Hero', url: 'assets/images/golf_cart_sunset.jpg' },
+                { name: 'Image Battery', url: 'assets/images/battery_pack.jpg' },
+                { name: 'Flag France', url: 'assets/images/flags/france.svg' },
+                { name: 'Flag England', url: 'assets/images/flags/england.svg' },
+                { name: 'Audio Index', url: 'assets/audio/index.json' }
+            ];
+
+            let totalChecks = checks.length;
+            let passedChecks = 0;
+
+            for (const check of checks) {
+                try {
+                    const response = await fetch(check.url);
+                    const status = response.ok ? 'success' : 'error';
+                    const statusText = response.ok ? '✅ OK' : `❌ ${response.status}`;
+
+                    checksContainer.innerHTML += `
+                        <div class="check ${status}">
+                            <strong>${check.name}</strong>: ${statusText} - ${check.url}
+                        </div>
+                    `;
+
+                    if (response.ok) passedChecks++;
+                } catch (error) {
+                    checksContainer.innerHTML += `
+                        <div class="check error">
+                            <strong>${check.name}</strong>: ❌ Erreur - ${error.message}
+                        </div>
+                    `;
+                }
+            }
+
+            // Résumé final
+            const successRate = Math.round((passedChecks / totalChecks) * 100);
+            const summaryClass = successRate === 100 ? 'success' : successRate >= 80 ? 'warning' : 'error';
+
+            checksContainer.innerHTML += `
+                <div class="check ${summaryClass}">
+                    <h2>📊 Résumé: ${passedChecks}/${totalChecks} tests réussis (${successRate}%)</h2>
+                </div>
+            `;
+
+            // Test JavaScript
+            checksContainer.innerHTML += `
+                <h2>🧪 Test JavaScript</h2>
+                <div class="check success">
+                    JavaScript chargé et fonctionnel ✅
+                </div>
+            `;
+        }
+
+        runChecks();
+    </script>
+</body>
+</html>

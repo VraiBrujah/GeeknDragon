@@ -1,14 +1,14 @@
 section,key,value,color,gradient_color_1,gradient_color_2
 header,company_name,EDS QUEBEC,#1e40af
 header,company_tagline,Energy Development System,#BFF2EB
-header,company_subtitle,Quebec's Leading Lithium Solutions,##6795CF
-header,company_address,"195, rue Brissette, local A7, Sainte-Agathe-des-Monts",##6795CF
+header,company_subtitle,Quebec's Leading Lithium Solutions,#6795CF
+header,company_address,"195, rue Brissette, local A7, Sainte-Agathe-des-Monts",#6795CF
 header,company_phone,+1 (819) 323-7859,#1e40af
 header,company_email,contact@edsquebec.com,#1e40af
 
 hero,main_title,TRANSFORM YOUR GOLF COURSE WITH LITHIUM TECHNOLOGY,#1e40af
 hero,subtitle,LiFePO₄ Lithium Kit 48V 105Ah - Designed and Made in Canada,#BFF2EB
-hero,hero_image,images/golf_cart_sunset.jpg
+hero,hero_image,assets/images/golf_cart_sunset.jpg
 
 problem,title,YOUR CURRENT CHALLENGE: LEAD BATTERY LIMITATIONS,#FF0000
 problem,background_gradient,,#2d1b69,#1e1b4b
@@ -29,7 +29,7 @@ problem_details,section_1_subtitle,Why lead batteries cost so much,#6795CF
 problem_details,section_1_point_1,Frequent replacement every 2-5 years,#BFF2EB
 problem_details,section_1_point_2,{{lead_cost_replacement_unit}}$ per cart at each replacement,#BFF2EB
 problem_details,section_1_point_3,4 replacements needed over 10 years (4-year cycle),#BFF2EB
-problem_details,section_1_point_4,Including 1 free warranty replacement + 20% premature failure risk,##6795CF
+problem_details,section_1_point_4,Including 1 free warranty replacement + 20% premature failure risk,#6795CF
 problem_details,section_1_calculation,{{lead_replacement_calculation_10y}},#BFF2EB
 
 problem_details,section_2_title,⚙️ Specialized Expensive Maintenance,#d97706
@@ -41,7 +41,7 @@ problem_details,section_2_point_4,Terminal cleaning and inspection,#d97706
 problem_details,section_2_calculation,{{lead_maintenance_calculation_10y}},#F54005
 
 problem_details,section_3_title,🚨 Operational Risks and Losses,#7c3aed
-problem_details,section_3_subtitle,Costs nobody tells you about,##6795CF
+problem_details,section_3_subtitle,Costs nobody tells you about,#6795CF
 problem_details,section_3_point_1,Mid-course breakdowns = customer refunds,#7c3aed
 problem_details,section_3_point_2,25% electrical overconsumption,#7c3aed
 problem_details,section_3_point_3,Increased insurance for hazardous materials,#7c3aed
@@ -95,11 +95,11 @@ benefits,benefit_6,Eco-friendly and sustainable technology,#059669
 
 testimonial,quote,"Since installing EDS Quebec batteries, we have eliminated 95% of our golf cart problems. Our golfers are delighted and our maintenance team can finally focus on the course!",#ffffff
 testimonial,author,Jean-Michel RIBERA,#1e40af
-testimonial,title,General Manager,##6795CF
-testimonial,company,Tina Golf, New Caledonia,##6795CF
+testimonial,title,General Manager,#6795CF
+testimonial,company,Tina Golf, New Caledonia,#6795CF
 
 contact,specialist_name,Jean-Marc Bucher,#1e40af
-contact,specialist_title,Golf Solutions Specialist - EDS Quebec,##6795CF
+contact,specialist_title,Golf Solutions Specialist - EDS Quebec,#6795CF
 contact,specialist_phone,+1 (819) 323-7859,#1e40af
 contact,specialist_email,commande@edsquebec.com,#1e40af
 contact,website,www.edsquebec.com,#1e40af
@@ -200,10 +200,10 @@ backgrounds,pricing_card_fleet,rgba(124, 58, 237, 0.05)
 # Interface fixed texts
 ui,hero_image_alt,Modern golf cart,
 ui,problem_card_1_title,Explosive Hidden Costs,#BFF2EB
-ui,problem_card_1_suffix,+ premature failure risks,##6795CF
+ui,problem_card_1_suffix,+ premature failure risks,#6795CF
 ui,problem_card_1_total_prefix,Real total cost:,#ffffff
 ui,problem_card_2_title,Specialized Expensive Maintenance,#d97706
-ui,problem_card_2_suffix,,##6795CF
+ui,problem_card_2_suffix,,#6795CF
 ui,problem_card_2_cost_prefix,Total annual cost:,#ffffff
 ui,problem_card_3_title,Charging Time & Fleet Impact,#7c3aed
 ui,problem_card_3_charging_prefix,8-10h charge = +40% carts required:,#7c3aed
@@ -217,11 +217,11 @@ ui,problem_card_6_risks,{{revenue_loss_yearly}}$/year revenue losses from client
 
 ui,solution_card_1_title,Reliable Autonomy,#BFF2EB
 ui,solution_card_2_title,Exceptional Lifespan,#BFF2EB
-ui,solution_card_2_lifespan_separator,- Lifespan:,##6795CF
+ui,solution_card_2_lifespan_separator,- Lifespan:,#6795CF
 ui,solution_card_3_title,Fast Charging,#BFF2EB
-ui,solution_card_3_charge_prefix,Full charge in,##6795CF
+ui,solution_card_3_charge_prefix,Full charge in,#6795CF
 ui,solution_card_4_title,Reduced Weight,#BFF2EB
-ui,solution_card_4_weight_prefix,Only,##6795CF
+ui,solution_card_4_weight_prefix,Only,#6795CF
 
 ui,comparison_title,Technology Comparison,#1e40af
 ui,comparison_criterion,Criterion,#ffffff
@@ -233,15 +233,15 @@ ui,comparison_maintenance,Maintenance,#ffffff
 ui,comparison_charging_time,Charging time,#ffffff
 
 ui,pricing_title,Our Exclusive Offers,#1e40af
-ui,pricing_monthly_suffix,per cart / month,##6795CF
-ui,pricing_total_suffix,/ month,##6795CF
+ui,pricing_monthly_suffix,per cart / month,#6795CF
+ui,pricing_total_suffix,/ month,#6795CF
 ui,pricing_savings_prefix,Savings:,#BFF2EB
-ui,pricing_savings_10_suffix,over 10 years,##6795CF
+ui,pricing_savings_10_suffix,over 10 years,#6795CF
 ui,pricing_savings_20_prefix,MASSIVE Savings:,#BFF2EB
-ui,pricing_savings_20_suffix,over 20 years,##6795CF
+ui,pricing_savings_20_suffix,over 20 years,#6795CF
 ui,pricing_savings_fleet_prefix,PREMIUM Savings:,#BFF2EB
-ui,pricing_savings_fleet_suffix,over 20 years,##6795CF
-ui,fleet_minimum_text,Minimum 30 carts,##6795CF
+ui,pricing_savings_fleet_suffix,over 20 years,#6795CF
+ui,fleet_minimum_text,Minimum 30 carts,#6795CF
 
 ui,benefits_title,Why Choose EDS Quebec?,#1e40af
 ui,benefits_reliability,Reliability,#1e40af
@@ -252,7 +252,7 @@ ui,benefits_partnership,Partnership,#1e40af
 ui,benefits_ecology,Ecology,#1e40af
 
 ui,contact_title,Contact Our Specialist,#1e40af
-ui,contact_subtitle,Schedule your free demonstration today!,##6795CF
+ui,contact_subtitle,Schedule your free demonstration today!,#6795CF
 ui,contact_phone_label,Phone,#ffffff
 ui,contact_email_label,Email,#ffffff
 ui,contact_website_label,Website,#ffffff
@@ -264,11 +264,11 @@ ui,cart_unit_suffix,cart(s),#d1d5db
 ui,technician_cost_label,Technician cost:,#ffffff
 ui,technician_rate_unit,$/hour,#d1d5db
 
-images,hero_golf_cart,images/golf_cart_sunset.jpg,
-images,battery_pack,images/battery_pack.jpg,
-images,old_batteries,images/old_batteries.jpg,
-images,comparison_chart,images/comparison.jpg,
-images,golf_course,images/golf_course.jpg,
+images,hero_golf_cart,assets/images/golf_cart_sunset.jpg,
+images,battery_pack,assets/images/battery_pack.jpg,
+images,old_batteries,assets/images/old_batteries.jpg,
+images,comparison_chart,assets/images/comparison.jpg,
+images,golf_course,assets/images/golf_course.jpg,
 
 colors,primary_blue,#1e40af
 colors,secondary_green,#059669
