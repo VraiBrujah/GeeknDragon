@@ -16,6 +16,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 try {
+    // Charger la configuration afin de récupérer la clé secrète Snipcart
+    $config = [];
+    $configPath = __DIR__ . '/config.php';
+    if (is_file($configPath)) {
+        /** @var array<string, mixed> $config */
+        $config = require $configPath;
+    }
+
+    $secretFromEnv = getenv('SNIPCART_WEBHOOK_SECRET')
+        ?: getenv('SNIPCART_SECRET_API_KEY')
+        ?: ($_SERVER['SNIPCART_WEBHOOK_SECRET'] ?? $_SERVER['SNIPCART_SECRET_API_KEY'] ?? null);
+    $snipcartSecret = $secretFromEnv
+        ?: ($config['snipcart_webhook_secret'] ?? $config['snipcart_secret_api_key'] ?? null);
+
     // Charger les données produits
     $products = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true) ?? [];
     
@@ -45,12 +59,34 @@ try {
     
     // Requête POST (webhook)
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $input = file_get_contents('php://input');
-        $data = json_decode($input, true);
-        
-        // Log pour debugging
-        error_log('Snipcart Webhook: ' . $input);
-        
+        $payload = file_get_contents('php://input') ?: '';
+        $data = json_decode($payload, true);
+
+        $providedSignature = $_SERVER['HTTP_X_SNIPCART_REQUESTTOKEN'] ?? '';
+
+        if (empty($providedSignature) || empty($snipcartSecret)) {
+            http_response_code(401);
+            echo json_encode([
+                'success' => false,
+                'message' => 'Signature manquante ou configuration Snipcart invalide.',
+            ]);
+            exit;
+        }
+
+        $expectedSignature = hash_hmac('sha256', $payload, $snipcartSecret);
+
+        if (!hash_equals($expectedSignature, $providedSignature)) {
+            http_response_code(401);
+            echo json_encode([
+                'success' => false,
+                'message' => 'Signature Snipcart invalide.',
+            ]);
+            exit;
+        }
+
+        // Log uniquement après validation de la signature
+        error_log('Snipcart Webhook valide: ' . $payload);
+
         // Toujours retourner succès pour webhook
         echo json_encode(['success' => true, 'message' => 'Webhook processed']);
         exit;
