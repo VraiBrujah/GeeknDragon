@@ -80,6 +80,147 @@ function snipcartRequest(string $method, string $endpoint, ?array $payload = nul
     return is_array($data) ? $data : [];
 }
 
+/**
+ * Normalise une valeur pour construire une clé de variante stable.
+ */
+function normalizeVariantToken(string $value): string
+{
+    $normalized = trim($value);
+    if ($normalized === '') {
+        return '';
+    }
+
+    $transliterated = @iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $normalized);
+    if ($transliterated !== false && $transliterated !== null) {
+        $normalized = $transliterated;
+    }
+
+    $normalized = strtolower($normalized);
+    $normalized = preg_replace('/[^a-z0-9]+/i', '-', $normalized) ?? $normalized;
+    return trim($normalized, '-');
+}
+
+/**
+ * Construit une clé interne basée sur les champs personnalisés pour retrouver l'identifiant Snipcart.
+ */
+function buildVariantKey(string $productId, array $customFields): ?string
+{
+    $tokens = [];
+
+    foreach ($customFields as $field) {
+        if (!is_array($field)) {
+            continue;
+        }
+
+        $value = $field['value'] ?? $field['defaultValue'] ?? null;
+        if ($value === null || $value === '') {
+            continue;
+        }
+
+        $name = $field['name'] ?? $field['label'] ?? $field['key'] ?? null;
+        $valueToken = normalizeVariantToken((string) $value);
+
+        if ($valueToken === '') {
+            continue;
+        }
+
+        $nameToken = $name !== null ? normalizeVariantToken((string) $name) : '';
+        $tokens[] = $nameToken !== '' ? $nameToken . ':' . $valueToken : $valueToken;
+    }
+
+    if (empty($tokens)) {
+        return null;
+    }
+
+    sort($tokens, SORT_STRING);
+    return $productId . '|' . implode('|', $tokens);
+}
+
+/**
+ * Charge la table de correspondance produit/options → identifiant de variante Snipcart.
+ */
+function loadVariantMap(): array
+{
+    static $cache = null;
+
+    if ($cache !== null) {
+        return $cache;
+    }
+
+    $cache = [];
+    $candidates = [];
+
+    $envMapping = $_ENV['SNIPCART_VARIANT_MAP']
+        ?? $_SERVER['SNIPCART_VARIANT_MAP']
+        ?? null;
+
+    if (is_string($envMapping) && $envMapping !== '') {
+        $candidates[] = $envMapping;
+    }
+
+    $defaultFile = __DIR__ . '/data/variant-map.json';
+    if (is_file($defaultFile)) {
+        $candidates[] = file_get_contents($defaultFile) ?: '';
+    }
+
+    foreach ($candidates as $candidate) {
+        if ($candidate === '') {
+            continue;
+        }
+
+        if (is_file($candidate)) {
+            $payload = file_get_contents($candidate);
+        } else {
+            $payload = $candidate;
+        }
+
+        if (!$payload) {
+            continue;
+        }
+
+        $decoded = json_decode($payload, true);
+        if (is_array($decoded)) {
+            $cache = array_merge($cache, $decoded);
+        } else {
+            error_log('SNIPCART_VARIANT_MAP invalide, JSON attendu.');
+        }
+    }
+
+    return $cache;
+}
+
+/**
+ * Détermine l'identifiant d'inventaire Snipcart à partir des données de l'article.
+ */
+function resolveInventoryId(array $item): string
+{
+    $productId = $item['id'] ?? $item['itemId'] ?? null;
+    if (!$productId) {
+        respond(400, ['error' => 'Missing product identifier']);
+    }
+
+    if (!empty($item['variantId'])) {
+        return (string) $item['variantId'];
+    }
+
+    if (!empty($item['variation']['id'])) {
+        return (string) $item['variation']['id'];
+    }
+
+    $customFields = $item['customFields'] ?? [];
+    if (is_array($customFields) && !empty($customFields)) {
+        $variantKey = buildVariantKey($productId, $customFields);
+        if ($variantKey) {
+            $map = loadVariantMap();
+            if (isset($map[$variantKey])) {
+                return (string) $map[$variantKey];
+            }
+        }
+    }
+
+    return (string) $productId;
+}
+
 // 1. Valide le token Snipcart
 $raw   = file_get_contents('php://input');
 $token = $_SERVER['HTTP_X_SNIPCART_REQUESTTOKEN'] ?? '';
@@ -95,7 +236,7 @@ if (!$order || !isset($order['items'])) {
 
 // 3. Vérifie et décrémente le stock via l'API Snipcart
 foreach ($order['items'] as $item) {
-    $id  = $item['uniqueId'];
+    $id  = resolveInventoryId($item);
     $qty = (int) $item['quantity'];
 
     $inv = snipcartRequest('GET', '/inventory/' . urlencode($id));
