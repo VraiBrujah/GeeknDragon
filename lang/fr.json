@@ -109,7 +109,13 @@
         "hero": {
             "title": "Boutique Geek & Dragon",
             "description": "Offrez à vos parties l’élégance et la durabilité de pièces et cartes d’équipement conçues au Québec, plus précieuses qu’une figurine de dragon à 300 $, laquelle ne sert qu’exceptionnellement, nos pièces sont présentes à chaque session pour des années d’aventures.",
-            "button": "Choisir mes trésors"
+            "button": "Choisir mes trésors",
+            "quickLinks": {
+                "ariaLabel": "Accès rapides vers les catégories de la boutique",
+                "pieces": "Pièces",
+                "cards": "Cartes",
+                "triptychs": "Triptyques"
+            }
         },
         "intro": {
             "title": "Trésors artisanaux",

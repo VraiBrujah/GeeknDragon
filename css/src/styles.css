@@ -198,6 +198,72 @@ h6 {
   background-color: rgba(129, 140, 248, 0.1); /* indigo-400/10 */
   transform: translateY(-3px) scale(1.05);
 }
+
+/* ------------------------------------------------------------------------
+   Boutique — Liens rapides sous le hero
+   --------------------------------------------------------------------- */
+.shop-quick-links {
+  position: relative;
+  z-index: 5;
+  max-width: 64rem;
+  margin: -6rem auto 4rem;
+  padding: 0 1.5rem;
+}
+
+.shop-quick-links__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.shop-quick-links__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(30, 58, 138, 0.75));
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  color: #f8fafc;
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.shop-quick-links__link:hover,
+.shop-quick-links__link:focus-visible {
+  transform: translateY(-4px);
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.95), rgba(124, 58, 237, 0.85));
+  border-color: rgba(129, 140, 248, 0.8);
+  box-shadow: 0 12px 24px -8px rgba(79, 70, 229, 0.6);
+  outline: none;
+}
+
+.shop-quick-links__link:focus-visible {
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.45);
+}
+
+@media (max-width: 1024px) {
+  .shop-quick-links {
+    margin-top: -4rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .shop-quick-links {
+    margin: -3rem auto 3rem;
+    padding: 0 1rem;
+  }
+
+  .shop-quick-links__link {
+    padding: 0.875rem 1.25rem;
+  }
+}
 .btn-outline:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.4); /* indigo-400 */

@@ -150,6 +150,29 @@ echo $snipcartInit;
       </div>
   </section>
 
+  <nav
+    class="shop-quick-links"
+    aria-label="<?= htmlspecialchars($translations['shop']['hero']['quickLinks']['ariaLabel'] ?? 'Accès rapides de la boutique') ?>"
+  >
+    <ul class="shop-quick-links__list">
+      <li class="shop-quick-links__item">
+        <a class="shop-quick-links__link" href="#pieces">
+          <span data-i18n="shop.hero.quickLinks.pieces">Pièces</span>
+        </a>
+      </li>
+      <li class="shop-quick-links__item">
+        <a class="shop-quick-links__link" href="#cartes">
+          <span data-i18n="shop.hero.quickLinks.cards">Cartes</span>
+        </a>
+      </li>
+      <li class="shop-quick-links__item">
+        <a class="shop-quick-links__link" href="#triptyques">
+          <span data-i18n="shop.hero.quickLinks.triptychs">Triptyques</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
   <!-- ░░░ PIÈCES MÉTALLIQUES ░░░ -->
     <section id="pieces" class="py-24 bg-gray-900/80 scroll-mt-24">
       <div class="max-w-6xl mx-auto px-6">
