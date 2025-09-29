@@ -139,7 +139,8 @@
             "coming": "Coming soon",
             "description": "Ready-to-play heroes for improvised sessions.",
             "description1": "The artisans are still shaping these hero grimoires.",
-            "description2": "The triptychs will join the shop shortly."
+            "description2": "The triptychs will join the shop shortly.",
+            "guideCta": "How to use your triptychs"
         },
         "collective": {
             "title": "Invest together, share the adventure",
