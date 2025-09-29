@@ -29,7 +29,7 @@ class BoutiqueAsyncLoader {
         if (this.loading) return;
         this.loading = true;
 
-        console.log('🚀 Démarrage chargement asynchrone des produits...');
+        // Production: log supprimé
 
         try {
             // Obtenir la langue actuelle
@@ -50,7 +50,7 @@ class BoutiqueAsyncLoader {
             // Initialiser les fonctionnalités après injection
             this.initializeFeatures();
 
-            console.log(`✅ Chargement terminé: ${response.counts.total} produits injectés en ${response.performance.execution_time_ms}ms`);
+            // Production: log succès supprimé
 
         } catch (error) {
             console.error('❌ Erreur chargement produits:', error);
@@ -69,7 +69,7 @@ class BoutiqueAsyncLoader {
             return await response.json();
         } catch (error) {
             if (attempt < this.retryAttempts) {
-                console.warn(`Tentative ${attempt} échouée, retry dans ${this.retryDelay}ms...`);
+                // Production: log retry supprimé
                 await new Promise(resolve => setTimeout(resolve, this.retryDelay));
                 return this.fetchWithRetry(url, attempt + 1);
             }
@@ -81,7 +81,7 @@ class BoutiqueAsyncLoader {
         const container = document.querySelector(`#${category} .shop-grid`);
 
         if (!container) {
-            console.warn(`Container pour ${category} non trouvé`);
+            // Production: warning container supprimé
             return;
         }
 
@@ -94,7 +94,7 @@ class BoutiqueAsyncLoader {
         // Marquer comme chargé
         this.loadedSections.add(category);
 
-        console.log(`📦 ${category}: ${count} produits injectés`);
+        // Production: log injection supprimé
     }
 
     animateProductsIn(container) {
@@ -179,7 +179,7 @@ class BoutiqueAsyncLoader {
 
             if (snipcartBtn && customIndex) {
                 snipcartBtn.setAttribute(`data-item-custom${customIndex}-value`, select.value);
-                console.log(`🔄 Synced custom${customIndex} to:`, select.value, 'for product:', targetId);
+                // Production: log sync supprimé
             }
         };
 
@@ -193,7 +193,7 @@ class BoutiqueAsyncLoader {
         // Note: Snipcart utilise automatiquement les valeurs des attributs data-item-custom*-value
         // La synchronisation se fait déjà au changement des selects
 
-        console.log('✅ Synchronisation selects/Snipcart initialisée (comme product.php)');
+        // Production: log init sync supprimé
     }
 
     // Méthode obsolète supprimée - La synchronisation se fait directement via syncSelectsWithSnipcart()
@@ -202,7 +202,7 @@ class BoutiqueAsyncLoader {
         // Laisser Snipcart gérer les boutons directement selon la documentation officielle
         // Snipcart détecte automatiquement la classe .snipcart-add-item et gère les variations
         const snipcartButtons = document.querySelectorAll('.snipcart-add-item');
-        console.log(`🛒 ${snipcartButtons.length} boutons Snipcart détectés (gestion native)`);
+        // Production: log boutons supprimé
     }
 
 
@@ -245,4 +245,4 @@ class BoutiqueAsyncLoader {
 // Instance globale
 window.boutiqueLoader = new BoutiqueAsyncLoader();
 
-console.log('📦 BoutiqueAsyncLoader initialisé - Chargement non-bloquant en cours...');
+// Production: log initialisation supprimé

@@ -18,7 +18,7 @@ $cmpConfig = [
     'host' => 'c.delivery.consentmanager.net',
     'cdn' => 'cdn.consentmanager.net',
     'ab_testing' => '1', // A/B testing activé
-    'auto_blocking' => true, // Blocage automatique avant consentement
+    'auto_blocking' => false, // Désactiver autoblocking pour e-commerce
     'code_source' => '0', // Source directe CDN
     'language' => $currentLang === 'en' ? 'en' : 'fr' // Support multilingue
 ];
@@ -31,8 +31,8 @@ $cmpAttributes = [
     'data-cmp-codesrc="' . htmlspecialchars($cmpConfig['code_source']) . '"'
 ];
 
-// URL du script CMP avec autoblocking mais exemptions configurées
-$cmpScriptUrl = 'https://' . $cmpConfig['cdn'] . '/delivery/autoblocking/' . $cmpConfig['id'] . '.js';
+// URL du script CMP SANS autoblocking pour compatibilité e-commerce
+$cmpScriptUrl = 'https://' . $cmpConfig['cdn'] . '/delivery/' . $cmpConfig['id'] . '.js';
 
 ?>
 
@@ -49,6 +49,18 @@ $cmpScriptUrl = 'https://' . $cmpConfig['cdn'] . '/delivery/autoblocking/' . $cm
 <script>
 (function() {
     'use strict';
+    
+    // Variables globales ConsentManager pour ignorer les domaines e-commerce
+    window.cmp_block_ignoredomains = [
+        'cdn.snipcart.com',
+        'app.snipcart.com', 
+        'js.stripe.com',
+        'checkout.stripe.com',
+        'm.stripe.com',
+        'api.stripe.com',
+        'hooks.stripe.com',
+        'checkout.snipcart.com'
+    ];
     
     // Configuration spécifique e-commerce
     window.cmpConfig = window.cmpConfig || {
@@ -70,15 +82,25 @@ $cmpScriptUrl = 'https://' . $cmpConfig['cdn'] . '/delivery/autoblocking/' . $cm
         // Scripts essentiels exempts de blocage CMP
         essentialScripts: [
             'cdn.snipcart.com', // CDN Snipcart toujours autorisé
-            'snipcart.js' // Script panier essentiel
+            'snipcart.js', // Script panier essentiel
+            'app.snipcart.com', // API Snipcart
+            'js.stripe.com', // Processeur de paiement
+            'checkout.stripe.com', // Interface de paiement
+            'snipcart' // Mot-clé global pour Snipcart
         ],
         
-        // Configuration d'exemptions par attributs
+        // Configuration d'exemptions selon documentation ConsentManager
         exemptions: {
-            'data-cmp-ab': '0', // Désactiver autoblocking
-            'data-purposes': 'essential', // Marquage essentiel
-            'data-service': 'snipcart' // Service e-commerce critique
+            'data-cmp-ab': '1' // CORRECT: 1 = exempt du blocage automatique
         },
+        
+        // Configuration des domaines à ignorer
+        block_ignoredomains: [
+            'cdn.snipcart.com',
+            'app.snipcart.com',
+            'js.stripe.com',
+            'checkout.stripe.com'
+        ],
         
         // Configuration multilingue
         language: '<?= $currentLang ?>',
@@ -130,6 +152,14 @@ $cmpScriptUrl = 'https://' . $cmpConfig['cdn'] . '/delivery/autoblocking/' . $cm
         if (window.__cmp || window.__tcfapi) {
             document.documentElement.setAttribute('data-cmp-status', 'loaded');
             console.log('CMP: Chargé avec succès');
+            
+            // Forcer l'exemption Snipcart après chargement CMP
+            if (window.__cmp && window.__cmp.configure) {
+                window.__cmp.configure({
+                    whitelist: ['cdn.snipcart.com', 'app.snipcart.com', 'js.stripe.com'],
+                    essentialServices: ['snipcart', 'stripe']
+                });
+            }
         } else {
             setTimeout(checkCmpLoaded, 100);
         }

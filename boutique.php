@@ -27,9 +27,7 @@ $extraHead = <<<HTML
   }
 </style>
 
-<!-- Preload ressources critiques pour performance optimale -->
-<link rel="preload" href="/js/app.js?v=' . filemtime(__DIR__.'/js/app.js') . '" as="script">
-<link rel="preload" href="/js/async-stock-loader.js?v=' . filemtime(__DIR__.'/js/async-stock-loader.js') . '" as="script">
+<!-- Preconnections pour ressources externes uniquement -->
 <link rel="preconnect" href="https://app.snipcart.com">
 <link rel="dns-prefetch" href="https://app.snipcart.com">
 HTML;

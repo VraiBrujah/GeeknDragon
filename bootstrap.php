@@ -3,7 +3,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 Dotenv\Dotenv::createUnsafeImmutable(__DIR__)->safeLoad();
 
-// Initialisation du système de monitoring et logs centralisé
+// Initialisation du système de logs centralisé
 require_once __DIR__ . '/includes/logging-system.php';
 
 // Configuration du système de logs selon l'environnement

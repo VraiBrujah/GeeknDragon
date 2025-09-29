@@ -337,14 +337,14 @@
     // Vérifier que nous sommes sur la page boutique
     if (!document.querySelector('#main') || !window.location.pathname.includes('boutique')) return;
 
-    console.log('[Boutique Premium] Initialisation...');
+    // Production: logs init supprimés
 
     // Initialiser tous les modules
     new ScrollAnimations();
     new InteractiveEnhancements();
     new PerformanceOptimizer();
 
-    console.log('[Boutique Premium] ✅ Initialisé avec succès');
+    // Production: log succès supprimé
   }
 
   // Démarrer quand le DOM est prêt

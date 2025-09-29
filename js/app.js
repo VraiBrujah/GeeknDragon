@@ -15,8 +15,13 @@
   const qs = (sel, root = document) => root.querySelector(sel);
   const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  // Pas d’erreurs si console absente
-  const log = (...args) => { try { console.log('[GD]', ...args); } catch (_) {} };
+  // Système de debug conditionnel pour production
+  const DEBUG_MODE = window.location.search.includes('debug=1') || window.location.hash.includes('debug');
+  const log = (...args) => { 
+    if (DEBUG_MODE) {
+      try { console.log('[GD]', ...args); } catch (_) {} 
+    }
+  };
 
   // Throttle / Debounce
   const throttle = (fn, wait = 100) => {

@@ -125,7 +125,7 @@ class AsyncStockLoader {
             const responseTime = performance.now() - startTime;
             this.updateMetrics(productIds.length, responseTime);
 
-            console.log(`✅ Stock chargé pour ${productIds.length} produits en ${responseTime.toFixed(1)}ms`);
+            // Production: log stock supprimé
 
         } catch (error) {
             console.error('Erreur API stock:', error);
@@ -200,7 +200,7 @@ class AsyncStockLoader {
                     loadingIndicator.style.display = 'none';
                 }
                 // En cas d'erreur, on considère comme disponible (fallback optimiste)
-                console.warn(`Erreur chargement stock pour ${productId}, fallback optimiste appliqué`);
+                // Production: warning fallback supprimé
                 break;
         }
     }
@@ -236,7 +236,7 @@ class AsyncStockLoader {
         const productIds = Array.from(productCards).map(card => card.getAttribute('data-product-id'));
 
         if (productIds.length > 0) {
-            console.log(`🚀 Initialisation chargement asynchrone pour ${productIds.length} produits`);
+            // Production: log init supprimé
             this.loadStock(productIds);
         }
     }
@@ -289,4 +289,4 @@ if (document.readyState === 'loading') {
 }
 
 // Debug dans la console
-console.log('📦 AsyncStockLoader initialisé - Chargement optimisé du stock en cours...');
+// Production: log global supprimé

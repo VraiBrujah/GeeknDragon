@@ -79,10 +79,10 @@ if (!$snipcartKey) {
       console.warn('localStorage indisponible, utilisation fallback lang:', fallbackLang);
     }
 
-    // Configuration Snipcart avec chargement immédiat forcé
+    // Configuration Snipcart simplifiée - chargement automatique
     window.SnipcartSettings = {
       publicApiKey: '<?= htmlspecialchars($snipcartKey) ?>',
-      loadStrategy: 'onload', // Retour au chargement immédiat
+      loadStrategy: 'onload', // Chargement automatique
       version: '3.4.0',
       config: {
         addProductBehavior: '<?= htmlspecialchars($snipcartAddProductBehavior) ?>',
@@ -91,18 +91,8 @@ if (!$snipcartKey) {
       },
     };
 
-    // Forcer l'initialisation immédiate
-    window.addEventListener('DOMContentLoaded', function() {
-      if (window.Snipcart && typeof window.Snipcart.api === 'undefined') {
-        console.warn('Snipcart détecté mais API non initialisée, forçage...');
-        // Tentative de forcer l'initialisation
-        setTimeout(function() {
-          if (window.Snipcart && window.Snipcart.ready) {
-            window.Snipcart.ready();
-          }
-        }, 100);
-      }
-    });
+    // Configuration simple - pas d'interférence avec CMP
+    console.log('Snipcart configuré pour chargement direct');
 
     // Debug pour identifier les problèmes
     if (window.location.hash === '#debug' || window.location.search.includes('debug=1')) {
@@ -112,14 +102,46 @@ if (!$snipcartKey) {
     }
   })();
 </script>
-<!-- Librairie Snipcart avec exemption CMP configurée -->
-<script 
-  async 
-  src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"
-  data-cmp-ab="0"
-  data-purposes="essential"
-  data-service="snipcart"
-  class="cmplz-native">
+<!-- Snipcart avec diagnostics détaillés -->
+<script>
+// Test de connectivité préalable
+console.log('🔍 Test de connectivité CDN Snipcart...');
+fetch('https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js', { method: 'HEAD' })
+  .then(response => {
+    console.log('✅ CDN Snipcart accessible:', response.status, response.ok);
+    console.log('🔗 Headers:', Array.from(response.headers.entries()));
+  })
+  .catch(error => {
+    console.error('❌ CDN Snipcart bloqué par:', error.name, error.message);
+    console.error('Causes possibles: bloqueur pub, proxy, DNS, extensions navigateur');
+  });
+
+// Chargement avec exemption CMP complète
+const snipcartScript = document.createElement('script');
+snipcartScript.async = true;
+snipcartScript.src = 'https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js';
+
+// Exemption CMP correcte selon documentation ConsentManager
+snipcartScript.setAttribute('data-cmp-ab', '1'); // CORRECT: 1 = exempt du blocage
+// Suppression des autres attributs non-standard pour ConsentManager
+
+snipcartScript.onload = function() {
+  console.log('✅ Script Snipcart chargé avec succès');
+  console.log('🔍 window.Snipcart présent:', !!window.Snipcart);
+  
+  setTimeout(() => {
+    console.log('🔍 Snipcart.events disponible:', !!(window.Snipcart && window.Snipcart.events));
+    console.log('🔍 Snipcart.api disponible:', !!(window.Snipcart && window.Snipcart.api));
+  }, 1000);
+};
+
+snipcartScript.onerror = function(event) {
+  console.error('❌ Échec chargement script Snipcart');
+  console.error('Événement d\'erreur:', event);
+  console.error('Vérifiez: bloqueurs de pub, proxy, antivirus, extensions');
+};
+
+document.head.appendChild(snipcartScript);
 </script>
 <script>
   // Vérification silencieuse de Snipcart (logs uniquement en mode debug)
@@ -129,20 +151,14 @@ if (!$snipcartKey) {
     console.log('🚀 Chargement Snipcart avec exemption CMP configurée');
   }
   
-  let checkCount = 0;
-  const checkSnipcart = setInterval(() => {
-    checkCount++;
-    
+  // Vérification simple du chargement Snipcart
+  setTimeout(() => {
     if (window.Snipcart && window.Snipcart.events) {
-      if (debugMode) {
-        console.log('✅ Snipcart détecté et prêt avec exemption CMP !');
-      }
-      clearInterval(checkSnipcart);
-    } else if (checkCount > 50) { // 5 secondes - Log d'erreur même sans debug
-      console.error('❌ Snipcart non disponible après 5s');
-      clearInterval(checkSnipcart);
+      console.log('✅ Snipcart opérationnel !');
+    } else {
+      console.error('❌ Snipcart non chargé - problème de connectivité CDN');
     }
-  }, 100);
+  }, 3000);
   
   // Événements CMP uniquement en debug
   if (debugMode) {

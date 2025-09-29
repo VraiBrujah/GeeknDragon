@@ -489,7 +489,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (button && customIndex) {
       const attributeName = `data-item-custom${customIndex}-value`;
       button.setAttribute(attributeName, select.value);
-      console.log(`🔄 Synced custom${customIndex} to: ${select.value} for product: ${productId}`);
+      // Production: log sync supprimé
     }
   };
   
@@ -500,7 +500,7 @@ document.addEventListener('DOMContentLoaded', function() {
     syncSelectToSnipcart(select);
   });
 
-  console.log('✅ Synchronisation Snipcart initialisée (product.php)');
+  // Production: log init supprimé
 });
 </script>
 </body>

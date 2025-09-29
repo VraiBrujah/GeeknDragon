@@ -22,11 +22,12 @@ if (is_string($gaMeasurementId)) {
 ?>
 <head>
   <?php 
-  // CMP PRIORITÉ MAXIMALE - Chargé avant tout autre script de tracking
+  // CMP réactivé avec exemption Snipcart configurée
   include __DIR__ . '/includes/cmp-consent.php'; 
   ?>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Content-Security-Policy" content="frame-src 'self' https://checkout.stripe.com https://js.stripe.com https://hooks.stripe.com https://m.stripe.com https://api.stripe.com https://checkout.snipcart.com https://app.snipcart.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.snipcart.com https://js.stripe.com https://www.googletagmanager.com https://cdn.consentmanager.net https://c.delivery.consentmanager.net; connect-src 'self' https://api.stripe.com https://app.snipcart.com https://checkout.stripe.com https://cdn.snipcart.com https://payment.snipcart.com https://js.stripe.com https://hooks.stripe.com https://m.stripe.com;"/>
   <title><?= htmlspecialchars($title ?? 'Geek & Dragon') ?></title>
   <meta name="description" content="<?= htmlspecialchars($metaDescription ?? '') ?>" />
   <meta property="og:title" content="<?= htmlspecialchars($title ?? 'Geek & Dragon') ?>" />
@@ -76,43 +77,7 @@ if (is_string($gaMeasurementId)) {
   <link rel="stylesheet" href="/css/snipcart.css?v=<?= filemtime(__DIR__.'/css/snipcart.css') ?>">
   <link rel="stylesheet" href="/css/snipcart-custom.css?v=<?= filemtime(__DIR__.'/css/snipcart-custom.css') ?>">
 
-  <!-- Système de Monitoring Local Geek & Dragon -->
-  <script src="/js/monitoring-system.js?v=<?= filemtime(__DIR__.'/js/monitoring-system.js') ?>"></script>
-  <script>
-    // Configuration du monitoring selon l'environnement
-    document.addEventListener('DOMContentLoaded', function() {
-      // Détecter l'environnement (développement vs production)
-      const isDevelopment = window.location.hostname === 'localhost' ||
-                           window.location.hostname.includes('127.0.0.1') ||
-                           window.location.search.includes('debug=1');
-
-      // Configuration adaptée à l'environnement
-      const configMonitoring = {
-        modeDebug: isDevelopment,
-        urlSynchronisation: '/api/monitoring/sync',
-        intervaleSynchronisation: isDevelopment ? 10000 : 30000, // 10s en dev, 30s en prod
-        metriquesActivees: {
-          performance: true,
-          erreurs: true,
-          interactions: true,
-          conversion: true,
-          technique: !isDevelopment // Désactiver les métriques techniques lourdes en dev
-        }
-      };
-
-      // Initialiser le monitoring
-      try {
-        initMonitoringGeekDragon(configMonitoring);
-
-        // Log de démarrage réussi
-        if (window.monitoringGD) {
-          window.monitoringGD.debug('✅ Système de monitoring Geek & Dragon initialisé');
-        }
-      } catch (error) {
-        console.error('❌ Erreur initialisation monitoring:', error);
-      }
-    });
-  </script>
+  <!-- Monitoring supprimé - Performance réglée -->
 
   <?php if (!empty($extraHead)) echo $extraHead; ?>
 </head>
