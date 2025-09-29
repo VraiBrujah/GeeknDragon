@@ -89,15 +89,17 @@ if (!$snipcartKey) {
         locale: lang,
         customerAccount: { enabled: true },
         payment: {
-          appearance: {
-            theme: 'night', // Thème sombre pour Stripe
-            variables: {
-              colorPrimary: '#8b5cf6', // Violet accent
-              colorBackground: '#1e293b', // Fond sombre
-              colorText: '#f8fafc', // Texte blanc
-              colorDanger: '#ef4444',
-              spacingUnit: '12px',
-              borderRadius: '8px'
+          stripeElementsOptions: {
+            appearance: {
+              theme: 'night', // Thème sombre pour Stripe
+              variables: {
+                colorPrimary: '#8b5cf6', // Violet accent
+                colorBackground: '#1e293b', // Fond sombre
+                colorText: '#f8fafc', // Texte blanc
+                colorDanger: '#ef4444',
+                spacingUnit: '12px',
+                borderRadius: '8px'
+              }
             }
           }
         }
