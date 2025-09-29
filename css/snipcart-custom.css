@@ -41,6 +41,20 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--gd-bg-primary) !important;
   color: var(--gd-text-primary) !important;
+
+  /* Variables d'entrée réappliquées au scope dynamique de Snipcart */
+  --bgColor-input: var(--gd-bg-secondary);
+  --bgColor-inputDisabled: #131c2f;
+  --color-input: var(--gd-text-primary);
+  --color-inputPlaceholder: var(--gd-text-muted);
+  --color-inputIcon: var(--gd-text-muted);
+  --color-inputError: var(--gd-error);
+  --bgColor-inputError: rgba(239, 68, 68, 0.15);
+  --borderColor-input: var(--gd-border);
+  --borderColor-inputHover: var(--gd-bg-tertiary);
+  --borderColor-inputFocus: var(--gd-focus);
+  --borderColor-inputError: var(--gd-error);
+  --shadow-focus: 0 0 0 3px rgba(34, 211, 238, 0.1);
 }
 
 /* Conteneurs et boîtes */
@@ -89,6 +103,13 @@
   border-radius: 12px !important;
   box-shadow: var(--gd-shadow) !important;
   padding: 8px !important;
+}
+
+.snipcart-payment-card-form .snipcart-input,
+.snipcart-payment-card-form input {
+  background: var(--gd-bg-secondary) !important;
+  border: 2px solid var(--gd-border) !important;
+  color: var(--gd-text-primary) !important;
 }
 
 .snipcart input:focus,
