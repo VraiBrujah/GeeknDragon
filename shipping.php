@@ -6,11 +6,25 @@ require __DIR__.'/bootstrap.php';
 ini_set('display_errors', '0');
 
 // Récup headers de façon robuste
+function mask_sensitive_value(string $value): string {
+  $length = strlen($value);
+  if ($length <= 8) {
+    return str_repeat('•', $length);
+  }
+
+  return substr($value, 0, 6) . str_repeat('•', $length - 8) . substr($value, -2);
+}
+
 function header_value(string $name): ?string {
   $key = 'HTTP_' . strtoupper(str_replace('-', '_', $name));
   $value = $_SERVER[$key] ?? null;
   if ($value === null) {
     error_log(sprintf('[shipping] Header "%s" absent de la requête Snipcart', $name));
+  } else {
+    $logValue = $name === 'X-Snipcart-RequestToken'
+      ? mask_sensitive_value($value)
+      : sprintf('%d caractères', strlen($value));
+    error_log(sprintf('[shipping] Header "%s" détecté (%s)', $name, $logValue));
   }
   return $value;
 }
@@ -73,16 +87,20 @@ curl_setopt_array($ch, [
   CURLOPT_TIMEOUT        => 5,
 ]);
 $response = curl_exec($ch);
-if ($response === false) {
-  error_log('[shipping] curl_exec a retourné false pendant la validation Snipcart');
-}
 $curlErrNo = curl_errno($ch);
 $curlErr = curl_error($ch) ?: null;
-$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-error_log(sprintf('[shipping] Validation Snipcart : statut HTTP=%s errno=%s message="%s"',
+$code = curl_getinfo($ch, CURLINFO_HTTP_CODE) ?: 0;
+$maskedToken = $token ? mask_sensitive_value($token) : 'non communiqué';
+
+if ($response === false) {
+  error_log(sprintf('[shipping] Échec curl_exec lors de la validation Snipcart (token %s)', $maskedToken));
+}
+
+error_log(sprintf('[shipping] Validation Snipcart : statut HTTP=%s errno=%s message="%s" token=%s',
   $code ?: '0',
   $curlErrNo ?: '0',
-  $curlErr ?? 'aucune erreur curl'
+  $curlErr ?? 'aucune erreur curl',
+  $maskedToken
 ));
 curl_close($ch);
 
@@ -91,6 +109,7 @@ if ($code !== 200 && $code !== 204) {
     'status' => $code,
     'curlErrNo' => $curlErrNo,
     'curlError' => $curlErr,
+    'tokenSnippet' => $maskedToken,
   ];
 
   if (in_array($code, [400, 401, 403], true)) {
