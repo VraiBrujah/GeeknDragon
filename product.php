@@ -397,6 +397,7 @@ echo $snipcartInit;
               data-item-description="<?= htmlspecialchars($summary, ENT_QUOTES, 'UTF-8') ?>"
               data-item-description-fr="<?= htmlspecialchars($summaryFr, ENT_QUOTES, 'UTF-8') ?>"
               data-item-description-en="<?= htmlspecialchars($summaryEn, ENT_QUOTES, 'UTF-8') ?>"
+              data-item-image="<?= !empty($images) ? ('/' . ltrim(htmlspecialchars($images[0]), '/')) : '' ?>"
               data-item-price="<?= htmlspecialchars(number_format((float)$product['price'], 2, '.', '')) ?>"
               data-item-url="<?= htmlspecialchars($metaUrl) ?>"
               data-item-quantity="1"
@@ -473,24 +474,34 @@ echo $snipcartInit;
 <script>window.stock = <?= json_encode([$id => getStock($id)]) ?>;</script>
 <script src="js/app.js"></script>
 
-<!-- Snipcart — initialisation du patch quantité/champs personnalisés -->
+<!-- Synchronisation Snipcart selon documentation officielle -->
 <script>
-(function () {
-  if (window.__snipcartQtyPatchBootstrap) return;
-  window.__snipcartQtyPatchBootstrap = true;
-
-  const bootstrap = () => {
-    if (typeof window.__ensureSnipcartQtyPatch === 'function') {
-      window.__ensureSnipcartQtyPatch();
+document.addEventListener('DOMContentLoaded', function() {
+  /**
+   * Synchronise les valeurs des selects avec les attributs Snipcart
+   * Méthode conforme à la documentation officielle Snipcart
+   */
+  const syncSelectToSnipcart = (select) => {
+    const productId = select.dataset.target;
+    const customIndex = select.dataset.customIndex;
+    const button = document.querySelector(`button[data-item-id="${productId}"]`);
+    
+    if (button && customIndex) {
+      const attributeName = `data-item-custom${customIndex}-value`;
+      button.setAttribute(attributeName, select.value);
+      console.log(`🔄 Synced custom${customIndex} to: ${select.value} for product: ${productId}`);
     }
   };
+  
+  // Synchroniser au changement et initialiser avec valeurs par défaut
+  document.querySelectorAll('select[data-target][data-custom-index]').forEach(select => {
+    select.addEventListener('change', () => syncSelectToSnipcart(select));
+    // Synchroniser immédiatement avec la valeur par défaut
+    syncSelectToSnipcart(select);
+  });
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', bootstrap, { once: true });
-  } else {
-    bootstrap();
-  }
-})();
+  console.log('✅ Synchronisation Snipcart initialisée (product.php)');
+});
 </script>
 </body>
 </html>

@@ -309,7 +309,7 @@ class SystemeLogsGeekDragon
      * @param array $contexte Contexte additionnel
      * @return void
      */
-    private function enregistrer(string $niveau, string $message, array $contexte = []): void
+    public function enregistrer(string $niveau, string $message, array $contexte = []): void
     {
         // Vérifier si le niveau est suffisant
         if (self::NIVEAUX[$niveau] < self::NIVEAUX[$this->niveauMinimum]) {

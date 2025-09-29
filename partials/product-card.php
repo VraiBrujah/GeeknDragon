@@ -14,7 +14,7 @@ $descriptionFr = (string) ($product['description'] ?? '');
 $descriptionEn = (string) ($product['description_en'] ?? $descriptionFr);
 $description = $lang === 'en' ? $descriptionEn : $descriptionFr;
 
-// Utilisation du cache Markdown optimisé
+// Markdown optimisé avec cache
 require_once __DIR__ . '/../includes/markdown-cache.php';
 
 // Génération de clés de cache uniques basées sur l'ID produit
@@ -25,7 +25,7 @@ $descriptionHtmlFr = MarkdownCache::convertToHtml($descriptionFr, $cacheKeyFr);
 $descriptionHtmlEn = MarkdownCache::convertToHtml($descriptionEn, $cacheKeyEn);
 $descriptionHtml = $lang === 'en' ? $descriptionHtmlEn : $descriptionHtmlFr;
 
-// Conversion optimisée vers texte brut avec cache
+// Alt text optimisé
 $altFr = MarkdownCache::convertToPlainText($descriptionFr, $id . '_alt_fr');
 $altEn = MarkdownCache::convertToPlainText($descriptionEn, $id . '_alt_en');
 $alt = $lang === 'en' ? $altEn : $altFr;
@@ -40,14 +40,14 @@ if ($summaryRawEn === '' && $summaryRawFr !== '') {
     $summaryRawEn = $summaryRawFr;
 }
 
-$summaryFr = $summaryRawFr !== '' ? MarkdownCache::convertToPlainText($summaryRawFr, $id . '_sum_fr') : $altFr;
-$summaryEn = $summaryRawEn !== '' ? MarkdownCache::convertToPlainText($summaryRawEn, $id . '_sum_en') : $altEn;
+$summaryFr = $summaryRawFr !== '' ? strip_tags($summaryRawFr) : $alt;
+$summaryEn = $summaryRawEn !== '' ? strip_tags($summaryRawEn) : $alt;
 
 if ($summaryFr === '') {
-    $summaryFr = $altFr;
+    $summaryFr = $alt;
 }
 if ($summaryEn === '') {
-    $summaryEn = $altEn;
+    $summaryEn = $alt;
 }
 
 $summary = $lang === 'en' ? $summaryEn : $summaryFr;
@@ -140,14 +140,16 @@ $defaultLanguage = $languages[0] ?? '';
 $multiplierOptions = array_map(static fn ($value) => (string) $value, $multipliers);
 ?>
 
-<?php if (inStock($id)) : ?>
+<!-- Affichage immédiat avec chargement stock asynchrone -->
 <div class="card h-full flex flex-col bg-gray-800 p-4 rounded-xl shadow
-            min-w-[14.5rem] sm:min-w-[15rem]">
+            min-w-[14.5rem] sm:min-w-[15rem]"
+     data-product-id="<?= htmlspecialchars($id) ?>"
+     data-stock-status="loading">
   <a href="<?= htmlspecialchars($url) ?>">
     <img src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
          alt="<?= htmlspecialchars($alt) ?>"
-         data-alt-fr="<?= htmlspecialchars($altFr) ?>"
-         data-alt-en="<?= htmlspecialchars($altEn) ?>"
+         data-alt-fr="<?= htmlspecialchars($alt) ?>"
+         data-alt-en="<?= htmlspecialchars($alt) ?>"
          class="rounded mb-4 w-full max-h-48 object-contain" 
          loading="lazy"
          onerror="this.src='/media/ui/placeholders/placeholder-product.svg'; this.onerror=null;">
@@ -282,6 +284,7 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
                 data-item-description="<?= htmlspecialchars($summary) ?>"
                 data-item-description-fr="<?= htmlspecialchars($summaryFr) ?>"
                 data-item-description-en="<?= htmlspecialchars($summaryEn) ?>"
+                data-item-image="/<?= ltrim(htmlspecialchars($img), '/') ?>"
                 data-item-price="<?= htmlspecialchars($price) ?>"
                 data-item-url="<?= htmlspecialchars($canonicalUrl) ?>"
                 data-item-quantity="1"
@@ -313,6 +316,17 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
                 <span data-i18n="product.add"><?= __('product.add', 'Ajouter') ?></span>
           </button>
         </div>
-</div>
 
-<?php endif; ?>
+        <!-- Indicateur de chargement stock -->
+        <div class="stock-loading-indicator opacity-50 text-xs text-center p-2" style="display: none;">
+          <div class="animate-pulse">🔄 Vérification stock...</div>
+        </div>
+
+        <!-- État rupture de stock (masqué par défaut) -->
+        <div class="stock-unavailable-overlay absolute inset-0 bg-gray-900/80 flex items-center justify-center rounded-xl" style="display: none;">
+          <div class="text-center text-red-400">
+            <div class="text-lg font-bold mb-2">😞</div>
+            <div class="text-sm" data-i18n="product.outOfStock">Rupture de stock</div>
+          </div>
+        </div>
+</div>

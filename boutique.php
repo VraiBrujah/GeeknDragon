@@ -8,14 +8,35 @@ $metaDescription = $translations['meta']['shop']['desc'] ?? '';
 $metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/boutique.php';
 $extraHead = <<<HTML
 <style>
-  .card{@apply bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col;}
+  .card{@apply bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col; position: relative;}
   .oos{@apply bg-gray-700 text-gray-400 cursor-not-allowed;}
+
+  /* États de chargement stock asynchrone */
+  [data-stock-status="loading"] .stock-loading-indicator { display: block !important; }
+  [data-stock-status="loading"] { opacity: 0.9; }
+
+  .stock-unavailable-overlay {
+    backdrop-filter: blur(2px);
+    z-index: 10;
+  }
+
+  /* CSS pour animations produits (simplifié) */
+  .shop-grid {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
 </style>
+
+<!-- Preload ressources critiques pour performance optimale -->
+<link rel="preload" href="/js/app.js?v=' . filemtime(__DIR__.'/js/app.js') . '" as="script">
+<link rel="preload" href="/js/async-stock-loader.js?v=' . filemtime(__DIR__.'/js/async-stock-loader.js') . '" as="script">
+<link rel="preconnect" href="https://app.snipcart.com">
+<link rel="dns-prefetch" href="https://app.snipcart.com">
 HTML;
 
 /* ───── STOCK ───── */
 $snipcartSecret = $config['snipcart_secret_api_key'] ?? null;
-$stockData = json_decode(file_get_contents(__DIR__ . '/data/stock.json'), true) ?? [];
+$stockData = []; // Plus de stock.json local - géré par Snipcart
 $snipcartSyncRaw = $_ENV['SNIPCART_SYNC'] ?? null;
 $forceOfflineStock = false;
 if ($snipcartSyncRaw !== null) {
@@ -64,62 +85,19 @@ function inStock(string $id): bool
     return $stock === null || $stock > 0;      // true si illimité ou quantité > 0
 }
 
-// Liste des produits séparés par catégorie
-$data = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true) ?? [];
+// CHARGEMENT ASYNCHRONE: Plus de traitement PHP bloquant !
+// Les produits seront chargés via /api/products-async.php pour affichage instantané
+
+// Variables vides pour compatibilité avec le reste du code
 $pieces = [];
 $cards = [];
 $triptychs = [];
-
-foreach ($data as $id => $p) {
-    $summaryFr = (string) ($p['summary'] ?? ($p['description'] ?? ''));
-    $summaryEn = (string) ($p['summary_en'] ?? ($p['description_en'] ?? ''));
-    if ($summaryFr === '' && $summaryEn !== '') {
-        $summaryFr = $summaryEn;
-    }
-    if ($summaryEn === '' && $summaryFr !== '') {
-        $summaryEn = $summaryFr;
-    }
-
-    $product = [
-        'id' => $id,
-        'name' => str_replace(' – ', '<br>', $p['name']),
-        'name_en' => str_replace(' – ', '<br>', $p['name_en'] ?? $p['name']),
-        'price' => $p['price'],
-        'img' => $p['images'][0] ?? '',
-        'description' => $p['description'] ?? '',
-        'description_en' => $p['description_en'] ?? ($p['description'] ?? ''),
-        'summary' => $summaryFr,
-        'summary_en' => $summaryEn,
-        'multipliers' => $p['multipliers'] ?? [],
-        'metals' => $p['metals'] ?? [],
-        'metals_en' => $p['metals_en'] ?? [],
-        'languages' => $p['languages'] ?? [],
-        'triptych_options' => $p['triptych_options'] ?? [],
-        'triptych_type' => $p['triptych_type'] ?? null,
-        'customizable' => $p['customizable'] ?? false,
-    ];
-    
-    // Catégorisation des produits basée sur la colonne 'category' du CSV
-    $category = $p['category'] ?? 'cards'; // Par défaut 'cards' si pas défini
-    
-    if ($category === 'pieces') {
-        $product['url'] = 'product.php?id=' . urlencode($id) . '&from=pieces';
-        $pieces[] = $product;
-    } elseif ($category === 'triptychs') {
-        $product['url'] = 'product.php?id=' . urlencode($id) . '&from=triptychs';
-        $triptychs[] = $product;
-    } else { // 'cards' ou toute autre valeur
-        $product['url'] = 'product.php?id=' . urlencode($id) . '&from=cards';
-        $cards[] = $product;
-    }
-}
-
-// Pour compatibilité (si du code utilise encore $products)
-$products = array_merge($pieces, $cards, $triptychs);
-$stock = [];
-foreach ($products as $p) {
-    $stock[$p['id']] = getStock($p['id']);
-}
+$products = [];
+// SUPPRIMÉ: Stock chargé en AJAX pour performance optimale
+// $stock = [];
+// foreach ($products as $p) {
+//     $stock[$p['id']] = getStock($p['id']);
+// }
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
@@ -130,6 +108,7 @@ foreach ($products as $p) {
 $snipcartLanguage = $lang;
 $snipcartLocales = 'fr,en';
 $snipcartAddProductBehavior = 'overlay';
+// Snipcart réactivé avec chargement optimisé mais fonctionnel
 ob_start();
 include 'snipcart-init.php';
 $snipcartInit = ob_get_clean();
@@ -154,11 +133,8 @@ echo $snipcartInit;
     <section id="pieces" class="py-24 bg-gray-900/80 scroll-mt-24">
       <div class="max-w-6xl mx-auto px-6">
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-8" data-i18n="shop.pieces.title">Pièces métalliques</h2>
-        <div class="shop-grid">
-          <?php foreach ($pieces as $product) : ?>
-              <?php include __DIR__ . '/partials/product-card.php'; ?>
-          <?php endforeach; ?>
-        </div>
+        <!-- Grille produits (chargement instantané) -->
+        <div class="shop-grid"></div>
 
         <p class="text-center mt-8 italic max-w-3xl mx-auto text-gray-300">
           <span data-i18n="shop.pieces.description">Un jeu de rôle sans pièces physiques, c'est comme un Monopoly sans billets. Offrez‑vous le poids authentique du trésor.</span><br>
@@ -195,11 +171,8 @@ echo $snipcartInit;
     <section id="cartes" class="py-24 bg-gray-900/80 scroll-mt-24">
       <div class="max-w-6xl mx-auto px-6">
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-8" data-i18n="shop.cards.title">Cartes d'équipement</h2>
-        <div class="shop-grid">
-          <?php foreach ($cards as $product) : ?>
-              <?php include __DIR__ . '/partials/product-card.php'; ?>
-          <?php endforeach; ?>
-        </div>
+        <!-- Grille produits (chargement instantané) -->
+        <div class="shop-grid"></div>
 
         <p class="text-center mt-8 italic max-w-3xl mx-auto text-gray-300">
           <span data-i18n="shop.cards.description"><?= __('shop.cards.description', 'Paquets thématiques de cartes illustrées pour gérer l\'inventaire visuellement.') ?></span>
@@ -211,11 +184,8 @@ echo $snipcartInit;
     <section id="triptyques" class="py-24 scroll-mt-24">
       <div class="max-w-6xl mx-auto px-6">
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-8" data-i18n="shop.triptychs.title">Triptyques de personnage</h2>
-        <div class="shop-grid">
-          <?php foreach ($triptychs as $product) : ?>
-              <?php include __DIR__ . '/partials/product-card.php'; ?>
-          <?php endforeach; ?>
-        </div>
+        <!-- Grille produits (chargement instantané) -->
+        <div class="shop-grid"></div>
 
         <p class="text-center mt-8 italic max-w-3xl mx-auto text-gray-300">
           <span data-i18n="shop.triptychs.description"><?= __('shop.triptychs.description', 'Héros clé en main pour des parties improvisées.') ?></span>
@@ -256,34 +226,27 @@ echo $snipcartInit;
 </main>
 
 <?php include 'footer.php'; ?>
-<script type="application/ld+json">
-<?= json_encode([
-    '@context' => 'https://schema.org/',
-    '@graph' => array_map(function ($p) {
-        return [
-            '@type' => 'Product',
-            'name' => strip_tags($p['name']),
-            'description' => $p['description'],
-            'image' => 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/' . $p['img'],
-            'sku' => $p['id'],
-            'offers' => [
-                '@type' => 'Offer',
-                'price' => $p['price'],
-                'priceCurrency' => 'CAD',
-                'availability' => inStock($p['id']) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-            ],
-        ];
-    }, $products),
-], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
+<!-- Schema.org sera généré via JavaScript après chargement des produits -->
+<script type="application/ld+json" id="product-schema">
+{
+  "@context": "https://schema.org/",
+  "@type": "CollectionPage",
+  "name": "Boutique Geek & Dragon",
+  "description": "Accessoires immersifs pour jeux de rôle D&D",
+  "url": "https://geekndragon.com/boutique.php"
+}
 </script>
-  <script>
-    window.stock = <?= json_encode($stock) ?>;
-    window.products = <?= json_encode($data) ?>;
-  </script>
-  <!-- Ordre correct comme index.php -->
+  <!-- Scripts optimisés pour chargement immédiat -->
   <script src="/js/app.js?v=<?= filemtime(__DIR__.'/js/app.js') ?>"></script>
   <script src="/js/hero-videos.js?v=<?= filemtime(__DIR__.'/js/hero-videos.js') ?>"></script>
-  <!-- Scripts convertisseur supprimés: déplacés vers aide-jeux.php -->
+
+  <!-- NOUVEAU: Chargement asynchrone des produits (non-bloquant) -->
+  <script src="/js/boutique-async-loader.js?v=<?= filemtime(__DIR__.'/js/boutique-async-loader.js') ?>"></script>
+
+  <!-- Stock en arrière-plan après chargement des produits -->
+  <script src="/js/async-stock-loader.js?v=<?= filemtime(__DIR__.'/js/async-stock-loader.js') ?>"></script>
+
+  <!-- Snipcart fonctionne nativement avec les attributs data-item-* selon la documentation officielle -->
 </body>
 
 

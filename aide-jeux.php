@@ -2224,7 +2224,9 @@ function confirmDownload() {
 <script src="/js/snipcart-utils.js?v=<?= filemtime(__DIR__.'/js/snipcart-utils.js') ?>"></script>
 <script src="/js/coin-lot-optimizer.js?v=<?= filemtime(__DIR__.'/js/coin-lot-optimizer.js') ?>"></script>
 <script src="/js/currency-converter.js?v=<?= filemtime(__DIR__.'/js/currency-converter.js') ?>"></script>
+<?php if (isset($_GET['debug']) || strpos($_SERVER['REQUEST_URI'] ?? '', '#debug') !== false) : ?>
 <script src="/js/currency-converter-tests.js?v=<?= filemtime(__DIR__.'/js/currency-converter-tests.js') ?>"></script>
+<?php endif; ?>
 <script src="/js/dnd-music-player.js?v=<?= filemtime(__DIR__.'/js/dnd-music-player.js') ?>"></script>
 
 <script>
