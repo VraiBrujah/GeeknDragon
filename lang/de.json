@@ -139,7 +139,8 @@
             "coming": "[TO_TRANSLATE_de] À venir",
             "description": "[TO_TRANSLATE_de] Héros clé en main pour des parties improvisées.",
             "description1": "[TO_TRANSLATE_de] Les artisans façonnent encore ces grimoires de héros.",
-            "description2": "[TO_TRANSLATE_de] Les triptyques rejoindront la boutique sous peu."
+            "description2": "[TO_TRANSLATE_de] Les triptyques rejoindront la boutique sous peu.",
+            "guideCta": "[TO_TRANSLATE_de] Comment utiliser vos triptyques"
         },
         "collective": {
             "title": "[TO_TRANSLATE_de] Investissez ensemble, partagez l’aventure",

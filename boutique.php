@@ -197,6 +197,11 @@ echo $snipcartInit;
         <p class="text-center mt-8 italic max-w-3xl mx-auto text-gray-300">
           <span data-i18n="shop.triptychs.description"><?= __('shop.triptychs.description', 'Héros clé en main pour des parties improvisées.') ?></span>
         </p>
+        <div class="text-center mt-6">
+          <a href="<?= langUrl('aide-jeux.php#guide-triptyques') ?>" class="btn btn-outline" data-i18n="shop.triptychs.guideCta">
+            <?= __('shop.triptychs.guideCta', 'Comment utiliser vos triptyques') ?>
+          </a>
+        </div>
       </div>
     </section>
 
