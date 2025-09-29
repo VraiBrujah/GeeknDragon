@@ -82,6 +82,15 @@
   transition: all 0.2s ease !important;
 }
 
+/* Encadrement harmonisé de l'iframe Stripe */
+.snipcart .snipcart-payment-card-form {
+  background: var(--gd-bg-secondary) !important;
+  border: 2px solid var(--gd-border) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--gd-shadow) !important;
+  padding: 8px !important;
+}
+
 .snipcart input:focus,
 .snipcart textarea:focus,
 .snipcart .snipcart-input:focus {
