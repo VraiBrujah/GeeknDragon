@@ -1,0 +1,43 @@
+# Configuration API Monitoring - Geek & Dragon
+# Sécurisation et routage pour l'API
+
+# Activer la réécriture d'URL
+RewriteEngine On
+
+# Headers de sécurité
+Header always set X-Content-Type-Options nosniff
+Header always set X-Frame-Options DENY
+Header always set X-XSS-Protection "1; mode=block"
+
+# CORS pour l'API monitoring
+Header always set Access-Control-Allow-Origin "https://geekndragon.com"
+Header always set Access-Control-Allow-Methods "POST, OPTIONS"
+Header always set Access-Control-Allow-Headers "Content-Type, X-Requested-With"
+
+# Gestion des requêtes OPTIONS (preflight)
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^(.*)$ - [R=200,L]
+
+# Routage API
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^monitoring/sync$ monitoring/sync.php [L,QSA]
+
+# Sécurité : Interdire l'accès direct aux fichiers de configuration
+<FilesMatch "\.(env|md|json|txt|log)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Optimisation des performances
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType application/json "access plus 0 seconds"
+</IfModule>
+
+# Compression pour économiser la bande passante
+<IfModule mod_deflate.c>
+    SetOutputFilter DEFLATE
+    SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+    SetEnvIfNoCase Request_URI \.(?:exe|t?gz|zip|bz2|sit|rar)$ no-gzip dont-vary
+</IfModule>
