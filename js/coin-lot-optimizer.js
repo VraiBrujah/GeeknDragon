@@ -464,15 +464,21 @@ class CoinLotOptimizer {
     variations.forEach(variation => {
       for (let qty = 1; qty <= maxQuantity; qty++) {
         if (this.canCoverWithQuantity(variation, needs, qty)) {
+          // LOGIQUE ANTI-GASPILLAGE: Éviter Quintessence pour besoins simples
+          if (this.isWastefulSolution(variation, needs, qty)) {
+            this.debugLog(`⚠️ CoinLotOptimizer: ${variation.name} x${qty} rejeté (gaspillage excessif)`);
+            continue;
+          }
+
           const cost = variation.price * qty;
-          
+
           solutions.push({
             items: [{ variation, quantity: qty }],
             totalCost: cost,
             type: 'brute_force_single'
           });
-          
-          this.debugLog(`✅ CoinLotOptimizer: ${variation.name} x${qty} = ${cost}$ (couvre avec surplus autorisé)`);
+
+          this.debugLog(`✅ CoinLotOptimizer: ${variation.name} x${qty} = ${cost}$ (couvre avec surplus acceptable)`);
         }
       }
     });
@@ -481,7 +487,16 @@ class CoinLotOptimizer {
     if (Object.keys(needs).length > 1 && solutions.length < 5) {
       this.findBruteForce2Products(needs, variations, solutions, maxQuantity);
     }
-    
+
+    // FALLBACK: Si aucune solution économique trouvée, créer solution par pièces individuelles
+    if (solutions.length === 0 || solutions.every(s => s.totalCost > 50)) {
+      this.debugLog('🔄 CoinLotOptimizer: Fallback vers pièces individuelles');
+      const individualSolution = this.createIndividualSolution(needs, variations);
+      if (individualSolution) {
+        solutions.push(individualSolution);
+      }
+    }
+
     return solutions.sort((a, b) => a.totalCost - b.totalCost);
   }
 
@@ -528,17 +543,102 @@ class CoinLotOptimizer {
    */
   canCoverWithQuantity(variation, needs, quantity) {
     const coverage = {};
-    
+
     // Calculer ce que cette quantité couvre
     Object.entries(variation.capacity).forEach(([coinKey, capacity]) => {
       coverage[coinKey] = capacity * quantity;
     });
-    
+
     // Vérifier que TOUS les besoins sont couverts (surplus autorisé)
     return Object.entries(needs).every(([coinKey, needed]) => {
       const covered = coverage[coinKey] || 0;
       return needed <= covered;
     });
+  }
+
+  /**
+   * Détermine si une solution génère un gaspillage excessif
+   * @param {Object} variation - Variation du produit
+   * @param {Object} needs - Besoins
+   * @param {number} quantity - Quantité
+   * @returns {boolean} true si la solution est considérée comme gaspilleuse
+   */
+  isWastefulSolution(variation, needs, quantity) {
+    // Cas spécial : Quintessence avec besoins simples
+    if (variation.type === 'quintessence') {
+      const neededMetals = Object.keys(needs).map(key => key.split('_')[0]);
+      const uniqueMetals = [...new Set(neededMetals)];
+
+      // Si seulement 1-2 métaux demandés, Quintessence est gaspilleuse
+      if (uniqueMetals.length <= 2) {
+        this.debugLog(`🚫 Anti-gaspillage: Quintessence rejetée (${uniqueMetals.length} métaux vs 5 fournis)`);
+        return true;
+      }
+
+      // Si besoins totaux très faibles ET peu de métaux, Quintessence disproportionnée
+      const totalNeeded = Object.values(needs).reduce((sum, qty) => sum + qty, 0);
+      if (totalNeeded <= 3 && uniqueMetals.length <= 2) {
+        this.debugLog(`🚫 Anti-gaspillage: Quintessence rejetée (${totalNeeded} pièces, ${uniqueMetals.length} métaux)`);
+        return true;
+      }
+    }
+
+    // Calculer le ratio de gaspillage global
+    const totalProvided = Object.values(variation.capacity).reduce((sum, cap) => sum + cap * quantity, 0);
+    const totalNeeded = Object.values(needs).reduce((sum, needed) => sum + needed, 0);
+    const wasteRatio = (totalProvided - totalNeeded) / totalProvided;
+
+    // Rejeter si plus de 70% de gaspillage
+    if (wasteRatio > 0.7) {
+      this.debugLog(`🚫 Anti-gaspillage: ${variation.name} rejeté (${Math.round(wasteRatio * 100)}% gaspillage)`);
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * Crée une solution par pièces individuelles
+   * @param {Object} needs - Besoins exacts
+   * @param {Array} variations - Toutes les variations disponibles
+   * @returns {Object|null} Solution par pièces individuelles
+   */
+  createIndividualSolution(needs, variations) {
+    const items = [];
+    let totalCost = 0;
+
+    // Pour chaque besoin, trouver la pièce personnalisée correspondante
+    for (const [coinKey, quantity] of Object.entries(needs)) {
+      if (quantity <= 0) continue;
+
+      const [metal, mult] = coinKey.split('_');
+      const individualVariation = variations.find(v =>
+        v.type === 'normal' &&
+        v.productId === 'coin-custom-single' &&
+        v.capacity[coinKey] === 1
+      );
+
+      if (individualVariation) {
+        items.push({ variation: individualVariation, quantity });
+        totalCost += individualVariation.price * quantity;
+        this.debugLog(`  + ${quantity}x ${individualVariation.name} ($${individualVariation.price})`);
+      } else {
+        this.debugLog(`⚠️ CoinLotOptimizer: Pièce individuelle non trouvée pour ${coinKey}`);
+        return null;
+      }
+    }
+
+    if (items.length === 0) {
+      return null;
+    }
+
+    this.debugLog(`🏗️ CoinLotOptimizer: Solution individuelle créée - $${totalCost}`);
+
+    return {
+      items,
+      totalCost,
+      type: 'individual_fallback'
+    };
   }
 
   /**
@@ -700,7 +800,7 @@ class CoinLotOptimizer {
     
     // NOUVELLE LOGIQUE: Tester spécifiquement les patterns détectés
     const patterns = this.multipliers.map(mult => this.identifyQuintessencePattern(needs, mult))
-                                      .filter(p => p.matches >= 3); // Seuil abaissé à 3 pour plus de flexibilité
+                                      .filter(p => p.matches >= 4); // SEUIL REHAUSSÉ: Minimum 4 métaux sur 5
     
     this.debugLog(`🔍 CoinLotOptimizer: ${patterns.length} patterns Quintessence détectés`);
     
@@ -711,8 +811,8 @@ class CoinLotOptimizer {
         const pattern2 = patterns[j];
         
         // Ne tester que si les patterns ont des multiplicateurs différents et suffisamment de métaux
-        if (pattern1.multiplier !== pattern2.multiplier && 
-            pattern1.matches >= 3 && pattern2.matches >= 3) {
+        if (pattern1.multiplier !== pattern2.multiplier &&
+            pattern1.matches >= 4 && pattern2.matches >= 4) {
           
           const quintessence1 = quintessenceVariations.find(v => v.multiplier === pattern1.multiplier);
           const quintessence2 = quintessenceVariations.find(v => v.multiplier === pattern2.multiplier);
@@ -834,8 +934,9 @@ class CoinLotOptimizer {
     const quintessenceVariations = variations.filter(v => v.type === 'quintessence');
     
     // Identifier tous les patterns Quintessence possibles par multiplicateur
+    // SEUIL REHAUSSÉ: Minimum 4 métaux sur 5 pour justifier une Quintessence
     const patterns = this.multipliers.map(mult => this.identifyQuintessencePattern(needs, mult))
-                                      .filter(p => p.matches >= 3);
+                                      .filter(p => p.matches >= 4);
     
     // Tester des combinaisons de patterns (jusqu'à 3 patterns simultanés)
     for (let i = 0; i < patterns.length; i++) {
@@ -889,7 +990,7 @@ class CoinLotOptimizer {
       matches,
       matchingMetals,
       isComplete: matches === 5,
-      isPartial: matches >= 3 && matches < 5
+      isPartial: matches >= 4 && matches < 5
     };
   }
   

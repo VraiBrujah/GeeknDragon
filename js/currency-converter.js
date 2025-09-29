@@ -392,17 +392,7 @@ class CurrencyConverterPremium {
     let bestSolution = null;
     let minCost = Infinity;
 
-    // STRATÉGIE 1: Optimisation coût avec lots 3/7 (prioritaire)
-    const costOptimalSolution = this.findCostOptimalSolution(targetValue, preserveMetals);
-    if (costOptimalSolution && costOptimalSolution.length > 0) {
-      const cost = this.calculateSolutionCost(costOptimalSolution);
-      if (cost < minCost) {
-        minCost = cost;
-        bestSolution = costOptimalSolution;
-      }
-    }
-
-    // STRATÉGIE 2: Priorité métal > multiplicateur (nouvelle règle)
+      // STRATÉGIE 1: Priorité métal > multiplicateur (PRINCIPALE)
     const metalPrioritySolution = this.findMetalPrioritySolution(targetValue, preserveMetals);
     if (metalPrioritySolution && metalPrioritySolution.length > 0) {
       const cost = this.calculateSolutionCost(metalPrioritySolution);
@@ -412,11 +402,20 @@ class CurrencyConverterPremium {
       }
     }
 
-    // STRATÉGIE 3: Fallback - Anciennes métaheuristiques
-    const fallbackSolution = this.findFallbackSolution(targetValue);
-    if (fallbackSolution && fallbackSolution.length > 0) {
-      const cost = this.calculateSolutionCost(fallbackSolution);
-      if (cost < minCost || !bestSolution) {
+    // STRATÉGIE 2: Optimisation coût avec lots 3/7 (secondaire)
+    const costOptimalSolution = this.findCostOptimalSolution(targetValue, preserveMetals);
+    if (costOptimalSolution && costOptimalSolution.length > 0) {
+      const cost = this.calculateSolutionCost(costOptimalSolution);
+      if (cost < minCost) {
+        minCost = cost;
+        bestSolution = costOptimalSolution;
+      }
+    }
+
+    // STRATÉGIE 3: Fallback simple et fiable
+    if (!bestSolution) {
+      const fallbackSolution = this.findFallbackSolution(targetValue);
+      if (fallbackSolution && fallbackSolution.length > 0) {
         bestSolution = fallbackSolution;
       }
     }
@@ -703,9 +702,11 @@ class CurrencyConverterPremium {
     const balancedValue = result.reduce((sum, item) => sum + (item.value * item.quantity), 0);
     const coverageRatio = balancedValue / targetValue;
     
-    // Si on couvre au moins 70% avec une distribution équilibrée, l'utiliser
-    if (coverageRatio >= 0.7 && result.length >= 15) {
-      
+    // CORRECTION: Ne pas forcer la distribution équilibrée systématiquement
+    // Elle doit être économiquement justifiée
+    if (coverageRatio >= 0.9 && result.length >= 20 && targetValue >= 50000) {
+      // Seulement pour de très gros montants où c'est vraiment avantageux
+
       // Compléter le reste avec l'algorithme glouton si nécessaire
       if (remaining > 0) {
         denoms.forEach(denom => {
@@ -724,13 +725,13 @@ class CurrencyConverterPremium {
           }
         });
       }
-      
+
       return result;
     }
     
-    // Si la distribution équilibrée ne couvre pas assez, essayer une approche hybride
-    // Forcer au moins quelques pièces équilibrées si on a de gros montants
-    if (targetValue >= 11111) { // Valeur de la Quintessence ×1 + tous métaux ×1
+    // CORRECTION: Approche hybride seulement pour les très gros montants
+    // Ne pas forcer la Quintessence pour des petits montants comme 150 cuivres
+    if (targetValue >= 100000) { // Seuil beaucoup plus élevé
       const hybridResult = [];
       let hybridRemaining = targetValue;
       
