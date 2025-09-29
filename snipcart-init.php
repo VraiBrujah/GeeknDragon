@@ -92,12 +92,30 @@ if (!$snipcartKey) {
           appearance: {
             theme: 'night', // Thème sombre pour Stripe
             variables: {
-              colorPrimary: '#8b5cf6', // Violet accent
-              colorBackground: '#1e293b', // Fond sombre
-              colorText: '#f8fafc', // Texte blanc
+              colorPrimary: '#8b5cf6',
+              colorBackground: '#1e293b',
+              colorText: '#f8fafc',
               colorDanger: '#ef4444',
+              colorSuccess: '#10b981',
+              fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
               spacingUnit: '12px',
-              borderRadius: '8px'
+              borderRadius: '8px',
+              colorTextSecondary: '#cbd5e1',
+              colorTextPlaceholder: '#94a3b8'
+            }
+          },
+          stripe: {
+            appearance: {
+              theme: 'night',
+              variables: {
+                colorPrimary: '#8b5cf6',
+                colorBackground: '#1e293b',
+                colorText: '#f8fafc',
+                colorDanger: '#ef4444',
+                fontFamily: 'Inter',
+                spacingUnit: '12px',
+                borderRadius: '8px'
+              }
             }
           }
         }

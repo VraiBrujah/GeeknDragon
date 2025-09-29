@@ -28,7 +28,7 @@ if (is_string($gaMeasurementId)) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="Content-Security-Policy" content="frame-src 'self' https://checkout.stripe.com https://js.stripe.com https://hooks.stripe.com https://m.stripe.com https://api.stripe.com https://checkout.snipcart.com https://app.snipcart.com https://payment.snipcart.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.snipcart.com https://js.stripe.com https://www.googletagmanager.com https://cdn.consentmanager.net https://c.delivery.consentmanager.net; connect-src 'self' https://api.stripe.com https://app.snipcart.com https://checkout.stripe.com https://cdn.snipcart.com https://payment.snipcart.com https://js.stripe.com https://hooks.stripe.com https://m.stripe.com;"/>
-  <meta http-equiv="Permissions-Policy" content="payment=(self &quot;https://payment.snipcart.com&quot; &quot;https://checkout.stripe.com&quot; &quot;https://js.stripe.com&quot;)"/>
+  <meta http-equiv="Permissions-Policy" content="payment=*, payment-handler=*"/>
   <title><?= htmlspecialchars($title ?? 'Geek & Dragon') ?></title>
   <meta name="description" content="<?= htmlspecialchars($metaDescription ?? '') ?>" />
   <meta property="og:title" content="<?= htmlspecialchars($title ?? 'Geek & Dragon') ?>" />
