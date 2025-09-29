@@ -79,7 +79,7 @@ if (!$snipcartKey) {
       console.warn('localStorage indisponible, utilisation fallback lang:', fallbackLang);
     }
 
-    // Configuration Snipcart simplifiée - chargement automatique
+    // Configuration Snipcart avec thème sombre
     window.SnipcartSettings = {
       publicApiKey: '<?= htmlspecialchars($snipcartKey) ?>',
       loadStrategy: 'onload', // Chargement automatique
@@ -87,7 +87,20 @@ if (!$snipcartKey) {
       config: {
         addProductBehavior: '<?= htmlspecialchars($snipcartAddProductBehavior) ?>',
         locale: lang,
-        customerAccount: { enabled: true }
+        customerAccount: { enabled: true },
+        payment: {
+          appearance: {
+            theme: 'night', // Thème sombre pour Stripe
+            variables: {
+              colorPrimary: '#8b5cf6', // Violet accent
+              colorBackground: '#1e293b', // Fond sombre
+              colorText: '#f8fafc', // Texte blanc
+              colorDanger: '#ef4444',
+              spacingUnit: '12px',
+              borderRadius: '8px'
+            }
+          }
+        }
       },
     };
 
