@@ -497,6 +497,18 @@ class MonitoringSystemeGeekDragon {
      * @returns {void}
      */
     demarrerSynchronisationPeriodique() {
+        // Désactiver la synchronisation en environnement local/développement
+        const estEnvironnementLocal = window.location.hostname === 'localhost' ||
+                                     window.location.hostname === '127.0.0.1' ||
+                                     window.location.hostname.includes('192.168.') ||
+                                     window.location.hostname.includes('10.0.') ||
+                                     window.location.port !== '';
+
+        if (estEnvironnementLocal) {
+            this.debug('🚫 Synchronisation désactivée en environnement local');
+            return;
+        }
+
         setInterval(() => {
             this.synchroniserAvecServeur();
         }, this.configuration.intervaleSynchronisation);
@@ -745,7 +757,10 @@ window.monitoringGD = null;
  */
 function initMonitoringGeekDragon(configuration = {}) {
     if (window.monitoringGD) {
-        console.warn('⚠️ Système de monitoring déjà initialisé');
+        // Seulement en mode debug pour éviter le spam en production
+        if (window.location.hostname === 'localhost' || window.location.search.includes('debug=1')) {
+            console.warn('⚠️ Système de monitoring déjà initialisé');
+        }
         return window.monitoringGD;
     }
 
