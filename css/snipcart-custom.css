@@ -140,6 +140,30 @@
   padding: 8px !important;
 }
 
+/* Autocomplétion (typeahead) */
+.snipcart .snipcart-typeahead__dropdown,
+.snipcart .snipcart-typeahead__suggestions,
+.snipcart .snipcart-typeahead__select--focus__input {
+  background: var(--gd-bg-secondary) !important;
+  color: var(--gd-text-primary) !important;
+  border-color: var(--gd-border) !important;
+}
+
+.snipcart .snipcart-typeahead__dropdown:hover,
+.snipcart .snipcart-typeahead__dropdown:focus,
+.snipcart .snipcart-typeahead__dropdown:focus-within,
+.snipcart .snipcart-typeahead__dropdown:active,
+.snipcart .snipcart-typeahead__suggestions:hover,
+.snipcart .snipcart-typeahead__suggestions:focus,
+.snipcart .snipcart-typeahead__suggestions:focus-within,
+.snipcart .snipcart-typeahead__suggestions:active,
+.snipcart .snipcart-typeahead__select--focus__input:hover,
+.snipcart .snipcart-typeahead__select--focus__input:focus,
+.snipcart .snipcart-typeahead__select--focus__input:active {
+  background: var(--gd-bg-tertiary) !important;
+  border-color: var(--gd-focus) !important;
+}
+
 /* Custom fields dans le panier */
 .snipcart .snipcart-item-line__custom-fields,
 .snipcart .snipcart-cart-item__custom-fields {
