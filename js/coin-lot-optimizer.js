@@ -575,8 +575,17 @@ class CoinLotOptimizer {
         return true;
       }
 
-      // Si besoins totaux très faibles ET peu de métaux, Quintessence disproportionnée
+      // NOUVEAU: Comparaison économique directe avec pièces individuelles
       const totalNeeded = Object.values(needs).reduce((sum, qty) => sum + qty, 0);
+      const quintessenceCost = variation.price * quantity;
+      const individualCost = totalNeeded * 10; // Prix pièce personnalisée = $10
+
+      if (individualCost < quintessenceCost) {
+        this.debugLog(`🚫 Anti-gaspillage: Quintessence rejetée (${uniqueMetals.length} métaux, $${quintessenceCost} vs $${individualCost} individuel)`);
+        return true;
+      }
+
+      // Si besoins totaux très faibles ET peu de métaux, Quintessence disproportionnée
       if (totalNeeded <= 3 && uniqueMetals.length <= 2) {
         this.debugLog(`🚫 Anti-gaspillage: Quintessence rejetée (${totalNeeded} pièces, ${uniqueMetals.length} métaux)`);
         return true;
