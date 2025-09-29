@@ -302,7 +302,15 @@ echo $snipcartInit;
           <div class="space-y-6">
             <div>
               <label class="block mb-3 text-lg font-medium text-white" data-i18n="product.quantity">Quantité</label>
-              <div class="quantity-selector" data-id="<?= htmlspecialchars($id) ?>">
+              <p id="quantity-help-<?= htmlspecialchars($id) ?>"
+                 class="text-sm text-gray-300 mb-3"
+                 data-i18n="product.quantityHelp">
+                <?= __('product.quantityHelp', 'Nombre d\'exemplaires ajoutés au panier pour la combinaison sélectionnée.') ?>
+              </p>
+              <div class="quantity-selector"
+                   data-id="<?= htmlspecialchars($id) ?>"
+                   role="group"
+                   aria-describedby="quantity-help-<?= htmlspecialchars($id) ?>">
                 <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
                 <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
                 <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
@@ -317,11 +325,17 @@ echo $snipcartInit;
                      data-i18n="product.metal">
                 <?= htmlspecialchars($translations['product']['metal'] ?? 'Métal') ?>
               </label>
+              <p id="metal-help-<?= htmlspecialchars($id) ?>"
+                 class="text-sm text-gray-300 mb-3"
+                 data-i18n="product.metalHelp">
+                <?= __('product.metalHelp', 'Définit le matériau ou la finition livrée avec la pièce.') ?>
+              </p>
               <select id="metal-<?= htmlspecialchars($id) ?>"
                       class="metal-select w-full md:w-64 px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       data-target="<?= htmlspecialchars($id) ?>"
                       data-custom-index="<?= (int) $metalFieldIndex ?>"
-                      data-item-custom-role="metal">
+                      data-item-custom-role="metal"
+                      aria-describedby="metal-help-<?= htmlspecialchars($id) ?>">
                 <?php foreach ($metalsDisplay as $index => $metal) : ?>
                 <option value="<?= htmlspecialchars($metal) ?>" <?= $index === 0 ? 'selected' : '' ?>><?= htmlspecialchars(ucfirst($metal)) ?></option>
                 <?php endforeach; ?>
@@ -336,11 +350,17 @@ echo $snipcartInit;
                      data-i18n="product.multiplier">
                 <?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>
               </label>
+              <p id="multiplier-help-<?= htmlspecialchars($id) ?>"
+                 class="text-sm text-gray-300 mb-3"
+                 data-i18n="product.multiplierHelp">
+                <?= __('product.multiplierHelp', 'Indique la valeur gravée sur la pièce, différente de la quantité commandée.') ?>
+              </p>
               <select id="multiplier-<?= htmlspecialchars($id) ?>"
                       class="multiplier-select w-full md:w-64 px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       data-target="<?= htmlspecialchars($id) ?>"
                       data-custom-index="<?= (int) $multiplierFieldIndex ?>"
-                      data-item-custom-role="multiplier">
+                      data-item-custom-role="multiplier"
+                      aria-describedby="multiplier-help-<?= htmlspecialchars($id) ?>">
                 <?php foreach ($multiplierOptions as $index => $value) : ?>
                 <option value="<?= htmlspecialchars($value) ?>" <?= $index === 0 ? 'selected' : '' ?>><?= htmlspecialchars($value) ?></option>
                 <?php endforeach; ?>
