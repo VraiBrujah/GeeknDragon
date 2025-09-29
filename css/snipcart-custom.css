@@ -690,8 +690,13 @@ div[class*="wrapper"] {
   color: #94a3b8 !important;
 }
 
-.snipcart *::before,
-.snipcart *::after {
+/* Masque uniquement les éléments problématiques (barre sécurité, etc.) */
+.snipcart *[class*="security"]::before,
+.snipcart *[class*="security"]::after,
+.snipcart *[class*="powered"]::before,
+.snipcart *[class*="powered"]::after,
+.snipcart *[class*="footer"]::before,
+.snipcart *[class*="footer"]::after {
   border: none !important;
   background: none !important;
   content: none !important;
