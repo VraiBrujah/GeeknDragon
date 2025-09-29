@@ -131,6 +131,7 @@
             "title": "Cartes d'équipement",
             "coming": "À venir",
             "description": "Paquets thématiques de cartes illustrées pour gérer l'inventaire visuellement.",
+            "faqLink": "Questions fréquentes / Guide des cartes",
             "description1": "Nos scribes enchantent encore ces parchemins d'aventure.",
             "description2": "Les cartes d'équipement forgeront leur entrée lors de la prochaine lune."
         },
@@ -580,6 +581,7 @@
     },
     "cards": {
         "mainTitle": "🃏 Guide des Cartes à Jouer Geek & Dragon",
+        "faqSubtitle": "FAQ Cartes",
         "mainDescription": "Complétez vos triptyques avec nos cartes détaillées : Armes, Armures, Équipements, Sorts, Monstres et bien plus ! Chaque carte contient toutes les informations nécessaires pour accélérer vos parties.",
         "title": "Cartes d'Équipement",
         "types": {

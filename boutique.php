@@ -204,6 +204,15 @@ echo $snipcartInit;
         <p class="text-center mt-8 italic max-w-3xl mx-auto text-gray-300">
           <span data-i18n="shop.cards.description"><?= __('shop.cards.description', 'Paquets thématiques de cartes illustrées pour gérer l\'inventaire visuellement.') ?></span>
         </p>
+        <div class="text-center mt-6">
+          <a
+            href="<?= langUrl('aide-jeux.php#guide-cartes') ?>"
+            class="inline-flex items-center gap-2 text-amber-300 underline decoration-2 underline-offset-4 hover:text-amber-100 transition"
+            data-i18n="shop.cards.faqLink"
+          >
+            <?= __('shop.cards.faqLink', "Questions fréquentes / Guide des cartes") ?>
+          </a>
+        </div>
       </div>
     </section>
 
