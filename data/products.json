@@ -3,10 +3,17 @@
         "price": 10,
         "images": [
             "/media/products/coins/coin-copper-1.webp",
+            "/media/products/coins/cf.webp",
             "/media/products/coins/coin-silver-1.webp",
             "/media/products/coins/coin-electrum-1.webp",
+            "/media/products/coins/ef.webp",
             "/media/products/coins/coin-gold-1.webp",
-            "/media/products/coins/coin-platinum-1.webp"
+            "/media/products/coins/of.webp",
+            "/media/products/coins/coin-platinum-1.webp",
+            "/media/products/coins/pf.webp",
+            "/media/products/coins/x1f2.webp",
+            "/media/products/coins/x1p2.webp",
+            "/media/products/coins/x1p3.webp"
         ],
         "multipliers": [
             1,
@@ -61,11 +68,20 @@
     "coin-trio-customizable": {
         "price": 25,
         "images": [
+            "/media/products/coins/lot-3.webp",
             "/media/products/coins/coin-copper-1.webp",
+            "/media/products/coins/cf.webp",
             "/media/products/coins/coin-silver-1.webp",
+            "/media/products/coins/af.webp",
             "/media/products/coins/coin-electrum-1.webp",
+            "/media/products/coins/ef.webp",
             "/media/products/coins/coin-gold-1.webp",
-            "/media/products/coins/coin-platinum-1.webp"
+            "/media/products/coins/of.webp",
+            "/media/products/coins/coin-platinum-1.webp",
+            "/media/products/coins/pf.webp",
+            "/media/products/coins/x1f2.webp",
+            "/media/products/coins/x10.webp",
+            "/media/products/coins/x10p.webp"
         ],
         "multipliers": [
             1,
@@ -121,10 +137,20 @@
         "price": 35,
         "images": [
             "/media/products/coins/coin-copper-1.webp",
+            "/media/products/coins/cf.webp",
             "/media/products/coins/coin-silver-1.webp",
+            "/media/products/coins/af.webp",
             "/media/products/coins/coin-electrum-1.webp",
+            "/media/products/coins/ef.webp",
             "/media/products/coins/coin-gold-1.webp",
-            "/media/products/coins/coin-platinum-1.webp"
+            "/media/products/coins/of.webp",
+            "/media/products/coins/coin-platinum-1.webp",
+            "/media/products/coins/pf.webp",
+            "/media/products/coins/x1f2.webp",
+            "/media/products/coins/x10.webp",
+            "/media/products/coins/x10p.webp",
+            "/media/products/coins/x100p.webp",
+            "/media/products/coins/x100f3.webp"
         ],
         "multipliers": [
             1,
@@ -161,11 +187,23 @@
     "coin-septuple-free": {
         "price": 50,
         "images": [
+            "/media/products/coins/lot-7.webp",
             "/media/products/coins/coin-copper-1.webp",
+            "/media/products/coins/cf.webp",
             "/media/products/coins/coin-silver-1.webp",
+            "/media/products/coins/af.webp",
             "/media/products/coins/coin-electrum-1.webp",
+            "/media/products/coins/ef.webp",
             "/media/products/coins/coin-gold-1.webp",
-            "/media/products/coins/coin-platinum-1.webp"
+            "/media/products/coins/of.webp",
+            "/media/products/coins/coin-platinum-1.webp",
+            "/media/products/coins/pf.webp",
+            "/media/products/coins/x1f2.webp",
+            "/media/products/coins/x10.webp",
+            "/media/products/coins/x10p.webp",
+            "/media/products/coins/x100p.webp",
+            "/media/products/coins/x100f3.webp",
+            "/media/products/coins/x1p2.webp"
         ],
         "multipliers": [
             1,
@@ -222,13 +260,24 @@
         "images": [
             "/media/products/bundles/Vagabon.webp",
             "/media/products/bundles/VagabonPlast.webp",
+            "/media/products/bundles/Vagabonx10.webp",
+            "/media/products/bundles/Vagabonx10Plast.webp",
+            "/media/products/bundles/lot10Piece2-300.webp",
             "/media/products/coins/coin-copper-1.webp",
+            "/media/products/coins/cf.webp",
             "/media/products/coins/coin-silver-1.webp",
+            "/media/products/coins/af.webp",
+            "/media/products/coins/coin-electrum-1.webp",
             "/media/products/coins/ef.webp",
+            "/media/products/coins/coin-gold-1.webp",
             "/media/products/coins/of.webp",
+            "/media/products/coins/coin-platinum-1.webp",
             "/media/products/coins/pf.webp",
             "/media/products/coins/x1f2.webp",
-            "/media/products/coins/x100f3.webp"
+            "/media/products/coins/x10.webp",
+            "/media/products/coins/x10p.webp",
+            "/media/products/coins/x100f3.webp",
+            "/media/products/coins/x100p.webp"
         ],
         "multipliers": [
             1,
@@ -267,13 +316,26 @@
         "images": [
             "/media/products/bundles/Seignieur.webp",
             "/media/products/bundles/Seignieurplast.webp",
+            "/media/products/bundles/coffre.webp",
+            "/media/products/coins/coin-copper-1.webp",
+            "/media/products/coins/cf.webp",
+            "/media/products/coins/coin-copper-10.webp",
+            "/media/products/coins/coin-silver-1.webp",
+            "/media/products/coins/af.webp",
+            "/media/products/coins/coin-electrum-1.webp",
+            "/media/products/coins/ef.webp",
+            "/media/products/coins/coin-gold-1.webp",
+            "/media/products/coins/of.webp",
+            "/media/products/coins/coin-platinum-1.webp",
+            "/media/products/coins/pf.webp",
             "/media/products/coins/x1f2.webp",
             "/media/products/coins/x1p2.webp",
-            "/media/products/coins/coin-copper-1.webp",
-            "/media/products/coins/coin-silver-1.webp",
-            "/media/products/coins/coin-electrum-1.webp",
-            "/media/products/coins/coin-gold-1.webp",
-            "/media/products/coins/coin-platinum-1.webp"
+            "/media/products/coins/x10.webp",
+            "/media/products/coins/x10p.webp",
+            "/media/products/coins/x100p.webp",
+            "/media/products/coins/x100f3.webp",
+            "/media/products/coins/x10000p.webp",
+            "/media/products/coins/x10000p2.webp"
         ],
         "multipliers": [],
         "coin_lots": {
@@ -336,13 +398,26 @@
         "images": [
             "/media/products/bundles/Royaume.webp",
             "/media/products/bundles/RoyaumePlast.webp",
+            "/media/products/bundles/coffre.webp",
             "/media/products/coins/coin-copper-1.webp",
+            "/media/products/coins/cf.webp",
+            "/media/products/coins/coin-copper-10.webp",
             "/media/products/coins/coin-silver-1.webp",
+            "/media/products/coins/af.webp",
             "/media/products/coins/coin-electrum-1.webp",
+            "/media/products/coins/ef.webp",
             "/media/products/coins/coin-gold-1.webp",
+            "/media/products/coins/of.webp",
             "/media/products/coins/coin-platinum-1.webp",
+            "/media/products/coins/pf.webp",
             "/media/products/coins/x1f2.webp",
-            "/media/products/coins/x1p2.webp"
+            "/media/products/coins/x1p2.webp",
+            "/media/products/coins/x10.webp",
+            "/media/products/coins/x10p.webp",
+            "/media/products/coins/x100p.webp",
+            "/media/products/coins/x100f3.webp",
+            "/media/products/coins/x10000p.webp",
+            "/media/products/coins/x10000p2.webp"
         ],
         "multipliers": [],
         "coin_lots": {
@@ -405,13 +480,26 @@
         "images": [
             "/media/products/bundles/Essence.webp",
             "/media/products/bundles/EssencePlast.webp",
+            "/media/products/bundles/coffre.webp",
             "/media/products/coins/coin-copper-1.webp",
+            "/media/products/coins/cf.webp",
+            "/media/products/coins/coin-copper-10.webp",
             "/media/products/coins/coin-silver-1.webp",
+            "/media/products/coins/af.webp",
             "/media/products/coins/coin-electrum-1.webp",
+            "/media/products/coins/ef.webp",
             "/media/products/coins/coin-gold-1.webp",
+            "/media/products/coins/of.webp",
             "/media/products/coins/coin-platinum-1.webp",
+            "/media/products/coins/pf.webp",
             "/media/products/coins/x1f2.webp",
-            "/media/products/coins/x1p2.webp"
+            "/media/products/coins/x1p2.webp",
+            "/media/products/coins/x10.webp",
+            "/media/products/coins/x10p.webp",
+            "/media/products/coins/x100p.webp",
+            "/media/products/coins/x100f3.webp",
+            "/media/products/coins/x10000p.webp",
+            "/media/products/coins/x10000p2.webp"
         ],
         "multipliers": [
             1,
@@ -477,7 +565,10 @@
         "price": 21,
         "images": [
             "/media/products/cards/arme-recto.webp",
-            "/media/products/cards/armure-recto.webp"
+            "/media/products/cards/arme-verso.webp",
+            "/media/products/cards/armure-recto.webp",
+            "/media/products/cards/armure-verso.webp",
+            "/media/products/cards/greatclub-recto.webp"
         ],
         "multipliers": [],
         "coin_lots": "",
@@ -505,7 +596,8 @@
     "cards-adventure-packs-70": {
         "price": 25,
         "images": [
-            "/media/products/cards/sac-aa-dos-recto.webp"
+            "/media/products/cards/sac-aa-dos-recto.webp",
+            "/media/products/cards/sac-aa-dos-verso.webp"
         ],
         "multipliers": [],
         "coin_lots": "",
@@ -534,7 +626,9 @@
         "price": 22,
         "images": [
             "/media/products/cards/bombe-recto.webp",
-            "/media/products/cards/mataerield-alchimiste-recto.webp"
+            "/media/products/cards/bombe-verso.webp",
+            "/media/products/cards/mataerield-alchimiste-recto.webp",
+            "/media/products/cards/mataerield-alchimiste-verso.webp"
         ],
         "multipliers": [],
         "coin_lots": "",
@@ -563,7 +657,10 @@
         "price": 29,
         "images": [
             "/media/products/cards/biaere-chope-recto.webp",
-            "/media/products/cards/vaisseau-aaerien-recto.webp"
+            "/media/products/cards/biaere-chope-verso.webp",
+            "/media/products/cards/vaisseau-aaerien-recto.webp",
+            "/media/products/cards/vaisseau-aaerien-verso.webp",
+            "/media/products/cards/chaevre-recto.webp"
         ],
         "multipliers": [],
         "coin_lots": "",
@@ -592,8 +689,11 @@
         "price": 54,
         "images": [
             "/media/products/cards/alexandrite-recto.webp",
+            "/media/products/cards/alexandrite-verso.webp",
             "/media/products/cards/chaevre-recto.webp",
-            "/media/products/cards/mataerield-alchimiste-recto.webp"
+            "/media/products/cards/chaevre-verso.webp",
+            "/media/products/cards/mataerield-alchimiste-recto.webp",
+            "/media/products/cards/mataerield-alchimiste-verso.webp"
         ],
         "multipliers": [],
         "coin_lots": "",
@@ -622,9 +722,12 @@
         "price": 56,
         "images": [
             "/media/products/cards/sac-aa-dos-recto.webp",
+            "/media/products/cards/sac-aa-dos-verso.webp",
             "/media/products/cards/biaere-chope-recto.webp",
             "/media/products/cards/vaisseau-aaerien-recto.webp",
-            "/media/products/cards/sang-d-assassin-recto.webp"
+            "/media/products/cards/chaevre-recto.webp",
+            "/media/products/cards/sang-d-assassin-recto.webp",
+            "/media/products/cards/sang-d-assassin-verso.webp"
         ],
         "multipliers": [],
         "coin_lots": "",
@@ -655,7 +758,11 @@
             "/media/products/cards/arme-recto.webp",
             "/media/products/cards/arme-verso.webp",
             "/media/products/cards/greatclub-recto.webp",
-            "/media/products/cards/armure-recto.webp"
+            "/media/products/cards/greatclub-verso.webp",
+            "/media/products/cards/armure-recto.webp",
+            "/media/products/cards/armure-verso.webp",
+            "/media/products/cards/sac-aa-dos-recto.webp",
+            "/media/products/cards/mataerield-alchimiste-recto.webp"
         ],
         "multipliers": [],
         "coin_lots": "",
