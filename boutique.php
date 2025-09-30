@@ -140,102 +140,18 @@ echo $snipcartInit;
       <div class="max-w-6xl mx-auto px-6">
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-8" data-i18n="shop.pieces.title">Pièces métalliques</h2>
 
-        <!-- Texte explicatif du système de pièces -->
-        <div class="max-w-4xl mx-auto mb-12 bg-gradient-to-br from-amber-900/30 to-yellow-900/20 rounded-xl p-8 border border-amber-600/30">
+        <!-- Texte explicatif court du système de pièces -->
+        <div class="max-w-4xl mx-auto mb-12 bg-gradient-to-br from-amber-900/30 to-yellow-900/20 rounded-xl p-6 border border-amber-600/30">
           <div class="text-gray-200 space-y-4">
-            <p class="text-lg leading-relaxed" data-i18n="shop.pieces.intro.paragraph1">
-              Dans D&D, la monnaie utilise <strong class="text-amber-300">5 métaux différents</strong> : cuivre (pc), argent (pa), électrum (pe), or (po) et platine (pp). Les conversions de base sont : 10 pc = 1 pa, 2 pa = 1 pe, 5 pa = 1 po, et 10 po = 1 pp.
+            <p class="text-lg leading-relaxed text-center" data-i18n="shop.pieces.intro.shortDescription">
+              Nos pièces métalliques reproduisent fidèlement le système monétaire de D&D (<strong class="text-amber-300">5 métaux</strong>) avec des <strong class="text-yellow-300">multiplicateurs gravés</strong> (×1, ×10, ×100, ×1000, ×10000). <strong class="text-green-400">Ressentez le poids réel du trésor</strong> entre vos mains !
             </p>
 
-            <p class="text-lg leading-relaxed" data-i18n="shop.pieces.intro.paragraph2">
-              Nos pièces physiques ajoutent une dimension immersive : chaque pièce peut avoir un <strong class="text-yellow-300">multiplicateur gravé</strong> (×1, ×10, ×100, ×1000, ×10000). Une pièce d'or ×100 vaut 100 po — parfait pour gérer de gros trésors sans manipuler des centaines de pièces !
-            </p>
-
-            <p class="text-base leading-relaxed text-gray-300 mb-4" data-i18n="shop.pieces.intro.paragraph3">
-              Selon les règles officielles D&D, <strong class="text-amber-300">50 pièces = 500g/1 lb</strong>. Nos multiplicateurs représentent fidèlement ces valeurs et leur poids pour une immersion totale :
-            </p>
-
-            <!-- Tableau des poids -->
-            <div class="bg-gray-800/50 rounded-lg p-6 border border-amber-500/20 mb-4">
-              <h3 class="text-lg font-bold text-amber-400 mb-4" data-i18n="shop.pieces.intro.weightTableTitle">⚖️ Tableau des poids par multiplicateur</h3>
-              <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm">
-                  <thead class="text-amber-300 border-b border-amber-500/30">
-                    <tr>
-                      <th class="py-2 px-3 font-semibold">Multiplicateur</th>
-                      <th class="py-2 px-3 font-semibold">Poids (g)</th>
-                      <th class="py-2 px-3 font-semibold">Poids (lb)</th>
-                      <th class="py-2 px-3 font-semibold">Équivalent</th>
-                    </tr>
-                  </thead>
-                  <tbody class="text-gray-300">
-                    <tr class="border-b border-gray-700/50">
-                      <td class="py-2 px-3">×1</td>
-                      <td class="py-2 px-3">10 g</td>
-                      <td class="py-2 px-3">0.02 lb</td>
-                      <td class="py-2 px-3 text-gray-400">1 pièce standard</td>
-                    </tr>
-                    <tr class="border-b border-gray-700/50">
-                      <td class="py-2 px-3">×10</td>
-                      <td class="py-2 px-3">100 g</td>
-                      <td class="py-2 px-3">0.22 lb</td>
-                      <td class="py-2 px-3 text-gray-400">10 pièces</td>
-                    </tr>
-                    <tr class="border-b border-gray-700/50 bg-amber-900/10">
-                      <td class="py-2 px-3 font-semibold text-yellow-300">×100</td>
-                      <td class="py-2 px-3 font-semibold text-yellow-300">1 kg</td>
-                      <td class="py-2 px-3 font-semibold text-yellow-300">2.2 lb</td>
-                      <td class="py-2 px-3 text-gray-400">100 pièces</td>
-                    </tr>
-                    <tr class="border-b border-gray-700/50 bg-amber-900/10">
-                      <td class="py-2 px-3 font-semibold text-yellow-400">×1000</td>
-                      <td class="py-2 px-3 font-semibold text-yellow-400">10 kg</td>
-                      <td class="py-2 px-3 font-semibold text-yellow-400">22 lb</td>
-                      <td class="py-2 px-3 text-gray-400">1000 pièces</td>
-                    </tr>
-                    <tr>
-                      <td class="py-2 px-3">×10000</td>
-                      <td class="py-2 px-3">100 kg</td>
-                      <td class="py-2 px-3">220 lb</td>
-                      <td class="py-2 px-3 text-gray-400">10000 pièces</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <p class="text-sm text-gray-400 mt-3 italic text-center" data-i18n="shop.pieces.intro.weightNote">
-                Ressentez le poids croissant du trésor entre vos mains !
-              </p>
-              <div class="mt-4 p-3 bg-blue-900/20 border border-blue-500/30 rounded text-center">
-                <p class="text-sm text-blue-300" data-i18n="shop.pieces.intro.weightNotice">
-                  📌 Ces multiplicateurs s'appliquent à <strong>n'importe quel métal</strong> (cuivre, argent, électrum, or, platine)
-                </p>
-              </div>
+            <div class="text-center">
+              <a href="<?= langUrl('aide-jeux.php#pieces-physiques') ?>" class="inline-flex items-center gap-2 text-amber-300 hover:text-amber-200 transition-colors font-medium">
+                📚 <span data-i18n="shop.pieces.intro.learnMore">En savoir plus sur le système de pièces et leurs poids</span> →
+              </a>
             </div>
-
-            <!-- Exemple concret -->
-            <div class="bg-gray-800/50 rounded-lg p-6 border border-amber-500/20 mt-4">
-              <h3 class="text-xl font-bold text-amber-400 mb-4" data-i18n="shop.pieces.intro.exampleTitle">💡 Exemple concret avec de l'or : trésor de 1 500 po</h3>
-              <p class="text-base leading-relaxed mb-3" data-i18n="shop.pieces.intro.exampleText">
-                Plutôt que d'empiler <strong class="text-red-400">1 500 pièces unitaires</strong> (15 kg / 33 lb), utilisez :
-              </p>
-              <ul class="list-none space-y-2 text-base">
-                <li class="flex items-start">
-                  <span class="text-yellow-400 mr-3 text-xl">→</span>
-                  <span data-i18n="shop.pieces.intro.exampleItem1"><strong class="text-yellow-400">1 pièce d'or ×1000</strong> → 1000 po (10 kg / 22 lb)</span>
-                </li>
-                <li class="flex items-start">
-                  <span class="text-yellow-300 mr-3 text-xl">→</span>
-                  <span data-i18n="shop.pieces.intro.exampleItem2"><strong class="text-yellow-300">5 pièces d'or ×100</strong> → 500 po (5 kg / 11 lb)</span>
-                </li>
-              </ul>
-              <p class="text-sm text-gray-300 mt-4 p-3 bg-green-900/20 border border-green-600/30 rounded" data-i18n="shop.pieces.intro.exampleNote">
-                <strong class="text-green-400">Résultat : 6 pièces physiques</strong> au lieu de 1 500 !
-              </p>
-            </div>
-
-            <p class="text-base text-center text-gray-300 mt-6" data-i18n="shop.pieces.intro.footer">
-              Choisissez parmi nos collections prêtes à l'emploi ou créez votre trésor sur mesure avec les pièces personnalisables.
-            </p>
           </div>
         </div>
 

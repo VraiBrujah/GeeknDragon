@@ -2201,11 +2201,114 @@ echo $snipcartInit;
       </div>
 
       <!-- ===== PIÈCES PHYSIQUES GEEK & DRAGON ===== -->
-      <div class="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 rounded-xl p-8 border border-purple-700/50">
+      <div id="pieces-physiques" class="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 rounded-xl p-8 border border-purple-700/50 scroll-mt-24">
         <h3 class="text-3xl font-bold mb-8 text-center text-purple-400"><?= __('money.physicalCoins.title', '🪙 Pièces Physiques Geek & Dragon') ?></h3>
-        
+
+        <!-- Section explicative complète du système -->
+        <div class="bg-gradient-to-br from-amber-900/30 to-yellow-900/20 rounded-xl p-8 border border-amber-600/30 mb-8">
+          <div class="text-gray-200 space-y-6">
+            <div class="grid md:grid-cols-2 gap-8">
+              <div>
+                <h4 class="text-xl font-bold text-amber-400 mb-4"><?= __('money.physicalCoins.system.title', '💰 Le Système Monétaire D&D') ?></h4>
+                <p class="text-base leading-relaxed mb-4">
+                  <?= __('money.physicalCoins.system.paragraph1', 'Dans D&D, la monnaie utilise <strong class="text-amber-300">5 métaux différents</strong> : cuivre (pc), argent (pa), électrum (pe), or (po) et platine (pp). Les conversions de base sont : 10 pc = 1 pa, 2 pa = 1 pe, 5 pa = 1 po, et 10 po = 1 pp.') ?>
+                </p>
+                <p class="text-base leading-relaxed">
+                  <?= __('money.physicalCoins.system.paragraph2', 'Nos pièces physiques ajoutent une dimension immersive : chaque pièce peut avoir un <strong class="text-yellow-300">multiplicateur gravé</strong> (×1, ×10, ×100, ×1000, ×10000). Une pièce d\'or ×100 vaut 100 po — parfait pour gérer de gros trésors sans manipuler des centaines de pièces !') ?>
+                </p>
+              </div>
+
+              <div>
+                <h4 class="text-xl font-bold text-amber-400 mb-4"><?= __('money.physicalCoins.weight.title', '⚖️ Poids Authentiques') ?></h4>
+                <p class="text-base leading-relaxed mb-4">
+                  <?= __('money.physicalCoins.weight.paragraph', 'Selon les règles officielles D&D, <strong class="text-amber-300">50 pièces = 500g/1 lb</strong>. Nos multiplicateurs représentent fidèlement ces valeurs et leur poids pour une immersion totale :') ?>
+                </p>
+              </div>
+            </div>
+
+            <!-- Tableau des poids -->
+            <div class="bg-gray-800/50 rounded-lg p-6 border border-amber-500/20">
+              <h4 class="text-lg font-bold text-amber-400 mb-4 text-center"><?= __('money.physicalCoins.weightTable.title', '📊 Tableau des poids par multiplicateur') ?></h4>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                  <thead class="text-amber-300 border-b border-amber-500/30">
+                    <tr>
+                      <th class="py-2 px-3 font-semibold">Multiplicateur</th>
+                      <th class="py-2 px-3 font-semibold">Poids (g)</th>
+                      <th class="py-2 px-3 font-semibold">Poids (lb)</th>
+                      <th class="py-2 px-3 font-semibold">Équivalent</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-gray-300">
+                    <tr class="border-b border-gray-700/50">
+                      <td class="py-2 px-3">×1</td>
+                      <td class="py-2 px-3">10 g</td>
+                      <td class="py-2 px-3">0.02 lb</td>
+                      <td class="py-2 px-3 text-gray-400">1 pièce standard</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                      <td class="py-2 px-3">×10</td>
+                      <td class="py-2 px-3">100 g</td>
+                      <td class="py-2 px-3">0.22 lb</td>
+                      <td class="py-2 px-3 text-gray-400">10 pièces</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50 bg-amber-900/10">
+                      <td class="py-2 px-3 font-semibold text-yellow-300">×100</td>
+                      <td class="py-2 px-3 font-semibold text-yellow-300">1 kg</td>
+                      <td class="py-2 px-3 font-semibold text-yellow-300">2.2 lb</td>
+                      <td class="py-2 px-3 text-gray-400">100 pièces</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50 bg-amber-900/10">
+                      <td class="py-2 px-3 font-semibold text-yellow-400">×1000</td>
+                      <td class="py-2 px-3 font-semibold text-yellow-400">10 kg</td>
+                      <td class="py-2 px-3 font-semibold text-yellow-400">22 lb</td>
+                      <td class="py-2 px-3 text-gray-400">1000 pièces</td>
+                    </tr>
+                    <tr>
+                      <td class="py-2 px-3">×10000</td>
+                      <td class="py-2 px-3">100 kg</td>
+                      <td class="py-2 px-3">220 lb</td>
+                      <td class="py-2 px-3 text-gray-400">10000 pièces</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="text-sm text-gray-400 mt-3 italic text-center">
+                <?= __('money.physicalCoins.weightTable.note', 'Ressentez le poids croissant du trésor entre vos mains !') ?>
+              </p>
+              <div class="mt-4 p-3 bg-blue-900/20 border border-blue-500/30 rounded text-center">
+                <p class="text-sm text-blue-300">
+                  <?= __('money.physicalCoins.weightTable.notice', '📌 Ces multiplicateurs s\'appliquent à <strong>n\'importe quel métal</strong> (cuivre, argent, électrum, or, platine)') ?>
+                </p>
+              </div>
+            </div>
+
+            <!-- Exemple concret -->
+            <div class="bg-gray-800/50 rounded-lg p-6 border border-amber-500/20">
+              <h4 class="text-xl font-bold text-amber-400 mb-4"><?= __('money.physicalCoins.example.title', '💡 Exemple concret avec de l\'or : trésor de 1 500 po') ?></h4>
+              <p class="text-base leading-relaxed mb-3">
+                <?= __('money.physicalCoins.example.text', 'Plutôt que d\'empiler <strong class="text-red-400">1 500 pièces unitaires</strong> (15 kg / 33 lb), utilisez :') ?>
+              </p>
+              <ul class="list-none space-y-2 text-base">
+                <li class="flex items-start">
+                  <span class="text-yellow-400 mr-3 text-xl">→</span>
+                  <span><?= __('money.physicalCoins.example.item1', '<strong class="text-yellow-400">1 pièce d\'or ×1000</strong> → 1000 po (10 kg / 22 lb)') ?></span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-yellow-300 mr-3 text-xl">→</span>
+                  <span><?= __('money.physicalCoins.example.item2', '<strong class="text-yellow-300">5 pièces d\'or ×100</strong> → 500 po (5 kg / 11 lb)') ?></span>
+                </li>
+              </ul>
+              <p class="text-sm text-gray-300 mt-4 p-3 bg-green-900/20 border border-green-600/30 rounded">
+                <?= __('money.physicalCoins.example.result', '<strong class="text-green-400">Résultat : 6 pièces physiques</strong> au lieu de 1 500 !') ?>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grille originale -->
         <div class="grid md:grid-cols-2 gap-8">
-          
+
           <!-- Description -->
           <div class="space-y-6">
             <div>
@@ -2220,7 +2323,7 @@ echo $snipcartInit;
                 <li><?= __('money.physicalCoins.authentic.feature4', '• <strong>Sets complets</strong> ou pièces individuelles') ?></li>
               </ul>
             </div>
-            
+
             <div>
               <h4 class="text-xl font-bold mb-4 text-purple-400"><?= __('money.physicalCoins.gameUse.title', '🎯 Utilisation en Jeu') ?></h4>
               <ul class="text-gray-300 space-y-2">

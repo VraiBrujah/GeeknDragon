@@ -129,24 +129,8 @@
             "description": "Un jeu de rôle sans pièces physiques, c'est comme un Monopoly sans billets. Offrez‑vous le poids authentique du trésor.",
             "video": "Voir les Conseils Jeux de Rôle sur L'Économie de D&D en vidéo&nbsp;>",
             "intro": {
-                "paragraph1": "Dans D&D, la monnaie utilise <strong class=\"text-amber-300\">5 métaux différents</strong> : cuivre (pc), argent (pa), électrum (pe), or (po) et platine (pp). Les conversions de base sont : 10 pc = 1 pa, 2 pa = 1 pe, 5 pa = 1 po, et 10 po = 1 pp.",
-                "paragraph2": "Nos pièces physiques ajoutent une dimension immersive : chaque pièce peut avoir un <strong class=\"text-yellow-300\">multiplicateur gravé</strong> (×1, ×10, ×100, ×1000, ×10000). Une pièce d'or ×100 vaut 100 po — parfait pour gérer de gros trésors sans manipuler des centaines de pièces !",
-                "paragraph3": "Selon les règles officielles D&D, <strong class=\"text-amber-300\">50 pièces = 500g/1 lb</strong>. Nos multiplicateurs représentent fidèlement ces valeurs et leur poids pour une immersion totale :",
-                "weightTableTitle": "⚖️ Tableau des poids par multiplicateur",
-                "weightTableHeaders": ["Multiplicateur", "Poids (g)", "Poids (lb)", "Équivalent"],
-                "weightTableRow1": ["×1", "10 g", "0.02 lb", "1 pièce standard"],
-                "weightTableRow2": ["×10", "100 g", "0.22 lb", "10 pièces"],
-                "weightTableRow3": ["×100", "1 kg", "2.2 lb", "100 pièces"],
-                "weightTableRow4": ["×1000", "10 kg", "22 lb", "1000 pièces"],
-                "weightTableRow5": ["×10000", "100 kg", "220 lb", "10000 pièces"],
-                "weightNote": "Ressentez le poids croissant du trésor entre vos mains !",
-                "weightNotice": "📌 Ces multiplicateurs s'appliquent à <strong>n'importe quel métal</strong> (cuivre, argent, électrum, or, platine)",
-                "exampleTitle": "💡 Exemple concret avec de l'or : trésor de 1 500 po",
-                "exampleText": "Plutôt que d'empiler <strong class=\"text-red-400\">1 500 pièces unitaires</strong> (15 kg / 33 lb), utilisez :",
-                "exampleItem1": "<strong class=\"text-yellow-400\">1 pièce d'or ×1000</strong> → 1000 po (10 kg / 22 lb)",
-                "exampleItem2": "<strong class=\"text-yellow-300\">5 pièces d'or ×100</strong> → 500 po (5 kg / 11 lb)",
-                "exampleNote": "<strong class=\"text-green-400\">Résultat : 6 pièces physiques</strong> au lieu de 1 500 !",
-                "footer": "Choisissez parmi nos collections prêtes à l'emploi ou créez votre trésor sur mesure avec les pièces personnalisables."
+                "shortDescription": "Nos pièces métalliques reproduisent fidèlement le système monétaire de D&D (<strong class=\"text-amber-300\">5 métaux</strong> : cuivre, argent, électrum, or, platine). Les pièces unitaires sont <strong class=\"text-yellow-200\">brillantes</strong>, tandis que les <strong class=\"text-yellow-300\">multiplicateurs gravés</strong> (×10, ×100, ×1000, ×10000) ont un fini mat distinctif. Chaque pièce représente physiquement sa valeur : une pièce ×100 = 100 pièces unitaires. <strong class=\"text-green-400\">Ressentez le poids réel du trésor</strong> entre vos mains !",
+                "learnMore": "En savoir plus sur le système de pièces et leurs poids"
             }
         },
         "chest": {
@@ -794,6 +778,27 @@
         },
         "physicalCoins": {
             "title": "🪙 Pièces Physiques Geek & Dragon",
+            "system": {
+                "title": "💰 Le Système Monétaire D&D",
+                "paragraph1": "Dans D&D, la monnaie utilise <strong class=\"text-amber-300\">5 métaux différents</strong> : cuivre (pc), argent (pa), électrum (pe), or (po) et platine (pp). Les conversions de base sont : 10 pc = 1 pa, 2 pa = 1 pe, 5 pa = 1 po, et 10 po = 1 pp.",
+                "paragraph2": "Nos pièces physiques ajoutent une dimension immersive : les pièces unitaires ont un <strong class=\"text-yellow-200\">fini brillant</strong>, tandis que les <strong class=\"text-yellow-300\">multiplicateurs gravés</strong> (×10, ×100, ×1000, ×10000) arborent un fini mat distinctif. Une pièce d'or ×100 vaut 100 po — parfait pour gérer de gros trésors sans manipuler des centaines de pièces !"
+            },
+            "weight": {
+                "title": "⚖️ Poids Authentiques",
+                "paragraph": "Selon les règles officielles D&D, <strong class=\"text-amber-300\">50 pièces = 500g/1 lb</strong>. Nos multiplicateurs représentent fidèlement ces valeurs et leur poids pour une immersion totale :"
+            },
+            "weightTable": {
+                "title": "📊 Tableau des poids par multiplicateur",
+                "note": "Ressentez le poids croissant du trésor entre vos mains !",
+                "notice": "📌 Ces multiplicateurs s'appliquent à <strong>n'importe quel métal</strong> (cuivre, argent, électrum, or, platine)"
+            },
+            "example": {
+                "title": "💡 Exemple concret avec de l'or : trésor de 1 500 po",
+                "text": "Plutôt que d'empiler <strong class=\"text-red-400\">1 500 pièces unitaires</strong> (15 kg / 33 lb), utilisez :",
+                "item1": "<strong class=\"text-yellow-400\">1 pièce d'or ×1000</strong> → 1000 po (10 kg / 22 lb)",
+                "item2": "<strong class=\"text-yellow-300\">5 pièces d'or ×100</strong> → 500 po (5 kg / 11 lb)",
+                "result": "<strong class=\"text-green-400\">Résultat : 6 pièces physiques</strong> au lieu de 1 500 !"
+            },
             "authentic": {
                 "title": "✨ Des Pièces Authentiques",
                 "feature1": "• <strong>Métal véritable</strong> avec finitions spécifiques",
