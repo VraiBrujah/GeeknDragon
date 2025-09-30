@@ -69,6 +69,7 @@ class ScriptLoader {
         $this->loadScripts([
             'hero-videos',
             'snipcart-utils',
+            'account-icon-switcher',
             'boutique-premium',
             'boutique-async-loader',
             'async-stock-loader'
@@ -81,12 +82,13 @@ class ScriptLoader {
     public function loadGameHelpScripts() {
         // Bundle principal
         $this->loadMainBundle();
-        
+
         // Scripts spécifiques aide-jeux
         $this->loadScripts([
             'hero-videos',
-            'boutique-premium', 
+            'boutique-premium',
             'snipcart-utils',
+            'account-icon-switcher',
             'dnd-music-player'
         ]);
     }
@@ -130,6 +132,7 @@ function load_optimized_scripts($type = 'basic', $baseDir = null) {
         case 'main-bundle':
             $loader->loadMainBundle();
             $loader->loadScript('hero-videos');
+            $loader->loadScript('account-icon-switcher');
             break;
             
         case 'basic':

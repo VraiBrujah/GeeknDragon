@@ -118,20 +118,17 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       </div>
 
       <?php if ($snipcartKey): ?>
-      <!-- Snipcart : icônes EMPILÉES partout -->
+      <!-- Snipcart : icônes personnalisées WebP -->
       <div class="flex flex-row md:flex-col items-center gap-2 flex-shrink-0 order-2 md:order-3 md:ml-auto">
-        <button class="snipcart-customer-signin snipcart-btn flex items-center justify-center gap-1 w-auto text-center text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" aria-label="Compte">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-          </svg>
-          <span class="sr-only" data-i18n="nav.account">Compte</span>
+        <button class="snipcart-customer-signin snipcart-btn flex items-center justify-center gap-1 w-auto text-center text-sm md:text-base uppercase tracking-wide hover:opacity-80 transition-opacity duration-200 group" aria-label="Compte" title="Se connecter">
+          <img src="/media/branding/icons/compte_non_connecter.webp" alt="" class="w-6 h-6 account-icon-disconnected transition-all duration-300" width="24" height="24">
+          <img src="/media/branding/icons/compte_connecter.webp" alt="" class="w-6 h-6 account-icon-connected hidden transition-all duration-300" width="24" height="24">
+          <span class="sr-only account-label" data-i18n="nav.account">Compte</span>
         </button>
 
-        <button class="snipcart-checkout snipcart-btn flex items-center justify-center gap-1 w-auto text-center text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" aria-label="Panier">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-          </svg>
-          <span class="snipcart-items-count"></span>
+        <button class="snipcart-checkout snipcart-btn flex items-center justify-center gap-1 w-auto text-center text-sm md:text-base uppercase tracking-wide hover:opacity-80 transition-opacity duration-200 relative" aria-label="Panier" title="Mon panier">
+          <img src="/media/branding/icons/panier.webp" alt="" class="w-6 h-6 transition-transform duration-200 hover:scale-110" width="24" height="24">
+          <span class="snipcart-items-count absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold"></span>
           <span class="sr-only" data-i18n="nav.cart">Panier</span>
         </button>
       </div>
@@ -159,19 +156,18 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 
       <?php if ($snipcartKey): ?>
       <div class="flex flex-col w-full gap-6">
-        <button class="snipcart-customer-signin snipcart-btn w-full text-center text-lg uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" aria-label="Compte">
-          <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-          </svg>
-          <span class="sr-only" data-i18n="nav.account">Compte</span>
+        <button class="snipcart-customer-signin snipcart-btn w-full text-center text-lg uppercase tracking-wide hover:opacity-80 transition-opacity duration-200 flex flex-col items-center gap-2" aria-label="Compte" title="Se connecter">
+          <img src="/media/branding/icons/compte_non_connecter.webp" alt="" class="w-8 h-8 account-icon-disconnected transition-all duration-300" width="32" height="32">
+          <img src="/media/branding/icons/compte_connecter.webp" alt="" class="w-8 h-8 account-icon-connected hidden transition-all duration-300" width="32" height="32">
+          <span class="account-label text-sm" data-i18n="nav.account">Se connecter</span>
         </button>
 
-        <button class="snipcart-checkout snipcart-btn w-full text-center text-lg uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" aria-label="Panier">
-          <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-          </svg>
-          <span class="snipcart-items-count"></span>
-          <span class="sr-only" data-i18n="nav.cart">Panier</span>
+        <button class="snipcart-checkout snipcart-btn w-full text-center text-lg uppercase tracking-wide hover:opacity-80 transition-opacity duration-200 flex flex-col items-center gap-2 relative" aria-label="Panier" title="Mon panier">
+          <div class="relative">
+            <img src="/media/branding/icons/panier.webp" alt="" class="w-8 h-8 transition-transform duration-200 hover:scale-110" width="32" height="32">
+            <span class="snipcart-items-count absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold"></span>
+          </div>
+          <span class="text-sm" data-i18n="nav.cart">Panier</span>
         </button>
       </div>
       <?php endif; ?>
