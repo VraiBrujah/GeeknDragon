@@ -2295,11 +2295,7 @@ echo $snipcartInit;
   // Exposer les données des produits pour le système de recommandation
   window.products = <?= json_encode($products_data) ?>;
 </script>
-<?php
-// Charger les scripts optimisés pour l'aide de jeux
-require_once __DIR__ . '/includes/script-loader.php';
-load_optimized_scripts('aide-jeux', __DIR__);
-?>
+<!-- Scripts chargés automatiquement via footer.php -->
 <script>
 // Fonction pour retourner les cartes (triptyques)
 function flipCard(cardId) {

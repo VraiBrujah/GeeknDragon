@@ -351,19 +351,8 @@ echo $snipcartInit;
   "url": "https://geekndragon.com/boutique.php"
 }
 </script>
-  <!-- Scripts optimisés pour la boutique -->
-  <?php
-  require_once __DIR__ . '/includes/script-loader.php';
-  load_optimized_scripts('boutique', __DIR__);
-  ?>
-
-  <!-- Scripts asynchrones pour la boutique -->
-  <?php
-  $loader = new ScriptLoader(__DIR__);
-  $loader->loadScript('boutique-async-loader');
-  ?>
-
-  <!-- Stock loader déjà inclus dans boutique scripts -->
+  <!-- Scripts chargés automatiquement via footer.php -->
+  <!-- Pas besoin de charger manuellement ici, footer.php s'en occupe -->
 
   <!-- Snipcart fonctionne nativement avec les attributs data-item-* selon la documentation officielle -->
 </body>
