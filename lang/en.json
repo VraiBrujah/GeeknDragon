@@ -134,10 +134,53 @@
             },
             "backToTop": "🔝 Back to main menu"
         },
-        "chest": {
-            "title": "Custom chests",
-            "description": "Need more than 50 coins? Custom chests are available on request.",
-            "button": "Request a quote"
+        "deluxeBundle": {
+            "title": "Dragon's Vault - Collector's Edition",
+            "badge": "⭐ Limited Numbered Edition ⭐",
+            "subtitle": "The ultimate experience for collectors and demanding game masters",
+            "description": "The premium set that transforms every session into legend. Numbered and certified, this treasure contains the complete arsenal of the passionate game master.",
+            "features": {
+                "title": "Vault Contents",
+                "essence": "<strong class=\"text-yellow-300\">2× Merchant's Essence</strong> - Complete sets for quick in-game distribution",
+                "collectors": {
+                    "title": "<strong class=\"text-yellow-200\">5 Plated Collector Coins</strong>",
+                    "subtitle": "Exclusive edition plated in their <strong class=\"text-amber-400\">authentic genuine rare metal</strong>",
+                    "copper": {
+                        "name": "Copper Coin",
+                        "detail": "Pure copper plated - Warm shine with orange reflections"
+                    },
+                    "silver": {
+                        "name": "Silver Coin",
+                        "detail": "Sterling silver 925 plated - Immaculate brilliance and prestige"
+                    },
+                    "electrum": {
+                        "name": "Electrum Coin",
+                        "detail": "Sterling silver 925 plated - Pure and timeless silver shine"
+                    },
+                    "gold": {
+                        "name": "Gold Coin",
+                        "detail": "Genuine 18-karat gold plated - Royal luxury and legendary radiance"
+                    },
+                    "platinum": {
+                        "name": "Platinum Coin",
+                        "detail": "Genuine platinum plated - Ultimate rarity, absolute nobility"
+                    }
+                },
+                "cards": "<strong class=\"text-indigo-300\">Complete 560 equipment cards set</strong> in premium box",
+                "triptychs": "<strong class=\"text-purple-300\">3 triptychs of choice</strong> (Species + Class + Background)",
+                "bag": "Embroidered velvet pouch \"Geek & Dragon\"",
+                "certificate": "Hand-numbered certificate of authenticity",
+                "chest": "Customized deluxe chest",
+                "guide": "Deluxe immersion guide (24-page booklet)"
+            },
+            "specs": {
+                "title": "Premium Specifications",
+                "numbered": "Unique laser-engraved numbering",
+                "savings": "25% savings vs separate purchase"
+            },
+            "cta": "Reserve My Edition",
+            "contact": "Contact us for availability",
+            "limited": "Limited production to 500 units"
         },
         "cards": {
             "title": "Equipment cards",

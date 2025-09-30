@@ -186,13 +186,172 @@ echo $snipcartInit;
       </div>
     </section>
 
-  <!-- ░░░ COFFRES SUR MESURE ░░░ -->
-    <section class="py-24">
-      <div class="max-w-3xl mx-auto px-6 text-center">
-        <h3 class="text-4xl font-bold mb-6" data-i18n="shop.chest.title">Coffres sur mesure</h3>
-        <a href="<?= langUrl('index.php#contact') ?>"><img src="/media/products/bundles/coffre.webp" alt="Coffre de pièces personnalisable" class="rounded mb-4 w-full h-124 object-cover" loading="lazy"></a>
-        <p class="mb-6 text-gray-300" data-i18n="shop.chest.description">Besoin de plus de 50 pièces ? Des coffres personnalisés sont disponibles sur demande.</p>
-        <a href="<?= langUrl('index.php#contact') ?>" class="btn btn-primary" data-i18n="shop.chest.button">Demander un devis</a>
+  <!-- ░░░ BUNDLE DELUXE COLLECTIONNEUR ░░░ -->
+    <section id="bundle-deluxe" class="py-24 bg-gradient-to-br from-amber-900/20 via-yellow-900/30 to-orange-900/20 scroll-mt-24">
+      <div class="max-w-6xl mx-auto px-6">
+
+        <!-- Badge + Titre -->
+        <div class="text-center mb-12">
+          <div class="inline-block mb-4 px-6 py-2 bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 rounded-full text-gray-900 font-extrabold text-sm uppercase tracking-wide shadow-xl shadow-amber-500/50 animate-pulse border-2 border-yellow-300">
+            <span data-i18n="shop.deluxeBundle.badge">⭐ Édition Limitée Numérotée ⭐</span>
+          </div>
+          <h2 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-amber-300 to-yellow-500 mb-4" data-i18n="shop.deluxeBundle.title">
+            <?= __('shop.deluxeBundle.title', 'Coffre du Dragon - Édition Collectionneur') ?>
+          </h2>
+          <p class="text-xl text-amber-200 font-medium mb-4" data-i18n="shop.deluxeBundle.subtitle">
+            <?= __('shop.deluxeBundle.subtitle', 'L\'expérience ultime pour collectionneurs et maîtres de jeu exigeants') ?>
+          </p>
+          <p class="text-lg text-gray-300 max-w-3xl mx-auto" data-i18n="shop.deluxeBundle.description">
+            <?= __('shop.deluxeBundle.description', 'Le coffret premium qui transforme chaque partie en légende. Numéroté et certifié, ce trésor contient l\'arsenal complet du maître de jeu passionné.') ?>
+          </p>
+        </div>
+
+        <!-- Contenu en une seule colonne large -->
+        <div class="max-w-5xl mx-auto">
+
+          <!-- Section Pièces de Collection - Mise en avant principale -->
+          <div class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-2xl p-8 border border-amber-500/40 shadow-2xl mb-8">
+            <div class="flex items-center gap-4 mb-6">
+              <span class="text-5xl">👑</span>
+              <div>
+                <h3 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-amber-300 to-yellow-400 mb-1" data-i18n="shop.deluxeBundle.features.collectors.title"><?= __('shop.deluxeBundle.features.collectors.title', '<strong class="text-yellow-200">5 Pièces de Collection Plaquées</strong>') ?></h3>
+                <p class="text-lg text-amber-300/90 italic" data-i18n="shop.deluxeBundle.features.collectors.subtitle"><?= __('shop.deluxeBundle.features.collectors.subtitle', 'Édition exclusive plaquée dans leur <strong class="text-amber-400">véritable métal rare authentique</strong>') ?></p>
+              </div>
+            </div>
+
+            <!-- Grille des 5 pièces -->
+            <div class="grid md:grid-cols-2 gap-4">
+              <!-- Cuivre -->
+              <div class="bg-gradient-to-br from-orange-950/50 to-gray-900/50 rounded-lg p-5 border-2 border-orange-500/50 hover:border-orange-400 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20 text-center">
+                <div class="flex items-center justify-center gap-3 mb-2">
+                  <div class="w-3 h-3 rounded-full bg-orange-500 shadow-lg shadow-orange-500/50"></div>
+                  <h4 class="font-bold text-xl text-orange-400" data-i18n="shop.deluxeBundle.features.collectors.copper.name"><?= __('shop.deluxeBundle.features.collectors.copper.name', 'Pièce Cuivre') ?></h4>
+                </div>
+                <p class="text-gray-300 leading-relaxed" data-i18n="shop.deluxeBundle.features.collectors.copper.detail"><?= __('shop.deluxeBundle.features.collectors.copper.detail', 'Plaquée cuivre pur - Éclat chaleureux et reflets orangés') ?></p>
+              </div>
+
+              <!-- Argent -->
+              <div class="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-lg p-5 border-2 border-gray-400/50 hover:border-gray-300 transition-all duration-300 hover:shadow-lg hover:shadow-gray-400/20 text-center">
+                <div class="flex items-center justify-center gap-3 mb-2">
+                  <div class="w-3 h-3 rounded-full bg-gray-300 shadow-lg shadow-gray-300/50"></div>
+                  <h4 class="font-bold text-xl text-gray-200" data-i18n="shop.deluxeBundle.features.collectors.silver.name"><?= __('shop.deluxeBundle.features.collectors.silver.name', 'Pièce Argent') ?></h4>
+                </div>
+                <p class="text-gray-300 leading-relaxed" data-i18n="shop.deluxeBundle.features.collectors.silver.detail"><?= __('shop.deluxeBundle.features.collectors.silver.detail', 'Plaquée argent sterling 925 - Brillance immaculée et prestige') ?></p>
+              </div>
+
+              <!-- Électrum -->
+              <div class="bg-gradient-to-br from-teal-950/50 to-gray-900/50 rounded-lg p-5 border-2 border-teal-500/50 hover:border-teal-400 transition-all duration-300 hover:shadow-lg hover:shadow-teal-500/20 text-center">
+                <div class="flex items-center justify-center gap-3 mb-2">
+                  <div class="w-3 h-3 rounded-full bg-teal-400 shadow-lg shadow-teal-400/50"></div>
+                  <h4 class="font-bold text-xl text-teal-300" data-i18n="shop.deluxeBundle.features.collectors.electrum.name"><?= __('shop.deluxeBundle.features.collectors.electrum.name', 'Pièce Électrum') ?></h4>
+                </div>
+                <p class="text-gray-300 leading-relaxed" data-i18n="shop.deluxeBundle.features.collectors.electrum.detail"><?= __('shop.deluxeBundle.features.collectors.electrum.detail', 'Plaquée argent sterling 925 - Éclat argenté pur et intemporel') ?></p>
+              </div>
+
+              <!-- Or -->
+              <div class="bg-gradient-to-br from-yellow-950/50 to-gray-900/50 rounded-lg p-5 border-2 border-yellow-500/50 hover:border-yellow-400 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/20 text-center">
+                <div class="flex items-center justify-center gap-3 mb-2">
+                  <div class="w-3 h-3 rounded-full bg-yellow-400 shadow-lg shadow-yellow-400/50"></div>
+                  <h4 class="font-bold text-xl text-yellow-300" data-i18n="shop.deluxeBundle.features.collectors.gold.name"><?= __('shop.deluxeBundle.features.collectors.gold.name', 'Pièce Or') ?></h4>
+                </div>
+                <p class="text-gray-300 leading-relaxed" data-i18n="shop.deluxeBundle.features.collectors.gold.detail"><?= __('shop.deluxeBundle.features.collectors.gold.detail', 'Plaquée or 18 carats véritable - Luxe royal et éclat légendaire') ?></p>
+              </div>
+
+              <!-- Platine (centré si impair) -->
+              <div class="bg-gradient-to-br from-slate-800/50 to-gray-900/50 rounded-lg p-5 border-2 border-slate-500/50 hover:border-slate-400 transition-all duration-300 hover:shadow-lg hover:shadow-slate-500/20 md:col-span-2 md:max-w-md md:mx-auto text-center">
+                <div class="flex items-center justify-center gap-3 mb-2">
+                  <div class="w-3 h-3 rounded-full bg-slate-400 shadow-lg shadow-slate-400/50"></div>
+                  <h4 class="font-bold text-xl text-slate-300" data-i18n="shop.deluxeBundle.features.collectors.platinum.name"><?= __('shop.deluxeBundle.features.collectors.platinum.name', 'Pièce Platine') ?></h4>
+                </div>
+                <p class="text-gray-300 leading-relaxed" data-i18n="shop.deluxeBundle.features.collectors.platinum.detail"><?= __('shop.deluxeBundle.features.collectors.platinum.detail', 'Plaquée platine véritable - Rareté ultime, noblesse absolue') ?></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Autres contenus du coffre -->
+          <div class="bg-gray-900/80 backdrop-blur rounded-2xl p-8 border border-amber-600/30 shadow-xl mb-8">
+            <h3 class="text-2xl font-bold text-amber-300 mb-6 flex items-center gap-3">
+              <span class="text-3xl">📦</span>
+              <span data-i18n="shop.deluxeBundle.features.title"><?= __('shop.deluxeBundle.features.title', 'Contenu du Coffre') ?></span>
+            </h3>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="flex items-start gap-3 bg-gray-800/50 rounded-lg p-4 border border-yellow-500/20">
+                <span class="text-yellow-400 text-2xl flex-shrink-0">💰</span>
+                <span class="text-gray-200" data-i18n="shop.deluxeBundle.features.essence"><?= __('shop.deluxeBundle.features.essence', '<strong class="text-yellow-300">2× Essence du Marchand</strong> - Sets complets pour distribution rapide en jeu') ?></span>
+              </div>
+
+              <div class="flex items-start gap-3 bg-gray-800/50 rounded-lg p-4 border border-indigo-500/20">
+                <span class="text-indigo-400 text-2xl flex-shrink-0">🃏</span>
+                <span class="text-gray-200" data-i18n="shop.deluxeBundle.features.cards"><?= __('shop.deluxeBundle.features.cards', '<strong class="text-indigo-300">Set complet 560 cartes d\'équipement</strong> dans boîte premium') ?></span>
+              </div>
+
+              <div class="flex items-start gap-3 bg-gray-800/50 rounded-lg p-4 border border-purple-500/20">
+                <span class="text-purple-400 text-2xl flex-shrink-0">📜</span>
+                <span class="text-gray-200" data-i18n="shop.deluxeBundle.features.triptychs"><?= __('shop.deluxeBundle.features.triptychs', '<strong class="text-purple-300">3 triptyques au choix</strong> (Espèce + Classe + Historique)') ?></span>
+              </div>
+
+              <div class="flex items-start gap-3 bg-gray-800/50 rounded-lg p-4 border border-purple-500/20">
+                <span class="text-purple-300 text-2xl flex-shrink-0">🎒</span>
+                <span class="text-gray-200" data-i18n="shop.deluxeBundle.features.bag"><?= __('shop.deluxeBundle.features.bag', 'Sac en velours brodé "Geek & Dragon"') ?></span>
+              </div>
+
+              <div class="flex items-start gap-3 bg-gray-800/50 rounded-lg p-4 border border-blue-500/20">
+                <span class="text-blue-400 text-2xl flex-shrink-0">📜</span>
+                <span class="text-gray-200" data-i18n="shop.deluxeBundle.features.certificate"><?= __('shop.deluxeBundle.features.certificate', 'Certificat d\'authenticité numéroté à la main') ?></span>
+              </div>
+
+              <div class="flex items-start gap-3 bg-gray-800/50 rounded-lg p-4 border border-amber-500/20">
+                <span class="text-amber-500 text-2xl flex-shrink-0">🗝️</span>
+                <span class="text-gray-200" data-i18n="shop.deluxeBundle.features.chest"><?= __('shop.deluxeBundle.features.chest', 'Coffret deluxe personnalisé') ?></span>
+              </div>
+
+              <div class="flex items-start gap-3 bg-gray-800/50 rounded-lg p-4 border border-green-500/20 md:col-span-2">
+                <span class="text-green-400 text-2xl flex-shrink-0">📖</span>
+                <span class="text-gray-200" data-i18n="shop.deluxeBundle.features.guide"><?= __('shop.deluxeBundle.features.guide', 'Guide d\'immersion deluxe (livret 24 pages)') ?></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Spécifications et CTA -->
+          <div class="grid md:grid-cols-2 gap-6">
+            <!-- Spécifications -->
+            <div class="bg-gray-900/80 backdrop-blur rounded-xl p-6 border border-yellow-600/30 shadow-xl">
+              <h3 class="text-xl font-bold text-yellow-300 mb-4 flex items-center gap-2">
+                <span class="text-2xl">⚙️</span>
+                <span data-i18n="shop.deluxeBundle.specs.title"><?= __('shop.deluxeBundle.specs.title', 'Spécifications Premium') ?></span>
+              </h3>
+
+              <div class="space-y-3">
+                <div class="flex items-start gap-3 text-gray-200">
+                  <span class="text-amber-400 text-xl">🔢</span>
+                  <span data-i18n="shop.deluxeBundle.specs.numbered"><?= __('shop.deluxeBundle.specs.numbered', 'Numérotation unique gravée au laser') ?></span>
+                </div>
+                <div class="flex items-start gap-3 text-gray-200">
+                  <span class="text-green-400 text-xl">💎</span>
+                  <span data-i18n="shop.deluxeBundle.specs.savings"><?= __('shop.deluxeBundle.specs.savings', 'Économie de 25% vs achat séparé') ?></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="bg-gradient-to-br from-amber-900/40 via-orange-900/40 to-yellow-900/40 backdrop-blur rounded-xl p-6 border-2 border-amber-500/60 shadow-2xl text-center flex flex-col justify-center">
+              <p class="text-red-400 font-bold text-xl mb-4 animate-pulse" data-i18n="shop.deluxeBundle.limited">
+                <?= __('shop.deluxeBundle.limited', 'Production limitée à 500 exemplaires') ?>
+              </p>
+
+              <a href="<?= langUrl('index.php#contact') ?>" class="btn btn-primary text-lg px-8 py-4 mb-3 inline-block shadow-lg shadow-amber-600/30 hover:shadow-amber-500/50 transition-all" data-i18n="shop.deluxeBundle.cta">
+                <?= __('shop.deluxeBundle.cta', 'Réserver Mon Édition') ?>
+              </a>
+
+              <p class="text-sm text-gray-300" data-i18n="shop.deluxeBundle.contact">
+                <?= __('shop.deluxeBundle.contact', 'Contactez-nous pour disponibilité') ?>
+              </p>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </section>
 	

@@ -134,10 +134,53 @@
             },
             "backToTop": "🔝 Retour au menu principal"
         },
-        "chest": {
-            "title": "Coffres sur mesure",
-            "description": "Besoin de plus de 50 pièces ? Des coffres personnalisés sont disponibles sur demande.",
-            "button": "Demander un devis"
+        "deluxeBundle": {
+            "title": "Coffre du Dragon - Édition Collectionneur",
+            "badge": "⭐ Édition Limitée Numérotée ⭐",
+            "subtitle": "L'expérience ultime pour collectionneurs et maîtres de jeu exigeants",
+            "description": "Le coffret premium qui transforme chaque partie en légende. Numéroté et certifié, ce trésor contient l'arsenal complet du maître de jeu passionné.",
+            "features": {
+                "title": "Contenu du Coffre",
+                "essence": "<strong class=\"text-yellow-300\">2× Essence du Marchand</strong> - Sets complets pour distribution rapide en jeu",
+                "collectors": {
+                    "title": "<strong class=\"text-yellow-200\">5 Pièces de Collection Plaquées</strong>",
+                    "subtitle": "Édition exclusive plaquée dans leur <strong class=\"text-amber-400\">véritable métal rare authentique</strong>",
+                    "copper": {
+                        "name": "Pièce Cuivre",
+                        "detail": "Plaquée cuivre pur - Éclat chaleureux et reflets orangés"
+                    },
+                    "silver": {
+                        "name": "Pièce Argent",
+                        "detail": "Plaquée argent sterling 925 - Brillance immaculée et prestige"
+                    },
+                    "electrum": {
+                        "name": "Pièce Électrum",
+                        "detail": "Plaquée argent sterling 925 - Éclat argenté pur et intemporel"
+                    },
+                    "gold": {
+                        "name": "Pièce Or",
+                        "detail": "Plaquée or 18 carats véritable - Luxe royal et éclat légendaire"
+                    },
+                    "platinum": {
+                        "name": "Pièce Platine",
+                        "detail": "Plaquée platine véritable - Rareté ultime, noblesse absolue"
+                    }
+                },
+                "cards": "<strong class=\"text-indigo-300\">Set complet 560 cartes d'équipement</strong> dans boîte premium",
+                "triptychs": "<strong class=\"text-purple-300\">3 triptyques au choix</strong> (Espèce + Classe + Historique)",
+                "bag": "Sac en velours brodé \"Geek & Dragon\"",
+                "certificate": "Certificat d'authenticité numéroté à la main",
+                "chest": "Coffret deluxe personnalisé",
+                "guide": "Guide d'immersion deluxe (livret 24 pages)"
+            },
+            "specs": {
+                "title": "Spécifications Premium",
+                "numbered": "Numérotation unique gravée au laser",
+                "savings": "Économie de 25% vs achat séparé"
+            },
+            "cta": "Réserver Mon Édition",
+            "contact": "Contactez-nous pour disponibilité",
+            "limited": "Production limitée à 500 exemplaires"
         },
         "cards": {
             "title": "Cartes d'équipement",
