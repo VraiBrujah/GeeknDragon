@@ -205,11 +205,16 @@ echo $snipcartInit;
               <p class="text-sm text-gray-400 mt-3 italic text-center" data-i18n="shop.pieces.intro.weightNote">
                 Ressentez le poids croissant du trésor entre vos mains !
               </p>
+              <div class="mt-4 p-3 bg-blue-900/20 border border-blue-500/30 rounded text-center">
+                <p class="text-sm text-blue-300" data-i18n="shop.pieces.intro.weightNotice">
+                  📌 Ces multiplicateurs s'appliquent à <strong>n'importe quel métal</strong> (cuivre, argent, électrum, or, platine)
+                </p>
+              </div>
             </div>
 
             <!-- Exemple concret -->
-            <div class="bg-gray-800/50 rounded-lg p-6 border border-amber-500/20">
-              <h3 class="text-xl font-bold text-amber-400 mb-4" data-i18n="shop.pieces.intro.exampleTitle">💡 Exemple concret : trésor de 1 500 po</h3>
+            <div class="bg-gray-800/50 rounded-lg p-6 border border-amber-500/20 mt-4">
+              <h3 class="text-xl font-bold text-amber-400 mb-4" data-i18n="shop.pieces.intro.exampleTitle">💡 Exemple concret avec de l'or : trésor de 1 500 po</h3>
               <p class="text-base leading-relaxed mb-3" data-i18n="shop.pieces.intro.exampleText">
                 Plutôt que d'empiler <strong class="text-red-400">1 500 pièces unitaires</strong> (15 kg / 33 lb), utilisez :
               </p>
