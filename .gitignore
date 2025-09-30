@@ -84,3 +84,4 @@ vendor/vlucas/phpdotenv/tests/fixtures/env/windows.env
 vendor/vlucas/phpdotenv/UPGRADING.md
 vendor/vlucas/phpdotenv/vendor-bin/phpstan/composer.json
 vendor/vlucas/phpdotenv/vendor-bin/psalm/composer.json
+nul

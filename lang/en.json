@@ -127,7 +127,26 @@
         "pieces": {
             "title": "Metal coins",
             "description": "A role-playing game without physical coins is like Monopoly without banknotes. Treat yourself to the authentic weight of treasure.",
-            "video": "Watch Role-Playing Tips on D&D Economy video >"
+            "video": "Watch Role-Playing Tips on D&D Economy video >",
+            "intro": {
+                "paragraph1": "In D&D, currency uses <strong class=\"text-amber-300\">5 different metals</strong>: copper (cp), silver (sp), electrum (ep), gold (gp), and platinum (pp). Base conversions are: 10 cp = 1 sp, 2 sp = 1 ep, 5 sp = 1 gp, and 10 gp = 1 pp.",
+                "paragraph2": "Our physical coins add an immersive dimension: each coin can have an <strong class=\"text-yellow-300\">engraved multiplier</strong> (×1, ×10, ×100, ×1000, ×10000). A gold coin ×100 is worth 100 gp — perfect for managing large treasures without handling hundreds of coins!",
+                "paragraph3": "According to official D&D rules, <strong class=\"text-amber-300\">50 coins = 500g/1 lb</strong>. Our multipliers faithfully represent these values and their weight for total immersion:",
+                "weightTableTitle": "⚖️ Weight table by multiplier",
+                "weightTableHeaders": ["Multiplier", "Weight (g)", "Weight (lb)", "Equivalent"],
+                "weightTableRow1": ["×1", "10 g", "0.02 lb", "1 standard coin"],
+                "weightTableRow2": ["×10", "100 g", "0.22 lb", "10 coins"],
+                "weightTableRow3": ["×100", "1 kg", "2.2 lb", "100 coins"],
+                "weightTableRow4": ["×1000", "10 kg", "22 lb", "1000 coins"],
+                "weightTableRow5": ["×10000", "100 kg", "220 lb", "10000 coins"],
+                "weightNote": "Feel the growing weight of treasure in your hands!",
+                "exampleTitle": "💡 Concrete example: 1,500 gp treasure",
+                "exampleText": "Rather than stacking <strong class=\"text-red-400\">1,500 unit coins</strong> (15 kg / 33 lb), use:",
+                "exampleItem1": "<strong class=\"text-yellow-400\">1 gold coin ×1000</strong> → 1000 gp (10 kg / 22 lb)",
+                "exampleItem2": "<strong class=\"text-yellow-300\">5 gold coins ×100</strong> → 500 gp (5 kg / 11 lb)",
+                "exampleNote": "<strong class=\"text-green-400\">Result: 6 physical coins</strong> instead of 1,500!",
+                "footer": "Choose from our ready-to-use collections or create your custom treasure with customizable coins."
+            }
         },
         "chest": {
             "title": "Custom chests",
