@@ -1028,7 +1028,7 @@ echo $snipcartInit;
         <a href="#guide-triptyques" class="btn btn-primary"><?= __('gameHelp.buttons.discover', 'Découvrir les Triptyques') ?></a>
         <a href="#guide-cartes" class="btn btn-primary"><?= __('gameHelp.buttons.cardsGuide', 'Guide des Cartes') ?></a>
         <a href="#guide-monnaie" class="btn btn-primary"><?= __('gameHelp.buttons.moneyGuide', 'Guide de la Monnaie') ?></a>
-        <a href="<?= langUrl('boutique.php#triptyques') ?>" class="btn btn-outline"><?= __('gameHelp.buttons.buyTriptychs', 'Acheter mes Triptyques') ?></a>
+        <a href="<?= langUrl('boutique.php') ?>" class="btn btn-outline"><?= __('gameHelp.buttons.goToShop', 'Visiter la Boutique') ?></a>
       </div>
     </div>
   </section>
