@@ -209,72 +209,73 @@ echo $snipcartInit;
         <!-- Contenu en une seule colonne large -->
         <div class="max-w-5xl mx-auto">
 
-          <!-- Section Pièces de Collection - Mise en avant principale -->
-          <div class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-2xl p-8 border border-amber-500/40 shadow-2xl mb-8">
-            <div class="flex items-center gap-4 mb-6">
-              <span class="text-5xl">👑</span>
-              <div>
-                <h3 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-amber-300 to-yellow-400 mb-1" data-i18n="shop.deluxeBundle.features.collectors.title"><?= __('shop.deluxeBundle.features.collectors.title', '<strong class="text-yellow-200">5 Pièces de Collection Plaquées</strong>') ?></h3>
-                <p class="text-lg text-amber-300/90 italic" data-i18n="shop.deluxeBundle.features.collectors.subtitle"><?= __('shop.deluxeBundle.features.collectors.subtitle', 'Édition exclusive plaquée dans leur <strong class="text-amber-400">véritable métal rare authentique</strong>') ?></p>
-              </div>
-            </div>
-
-            <!-- Grille des 5 pièces -->
-            <div class="grid md:grid-cols-2 gap-4">
-              <!-- Cuivre -->
-              <div class="bg-gradient-to-br from-orange-950/50 to-gray-900/50 rounded-lg p-5 border-2 border-orange-500/50 hover:border-orange-400 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20 text-center">
-                <div class="flex items-center justify-center gap-3 mb-2">
-                  <div class="w-3 h-3 rounded-full bg-orange-500 shadow-lg shadow-orange-500/50"></div>
-                  <h4 class="font-bold text-xl text-orange-400" data-i18n="shop.deluxeBundle.features.collectors.copper.name"><?= __('shop.deluxeBundle.features.collectors.copper.name', 'Pièce Cuivre') ?></h4>
-                </div>
-                <p class="text-gray-300 leading-relaxed" data-i18n="shop.deluxeBundle.features.collectors.copper.detail"><?= __('shop.deluxeBundle.features.collectors.copper.detail', 'Plaquée cuivre pur - Éclat chaleureux et reflets orangés') ?></p>
-              </div>
-
-              <!-- Argent -->
-              <div class="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-lg p-5 border-2 border-gray-400/50 hover:border-gray-300 transition-all duration-300 hover:shadow-lg hover:shadow-gray-400/20 text-center">
-                <div class="flex items-center justify-center gap-3 mb-2">
-                  <div class="w-3 h-3 rounded-full bg-gray-300 shadow-lg shadow-gray-300/50"></div>
-                  <h4 class="font-bold text-xl text-gray-200" data-i18n="shop.deluxeBundle.features.collectors.silver.name"><?= __('shop.deluxeBundle.features.collectors.silver.name', 'Pièce Argent') ?></h4>
-                </div>
-                <p class="text-gray-300 leading-relaxed" data-i18n="shop.deluxeBundle.features.collectors.silver.detail"><?= __('shop.deluxeBundle.features.collectors.silver.detail', 'Plaquée argent sterling 925 - Brillance immaculée et prestige') ?></p>
-              </div>
-
-              <!-- Électrum -->
-              <div class="bg-gradient-to-br from-teal-950/50 to-gray-900/50 rounded-lg p-5 border-2 border-teal-500/50 hover:border-teal-400 transition-all duration-300 hover:shadow-lg hover:shadow-teal-500/20 text-center">
-                <div class="flex items-center justify-center gap-3 mb-2">
-                  <div class="w-3 h-3 rounded-full bg-teal-400 shadow-lg shadow-teal-400/50"></div>
-                  <h4 class="font-bold text-xl text-teal-300" data-i18n="shop.deluxeBundle.features.collectors.electrum.name"><?= __('shop.deluxeBundle.features.collectors.electrum.name', 'Pièce Électrum') ?></h4>
-                </div>
-                <p class="text-gray-300 leading-relaxed" data-i18n="shop.deluxeBundle.features.collectors.electrum.detail"><?= __('shop.deluxeBundle.features.collectors.electrum.detail', 'Plaquée argent sterling 925 - Éclat argenté pur et intemporel') ?></p>
-              </div>
-
-              <!-- Or -->
-              <div class="bg-gradient-to-br from-yellow-950/50 to-gray-900/50 rounded-lg p-5 border-2 border-yellow-500/50 hover:border-yellow-400 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/20 text-center">
-                <div class="flex items-center justify-center gap-3 mb-2">
-                  <div class="w-3 h-3 rounded-full bg-yellow-400 shadow-lg shadow-yellow-400/50"></div>
-                  <h4 class="font-bold text-xl text-yellow-300" data-i18n="shop.deluxeBundle.features.collectors.gold.name"><?= __('shop.deluxeBundle.features.collectors.gold.name', 'Pièce Or') ?></h4>
-                </div>
-                <p class="text-gray-300 leading-relaxed" data-i18n="shop.deluxeBundle.features.collectors.gold.detail"><?= __('shop.deluxeBundle.features.collectors.gold.detail', 'Plaquée or 18 carats véritable - Luxe royal et éclat légendaire') ?></p>
-              </div>
-
-              <!-- Platine (centré si impair) -->
-              <div class="bg-gradient-to-br from-slate-800/50 to-gray-900/50 rounded-lg p-5 border-2 border-slate-500/50 hover:border-slate-400 transition-all duration-300 hover:shadow-lg hover:shadow-slate-500/20 md:col-span-2 md:max-w-md md:mx-auto text-center">
-                <div class="flex items-center justify-center gap-3 mb-2">
-                  <div class="w-3 h-3 rounded-full bg-slate-400 shadow-lg shadow-slate-400/50"></div>
-                  <h4 class="font-bold text-xl text-slate-300" data-i18n="shop.deluxeBundle.features.collectors.platinum.name"><?= __('shop.deluxeBundle.features.collectors.platinum.name', 'Pièce Platine') ?></h4>
-                </div>
-                <p class="text-gray-300 leading-relaxed" data-i18n="shop.deluxeBundle.features.collectors.platinum.detail"><?= __('shop.deluxeBundle.features.collectors.platinum.detail', 'Plaquée platine véritable - Rareté ultime, noblesse absolue') ?></p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Autres contenus du coffre -->
+          <!-- Contenu du coffre -->
           <div class="bg-gray-900/80 backdrop-blur rounded-2xl p-8 border border-amber-600/30 shadow-xl mb-8">
             <h3 class="text-2xl font-bold text-amber-300 mb-6 flex items-center gap-3">
               <span class="text-3xl">📦</span>
               <span data-i18n="shop.deluxeBundle.features.title"><?= __('shop.deluxeBundle.features.title', 'Contenu du Coffre') ?></span>
             </h3>
 
+            <!-- Section Pièces de Collection - Mise en avant dans le contenu -->
+            <div class="bg-gradient-to-br from-gray-800/60 via-gray-900/60 to-gray-800/60 rounded-xl p-6 border border-amber-500/40 shadow-xl mb-6">
+              <div class="flex items-center gap-4 mb-6">
+                <span class="text-4xl">👑</span>
+                <div>
+                  <h4 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-amber-300 to-yellow-400 mb-1" data-i18n="shop.deluxeBundle.features.collectors.title"><?= __('shop.deluxeBundle.features.collectors.title', '<strong class="text-yellow-200">5 Pièces de Collection Plaquées</strong>') ?></h4>
+                  <p class="text-base text-amber-300/90 italic" data-i18n="shop.deluxeBundle.features.collectors.subtitle"><?= __('shop.deluxeBundle.features.collectors.subtitle', 'Édition exclusive plaquée dans leur <strong class="text-amber-400">véritable métal rare authentique</strong>') ?></p>
+                </div>
+              </div>
+
+              <!-- Grille des 5 pièces -->
+              <div class="grid md:grid-cols-2 gap-3">
+                <!-- Cuivre -->
+                <div class="bg-gradient-to-br from-orange-950/50 to-gray-900/50 rounded-lg p-4 border-2 border-orange-500/50 hover:border-orange-400 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20 text-center">
+                  <div class="flex items-center justify-center gap-2 mb-2">
+                    <div class="w-2.5 h-2.5 rounded-full bg-orange-500 shadow-lg shadow-orange-500/50"></div>
+                    <h5 class="font-bold text-lg text-orange-400" data-i18n="shop.deluxeBundle.features.collectors.copper.name"><?= __('shop.deluxeBundle.features.collectors.copper.name', 'Pièce Cuivre') ?></h5>
+                  </div>
+                  <p class="text-gray-300 text-sm leading-relaxed" data-i18n="shop.deluxeBundle.features.collectors.copper.detail"><?= __('shop.deluxeBundle.features.collectors.copper.detail', 'Plaquée cuivre pur - Éclat chaleureux et reflets orangés') ?></p>
+                </div>
+
+                <!-- Argent -->
+                <div class="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-lg p-4 border-2 border-gray-400/50 hover:border-gray-300 transition-all duration-300 hover:shadow-lg hover:shadow-gray-400/20 text-center">
+                  <div class="flex items-center justify-center gap-2 mb-2">
+                    <div class="w-2.5 h-2.5 rounded-full bg-gray-300 shadow-lg shadow-gray-300/50"></div>
+                    <h5 class="font-bold text-lg text-gray-200" data-i18n="shop.deluxeBundle.features.collectors.silver.name"><?= __('shop.deluxeBundle.features.collectors.silver.name', 'Pièce Argent') ?></h5>
+                  </div>
+                  <p class="text-gray-300 text-sm leading-relaxed" data-i18n="shop.deluxeBundle.features.collectors.silver.detail"><?= __('shop.deluxeBundle.features.collectors.silver.detail', 'Plaquée argent sterling 925 - Brillance immaculée et prestige') ?></p>
+                </div>
+
+                <!-- Électrum -->
+                <div class="bg-gradient-to-br from-teal-950/50 to-gray-900/50 rounded-lg p-4 border-2 border-teal-500/50 hover:border-teal-400 transition-all duration-300 hover:shadow-lg hover:shadow-teal-500/20 text-center">
+                  <div class="flex items-center justify-center gap-2 mb-2">
+                    <div class="w-2.5 h-2.5 rounded-full bg-teal-400 shadow-lg shadow-teal-400/50"></div>
+                    <h5 class="font-bold text-lg text-teal-300" data-i18n="shop.deluxeBundle.features.collectors.electrum.name"><?= __('shop.deluxeBundle.features.collectors.electrum.name', 'Pièce Électrum') ?></h5>
+                  </div>
+                  <p class="text-gray-300 text-sm leading-relaxed" data-i18n="shop.deluxeBundle.features.collectors.electrum.detail"><?= __('shop.deluxeBundle.features.collectors.electrum.detail', 'Plaquée argent sterling 925 - Éclat argenté pur et intemporel') ?></p>
+                </div>
+
+                <!-- Or -->
+                <div class="bg-gradient-to-br from-yellow-950/50 to-gray-900/50 rounded-lg p-4 border-2 border-yellow-500/50 hover:border-yellow-400 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/20 text-center">
+                  <div class="flex items-center justify-center gap-2 mb-2">
+                    <div class="w-2.5 h-2.5 rounded-full bg-yellow-400 shadow-lg shadow-yellow-400/50"></div>
+                    <h5 class="font-bold text-lg text-yellow-300" data-i18n="shop.deluxeBundle.features.collectors.gold.name"><?= __('shop.deluxeBundle.features.collectors.gold.name', 'Pièce Or') ?></h5>
+                  </div>
+                  <p class="text-gray-300 text-sm leading-relaxed" data-i18n="shop.deluxeBundle.features.collectors.gold.detail"><?= __('shop.deluxeBundle.features.collectors.gold.detail', 'Plaquée or 18 carats véritable - Luxe royal et éclat légendaire') ?></p>
+                </div>
+
+                <!-- Platine (centré sur 2 colonnes) -->
+                <div class="bg-gradient-to-br from-slate-800/50 to-gray-900/50 rounded-lg p-4 border-2 border-slate-500/50 hover:border-slate-400 transition-all duration-300 hover:shadow-lg hover:shadow-slate-500/20 md:col-span-2 md:max-w-md md:mx-auto text-center">
+                  <div class="flex items-center justify-center gap-2 mb-2">
+                    <div class="w-2.5 h-2.5 rounded-full bg-slate-400 shadow-lg shadow-slate-400/50"></div>
+                    <h5 class="font-bold text-lg text-slate-300" data-i18n="shop.deluxeBundle.features.collectors.platinum.name"><?= __('shop.deluxeBundle.features.collectors.platinum.name', 'Pièce Platine') ?></h5>
+                  </div>
+                  <p class="text-gray-300 text-sm leading-relaxed" data-i18n="shop.deluxeBundle.features.collectors.platinum.detail"><?= __('shop.deluxeBundle.features.collectors.platinum.detail', 'Plaquée platine véritable - Rareté ultime, noblesse absolue') ?></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Autres items du coffre -->
             <div class="grid md:grid-cols-2 gap-4">
               <div class="flex items-start gap-3 bg-gray-800/50 rounded-lg p-4 border border-yellow-500/20">
                 <span class="text-yellow-400 text-2xl flex-shrink-0">💰</span>
@@ -304,11 +305,6 @@ echo $snipcartInit;
               <div class="flex items-start gap-3 bg-gray-800/50 rounded-lg p-4 border border-amber-500/20">
                 <span class="text-amber-500 text-2xl flex-shrink-0">🗝️</span>
                 <span class="text-gray-200" data-i18n="shop.deluxeBundle.features.chest"><?= __('shop.deluxeBundle.features.chest', 'Coffret deluxe personnalisé') ?></span>
-              </div>
-
-              <div class="flex items-start gap-3 bg-gray-800/50 rounded-lg p-4 border border-green-500/20 md:col-span-2">
-                <span class="text-green-400 text-2xl flex-shrink-0">📖</span>
-                <span class="text-gray-200" data-i18n="shop.deluxeBundle.features.guide"><?= __('shop.deluxeBundle.features.guide', 'Guide d\'immersion deluxe (livret 24 pages)') ?></span>
               </div>
             </div>
           </div>
@@ -352,9 +348,16 @@ echo $snipcartInit;
 
         </div>
 
+        <!-- Bouton retour au menu -->
+        <div class="text-center mt-16">
+          <a href="#main" class="btn btn-outline" data-i18n="shop.deluxeBundle.backToTop">
+            <?= __('shop.deluxeBundle.backToTop', '🔝 Retour au menu principal') ?>
+          </a>
+        </div>
+
       </div>
     </section>
-	
+
   <!-- ░░░ CARTES D'ÉQUIPEMENT ░░░ -->
     <section id="cartes" class="py-24 bg-gray-900/80 scroll-mt-24">
       <div class="max-w-6xl mx-auto px-6">

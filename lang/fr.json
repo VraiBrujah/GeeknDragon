@@ -180,7 +180,8 @@
             },
             "cta": "Réserver Mon Édition",
             "contact": "Contactez-nous pour disponibilité",
-            "limited": "Production limitée à 500 exemplaires"
+            "limited": "Production limitée à 500 exemplaires",
+            "backToTop": "🔝 Retour au menu principal"
         },
         "cards": {
             "title": "Cartes d'équipement",

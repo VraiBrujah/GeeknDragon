@@ -180,7 +180,8 @@
             },
             "cta": "Reserve My Edition",
             "contact": "Contact us for availability",
-            "limited": "Limited production to 500 units"
+            "limited": "Limited production to 500 units",
+            "backToTop": "🔝 Back to main menu"
         },
         "cards": {
             "title": "Equipment cards",
