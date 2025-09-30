@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Direct - Convertisseur de Monnaie</title>
+    <link href="/css/styles.css" rel="stylesheet">
+    <style>
+        body { 
+            background: #1a1a1a; 
+            color: white; 
+            font-family: Arial, sans-serif; 
+            padding: 20px;
+        }
+        .test-container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            background: #2d2d2d; 
+            padding: 20px; 
+            border-radius: 8px;
+        }
+        .status { 
+            padding: 10px; 
+            margin: 10px 0; 
+            border-radius: 4px; 
+        }
+        .success { background: #1e7e34; }
+        .error { background: #721c24; }
+        .warning { background: #856404; }
+        
+        /* Styles pour le convertisseur */
+        .converter-container {
+            background: #3d3d3d;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .currency-input-group {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            gap: 10px;
+        }
+        
+        .currency-input {
+            padding: 8px 12px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background: #2d2d2d;
+            color: white;
+            width: 120px;
+        }
+        
+        .currency-label {
+            font-weight: bold;
+            width: 80px;
+            display: inline-block;
+        }
+        
+        .result-display {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+            border-left: 4px solid #007bff;
+        }
+        
+        .test-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        
+        .test-button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Test Direct du Convertisseur de Monnaie</h1>
+        
+        <div id="status-container">
+            <h2>📊 Statut du Chargement</h2>
+            <div id="loading-status"></div>
+        </div>
+        
+        <div class="converter-container">
+            <h2>💰 Convertisseur de Monnaie D&D</h2>
+            
+            <div id="currency-converter-premium">
+                <!-- Le convertisseur s'injectera ici -->
+                <div class="currency-inputs">
+                    <div class="currency-input-group">
+                        <span class="currency-label">🪙 Cuivre:</span>
+                        <input type="number" class="currency-input" data-currency="copper" value="0" min="0">
+                    </div>
+                    <div class="currency-input-group">
+                        <span class="currency-label">🥈 Argent:</span>
+                        <input type="number" class="currency-input" data-currency="silver" value="0" min="0">
+                    </div>
+                    <div class="currency-input-group">
+                        <span class="currency-label">⚡ Électrum:</span>
+                        <input type="number" class="currency-input" data-currency="electrum" value="0" min="0">
+                    </div>
+                    <div class="currency-input-group">
+                        <span class="currency-label">🥇 Or:</span>
+                        <input type="number" class="currency-input" data-currency="gold" value="0" min="0">
+                    </div>
+                    <div class="currency-input-group">
+                        <span class="currency-label">💎 Platine:</span>
+                        <input type="number" class="currency-input" data-currency="platinum" value="0" min="0">
+                    </div>
+                </div>
+                
+                <div class="result-display" id="currency-best">
+                    Entrez des montants pour voir la conversion optimale...
+                </div>
+                
+                <div class="test-buttons">
+                    <button class="test-button" onclick="testWithSampleData()">
+                        Test avec 1661 cuivres
+                    </button>
+                    <button class="test-button" onclick="testWithComplexData()">
+                        Test complexe
+                    </button>
+                    <button class="test-button" onclick="resetConverter()">
+                        Reset
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="debug-info" class="converter-container">
+            <h2>🔍 Informations de Debug</h2>
+            <div id="debug-content"></div>
+        </div>
+    </div>
+
+    <!-- Scripts de données -->
+    <script>
+        // Simuler les données produits
+        window.products = {
+            "coin-custom-single": {
+                "price": 10,
+                "coin_lots": {"copper": 1, "silver": 1, "electrum": 1, "gold": 1, "platinum": 1},
+                "customizable": true,
+                "category": "pieces",
+                "metals_en": ["copper", "silver", "electrum", "gold", "platinum"],
+                "multipliers": [1, 10, 100, 1000, 10000]
+            },
+            "coin-trio-customizable": {
+                "price": 25,
+                "coin_lots": {"copper": 3, "silver": 3, "electrum": 3, "gold": 3, "platinum": 3},
+                "customizable": true,
+                "category": "pieces"
+            },
+            "coin-septuple-free": {
+                "price": 50,
+                "coin_lots": {"copper": 7, "silver": 7, "electrum": 7, "gold": 7, "platinum": 7},
+                "customizable": true,
+                "category": "pieces"
+            }
+        };
+        
+        // Simuler les traductions
+        window.i18n = {
+            shop: {
+                converter: {
+                    optimalConversion: "Conversion optimale",
+                    total: "Total",
+                    cost: "Coût",
+                    economy: "Économie",
+                    value: "Valeur",
+                    and: "et",
+                    coins: "pièces",
+                    enterAmounts: "Entrez des montants pour voir les recommandations optimales"
+                }
+            }
+        };
+    </script>
+
+    <!-- Test du bundle d'abord -->
+    <script src="/js/app.bundle.min.js"></script>
+    
+    <!-- Fallback vers fichiers individuels si le bundle ne fonctionne pas -->
+    <script>
+        if (typeof CurrencyConverterPremium === 'undefined') {
+            console.warn('Bundle non disponible, chargement des fichiers individuels...');
+            document.write('<script src="/js/app.js"><\/script>');
+            document.write('<script src="/js/currency-converter.js"><\/script>');
+            document.write('<script src="/js/coin-lot-optimizer.js"><\/script>');
+        }
+    </script>
+
+    <script>
+        let converterInstance = null;
+        
+        function updateStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('loading-status');
+            const className = type === 'success' ? 'success' : type === 'error' ? 'error' : 'warning';
+            statusDiv.innerHTML += `<div class="status ${className}">${message}</div>`;
+        }
+        
+        function updateDebugInfo() {
+            const debugDiv = document.getElementById('debug-content');
+            debugDiv.innerHTML = `
+                <p><strong>CurrencyConverterPremium:</strong> ${typeof CurrencyConverterPremium}</p>
+                <p><strong>CoinLotOptimizer:</strong> ${typeof CoinLotOptimizer}</p>
+                <p><strong>Instance créée:</strong> ${converterInstance ? 'Oui' : 'Non'}</p>
+                <p><strong>Window.products:</strong> ${window.products ? 'Chargé' : 'Non chargé'}</p>
+                <p><strong>Bundle chargé:</strong> ${typeof window.GD !== 'undefined' ? 'Oui' : 'Non'}</p>
+            `;
+        }
+        
+        function initializeConverter() {
+            try {
+                if (typeof CurrencyConverterPremium === 'undefined') {
+                    throw new Error('CurrencyConverterPremium non disponible');
+                }
+                
+                converterInstance = new CurrencyConverterPremium();
+                updateStatus('✅ Convertisseur initialisé avec succès', 'success');
+                
+                // Test de base
+                const testResult = converterInstance.getTotalBaseValue();
+                updateStatus(`✅ Test de base réussi: ${testResult} cuivres`, 'success');
+                
+            } catch (error) {
+                updateStatus(`❌ Erreur initialisation: ${error.message}`, 'error');
+                console.error('Erreur convertisseur:', error);
+            }
+            
+            updateDebugInfo();
+        }
+        
+        function testWithSampleData() {
+            if (!converterInstance) {
+                updateStatus('❌ Convertisseur non initialisé', 'error');
+                return;
+            }
+            
+            try {
+                // Mettre 1661 dans le champ cuivre
+                const copperInput = document.querySelector('input[data-currency="copper"]');
+                if (copperInput) {
+                    copperInput.value = '1661';
+                    copperInput.dispatchEvent(new Event('input', { bubbles: true }));
+                }
+                
+                updateStatus('✅ Test avec 1661 cuivres exécuté', 'success');
+            } catch (error) {
+                updateStatus(`❌ Erreur test: ${error.message}`, 'error');
+            }
+        }
+        
+        function testWithComplexData() {
+            if (!converterInstance) {
+                updateStatus('❌ Convertisseur non initialisé', 'error');
+                return;
+            }
+            
+            try {
+                // Test avec différentes pièces
+                const inputs = {
+                    copper: 50,
+                    silver: 25,
+                    electrum: 10,
+                    gold: 5,
+                    platinum: 2
+                };
+                
+                Object.entries(inputs).forEach(([currency, value]) => {
+                    const input = document.querySelector(`input[data-currency="${currency}"]`);
+                    if (input) {
+                        input.value = value.toString();
+                        input.dispatchEvent(new Event('input', { bubbles: true }));
+                    }
+                });
+                
+                updateStatus('✅ Test complexe exécuté', 'success');
+            } catch (error) {
+                updateStatus(`❌ Erreur test complexe: ${error.message}`, 'error');
+            }
+        }
+        
+        function resetConverter() {
+            const inputs = document.querySelectorAll('.currency-input');
+            inputs.forEach(input => {
+                input.value = '0';
+                input.dispatchEvent(new Event('input', { bubbles: true }));
+            });
+            
+            updateStatus('🔄 Convertisseur remis à zéro', 'info');
+        }
+        
+        // Initialisation au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStatus('🚀 Page chargée, initialisation...', 'info');
+            
+            // Attendre un peu pour s'assurer que tous les scripts sont chargés
+            setTimeout(() => {
+                updateDebugInfo();
+                initializeConverter();
+            }, 500);
+        });
+        
+        // Debug des erreurs
+        window.addEventListener('error', function(e) {
+            updateStatus(`❌ Erreur JavaScript: ${e.message}`, 'error');
+            console.error('Erreur globale:', e);
+        });
+    </script>
+</body>
+</html>

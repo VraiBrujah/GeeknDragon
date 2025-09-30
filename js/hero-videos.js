@@ -5,636 +5,633 @@
 //   qu'après que le nouveau joue vraiment (plus d'écran vide).
 
 // Protection contre les conflits d'extensions
-(function() {
-  'use strict';
-  
-  // Eviter l'execution multiple et les conflits d'extensions
-  if (window.__heroVideosInitialized) {
-    return;
-  }
-  window.__heroVideosInitialized = true;
-
-document.addEventListener('DOMContentLoaded', () => {
-  const FADE_MS = 1000;
-  const LOAD_AHEAD_SECONDS = 10; // Augmenté pour les videos lourdes
-  const supportsMatchMedia = typeof window.matchMedia === 'function';
-  const reduceMotionQuery = supportsMatchMedia
-    ? window.matchMedia('(prefers-reduced-motion: reduce)')
-    : null;
-  const coarsePointerQuery = supportsMatchMedia
-    ? window.matchMedia('(pointer: coarse)')
-    : null;
-  const readMediaQuery = (query) => (query && 'matches' in query ? query.matches : false);
-
-  // Gestionnaire d'erreur robuste contre les extensions
-  const safeVideoPlay = async (video) => {
-    if (!video || !autoPlayAllowed) return;
-    
-    try {
-      const playPromise = video.play();
-      if (playPromise && typeof playPromise.catch === 'function') {
-        return await playPromise.catch((error) => {
-          // Log seulement si ce n'est pas une erreur d'extension connue
-          if (!error.message?.includes('interrupted') && !error.message?.includes('aborted')) {
-            console.debug('Hero Videos: Play error handled:', error.name);
-          }
-          return Promise.resolve(); // Résoudre silencieusement
-        });
-      }
-    } catch (error) {
-      console.debug('Hero Videos: Play error handled:', error.name);
-    }
-  };
-
-  // Gestion paresseuse du prechargement : charge la prochaine vidéo seulement
-  // lorsque l'utilisateur interagit ou quand la lecture courante approche de sa fin.
-  const createLazyManager = ({ container, getNext, thresholdSeconds }) => {
-    const primed = new WeakMap();
-    const watchers = new WeakMap();
-
-    const mark = (video) => {
-      if (video) {
-        primed.set(video, false);
-      }
-    };
-
-    const prime = () => {
-      const candidate = getNext();
-      if (!candidate) return;
-      if (candidate.readyState >= 2) {
-        primed.set(candidate, true);
+(function () {
+    // Eviter l'execution multiple et les conflits d'extensions
+    if (window.__heroVideosInitialized) {
         return;
-      }
-      if (primed.get(candidate)) return;
-      primed.set(candidate, true);
-      try {
-        candidate.load();
-      } catch (error) {
-        console.debug('Hero Videos: Load error ignored:', error);
-      }
-    };
-
-    const monitor = (video) => {
-      if (!video) return;
-
-      if (watchers.has(video)) {
-        const previous = watchers.get(video);
-        video.removeEventListener('timeupdate', previous);
-        watchers.delete(video);
-      }
-
-      const handler = () => {
-        const candidate = getNext();
-        if (!candidate) return;
-        if (candidate.readyState >= 2) {
-          primed.set(candidate, true);
-          video.removeEventListener('timeupdate', handler);
-          watchers.delete(video);
-          return;
-        }
-        if (primed.get(candidate)) return;
-
-        const { duration, currentTime } = video;
-        if (!Number.isFinite(duration) || duration <= 0) {
-          if (currentTime >= thresholdSeconds) {
-            prime();
-            video.removeEventListener('timeupdate', handler);
-            watchers.delete(video);
-          }
-          return;
-        }
-
-        if (duration - currentTime <= thresholdSeconds) {
-          prime();
-          video.removeEventListener('timeupdate', handler);
-          watchers.delete(video);
-        }
-      };
-
-      watchers.set(video, handler);
-      video.addEventListener('timeupdate', handler);
-    };
-
-    const reset = (video) => {
-      if (!video) return;
-      const handler = watchers.get(video);
-      if (handler) {
-        video.removeEventListener('timeupdate', handler);
-        watchers.delete(video);
-      }
-    };
-
-    const events = [
-      ['pointerdown', { passive: true }],
-      ['pointerenter', false],
-      ['touchstart', { passive: true }],
-      ['focusin', false],
-    ];
-
-    events.forEach(([eventName, options]) => {
-      const opts = typeof options === 'undefined' ? false : options;
-      container.addEventListener(eventName, prime, opts);
-    });
-
-    return {
-      mark,
-      prime,
-      monitor,
-      reset,
-    };
-  };
-
-  document.querySelectorAll('.hero-videos').forEach((container) => {
-    // PROTECTION : Marquer le container comme gere par hero-videos.js
-    container.setAttribute('data-managed-by', 'hero-videos');
-    container.style.setProperty('--hero-managed', 'true');
-    const prefersReducedMotion = readMediaQuery(reduceMotionQuery);
-    const isCoarsePointer = readMediaQuery(coarsePointerQuery);
-    // LOGIQUE ORIGINALE RESTAURÉE
-    const freezeCarousel = prefersReducedMotion || isCoarsePointer;
-    const autoPlayAllowed = !prefersReducedMotion;
-    
-    // Force global loop - vérification plus agressive (variable locale par container)
-    let containerLoopInterval = null;
-
-    // 1) Lire et valider la liste aléatoire + éventuelle vidéo principale
-    let list = [];
-    try {
-      const raw = container.dataset.videos || '[]';
-      const arr = JSON.parse(raw);
-      if (Array.isArray(arr)) {
-        list = arr.filter((s) => typeof s === 'string' && s.trim() !== '');
-      }
-    } catch { /* ignore */ }
-
-    const mainSrc = (container.dataset.main || '').trim();
-
-    if (mainSrc && list.length === 0) {
-      list = [mainSrc];
-    } else if (!mainSrc && list.length === 0) {
-      return;
     }
+    window.__heroVideosInitialized = true;
 
-    // Helper de création <video>
-    const makeVideo = (src, hidden = true) => {
-      const v = document.createElement('video');
-      v.src = src;
-      v.muted = true;
-      v.playsInline = true;
-      v.setAttribute('playsinline', ''); // iOS
-      v.preload = 'metadata'; // Optimisation: charge seulement les metadonnees
-      v.autoplay = autoPlayAllowed;
-      v.loop = false; // gere au cas par cas
-      // Layout + anim
-      v.style.position = 'absolute';
-      v.style.inset = '0';
-      v.style.width = '100%';
-      v.style.height = '100%';
-      v.style.objectFit = 'cover';
-      v.style.pointerEvents = 'none';
-      v.style.transition = `opacity ${FADE_MS}ms ease, filter ${FADE_MS}ms ease`;
-      v.style.opacity = hidden ? '0' : '1';
-      v.style.filter = hidden ? 'blur(8px)' : 'blur(0)';
-      return v;
-    };
+    document.addEventListener('DOMContentLoaded', () => {
+        const FADE_MS = 1000;
+        const LOAD_AHEAD_SECONDS = 10; // Augmenté pour les videos lourdes
+        const supportsMatchMedia = typeof window.matchMedia === 'function';
+        const reduceMotionQuery = supportsMatchMedia
+            ? window.matchMedia('(prefers-reduced-motion: reduce)')
+            : null;
+        const coarsePointerQuery = supportsMatchMedia
+            ? window.matchMedia('(pointer: coarse)')
+            : null;
+        const readMediaQuery = (query) => (query && 'matches' in query ? query.matches : false);
 
-    // Cas C — vidéo principale + liste aléatoire
-    if (mainSrc && (list.length > 1 || (list.length === 1 && list[0] !== mainSrc))) {
-      let lastWasMain = true;
-      let current = makeVideo(mainSrc, true);
-      container.appendChild(current);
+        // Gestionnaire d'erreur robuste contre les extensions
+        const safeVideoPlay = async (video) => {
+            if (!video || !autoPlayAllowed) return;
 
-      let next = null;
-
-      let pool = [...list];
-      const pickRandom = () => {
-        if (pool.length === 0) pool = [...list];
-        const i = Math.floor(Math.random() * pool.length);
-        return pool.splice(i, 1)[0];
-      };
-
-      const showWhenReady = (video) => {
-        const vid = video;
-        const run = () => {
-          if (autoPlayAllowed && vid.paused) {
-            // Protection renforcée contre les extensions
-            vid.play().catch((error) => {
-              console.debug('Hero Videos: Play error ignored:', error);
-            });
-          }
-          requestAnimationFrame(() => {
-            vid.style.opacity = '1';
-            vid.style.filter = 'blur(0)';
-          });
+            try {
+                const playPromise = video.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    return await playPromise.catch((error) => {
+                        // Log seulement si ce n'est pas une erreur d'extension connue
+                        if (!error.message?.includes('interrupted') && !error.message?.includes('aborted')) {
+                            console.debug('Hero Videos: Play error handled:', error.name);
+                        }
+                        return Promise.resolve(); // Résoudre silencieusement
+                    });
+                }
+            } catch (error) {
+                console.debug('Hero Videos: Play error handled:', error.name);
+            }
         };
-        if (vid.readyState >= 2) run();
-        else vid.addEventListener('canplay', run, { once: true });
-      };
 
-      if (freezeCarousel) {
-        current.loop = true;
+        // Gestion paresseuse du prechargement : charge la prochaine vidéo seulement
+        // lorsque l'utilisateur interagit ou quand la lecture courante approche de sa fin.
+        const createLazyManager = ({ container, getNext, thresholdSeconds }) => {
+            const primed = new WeakMap();
+            const watchers = new WeakMap();
 
-        current.addEventListener('loadeddata', () => {
-          if (autoPlayAllowed && current.paused) {
-            current.play().catch(() => {});
-          }
-          showWhenReady(current);
-        }, { once: true });
+            const mark = (video) => {
+                if (video) {
+                    primed.set(video, false);
+                }
+            };
 
-        current.addEventListener('ended', () => {
-          if (autoPlayAllowed) {
-            current.currentTime = 0;
-            current.play().catch(() => {});
-          }
-        });
+            const prime = () => {
+                const candidate = getNext();
+                if (!candidate) return;
+                if (candidate.readyState >= 2) {
+                    primed.set(candidate, true);
+                    return;
+                }
+                if (primed.get(candidate)) return;
+                primed.set(candidate, true);
+                try {
+                    candidate.load();
+                } catch (error) {
+                    console.debug('Hero Videos: Load error ignored:', error);
+                }
+            };
 
-        setTimeout(() => {
-          if (current.style.opacity !== '1') {
-            showWhenReady(current);
-          }
-        }, 300);
+            const monitor = (video) => {
+                if (!video) return;
 
-        document.addEventListener('visibilitychange', () => {
-          if (document.visibilityState === 'visible' && autoPlayAllowed && current.paused) {
-            current.play().catch(() => {});
-          }
-        });
+                if (watchers.has(video)) {
+                    const previous = watchers.get(video);
+                    video.removeEventListener('timeupdate', previous);
+                    watchers.delete(video);
+                }
 
-        return;
-      }
+                const handler = () => {
+                    const candidate = getNext();
+                    if (!candidate) return;
+                    if (candidate.readyState >= 2) {
+                        primed.set(candidate, true);
+                        video.removeEventListener('timeupdate', handler);
+                        watchers.delete(video);
+                        return;
+                    }
+                    if (primed.get(candidate)) return;
 
-      const lazy = createLazyManager({
-        container,
-        getNext: () => next,
-        thresholdSeconds: LOAD_AHEAD_SECONDS,
-      });
+                    const { duration, currentTime } = video;
+                    if (!Number.isFinite(duration) || duration <= 0) {
+                        if (currentTime >= thresholdSeconds) {
+                            prime();
+                            video.removeEventListener('timeupdate', handler);
+                            watchers.delete(video);
+                        }
+                        return;
+                    }
 
-      const buildNextRandom = () => {
-        const src = lastWasMain ? pickRandom() : mainSrc;
-        lastWasMain = !lastWasMain;
-        const v = makeVideo(src, true);
-        v.addEventListener('error', () => {
-          setTimeout(() => {
-            if (v.parentNode) v.parentNode.removeChild(v);
-            // eslint-disable-next-line no-use-before-define
-            buildAndStageNextRandom();
-          }, 100);
-        });
-        return v;
-      };
+                    if (duration - currentTime <= thresholdSeconds) {
+                        prime();
+                        video.removeEventListener('timeupdate', handler);
+                        watchers.delete(video);
+                    }
+                };
 
-      const buildAndStageNextRandom = () => {
-        next = buildNextRandom();
-        lazy.mark(next);
-        container.appendChild(next);
-      };
+                watchers.set(video, handler);
+                video.addEventListener('timeupdate', handler);
+            };
 
-      const goToNext = () => {
-        if (!next) buildAndStageNextRandom();
+            const reset = (video) => {
+                if (!video) return;
+                const handler = watchers.get(video);
+                if (handler) {
+                    video.removeEventListener('timeupdate', handler);
+                    watchers.delete(video);
+                }
+            };
 
-        lazy.prime();
+            const events = [
+                ['pointerdown', { passive: true }],
+                ['pointerenter', false],
+                ['touchstart', { passive: true }],
+                ['focusin', false],
+            ];
 
-        const startTransition = () => {
-          // Attendre que la vidéo soit vraiment prete pour les gros fichiers
-          const ensureVideoReady = (video, callback) => {
-            if (video.readyState >= 3) { // HAVE_FUTURE_DATA ou plus
-              callback();
-            } else {
-              video.addEventListener('canplaythrough', callback, { once: true });
-              // Timeout de securite pour éviter les blocages
-              setTimeout(callback, 5000);
+            events.forEach(([eventName, options]) => {
+                const opts = typeof options === 'undefined' ? false : options;
+                container.addEventListener(eventName, prime, opts);
+            });
+
+            return {
+                mark,
+                prime,
+                monitor,
+                reset,
+            };
+        };
+
+        document.querySelectorAll('.hero-videos').forEach((container) => {
+            // PROTECTION : Marquer le container comme gere par hero-videos.js
+            container.setAttribute('data-managed-by', 'hero-videos');
+            container.style.setProperty('--hero-managed', 'true');
+            const prefersReducedMotion = readMediaQuery(reduceMotionQuery);
+            const isCoarsePointer = readMediaQuery(coarsePointerQuery);
+            // LOGIQUE ORIGINALE RESTAURÉE
+            const freezeCarousel = prefersReducedMotion || isCoarsePointer;
+            const autoPlayAllowed = !prefersReducedMotion;
+
+            // Force global loop - vérification plus agressive (variable locale par container)
+            let containerLoopInterval = null;
+
+            // 1) Lire et valider la liste aléatoire + éventuelle vidéo principale
+            let list = [];
+            try {
+                const raw = container.dataset.videos || '[]';
+                const arr = JSON.parse(raw);
+                if (Array.isArray(arr)) {
+                    list = arr.filter((s) => typeof s === 'string' && s.trim() !== '');
+                }
+            } catch { /* ignore */ }
+
+            const mainSrc = (container.dataset.main || '').trim();
+
+            if (mainSrc && list.length === 0) {
+                list = [mainSrc];
+            } else if (!mainSrc && list.length === 0) {
+                return;
             }
-          };
-          
-          ensureVideoReady(next, () => {
-            if (autoPlayAllowed) {
-              next.play().catch(() => {});
-            }
-            requestAnimationFrame(() => {
-              next.style.opacity = '1';
-              next.style.filter = 'blur(0)';
 
-              current.style.opacity = '0';
-              current.style.filter = 'blur(8px)';
+            // Helper de création <video>
+            const makeVideo = (src, hidden = true) => {
+                const v = document.createElement('video');
+                v.src = src;
+                v.muted = true;
+                v.playsInline = true;
+                v.setAttribute('playsinline', ''); // iOS
+                v.preload = 'metadata'; // Optimisation: charge seulement les metadonnees
+                v.autoplay = autoPlayAllowed;
+                v.loop = false; // gere au cas par cas
+                // Layout + anim
+                v.style.position = 'absolute';
+                v.style.inset = '0';
+                v.style.width = '100%';
+                v.style.height = '100%';
+                v.style.objectFit = 'cover';
+                v.style.pointerEvents = 'none';
+                v.style.transition = `opacity ${FADE_MS}ms ease, filter ${FADE_MS}ms ease`;
+                v.style.opacity = hidden ? '0' : '1';
+                v.style.filter = hidden ? 'blur(8px)' : 'blur(0)';
+                return v;
+            };
 
-              const old = current;
-              current = next;
+            // Cas C — vidéo principale + liste aléatoire
+            if (mainSrc && (list.length > 1 || (list.length === 1 && list[0] !== mainSrc))) {
+                let lastWasMain = true;
+                let current = makeVideo(mainSrc, true);
+                container.appendChild(current);
 
-            old.addEventListener('transitionend', () => {
-              lazy.reset(old);
-              if (old.parentNode) old.parentNode.removeChild(old);
-              current.addEventListener('ended', goToNext, { once: true });
-              if (current.paused) {
-                current.addEventListener('playing', () => {
-                  lazy.monitor(current);
+                let next = null;
+
+                let pool = [...list];
+                const pickRandom = () => {
+                    if (pool.length === 0) pool = [...list];
+                    const i = Math.floor(Math.random() * pool.length);
+                    return pool.splice(i, 1)[0];
+                };
+
+                const showWhenReady = (video) => {
+                    const vid = video;
+                    const run = () => {
+                        if (autoPlayAllowed && vid.paused) {
+                            // Protection renforcée contre les extensions
+                            vid.play().catch((error) => {
+                                console.debug('Hero Videos: Play error ignored:', error);
+                            });
+                        }
+                        requestAnimationFrame(() => {
+                            vid.style.opacity = '1';
+                            vid.style.filter = 'blur(0)';
+                        });
+                    };
+                    if (vid.readyState >= 2) run();
+                    else vid.addEventListener('canplay', run, { once: true });
+                };
+
+                if (freezeCarousel) {
+                    current.loop = true;
+
+                    current.addEventListener('loadeddata', () => {
+                        if (autoPlayAllowed && current.paused) {
+                            current.play().catch(() => {});
+                        }
+                        showWhenReady(current);
+                    }, { once: true });
+
+                    current.addEventListener('ended', () => {
+                        if (autoPlayAllowed) {
+                            current.currentTime = 0;
+                            current.play().catch(() => {});
+                        }
+                    });
+
+                    setTimeout(() => {
+                        if (current.style.opacity !== '1') {
+                            showWhenReady(current);
+                        }
+                    }, 300);
+
+                    document.addEventListener('visibilitychange', () => {
+                        if (document.visibilityState === 'visible' && autoPlayAllowed && current.paused) {
+                            current.play().catch(() => {});
+                        }
+                    });
+
+                    return;
+                }
+
+                const lazy = createLazyManager({
+                    container,
+                    getNext: () => next,
+                    thresholdSeconds: LOAD_AHEAD_SECONDS,
+                });
+
+                const buildNextRandom = () => {
+                    const src = lastWasMain ? pickRandom() : mainSrc;
+                    lastWasMain = !lastWasMain;
+                    const v = makeVideo(src, true);
+                    v.addEventListener('error', () => {
+                        setTimeout(() => {
+                            if (v.parentNode) v.parentNode.removeChild(v);
+                            // eslint-disable-next-line no-use-before-define
+                            buildAndStageNextRandom();
+                        }, 100);
+                    });
+                    return v;
+                };
+
+                const buildAndStageNextRandom = () => {
+                    next = buildNextRandom();
+                    lazy.mark(next);
+                    container.appendChild(next);
+                };
+
+                const goToNext = () => {
+                    if (!next) buildAndStageNextRandom();
+
+                    lazy.prime();
+
+                    const startTransition = () => {
+                        // Attendre que la vidéo soit vraiment prete pour les gros fichiers
+                        const ensureVideoReady = (video, callback) => {
+                            if (video.readyState >= 3) { // HAVE_FUTURE_DATA ou plus
+                                callback();
+                            } else {
+                                video.addEventListener('canplaythrough', callback, { once: true });
+                                // Timeout de securite pour éviter les blocages
+                                setTimeout(callback, 5000);
+                            }
+                        };
+
+                        ensureVideoReady(next, () => {
+                            if (autoPlayAllowed) {
+                                next.play().catch(() => {});
+                            }
+                            requestAnimationFrame(() => {
+                                next.style.opacity = '1';
+                                next.style.filter = 'blur(0)';
+
+                                current.style.opacity = '0';
+                                current.style.filter = 'blur(8px)';
+
+                                const old = current;
+                                current = next;
+
+                                old.addEventListener('transitionend', () => {
+                                    lazy.reset(old);
+                                    if (old.parentNode) old.parentNode.removeChild(old);
+                                    current.addEventListener('ended', goToNext, { once: true });
+                                    if (current.paused) {
+                                        current.addEventListener('playing', () => {
+                                            lazy.monitor(current);
+                                        }, { once: true });
+                                    } else {
+                                        lazy.monitor(current);
+                                    }
+                                    buildAndStageNextRandom();
+                                }, { once: true });
+                            });
+                        });
+                    };
+
+                    if (next.readyState >= 2) startTransition();
+                    else next.addEventListener('canplay', startTransition, { once: true });
+                };
+
+                current.addEventListener('loadeddata', () => {
+                    showWhenReady(current);
                 }, { once: true });
-              } else {
-                lazy.monitor(current);
-              }
-              buildAndStageNextRandom();
-            }, { once: true });
+
+                current.addEventListener('playing', () => {
+                    buildAndStageNextRandom();
+                    current.addEventListener('ended', goToNext, { once: true });
+                    lazy.monitor(current);
+                }, { once: true });
+
+                setTimeout(() => {
+                    if (current.style.opacity !== '1') {
+                        showWhenReady(current);
+                    }
+                }, 300);
+
+                document.addEventListener('visibilitychange', () => {
+                    if (document.visibilityState === 'visible' && autoPlayAllowed) {
+                        [current, next].forEach((v) => v && v.paused && v.play().catch(() => {}));
+                    }
+                });
+
+                return;
+            }
+
+            // Cas A — une seule vidéo : pas de recréation, boucle fiable
+            if (list.length === 1) {
+                const src = list[0];
+                const vid = makeVideo(src, true);
+                vid.loop = true;
+
+                const reveal = () => {
+                    requestAnimationFrame(() => {
+                        vid.style.opacity = '1';
+                        vid.style.filter = 'blur(0)';
+                    });
+                };
+
+                vid.addEventListener('loadeddata', () => {
+                    if (autoPlayAllowed && vid.paused) {
+                        vid.play().catch(() => {});
+                    }
+                    reveal();
+                }, { once: true });
+
+                // Filets de securite : si loop est ignoré (certains contextes/sommeil d’onglet)
+                vid.addEventListener('ended', () => {
+                    vid.currentTime = 0;
+                    if (autoPlayAllowed) {
+                        vid.play().catch(() => {});
+                    }
+                });
+
+                vid.addEventListener('error', () => {
+                    setTimeout(() => {
+                        vid.load();
+                        if (autoPlayAllowed) {
+                            vid.play().catch(() => {});
+                        }
+                    }, 500);
+                });
+
+                container.appendChild(vid);
+
+                document.addEventListener('visibilitychange', () => {
+                    if (document.visibilityState === 'visible' && autoPlayAllowed && vid.paused) {
+                        vid.play().catch(() => {});
+                    }
+                });
+
+                return; // termine pour le cas 1 vidéo
+            }
+
+            // Cas B — plusieurs videos : double-buffer avec precharge
+            let idx = 0;
+            let current = makeVideo(list[idx], true);
+            container.appendChild(current);
+
+            let next = null;
+
+            const showWhenReady = (video) => {
+                const vid = video;
+                const run = () => {
+                    if (autoPlayAllowed && vid.paused) {
+                        vid.play().catch(() => {});
+                    }
+                    requestAnimationFrame(() => {
+                        vid.style.opacity = '1';
+                        vid.style.filter = 'blur(0)';
+                    });
+                };
+                if (vid.readyState >= 2) run();
+                else vid.addEventListener('canplay', run, { once: true });
+            };
+
+            if (freezeCarousel) {
+                current.loop = true;
+
+                current.addEventListener('loadeddata', () => {
+                    if (current.paused) {
+                        safeVideoPlay(current);
+                    }
+                    showWhenReady(current);
+                }, { once: true });
+
+                current.addEventListener('ended', () => {
+                    if (autoPlayAllowed) {
+                        current.currentTime = 0;
+                        safeVideoPlay(current);
+                    }
+                });
+
+                setTimeout(() => {
+                    if (current.style.opacity !== '1') {
+                        showWhenReady(current);
+                    }
+                }, 300);
+
+                document.addEventListener('visibilitychange', () => {
+                    if (document.visibilityState === 'visible' && current.paused) {
+                        safeVideoPlay(current);
+                    }
+                });
+
+                return;
+            }
+
+            const lazy = createLazyManager({
+                container,
+                getNext: () => next,
+                thresholdSeconds: LOAD_AHEAD_SECONDS,
             });
-          });
-        };
 
-        if (next.readyState >= 2) startTransition();
-        else next.addEventListener('canplay', startTransition, { once: true });
-      };
+            const buildNext = () => {
+                idx = (idx + 1) % list.length;
+                const v = makeVideo(list[idx], true);
+                v.addEventListener('error', () => {
+                    // Si erreur sur la source, on tente de passer à la suivante
+                    setTimeout(() => {
+                        if (v.parentNode) v.parentNode.removeChild(v);
+                        // eslint-disable-next-line no-use-before-define
+                        buildAndStageNext();
+                    }, 100);
+                });
+                return v;
+            };
 
-      current.addEventListener('loadeddata', () => {
-        showWhenReady(current);
-      }, { once: true });
+            const buildAndStageNext = () => {
+                next = buildNext();
+                lazy.mark(next);
+                container.appendChild(next); // on l'ajoute cachée pour bufferiser
+            };
 
-      current.addEventListener('playing', () => {
-        buildAndStageNextRandom();
-        current.addEventListener('ended', goToNext, { once: true });
-        lazy.monitor(current);
-      }, { once: true });
+            const goToNext = () => {
+                if (!next) buildAndStageNext();
 
-      setTimeout(() => {
-        if (current.style.opacity !== '1') {
-          showWhenReady(current);
-        }
-      }, 300);
+                lazy.prime();
 
-      document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible' && autoPlayAllowed) {
-          [current, next].forEach((v) => v && v.paused && v.play().catch(() => {}));
-        }
-      });
+                const startTransition = () => {
+                    // Attendre que la vidéo soit vraiment prete pour les gros fichiers
+                    const ensureVideoReady = (video, callback) => {
+                        if (video.readyState >= 3) { // HAVE_FUTURE_DATA ou plus
+                            callback();
+                        } else {
+                            video.addEventListener('canplaythrough', callback, { once: true });
+                            // Timeout de securite pour éviter les blocages
+                            setTimeout(callback, 5000);
+                        }
+                    };
 
-      return;
-    }
+                    ensureVideoReady(next, () => {
+                        if (autoPlayAllowed) {
+                            next.play().catch(() => {});
+                        }
+                        requestAnimationFrame(() => {
+                            // Faire apparaître la nouvelle
+                            next.style.opacity = '1';
+                            next.style.filter = 'blur(0)';
 
-    // Cas A — une seule vidéo : pas de recréation, boucle fiable
-    if (list.length === 1) {
-      const src = list[0];
-      const vid = makeVideo(src, true);
-      vid.loop = true;
+                            // Faire disparaître l'ancienne APRÈS le démarrage de la nouvelle
+                            current.style.opacity = '0';
+                            current.style.filter = 'blur(8px)';
 
-      const reveal = () => {
-        requestAnimationFrame(() => {
-          vid.style.opacity = '1';
-          vid.style.filter = 'blur(0)';
-        });
-      };
+                            const old = current;
+                            current = next;
 
-      vid.addEventListener('loadeddata', () => {
-        if (autoPlayAllowed && vid.paused) {
-          vid.play().catch(() => {});
-        }
-        reveal();
-      }, { once: true });
+                            old.addEventListener('transitionend', () => {
+                                lazy.reset(old);
+                                if (old.parentNode) old.parentNode.removeChild(old);
+                                // Écouter la fin de la "nouvelle actuelle"
+                                current.addEventListener('ended', goToNext, { once: true });
+                                if (current.paused) {
+                                    current.addEventListener('playing', () => {
+                                        lazy.monitor(current);
+                                    }, { once: true });
+                                } else {
+                                    lazy.monitor(current);
+                                }
+                                // Préparer la suivante
+                                buildAndStageNext();
+                            }, { once: true });
+                        });
+                    });
+                };
 
-      // Filets de securite : si loop est ignoré (certains contextes/sommeil d’onglet)
-      vid.addEventListener('ended', () => {
-        vid.currentTime = 0;
-        if (autoPlayAllowed) {
-          vid.play().catch(() => {});
-        }
-      });
+                if (next.readyState >= 2) startTransition();
+                else next.addEventListener('canplay', startTransition, { once: true });
+            };
 
-      vid.addEventListener('error', () => {
-        setTimeout(() => {
-          vid.load();
-          if (autoPlayAllowed) {
-            vid.play().catch(() => {});
-          }
-        }, 500);
-      });
+            // Démarrage : afficher la première dès qu’elle peut
+            current.addEventListener('loadeddata', () => {
+                showWhenReady(current);
+            }, { once: true });
 
-      container.appendChild(vid);
-
-      document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible' && autoPlayAllowed && vid.paused) {
-          vid.play().catch(() => {});
-        }
-      });
-
-      return; // termine pour le cas 1 vidéo
-    }
-
-    // Cas B — plusieurs videos : double-buffer avec precharge
-    let idx = 0;
-    let current = makeVideo(list[idx], true);
-    container.appendChild(current);
-
-    let next = null;
-
-    const showWhenReady = (video) => {
-      const vid = video;
-      const run = () => {
-        if (autoPlayAllowed && vid.paused) {
-          vid.play().catch(() => {});
-        }
-        requestAnimationFrame(() => {
-          vid.style.opacity = '1';
-          vid.style.filter = 'blur(0)';
-        });
-      };
-      if (vid.readyState >= 2) run();
-      else vid.addEventListener('canplay', run, { once: true });
-    };
-
-    if (freezeCarousel) {
-      current.loop = true;
-
-      current.addEventListener('loadeddata', () => {
-        if (current.paused) {
-          safeVideoPlay(current);
-        }
-        showWhenReady(current);
-      }, { once: true });
-
-      current.addEventListener('ended', () => {
-        if (autoPlayAllowed) {
-          current.currentTime = 0;
-          safeVideoPlay(current);
-        }
-      });
-
-      setTimeout(() => {
-        if (current.style.opacity !== '1') {
-          showWhenReady(current);
-        }
-      }, 300);
-
-      document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible' && current.paused) {
-          safeVideoPlay(current);
-        }
-      });
-
-      return;
-    }
-
-    const lazy = createLazyManager({
-      container,
-      getNext: () => next,
-      thresholdSeconds: LOAD_AHEAD_SECONDS,
-    });
-
-    const buildNext = () => {
-      idx = (idx + 1) % list.length;
-      const v = makeVideo(list[idx], true);
-      v.addEventListener('error', () => {
-        // Si erreur sur la source, on tente de passer à la suivante
-        setTimeout(() => {
-          if (v.parentNode) v.parentNode.removeChild(v);
-          // eslint-disable-next-line no-use-before-define
-          buildAndStageNext();
-        }, 100);
-      });
-      return v;
-    };
-
-    const buildAndStageNext = () => {
-      next = buildNext();
-      lazy.mark(next);
-      container.appendChild(next); // on l'ajoute cachée pour bufferiser
-    };
-
-    const goToNext = () => {
-      if (!next) buildAndStageNext();
-
-      lazy.prime();
-
-      const startTransition = () => {
-        // Attendre que la vidéo soit vraiment prete pour les gros fichiers
-        const ensureVideoReady = (video, callback) => {
-          if (video.readyState >= 3) { // HAVE_FUTURE_DATA ou plus
-            callback();
-          } else {
-            video.addEventListener('canplaythrough', callback, { once: true });
-            // Timeout de securite pour éviter les blocages
-            setTimeout(callback, 5000);
-          }
-        };
-        
-        ensureVideoReady(next, () => {
-          if (autoPlayAllowed) {
-            next.play().catch(() => {});
-          }
-          requestAnimationFrame(() => {
-            // Faire apparaître la nouvelle
-            next.style.opacity = '1';
-            next.style.filter = 'blur(0)';
-
-            // Faire disparaître l'ancienne APRÈS le démarrage de la nouvelle
-            current.style.opacity = '0';
-            current.style.filter = 'blur(8px)';
-
-            const old = current;
-            current = next;
-
-          old.addEventListener('transitionend', () => {
-            lazy.reset(old);
-            if (old.parentNode) old.parentNode.removeChild(old);
-            // Écouter la fin de la "nouvelle actuelle"
-            current.addEventListener('ended', goToNext, { once: true });
-            if (current.paused) {
-              current.addEventListener('playing', () => {
+            // Une fois qu’elle joue, on prépare la suite et on enchaîne à "ended"
+            current.addEventListener('playing', () => {
+                buildAndStageNext();
+                current.addEventListener('ended', goToNext, { once: true });
                 lazy.monitor(current);
-              }, { once: true });
-            } else {
-              lazy.monitor(current);
-            }
-            // Préparer la suivante
-            buildAndStageNext();
-          }, { once: true });
-          });
+            }, { once: true });
+
+            // Sécurité anti-écran vide si "playing" est lent/bloqué
+            setTimeout(() => {
+                if (current.style.opacity !== '1') {
+                    showWhenReady(current);
+                }
+            }, 300);
+
+            // Reprise à retour d'onglet
+            document.addEventListener('visibilitychange', () => {
+                if (document.visibilityState === 'visible' && autoPlayAllowed) {
+                    [current, next].forEach((v) => v && v.paused && v.play().catch(() => {}));
+                }
+            });
+
+            // FORCE ABSOLUE - garantit la lecture perpétuelle (logique corrigée)
+            const forceGlobalLoop = () => {
+                if (document.visibilityState !== 'visible') return;
+
+                const allVideos = container.querySelectorAll('video');
+                if (allVideos.length === 0) return;
+
+                // Trouver la vidéo actuellement visible (opacity proche de 1)
+                let activeVideo = null;
+                for (const video of allVideos) {
+                    const opacity = parseFloat(video.style.opacity || '0');
+                    if (opacity > 0.5) { // Plus robuste que === '1'
+                        activeVideo = video;
+                        break; // IMPORTANT: sortir de la boucle dès qu'on trouve LA vidéo active
+                    }
+                }
+
+                // Si on a une vidéo active, s'assurer qu'elle joue
+                if (activeVideo) {
+                    if (activeVideo.paused || activeVideo.ended) {
+                        activeVideo.currentTime = 0;
+                        activeVideo.play().catch(() => {});
+                    }
+                } else {
+                    // Aucune vidéo visible : activer la première
+                    const firstVideo = allVideos[0];
+                    if (firstVideo) {
+                        // Masquer toutes les autres d'abord
+                        allVideos.forEach((v) => {
+                            if (v !== firstVideo) {
+                                v.style.opacity = '0';
+                                v.style.filter = 'blur(8px)';
+                                v.pause();
+                            }
+                        });
+
+                        // Activer la première
+                        firstVideo.style.opacity = '1';
+                        firstVideo.style.filter = 'blur(0)';
+                        firstVideo.currentTime = 0;
+                        firstVideo.play().catch(() => {});
+                    }
+                }
+            };
+
+            // Vérification plus modérée toutes les 5 secondes (évite les conflits d'extensions)
+            containerLoopInterval = setInterval(forceGlobalLoop, 5000);
+
+            // Nettoyage propre à la fermeture de page
+            const cleanup = () => {
+                if (containerLoopInterval) {
+                    clearInterval(containerLoopInterval);
+                    containerLoopInterval = null;
+                }
+            };
+
+            window.addEventListener('beforeunload', cleanup);
+            window.addEventListener('pagehide', cleanup); // Pour mobile/Safari
         });
-      };
-
-      if (next.readyState >= 2) startTransition();
-      else next.addEventListener('canplay', startTransition, { once: true });
-    };
-
-    // Démarrage : afficher la première dès qu’elle peut
-    current.addEventListener('loadeddata', () => {
-      showWhenReady(current);
-    }, { once: true });
-
-    // Une fois qu’elle joue, on prépare la suite et on enchaîne à "ended"
-    current.addEventListener('playing', () => {
-      buildAndStageNext();
-      current.addEventListener('ended', goToNext, { once: true });
-      lazy.monitor(current);
-    }, { once: true });
-
-    // Sécurité anti-écran vide si "playing" est lent/bloqué
-    setTimeout(() => {
-      if (current.style.opacity !== '1') {
-        showWhenReady(current);
-      }
-    }, 300);
-
-    // Reprise à retour d'onglet
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible' && autoPlayAllowed) {
-        [current, next].forEach((v) => v && v.paused && v.play().catch(() => {}));
-      }
-    });
-
-    // FORCE ABSOLUE - garantit la lecture perpétuelle (logique corrigée)
-    const forceGlobalLoop = () => {
-      if (document.visibilityState !== 'visible') return;
-      
-      const allVideos = container.querySelectorAll('video');
-      if (allVideos.length === 0) return;
-      
-      // Trouver la vidéo actuellement visible (opacity proche de 1)
-      let activeVideo = null;
-      for (const video of allVideos) {
-        const opacity = parseFloat(video.style.opacity || '0');
-        if (opacity > 0.5) { // Plus robuste que === '1'
-          activeVideo = video;
-          break; // IMPORTANT: sortir de la boucle dès qu'on trouve LA vidéo active
-        }
-      }
-      
-      // Si on a une vidéo active, s'assurer qu'elle joue
-      if (activeVideo) {
-        if (activeVideo.paused || activeVideo.ended) {
-          activeVideo.currentTime = 0;
-          activeVideo.play().catch(() => {});
-        }
-      } else {
-        // Aucune vidéo visible : activer la première
-        const firstVideo = allVideos[0];
-        if (firstVideo) {
-          // Masquer toutes les autres d'abord
-          allVideos.forEach(v => {
-            if (v !== firstVideo) {
-              v.style.opacity = '0';
-              v.style.filter = 'blur(8px)';
-              v.pause();
-            }
-          });
-          
-          // Activer la première
-          firstVideo.style.opacity = '1';
-          firstVideo.style.filter = 'blur(0)';
-          firstVideo.currentTime = 0;
-          firstVideo.play().catch(() => {});
-        }
-      }
-    };
-
-    // Vérification plus modérée toutes les 5 secondes (évite les conflits d'extensions)
-    containerLoopInterval = setInterval(forceGlobalLoop, 5000);
-    
-    // Nettoyage propre à la fermeture de page
-    const cleanup = () => {
-      if (containerLoopInterval) {
-        clearInterval(containerLoopInterval);
-        containerLoopInterval = null;
-      }
-    };
-    
-    window.addEventListener('beforeunload', cleanup);
-    window.addEventListener('pagehide', cleanup); // Pour mobile/Safari
-  });
-}); // Fin DOMContentLoaded
-
-})(); // Fin de la fonction de protection contre les extensions
+    }); // Fin DOMContentLoaded
+}()); // Fin de la fonction de protection contre les extensions

@@ -1,4 +1,4 @@
-# Configuration API Monitoring - Geek & Dragon
+# Configuration API - Geek & Dragon
 # Sécurisation et routage pour l'API
 
 # Activer la réécriture d'URL
@@ -9,9 +9,9 @@ Header always set X-Content-Type-Options nosniff
 Header always set X-Frame-Options DENY
 Header always set X-XSS-Protection "1; mode=block"
 
-# CORS pour l'API monitoring
+# CORS pour l'API
 Header always set Access-Control-Allow-Origin "https://geekndragon.com"
-Header always set Access-Control-Allow-Methods "POST, OPTIONS"
+Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
 Header always set Access-Control-Allow-Headers "Content-Type, X-Requested-With"
 
 # Gestion des requêtes OPTIONS (preflight)
@@ -21,7 +21,6 @@ RewriteRule ^(.*)$ - [R=200,L]
 # Routage API
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^monitoring/sync$ monitoring/sync.php [L,QSA]
 
 # Sécurité : Interdire l'accès direct aux fichiers de configuration
 <FilesMatch "\.(env|md|json|txt|log)$">

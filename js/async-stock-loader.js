@@ -24,7 +24,7 @@ class AsyncStockLoader {
             totalRequests: 0,
             totalProducts: 0,
             cacheHits: 0,
-            averageResponseTime: 0
+            averageResponseTime: 0,
         };
     }
 
@@ -35,7 +35,7 @@ class AsyncStockLoader {
     loadStock(productIds) {
         const ids = Array.isArray(productIds) ? productIds : [productIds];
 
-        ids.forEach(id => {
+        ids.forEach((id) => {
             // Éviter les doublons et les produits déjà chargés
             if (!this.loadedCache.has(id) && !this.pendingProducts.has(id)) {
                 this.pendingProducts.add(id);
@@ -67,14 +67,14 @@ class AsyncStockLoader {
         const productIds = Array.from(this.pendingProducts).slice(0, this.batchSize);
 
         // Nettoyer les produits en cours de traitement
-        productIds.forEach(id => this.pendingProducts.delete(id));
+        productIds.forEach((id) => this.pendingProducts.delete(id));
 
         try {
             await this.fetchStockBatch(productIds);
         } catch (error) {
             console.error('Erreur chargement stock:', error);
             // Remettre dans la queue pour retry
-            productIds.forEach(id => this.pendingProducts.add(id));
+            productIds.forEach((id) => this.pendingProducts.add(id));
         }
 
         // Traiter le prochain lot s'il y en a
@@ -93,7 +93,7 @@ class AsyncStockLoader {
         const startTime = performance.now();
 
         // Mettre à jour l'état de chargement
-        productIds.forEach(id => {
+        productIds.forEach((id) => {
             this.loadingStates.set(id, 'loading');
             this.updateProductUI(id, 'loading');
         });
@@ -103,9 +103,9 @@ class AsyncStockLoader {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                    Accept: 'application/json',
                 },
-                body: JSON.stringify({ products: productIds })
+                body: JSON.stringify({ products: productIds }),
             });
 
             if (!response.ok) {
@@ -126,18 +126,16 @@ class AsyncStockLoader {
             this.updateMetrics(productIds.length, responseTime);
 
             // Production: log stock supprimé
-
         } catch (error) {
             console.error('Erreur API stock:', error);
 
             // Marquer comme erreur et utiliser fallback
-            productIds.forEach(id => {
+            productIds.forEach((id) => {
                 this.loadingStates.set(id, 'error');
                 this.updateProductUI(id, 'error');
             });
 
             throw error;
-
         } finally {
             this.requestInProgress = false;
         }
@@ -158,50 +156,50 @@ class AsyncStockLoader {
         productCard.setAttribute('data-stock-status', status);
 
         switch (status) {
-            case 'loading':
-                if (loadingIndicator) {
-                    loadingIndicator.style.display = 'block';
-                }
-                break;
+        case 'loading':
+            if (loadingIndicator) {
+                loadingIndicator.style.display = 'block';
+            }
+            break;
 
-            case 'loaded':
-                if (loadingIndicator) {
-                    loadingIndicator.style.display = 'none';
-                }
+        case 'loaded':
+            if (loadingIndicator) {
+                loadingIndicator.style.display = 'none';
+            }
 
-                // Vérifier disponibilité
-                const isInStock = stock === null || stock > 0;
+            // Vérifier disponibilité
+            const isInStock = stock === null || stock > 0;
 
-                if (!isInStock) {
-                    // Rupture de stock
-                    if (unavailableOverlay) {
-                        unavailableOverlay.style.display = 'flex';
-                    }
-                    if (addButton) {
-                        addButton.disabled = true;
-                        addButton.classList.add('opacity-50', 'cursor-not-allowed');
-                    }
-                    productCard.classList.add('oos'); // Out of stock class
-                } else {
-                    // En stock
-                    if (unavailableOverlay) {
-                        unavailableOverlay.style.display = 'none';
-                    }
-                    if (addButton) {
-                        addButton.disabled = false;
-                        addButton.classList.remove('opacity-50', 'cursor-not-allowed');
-                    }
-                    productCard.classList.remove('oos');
+            if (!isInStock) {
+                // Rupture de stock
+                if (unavailableOverlay) {
+                    unavailableOverlay.style.display = 'flex';
                 }
-                break;
+                if (addButton) {
+                    addButton.disabled = true;
+                    addButton.classList.add('opacity-50', 'cursor-not-allowed');
+                }
+                productCard.classList.add('oos'); // Out of stock class
+            } else {
+                // En stock
+                if (unavailableOverlay) {
+                    unavailableOverlay.style.display = 'none';
+                }
+                if (addButton) {
+                    addButton.disabled = false;
+                    addButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+                productCard.classList.remove('oos');
+            }
+            break;
 
-            case 'error':
-                if (loadingIndicator) {
-                    loadingIndicator.style.display = 'none';
-                }
-                // En cas d'erreur, on considère comme disponible (fallback optimiste)
-                // Production: warning fallback supprimé
-                break;
+        case 'error':
+            if (loadingIndicator) {
+                loadingIndicator.style.display = 'none';
+            }
+            // En cas d'erreur, on considère comme disponible (fallback optimiste)
+            // Production: warning fallback supprimé
+            break;
         }
     }
 
@@ -224,7 +222,7 @@ class AsyncStockLoader {
     getMetrics() {
         return {
             ...this.metrics,
-            cacheHitRate: this.loadedCache.size > 0 ? (this.metrics.cacheHits / this.loadedCache.size) : 0
+            cacheHitRate: this.loadedCache.size > 0 ? (this.metrics.cacheHits / this.loadedCache.size) : 0,
         };
     }
 
@@ -233,7 +231,7 @@ class AsyncStockLoader {
      */
     initAutoLoad() {
         const productCards = document.querySelectorAll('[data-product-id]');
-        const productIds = Array.from(productCards).map(card => card.getAttribute('data-product-id'));
+        const productIds = Array.from(productCards).map((card) => card.getAttribute('data-product-id'));
 
         if (productIds.length > 0) {
             // Production: log init supprimé
@@ -253,20 +251,20 @@ class AsyncStockLoader {
 
         const observer = new IntersectionObserver((entries) => {
             const visibleProducts = entries
-                .filter(entry => entry.isIntersecting)
-                .map(entry => entry.target.getAttribute('data-product-id'))
-                .filter(id => id);
+                .filter((entry) => entry.isIntersecting)
+                .map((entry) => entry.target.getAttribute('data-product-id'))
+                .filter((id) => id);
 
             if (visibleProducts.length > 0) {
                 this.loadStock(visibleProducts);
             }
         }, {
             rootMargin: '100px', // Charger 100px avant que l'élément soit visible
-            threshold: 0.1
+            threshold: 0.1,
         });
 
         // Observer tous les produits
-        document.querySelectorAll('[data-product-id]').forEach(card => {
+        document.querySelectorAll('[data-product-id]').forEach((card) => {
             observer.observe(card);
         });
     }
@@ -276,7 +274,7 @@ class AsyncStockLoader {
 window.asyncStockLoader = new AsyncStockLoader({
     batchSize: 20,
     debounceDelay: 100,
-    retryAttempts: 2
+    retryAttempts: 2,
 });
 
 // Auto-initialisation quand le DOM est prêt

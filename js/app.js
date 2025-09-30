@@ -1162,3 +1162,66 @@ document.addEventListener('DOMContentLoaded', () => {
   // Arrêter la vérification après 10 secondes max
   setTimeout(() => clearInterval(statusInterval), 10000);
 });
+
+/* ========================================================================
+   EFFET TYPEWRITER POUR TITRES HERO (réutilisable)
+   ===================================================================== */
+(() => {
+  /**
+   * Initialise l'effet typewriter sur un titre hero
+   * @param {string} selector - Sélecteur CSS du titre (défaut: '.hero-text h1')
+   * @param {number} charDelay - Délai entre chaque caractère en ms (défaut: 50)
+   * @param {number} startDelay - Délai avant le début de l'animation en ms (défaut: 500)
+   */
+  function initTypewriterTitle(selector = '.hero-text h1', charDelay = 50, startDelay = 500) {
+    const heroTitle = document.querySelector(selector);
+    if (heroTitle && !heroTitle.dataset.typed) {
+      const text = heroTitle.textContent.trim();
+      heroTitle.textContent = '';
+      heroTitle.dataset.typed = 'true';
+
+      // Sauvegarder l'attribut data-i18n original avant de le retirer
+      if (heroTitle.hasAttribute('data-i18n')) {
+        heroTitle.dataset.originalI18n = heroTitle.getAttribute('data-i18n');
+        heroTitle.removeAttribute('data-i18n');
+      }
+
+      let i = 0;
+      const typeWriter = () => {
+        if (i < text.length) {
+          heroTitle.textContent += text.charAt(i);
+          i++;
+          setTimeout(typeWriter, charDelay);
+        }
+      };
+
+      setTimeout(typeWriter, startDelay);
+    }
+  }
+
+  // Initialiser au chargement de la page
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => initTypewriterTitle());
+  } else {
+    initTypewriterTitle();
+  }
+
+  // Relancer l'animation lors des changements de langue
+  document.addEventListener('languageChanged', () => {
+    const heroTitle = document.querySelector('.hero-text h1');
+    if (heroTitle) {
+      heroTitle.dataset.typed = false;
+
+      // Restaurer l'attribut data-i18n original
+      if (heroTitle.dataset.originalI18n) {
+        heroTitle.setAttribute('data-i18n', heroTitle.dataset.originalI18n);
+      }
+
+      // Attendre que i18n mette à jour le contenu
+      setTimeout(() => initTypewriterTitle(), 100);
+    }
+  });
+
+  // Exporter la fonction pour utilisation manuelle si nécessaire
+  window.initTypewriterTitle = initTypewriterTitle;
+})();

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Corrections Mobile - Aide-jeux.php</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #1f2937;
+            color: white;
+            line-height: 1.6;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-section {
+            background: #374151;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid #4b5563;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .status.success { background: #065f46; }
+        .status.error { background: #7f1d1d; }
+        .status.warning { background: #92400e; }
+        .btn {
+            background: #3b82f6;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+            min-height: 44px;
+            touch-action: manipulation;
+        }
+        .btn:hover { background: #2563eb; }
+        
+        /* Test de responsivité */
+        .responsive-test {
+            display: grid;
+            gap: 10px;
+        }
+        
+        @media (min-width: 640px) {
+            .responsive-test { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (min-width: 768px) {
+            .responsive-test { grid-template-columns: repeat(5, 1fr); }
+        }
+        
+        .test-card {
+            background: #4b5563;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            background: #374151;
+            border: 1px solid #6b7280;
+            border-radius: 4px;
+            color: white;
+            min-height: 44px;
+            font-size: 16px;
+            touch-action: manipulation;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔧 Test des Corrections Mobile - Aide-jeux.php</h1>
+        
+        <div class="test-section">
+            <h2>📱 Détection d'Appareil</h2>
+            <div id="device-detection"></div>
+            <button class="btn" onclick="testDeviceDetection()">Tester la Détection</button>
+        </div>
+        
+        <div class="test-section">
+            <h2>📐 Test de Responsivité</h2>
+            <p>Cette grille doit s'adapter : 1 colonne mobile → 2 colonnes tablet → 5 colonnes desktop</p>
+            <div class="responsive-test">
+                <div class="test-card">Item 1</div>
+                <div class="test-card">Item 2</div>
+                <div class="test-card">Item 3</div>
+                <div class="test-card">Item 4</div>
+                <div class="test-card">Item 5</div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>👆 Test d'Interaction Tactile</h2>
+            <p>Les champs doivent être facilement tactiles (44px min) et ne pas zoomer sur iOS</p>
+            <div class="responsive-test">
+                <div class="test-card">
+                    <label>Cuivre</label>
+                    <input type="number" min="0" step="1" value="0" placeholder="0">
+                </div>
+                <div class="test-card">
+                    <label>Argent</label>
+                    <input type="number" min="0" step="1" value="0" placeholder="0">
+                </div>
+                <div class="test-card">
+                    <label>Électrum</label>
+                    <input type="number" min="0" step="1" value="0" placeholder="0">
+                </div>
+                <div class="test-card">
+                    <label>Or</label>
+                    <input type="number" min="0" step="1" value="0" placeholder="0">
+                </div>
+                <div class="test-card">
+                    <label>Platine</label>
+                    <input type="number" min="0" step="1" value="0" placeholder="0">
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>🔄 Test des Événements</h2>
+            <div id="event-log"></div>
+            <button class="btn" onclick="testEvents()">Tester Click</button>
+            <button class="btn" onclick="testTouchEvents()">Simuler Touch</button>
+            <button class="btn" onclick="clearEventLog()">Effacer Log</button>
+        </div>
+        
+        <div class="test-section">
+            <h2>🧪 Test de Validation Finale</h2>
+            <button class="btn" onclick="runAllTests()">🚀 Lancer Tous les Tests</button>
+            <div id="final-results"></div>
+        </div>
+    </div>
+
+    <script>
+        // Test de détection d'appareil (même fonction que dans aide-jeux.php)
+        function isMobileDevice() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                   (navigator.maxTouchPoints && navigator.maxTouchPoints > 1);
+        }
+        
+        function testDeviceDetection() {
+            const result = document.getElementById('device-detection');
+            const isMobile = isMobileDevice();
+            const touchPoints = navigator.maxTouchPoints || 0;
+            const userAgent = navigator.userAgent;
+            
+            result.innerHTML = `
+                <div class="status ${isMobile ? 'success' : 'warning'}">
+                    <strong>Appareil Mobile:</strong> ${isMobile ? 'OUI' : 'NON'}<br>
+                    <strong>Points Tactiles:</strong> ${touchPoints}<br>
+                    <strong>User Agent:</strong> ${userAgent.substring(0, 100)}...
+                </div>
+            `;
+        }
+        
+        // Test des événements
+        let eventCount = 0;
+        function logEvent(type, target) {
+            eventCount++;
+            const log = document.getElementById('event-log');
+            const timestamp = new Date().toLocaleTimeString();
+            log.innerHTML += `<div>[${timestamp}] Événement ${eventCount}: ${type} sur ${target}</div>`;
+            log.scrollTop = log.scrollHeight;
+        }
+        
+        function testEvents() {
+            logEvent('click', 'bouton test');
+        }
+        
+        function testTouchEvents() {
+            logEvent('touchend', 'simulation tactile');
+        }
+        
+        function clearEventLog() {
+            document.getElementById('event-log').innerHTML = '';
+            eventCount = 0;
+        }
+        
+        // Test de validation finale
+        function runAllTests() {
+            const results = document.getElementById('final-results');
+            let report = [];
+            
+            // Test 1: Détection mobile
+            const isMobile = isMobileDevice();
+            report.push(`✅ Détection mobile: ${isMobile ? 'Fonctionnelle' : 'Desktop détecté'}`);
+            
+            // Test 2: Taille tactile des boutons
+            const buttons = document.querySelectorAll('.btn');
+            let tactileOK = true;
+            buttons.forEach(btn => {
+                const rect = btn.getBoundingClientRect();
+                if (rect.height < 44) tactileOK = false;
+            });
+            report.push(`${tactileOK ? '✅' : '❌'} Taille tactile: ${tactileOK ? 'Conforme (≥44px)' : 'Non conforme'}`);
+            
+            // Test 3: Responsive design
+            const responsive = document.querySelector('.responsive-test');
+            const computedStyle = window.getComputedStyle(responsive);
+            const gridCols = computedStyle.gridTemplateColumns.split(' ').length;
+            report.push(`✅ Responsive: ${gridCols} colonne(s) détectée(s)`);
+            
+            // Test 4: Font-size des inputs
+            const inputs = document.querySelectorAll('input[type="number"]');
+            let fontSizeOK = true;
+            inputs.forEach(input => {
+                const fontSize = parseInt(window.getComputedStyle(input).fontSize);
+                if (fontSize < 16) fontSizeOK = false;
+            });
+            report.push(`${fontSizeOK ? '✅' : '❌'} Font-size inputs: ${fontSizeOK ? '≥16px (pas de zoom iOS)' : '<16px (risque zoom)'}`);
+            
+            // Test 5: Touch-action
+            const firstInput = inputs[0];
+            const touchAction = window.getComputedStyle(firstInput).touchAction;
+            report.push(`${touchAction === 'manipulation' ? '✅' : '⚠️'} Touch-action: ${touchAction}`);
+            
+            results.innerHTML = `
+                <div class="status success">
+                    <h3>🎯 Résultats des Tests</h3>
+                    ${report.map(r => `<div>${r}</div>`).join('')}
+                </div>
+                <div class="status warning">
+                    <strong>Instructions:</strong><br>
+                    1. Testez sur un vrai appareil mobile<br>
+                    2. Vérifiez que les champs ne zooment pas sur iOS<br>
+                    3. Confirmez que la grille s'adapte aux différentes tailles<br>
+                    4. Validez que tous les éléments sont facilement tactiles
+                </div>
+            `;
+        }
+        
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            testDeviceDetection();
+            
+            // Ajouter des listeners pour tester les événements
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.test-card') || e.target.closest('input')) {
+                    logEvent('click', e.target.tagName.toLowerCase());
+                }
+            });
+            
+            if ('ontouchend' in window) {
+                document.addEventListener('touchend', function(e) {
+                    if (e.target.closest('.test-card') || e.target.closest('input')) {
+                        logEvent('touchend', e.target.tagName.toLowerCase());
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

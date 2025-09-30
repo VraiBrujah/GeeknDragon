@@ -7,9 +7,15 @@
     "build": "tailwindcss -i css/src/styles.css -o css/styles.css --minify",
     "bundle:css": "npx clean-css-cli -o css/vendor.bundle.min.css css/swiper-bundle.min.css css/fancybox.css",
     "bundle:js": "npx terser js/swiper-bundle.min.js js/fancybox.umd.js -c -m -o js/vendor.bundle.min.js",
+    "optimize:js": "npx terser js/app.js js/currency-converter.js js/coin-lot-optimizer.js -c -m -o js/app.bundle.min.js",
+    "optimize:all": "npm run optimize:js && npm run bundle",
+    "compress": "node scripts/optimize-assets.js",
+    "validate": "node scripts/validate-optimization.js",
+    "test:converter": "node scripts/test-currency-converter.js",
+    "deploy:prep": "npm run compress && npm run validate && npm run test:converter",
     "bundle": "npm run bundle:css && npm run bundle:js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint js"
+    "lint": "eslint js --fix"
   },
   "keywords": [],
   "author": "",
@@ -17,10 +23,13 @@
   "type": "commonjs",
   "devDependencies": {
     "autoprefixer": "^10.4.21",
+    "clean-css-cli": "^5.6.2",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.32.0",
+    "gzipper": "^7.2.0",
     "postcss": "^8.5.6",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "terser": "^5.24.0"
   }
 }

@@ -256,15 +256,19 @@ echo $snipcartInit;
   "url": "https://geekndragon.com/boutique.php"
 }
 </script>
-  <!-- Scripts optimisés pour chargement immédiat -->
-  <script src="/js/app.js?v=<?= filemtime(__DIR__.'/js/app.js') ?>"></script>
-  <script src="/js/hero-videos.js?v=<?= filemtime(__DIR__.'/js/hero-videos.js') ?>"></script>
+  <!-- Scripts optimisés pour la boutique -->
+  <?php
+  require_once __DIR__ . '/includes/script-loader.php';
+  load_optimized_scripts('boutique', __DIR__);
+  ?>
 
-  <!-- NOUVEAU: Chargement asynchrone des produits (non-bloquant) -->
-  <script src="/js/boutique-async-loader.js?v=<?= filemtime(__DIR__.'/js/boutique-async-loader.js') ?>"></script>
+  <!-- Scripts asynchrones pour la boutique -->
+  <?php
+  $loader = new ScriptLoader(__DIR__);
+  $loader->loadScript('boutique-async-loader');
+  ?>
 
-  <!-- Stock en arrière-plan après chargement des produits -->
-  <script src="/js/async-stock-loader.js?v=<?= filemtime(__DIR__.'/js/async-stock-loader.js') ?>"></script>
+  <!-- Stock loader déjà inclus dans boutique scripts -->
 
   <!-- Snipcart fonctionne nativement avec les attributs data-item-* selon la documentation officielle -->
 </body>

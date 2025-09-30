@@ -51,7 +51,6 @@ class BoutiqueAsyncLoader {
             this.initializeFeatures();
 
             // Production: log succès supprimé
-
         } catch (error) {
             console.error('❌ Erreur chargement produits:', error);
             this.showErrorState();
@@ -70,7 +69,7 @@ class BoutiqueAsyncLoader {
         } catch (error) {
             if (attempt < this.retryAttempts) {
                 // Production: log retry supprimé
-                await new Promise(resolve => setTimeout(resolve, this.retryDelay));
+                await new Promise((resolve) => setTimeout(resolve, this.retryDelay));
                 return this.fetchWithRetry(url, attempt + 1);
             }
             throw error;
@@ -134,7 +133,7 @@ class BoutiqueAsyncLoader {
 
     initQuantitySelectors() {
         const selectors = document.querySelectorAll('.quantity-selector');
-        selectors.forEach(selector => {
+        selectors.forEach((selector) => {
             const minusBtn = selector.querySelector('.minus');
             const plusBtn = selector.querySelector('.plus');
             const valueSpan = selector.querySelector('.qty-value');
@@ -149,14 +148,14 @@ class BoutiqueAsyncLoader {
                 const newPlusBtn = selector.querySelector('.plus');
 
                 newMinusBtn.addEventListener('click', () => {
-                    let value = parseInt(valueSpan.textContent) || 1;
+                    const value = parseInt(valueSpan.textContent) || 1;
                     if (value > 1) {
                         valueSpan.textContent = value - 1;
                     }
                 });
 
                 newPlusBtn.addEventListener('click', () => {
-                    let value = parseInt(valueSpan.textContent) || 1;
+                    const value = parseInt(valueSpan.textContent) || 1;
                     if (value < 999) {
                         valueSpan.textContent = value + 1;
                     }
@@ -174,7 +173,7 @@ class BoutiqueAsyncLoader {
         // Fonction pour synchroniser un select spécifique (copie exacte de app.js)
         const syncSelect = (select) => {
             const targetId = select.dataset.target;
-            const customIndex = select.dataset.customIndex;
+            const { customIndex } = select.dataset;
             const snipcartBtn = document.querySelector(`.snipcart-add-item[data-item-id="${targetId}"]`);
 
             if (snipcartBtn && customIndex) {
@@ -184,7 +183,7 @@ class BoutiqueAsyncLoader {
         };
 
         // Synchroniser au changement et initialiser avec valeurs par défaut
-        document.querySelectorAll('select[data-target][data-custom-index]').forEach(select => {
+        document.querySelectorAll('select[data-target][data-custom-index]').forEach((select) => {
             select.addEventListener('change', () => syncSelect(select));
             // Synchroniser immédiatement avec la valeur par défaut
             syncSelect(select);
@@ -205,7 +204,6 @@ class BoutiqueAsyncLoader {
         // Production: log boutons supprimé
     }
 
-
     initAsyncStock() {
         // Démarrer le chargement du stock en arrière-plan
         if (window.asyncStockLoader) {
@@ -223,7 +221,7 @@ class BoutiqueAsyncLoader {
     showErrorState() {
         const sections = ['pieces', 'cartes', 'triptyques'];
 
-        sections.forEach(category => {
+        sections.forEach((category) => {
             const container = document.querySelector(`#${category} .shop-grid`);
 
             if (container) {

@@ -3,7 +3,6 @@
  * Fonctions cohérentes pour l'ajout au panier dans toute l'application
  */
 class SnipcartUtils {
-    
     /**
      * Crée un bouton d'ajout au panier avec tous les attributs nécessaires
      */
@@ -26,7 +25,7 @@ class SnipcartUtils {
             'data-item-name': productData.name,
             'data-item-description': productData.summary || productData.description || '',
             'data-item-price': productData.price.toString(),
-            'data-item-quantity': quantity.toString()
+            'data-item-quantity': quantity.toString(),
         };
 
         // Ajouter les attributs multilingues si disponibles
@@ -54,7 +53,7 @@ class SnipcartUtils {
             button.setAttribute(`data-item-custom${index}-type`, fieldData.type);
             button.setAttribute(`data-item-custom${index}-options`, fieldData.options);
             button.setAttribute(`data-item-custom${index}-value`, fieldData.value);
-            
+
             // Ajouter le rôle pour faciliter la recherche
             if (fieldData.role) {
                 button.setAttribute(`data-item-custom${index}-role`, fieldData.role);
@@ -74,14 +73,14 @@ class SnipcartUtils {
      */
     static addToCart(productData, options = {}) {
         const button = this.createAddToCartButton(productData, options);
-        
+
         // Ajouter temporairement au DOM pour déclencher Snipcart
         button.style.display = 'none';
         document.body.appendChild(button);
-        
+
         // Déclencher le clic
         button.click();
-        
+
         // Nettoyer
         setTimeout(() => {
             if (button.parentNode) {
@@ -103,7 +102,7 @@ class SnipcartUtils {
 
         // Extraire les données du bouton HTML
         const productData = this.extractProductDataFromButton(button);
-        
+
         // Tenter d'utiliser l'API Snipcart directement si disponible
         if (window.Snipcart && window.Snipcart.api && window.Snipcart.api.cart) {
             try {
@@ -114,21 +113,21 @@ class SnipcartUtils {
                 console.warn('⚠️ Erreur API Snipcart, fallback vers méthode HTML:', error);
             }
         }
-        
+
         // Fallback : créer un événement click simulé pour déclencher Snipcart
         console.log('📦 Utilisation du système Snipcart HTML standard');
-        
+
         // Créer un nouveau bouton temporaire avec les mêmes attributs
         const tempButton = button.cloneNode(true);
         tempButton.style.display = 'none';
         document.body.appendChild(tempButton);
-        
+
         // Déclencher le click sur le bouton temporaire sans notre event listener
         setTimeout(() => {
             tempButton.click();
             document.body.removeChild(tempButton);
         }, 10);
-        
+
         return true;
     }
 
@@ -142,7 +141,7 @@ class SnipcartUtils {
             price: parseFloat(button.getAttribute('data-item-price') || '0'),
             url: button.getAttribute('data-item-url') || window.location.href,
             quantity: parseInt(button.getAttribute('data-item-quantity') || '1'),
-            description: button.getAttribute('data-item-description')
+            description: button.getAttribute('data-item-description'),
         };
 
         // Ajouter l'image si disponible
@@ -160,7 +159,7 @@ class SnipcartUtils {
             if (customName && customValue) {
                 data.customFields.push({
                     name: customName,
-                    value: customValue
+                    value: customValue,
                 });
             }
         }
@@ -178,34 +177,33 @@ class SnipcartUtils {
         }
 
         let added = 0;
-        
+
         // Fonction récursive pour ajouter un produit à la fois avec délai adaptatif
         const addNext = (index) => {
             if (index >= products.length) return;
-            
+
             const productData = products[index];
-            
+
             try {
                 this.addToCart(productData.product, {
                     quantity: productData.quantity,
-                    customFields: productData.customFields || {}
+                    customFields: productData.customFields || {},
                 });
-                
+
                 added++;
                 if (onProgress) {
                     onProgress(added, products.length);
                 }
-                
+
                 // Délai plus long pour être sûr que Snipcart a traité l'ajout
                 setTimeout(() => addNext(index + 1), 500);
-                
             } catch (error) {
                 console.error('Erreur ajout produit au panier:', error, productData);
                 // Continuer avec le suivant même en cas d'erreur
                 setTimeout(() => addNext(index + 1), 500);
             }
         };
-        
+
         // Commencer l'ajout séquentiel
         addNext(0);
     }
@@ -214,8 +212,10 @@ class SnipcartUtils {
      * Met à jour les attributs d'un bouton existant selon les sélections
      */
     static updateCartButton(button, selections = {}) {
-        const { quantity, metal, multiplier, triptych, language } = selections;
-        
+        const {
+            quantity, metal, multiplier, triptych, language,
+        } = selections;
+
         if (quantity !== undefined) {
             button.setAttribute('data-item-quantity', quantity.toString());
         }
@@ -228,8 +228,10 @@ class SnipcartUtils {
      * Met à jour les champs personnalisés d'un bouton
      */
     static updateCustomFields(button, selections) {
-        const { metal, multiplier, triptych, language } = selections;
-        
+        const {
+            metal, multiplier, triptych, language,
+        } = selections;
+
         // Trouver et mettre à jour le champ métal
         if (metal !== undefined) {
             const metalField = this.findCustomFieldByRole(button, 'metal');
@@ -268,14 +270,14 @@ class SnipcartUtils {
      */
     static findCustomFieldByRole(button, role) {
         const attributes = Array.from(button.attributes);
-        
+
         for (const attr of attributes) {
             const match = attr.name.match(/^data-item-custom(\d+)-role$/);
             if (match && attr.value === role) {
                 return match[1];
             }
         }
-        
+
         return null;
     }
 
@@ -289,7 +291,7 @@ class SnipcartUtils {
             description: button.getAttribute('data-item-description'),
             price: parseFloat(button.getAttribute('data-item-price')),
             quantity: parseInt(button.getAttribute('data-item-quantity')),
-            url: button.getAttribute('data-item-url')
+            url: button.getAttribute('data-item-url'),
         };
     }
 
@@ -297,18 +299,20 @@ class SnipcartUtils {
      * Crée les données de produit pour les lots recommandés
      */
     static createLotProductData(lot) {
-        const { product, quantity, customFields, displayName } = lot;
-        
+        const {
+            product, quantity, customFields, displayName,
+        } = lot;
+
         return {
             product: {
                 id: product.id,
                 name: displayName || product.name,
                 summary: product.summary,
                 price: product.price,
-                url: `product.php?id=${encodeURIComponent(product.id)}`
+                url: `product.php?id=${encodeURIComponent(product.id)}`,
             },
-            quantity: quantity,
-            customFields: customFields || {}
+            quantity,
+            customFields: customFields || {},
         };
     }
 
@@ -322,25 +326,25 @@ class SnipcartUtils {
         if (translated) {
             return translated;
         }
-        
+
         // Fallback vers les traductions locales pour rétro-compatibilité
         const translations = {
             fr: {
                 copper: 'cuivre',
-                silver: 'argent', 
+                silver: 'argent',
                 electrum: 'électrum',
                 gold: 'or',
-                platinum: 'platine'
+                platinum: 'platine',
             },
             en: {
                 copper: 'copper',
                 silver: 'silver',
-                electrum: 'electrum', 
+                electrum: 'electrum',
                 gold: 'gold',
-                platinum: 'platinum'
-            }
+                platinum: 'platinum',
+            },
         };
-        
+
         return translations[lang]?.[metal] || metal;
     }
 

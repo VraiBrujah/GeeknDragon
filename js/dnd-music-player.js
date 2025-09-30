@@ -16,7 +16,7 @@ class DnDMusicPlayer {
         this.firstInteraction = true;
         this.heroIntroPath = null;
         this.heroIntroWeight = 2.5; // Pondération pour hero-intro.mp3
-        
+
         this.initializePlayer();
         this.setupEventListeners();
     }
@@ -50,36 +50,35 @@ class DnDMusicPlayer {
         try {
             const response = await fetch('/api/music-scanner.php');
             if (!response.ok) throw new Error('Erreur chargement playlist');
-            
+
             const data = await response.json();
             this.playlist = data.files || [];
             this.heroIntroPath = data.heroIntro;
-            
+
             // Créer playlist pondérée avec hero-intro favorisé
             this.createWeightedPlaylist();
-            
         } catch (error) {
             console.error('Erreur chargement playlist:', error);
             // Playlist de fallback si l'API échoue
             this.playlist = [
-                {path: 'media/musique/hero-intro.mp3', name: 'Hero Intro'},
-                {path: 'media/musique/dnd/Agdon.mp3', name: 'Agdon'}
+                { path: 'media/musique/hero-intro.mp3', name: 'Hero Intro' },
+                { path: 'media/musique/dnd/Agdon.mp3', name: 'Agdon' },
             ];
         }
     }
 
     createWeightedPlaylist() {
         this.weightedPlaylist = [];
-        
-        this.playlist.forEach(track => {
+
+        this.playlist.forEach((track) => {
             const weight = (track.path === this.heroIntroPath) ? this.heroIntroWeight : 1;
             const weightedCount = Math.ceil(weight);
-            
+
             for (let i = 0; i < weightedCount; i++) {
                 this.weightedPlaylist.push(track);
             }
         });
-        
+
         // Mélanger la playlist pondérée
         this.shuffleArray(this.weightedPlaylist);
     }
@@ -87,16 +86,16 @@ class DnDMusicPlayer {
     setupAudioElement() {
         this.audio.volume = this.volume;
         this.audio.preload = 'none';
-        
+
         this.audio.addEventListener('ended', () => {
             this.playNext();
         });
-        
+
         this.audio.addEventListener('error', (e) => {
             console.warn('Erreur audio:', e);
             this.playNext(); // Passer au suivant en cas d'erreur
         });
-        
+
         this.audio.addEventListener('canplaythrough', () => {
             this.updatePlayButton();
         });
@@ -154,7 +153,7 @@ class DnDMusicPlayer {
         // Insérer après le hero ou au début du contenu principal
         const heroSection = document.querySelector('.hero-section');
         const mainContent = document.querySelector('main') || document.body;
-        
+
         if (heroSection) {
             heroSection.insertAdjacentHTML('afterend', playerHTML);
         } else {
@@ -195,7 +194,7 @@ class DnDMusicPlayer {
             if (this.firstInteraction && this.isInitialized) {
                 this.startPlayback();
                 this.firstInteraction = false;
-                
+
                 // Retirer les listeners après la première interaction
                 document.removeEventListener('click', startMusic, true);
                 document.removeEventListener('keydown', startMusic, true);
@@ -210,10 +209,10 @@ class DnDMusicPlayer {
 
     async startPlayback() {
         if (!this.playlist.length) return;
-        
+
         // Commencer par hero-intro.mp3 si disponible
         if (this.heroIntroPath) {
-            const heroTrack = this.playlist.find(track => track.path === this.heroIntroPath);
+            const heroTrack = this.playlist.find((track) => track.path === this.heroIntroPath);
             if (heroTrack) {
                 this.currentIndex = this.playlist.indexOf(heroTrack);
             }
@@ -225,10 +224,10 @@ class DnDMusicPlayer {
 
     async loadCurrentTrack() {
         if (!this.playlist[this.currentIndex]) return;
-        
+
         const currentTrack = this.playlist[this.currentIndex];
         this.audio.src = `/${currentTrack.path}`;
-        
+
         try {
             this.audio.load();
         } catch (error) {
@@ -266,11 +265,11 @@ class DnDMusicPlayer {
             // Mode aléatoire pondéré
             this.currentIndex = Math.floor(Math.random() * this.weightedPlaylist.length);
             const selectedTrack = this.weightedPlaylist[this.currentIndex];
-            this.currentIndex = this.playlist.findIndex(track => track.path === selectedTrack.path);
+            this.currentIndex = this.playlist.findIndex((track) => track.path === selectedTrack.path);
         } else {
             this.currentIndex = (this.currentIndex + 1) % this.playlist.length;
         }
-        
+
         await this.loadCurrentTrack();
         if (this.isPlaying) this.play();
     }
@@ -308,7 +307,7 @@ class DnDMusicPlayer {
     updatePlayButton() {
         const playIcon = document.querySelector('.play-icon');
         const pauseIcon = document.querySelector('.pause-icon');
-        
+
         if (this.isPlaying) {
             playIcon.classList.add('hidden');
             pauseIcon.classList.remove('hidden');
@@ -316,7 +315,7 @@ class DnDMusicPlayer {
             playIcon.classList.remove('hidden');
             pauseIcon.classList.add('hidden');
         }
-        
+
         this.updateStatusIndicator();
     }
 

@@ -5,7 +5,9 @@
 class CurrencyConverterTests {
     constructor() {
         this.testResults = [];
-        this.rates = { copper: 1, silver: 10, electrum: 50, gold: 100, platinum: 1000 };
+        this.rates = {
+            copper: 1, silver: 10, electrum: 50, gold: 100, platinum: 1000,
+        };
         this.multipliers = [1, 10, 100, 1000, 10000];
     }
 
@@ -14,14 +16,14 @@ class CurrencyConverterTests {
      */
     runAllTests() {
         console.log('🧪 Démarrage des tests du convertisseur de monnaie...\n');
-        
+
         this.testOptimalBreakdown();
         this.testLotsRecommendations();
         this.testCostMinimization();
         this.testCoverageValidation();
         this.testMetalsAndMultipliers();
         this.testEdgeCases();
-        
+
         this.displayResults();
     }
 
@@ -30,7 +32,7 @@ class CurrencyConverterTests {
      */
     testOptimalBreakdown() {
         console.log('📊 Test 1: Conversion optimale...');
-        
+
         const testCases = [
             {
                 name: 'Cas simple: 1161 cuivres',
@@ -41,24 +43,24 @@ class CurrencyConverterTests {
                     { currency: 'gold', multiplier: 1, quantity: 1 },
                     { currency: 'electrum', multiplier: 1, quantity: 1 },
                     { currency: 'silver', multiplier: 1, quantity: 1 },
-                    { currency: 'copper', multiplier: 1, quantity: 1 }
-                ]
+                    { currency: 'copper', multiplier: 1, quantity: 1 },
+                ],
             },
             {
                 name: 'Cas avec multiplicateurs: 1661 cuivres',
                 value: 1661,
                 expectedPieces: 6, // 1 platine + 1 or + 1 électrum + 1 électrum×10 + 1 argent + 1 cuivre
-                expectedCovers: true
+                expectedCovers: true,
             },
             {
                 name: 'Cas grand nombre: 12345 cuivres',
                 value: 12345,
                 expectedPieces: 7, // Optimal avec multiplicateurs
-                expectedCovers: true
-            }
+                expectedCovers: true,
+            },
         ];
 
-        testCases.forEach(testCase => {
+        testCases.forEach((testCase) => {
             const result = this.runOptimalBreakdownTest(testCase);
             this.testResults.push(result);
         });
@@ -69,29 +71,33 @@ class CurrencyConverterTests {
      */
     testLotsRecommendations() {
         console.log('🛒 Test 2: Recommandations de lots...');
-        
+
         const testCases = [
             {
                 name: 'Quintessence vs Pièces individuelles',
-                coins: { platinum: 1, gold: 1, electrum: 1, silver: 1, copper: 1 },
+                coins: {
+                    platinum: 1, gold: 1, electrum: 1, silver: 1, copper: 1,
+                },
                 expectedProduct: 'coin-quintessence-metals', // Doit recommander Quintessence (35$) vs 5×10$ = 50$
-                maxCost: 35
+                maxCost: 35,
             },
             {
                 name: 'Pièce personnalisée électrum ×10',
                 coins: { electrum: 10 }, // 10 électrum avec multiplicateur ×10
                 expectedProduct: 'coin-custom-single',
-                expectedCustomFields: { metal: 'electrum', multiplier: '10' }
+                expectedCustomFields: { metal: 'electrum', multiplier: '10' },
             },
             {
                 name: 'Collection complète vs lots séparés',
-                coins: { platinum: 1, gold: 1, electrum: 1, silver: 1, copper: 1 },
+                coins: {
+                    platinum: 1, gold: 1, electrum: 1, silver: 1, copper: 1,
+                },
                 testAllMultipliers: true,
-                expectedBestCost: true // Doit choisir la solution la moins chère
-            }
+                expectedBestCost: true, // Doit choisir la solution la moins chère
+            },
         ];
 
-        testCases.forEach(testCase => {
+        testCases.forEach((testCase) => {
             const result = this.runLotsRecommendationTest(testCase);
             this.testResults.push(result);
         });
@@ -102,7 +108,7 @@ class CurrencyConverterTests {
      */
     testCostMinimization() {
         console.log('💰 Test 3: Minimisation du coût...');
-        
+
         const testCases = [
             {
                 name: 'Trio vs 3 pièces individuelles',
@@ -111,19 +117,23 @@ class CurrencyConverterTests {
             },
             {
                 name: 'Septuple vs combinaison de lots',
-                coins: { platinum: 1, gold: 2, electrum: 2, silver: 1, copper: 1 },
+                coins: {
+                    platinum: 1, gold: 2, electrum: 2, silver: 1, copper: 1,
+                },
                 expectedTotalPieces: 7,
-                maxBudget: 60 // Budget du Septuple Libre
+                maxBudget: 60, // Budget du Septuple Libre
             },
             {
                 name: 'Offrande du Voyageur optimale',
-                coins: { platinum: 2, gold: 2, electrum: 2, silver: 2, copper: 2 },
+                coins: {
+                    platinum: 2, gold: 2, electrum: 2, silver: 2, copper: 2,
+                },
                 expectedProduct: 'coin-traveler-offering', // 60$ pour 10 pièces vs alternatives
-                expectedQuantity: 1
-            }
+                expectedQuantity: 1,
+            },
         ];
 
-        testCases.forEach(testCase => {
+        testCases.forEach((testCase) => {
             const result = this.runCostMinimizationTest(testCase);
             this.testResults.push(result);
         });
@@ -134,23 +144,25 @@ class CurrencyConverterTests {
      */
     testCoverageValidation() {
         console.log('✅ Test 4: Validation de la couverture...');
-        
+
         const testCases = [
             {
                 name: 'Couverture exacte des besoins',
-                needs: { platinum: 1, gold: 1, electrum: 1, silver: 1, copper: 1 },
+                needs: {
+                    platinum: 1, gold: 1, electrum: 1, silver: 1, copper: 1,
+                },
                 allowSurplus: true, // Peut avoir plus de pièces si moins cher
-                noDeficit: true // Ne doit jamais avoir moins
+                noDeficit: true, // Ne doit jamais avoir moins
             },
             {
                 name: 'Surplus acceptable si moins cher',
                 needs: { gold: 3 },
                 expectedSurplus: 0, // Trio exact ou surplus si combo moins chère
-                costPriority: true
-            }
+                costPriority: true,
+            },
         ];
 
-        testCases.forEach(testCase => {
+        testCases.forEach((testCase) => {
             const result = this.runCoverageTest(testCase);
             this.testResults.push(result);
         });
@@ -161,30 +173,32 @@ class CurrencyConverterTests {
      */
     testMetalsAndMultipliers() {
         console.log('⚡ Test 5: Métaux et multiplicateurs...');
-        
+
         const testCases = [
             {
                 name: 'Pièce électrum ×10 correcte',
                 coin: { currency: 'electrum', multiplier: 10, quantity: 1 },
                 expectedMetal: 'electrum',
-                expectedMultiplier: 10
+                expectedMultiplier: 10,
             },
             {
                 name: 'Quintessence avec multiplicateur uniforme',
-                coins: { platinum: 1, gold: 1, electrum: 1, silver: 1, copper: 1 },
+                coins: {
+                    platinum: 1, gold: 1, electrum: 1, silver: 1, copper: 1,
+                },
                 multiplier: 100,
                 expectedProduct: 'coin-quintessence-metals',
-                expectedUniformMultiplier: 100
+                expectedUniformMultiplier: 100,
             },
             {
                 name: 'Traduction métaux française',
                 coins: { copper: 1 },
                 expectedTranslation: 'cuivre',
-                language: 'fr'
-            }
+                language: 'fr',
+            },
         ];
 
-        testCases.forEach(testCase => {
+        testCases.forEach((testCase) => {
             const result = this.runMetalMultiplierTest(testCase);
             this.testResults.push(result);
         });
@@ -195,29 +209,29 @@ class CurrencyConverterTests {
      */
     testEdgeCases() {
         console.log('🎯 Test 6: Cas limites...');
-        
+
         const testCases = [
             {
                 name: 'Valeur zéro',
                 value: 0,
                 expectedRecommendations: [],
-                expectedMessage: 'default'
+                expectedMessage: 'default',
             },
             {
                 name: 'Très grande valeur',
                 value: 999999,
                 expectedTimeout: false, // Ne doit pas bloquer
-                maxExecutionTime: 1000 // 1 seconde max
+                maxExecutionTime: 1000, // 1 seconde max
             },
             {
                 name: 'Valeur impossible',
                 value: -1,
                 expectedRecommendations: [],
-                expectedError: false
-            }
+                expectedError: false,
+            },
         ];
 
-        testCases.forEach(testCase => {
+        testCases.forEach((testCase) => {
             const result = this.runEdgeCaseTest(testCase);
             this.testResults.push(result);
         });
@@ -235,7 +249,7 @@ class CurrencyConverterTests {
             // Simuler la métaheuristique du convertisseur
             const solution = this.simulateOptimalBreakdown(testCase.value);
             const totalPieces = solution.reduce((sum, item) => sum + item.quantity, 0);
-            
+
             if (testCase.expectedPieces) {
                 success = totalPieces <= testCase.expectedPieces; // Peut être égal ou moins si même coût
                 details = `Pièces: ${totalPieces} (attendu: ≤${testCase.expectedPieces})`;
@@ -252,7 +266,7 @@ class CurrencyConverterTests {
             name: testCase.name,
             success,
             details,
-            executionTime: Date.now() - startTime
+            executionTime: Date.now() - startTime,
         };
     }
 
@@ -262,12 +276,12 @@ class CurrencyConverterTests {
     simulateOptimalBreakdown(value) {
         // Reproduction de la logique du convertisseur
         const denoms = [];
-        ['platinum', 'gold', 'electrum', 'silver', 'copper'].forEach(currency => {
-            this.multipliers.forEach(multiplier => {
+        ['platinum', 'gold', 'electrum', 'silver', 'copper'].forEach((currency) => {
+            this.multipliers.forEach((multiplier) => {
                 denoms.push({
                     currency,
                     multiplier,
-                    value: this.rates[currency] * multiplier
+                    value: this.rates[currency] * multiplier,
                 });
             });
         });
@@ -278,8 +292,8 @@ class CurrencyConverterTests {
         const result = [];
         let remaining = value;
 
-        ['platinum', 'gold', 'electrum', 'silver', 'copper'].forEach(currency => {
-            const currencyDenoms = denoms.filter(d => d.currency === currency);
+        ['platinum', 'gold', 'electrum', 'silver', 'copper'].forEach((currency) => {
+            const currencyDenoms = denoms.filter((d) => d.currency === currency);
             for (const denom of currencyDenoms) {
                 if (remaining >= denom.value) {
                     const qty = Math.min(1, Math.floor(remaining / denom.value));
@@ -293,7 +307,7 @@ class CurrencyConverterTests {
         });
 
         // Compléter avec l'algorithme standard
-        denoms.forEach(denom => {
+        denoms.forEach((denom) => {
             if (remaining >= denom.value) {
                 const qty = Math.floor(remaining / denom.value);
                 if (qty > 0) {
@@ -318,13 +332,13 @@ class CurrencyConverterTests {
             // Simuler les données de produits
             const mockProducts = this.getMockProducts();
             const recommendations = this.simulateLotsRecommendation(testCase.coins, mockProducts);
-            
+
             if (testCase.expectedProduct) {
-                const hasExpectedProduct = recommendations.some(r => r.productId === testCase.expectedProduct);
+                const hasExpectedProduct = recommendations.some((r) => r.productId === testCase.expectedProduct);
                 success = hasExpectedProduct;
                 details = `Produit trouvé: ${hasExpectedProduct ? testCase.expectedProduct : 'non trouvé'}`;
             }
-            
+
             if (testCase.maxCost) {
                 const totalCost = recommendations.reduce((sum, r) => sum + (r.price * r.quantity), 0);
                 success = success && totalCost <= testCase.maxCost;
@@ -339,7 +353,7 @@ class CurrencyConverterTests {
             name: testCase.name,
             success,
             details,
-            executionTime: Date.now() - startTime
+            executionTime: Date.now() - startTime,
         };
     }
 
@@ -348,29 +362,29 @@ class CurrencyConverterTests {
      */
     simulateLotsRecommendation(coins, products) {
         const recommendations = [];
-        
+
         Object.entries(coins).forEach(([currency, quantity]) => {
             // Trouver le meilleur produit pour cette pièce
             const candidates = [];
-            
+
             Object.entries(products).forEach(([id, product]) => {
                 if (this.canProductProvideCoin(product, currency, 1, quantity)) {
                     const efficiency = this.calculateEfficiency(product, currency, quantity);
                     candidates.push({ id, product, efficiency });
                 }
             });
-            
+
             candidates.sort((a, b) => a.efficiency - b.efficiency);
             if (candidates.length > 0) {
                 const best = candidates[0];
                 recommendations.push({
                     productId: best.id,
                     quantity: Math.ceil(quantity / (best.product.coin_lots[currency] || 1)),
-                    price: best.product.price
+                    price: best.product.price,
                 });
             }
         });
-        
+
         return recommendations;
     }
 
@@ -385,7 +399,9 @@ class CurrencyConverterTests {
                 customizable: true,
                 metals: ['cuivre', 'argent', 'électrum', 'or', 'platine'],
                 multipliers: [1, 10, 100, 1000, 10000],
-                coin_lots: { copper: 1, silver: 1, electrum: 1, gold: 1, platinum: 1 }
+                coin_lots: {
+                    copper: 1, silver: 1, electrum: 1, gold: 1, platinum: 1,
+                },
             },
             'coin-trio-customizable': {
                 name: 'Trio de Pièces',
@@ -393,22 +409,28 @@ class CurrencyConverterTests {
                 customizable: true,
                 metals: ['cuivre', 'argent', 'électrum', 'or', 'platine'],
                 multipliers: [1, 10, 100, 1000, 10000],
-                coin_lots: { copper: 3, silver: 3, electrum: 3, gold: 3, platinum: 3 }
+                coin_lots: {
+                    copper: 3, silver: 3, electrum: 3, gold: 3, platinum: 3,
+                },
             },
             'coin-quintessence-metals': {
                 name: 'Quintessence Métallique',
                 price: 35,
                 customizable: true,
                 multipliers: [1, 10, 100, 1000, 10000],
-                coin_lots: { copper: 1, silver: 1, electrum: 1, gold: 1, platinum: 1 }
+                coin_lots: {
+                    copper: 1, silver: 1, electrum: 1, gold: 1, platinum: 1,
+                },
             },
             'coin-traveler-offering': {
                 name: 'Offrande du Voyageur',
                 price: 60,
                 customizable: false,
                 multipliers: [1, 10, 100, 1000, 10000],
-                coin_lots: { copper: 2, silver: 2, electrum: 2, gold: 2, platinum: 2 }
-            }
+                coin_lots: {
+                    copper: 2, silver: 2, electrum: 2, gold: 2, platinum: 2,
+                },
+            },
         };
     }
 
@@ -421,7 +443,7 @@ class CurrencyConverterTests {
             name: testCase.name,
             success: true, // Implémentation simplifiée
             details: 'Test de coût simulé',
-            executionTime: 10
+            executionTime: 10,
         };
     }
 
@@ -434,7 +456,7 @@ class CurrencyConverterTests {
             name: testCase.name,
             success: true,
             details: 'Couverture validée',
-            executionTime: 5
+            executionTime: 5,
         };
     }
 
@@ -447,7 +469,7 @@ class CurrencyConverterTests {
             name: testCase.name,
             success: true,
             details: 'Métaux et multiplicateurs corrects',
-            executionTime: 3
+            executionTime: 3,
         };
     }
 
@@ -460,7 +482,7 @@ class CurrencyConverterTests {
             name: testCase.name,
             success: true,
             details: 'Cas limite géré correctement',
-            executionTime: 2
+            executionTime: 2,
         };
     }
 
@@ -478,14 +500,12 @@ class CurrencyConverterTests {
     }
 
     validateCoverage(solution, targetValue) {
-        const totalValue = solution.reduce((sum, item) => 
-            sum + (item.quantity * this.rates[item.currency] * item.multiplier), 0);
+        const totalValue = solution.reduce((sum, item) => sum + (item.quantity * this.rates[item.currency] * item.multiplier), 0);
         return totalValue === targetValue;
     }
 
     formatSolution(solution) {
-        return solution.map(item => 
-            `${item.quantity}×${item.currency}(×${item.multiplier})`).join(', ');
+        return solution.map((item) => `${item.quantity}×${item.currency}(×${item.multiplier})`).join(', ');
     }
 
     /**
@@ -493,17 +513,17 @@ class CurrencyConverterTests {
      */
     displayResults() {
         console.log('\n📋 RÉSULTATS DES TESTS\n');
-        
-        const categories = [...new Set(this.testResults.map(r => r.category))];
+
+        const categories = [...new Set(this.testResults.map((r) => r.category))];
         let totalTests = 0;
         let totalSuccess = 0;
 
-        categories.forEach(category => {
-            const categoryTests = this.testResults.filter(r => r.category === category);
-            const categorySuccess = categoryTests.filter(r => r.success).length;
-            
+        categories.forEach((category) => {
+            const categoryTests = this.testResults.filter((r) => r.category === category);
+            const categorySuccess = categoryTests.filter((r) => r.success).length;
+
             console.log(`\n🏷️  ${category}:`);
-            categoryTests.forEach(test => {
+            categoryTests.forEach((test) => {
                 const status = test.success ? '✅' : '❌';
                 const time = test.executionTime ? ` (${test.executionTime}ms)` : '';
                 console.log(`  ${status} ${test.name}${time}`);
@@ -511,15 +531,15 @@ class CurrencyConverterTests {
                     console.log(`     ${test.details}`);
                 }
             });
-            
+
             console.log(`   ${categorySuccess}/${categoryTests.length} tests réussis`);
             totalTests += categoryTests.length;
             totalSuccess += categorySuccess;
         });
 
         console.log(`\n🎯 RÉSULTAT GLOBAL: ${totalSuccess}/${totalTests} tests réussis`);
-        console.log(`📊 Taux de réussite: ${((totalSuccess/totalTests)*100).toFixed(1)}%`);
-        
+        console.log(`📊 Taux de réussite: ${((totalSuccess / totalTests) * 100).toFixed(1)}%`);
+
         if (totalSuccess === totalTests) {
             console.log('🎉 Tous les tests sont passés ! Le système est opérationnel.');
         } else {

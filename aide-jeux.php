@@ -16,20 +16,140 @@ $metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/aide-je
 
 $extraHead = <<<HTML
 <style>
-.tool-content { display: none; }
-.tool-content.active { display: block; }
-.tool-nav-btn.active { background: linear-gradient(135deg, #4f46e5, #7c3aed); }
+.tool-content { 
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.tool-content.active { 
+  display: block;
+  opacity: 1;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* CORRECTION MOBILE: Sections toujours visibles sur mobile */
+@media (max-width: 768px) {
+  #currency-converter-premium,
+  #coin-lot-optimizer,
+  #lot-recommendations {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  
+  /* Assurer que les grids fonctionnent sur mobile */
+  .currency-input-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  .grid-cols-1.sm\\:grid-cols-2.md\\:grid-cols-5 {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Forcer tous les éléments de conversion à être visibles */
+  .currency-input-card,
+  .conversion-result,
+  .recommended-lots {
+    display: block !important;
+    opacity: 1 !important;
+  }
+  
+  /* Améliorer la taille des inputs sur mobile */
+  .currency-input-card input,
+  .multiplier-input {
+    min-height: 44px !important;
+    font-size: 16px !important;
+    padding: 12px !important;
+  }
+  
+  /* Assurer que les boutons sont assez grands pour le touch */
+  .btn, button {
+    min-height: 44px !important;
+    padding: 12px 16px !important;
+    touch-action: manipulation !important;
+  }
+}
+
+/* FALLBACK NOSCRIPT: Affichage de base si JavaScript échoue */
+.noscript-fallback {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .noscript-fallback {
+    display: block !important;
+    background: #fef3c7;
+    border: 1px solid #f59e0b;
+    color: #92400e;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 0.5rem;
+    text-align: center;
+  }
+}
+.tool-nav-btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.tool-nav-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: left 0.5s ease;
+}
+.tool-nav-btn:hover::before {
+  left: 100%;
+}
+.tool-nav-btn.active { 
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+  transform: translateY(-1px);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .triptych-preview {
   max-width: 100%;
   height: auto;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.triptych-preview::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(79, 70, 229, 0.1), rgba(124, 58, 237, 0.1));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 .triptych-preview:hover {
-  transform: scale(1.02);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+  transform: scale(1.03) rotateX(2deg);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(79, 70, 229, 0.3);
+}
+.triptych-preview:hover::before {
+  opacity: 1;
 }
 .triptych-grid {
   display: grid;
@@ -44,6 +164,29 @@ $extraHead = <<<HTML
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 1.5rem;
+  position: relative;
+}
+.flip-container::after {
+  content: '🔄';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  font-size: 18px;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+.flip-container:hover::after {
+  opacity: 1;
+  transform: scale(1.1);
 }
 .flipper {
   position: relative;
@@ -78,6 +221,24 @@ $extraHead = <<<HTML
   padding: 1.5rem;
   margin: 2rem 0;
   border: 2px solid #4f46e5;
+  position: relative;
+  overflow: hidden;
+}
+.dice-roller::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(79, 70, 229, 0.1), transparent);
+  transform: rotate(45deg);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
 }
 .dice-grid {
   display: grid;
@@ -86,18 +247,47 @@ $extraHead = <<<HTML
   margin: 1rem 0;
 }
 .stat-dice {
-  background: #4f46e5;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
   color: white;
   border: none;
-  padding: 0.5rem;
-  border-radius: 6px;
+  padding: 0.75rem;
+  border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+}
+.stat-dice::before {
+  content: '🎲';
+  position: absolute;
+  top: 50%;
+  left: -30px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  transition: left 0.3s ease;
 }
 .stat-dice:hover {
-  background: #7c3aed;
-  transform: scale(1.05);
+  background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+  transform: scale(1.08) rotate(2deg);
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+}
+.stat-dice:hover::before {
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+.stat-dice:active {
+  transform: scale(0.95);
+  animation: diceRoll 0.6s ease;
+}
+
+@keyframes diceRoll {
+  0%, 100% { transform: scale(0.95) rotate(0deg); }
+  25% { transform: scale(1.1) rotate(90deg); }
+  50% { transform: scale(1.05) rotate(180deg); }
+  75% { transform: scale(1.1) rotate(270deg); }
+}
 }
 .dice-result {
   font-size: 1.5rem;
@@ -105,21 +295,81 @@ $extraHead = <<<HTML
   text-align: center;
   margin: 0.5rem 0;
   min-height: 2rem;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+.dice-result.rolling {
+  animation: rollAnimation 0.6s ease;
+}
+
+@keyframes rollAnimation {
+  0% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.2) rotate(90deg); color: #fbbf24; }
+  50% { transform: scale(1.1) rotate(180deg); color: #f59e0b; }
+  75% { transform: scale(1.15) rotate(270deg); color: #d97706; }
+  100% { transform: scale(1) rotate(360deg); color: #fff; }
+}
+
+/* Animations globales améliorées */
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(79, 70, 229, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(79, 70, 229, 0.6), 0 0 30px rgba(124, 58, 237, 0.4); }
+}
+
+@keyframes floatUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Animation de hover pour les sections */
+.section-hover {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.section-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
 }
 .roll-all-btn {
   background: linear-gradient(135deg, #10b981, #059669);
   color: white;
   border: none;
   padding: 1rem 2rem;
-  border-radius: 8px;
+  border-radius: 12px;
   font-weight: bold;
   cursor: pointer;
   font-size: 1.1rem;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
 }
+
+.roll-all-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+
 .roll-all-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+  background: linear-gradient(135deg, #059669, #047857);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+}
+
+.roll-all-btn:hover::before {
+  left: 100%;
+}
+
+.roll-all-btn:active {
+  transform: scale(0.98);
 }
 
 /* Ajustements responsives généraux pour une lecture mobile confortable */
@@ -184,15 +434,28 @@ $extraHead = <<<HTML
   .flip-container {
     height: 360px;
   }
-  .currency-input-grid {
-    grid-template-columns: 1fr;
-  }
+  /* Suppression du conflit avec Tailwind - laisser grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gérer */
 }
 
 @media (max-width: 480px) {
   .dice-grid {
     grid-template-columns: 1fr;
   }
+  
+  /* Améliorer la taille tactile des éléments interactifs sur mobile */
+  input[type="number"], 
+  .multiplier-input,
+  button,
+  .btn {
+    min-height: 44px; /* Taille tactile recommandée */
+    touch-action: manipulation; /* Éviter le double-tap zoom */
+  }
+  
+  .currency-input-card input {
+    font-size: 16px; /* Éviter le zoom automatique sur iOS */
+    padding: 12px; /* Augmenter la zone tactile */
+  }
+  
   .roll-all-btn {
     font-size: 1rem;
     padding: 0.875rem 1.5rem;
@@ -680,6 +943,57 @@ header .flag-btn {
 }
 </style>
 HTML;
+
+// Script d'urgence mobile pour affichage immédiat des sections
+$extraHead .= <<<'SCRIPT'
+<script>
+// CORRECTIF MOBILE IMMÉDIAT - s'exécute avant même le DOMContentLoaded
+(function() {
+  'use strict';
+  
+  // Fonction pour forcer l'affichage mobile
+  function forceDisplayMobile() {
+    if (window.innerWidth <= 768) {
+      console.log('📱 [MOBILE-FIX] Application du correctif d\'affichage mobile immédiat');
+      
+      // CSS d'urgence injecté directement
+      const emergencyCSS = `
+        @media (max-width: 768px) {
+          #currency-converter-premium,
+          #coin-lot-optimizer,
+          #lot-recommendations {
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+          }
+          .currency-input-grid {
+            display: grid !important;
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `;
+      
+      const style = document.createElement('style');
+      style.textContent = emergencyCSS;
+      document.head.appendChild(style);
+    }
+  }
+  
+  // Appliquer immédiatement
+  forceDisplayMobile();
+  
+  // Réappliquer au redimensionnement
+  window.addEventListener('resize', forceDisplayMobile);
+  
+  // Réappliquer quand le DOM est prêt
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', forceDisplayMobile);
+  } else {
+    forceDisplayMobile();
+  }
+})();
+</script>
+SCRIPT;
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
@@ -1625,6 +1939,12 @@ echo $snipcartInit;
       </div>
 
       <!-- ===== CONVERTISSEUR INTERACTIF ===== -->
+      <!-- Message de fallback mobile si JavaScript échoue -->
+      <div class="noscript-fallback mt-8">
+        <p><strong>⚠️ Problème d'affichage mobile détecté</strong></p>
+        <p>Si le convertisseur de monnaie n'apparaît pas, veuillez rafraîchir la page ou consulter depuis un ordinateur.</p>
+      </div>
+      
       <!-- Convertisseur de monnaie Premium (identique à celui de boutique.php) -->
       <div class="mt-12" id="currency-converter-premium">
         <h4 class="text-2xl font-bold text-center text-gray-200 mb-8" data-i18n="shop.converter.title"><?= __('shop.converter.title', '🧮 Convertisseur de monnaie') ?></h4>
@@ -1632,7 +1952,7 @@ echo $snipcartInit;
         <!-- Section 1: Monnaies sources avec design premium -->
         <div class="mb-8">
           <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.sourcesLabel"><?= __('shop.converter.sourcesLabel', '💰 Monnaies sources') ?></h5>
-          <div class="currency-input-grid grid grid-cols-2 md:grid-cols-5 gap-4 max-w-6xl mx-auto">
+          <div class="currency-input-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 sm:gap-4 max-w-6xl mx-auto">
             <div class="currency-input-card bg-gradient-to-br from-amber-900/20 to-orange-800/20 p-4 rounded-xl border border-amber-700/30">
               <label class="block text-amber-300 font-medium mb-2"><?= __('money.converter.labels.copper', '🪙 Cuivre') ?></label>
               <input type="number" min="0" step="1" value="0" data-currency="copper" 
@@ -1727,7 +2047,7 @@ echo $snipcartInit;
         <!-- Section 3: Équivalences totales par métal avec recommandations optimales -->
         <div class="mb-8" id="metal-totals-section">
           <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.equivalences"><?= __('shop.converter.equivalences', '💼 Équivalences totales par métal') ?></h5>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 max-w-6xl mx-auto">
             <!-- Première ligne: Cuivre, Argent, Électrum -->
             <div id="copper-card"></div>
             <div id="silver-card"></div>
@@ -1975,7 +2295,11 @@ echo $snipcartInit;
   // Exposer les données des produits pour le système de recommandation
   window.products = <?= json_encode($products_data) ?>;
 </script>
-<script src="/js/app.js?v=<?= filemtime(__DIR__.'/js/app.js') ?>"></script>
+<?php
+// Charger les scripts optimisés pour l'aide de jeux
+require_once __DIR__ . '/includes/script-loader.php';
+load_optimized_scripts('aide-jeux', __DIR__);
+?>
 <script>
 // Fonction pour retourner les cartes (triptyques)
 function flipCard(cardId) {
@@ -2222,15 +2546,6 @@ function confirmDownload() {
     closeDownloadPopup();
 }
 </script>
-<script src="/js/hero-videos.js?v=<?= filemtime(__DIR__.'/js/hero-videos.js') ?>"></script>
-<script src="/js/boutique-premium.js?v=<?= filemtime(__DIR__.'/js/boutique-premium.js') ?>"></script>
-<script src="/js/snipcart-utils.js?v=<?= filemtime(__DIR__.'/js/snipcart-utils.js') ?>"></script>
-<script src="/js/coin-lot-optimizer.js?v=<?= filemtime(__DIR__.'/js/coin-lot-optimizer.js') ?>"></script>
-<script src="/js/currency-converter.js?v=<?= filemtime(__DIR__.'/js/currency-converter.js') ?>"></script>
-<?php if (isset($_GET['debug']) || strpos($_SERVER['REQUEST_URI'] ?? '', '#debug') !== false) : ?>
-<script src="/js/currency-converter-tests.js?v=<?= filemtime(__DIR__.'/js/currency-converter-tests.js') ?>"></script>
-<?php endif; ?>
-<script src="/js/dnd-music-player.js?v=<?= filemtime(__DIR__.'/js/dnd-music-player.js') ?>"></script>
 
 <script>
 // Gestionnaire pour le bouton d'ajout au panier (utilise les utilitaires réutilisables)
@@ -2472,6 +2787,351 @@ document.addEventListener('DOMContentLoaded', function() {
       }, 1000);
     }
   }
+  
+  // Ajouter des animations de scroll et d'apparition
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animation = 'floatUp 0.6s ease-out';
+        entry.target.style.opacity = '1';
+      }
+    });
+  }, observerOptions);
+  
+  // Observer toutes les sections
+  document.querySelectorAll('section, .card-product, .navigation-rapide a').forEach(el => {
+    el.style.opacity = '0';
+    observer.observe(el);
+  });
+  
+  // Améliorer les effets hover sur les cartes de navigation
+  document.querySelectorAll('.navigation-rapide a').forEach(card => {
+    card.classList.add('section-hover');
+  });
+});
+
+// Fonction pour créer un effet de particules
+function createParticleEffect(element, color) {
+  const rect = element.getBoundingClientRect();
+  
+  for (let i = 0; i < 6; i++) {
+    const particle = document.createElement('div');
+    particle.style.position = 'fixed';
+    particle.style.left = rect.left + rect.width / 2 + 'px';
+    particle.style.top = rect.top + rect.height / 2 + 'px';
+    particle.style.width = '4px';
+    particle.style.height = '4px';
+    particle.style.background = color;
+    particle.style.borderRadius = '50%';
+    particle.style.pointerEvents = 'none';
+    particle.style.zIndex = '9999';
+    
+    document.body.appendChild(particle);
+    
+    const angle = (i / 6) * Math.PI * 2;
+    const distance = 30;
+    
+    particle.animate([
+      {
+        transform: 'translate(0, 0) scale(1)',
+        opacity: 1
+      },
+      {
+        transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`,
+        opacity: 0
+      }
+    ], {
+      duration: 600,
+      easing: 'ease-out'
+    }).onfinish = () => {
+      document.body.removeChild(particle);
+    };
+  }
+}
+
+// Fonction pour créer un effet de confettis
+function createConfettiEffect() {
+  const colors = ['#f59e0b', '#10b981', '#6366f1', '#ef4444', '#8b5cf6'];
+  
+  for (let i = 0; i < 20; i++) {
+    setTimeout(() => {
+      const confetti = document.createElement('div');
+      confetti.style.position = 'fixed';
+      confetti.style.left = Math.random() * window.innerWidth + 'px';
+      confetti.style.top = '-10px';
+      confetti.style.width = '8px';
+      confetti.style.height = '8px';
+      confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.borderRadius = '50%';
+      confetti.style.pointerEvents = 'none';
+      confetti.style.zIndex = '9999';
+      
+      document.body.appendChild(confetti);
+      
+      confetti.animate([
+        {
+          transform: 'translateY(0) rotate(0deg)',
+          opacity: 1
+        },
+        {
+          transform: `translateY(${window.innerHeight + 20}px) rotate(720deg)`,
+          opacity: 0
+        }
+      ], {
+        duration: 2000 + Math.random() * 1000,
+        easing: 'ease-in'
+      }).onfinish = () => {
+        document.body.removeChild(confetti);
+      };
+    }, i * 100);
+  }
+}
+
+// Améliorer la fonction rollStat existante
+if (typeof rollStat !== 'undefined') {
+  const originalRollStat = rollStat;
+  rollStat = function(statName) {
+    const resultElement = document.getElementById(statName + '-result');
+    const buttonElement = document.querySelector(`[onclick="rollStat('${statName}')"]`);
+    
+    if (resultElement) {
+      resultElement.classList.add('rolling');
+      if (buttonElement) {
+        buttonElement.style.pointerEvents = 'none';
+        setTimeout(() => {
+          buttonElement.style.pointerEvents = 'auto';
+        }, 1200);
+      }
+    }
+    
+    originalRollStat(statName);
+    
+    // Ajouter l'effet de particules pour les excellents résultats
+    setTimeout(() => {
+      const total = parseInt(resultElement.textContent) || 0;
+      if (total >= 15) {
+        createParticleEffect(resultElement, '#10b981');
+      }
+    }, 1000);
+  };
+}
+
+// Améliorer la fonction rollAllStats existante
+if (typeof rollAllStats !== 'undefined') {
+  const originalRollAllStats = rollAllStats;
+  rollAllStats = function() {
+    const button = document.querySelector('[onclick="rollAllStats()"]');
+    
+    if (button) {
+      button.style.pointerEvents = 'none';
+      button.style.opacity = '0.7';
+      
+      setTimeout(() => {
+        button.style.pointerEvents = 'auto';
+        button.style.opacity = '1';
+        
+        // Vérifier le résultat global
+        const stats = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
+        const results = stats.map(stat => {
+          const element = document.getElementById(stat + '-result');
+          return parseInt(element.textContent) || 0;
+        });
+        
+        const average = results.reduce((a, b) => a + b, 0) / results.length;
+        if (average >= 13) {
+          createConfettiEffect();
+        }
+      }, 2500);
+    }
+    
+    originalRollAllStats();
+  };
+}
+</script>
+
+<script>
+// Ajouter un indicateur de performance pour les animations
+function addPerformanceOptimizations() {
+  // Réduire les animations sur les appareils moins performants
+  if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
+    document.documentElement.style.setProperty('--animation-duration', '0.2s');
+  }
+  
+  // Désactiver les animations si l'utilisateur préfère les mouvements réduits
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const style = document.createElement('style');
+    style.textContent = `
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+}
+
+// Exécuter les optimisations au chargement
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', addPerformanceOptimizations);
+} else {
+  addPerformanceOptimizations();
+}
+</script>
+
+<script>
+// 🔧 INITIALISATION FORCÉE DU CONVERTISSEUR DE MONNAIE + DEBUG MOBILE
+// Ce script garantit que le convertisseur s'initialise même si l'IntersectionObserver ne se déclenche pas
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('🚀 [DEBUG] Initialisation forcée du convertisseur...');
+  
+  // DEBUG MOBILE SPÉCIFIQUE
+  const isMobile = window.innerWidth <= 768;
+  console.log(`📱 [DEBUG] Mode mobile détecté: ${isMobile} (largeur: ${window.innerWidth}px)`);
+  
+  // Vérifier la visibilité des sections principales
+  const sectionsToCheck = [
+    'currency-converter-premium',
+    'coin-lot-optimizer', 
+    'lot-recommendations'
+  ];
+  
+  sectionsToCheck.forEach(sectionId => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      const computedStyle = window.getComputedStyle(section);
+      const isVisible = computedStyle.display !== 'none' && computedStyle.visibility !== 'hidden';
+      console.log(`📊 [DEBUG] Section ${sectionId}: présente=${!!section}, visible=${isVisible}, display=${computedStyle.display}`);
+      
+      // Forcer la visibilité sur mobile
+      if (isMobile && !isVisible) {
+        section.style.display = 'block';
+        section.style.opacity = '1';
+        console.log(`🔧 [CORRECTION] Section ${sectionId} forcée visible sur mobile`);
+      }
+    } else {
+      console.warn(`❌ [DEBUG] Section ${sectionId} non trouvée dans le DOM`);
+    }
+  });
+  
+  // Vérifier la présence du container
+  const converterContainer = document.getElementById('currency-converter-premium');
+  if (!converterContainer) {
+    console.warn('❌ [DEBUG] Container currency-converter-premium non trouvé');
+    return;
+  }
+  
+  // Vérifier la présence des classes
+  if (typeof CurrencyConverterPremium === 'undefined') {
+    console.error('❌ [DEBUG] CurrencyConverterPremium non disponible');
+    return;
+  }
+  
+  // Attendre un peu pour s'assurer que tous les scripts sont chargés
+  setTimeout(() => {
+    try {
+      // Forcer l'initialisation même si l'instance existe déjà
+      if (!window.converterInstance || typeof window.converterInstance.getCurrentValues !== 'function') {
+        console.log('✅ [DEBUG] Création nouvelle instance du convertisseur...');
+        window.converterInstance = new CurrencyConverterPremium();
+        window.currencyConverter = window.converterInstance;
+        
+        console.log('✅ [DEBUG] Convertisseur initialisé avec succès');
+        
+        // Test de base
+        const testValue = window.converterInstance.getTotalBaseValue();
+        console.log(`✅ [DEBUG] Test de base réussi: ${testValue} cuivres`);
+
+      } else {
+        console.log('ℹ️ [DEBUG] Convertisseur déjà initialisé');
+      }
+      
+    } catch (error) {
+      console.error('❌ [DEBUG] Erreur initialisation convertisseur:', error);
+      
+      // Ajouter un indicateur d'erreur
+      const errorIndicator = document.createElement('div');
+      errorIndicator.style.cssText = 'position: fixed; top: 10px; right: 10px; background: #dc3545; color: white; padding: 8px 12px; border-radius: 4px; font-size: 12px; z-index: 9999;';
+      errorIndicator.textContent = '❌ Erreur Convertisseur: ' + error.message;
+      document.body.appendChild(errorIndicator);
+      
+      // Retirer l'indicateur d'erreur après 5 secondes
+      setTimeout(() => {
+        if (errorIndicator.parentNode) {
+          errorIndicator.parentNode.removeChild(errorIndicator);
+        }
+      }, 5000);
+    }
+  }, 1000); // Attendre 1 seconde pour s'assurer que tout est chargé
+  
+  // Vérifier après 2 secondes si les sections sont visibles et masquer le fallback
+  setTimeout(() => {
+    const converterVisible = document.getElementById('currency-converter-premium');
+    const fallbackMessage = document.querySelector('.noscript-fallback');
+    
+    if (converterVisible && fallbackMessage) {
+      const style = window.getComputedStyle(converterVisible);
+      if (style.display !== 'none' && style.opacity !== '0') {
+        // Convertisseur visible, masquer le message de fallback
+        fallbackMessage.style.display = 'none';
+        console.log('✅ [DEBUG] Sections visibles, message de fallback masqué');
+      } else {
+        console.warn('⚠️ [DEBUG] Sections toujours invisibles après 2 secondes');
+      }
+    }
+  }, 2000);
+});
+
+// Détection spécifique mobile pour améliorer l'initialisation
+function isMobileDevice() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+         (navigator.maxTouchPoints && navigator.maxTouchPoints > 1);
+}
+
+// Initialisation spéciale pour mobile
+if (isMobileDevice()) {
+  console.log('📱 [DEBUG] Appareil mobile détecté, initialisation adaptée...');
+  
+  // Attendre que l'appareil soit stable
+  window.addEventListener('load', function() {
+    setTimeout(() => {
+      if (!window.converterInstance && document.getElementById('currency-converter-premium')) {
+        console.log('📱 [DEBUG] Initialisation mobile forcée...');
+        try {
+          window.converterInstance = new CurrencyConverterPremium();
+          console.log('✅ [DEBUG] Initialisation mobile réussie');
+        } catch (error) {
+          console.error('❌ [DEBUG] Erreur initialisation mobile:', error);
+        }
+      }
+    }, 2000); // Délai plus long pour mobile
+  });
+}
+
+// Debug supplémentaire pour les événements - support mobile et desktop
+['click', 'touchend'].forEach(eventType => {
+  document.addEventListener(eventType, function(e) {
+    if (e.target.closest('#currency-converter-premium')) {
+      console.log('🖱️ [DEBUG] Interaction détectée sur le convertisseur:', eventType);
+      
+      // Forcer la ré-initialisation si nécessaire
+      if (!window.converterInstance) {
+        console.log('🔄 [DEBUG] Ré-initialisation suite à l\'interaction...');
+        try {
+          window.converterInstance = new CurrencyConverterPremium();
+          console.log('✅ [DEBUG] Ré-initialisation réussie');
+        } catch (error) {
+          console.error('❌ [DEBUG] Erreur ré-initialisation:', error);
+        }
+      }
+    }
+  }, { passive: false }); // Retirer passive pour permettre preventDefault si nécessaire
 });
 </script>
 
