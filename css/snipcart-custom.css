@@ -440,39 +440,48 @@
 }
 
 /* =================================================================== */
-/* MODAL ET OVERLAY                                                    */
+/* MODAL ET OVERLAY - SOLUTION SCROLL DÉFINITIVE                      */
 /* =================================================================== */
 
+/* Container principal fixe */
 .snipcart .snipcart-modal__container {
   background: rgba(15, 23, 42, 0.95) !important;
   backdrop-filter: blur(8px) !important;
   top: var(--gd-header-h, 96px) !important;
-  height: calc(100vh - var(--gd-header-h, 96px)) !important;
-  max-height: calc(100vh - var(--gd-header-h, 96px)) !important;
   position: fixed !important;
   z-index: 9999 !important;
+  width: 100% !important;
+  left: 0 !important;
+  right: 0 !important;
   padding: 0 !important;
-  overflow-y: scroll !important;
-  overflow-x: hidden !important;
-  -webkit-overflow-scrolling: touch !important;
 }
 
-/* Force scrollbar visible */
-.snipcart .snipcart-modal__container::-webkit-scrollbar {
+/* Le scroll doit être sur le layout, pas le container */
+.snipcart .snipcart-layout {
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+  max-height: calc(100vh - var(--gd-header-h, 96px)) !important;
+  height: calc(100vh - var(--gd-header-h, 96px)) !important;
+  -webkit-overflow-scrolling: touch !important;
+  position: relative !important;
+}
+
+/* Force scrollbar visible sur layout */
+.snipcart .snipcart-layout::-webkit-scrollbar {
   width: 12px !important;
   display: block !important;
 }
 
-.snipcart .snipcart-modal__container::-webkit-scrollbar-track {
+.snipcart .snipcart-layout::-webkit-scrollbar-track {
   background: var(--gd-bg-secondary) !important;
 }
 
-.snipcart .snipcart-modal__container::-webkit-scrollbar-thumb {
+.snipcart .snipcart-layout::-webkit-scrollbar-thumb {
   background: var(--gd-accent) !important;
   border-radius: 6px !important;
 }
 
-.snipcart .snipcart-modal__container::-webkit-scrollbar-thumb:hover {
+.snipcart .snipcart-layout::-webkit-scrollbar-thumb:hover {
   background: #7c3aed !important;
 }
 
@@ -500,19 +509,10 @@ body.snipcart-open {
   overflow: hidden;
 }
 
-/* SOLUTION: Container fixe avec scroll, contenu flexible */
-.snipcart-modal__container {
-  overflow-y: scroll !important;
-  overflow-x: hidden !important;
-  max-height: calc(100vh - var(--gd-header-h, 96px)) !important;
-  height: calc(100vh - var(--gd-header-h, 96px)) !important;
-}
-
 /* Le contenu interne doit pouvoir grandir librement */
-.snipcart .snipcart-layout,
 .snipcart .snipcart-layout__content {
   height: auto !important;
-  min-height: 100% !important;
+  min-height: auto !important;
   max-height: none !important;
   overflow: visible !important;
 }
