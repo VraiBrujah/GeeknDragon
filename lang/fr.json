@@ -131,6 +131,7 @@
             "title": "Cartes d'équipement",
             "coming": "À venir",
             "description": "Paquets thématiques de cartes illustrées pour gérer l'inventaire visuellement.",
+            "faqLink": "Questions fréquentes / Guide des cartes",
             "description1": "Nos scribes enchantent encore ces parchemins d'aventure.",
             "description2": "Les cartes d'équipement forgeront leur entrée lors de la prochaine lune."
         },
@@ -139,7 +140,8 @@
             "coming": "À venir",
             "description": "Héros clé en main pour des parties improvisées.",
             "description1": "Les artisans façonnent encore ces grimoires de héros.",
-            "description2": "Les triptyques rejoindront la boutique sous peu."
+            "description2": "Les triptyques rejoindront la boutique sous peu.",
+            "guideCta": "Comment utiliser vos triptyques"
         },
         "collective": {
             "title": "Investissez ensemble, partagez l’aventure",
@@ -580,6 +582,7 @@
     },
     "cards": {
         "mainTitle": "🃏 Guide des Cartes à Jouer Geek & Dragon",
+        "faqSubtitle": "FAQ Cartes",
         "mainDescription": "Complétez vos triptyques avec nos cartes détaillées : Armes, Armures, Équipements, Sorts, Monstres et bien plus ! Chaque carte contient toutes les informations nécessaires pour accélérer vos parties.",
         "title": "Cartes d'Équipement",
         "types": {

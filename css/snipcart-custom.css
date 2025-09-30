@@ -41,6 +41,20 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--gd-bg-primary) !important;
   color: var(--gd-text-primary) !important;
+
+  /* Variables d'entrée réappliquées au scope dynamique de Snipcart */
+  --bgColor-input: var(--gd-bg-secondary);
+  --bgColor-inputDisabled: #131c2f;
+  --color-input: var(--gd-text-primary);
+  --color-inputPlaceholder: var(--gd-text-muted);
+  --color-inputIcon: var(--gd-text-muted);
+  --color-inputError: var(--gd-error);
+  --bgColor-inputError: rgba(239, 68, 68, 0.15);
+  --borderColor-input: var(--gd-border);
+  --borderColor-inputHover: var(--gd-bg-tertiary);
+  --borderColor-inputFocus: var(--gd-focus);
+  --borderColor-inputError: var(--gd-error);
+  --shadow-focus: 0 0 0 3px rgba(34, 211, 238, 0.1);
 }
 
 /* Conteneurs et boîtes */
@@ -80,6 +94,22 @@
   padding: 12px 16px !important;
   font-size: 14px !important;
   transition: all 0.2s ease !important;
+}
+
+/* Encadrement harmonisé de l'iframe Stripe */
+.snipcart .snipcart-payment-card-form {
+  background: var(--gd-bg-secondary) !important;
+  border: 2px solid var(--gd-border) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--gd-shadow) !important;
+  padding: 8px !important;
+}
+
+.snipcart-payment-card-form .snipcart-input,
+.snipcart-payment-card-form input {
+  background: var(--gd-bg-secondary) !important;
+  border: 2px solid var(--gd-border) !important;
+  color: var(--gd-text-primary) !important;
 }
 
 .snipcart input:focus,
@@ -140,6 +170,30 @@
   padding: 8px !important;
 }
 
+/* Autocomplétion (typeahead) */
+.snipcart .snipcart-typeahead__dropdown,
+.snipcart .snipcart-typeahead__suggestions,
+.snipcart .snipcart-typeahead__select--focus__input {
+  background: var(--gd-bg-secondary) !important;
+  color: var(--gd-text-primary) !important;
+  border-color: var(--gd-border) !important;
+}
+
+.snipcart .snipcart-typeahead__dropdown:hover,
+.snipcart .snipcart-typeahead__dropdown:focus,
+.snipcart .snipcart-typeahead__dropdown:focus-within,
+.snipcart .snipcart-typeahead__dropdown:active,
+.snipcart .snipcart-typeahead__suggestions:hover,
+.snipcart .snipcart-typeahead__suggestions:focus,
+.snipcart .snipcart-typeahead__suggestions:focus-within,
+.snipcart .snipcart-typeahead__suggestions:active,
+.snipcart .snipcart-typeahead__select--focus__input:hover,
+.snipcart .snipcart-typeahead__select--focus__input:focus,
+.snipcart .snipcart-typeahead__select--focus__input:active {
+  background: var(--gd-bg-tertiary) !important;
+  border-color: var(--gd-focus) !important;
+}
+
 /* Custom fields dans le panier */
 .snipcart .snipcart-item-line__custom-fields,
 .snipcart .snipcart-cart-item__custom-fields {
@@ -174,6 +228,14 @@
   cursor: pointer !important;
   transition: all 0.2s ease !important;
   box-shadow: var(--gd-shadow) !important;
+}
+
+.snipcart .snipcart-button-primary[disabled],
+.snipcart .snipcart-button-primary:disabled {
+  cursor: not-allowed !important;
+  opacity: 0.6 !important;
+  background: rgba(139, 92, 246, 0.5) !important;
+  box-shadow: none !important;
 }
 
 .snipcart .snipcart__button--primary:hover {
@@ -384,8 +446,8 @@
 .snipcart .snipcart-modal__container {
   background: rgba(15, 23, 42, 0.95) !important;
   backdrop-filter: blur(8px) !important;
-  top: 120px !important;
-  height: calc(100vh - 120px) !important;
+  top: var(--gd-header-h, 96px) !important;
+  height: calc(100vh - var(--gd-header-h, 96px)) !important;
   position: fixed !important;
   z-index: 9999 !important;
   padding-top: 20px !important;
@@ -654,6 +716,35 @@ div[class*="wrapper"] {
   background: var(--gd-bg-secondary) !important;
 }
 
+/* Options de livraison cohérentes en mode sombre */
+.snipcart .snipcart-shipping-rates-list-item,
+.snipcart .snipcart-shipping-rates-list-item:hover,
+.snipcart .snipcart-shipping-rates-list-item:focus,
+.snipcart .snipcart-shipping-rates-list-item--highlight,
+.snipcart .snipcart-shipping-rates-list-item--highlight:hover,
+.snipcart .snipcart-shipping-rates-list-item--highlight:focus {
+  background: var(--gd-bg-secondary) !important;
+  color: var(--gd-text-primary) !important;
+  border: 2px solid var(--gd-border) !important;
+  border-radius: 12px !important;
+  transition: all 0.2s ease !important;
+  box-shadow: var(--gd-shadow) !important;
+  outline: none !important;
+}
+
+.snipcart .snipcart-shipping-rates-list-item:hover,
+.snipcart .snipcart-shipping-rates-list-item:focus {
+  border-color: var(--gd-accent) !important;
+  box-shadow: var(--gd-shadow-lg) !important;
+}
+
+.snipcart .snipcart-shipping-rates-list-item--highlight,
+.snipcart .snipcart-shipping-rates-list-item--highlight:hover,
+.snipcart .snipcart-shipping-rates-list-item--highlight:focus {
+  border-color: var(--gd-accent) !important;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.25) !important;
+}
+
 /* Conteneur principal panier */
 .snipcart .snipcart-cart {
   background: var(--gd-bg-primary) !important;
@@ -690,8 +781,13 @@ div[class*="wrapper"] {
   color: #94a3b8 !important;
 }
 
-.snipcart *::before,
-.snipcart *::after {
+/* Masque uniquement les éléments problématiques (barre sécurité, etc.) */
+.snipcart *[class*="security"]::before,
+.snipcart *[class*="security"]::after,
+.snipcart *[class*="powered"]::before,
+.snipcart *[class*="powered"]::after,
+.snipcart *[class*="footer"]::before,
+.snipcart *[class*="footer"]::after {
   border: none !important;
   background: none !important;
   content: none !important;

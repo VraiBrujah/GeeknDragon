@@ -79,6 +79,29 @@ if (!$snipcartKey) {
       console.warn('localStorage indisponible, utilisation fallback lang:', fallbackLang);
     }
 
+    const rootStyles = window.getComputedStyle(document.documentElement);
+    const readCssVariable = (variableName) => {
+      if (typeof variableName !== 'string' || variableName.trim() === '') {
+        return '';
+      }
+
+      return rootStyles.getPropertyValue(variableName).trim();
+    };
+
+    const palette = {
+      backgroundPrimary: readCssVariable('--gd-bg-primary'),
+      backgroundSecondary: readCssVariable('--gd-bg-secondary'),
+      backgroundTertiary: readCssVariable('--gd-bg-tertiary'),
+      textPrimary: readCssVariable('--gd-text-primary'),
+      textSecondary: readCssVariable('--gd-text-secondary'),
+      textMuted: readCssVariable('--gd-text-muted'),
+      border: readCssVariable('--gd-border'),
+      accent: readCssVariable('--gd-accent'),
+      focus: readCssVariable('--gd-focus'),
+      danger: readCssVariable('--gd-error'),
+      success: readCssVariable('--gd-success'),
+    };
+
     // Configuration Snipcart avec thème sombre
     window.SnipcartSettings = {
       publicApiKey: '<?= htmlspecialchars($snipcartKey) ?>',
@@ -89,32 +112,44 @@ if (!$snipcartKey) {
         locale: lang,
         customerAccount: { enabled: true },
         payment: {
-          appearance: {
-            theme: 'night', // Thème sombre pour Stripe
-            variables: {
-              colorPrimary: '#8b5cf6',
-              colorBackground: '#1e293b',
-              colorText: '#f8fafc',
-              colorDanger: '#ef4444',
-              colorSuccess: '#10b981',
-              fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
-              spacingUnit: '12px',
-              borderRadius: '8px',
-              colorTextSecondary: '#cbd5e1',
-              colorTextPlaceholder: '#94a3b8'
-            }
-          },
-          stripe: {
+          stripeElementsOptions: {
             appearance: {
-              theme: 'night',
+              theme: 'night', // Thème sombre pour Stripe
               variables: {
-                colorPrimary: '#8b5cf6',
-                colorBackground: '#1e293b',
-                colorText: '#f8fafc',
-                colorDanger: '#ef4444',
-                fontFamily: 'Inter',
-                spacingUnit: '12px',
-                borderRadius: '8px'
+                colorPrimary: palette.accent,
+                colorBackground: palette.backgroundSecondary,
+                colorText: palette.textPrimary,
+                colorTextSecondary: palette.textSecondary,
+                colorTextPlaceholder: palette.textMuted,
+                colorDanger: palette.danger,
+                colorSuccess: palette.success,
+                colorBorder: palette.border,
+                colorFocus: palette.focus,
+                borderRadius: '8px',
+                spacingUnit: '12px'
+              },
+              rules: {
+                '.Input': {
+                  backgroundColor: palette.backgroundSecondary || palette.backgroundPrimary,
+                  color: palette.textPrimary,
+                  caretColor: palette.textPrimary,
+                  iconColor: palette.textPrimary,
+                  borderColor: palette.border,
+                  boxShadow: `0 0 0 1px ${palette.border}`
+                },
+                '.Input::placeholder': {
+                  color: palette.textMuted
+                },
+                '.Label': {
+                  color: palette.textSecondary
+                },
+                '.Input:focus': {
+                  boxShadow: `0 0 0 1px ${palette.focus}`,
+                  borderColor: palette.focus
+                },
+                '.Error': {
+                  color: palette.danger
+                }
               }
             }
           }

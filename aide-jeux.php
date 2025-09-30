@@ -1286,6 +1286,9 @@ echo $snipcartInit;
         <h2 class="text-3xl md:text-4xl font-bold mb-8 text-yellow-400">
           <?= __('gameHelp.cards.mainTitle', '🃏 Guide des Cartes à Jouer Geek & Dragon') ?>
         </h2>
+        <h3 class="text-2xl font-semibold text-yellow-200 mb-4">
+          <?= __('gameHelp.cards.faqSubtitle', 'FAQ Cartes') ?>
+        </h3>
         <p class="text-xl text-gray-300 max-w-4xl mx-auto txt-court">
           <?= __('gameHelp.cards.mainDescription', 'Complétez vos triptyques avec nos cartes détaillées : Armes, Armures, Équipements, Sorts, Monstres et bien plus ! Chaque carte contient toutes les informations nécessaires pour accélérer vos parties.') ?>
         </p>
