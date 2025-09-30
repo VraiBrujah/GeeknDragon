@@ -109,7 +109,14 @@
         "hero": {
             "title": "Geek & Dragon Shop",
             "description": "Give your sessions the elegance and durability of coins and equipment cards designed in Quebec, more precious than a $300 dragon miniature used only on rare occasions; our coins appear in every session for years of adventures.",
-            "button": "Choose my treasures"
+            "button": "Choose my treasures",
+            "quickLinks": {
+                "title": "Quick links",
+                "ariaLabel": "Quick navigation to the shop categories",
+                "pieces": "Browse coins",
+                "cards": "Explore cards",
+                "triptychs": "View triptychs"
+            }
         },
         "intro": {
             "title": "Handcrafted treasures",
