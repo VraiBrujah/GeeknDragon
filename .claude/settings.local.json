@@ -58,7 +58,8 @@
       "WebFetch(domain:192.168.2.33)",
       "Bash(expr:*)",
       "WebFetch(domain:docs.consentmanager.net)",
-      "Read(//e/**)"
+      "Read(//e/**)",
+      "Bash(test:*)"
     ],
     "deny": [],
     "ask": []
