@@ -448,9 +448,40 @@
   backdrop-filter: blur(8px) !important;
   top: var(--gd-header-h, 96px) !important;
   height: calc(100vh - var(--gd-header-h, 96px)) !important;
+  max-height: calc(100vh - var(--gd-header-h, 96px)) !important;
   position: fixed !important;
   z-index: 9999 !important;
-  padding-top: 20px !important;
+  padding: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+/* Force tous les conteneurs internes à ne pas limiter la hauteur */
+.snipcart .snipcart-layout,
+.snipcart .snipcart-layout__content,
+.snipcart .snipcart__box,
+.snipcart .snipcart__box--main,
+.snipcart .snipcart-cart,
+.snipcart .snipcart-cart-summary,
+.snipcart .snipcart-cart-summary-container,
+.snipcart [class*="modal__content"],
+.snipcart [class*="order"],
+.snipcart [class*="summary"] {
+  max-height: none !important;
+  height: auto !important;
+  min-height: auto !important;
+  overflow: visible !important;
+}
+
+/* Padding bas pour contenu complet visible */
+.snipcart .snipcart-layout__content {
+  padding-bottom: 100px !important;
+}
+
+.snipcart .snipcart-cart-summary {
+  padding-bottom: 60px !important;
+  margin-bottom: 40px !important;
 }
 
 /* Scroll et responsive */

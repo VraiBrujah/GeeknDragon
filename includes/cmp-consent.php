@@ -108,8 +108,9 @@ $cmpScriptUrl = 'https://' . $cmpConfig['cdn'] . '/delivery/' . $cmpConfig['id']
         // Callbacks pour intégration avec le site
         callbacks: {
             onConsentGiven: function(purposes) {
-                console.log('CMP: Consentements accordés:', purposes);
-                
+                const debugMode = window.location.hash === '#debug' || window.location.search.includes('debug=1');
+                if (debugMode) console.log('CMP: Consentements accordés:', purposes);
+
                 // Réinitialiser Google Analytics si consentement analytics
                 if (purposes.analytics && window.gtag) {
                     window.gtag('consent', 'update', {
@@ -117,7 +118,7 @@ $cmpScriptUrl = 'https://' . $cmpConfig['cdn'] . '/delivery/' . $cmpConfig['id']
                         'ad_storage': purposes.marketing ? 'granted' : 'denied'
                     });
                 }
-                
+
                 // Événement personnalisé pour d'autres intégrations
                 if (window.CustomEvent) {
                     document.dispatchEvent(new CustomEvent('cmpConsentUpdate', {
@@ -125,10 +126,11 @@ $cmpScriptUrl = 'https://' . $cmpConfig['cdn'] . '/delivery/' . $cmpConfig['id']
                     }));
                 }
             },
-            
+
             onConsentWithdrawn: function() {
-                console.log('CMP: Consentements retirés');
-                
+                const debugMode = window.location.hash === '#debug' || window.location.search.includes('debug=1');
+                if (debugMode) console.log('CMP: Consentements retirés');
+
                 // Révoquer les consentements Google Analytics
                 if (window.gtag) {
                     window.gtag('consent', 'update', {
@@ -137,22 +139,22 @@ $cmpScriptUrl = 'https://' . $cmpConfig['cdn'] . '/delivery/' . $cmpConfig['id']
                     });
                 }
             },
-            
+
             onError: function(error) {
                 console.error('CMP: Erreur de chargement:', error);
-                
-                // Fallback: autoriser les cookies essentiels seulement
                 document.documentElement.setAttribute('data-cmp-status', 'error');
             }
         }
     };
     
     // Détection du statut de chargement CMP
+    var debugMode = window.location.hash === '#debug' || window.location.search.includes('debug=1');
+
     var checkCmpLoaded = function() {
         if (window.__cmp || window.__tcfapi) {
             document.documentElement.setAttribute('data-cmp-status', 'loaded');
-            console.log('CMP: Chargé avec succès');
-            
+            if (debugMode) console.log('CMP: Chargé avec succès');
+
             // Forcer l'exemption Snipcart après chargement CMP
             if (window.__cmp && window.__cmp.configure) {
                 window.__cmp.configure({
@@ -164,14 +166,14 @@ $cmpScriptUrl = 'https://' . $cmpConfig['cdn'] . '/delivery/' . $cmpConfig['id']
             setTimeout(checkCmpLoaded, 100);
         }
     };
-    
+
     // Vérifier le chargement après un délai
     setTimeout(checkCmpLoaded, 500);
-    
-    // Timeout de sécurité (5 secondes)
+
+    // Timeout de sécurité (5 secondes) - silencieux sauf en debug
     setTimeout(function() {
         if (!document.documentElement.getAttribute('data-cmp-status')) {
-            console.warn('CMP: Timeout de chargement - Mode dégradé activé');
+            if (debugMode) console.warn('CMP: Timeout de chargement - Mode dégradé activé');
             document.documentElement.setAttribute('data-cmp-status', 'timeout');
         }
     }, 5000);

@@ -157,54 +157,55 @@ if (!$snipcartKey) {
       },
     };
 
-    // Configuration simple - pas d'interférence avec CMP
-    console.log('Snipcart configuré pour chargement direct');
-
-    // Debug pour identifier les problèmes
-    if (window.location.hash === '#debug' || window.location.search.includes('debug=1')) {
+    // Debug uniquement en mode debug
+    const debugMode = window.location.hash === '#debug' || window.location.search.includes('debug=1');
+    if (debugMode) {
+      console.log('Snipcart configuré pour chargement direct');
       console.log('Snipcart Debug - Configuration:', window.SnipcartSettings);
       console.log('Snipcart Debug - API Key:', '<?= htmlspecialchars($snipcartKey) ?>');
       console.log('Snipcart Debug - Langue:', lang);
     }
   })();
 </script>
-<!-- Snipcart avec diagnostics détaillés -->
+<!-- Chargement Snipcart -->
 <script>
-// Test de connectivité préalable
-console.log('🔍 Test de connectivité CDN Snipcart...');
-fetch('https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js', { method: 'HEAD' })
-  .then(response => {
-    console.log('✅ CDN Snipcart accessible:', response.status, response.ok);
-    console.log('🔗 Headers:', Array.from(response.headers.entries()));
-  })
-  .catch(error => {
-    console.error('❌ CDN Snipcart bloqué par:', error.name, error.message);
-    console.error('Causes possibles: bloqueur pub, proxy, DNS, extensions navigateur');
-  });
+const debugMode = window.location.hash === '#debug' || window.location.search.includes('debug=1');
 
-// Chargement avec exemption CMP complète
+// Test de connectivité en mode debug uniquement
+if (debugMode) {
+  console.log('🔍 Test de connectivité CDN Snipcart...');
+  fetch('https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js', { method: 'HEAD' })
+    .then(response => {
+      console.log('✅ CDN Snipcart accessible:', response.status, response.ok);
+      console.log('🔗 Headers:', Array.from(response.headers.entries()));
+    })
+    .catch(error => {
+      console.error('❌ CDN Snipcart bloqué par:', error.name, error.message);
+    });
+}
+
+// Chargement avec exemption CMP
 const snipcartScript = document.createElement('script');
 snipcartScript.async = true;
 snipcartScript.src = 'https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js';
-
-// Exemption CMP correcte selon documentation ConsentManager
-snipcartScript.setAttribute('data-cmp-ab', '1'); // CORRECT: 1 = exempt du blocage
-// Suppression des autres attributs non-standard pour ConsentManager
+snipcartScript.setAttribute('data-cmp-ab', '1'); // Exempt du blocage CMP
 
 snipcartScript.onload = function() {
-  console.log('✅ Script Snipcart chargé avec succès');
-  console.log('🔍 window.Snipcart présent:', !!window.Snipcart);
-  
-  setTimeout(() => {
-    console.log('🔍 Snipcart.events disponible:', !!(window.Snipcart && window.Snipcart.events));
-    console.log('🔍 Snipcart.api disponible:', !!(window.Snipcart && window.Snipcart.api));
-  }, 1000);
+  if (debugMode) {
+    console.log('✅ Script Snipcart chargé avec succès');
+    console.log('🔍 window.Snipcart présent:', !!window.Snipcart);
+    setTimeout(() => {
+      console.log('🔍 Snipcart.events disponible:', !!(window.Snipcart && window.Snipcart.events));
+      console.log('🔍 Snipcart.api disponible:', !!(window.Snipcart && window.Snipcart.api));
+    }, 1000);
+  }
 };
 
 snipcartScript.onerror = function(event) {
   console.error('❌ Échec chargement script Snipcart');
-  console.error('Événement d\'erreur:', event);
-  console.error('Vérifiez: bloqueurs de pub, proxy, antivirus, extensions');
+  if (debugMode) {
+    console.error('Événement d\'erreur:', event);
+  }
 };
 
 document.head.appendChild(snipcartScript);
@@ -212,22 +213,19 @@ document.head.appendChild(snipcartScript);
 <script>
   // Vérification silencieuse de Snipcart (logs uniquement en mode debug)
   const debugMode = window.location.hash === '#debug' || window.location.search.includes('debug=1');
-  
-  if (debugMode) {
-    console.log('🚀 Chargement Snipcart avec exemption CMP configurée');
-  }
-  
-  // Vérification simple du chargement Snipcart
+
+  // Vérification du chargement Snipcart
   setTimeout(() => {
     if (window.Snipcart && window.Snipcart.events) {
-      console.log('✅ Snipcart opérationnel !');
+      if (debugMode) console.log('✅ Snipcart opérationnel !');
     } else {
-      console.error('❌ Snipcart non chargé - problème de connectivité CDN');
+      console.error('❌ Snipcart non chargé');
     }
   }, 3000);
-  
+
   // Événements CMP uniquement en debug
   if (debugMode) {
+    console.log('🚀 Mode debug Snipcart activé');
     document.addEventListener('cmpConsentUpdate', function(event) {
       console.log('📢 CMP: Mise à jour des consentements:', event.detail);
     });
