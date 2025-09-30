@@ -62,10 +62,10 @@ class ScriptLoader {
      * Charge les scripts de la boutique/aide-jeux avec configuration optimale
      */
     public function loadShopScripts() {
-        // Bundle principal
+        // Bundle principal (contient app, currency-converter, coin-lot-optimizer)
         $this->loadMainBundle();
 
-        // Scripts utilitaires
+        // Scripts utilitaires (NON inclus dans le bundle)
         $this->loadScripts([
             'hero-videos',
             'snipcart-utils',

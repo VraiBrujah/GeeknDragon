@@ -13,8 +13,8 @@
     AddOutputFilterByType DEFLATE application/x-javascript
     AddOutputFilterByType DEFLATE application/json
     AddOutputFilterByType DEFLATE image/svg+xml
-    
-    # Exclure les images déjà compressées
+
+    # Exclure uniquement les images et fichiers déjà compressés
     SetEnvIfNoCase Request_URI \
         \.(?:gif|jpe?g|png|webp|ico)$ no-gzip dont-vary
     SetEnvIfNoCase Request_URI \
@@ -61,26 +61,28 @@
     </FilesMatch>
 </IfModule>
 
-# Réduction de la bande passante - Servir les fichiers compressés quand disponibles
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    
-    # Servir le fichier .gz si disponible et supporté par le client
-    RewriteCond %{HTTP:Accept-Encoding} gzip
-    RewriteCond %{REQUEST_FILENAME}\.gz -f
-    RewriteRule \.(js|css)$ %{REQUEST_URI}.gz [L]
-    
-    # Définir le bon Content-Type pour les fichiers .gz
-    <FilesMatch "\.js\.gz$">
-        Header set Content-Type "application/javascript"
-        Header set Content-Encoding "gzip"
-    </FilesMatch>
-    
-    <FilesMatch "\.css\.gz$">
-        Header set Content-Type "text/css"
-        Header set Content-Encoding "gzip"
-    </FilesMatch>
-</IfModule>
+# DÉSACTIVÉ: Réduction de la bande passante - Servir les fichiers compressés quand disponibles
+# Les fichiers .gz prégénérés causent des conflits avec mod_deflate
+# On laisse Apache gérer la compression à la volée via mod_deflate
+#<IfModule mod_rewrite.c>
+#    RewriteEngine On
+#
+#    # Servir le fichier .gz si disponible et supporté par le client
+#    RewriteCond %{HTTP:Accept-Encoding} gzip
+#    RewriteCond %{REQUEST_FILENAME}\.gz -f
+#    RewriteRule \.(js|css)$ %{REQUEST_URI}.gz [L]
+#
+#    # Définir le bon Content-Type pour les fichiers .gz
+#    <FilesMatch "\.js\.gz$">
+#        Header set Content-Type "application/javascript"
+#        Header set Content-Encoding "gzip"
+#    </FilesMatch>
+#
+#    <FilesMatch "\.css\.gz$">
+#        Header set Content-Type "text/css"
+#        Header set Content-Encoding "gzip"
+#    </FilesMatch>
+#</IfModule>
 
 # Sécurité générale
 <IfModule mod_headers.c>
