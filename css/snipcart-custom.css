@@ -524,6 +524,28 @@ body.snipcart-open {
   max-height: 100% !important;
 }
 
+/* SOLUTION AGRESSIVE - Force scroll sur TOUS les conteneurs possibles */
+.snipcart,
+#snipcart,
+.snipcart-modal,
+.snipcart-modal__container,
+div[class*="snipcart"][class*="modal"],
+div[id*="snipcart"][id*="modal"] {
+  overflow-y: scroll !important;
+  max-height: calc(100vh - var(--gd-header-h, 96px)) !important;
+}
+
+/* Annule les limitations de hauteur partout */
+.snipcart *,
+#snipcart * {
+  max-height: none !important;
+}
+
+/* Re-applique les limites uniquement sur le container principal */
+.snipcart-modal__container {
+  max-height: calc(100vh - var(--gd-header-h, 96px)) !important;
+}
+
 /* =================================================================== */
 /* RESPONSIVE                                                          */
 /* =================================================================== */
