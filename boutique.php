@@ -193,21 +193,28 @@ echo $snipcartInit;
     <section id="cartes" class="py-24 bg-gray-900/80 scroll-mt-24">
       <div class="max-w-6xl mx-auto px-6">
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-8" data-i18n="shop.cards.title">Cartes d'équipement</h2>
+
+        <!-- Texte explicatif court des cartes -->
+        <div class="max-w-4xl mx-auto mb-12 bg-gradient-to-br from-indigo-900/30 to-purple-900/20 rounded-xl p-6 border border-indigo-600/30">
+          <div class="text-gray-200 space-y-4">
+            <p class="text-lg leading-relaxed text-center" data-i18n="shop.cards.intro.shortDescription">
+              <strong class="text-indigo-300">560 cartes illustrées</strong> remplaçant la lecture fastidieuse des manuels. Chaque carte présente <strong class="text-purple-300">visuellement</strong> un équipement, une arme ou un objet magique avec ses statistiques complètes. <strong class="text-green-400">Gagnez du temps et de l'immersion</strong> en jeu !
+            </p>
+
+            <div class="text-center">
+              <a href="<?= langUrl('aide-jeux.php#guide-cartes') ?>" class="inline-flex items-center gap-2 text-indigo-300 hover:text-indigo-200 transition-colors font-medium">
+                📚 <span data-i18n="shop.cards.intro.learnMore">En savoir plus sur les cartes d'équipement</span> →
+              </a>
+            </div>
+          </div>
+        </div>
+
         <!-- Grille produits (chargement instantané) -->
         <div class="shop-grid"></div>
 
         <p class="text-center mt-8 italic max-w-3xl mx-auto text-gray-300">
           <span data-i18n="shop.cards.description"><?= __('shop.cards.description', 'Paquets thématiques de cartes illustrées pour gérer l\'inventaire visuellement.') ?></span>
         </p>
-        <div class="text-center mt-6">
-          <a
-            href="<?= langUrl('aide-jeux.php#guide-cartes') ?>"
-            class="inline-flex items-center gap-2 text-amber-300 underline decoration-2 underline-offset-4 hover:text-amber-100 transition"
-            data-i18n="shop.cards.faqLink"
-          >
-            <?= __('shop.cards.faqLink', "Questions fréquentes / Guide des cartes") ?>
-          </a>
-        </div>
       </div>
     </section>
 
@@ -215,17 +222,28 @@ echo $snipcartInit;
     <section id="triptyques" class="py-24 scroll-mt-24">
       <div class="max-w-6xl mx-auto px-6">
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-8" data-i18n="shop.triptychs.title">Triptyques de personnage</h2>
+
+        <!-- Texte explicatif court des triptyques -->
+        <div class="max-w-4xl mx-auto mb-12 bg-gradient-to-br from-purple-900/30 to-pink-900/20 rounded-xl p-6 border border-purple-600/30">
+          <div class="text-gray-200 space-y-4">
+            <p class="text-lg leading-relaxed text-center" data-i18n="shop.triptychs.intro.shortDescription">
+              Fiches de personnage <strong class="text-purple-300">triptyques robustes</strong> imprimées sur <strong class="text-pink-300">carton rigide</strong>. Trois volets articulés pour une gestion complète : caractéristiques, inventaire, sorts et notes. <strong class="text-green-400">Fini les feuilles froissées</strong> qui se déchirent !
+            </p>
+
+            <div class="text-center">
+              <a href="<?= langUrl('aide-jeux.php#guide-triptyques') ?>" class="inline-flex items-center gap-2 text-purple-300 hover:text-purple-200 transition-colors font-medium">
+                📚 <span data-i18n="shop.triptychs.intro.learnMore">En savoir plus sur les triptyques de personnage</span> →
+              </a>
+            </div>
+          </div>
+        </div>
+
         <!-- Grille produits (chargement instantané) -->
         <div class="shop-grid"></div>
 
         <p class="text-center mt-8 italic max-w-3xl mx-auto text-gray-300">
           <span data-i18n="shop.triptychs.description"><?= __('shop.triptychs.description', 'Héros clé en main pour des parties improvisées.') ?></span>
         </p>
-        <div class="text-center mt-6">
-          <a href="<?= langUrl('aide-jeux.php#guide-triptyques') ?>" class="btn btn-outline" data-i18n="shop.triptychs.guideCta">
-            <?= __('shop.triptychs.guideCta', 'Comment utiliser vos triptyques') ?>
-          </a>
-        </div>
       </div>
     </section>
 

@@ -1103,11 +1103,19 @@ echo $snipcartInit;
   <!-- ===== GALERIE DES TRIPTYQUES ===== -->
   <section id="guide-triptyques" class="py-24 bg-gray-900/80 scroll-mt-24">
     <div class="max-w-7xl mx-auto px-6">
-      
+
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-bold mb-8" data-i18n="gameHelp.triptychGuide.title">
           <?= __('gameHelp.triptychGuide.title', 'Les 3 Triptyques de votre Personnage') ?>
         </h2>
+
+        <!-- Encadré explicatif -->
+        <div class="max-w-4xl mx-auto mb-8 bg-gradient-to-br from-purple-900/30 to-pink-900/20 rounded-xl p-6 border border-purple-600/30">
+          <p class="text-lg leading-relaxed text-gray-200">
+            <?= __('gameHelp.triptychGuide.intro', 'Nos triptyques sont des <strong class="text-purple-300">fiches de personnage robustes</strong> imprimées sur <strong class="text-pink-300">carton rigide</strong>. Trois volets articulés (Espèce, Classe, Historique) organisent toutes les informations de votre héros. <strong class="text-green-400">Plus besoin de feuilles volantes</strong> qui se déchirent ou se perdent !') ?>
+          </p>
+        </div>
+
         <p class="text-xl text-gray-300 max-w-4xl mx-auto txt-court">
           <?= __('gameHelp.sections.detailsText', 'Découvrez en détail chaque type de triptyque. Cliquez sur les images pour voir le verso de chaque fiche.') ?>
         </p>
@@ -1595,11 +1603,19 @@ echo $snipcartInit;
   <!-- ===== GUIDE DES CARTES À JOUER ===== -->
   <section class="py-24 bg-gradient-to-r from-gray-900/80 to-slate-900/80 scroll-mt-24" id="guide-cartes">
     <div class="max-w-7xl mx-auto px-6">
-      
+
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-bold mb-8 text-yellow-400">
           <?= __('gameHelp.cards.mainTitle', '🃏 Guide des Cartes à Jouer Geek & Dragon') ?>
         </h2>
+
+        <!-- Encadré explicatif -->
+        <div class="max-w-4xl mx-auto mb-8 bg-gradient-to-br from-indigo-900/30 to-purple-900/20 rounded-xl p-6 border border-indigo-600/30">
+          <p class="text-lg leading-relaxed text-gray-200">
+            <?= __('gameHelp.cards.intro', '<strong class="text-indigo-300">560 cartes illustrées</strong> couvrant armes, armures, équipements, sorts et plus. Chaque carte présente <strong class="text-purple-300">visuellement</strong> toutes les statistiques et règles nécessaires. <strong class="text-green-400">Fini la lecture fastidieuse</strong> des manuels pendant les parties !') ?>
+          </p>
+        </div>
+
         <h3 class="text-2xl font-semibold text-yellow-200 mb-4">
           <?= __('gameHelp.cards.faqSubtitle', 'FAQ Cartes') ?>
         </h3>

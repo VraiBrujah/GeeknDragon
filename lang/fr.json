@@ -144,7 +144,11 @@
             "description": "Paquets thématiques de cartes illustrées pour gérer l'inventaire visuellement.",
             "faqLink": "Questions fréquentes / Guide des cartes",
             "description1": "Nos scribes enchantent encore ces parchemins d'aventure.",
-            "description2": "Les cartes d'équipement forgeront leur entrée lors de la prochaine lune."
+            "description2": "Les cartes d'équipement forgeront leur entrée lors de la prochaine lune.",
+            "intro": {
+                "shortDescription": "<strong class=\"text-indigo-300\">560 cartes d'équipement illustrées</strong> remplaçant la lecture fastidieuse des manuels. Chaque carte présente <strong class=\"text-purple-300\">visuellement</strong> une arme, une armure ou un équipement avec ses statistiques complètes. <strong class=\"text-green-400\">Gagnez du temps et de l'immersion</strong> en jeu ! <span class=\"text-amber-300 text-sm italic\">(Cartes de sorts de classe complètes en cours de création par nos gobelins dans nos monastères...)</span>",
+                "learnMore": "En savoir plus sur les cartes d'équipement"
+            }
         },
         "triptychs": {
             "title": "Triptyques de personnage",
@@ -152,7 +156,11 @@
             "description": "Héros clé en main pour des parties improvisées.",
             "description1": "Les artisans façonnent encore ces grimoires de héros.",
             "description2": "Les triptyques rejoindront la boutique sous peu.",
-            "guideCta": "Comment utiliser vos triptyques"
+            "guideCta": "Comment utiliser vos triptyques",
+            "intro": {
+                "shortDescription": "Fiches de personnage <strong class=\"text-purple-300\">triptyques robustes</strong> imprimées sur <strong class=\"text-pink-300\">carton rigide</strong>. Trois volets indépendants et complémentaires (Espèce, Classe, Historique) avec <strong class=\"text-amber-300\">toutes les règles</strong> et informations <strong class=\"text-yellow-300\">du niveau 1 à 20</strong>. Inclut les cartes d'équipement et sorts recommandés. <strong class=\"text-green-400\">Plus besoin du manuel</strong> en jeu !",
+                "learnMore": "En savoir plus sur les triptyques de personnage"
+            }
         },
         "collective": {
             "title": "Investissez ensemble, partagez l’aventure",
@@ -266,6 +274,7 @@
         },
         "triptychGuide": {
             "title": "Les 3 Triptyques de votre Personnage",
+            "intro": "Nos triptyques sont des <strong class=\"text-purple-300\">fiches de personnage robustes</strong> imprimées sur <strong class=\"text-pink-300\">carton rigide</strong>. Trois volets indépendants (Espèce, Classe, Historique) avec <strong class=\"text-amber-300\">toutes les règles nécessaires</strong>. Les fiches de Classe contiennent <strong class=\"text-yellow-300\">tous les niveaux de 1 à 20</strong> plus les cartes d'équipement et sorts spécifiques recommandés. <strong class=\"text-green-400\">Jouez sans ouvrir le manuel</strong> !",
             "description": "Chaque personnage D&D nécessite 3 triptyques cartonnés : Espèce, Classe et Historique.",
             "species": "Triptyque d'Espèce",
             "class": "Triptyque de Classe",
@@ -593,6 +602,7 @@
     },
     "cards": {
         "mainTitle": "🃏 Guide des Cartes à Jouer Geek & Dragon",
+        "intro": "<strong class=\"text-indigo-300\">560 cartes d'équipement illustrées</strong> couvrant armes, armures et équipements. Chaque carte présente <strong class=\"text-purple-300\">visuellement</strong> toutes les statistiques nécessaires. <strong class=\"text-green-400\">Fini la lecture fastidieuse</strong> des manuels pendant les parties ! <span class=\"text-amber-300 text-sm italic block mt-2\">✨ Les cartes de sorts de classe complètes arrivent bientôt, nos gobelins travaillent avec ardeur dans nos monastères enchantés...</span>",
         "faqSubtitle": "FAQ Cartes",
         "mainDescription": "Complétez vos triptyques avec nos cartes détaillées : Armes, Armures, Équipements, Sorts, Monstres et bien plus ! Chaque carte contient toutes les informations nécessaires pour accélérer vos parties.",
         "title": "Cartes d'Équipement",

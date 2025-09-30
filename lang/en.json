@@ -144,7 +144,11 @@
             "description": "Themed packs of illustrated cards to manage inventory visually.",
             "faqLink": "Frequently Asked Questions / Card Guide",
             "description1": "Our scribes are still enchanting these adventure parchments.",
-            "description2": "The equipment cards will forge their way in by the next moon."
+            "description2": "The equipment cards will forge their way in by the next moon.",
+            "intro": {
+                "shortDescription": "<strong class=\"text-indigo-300\">560 illustrated equipment cards</strong> replacing tedious manual reading. Each card <strong class=\"text-purple-300\">visually</strong> presents a weapon, armor, or equipment with complete statistics. <strong class=\"text-green-400\">Save time and increase immersion</strong> in-game! <span class=\"text-amber-300 text-sm italic\">(Complete class spell cards currently being crafted by our goblins in their enchanted monasteries...)</span>",
+                "learnMore": "Learn more about equipment cards"
+            }
         },
         "triptychs": {
             "title": "Character triptychs",
@@ -152,7 +156,11 @@
             "description": "Ready-to-play heroes for improvised sessions.",
             "description1": "The artisans are still shaping these hero grimoires.",
             "description2": "The triptychs will join the shop shortly.",
-            "guideCta": "How to use your triptychs"
+            "guideCta": "How to use your triptychs",
+            "intro": {
+                "shortDescription": "<strong class=\"text-purple-300\">Sturdy triptych</strong> character sheets printed on <strong class=\"text-pink-300\">rigid cardboard</strong>. Three independent panels (Species, Class, Background) with <strong class=\"text-amber-300\">all necessary rules</strong> and information <strong class=\"text-yellow-300\">from level 1 to 20</strong>. Includes recommended equipment and spell cards. <strong class=\"text-green-400\">No need for the manual</strong> during play!",
+                "learnMore": "Learn more about character triptychs"
+            }
         },
         "collective": {
             "title": "Invest together, share the adventure",
@@ -266,6 +274,7 @@
         },
         "triptychGuide": {
             "title": "The 3 Triptychs of your Character",
+            "intro": "Our triptychs are <strong class=\"text-purple-300\">sturdy character sheets</strong> printed on <strong class=\"text-pink-300\">rigid cardboard</strong>. Three independent panels (Species, Class, Background) with <strong class=\"text-amber-300\">all necessary rules</strong>. Class sheets contain <strong class=\"text-yellow-300\">all levels from 1 to 20</strong> plus specific recommended equipment and spell cards. <strong class=\"text-green-400\">Play without opening the manual</strong>!",
             "description": "Each D&D character requires 3 cardboard triptychs: Species, Class and Background.",
             "species": "Species Triptych",
             "class": "Class Triptych",
@@ -592,6 +601,7 @@
         "backToMain": "⬆️ Back to main guides",
         "cards": {
             "mainTitle": "🃏 Geek & Dragon Playing Cards Guide",
+            "intro": "<strong class=\"text-indigo-300\">560 illustrated equipment cards</strong> covering weapons, armor and equipment. Each card <strong class=\"text-purple-300\">visually</strong> presents all necessary statistics. <strong class=\"text-green-400\">No more tedious manual reading</strong> during games! <span class=\"text-amber-300 text-sm italic block mt-2\">✨ Complete class spell cards coming soon, our goblins are working diligently in their enchanted monasteries...</span>",
             "faqSubtitle": "Card FAQ",
             "mainDescription": "Complete your triptychs with our detailed cards: Weapons, Armor, Equipment, Spells, Monsters and much more! Each card contains all the information needed to speed up your games.",
             "title": "Equipment Cards",
