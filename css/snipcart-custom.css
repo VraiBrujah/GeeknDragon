@@ -476,9 +476,7 @@
   background: #7c3aed !important;
 }
 
-/* Force tous les conteneurs internes à ne pas limiter la hauteur */
-.snipcart .snipcart-layout,
-.snipcart .snipcart-layout__content,
+/* Tous les autres conteneurs doivent s'adapter au contenu */
 .snipcart .snipcart__box,
 .snipcart .snipcart__box--main,
 .snipcart .snipcart-cart,
@@ -487,20 +485,14 @@
 .snipcart [class*="modal__content"],
 .snipcart [class*="order"],
 .snipcart [class*="summary"] {
-  max-height: none !important;
   height: auto !important;
-  min-height: auto !important;
+  max-height: none !important;
   overflow: visible !important;
 }
 
-/* Padding bas pour contenu complet visible */
+/* Padding bas pour s'assurer que tout est visible */
 .snipcart .snipcart-layout__content {
-  padding-bottom: 100px !important;
-}
-
-.snipcart .snipcart-cart-summary {
-  padding-bottom: 60px !important;
-  margin-bottom: 40px !important;
+  padding-bottom: 80px !important;
 }
 
 /* Scroll et responsive */
@@ -508,42 +500,21 @@ body.snipcart-open {
   overflow: hidden;
 }
 
-/* Force le parent de la modal à ne pas bloquer */
-.snipcart,
-#snipcart,
-.snipcart *[class*="modal"],
-.snipcart *[id*="modal"] {
-  max-height: none !important;
-}
-
-/* Container flex pour modal complète */
-.snipcart .snipcart-modal {
-  display: flex !important;
-  flex-direction: column !important;
-  height: 100% !important;
-  max-height: 100% !important;
-}
-
-/* SOLUTION AGRESSIVE - Force scroll sur TOUS les conteneurs possibles */
-.snipcart,
-#snipcart,
-.snipcart-modal,
-.snipcart-modal__container,
-div[class*="snipcart"][class*="modal"],
-div[id*="snipcart"][id*="modal"] {
-  overflow-y: scroll !important;
-  max-height: calc(100vh - var(--gd-header-h, 96px)) !important;
-}
-
-/* Annule les limitations de hauteur partout */
-.snipcart *,
-#snipcart * {
-  max-height: none !important;
-}
-
-/* Re-applique les limites uniquement sur le container principal */
+/* SOLUTION: Container fixe avec scroll, contenu flexible */
 .snipcart-modal__container {
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
   max-height: calc(100vh - var(--gd-header-h, 96px)) !important;
+  height: calc(100vh - var(--gd-header-h, 96px)) !important;
+}
+
+/* Le contenu interne doit pouvoir grandir librement */
+.snipcart .snipcart-layout,
+.snipcart .snipcart-layout__content {
+  height: auto !important;
+  min-height: 100% !important;
+  max-height: none !important;
+  overflow: visible !important;
 }
 
 /* =================================================================== */
