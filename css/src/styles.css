@@ -198,6 +198,92 @@ h6 {
   background-color: rgba(129, 140, 248, 0.1); /* indigo-400/10 */
   transform: translateY(-3px) scale(1.05);
 }
+
+/* ========================================================================
+   BOUTIQUE — Liens rapides
+   ===================================================================== */
+
+.shop-quick-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--boutique-space-md);
+  margin: var(--boutique-space-lg) 0;
+  padding: var(--boutique-space-lg);
+  background: rgba(17, 24, 39, 0.7);
+  border: 1px solid var(--boutique-border);
+  border-radius: var(--boutique-radius-xl);
+  backdrop-filter: blur(6px);
+}
+
+.shop-quick-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--boutique-space-sm);
+  padding: var(--boutique-space-md) var(--boutique-space-lg);
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--boutique-text);
+  background: rgba(51, 65, 85, 0.45);
+  border: 1px solid transparent;
+  border-radius: var(--boutique-radius-lg);
+  text-decoration: none;
+  transition: var(--boutique-transition);
+}
+
+.shop-quick-link:hover,
+.shop-quick-link:focus-visible {
+  color: #fff;
+  background: linear-gradient(135deg, var(--gd-primary) 0%, var(--gd-primary-hover) 100%);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--boutique-shadow-md);
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+.shop-quick-link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--gd-ring), var(--boutique-shadow-md);
+}
+
+.shop-quick-link svg,
+.shop-quick-link .icon {
+  flex-shrink: 0;
+  color: var(--boutique-text-accent);
+  transition: var(--boutique-transition-fast);
+}
+
+.shop-quick-link:hover svg,
+.shop-quick-link:hover .icon,
+.shop-quick-link:focus-visible svg,
+.shop-quick-link:focus-visible .icon {
+  color: #fff;
+  transform: translateX(4px);
+}
+
+@media (max-width: 1024px) {
+  .shop-quick-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: var(--boutique-space-md);
+  }
+
+  .shop-quick-link {
+    padding-inline: var(--boutique-space-md);
+  }
+}
+
+@media (max-width: 640px) {
+  .shop-quick-links {
+    grid-template-columns: 1fr;
+    gap: var(--boutique-space-sm);
+  }
+
+  .shop-quick-link {
+    justify-content: center;
+    text-align: center;
+  }
+}
 .btn-outline:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.4); /* indigo-400 */
