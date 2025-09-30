@@ -622,7 +622,10 @@ $extraHead = <<<HTML
   height: 18px;
 }
 
-.hidden {
+/* Règle .hidden spécifique pour les outils uniquement (ne pas affecter le header) */
+.tool-card .hidden,
+#debug-section.hidden,
+.music-player-container .hidden {
   display: none !important;
 }
 
