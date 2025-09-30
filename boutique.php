@@ -168,13 +168,20 @@ echo $snipcartInit;
           <div class="bg-indigo-900/20 border border-indigo-500/30 rounded-xl p-6 max-w-2xl mx-auto">
             <h4 class="text-xl font-bold text-indigo-400 mb-4">🧮 Convertisseur de Monnaie</h4>
             <p class="text-gray-300 mb-4">
-              Notre convertisseur de monnaie interactif a été déplacé vers la page d'aide des jeux 
+              Notre convertisseur de monnaie interactif a été déplacé vers la page d'aide des jeux
               pour une meilleure organisation et une expérience utilisateur optimisée.
             </p>
             <a href="<?= langUrl('aide-jeux.php#guide-monnaie') ?>" class="btn btn-primary">
               Utiliser le Convertisseur
             </a>
           </div>
+        </div>
+
+        <!-- Bouton retour au menu -->
+        <div class="text-center mt-16">
+          <a href="#main" class="btn btn-outline" data-i18n="shop.pieces.backToTop">
+            <?= __('shop.pieces.backToTop', '🔝 Retour au menu principal') ?>
+          </a>
         </div>
       </div>
     </section>
@@ -215,6 +222,13 @@ echo $snipcartInit;
         <p class="text-center mt-8 italic max-w-3xl mx-auto text-gray-300">
           <span data-i18n="shop.cards.description"><?= __('shop.cards.description', 'Paquets thématiques de cartes illustrées pour gérer l\'inventaire visuellement.') ?></span>
         </p>
+
+        <!-- Bouton retour au menu -->
+        <div class="text-center mt-16">
+          <a href="#main" class="btn btn-outline" data-i18n="shop.cards.backToTop">
+            <?= __('shop.cards.backToTop', '🔝 Retour au menu principal') ?>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -244,6 +258,13 @@ echo $snipcartInit;
         <p class="text-center mt-8 italic max-w-3xl mx-auto text-gray-300">
           <span data-i18n="shop.triptychs.description"><?= __('shop.triptychs.description', 'Héros clé en main pour des parties improvisées.') ?></span>
         </p>
+
+        <!-- Bouton retour au menu -->
+        <div class="text-center mt-16">
+          <a href="#main" class="btn btn-outline" data-i18n="shop.triptychs.backToTop">
+            <?= __('shop.triptychs.backToTop', '🔝 Retour au menu principal') ?>
+          </a>
+        </div>
       </div>
     </section>
 

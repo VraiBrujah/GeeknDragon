@@ -1225,3 +1225,127 @@ document.addEventListener('DOMContentLoaded', () => {
   // Exporter la fonction pour utilisation manuelle si nécessaire
   window.initTypewriterTitle = initTypewriterTitle;
 })();
+
+/* ========================================================================
+   STICKY NAVIGATION BOUTIQUE (shop-quick-links)
+   Rend la navigation collante après scroll du hero pour améliorer la découverte
+   ===================================================================== */
+(() => {
+  /**
+   * Gère la navigation sticky pour shop-quick-links
+   * - Devient fixe en haut après scroll du hero
+   * - Animation slide-down fluide
+   * - Indicateur de section active
+   */
+  class StickyShopNav {
+    constructor() {
+      this.nav = document.querySelector('.shop-quick-links');
+      this.hero = document.querySelector('section.min-h-screen');
+      this.links = this.nav ? Array.from(this.nav.querySelectorAll('a[href^="#"]')) : [];
+      this.sections = [];
+      this.isSticky = false;
+      this.scrollThreshold = 0;
+
+      if (!this.nav || !this.hero) return;
+
+      this.init();
+    }
+
+    init() {
+      // Calculer le seuil de déclenchement (hauteur du hero)
+      this.updateScrollThreshold();
+
+      // Collecter les sections ciblées par les liens
+      this.links.forEach(link => {
+        const targetId = link.getAttribute('href').substring(1);
+        const section = document.getElementById(targetId);
+        if (section) {
+          this.sections.push({ id: targetId, element: section, link });
+        }
+      });
+
+      // Écouteurs d'événements
+      window.addEventListener('scroll', this.handleScroll.bind(this), { passive: true });
+      window.addEventListener('resize', this.debounce(() => this.updateScrollThreshold(), 200));
+
+      // Gestion des clics pour smooth scroll
+      this.links.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href').substring(1);
+          const target = document.getElementById(targetId);
+          if (target) {
+            const offsetTop = target.offsetTop - (this.isSticky ? this.nav.offsetHeight + parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height') || '0') : 0);
+            window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+          }
+        });
+      });
+
+      // Vérification initiale
+      this.handleScroll();
+    }
+
+    updateScrollThreshold() {
+      if (this.hero) {
+        this.scrollThreshold = this.hero.offsetHeight - 100; // Déclenche 100px avant la fin du hero
+      }
+    }
+
+    handleScroll() {
+      const scrollY = window.scrollY || window.pageYOffset;
+
+      // Toggle sticky state
+      if (scrollY > this.scrollThreshold && !this.isSticky) {
+        this.nav.classList.add('sticky-active');
+        this.isSticky = true;
+      } else if (scrollY <= this.scrollThreshold && this.isSticky) {
+        this.nav.classList.remove('sticky-active');
+        this.isSticky = false;
+      }
+
+      // Mise à jour de la section active
+      if (this.isSticky) {
+        this.updateActiveSection(scrollY);
+      }
+    }
+
+    updateActiveSection(scrollY) {
+      // Trouver la section actuellement visible
+      let activeSection = null;
+      const offset = this.nav.offsetHeight + parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height') || '0') + 50;
+
+      for (let i = this.sections.length - 1; i >= 0; i--) {
+        const section = this.sections[i];
+        if (scrollY >= section.element.offsetTop - offset) {
+          activeSection = section;
+          break;
+        }
+      }
+
+      // Mettre à jour les classes actives
+      this.links.forEach(link => link.classList.remove('active'));
+      if (activeSection) {
+        activeSection.link.classList.add('active');
+      }
+    }
+
+    debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+  }
+
+  // Initialisation après chargement du DOM
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => new StickyShopNav());
+  } else {
+    new StickyShopNav();
+  }
+})();

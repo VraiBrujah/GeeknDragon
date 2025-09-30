@@ -1034,7 +1034,7 @@ echo $snipcartInit;
   </section>
 
   <!-- ===== NAVIGATION RAPIDE ===== -->
-  <section class="py-12 bg-gray-800/50">
+  <section id="menu-guides" class="py-12 bg-gray-800/50 scroll-mt-24">
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-2xl font-bold text-center mb-8 text-white"><?= __('gameHelp.navigation.quickNav', 'Navigation Rapide') ?></h2>
       <div class="grid md:grid-cols-3 gap-6">
@@ -1593,7 +1593,7 @@ echo $snipcartInit;
       
       <!-- Bouton de retour au hero -->
       <div class="text-center mt-16">
-        <a href="#main" class="btn btn-outline">
+        <a href="#menu-guides" class="btn btn-outline">
           <?= __('gameHelp.backToMain', '⬆️ Retour aux guides principaux') ?>
         </a>
       </div>
@@ -1820,7 +1820,7 @@ echo $snipcartInit;
       
       <!-- Bouton de retour au hero -->
       <div class="text-center mt-16">
-        <a href="#main" class="btn btn-outline">
+        <a href="#menu-guides" class="btn btn-outline">
           <?= __('gameHelp.cards.backToMain', '⬆️ Retour aux guides principaux') ?>
         </a>
       </div>
@@ -2373,7 +2373,7 @@ echo $snipcartInit;
       
       <!-- Bouton de retour au hero -->
       <div class="text-center mt-16">
-        <a href="#main" class="btn btn-outline">
+        <a href="#menu-guides" class="btn btn-outline">
           <?= __('money.backToMain', '⬆️ Retour aux guides principaux') ?>
         </a>
       </div>

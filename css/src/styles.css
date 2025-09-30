@@ -1355,3 +1355,88 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
   0%,100%{opacity:.7}
   50%{opacity:1}
 }
+
+/* ========================================================================
+   STICKY NAVIGATION BOUTIQUE (shop-quick-links)
+   Navigation collante après scroll du hero pour améliorer la découverte
+   ======================================================================== */
+
+/* Animation slide-down pour l'apparition sticky */
+@keyframes slideDownNav {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* État sticky activé */
+.shop-quick-links.sticky-active {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  z-index: 40;
+
+  /* Fond semi-transparent avec blur pour effet glassmorphism */
+  background: rgba(17, 24, 39, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  /* Espacement et ombre */
+  padding: 0.75rem 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+
+  /* Animation d'apparition fluide */
+  animation: slideDownNav 0.3s ease-out;
+}
+
+/* Lien actif dans la navigation sticky */
+.shop-quick-links.sticky-active a.active {
+  position: relative;
+  background: rgba(99, 102, 241, 0.2);
+  border-color: rgba(99, 102, 241, 0.6);
+  color: #a5b4fc;
+  font-weight: 600;
+}
+
+/* Indicateur visuel sous le lien actif */
+.shop-quick-links.sticky-active a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(165, 180, 252, 0.8), transparent);
+  animation: linkGlow 2s ease-in-out infinite;
+}
+
+@keyframes linkGlow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Amélioration du hover dans l'état sticky */
+.shop-quick-links.sticky-active a:not(.active):hover {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Mobile : réduire la taille en sticky */
+@media (max-width: 768px) {
+  .shop-quick-links.sticky-active {
+    padding: 0.5rem;
+  }
+
+  .shop-quick-links.sticky-active a {
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+  }
+}

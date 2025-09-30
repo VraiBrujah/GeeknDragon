@@ -131,7 +131,8 @@
             "intro": {
                 "shortDescription": "Nos pièces métalliques reproduisent fidèlement le système monétaire de D&D (<strong class=\"text-amber-300\">5 métaux</strong> : cuivre, argent, électrum, or, platine). Les pièces unitaires sont <strong class=\"text-yellow-200\">brillantes</strong>, tandis que les <strong class=\"text-yellow-300\">multiplicateurs gravés</strong> (×10, ×100, ×1000, ×10000) ont un fini mat distinctif. Chaque pièce représente physiquement sa valeur : une pièce ×100 = 100 pièces unitaires. <strong class=\"text-green-400\">Ressentez le poids réel du trésor</strong> entre vos mains !",
                 "learnMore": "En savoir plus sur le système de pièces et leurs poids"
-            }
+            },
+            "backToTop": "🔝 Retour au menu principal"
         },
         "chest": {
             "title": "Coffres sur mesure",
@@ -148,7 +149,8 @@
             "intro": {
                 "shortDescription": "<strong class=\"text-indigo-300\">560 cartes d'équipement illustrées</strong> remplaçant la lecture fastidieuse des manuels. Chaque carte présente <strong class=\"text-purple-300\">visuellement</strong> une arme, une armure ou un équipement avec ses statistiques complètes. <strong class=\"text-green-400\">Gagnez du temps et de l'immersion</strong> en jeu ! <span class=\"text-amber-300 text-sm italic\">(Cartes de sorts de classe complètes en cours de création par nos gobelins dans nos monastères...)</span>",
                 "learnMore": "En savoir plus sur les cartes d'équipement"
-            }
+            },
+            "backToTop": "🔝 Retour au menu principal"
         },
         "triptychs": {
             "title": "Triptyques de personnage",
@@ -157,6 +159,7 @@
             "description1": "Les artisans façonnent encore ces grimoires de héros.",
             "description2": "Les triptyques rejoindront la boutique sous peu.",
             "guideCta": "Comment utiliser vos triptyques",
+            "backToTop": "🔝 Retour au menu principal",
             "intro": {
                 "shortDescription": "Fiches de personnage <strong class=\"text-purple-300\">triptyques robustes</strong> imprimées sur <strong class=\"text-pink-300\">carton rigide</strong>. Trois volets indépendants et complémentaires (Espèce, Classe, Historique) avec <strong class=\"text-amber-300\">toutes les règles</strong> et informations <strong class=\"text-yellow-300\">du niveau 1 à 20</strong>. Inclut les cartes d'équipement et sorts recommandés. <strong class=\"text-green-400\">Plus besoin du manuel</strong> en jeu !",
                 "learnMore": "En savoir plus sur les triptyques de personnage"
@@ -598,7 +601,7 @@
             },
             "recommended": "Crayon recommandé : Staedtler HB ou 2H pour un tracé précis et effaçable."
         },
-        "backToMain": "⬆️ Retour aux guides principaux"
+        "backToMain": "🔝 Retour au menu principal"
     },
     "cards": {
         "mainTitle": "🃏 Guide des Cartes à Jouer Geek & Dragon",
@@ -698,7 +701,7 @@
                 }
             }
         },
-        "backToMain": "⬆️ Retour aux guides principaux"
+        "backToMain": "🔝 Retour au menu principal"
     },
     "money": {
         "title": "💰 Guide de la Monnaie D&D",
@@ -862,7 +865,7 @@
             "confirmButton": "📥 Télécharger",
             "cancelButton": "Annuler"
         },
-        "backToMain": "⬆️ Retour aux guides principaux"
+        "backToMain": "🔝 Retour au menu principal"
     },
     "callToAction": {
         "title": "Prêt à révolutionner vos parties ?",

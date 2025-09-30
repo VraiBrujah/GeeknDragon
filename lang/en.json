@@ -131,7 +131,8 @@
             "intro": {
                 "shortDescription": "Our metal coins faithfully reproduce D&D's monetary system (<strong class=\"text-amber-300\">5 metals</strong>: copper, silver, electrum, gold, platinum). Unit coins are <strong class=\"text-yellow-200\">shiny</strong>, while <strong class=\"text-yellow-300\">engraved multipliers</strong> (×10, ×100, ×1000, ×10000) have a distinctive matte finish. Each coin physically represents its value: one ×100 coin = 100 unit coins. <strong class=\"text-green-400\">Feel the real weight of treasure</strong> in your hands!",
                 "learnMore": "Learn more about the coin system and their weights"
-            }
+            },
+            "backToTop": "🔝 Back to main menu"
         },
         "chest": {
             "title": "Custom chests",
@@ -148,7 +149,8 @@
             "intro": {
                 "shortDescription": "<strong class=\"text-indigo-300\">560 illustrated equipment cards</strong> replacing tedious manual reading. Each card <strong class=\"text-purple-300\">visually</strong> presents a weapon, armor, or equipment with complete statistics. <strong class=\"text-green-400\">Save time and increase immersion</strong> in-game! <span class=\"text-amber-300 text-sm italic\">(Complete class spell cards currently being crafted by our goblins in their enchanted monasteries...)</span>",
                 "learnMore": "Learn more about equipment cards"
-            }
+            },
+            "backToTop": "🔝 Back to main menu"
         },
         "triptychs": {
             "title": "Character triptychs",
@@ -157,6 +159,7 @@
             "description1": "The artisans are still shaping these hero grimoires.",
             "description2": "The triptychs will join the shop shortly.",
             "guideCta": "How to use your triptychs",
+            "backToTop": "🔝 Back to main menu",
             "intro": {
                 "shortDescription": "<strong class=\"text-purple-300\">Sturdy triptych</strong> character sheets printed on <strong class=\"text-pink-300\">rigid cardboard</strong>. Three independent panels (Species, Class, Background) with <strong class=\"text-amber-300\">all necessary rules</strong> and information <strong class=\"text-yellow-300\">from level 1 to 20</strong>. Includes recommended equipment and spell cards. <strong class=\"text-green-400\">No need for the manual</strong> during play!",
                 "learnMore": "Learn more about character triptychs"
@@ -598,7 +601,7 @@
             },
             "recommended": "Recommended pencil: Staedtler HB or 2H for precise and erasable lines."
         },
-        "backToMain": "⬆️ Back to main guides",
+        "backToMain": "🔝 Back to main menu",
         "cards": {
             "mainTitle": "🃏 Geek & Dragon Playing Cards Guide",
             "intro": "<strong class=\"text-indigo-300\">560 illustrated equipment cards</strong> covering weapons, armor and equipment. Each card <strong class=\"text-purple-300\">visually</strong> presents all necessary statistics. <strong class=\"text-green-400\">No more tedious manual reading</strong> during games! <span class=\"text-amber-300 text-sm italic block mt-2\">✨ Complete class spell cards coming soon, our goblins are working diligently in their enchanted monasteries...</span>",
@@ -697,7 +700,7 @@
                     }
                 }
             },
-            "backToMain": "⬆️ Back to main guides"
+            "backToMain": "🔝 Back to main menu"
         }
     },
     "callToAction": {
@@ -897,7 +900,7 @@
             "confirmButton": "📥 Download",
             "cancelButton": "Cancel"
         },
-        "backToMain": "⬆️ Back to main guides"
+        "backToMain": "🔝 Back to main menu"
     },
     "backToTop": "⬆️ Back to main guides",
     "products": {
