@@ -452,9 +452,28 @@
   position: fixed !important;
   z-index: 9999 !important;
   padding: 0 !important;
-  overflow-y: auto !important;
+  overflow-y: scroll !important;
   overflow-x: hidden !important;
   -webkit-overflow-scrolling: touch !important;
+}
+
+/* Force scrollbar visible */
+.snipcart .snipcart-modal__container::-webkit-scrollbar {
+  width: 12px !important;
+  display: block !important;
+}
+
+.snipcart .snipcart-modal__container::-webkit-scrollbar-track {
+  background: var(--gd-bg-secondary) !important;
+}
+
+.snipcart .snipcart-modal__container::-webkit-scrollbar-thumb {
+  background: var(--gd-accent) !important;
+  border-radius: 6px !important;
+}
+
+.snipcart .snipcart-modal__container::-webkit-scrollbar-thumb:hover {
+  background: #7c3aed !important;
 }
 
 /* Force tous les conteneurs internes à ne pas limiter la hauteur */
@@ -487,6 +506,22 @@
 /* Scroll et responsive */
 body.snipcart-open {
   overflow: hidden;
+}
+
+/* Force le parent de la modal à ne pas bloquer */
+.snipcart,
+#snipcart,
+.snipcart *[class*="modal"],
+.snipcart *[id*="modal"] {
+  max-height: none !important;
+}
+
+/* Container flex pour modal complète */
+.snipcart .snipcart-modal {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  max-height: 100% !important;
 }
 
 /* =================================================================== */
