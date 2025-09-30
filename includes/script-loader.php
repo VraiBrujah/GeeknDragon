@@ -70,6 +70,7 @@ class ScriptLoader {
             'hero-videos',
             'snipcart-utils',
             'boutique-premium',
+            'boutique-async-loader',
             'async-stock-loader'
         ]);
     }
