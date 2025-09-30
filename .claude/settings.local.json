@@ -59,7 +59,10 @@
       "Bash(expr:*)",
       "WebFetch(domain:docs.consentmanager.net)",
       "Read(//e/**)",
-      "Bash(test:*)"
+      "Bash(test:*)",
+      "Bash(for f in *.webp *.png *.jpg)",
+      "Bash(do [ -f \"$f\" ])",
+      "Bash(done)"
     ],
     "deny": [],
     "ask": []
