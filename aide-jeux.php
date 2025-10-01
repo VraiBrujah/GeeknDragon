@@ -527,35 +527,37 @@ $extraHead = <<<HTML
 /* === WIDGET AUDIO D&D === */
 .music-player-container {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 20px);
+  left: env(safe-area-inset-left, 10px);
+  right: env(safe-area-inset-right, 10px);
   z-index: 100;
-  width: auto;
+  display: flex;
+  justify-content: center;
   padding: 0;
   margin: 0;
 }
 
 .music-player {
-  background: linear-gradient(135deg, 
+  background: linear-gradient(135deg,
     rgba(15, 23, 42, 0.98) 0%,
     rgba(30, 41, 59, 0.98) 50%,
     rgba(15, 23, 42, 0.98) 100%);
   backdrop-filter: blur(25px);
   border: 1px solid rgba(139, 92, 246, 0.4);
   border-radius: 25px;
-  padding: 14px 18px;
+  padding: 16px 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  box-shadow: 
+  gap: 12px;
+  box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.3),
     0 0 20px rgba(139, 92, 246, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  width: auto;
-  min-width: 150px;
-  max-width: 180px;
+  width: min(280px, calc(100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) - 20px));
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 .music-player:hover {
@@ -632,22 +634,22 @@ $extraHead = <<<HTML
 .music-volume-container {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
   width: 100%;
   justify-content: center;
   flex-shrink: 0;
+  padding: 6px 0 2px;
 }
 
 .volume-slider {
   flex: 1;
-  height: 3px;
+  width: 100%;
+  height: 6px;
   border-radius: 2px;
   background: rgba(255, 255, 255, 0.15);
   appearance: none;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 80px;
-  max-width: 120px;
 }
 
 .volume-slider:hover {
@@ -711,19 +713,19 @@ $extraHead = <<<HTML
 /* === RESPONSIVE MOBILE === */
 @media (max-width: 768px) {
   .music-player-container {
-    position: fixed;
-    bottom: 20px;
-    right: 15px;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+    left: env(safe-area-inset-left, 10px);
+    right: env(safe-area-inset-right, 10px);
     top: auto;
     transform: none;
     z-index: 1000;
+    justify-content: center;
   }
 
   .music-player {
-    min-width: 140px;
-    max-width: 160px;
-    padding: 12px 14px;
-    gap: 8px;
+    width: min(260px, calc(100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) - 24px));
+    padding: 14px 16px;
+    gap: 10px;
     border-radius: 20px;
   }
 
@@ -752,22 +754,21 @@ $extraHead = <<<HTML
   }
 
   .volume-slider {
-    min-width: 70px;
-    max-width: 90px;
+    width: 100%;
   }
 }
 
 @media (max-width: 480px) {
   .music-player-container {
-    bottom: 15px;
-    right: 10px;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+    left: env(safe-area-inset-left, 10px);
+    right: env(safe-area-inset-right, 10px);
   }
 
   .music-player {
-    min-width: 120px;
-    max-width: 140px;
-    padding: 10px 12px;
-    gap: 6px;
+    width: min(240px, calc(100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) - 24px));
+    padding: 12px 14px;
+    gap: 8px;
   }
 
   .music-controls {
@@ -785,8 +786,7 @@ $extraHead = <<<HTML
   }
 
   .volume-slider {
-    min-width: 60px;
-    max-width: 80px;
+    width: 100%;
   }
 }
 
