@@ -512,13 +512,21 @@ $extraHead = <<<HTML
 .music-player-container {
   position: fixed;
   bottom: calc(env(safe-area-inset-bottom, 0px) + 20px);
-  left: env(safe-area-inset-left, 10px);
-  right: env(safe-area-inset-right, 10px);
+  right: calc(env(safe-area-inset-right, 0px) + 20px);
   z-index: 100;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   padding: 0;
   margin: 0;
+}
+
+/* Mode mobile - centré en bas */
+@media (max-width: 768px) {
+  .music-player-container {
+    left: env(safe-area-inset-left, 10px);
+    right: env(safe-area-inset-right, 10px);
+    justify-content: center;
+  }
 }
 
 .music-player {
@@ -2579,6 +2587,9 @@ function setupIntersectionAnimation(elements, {
         return;
     }
 
+    // Convertir NodeList en Array pour avoir accès à .every()
+    const elementsArray = Array.from(elements);
+
     const datasetProperty = datasetKey;
     const isMobileView = typeof window.matchMedia === 'function'
         ? window.matchMedia('(max-width: 768px)').matches
@@ -2586,7 +2597,7 @@ function setupIntersectionAnimation(elements, {
 
     const context = { isMobileView };
 
-    elements.forEach(el => {
+    elementsArray.forEach(el => {
         if (typeof onSetup === 'function') {
             onSetup(el, context);
         }
@@ -2601,14 +2612,14 @@ function setupIntersectionAnimation(elements, {
     };
 
     if (!('IntersectionObserver' in window) || isMobileView) {
-        elements.forEach(markAsRevealed);
+        elementsArray.forEach(markAsRevealed);
         return;
     }
 
     let fallbackTimer = null;
 
     const checkAllRevealed = () => {
-        if (fallbackTimer && elements.every(el => el.dataset[datasetProperty] === 'true')) {
+        if (fallbackTimer && elementsArray.every(el => el.dataset[datasetProperty] === 'true')) {
             clearTimeout(fallbackTimer);
             fallbackTimer = null;
         }
@@ -2624,7 +2635,7 @@ function setupIntersectionAnimation(elements, {
         checkAllRevealed();
     }, observerOptions);
 
-    elements.forEach(el => {
+    elementsArray.forEach(el => {
         if (typeof onPrepare === 'function') {
             onPrepare(el, context);
         }
@@ -2632,7 +2643,7 @@ function setupIntersectionAnimation(elements, {
     });
 
     fallbackTimer = window.setTimeout(() => {
-        elements.forEach(markAsRevealed);
+        elementsArray.forEach(markAsRevealed);
         checkAllRevealed();
     }, fallbackDelay);
 }
