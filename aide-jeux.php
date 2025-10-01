@@ -64,7 +64,8 @@ $extraHead = <<<HTML
   }
   
   /* Assurer que les boutons sont assez grands pour le touch */
-  .btn, button {
+  .btn,
+  button:not(.music-btn):not(#music-mute):not(#music-prev):not(#music-next):not(#music-play-pause) {
     min-height: 44px !important;
     padding: 12px 16px !important;
     touch-action: manipulation !important;
