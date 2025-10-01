@@ -30,8 +30,8 @@ $extraHead = <<<HTML
 /* CORRECTION MOBILE: Sections toujours visibles sur mobile */
 @media (max-width: 768px) {
   #currency-converter-premium,
-  #coin-lot-optimizer,
-  #lot-recommendations {
+  #coin-lots-recommendations,
+  #coin-lots-content {
     display: block !important;
     opacity: 1 !important;
     visibility: visible !important;
@@ -963,8 +963,8 @@ $extraHead .= <<<'SCRIPT'
       const emergencyCSS = `
         @media (max-width: 768px) {
           #currency-converter-premium,
-          #coin-lot-optimizer,
-          #lot-recommendations {
+          #coin-lots-recommendations,
+          #coin-lots-content {
             display: block !important;
             opacity: 1 !important;
             visibility: visible !important;
@@ -3132,8 +3132,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // Vérifier la visibilité des sections principales
   const sectionsToCheck = [
     'currency-converter-premium',
-    'coin-lot-optimizer', 
-    'lot-recommendations'
+    'coin-lots-recommendations',
+    'coin-lots-content'
   ];
   
   sectionsToCheck.forEach(sectionId => {
