@@ -906,12 +906,16 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
     box-shadow: var(--boutique-shadow-sm);
   }
 
+  #multiplier-table tbody tr {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   #currency-converter tbody tr td,
   #currency-equivalences tbody tr td,
   #currency-best tbody tr td,
   #multiplier-table tbody tr td {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: flex-start;
     gap: var(--boutique-space-xs);
     padding: 0;
@@ -920,11 +924,17 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
     background: transparent;
   }
 
+  #multiplier-table tbody tr td:first-child {
+    grid-column: 1 / -1;
+  }
+
   #currency-converter tbody tr td[data-label]::before,
   #currency-equivalences tbody tr td[data-label]::before,
   #currency-best tbody tr td[data-label]::before,
   #multiplier-table tbody tr td[data-label]::before {
     content: attr(data-label);
+    display: block;
+    width: 100%;
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.05em;
