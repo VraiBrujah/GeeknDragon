@@ -1605,7 +1605,7 @@ echo $snipcartInit;
           </p>
 
           <div class="bg-gray-700/30 rounded-lg p-6 border border-yellow-500/30">
-            <h4 class="text-xl font-bold mb-4 text-yellow-300"><?= __('gameHelp.customTriptychs.usage.proTip.writingAdvice.title', '✏️ Astuce d\'\u00c9criture & Effacement') ?></h4>
+            <h4 class="text-xl font-bold mb-4 text-yellow-300"><?= __('gameHelp.customTriptychs.usage.proTip.writingAdvice.title', '✏️ Astuce d\'Écriture & Effacement') ?></h4>
             <div class="grid md:grid-cols-2 gap-6">
               <div>
                 <h5 class="font-semibold text-yellow-200 mb-2"><?= __('gameHelp.customTriptychs.usage.proTip.writingAdvice.triptychs.title', 'Pour les Triptyques :') ?></h5>
@@ -1697,8 +1697,8 @@ echo $snipcartInit;
           <ul class="text-gray-300 text-sm space-y-2">
             <li><?= __('gameHelp.cards.types.gameplay.spells', '• <strong>Sorts :</strong> Descriptions complètes, composantes') ?></li>
             <li><?= __('gameHelp.cards.types.gameplay.monsters', '• <strong>Monstres :</strong> Statistiques, tactiques, butin') ?></li>
-            <li><?= __('gameHelp.cards.types.gameplay.packages', '• <strong>Paquetages :</strong> Kits d\'\u00e9quipement thématiques') ?></li>
-            <li><?= __('gameHelp.cards.types.gameplay.goods', '• <strong>Marchandises :</strong> Commerce et \u00e9conomie') ?></li>
+            <li><?= __('gameHelp.cards.types.gameplay.packages', '• <strong>Paquetages :</strong> Kits d\'équipement thématiques') ?></li>
+            <li><?= __('gameHelp.cards.types.gameplay.goods', '• <strong>Marchandises :</strong> Commerce et économie') ?></li>
           </ul>
         </div>
       </div>
@@ -1780,7 +1780,7 @@ echo $snipcartInit;
               <div class="border-l-4 border-emerald-500 pl-4">
                 <h5 class="font-semibold text-emerald-300"><?= __('gameHelp.cards.usage.inGame.quickAccess.title', '1. Accès Rapide') ?></h5>
                 <p class="text-gray-300 text-sm">
-                  <?= __('gameHelp.cards.usage.inGame.quickAccess.list.item1', '• Gardez vos cartes d\'\u00e9quipement à portée de main') ?><br>
+                  <?= __('gameHelp.cards.usage.inGame.quickAccess.list.item1', '• Gardez vos cartes d\'équipement à portée de main') ?><br>
                   <?= __('gameHelp.cards.usage.inGame.quickAccess.list.item2', '• Consultez les propriétés spéciales sans ralentir le jeu') ?><br>
                   <?= __('gameHelp.cards.usage.inGame.quickAccess.list.item3', '• Plus besoin d\'ouvrir les manuels pendant l\'action') ?>
                 </p>
@@ -1814,7 +1814,7 @@ echo $snipcartInit;
               <div class="border-l-4 border-teal-500 pl-4">
                 <h5 class="font-semibold text-teal-300"><?= __('gameHelp.cards.usage.organization.visualInventory.title', '2. Inventaire Visuel') ?></h5>
                 <p class="text-gray-300 text-sm">
-                  <?= __('gameHelp.cards.usage.organization.visualInventory.list.item1', '• Étalez vos cartes d\'\u00e9quipement actuel') ?><br>
+                  <?= __('gameHelp.cards.usage.organization.visualInventory.list.item1', '• Étalez vos cartes d\'équipement actuel') ?><br>
                   <?= __('gameHelp.cards.usage.organization.visualInventory.list.item2', '• Ajoutez/retirez selon vos acquisitions') ?><br>
                   <?= __('gameHelp.cards.usage.organization.visualInventory.list.item3', '• Inventaire physique = inventaire de personnage') ?>
                 </p>
@@ -1909,7 +1909,7 @@ echo $snipcartInit;
             <div class="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-lg">
               <div class="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold">PE</div>
               <div>
-                <h4 class="font-semibold text-orange-400"><?= __('money.coinTypes.electrum.name', '&nbsp;&nbsp;&nbsp;&nbsp;Pièce d\'\u00c9lectrum (pe)') ?></h4>
+                <h4 class="font-semibold text-orange-400"><?= __('money.coinTypes.electrum.name', '&nbsp;&nbsp;&nbsp;&nbsp;Pièce d\'Électrum (pe)') ?></h4>
                 <p class="text-gray-300 text-sm"><?= __('money.coinTypes.electrum.description', '&nbsp;&nbsp;&nbsp;&nbsp;Alliage or-argent • 1 pe = 5 pc') ?></p>
               </div>
             </div>
@@ -2225,7 +2225,7 @@ echo $snipcartInit;
               
               <div class="space-y-4">
                 <p class="text-base leading-relaxed">
-                  <?= __('money.physicalTreasure.paragraph1', 'Dans Donjons & Dragons, les <strong class="text-amber-400">deux objectifs principaux</strong> sont l\'expérience et le trésor. Devoir écrire le trésor sur papier puis le gommer ne lui rend pas hommage. Le trésor mérite d\'\u00eatre <strong class="text-yellow-400">tangible, pesé, manipulé</strong>.') ?>
+                  <?= __('money.physicalTreasure.paragraph1', 'Dans Donjons & Dragons, les <strong class="text-amber-400">deux objectifs principaux</strong> sont l\'expérience et le trésor. Devoir écrire le trésor sur papier puis le gommer ne lui rend pas hommage. Le trésor mérite d\'être <strong class="text-yellow-400">tangible, pesé, manipulé</strong>.') ?>
                 </p>
                 
                 <p class="text-base leading-relaxed">
