@@ -2581,13 +2581,83 @@ function rollStat(statName) {
 
 function rollAllStats() {
     const stats = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
-    
+
     // Lancer chaque caractéristique avec un petit délai
     stats.forEach((stat, index) => {
         setTimeout(() => {
             rollStat(stat);
         }, index * 200);
     });
+}
+
+function setupIntersectionAnimation(elements, {
+    observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' },
+    datasetKey = 'revealed',
+    onEnter = () => {},
+    onPrepare,
+    onSetup,
+    fallbackDelay = 1500
+} = {}) {
+    if (!elements || elements.length === 0) {
+        return;
+    }
+
+    const datasetProperty = datasetKey;
+    const isMobileView = typeof window.matchMedia === 'function'
+        ? window.matchMedia('(max-width: 768px)').matches
+        : false;
+
+    const context = { isMobileView };
+
+    elements.forEach(el => {
+        if (typeof onSetup === 'function') {
+            onSetup(el, context);
+        }
+    });
+
+    const markAsRevealed = (el) => {
+        if (el.dataset[datasetProperty] === 'true') {
+            return;
+        }
+        el.dataset[datasetProperty] = 'true';
+        onEnter(el, context);
+    };
+
+    if (!('IntersectionObserver' in window) || isMobileView) {
+        elements.forEach(markAsRevealed);
+        return;
+    }
+
+    let fallbackTimer = null;
+
+    const checkAllRevealed = () => {
+        if (fallbackTimer && elements.every(el => el.dataset[datasetProperty] === 'true')) {
+            clearTimeout(fallbackTimer);
+            fallbackTimer = null;
+        }
+    };
+
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                markAsRevealed(entry.target);
+                obs.unobserve(entry.target);
+            }
+        });
+        checkAllRevealed();
+    }, observerOptions);
+
+    elements.forEach(el => {
+        if (typeof onPrepare === 'function') {
+            onPrepare(el, context);
+        }
+        observer.observe(el);
+    });
+
+    fallbackTimer = window.setTimeout(() => {
+        elements.forEach(markAsRevealed);
+        checkAllRevealed();
+    }, fallbackDelay);
 }
 
 // Smooth scroll pour les ancres
@@ -2613,34 +2683,21 @@ document.addEventListener('DOMContentLoaded', function() {
     // Animation d'apparition des éléments au scroll
     const elementsToAnimate = document.querySelectorAll('.usage-step, .card-product');
 
-    if (!('IntersectionObserver' in window)) {
-        elementsToAnimate.forEach(el => {
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-        });
-    } else {
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observer les éléments à animer
-        elementsToAnimate.forEach(el => {
+    setupIntersectionAnimation(elementsToAnimate, {
+        datasetKey: 'usageAnimationVisible',
+        onSetup: (el) => {
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        },
+        onPrepare: (el) => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-    }
+        },
+        onEnter: (el) => {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+        },
+        fallbackDelay: 2000
+    });
 });
 
 // Fonction simple de téléchargement des fiches de monnaie
@@ -2947,31 +3004,17 @@ document.addEventListener('DOMContentLoaded', function() {
   // Ajouter des animations de scroll et d'apparition
   const sectionsToAnimate = document.querySelectorAll('section, .card-product, .navigation-rapide a');
 
-  if (!('IntersectionObserver' in window)) {
-    sectionsToAnimate.forEach(el => {
-      el.style.opacity = '1';
-    });
-  } else {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.animation = 'floatUp 0.6s ease-out';
-          entry.target.style.opacity = '1';
-        }
-      });
-    }, observerOptions);
-
-    // Observer toutes les sections
-    sectionsToAnimate.forEach(el => {
+  setupIntersectionAnimation(sectionsToAnimate, {
+    datasetKey: 'sectionAnimationVisible',
+    onPrepare: (el) => {
       el.style.opacity = '0';
-      observer.observe(el);
-    });
-  }
+    },
+    onEnter: (el) => {
+      el.style.animation = 'floatUp 0.6s ease-out';
+      el.style.opacity = '1';
+    },
+    fallbackDelay: 2000
+  });
   
   // Améliorer les effets hover sur les cartes de navigation
   document.querySelectorAll('.navigation-rapide a').forEach(card => {
