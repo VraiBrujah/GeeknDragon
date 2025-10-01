@@ -322,16 +322,16 @@
         },
         "triptychGuide": {
             "title": "Les 3 Triptyques de votre Personnage",
-            "intro": "Nos triptyques sont des <strong class=\"text-purple-300\">fiches de personnage robustes</strong> imprimées sur <strong class=\"text-pink-300\">carton rigide</strong>. Trois volets indépendants (Espèce, Classe, Historique) avec <strong class=\"text-amber-300\">toutes les règles nécessaires</strong>. Les fiches de Classe contiennent <strong class=\"text-yellow-300\">tous les niveaux de 1 à 20</strong> plus les cartes d'équipement et sorts spécifiques recommandés. <strong class=\"text-green-400\">Jouez sans ouvrir le manuel</strong> !",
-            "description": "Chaque personnage D&D nécessite 3 triptyques cartonnés : Espèce, Classe et Historique.",
+            "intro": "Nos triptyques sont des <strong class=\"text-purple-300\">fiches de personnage robustes</strong> imprimées sur <strong class=\"text-pink-300\">carton rigide recto-verso</strong>. Trois pages cartonnées indépendantes et complémentaires (Espèce, Classe, Historique) avec <strong class=\"text-amber-300\">toutes les règles nécessaires</strong>. Les fiches de Classe contiennent <strong class=\"text-yellow-300\">tous les niveaux de 1 à 20</strong> plus les cartes d'équipement et sorts spécifiques recommandés. <strong class=\"text-green-400\">Jouez sans ouvrir le manuel</strong> !",
+            "description": "Chaque personnage D&D nécessite 3 triptyques cartonnés indépendants : Espèce, Classe et Historique.",
             "species": "Triptyque d'Espèce",
             "class": "Triptyque de Classe",
             "background": "Triptyque d'Historique"
         },
         "howToUse": {
             "title": "Comment utiliser vos triptyques",
-            "fold": "Pliez en 3 volets",
-            "organize": "Organisez sur votre table",
+            "fold": "3 pages cartonnées",
+            "organize": "Disposez devant vous",
             "reference": "Consultez pendant le jeu"
         },
         "comingSoon": "Bientôt disponible",
@@ -344,8 +344,8 @@
         },
         "sections": {
             "whatIsTriptyque": "Qu'est-ce qu'un triptyque Geek & Dragon ?",
-            "triptychDescription": "Un triptyque est une fiche de personnage cartonnée pliable en 3 volets, conçue pour remplacer les fastidieuses recherches dans les manuels.",
-            "threeRequired": "Chaque personnage D&D nécessite 3 triptyques différents qui se complètent parfaitement.",
+            "triptychDescription": "Un triptyque est une <strong>fiche de personnage cartonnée</strong> indépendante avec <strong>recto-verso</strong>, conçue pour remplacer les fastidieuses recherches dans les manuels.",
+            "threeRequired": "Chaque personnage D&D nécessite <strong>3 triptyques différents et complémentaires</strong> (3 pages cartonnées à disposer devant soi) qui contiennent <strong>toutes les informations de niveau 1 à 20</strong>.",
             "detailsText": "Découvrez en détail chaque type de triptyque. Cliquez sur les images pour voir le verso de chaque fiche.",
             "clickToFlip": "Cliquez pour retourner la fiche",
             "classTriptych": "Triptyque de Classe",
@@ -606,14 +606,14 @@
             },
             "usage": {
                 "title": "Comment utiliser vos triptyques",
-                "description": "Vos triptyques cartonnés sont conçus pour être pliés et organisés sur votre table de jeu",
+                "description": "Vos 3 triptyques cartonnés indépendants sont conçus pour être disposés devant vous sur votre table de jeu",
                 "step1": {
-                    "title": "📁 Pliez en 3 volets",
-                    "text": "Chaque triptyque se plie facilement en 3 sections. Le carton robuste maintient la forme et permet une consultation rapide des informations sur les 3 volets."
+                    "title": "📄 3 pages cartonnées indépendantes",
+                    "text": "Chaque triptyque est une page cartonnée <strong>recto-verso robuste</strong>. Pas besoin de plier : ce sont 3 fiches indépendantes et complémentaires."
                 },
                 "step2": {
-                    "title": "🎯 Organisez sur votre table",
-                    "text": "Disposez vos 3 triptyques devant vous : Espèce à gauche, Classe au centre, Historique à droite. Accès instantané à toutes vos capacités."
+                    "title": "🎯 Disposez devant vous",
+                    "text": "Disposez vos 3 triptyques devant vous : Espèce à gauche, Classe au centre, Historique à droite. Accès instantané à toutes vos capacités du niveau 1 à 20."
                 },
                 "step3": {
                     "title": "⚡ Consultez pendant le jeu",

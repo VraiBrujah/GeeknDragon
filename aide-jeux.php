@@ -1097,8 +1097,8 @@ echo $snipcartInit;
       </h2>
       <div class="max-w-4xl mx-auto">
         <p class="text-xl text-gray-300 mb-8 txt-court">
-          <?= __('gameHelp.sections.triptychDescription', 'Un triptyque est une fiche de personnage cartonnée pliable en 3 volets, conçue pour remplacer les fastidieuses recherches dans les manuels.') ?> 
-          <?= __('gameHelp.sections.threeRequired', 'Chaque personnage D&D nécessite <strong>3 triptyques différents</strong> qui se complètent parfaitement.') ?>
+          <?= __('gameHelp.sections.triptychDescription', 'Un triptyque est une <strong>fiche de personnage cartonnée</strong> indépendante avec <strong>recto-verso</strong>, conçue pour remplacer les fastidieuses recherches dans les manuels.') ?>
+          <?= __('gameHelp.sections.threeRequired', 'Chaque personnage D&D nécessite <strong>3 triptyques différents et complémentaires</strong> (3 pages cartonnées à disposer devant soi) qui contiennent <strong>toutes les informations de niveau 1 à 20</strong>.') ?>
         </p>
         
         <div class="grid md:grid-cols-3 gap-8 mt-12">
@@ -1558,24 +1558,24 @@ echo $snipcartInit;
           <?= __('gameHelp.customTriptychs.usage.title', 'Comment utiliser vos triptyques') ?>
         </h2>
         <p class="text-xl text-gray-300 txt-court">
-          <?= __('gameHelp.customTriptychs.usage.description', 'Vos triptyques cartonnés sont conçus pour être pliés et organisés sur votre table de jeu') ?>
+          <?= __('gameHelp.customTriptychs.usage.description', 'Vos 3 triptyques cartonnés indépendants sont conçus pour être disposés devant vous sur votre table de jeu') ?>
         </p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
         <div class="usage-step">
           <div class="step-number">1</div>
-          <h3 class="text-xl font-semibold mb-4 text-indigo-400"><?= __('gameHelp.customTriptychs.usage.step1.title', '📁 Pliez en 3 volets') ?></h3>
+          <h3 class="text-xl font-semibold mb-4 text-indigo-400"><?= __('gameHelp.customTriptychs.usage.step1.title', '📄 3 pages cartonnées indépendantes') ?></h3>
           <p class="text-gray-300">
-            <?= __('gameHelp.customTriptychs.usage.step1.text', 'Chaque triptyque se plie facilement en 3 sections. Le carton robuste maintient la forme et permet une consultation rapide des informations sur les 3 volets.') ?>
+            <?= __('gameHelp.customTriptychs.usage.step1.text', 'Chaque triptyque est une page cartonnée <strong>recto-verso robuste</strong>. Pas besoin de plier : ce sont 3 fiches indépendantes et complémentaires.') ?>
           </p>
         </div>
 
         <div class="usage-step">
           <div class="step-number">2</div>
-          <h3 class="text-xl font-semibold mb-4 text-blue-400"><?= __('gameHelp.customTriptychs.usage.step2.title', '🎯 Organisez sur votre table') ?></h3>
+          <h3 class="text-xl font-semibold mb-4 text-blue-400"><?= __('gameHelp.customTriptychs.usage.step2.title', '🎯 Disposez devant vous') ?></h3>
           <p class="text-gray-300">
-            <?= __('gameHelp.customTriptychs.usage.step2.text', 'Disposez vos 3 triptyques devant vous : Espèce à gauche, Classe au centre, Historique à droite. Accès instantané à toutes vos capacités.') ?>
+            <?= __('gameHelp.customTriptychs.usage.step2.text', 'Disposez vos 3 triptyques devant vous : Espèce à gauche, Classe au centre, Historique à droite. Accès instantané à toutes vos capacités du niveau 1 à 20.') ?>
           </p>
         </div>
 

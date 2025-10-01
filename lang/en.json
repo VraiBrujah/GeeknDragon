@@ -322,16 +322,16 @@
         },
         "triptychGuide": {
             "title": "The 3 Triptychs of your Character",
-            "intro": "Our triptychs are <strong class=\"text-purple-300\">sturdy character sheets</strong> printed on <strong class=\"text-pink-300\">rigid cardboard</strong>. Three independent panels (Species, Class, Background) with <strong class=\"text-amber-300\">all necessary rules</strong>. Class sheets contain <strong class=\"text-yellow-300\">all levels from 1 to 20</strong> plus specific recommended equipment and spell cards. <strong class=\"text-green-400\">Play without opening the manual</strong>!",
-            "description": "Each D&D character requires 3 cardboard triptychs: Species, Class and Background.",
+            "intro": "Our triptychs are <strong class=\"text-purple-300\">sturdy character sheets</strong> printed on <strong class=\"text-pink-300\">rigid double-sided cardboard</strong>. Three independent and complementary cardboard pages (Species, Class, Background) with <strong class=\"text-amber-300\">all necessary rules</strong>. Class sheets contain <strong class=\"text-yellow-300\">all levels from 1 to 20</strong> plus specific recommended equipment and spell cards. <strong class=\"text-green-400\">Play without opening the manual</strong>!",
+            "description": "Each D&D character requires 3 independent cardboard triptychs: Species, Class and Background.",
             "species": "Species Triptych",
             "class": "Class Triptych",
             "background": "Background Triptych"
         },
         "howToUse": {
             "title": "How to use your triptychs",
-            "fold": "Fold in 3 panels",
-            "organize": "Organize on your table",
+            "fold": "3 cardboard pages",
+            "organize": "Place in front of you",
             "reference": "Reference during play"
         },
         "comingSoon": "Coming soon",
@@ -344,8 +344,8 @@
         },
         "sections": {
             "whatIsTriptyque": "What is a Geek & Dragon triptych?",
-            "triptychDescription": "A triptych is a foldable cardboard character sheet with 3 panels, designed to replace tedious manual searches.",
-            "threeRequired": "Each D&D character requires 3 different triptychs that complement each other perfectly.",
+            "triptychDescription": "A triptych is an independent <strong>double-sided cardboard character sheet</strong>, designed to replace tedious manual searches.",
+            "threeRequired": "Each D&D character requires <strong>3 different and complementary triptychs</strong> (3 cardboard pages to place in front of you) that contain <strong>all information from level 1 to 20</strong>.",
             "detailsText": "Discover each type of triptych in detail. Click on images to see the back of each sheet.",
             "clickToFlip": "Click to flip the sheet",
             "classTriptych": "Class Triptych",
@@ -606,14 +606,14 @@
             },
             "usage": {
                 "title": "How to use your triptychs",
-                "description": "Your cardboard triptychs are designed to be folded and organized on your gaming table",
+                "description": "Your 3 independent cardboard triptychs are designed to be placed in front of you on your gaming table",
                 "step1": {
-                    "title": "📁 Fold in 3 panels",
-                    "text": "Each triptych folds easily into 3 sections. The sturdy cardboard maintains its shape and allows quick consultation of information across all 3 panels."
+                    "title": "📄 3 independent cardboard pages",
+                    "text": "Each triptych is a <strong>sturdy double-sided cardboard page</strong>. No need to fold: these are 3 independent and complementary sheets."
                 },
                 "step2": {
-                    "title": "🎯 Organize on your table",
-                    "text": "Arrange your 3 triptychs in front of you: Species on the left, Class in the center, Background on the right. Instant access to all your abilities."
+                    "title": "🎯 Place in front of you",
+                    "text": "Arrange your 3 triptychs in front of you: Species on the left, Class in the center, Background on the right. Instant access to all your abilities from level 1 to 20."
                 },
                 "step3": {
                     "title": "⚡ Consult during play",
