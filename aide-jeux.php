@@ -724,14 +724,28 @@ $extraHead = <<<HTML
   }
 
   .music-player {
-    width: min(260px, calc(100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) - 24px));
-    padding: 14px 16px;
-    gap: 10px;
+    width: min(100%, calc(100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) - 24px));
+    padding: 12px 14px;
+    gap: 8px;
     border-radius: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .music-controls {
     gap: 4px;
+  }
+
+  .music-volume-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1 1 60%;
+    min-width: 0;
+    max-width: 60%;
+    padding: 0;
   }
 
   .music-btn {
@@ -755,7 +769,8 @@ $extraHead = <<<HTML
   }
 
   .volume-slider {
-    width: 100%;
+    flex: 1;
+    width: auto;
   }
 }
 
@@ -767,9 +782,9 @@ $extraHead = <<<HTML
   }
 
   .music-player {
-    width: min(240px, calc(100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) - 24px));
-    padding: 12px 14px;
-    gap: 8px;
+    width: min(100%, calc(100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) - 20px));
+    padding: 10px 12px;
+    gap: 6px;
   }
 
   .music-controls {
@@ -787,7 +802,21 @@ $extraHead = <<<HTML
   }
 
   .volume-slider {
-    width: 100%;
+    flex: 1;
+    width: auto;
+  }
+
+  .music-volume-container {
+    gap: 4px;
+    flex: 1 1 60%;
+    min-width: 0;
+    max-width: 60%;
+  }
+
+  .music-volume-container .volume-label,
+  .music-volume-container .volume-text,
+  .music-volume-container .volume-btn span {
+    display: none !important;
   }
 }
 
