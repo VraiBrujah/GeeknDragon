@@ -72,23 +72,6 @@ $extraHead = <<<HTML
   }
 }
 
-/* FALLBACK NOSCRIPT: Affichage de base si JavaScript échoue */
-.noscript-fallback {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .noscript-fallback {
-    display: block !important;
-    background: #fef3c7;
-    border: 1px solid #f59e0b;
-    color: #92400e;
-    padding: 1rem;
-    margin: 1rem 0;
-    border-radius: 0.5rem;
-    text-align: center;
-  }
-}
 .tool-nav-btn {
   position: relative;
   overflow: hidden;
@@ -1988,12 +1971,6 @@ echo $snipcartInit;
       </div>
 
       <!-- ===== CONVERTISSEUR INTERACTIF ===== -->
-      <!-- Message de fallback mobile si JavaScript échoue -->
-      <div class="noscript-fallback mt-8">
-        <p><strong>⚠️ Problème d'affichage mobile détecté</strong></p>
-        <p>Si le convertisseur de monnaie n'apparaît pas, veuillez rafraîchir la page ou consulter depuis un ordinateur.</p>
-      </div>
-      
       <!-- Convertisseur de monnaie Premium (identique à celui de boutique.php) -->
       <div class="mt-12" id="currency-converter-premium">
         <h4 class="text-2xl font-bold text-center text-gray-200 mb-8" data-i18n="shop.converter.title"><?= __('shop.converter.title', '🧮 Convertisseur de monnaie') ?></h4>
@@ -3277,22 +3254,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }, 1000); // Attendre 1 seconde pour s'assurer que tout est chargé
   
-  // Vérifier après 2 secondes si les sections sont visibles et masquer le fallback
-  setTimeout(() => {
-    const converterVisible = document.getElementById('currency-converter-premium');
-    const fallbackMessage = document.querySelector('.noscript-fallback');
-    
-    if (converterVisible && fallbackMessage) {
-      const style = window.getComputedStyle(converterVisible);
-      if (style.display !== 'none' && style.opacity !== '0') {
-        // Convertisseur visible, masquer le message de fallback
-        fallbackMessage.style.display = 'none';
-        console.log('✅ [DEBUG] Sections visibles, message de fallback masqué');
-      } else {
-        console.warn('⚠️ [DEBUG] Sections toujours invisibles après 2 secondes');
-      }
-    }
-  }, 2000);
 });
 
 // Détection spécifique mobile pour améliorer l'initialisation
