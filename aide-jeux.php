@@ -2581,28 +2581,36 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Animation d'apparition des éléments au scroll
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-
-    // Observer les éléments à animer
     const elementsToAnimate = document.querySelectorAll('.usage-step, .card-product');
-    elementsToAnimate.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
+
+    if (!('IntersectionObserver' in window)) {
+        elementsToAnimate.forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+        });
+    } else {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observer les éléments à animer
+        elementsToAnimate.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    }
 });
 
 // Fonction simple de téléchargement des fiches de monnaie
@@ -2907,25 +2915,33 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // Ajouter des animations de scroll et d'apparition
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-  
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.animation = 'floatUp 0.6s ease-out';
-        entry.target.style.opacity = '1';
-      }
+  const sectionsToAnimate = document.querySelectorAll('section, .card-product, .navigation-rapide a');
+
+  if (!('IntersectionObserver' in window)) {
+    sectionsToAnimate.forEach(el => {
+      el.style.opacity = '1';
     });
-  }, observerOptions);
-  
-  // Observer toutes les sections
-  document.querySelectorAll('section, .card-product, .navigation-rapide a').forEach(el => {
-    el.style.opacity = '0';
-    observer.observe(el);
-  });
+  } else {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = 'floatUp 0.6s ease-out';
+          entry.target.style.opacity = '1';
+        }
+      });
+    }, observerOptions);
+
+    // Observer toutes les sections
+    sectionsToAnimate.forEach(el => {
+      el.style.opacity = '0';
+      observer.observe(el);
+    });
+  }
   
   // Améliorer les effets hover sur les cartes de navigation
   document.querySelectorAll('.navigation-rapide a').forEach(card => {
