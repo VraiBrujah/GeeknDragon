@@ -2,7 +2,12 @@
   "permissions": {
     "allow": [
       "Bash(tr:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(where gh)",
+      "Bash(winget install:*)",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" --version)",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo create EDS-inc/RSDE_Traceur_GPS_LiFePO4 --private --description \"Projet RS&DE - Traceur GPS LiFePO4 pour batteries industrielles\")",
+      "Bash(powershell.exe:*)"
     ],
     "deny": [],
     "ask": []

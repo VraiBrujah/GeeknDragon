@@ -13,6 +13,11 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
 <body>
 
   <?php
+  // Vérification compatibilité navigateur (doit être la première chose après <body>)
+  include __DIR__ . '/includes/browser-compatibility-check.php';
+  ?>
+
+  <?php
   ob_start();
   include 'snipcart-init.php';
   $snipcartInit = ob_get_clean();

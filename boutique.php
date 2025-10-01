@@ -102,6 +102,12 @@ $products = [];
 <?php include 'head-common.php'; ?>
 
 <body>
+
+<?php
+// Vérification compatibilité navigateur (doit être la première chose après <body>)
+include __DIR__ . '/includes/browser-compatibility-check.php';
+?>
+
 <?php
 $snipcartLanguage = $lang;
 $snipcartLocales = 'fr,en';

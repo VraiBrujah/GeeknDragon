@@ -42,6 +42,11 @@ if (is_string($gaMeasurementId)) {
   <meta name="twitter:description" content="<?= htmlspecialchars($metaDescription ?? '') ?>" />
   <meta name="twitter:image" content="<?= htmlspecialchars($ogImage ?? '/media/branding/logos/logo.webp') ?>" />
   <link rel="canonical" href="<?= htmlspecialchars($metaUrl ?? '') ?>">
+
+  <!-- Polyfills pour compatibilité navigateurs anciens (Array.from, Object.entries, fetch, IntersectionObserver, ResizeObserver) -->
+  <script crossorigin="anonymous"
+          src="https://polyfill.io/v3/polyfill.min.js?features=Array.from%2CObject.entries%2CObject.assign%2CPromise%2Cfetch%2CIntersectionObserver%2CResizeObserver%2CNumber.isFinite%2CNumber.parseInt"></script>
+
   <link rel="stylesheet" href="/css/vendor.bundle.min.css?v=<?= filemtime(__DIR__.'/css/vendor.bundle.min.css') ?>" />
   <script src="/js/vendor.bundle.min.js?v=<?= filemtime(__DIR__.'/js/vendor.bundle.min.js') ?>"></script>
   <link rel="stylesheet" href="/css/styles.css?v=<?= filemtime(__DIR__.'/css/styles.css') ?>">
