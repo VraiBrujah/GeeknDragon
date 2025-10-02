@@ -11,7 +11,9 @@
       "Bash(start index.php)",
       "Bash(npm run build:js:*)",
       "Bash(npm run bundle:js:*)",
-      "Bash(npx terser:*)"
+      "Bash(npx terser:*)",
+      "Bash(npm run build:css:*)",
+      "Bash(npm run:*)"
     ],
     "deny": [],
     "ask": []

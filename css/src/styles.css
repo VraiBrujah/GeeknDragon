@@ -218,7 +218,7 @@ h6 {
 .shop-quick-link {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: var(--boutique-space-sm);
   padding: var(--boutique-space-md) var(--boutique-space-lg);
   font-family: 'Cinzel', serif;
@@ -231,6 +231,7 @@ h6 {
   border-radius: var(--boutique-radius-lg);
   text-decoration: none;
   transition: var(--boutique-transition);
+  text-align: center;
 }
 
 .shop-quick-link:hover,
