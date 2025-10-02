@@ -537,7 +537,7 @@ $extraHead = <<<HTML
   backdrop-filter: blur(25px);
   border: 1px solid rgba(139, 92, 246, 0.4);
   border-radius: 25px;
-  padding: 16px 18px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -547,7 +547,7 @@ $extraHead = <<<HTML
     0 0 20px rgba(139, 92, 246, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  width: min(280px, calc(100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) - 20px));
+  width: min(180px, calc(100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) - 20px));
   max-width: 100%;
   margin: 0 auto;
 }
@@ -715,14 +715,14 @@ $extraHead = <<<HTML
   }
 
   .music-player {
-    width: min(100%, calc(100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) - 24px));
-    padding: 12px 14px;
-    gap: 8px;
+    width: min(180px, calc(100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) - 24px));
+    padding: 14px;
+    gap: 10px;
     border-radius: 20px;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
+    flex-wrap: nowrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
   }
 
   .music-controls {
@@ -733,9 +733,7 @@ $extraHead = <<<HTML
     display: flex;
     align-items: center;
     gap: 6px;
-    flex: 1 1 60%;
-    min-width: 0;
-    max-width: 60%;
+    width: 100%;
     padding: 0;
   }
 
@@ -773,9 +771,9 @@ $extraHead = <<<HTML
   }
 
   .music-player {
-    width: min(100%, calc(100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) - 20px));
-    padding: 10px 12px;
-    gap: 6px;
+    width: min(160px, calc(100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) - 20px));
+    padding: 12px;
+    gap: 8px;
   }
 
   .music-controls {
