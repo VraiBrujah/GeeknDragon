@@ -129,6 +129,21 @@ class BoutiqueAsyncLoader {
 
         // 5. Traductions
         this.initTranslations();
+
+        // 6. Scroll horizontal avec molette
+        this.initHorizontalScroll();
+    }
+
+    initHorizontalScroll() {
+        document.querySelectorAll('.shop-grid').forEach(grid => {
+            grid.scrollLeft = 0;
+            grid.addEventListener('wheel', (e) => {
+                if (e.deltaY !== 0) {
+                    e.preventDefault();
+                    grid.scrollLeft += e.deltaY;
+                }
+            }, { passive: false });
+        });
     }
 
     initQuantitySelectors() {

@@ -141,8 +141,7 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
 ?>
 
 <!-- Affichage immédiat avec chargement stock asynchrone -->
-<div class="card h-full flex flex-col bg-gray-800 p-4 rounded-xl shadow
-            min-w-[14.5rem] sm:min-w-[15rem]"
+<div class="card h-full flex flex-col bg-gray-800 p-4 rounded-xl shadow"
      data-product-id="<?= htmlspecialchars($id) ?>"
      data-stock-status="loading">
   <a href="<?= htmlspecialchars($url) ?>">

@@ -24,6 +24,50 @@ $extraHead = <<<HTML
   .shop-grid {
     opacity: 1;
     transition: opacity 0.3s ease;
+    /* Scroll horizontal moderne avec CSS Grid */
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(320px, 320px);
+    gap: 1.5rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    /* Sortir du padding parent (px-6 = 1.5rem) */
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    /* Ajouter du padding interne pour que les produits soient visibles */
+    padding: 1.5rem;
+    /* Scrollbar moderne */
+    scrollbar-width: thin;
+    scrollbar-color: #6366f1 #374151;
+  }
+
+  .shop-grid::-webkit-scrollbar {
+    height: 10px;
+  }
+
+  .shop-grid::-webkit-scrollbar-track {
+    background: #374151;
+    border-radius: 5px;
+  }
+
+  .shop-grid::-webkit-scrollbar-thumb {
+    background: #6366f1;
+    border-radius: 5px;
+  }
+
+  .shop-grid::-webkit-scrollbar-thumb:hover {
+    background: #818cf8;
+  }
+
+  @media (max-width: 640px) {
+    .shop-grid {
+      grid-auto-columns: minmax(280px, 280px);
+      gap: 1rem;
+      margin-left: -1.5rem;
+      margin-right: -1.5rem;
+      padding: 1rem 1.5rem;
+    }
   }
 </style>
 
