@@ -172,12 +172,12 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       <nav class="flex items-center justify-start md:justify-center gap-2 md:gap-3" aria-label="Navigation principale">
         <?php foreach ($headerNavLinks as $href => $item): ?>
           <a href="<?= langUrl($href) ?>"
-             class="header-nav-icon-btn flex-shrink-0 aspect-square w-16 md:w-20 lg:w-24 rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/50 border border-white/20 hover:border-indigo-400/60"
+             class="header-nav-icon-btn flex-shrink-0 aspect-square w-16 md:w-20 lg:w-24 overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/50"
              title="<?= __($item['i18n'], $item['label']) ?>"
              aria-label="<?= __($item['i18n'], $item['label']) ?>">
             <img src="<?= $item['image'] ?>"
                  alt="<?= __($item['i18n'], $item['label']) ?>"
-                 class="w-full h-full object-cover"
+                 class="w-full h-full object-cover rounded-xl"
                  loading="lazy">
           </a>
         <?php endforeach; ?>
