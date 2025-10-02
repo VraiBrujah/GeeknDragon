@@ -891,11 +891,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ========================================================================
-   HEADER MODERNE — Animation navigation boutique au scroll
+   HEADER MODERNE — Animation navigation icônes au scroll
    ===================================================================== */
 (() => {
-  const shopNav = document.getElementById('shop-nav');
-  if (!shopNav) return;
+  const iconNav = document.getElementById('icon-nav');
+  if (!iconNav) return;
 
   let lastScrollY = window.scrollY;
   let isHidden = false;
@@ -907,17 +907,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (scrollingDown && currentScrollY > scrollThreshold && !isHidden) {
       // Scroll vers le bas - cacher la nav
-      shopNav.style.maxHeight = '0';
-      shopNav.style.opacity = '0';
-      shopNav.style.paddingTop = '0';
-      shopNav.style.paddingBottom = '0';
+      iconNav.style.maxHeight = '0';
+      iconNav.style.opacity = '0';
+      iconNav.style.paddingTop = '0';
+      iconNav.style.paddingBottom = '0';
       isHidden = true;
     } else if (!scrollingDown && isHidden) {
       // Scroll vers le haut - montrer la nav
-      shopNav.style.maxHeight = '100px';
-      shopNav.style.opacity = '1';
-      shopNav.style.paddingTop = '';
-      shopNav.style.paddingBottom = '';
+      iconNav.style.maxHeight = '100px';
+      iconNav.style.opacity = '1';
+      iconNav.style.paddingTop = '';
+      iconNav.style.paddingBottom = '';
       isHidden = false;
     }
 

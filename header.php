@@ -28,30 +28,62 @@ $navItems = [
   ]
 ];
 
-$shopQuickLinks = [
+$headerNavLinks = [
+  '/boutique.php' => [
+    'slug' => 'boutique',
+    'label' => 'Boutique',
+    'i18n' => 'nav.shop',
+    'image' => '/media/ui/button/boutique.webp',
+    'class' => 'header-nav-icon'
+  ],
   '/boutique.php#pieces' => [
     'slug' => 'pieces',
     'label' => 'Monnaie',
     'i18n' => 'shop.hero.quickLinks.pieces',
-    'class' => 'shop-quick-link-coins'
+    'image' => '/media/ui/button/piece.webp',
+    'class' => 'header-nav-icon'
   ],
   '/boutique.php#cartes' => [
     'slug' => 'cartes',
     'label' => 'Cartes',
     'i18n' => 'shop.hero.quickLinks.cards',
-    'class' => 'shop-quick-link-cards'
+    'image' => '/media/ui/button/carte.webp',
+    'class' => 'header-nav-icon'
   ],
   '/boutique.php#triptyques' => [
     'slug' => 'triptyques',
     'label' => 'Triptyques',
     'i18n' => 'shop.hero.quickLinks.triptychs',
-    'class' => 'shop-quick-link-triptychs'
+    'image' => '/media/ui/button/triptyque.webp',
+    'class' => 'header-nav-icon'
   ],
   '/boutique.php#bundle-deluxe' => [
     'slug' => 'bundle',
     'label' => 'Coffre du Dragon',
     'i18n' => 'shop.hero.quickLinks.bundle',
-    'class' => 'shop-quick-link-dragon'
+    'image' => '/media/ui/button/dragon.webp',
+    'class' => 'header-nav-icon'
+  ],
+  '/index.php#actus' => [
+    'slug' => 'actus',
+    'label' => 'Actualités',
+    'i18n' => 'nav.news',
+    'image' => '/media/ui/button/actualite.webp',
+    'class' => 'header-nav-icon'
+  ],
+  '/aide-jeux.php' => [
+    'slug' => 'aide-jeux',
+    'label' => 'Aide de Jeux',
+    'i18n' => 'nav.gameHelp',
+    'image' => '/media/ui/button/aidejeux.webp',
+    'class' => 'header-nav-icon'
+  ],
+  '/index.php#contact' => [
+    'slug' => 'contact',
+    'label' => 'Contact',
+    'i18n' => 'nav.contact',
+    'image' => '/media/ui/button/contact.webp',
+    'class' => 'header-nav-icon'
   ]
 ];
 
@@ -116,15 +148,15 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       </div>
 
       <?php if ($snipcartKey): ?>
-      <!-- Compte + Panier côte à côte -->
-      <div class="flex items-center gap-3">
-        <button class="snipcart-customer-signin snipcart-btn flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="Compte">
+      <!-- Compte + Panier côte à côte, alignés verticalement -->
+      <div class="flex items-center gap-3 h-12">
+        <button class="snipcart-customer-signin snipcart-btn flex items-center gap-2 hover:opacity-80 transition-opacity h-full" aria-label="Compte">
           <img src="/media/branding/icons/compte_non_connecter.webp" alt="" class="w-6 h-6 account-icon-disconnected" width="24" height="24">
           <img src="/media/branding/icons/compte_connecter.webp" alt="" class="w-6 h-6 account-icon-connected hidden" width="24" height="24">
           <span class="text-white text-sm font-medium account-label" data-i18n="nav.account">Compte</span>
         </button>
 
-        <button class="snipcart-checkout snipcart-btn flex items-center gap-2 hover:opacity-80 transition-opacity relative" aria-label="Panier">
+        <button class="snipcart-checkout snipcart-btn flex items-center gap-2 hover:opacity-80 transition-opacity relative h-full" aria-label="Panier">
           <img src="/media/branding/icons/panier.webp" alt="" class="w-6 h-6" width="24" height="24">
           <span class="snipcart-items-count absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold"></span>
           <span class="text-white text-sm font-medium" data-i18n="nav.cart">Panier</span>
@@ -134,13 +166,19 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
     </div>
   </div>
 
-  <!-- LIGNE 2 : Navigation boutique avec images -->
-  <div class="header-shop-nav hidden md:block border-t border-white/10 transition-all duration-300" id="shop-nav">
-    <div class="max-w-7xl mx-auto px-6 py-3">
-      <nav class="flex items-center justify-center gap-3" aria-label="Navigation boutique">
-        <?php foreach ($shopQuickLinks as $href => $item): ?>
-          <a href="<?= langUrl($href) ?>" class="shop-quick-link <?= $item['class'] ?> px-6 py-3 rounded-lg text-white font-semibold text-sm uppercase tracking-wide transition-all duration-300 hover:scale-105" data-i18n="<?= $item['i18n'] ?>">
-            <?= __($item['i18n'], $item['label']) ?>
+  <!-- LIGNE 2 : Navigation icônes -->
+  <div class="header-icon-nav border-t border-white/10 transition-all duration-300 overflow-x-auto" id="icon-nav">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-2">
+      <nav class="flex items-center justify-start md:justify-center gap-2 md:gap-3" aria-label="Navigation principale">
+        <?php foreach ($headerNavLinks as $href => $item): ?>
+          <a href="<?= langUrl($href) ?>"
+             class="header-nav-icon-btn flex-shrink-0 aspect-square w-16 md:w-20 lg:w-24 rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/50 border border-white/20 hover:border-indigo-400/60"
+             title="<?= __($item['i18n'], $item['label']) ?>"
+             aria-label="<?= __($item['i18n'], $item['label']) ?>">
+            <img src="<?= $item['image'] ?>"
+                 alt="<?= __($item['i18n'], $item['label']) ?>"
+                 class="w-full h-full object-cover"
+                 loading="lazy">
           </a>
         <?php endforeach; ?>
       </nav>
@@ -151,19 +189,22 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
   <div id="menu-overlay" class="fixed inset-0 bg-black/60 hidden md:hidden z-10 opacity-0 transition-opacity duration-200"></div>
   <nav id="mobile-menu" class="fixed inset-0 z-20 bg-gray-900/95 flex flex-col items-center justify-center p-8 text-white hidden md:hidden uppercase tracking-wide transform transition-transform duration-200 translate-x-full overflow-y-auto" aria-hidden="true" aria-label="Navigation mobile">
 
-    <!-- Boutons boutique avec images -->
-    <div class="flex flex-col gap-3 w-full mb-8">
-      <?php foreach ($shopQuickLinks as $href => $item): ?>
-        <a href="<?= langUrl($href) ?>" class="shop-quick-link <?= $item['class'] ?> px-6 py-4 rounded-lg text-white font-semibold text-center uppercase tracking-wide" data-i18n="<?= $item['i18n'] ?>">
-          <?= __($item['i18n'], $item['label']) ?>
+    <!-- Navigation avec icônes -->
+    <div class="grid grid-cols-2 gap-4 w-full max-w-xs mb-8">
+      <?php foreach ($headerNavLinks as $href => $item): ?>
+        <a href="<?= langUrl($href) ?>"
+           class="flex flex-col items-center gap-3 p-4 rounded-xl bg-gray-800/60 border border-white/10 hover:border-indigo-400/60 transition-all duration-300 hover:scale-105">
+          <div class="w-20 h-20 rounded-lg overflow-hidden border border-white/20">
+            <img src="<?= $item['image'] ?>"
+                 alt="<?= __($item['i18n'], $item['label']) ?>"
+                 class="w-full h-full object-cover">
+          </div>
+          <span class="text-sm font-medium text-center" data-i18n="<?= $item['i18n'] ?>">
+            <?= __($item['i18n'], $item['label']) ?>
+          </span>
         </a>
       <?php endforeach; ?>
     </div>
-
-    <!-- Navigation secondaire -->
-    <ul class="flex flex-col items-center gap-4 text-sm">
-      <?php renderNav($navItems, $active, true); ?>
-    </ul>
 
     <!-- Langues + actions dans le même panneau -->
     <div class="mt-8 flex flex-col items-center gap-6 w-full">
