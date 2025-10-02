@@ -137,10 +137,16 @@ class BoutiqueAsyncLoader {
     initHorizontalScroll() {
         document.querySelectorAll('.shop-grid').forEach(grid => {
             grid.scrollLeft = 0;
+
             grid.addEventListener('wheel', (e) => {
-                if (e.deltaY !== 0) {
+                if (Math.abs(e.deltaY) > 0) {
                     e.preventDefault();
-                    grid.scrollLeft += e.deltaY;
+
+                    // Scroll direct sans animation pour éviter les saccades
+                    grid.scrollBy({
+                        left: e.deltaY,
+                        behavior: 'auto' // Pas de smooth, c'est plus fluide
+                    });
                 }
             }, { passive: false });
         });

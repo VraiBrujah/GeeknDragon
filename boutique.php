@@ -42,9 +42,19 @@ $extraHead = <<<HTML
     justify-items: stretch;
     align-content: flex-start;
     align-items: stretch;
+    /* Optimisations pour fluidité du scroll */
+    will-change: scroll-position;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
     /* Scrollbar moderne */
     scrollbar-width: thin;
     scrollbar-color: #6366f1 #374151;
+  }
+
+  /* Snap sur les cartes pour un scroll fluide */
+  .shop-grid .card {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
   }
 
   .shop-grid::-webkit-scrollbar {
