@@ -28,55 +28,51 @@ switch ($currentPage) {
 }
 ?>
 
-<!-- Script de validation du chargement -->
+<!-- Chargement automatique et silencieux des dépendances manquantes -->
 <script>
-// Vérification que les classes critiques sont disponibles (seulement sur les pages qui les utilisent)
-document.addEventListener('DOMContentLoaded', function() {
-    // Vérifier si la page nécessite ces classes (présence du convertisseur ou des outils)
-    const needsConverter = document.getElementById('currency-converter-premium');
-    const needsOptimizer = document.getElementById('coin-lots-recommendations');
+// Chargement automatique des dépendances sans logs en production
+(function() {
+    'use strict';
 
-    // Ne vérifier que si les éléments sont présents
-    if (!needsConverter && !needsOptimizer) {
-        return; // Pas de vérification nécessaire sur cette page
-    }
+    const isDebugMode = window.location.hash === '#debug' || window.location.search.includes('debug=1');
 
-    const requiredClasses = {
-        'CurrencyConverterPremium': typeof CurrencyConverterPremium !== 'undefined',
-        'CoinLotOptimizer': typeof CoinLotOptimizer !== 'undefined',
-        'SnipcartUtils': typeof SnipcartUtils !== 'undefined'
-    };
+    // Attendre que tous les scripts soient chargés
+    function ensureDependencies() {
+        const needsConverter = document.getElementById('currency-converter-premium');
+        const needsOptimizer = document.getElementById('coin-lots-recommendations');
 
-    let missingClasses = [];
-    for (const [className, isAvailable] of Object.entries(requiredClasses)) {
-        if (!isAvailable) {
-            missingClasses.push(className);
+        // Ne rien faire si ces éléments ne sont pas présents
+        if (!needsConverter && !needsOptimizer) {
+            return;
+        }
+
+        const missing = [];
+
+        if (typeof CurrencyConverterPremium === 'undefined') missing.push('currency-converter');
+        if (typeof CoinLotOptimizer === 'undefined') missing.push('coin-lot-optimizer');
+        if (typeof SnipcartUtils === 'undefined') missing.push('snipcart-utils');
+
+        // Charger silencieusement les scripts manquants
+        missing.forEach(function(scriptName) {
+            const script = document.createElement('script');
+            script.src = '/js/' + scriptName + '.js?v=' + Date.now();
+            script.async = true;
+            document.head.appendChild(script);
+        });
+
+        // Log uniquement en mode debug
+        if (isDebugMode && missing.length > 0) {
+            console.log('[GD Debug] Chargement automatique:', missing);
         }
     }
 
-    if (missingClasses.length > 0) {
-        console.warn('⚠️ Classes requises manquantes pour cette page:', missingClasses);
-        
-        // Tentative de rechargement des scripts individuels
-        if (missingClasses.includes('CurrencyConverterPremium')) {
-            const script1 = document.createElement('script');
-            script1.src = '/js/currency-converter.js?v=' + Date.now();
-            document.head.appendChild(script1);
-        }
-        
-        if (missingClasses.includes('CoinLotOptimizer')) {
-            const script2 = document.createElement('script');
-            script2.src = '/js/coin-lot-optimizer.js?v=' + Date.now();
-            document.head.appendChild(script2);
-        }
-        
-        if (missingClasses.includes('SnipcartUtils')) {
-            const script3 = document.createElement('script');
-            script3.src = '/js/snipcart-utils.js?v=' + Date.now();
-            document.head.appendChild(script3);
-        }
+    // Vérifier après DOMContentLoaded et après un délai pour laisser les scripts se charger
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(ensureDependencies, 100);
+        });
     } else {
-        console.log('✅ Toutes les classes requises sont disponibles');
+        setTimeout(ensureDependencies, 100);
     }
-});
+})();
 </script>

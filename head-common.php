@@ -27,7 +27,7 @@ if (is_string($gaMeasurementId)) {
   ?>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="Content-Security-Policy" content="frame-src 'self' https://checkout.stripe.com https://js.stripe.com https://hooks.stripe.com https://m.stripe.com https://api.stripe.com https://checkout.snipcart.com https://app.snipcart.com https://payment.snipcart.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.snipcart.com https://js.stripe.com https://www.googletagmanager.com https://cdn.consentmanager.net https://c.delivery.consentmanager.net https://polyfill.io; connect-src 'self' https://api.stripe.com https://api.snipcart.com https://app.snipcart.com https://checkout.stripe.com https://cdn.snipcart.com https://payment.snipcart.com https://js.stripe.com https://hooks.stripe.com https://m.stripe.com;"/>
+  <meta http-equiv="Content-Security-Policy" content="frame-src 'self' https://checkout.stripe.com https://js.stripe.com https://hooks.stripe.com https://m.stripe.com https://api.stripe.com https://checkout.snipcart.com https://app.snipcart.com https://payment.snipcart.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.snipcart.com https://js.stripe.com https://www.googletagmanager.com https://cdn.consentmanager.net https://c.delivery.consentmanager.net; connect-src 'self' https://api.stripe.com https://api.snipcart.com https://app.snipcart.com https://checkout.stripe.com https://cdn.snipcart.com https://payment.snipcart.com https://js.stripe.com https://hooks.stripe.com https://m.stripe.com;"/>
   <meta http-equiv="Permissions-Policy" content="payment=(self), payment-handler=(self)"/>
   <title><?= htmlspecialchars($title ?? 'Geek & Dragon') ?></title>
   <meta name="description" content="<?= htmlspecialchars($metaDescription ?? '') ?>" />
@@ -42,10 +42,6 @@ if (is_string($gaMeasurementId)) {
   <meta name="twitter:description" content="<?= htmlspecialchars($metaDescription ?? '') ?>" />
   <meta name="twitter:image" content="<?= htmlspecialchars($ogImage ?? '/media/branding/logos/logo.webp') ?>" />
   <link rel="canonical" href="<?= htmlspecialchars($metaUrl ?? '') ?>">
-
-  <!-- Polyfills pour compatibilité navigateurs anciens (Array.from, Object.entries, fetch, IntersectionObserver, ResizeObserver) -->
-  <script crossorigin="anonymous"
-          src="https://polyfill.io/v3/polyfill.min.js?features=Array.from%2CObject.entries%2CObject.assign%2CPromise%2Cfetch%2CIntersectionObserver%2CResizeObserver%2CNumber.isFinite%2CNumber.parseInt"></script>
 
   <link rel="stylesheet" href="/css/vendor.bundle.min.css?v=<?= filemtime(__DIR__.'/css/vendor.bundle.min.css') ?>" />
   <script src="/js/vendor.bundle.min.js?v=<?= filemtime(__DIR__.'/js/vendor.bundle.min.js') ?>"></script>

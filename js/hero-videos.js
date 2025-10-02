@@ -574,47 +574,59 @@
                 }
             });
 
-            // Surveillance de récupération uniquement en cas de problème
+            // Surveillance de récupération robuste contre les interruptions
             const forceGlobalLoop = () => {
                 if (document.visibilityState !== 'visible') return;
 
                 const allVideos = container.querySelectorAll('video');
                 if (allVideos.length === 0) return;
 
-                // Vérifier s'il y a au moins une vidéo en lecture
+                // Vérifier s'il y a au moins une vidéo en lecture active
                 let hasPlayingVideo = false;
+                let visiblePausedVideo = null;
+
                 for (const video of allVideos) {
-                    if (!video.paused && !video.ended) {
+                    const opacity = parseFloat(video.style.opacity || '0');
+                    const isVisible = opacity > 0.5;
+
+                    if (!video.paused && !video.ended && isVisible) {
                         hasPlayingVideo = true;
                         break;
                     }
+
+                    // Mémoriser la vidéo visible mais en pause
+                    if (isVisible && (video.paused || video.ended)) {
+                        visiblePausedVideo = video;
+                    }
                 }
 
-                // Si aucune vidéo ne joue ET qu'il y a des vidéos, tenter récupération
-                if (!hasPlayingVideo) {
-                    // Trouver la vidéo visible ou la première
-                    let targetVideo = null;
-                    for (const video of allVideos) {
-                        const opacity = parseFloat(video.style.opacity || '0');
-                        if (opacity > 0.5) {
-                            targetVideo = video;
-                            break;
-                        }
+                // Si aucune vidéo ne joue, relancer la vidéo visible en pause
+                if (!hasPlayingVideo && visiblePausedVideo && autoPlayAllowed) {
+                    // Protection contre les boucles infinies
+                    const lastRestart = visiblePausedVideo.dataset.lastRestart || '0';
+                    const now = Date.now();
+                    if (now - parseInt(lastRestart) > 3000) { // Max une fois par 3 secondes
+                        visiblePausedVideo.dataset.lastRestart = String(now);
+                        visiblePausedVideo.currentTime = 0;
+                        visiblePausedVideo.play().catch(() => {});
                     }
-
-                    if (!targetVideo) {
-                        targetVideo = allVideos[0];
-                    }
-
-                    if (targetVideo && autoPlayAllowed) {
-                        targetVideo.currentTime = 0;
-                        targetVideo.play().catch(() => {});
+                } else if (!hasPlayingVideo && allVideos.length > 0 && autoPlayAllowed) {
+                    // Fallback : relancer la première vidéo
+                    const firstVideo = allVideos[0];
+                    const lastRestart = firstVideo.dataset.lastRestart || '0';
+                    const now = Date.now();
+                    if (now - parseInt(lastRestart) > 3000) {
+                        firstVideo.dataset.lastRestart = String(now);
+                        firstVideo.style.opacity = '1';
+                        firstVideo.style.filter = 'blur(0)';
+                        firstVideo.currentTime = 0;
+                        firstVideo.play().catch(() => {});
                     }
                 }
             };
 
-            // Vérification de récupération seulement toutes les 15 secondes (réduit les interférences)
-            containerLoopInterval = setInterval(forceGlobalLoop, 15000);
+            // Vérification plus fréquente pour détecter rapidement les arrêts (toutes les 5 secondes)
+            containerLoopInterval = setInterval(forceGlobalLoop, 5000);
 
             // Nettoyage propre à la fermeture de page
             const cleanup = () => {

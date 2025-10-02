@@ -977,8 +977,10 @@ $extraHead .= <<<'SCRIPT'
   
   // Fonction pour forcer l'affichage mobile
   function forceDisplayMobile() {
+    const isDebugMode = window.location.hash === '#debug' || window.location.search.includes('debug=1');
+
     if (window.innerWidth <= 768) {
-      console.log('📱 [MOBILE-FIX] Application du correctif d\'affichage mobile immédiat');
+      if (isDebugMode) console.log('📱 [MOBILE-FIX] Correctif affichage mobile');
       
       // CSS d'urgence injecté directement
       const emergencyCSS = `
@@ -2865,7 +2867,7 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         });
       } else {
-        console.error('SnipcartUtils non disponible');
+        // Erreur silencieuse en production, alerter uniquement
         alert("Erreur : impossible d'ajouter au panier");
       }
     });
@@ -3187,137 +3189,143 @@ if (document.readyState === 'loading') {
 </script>
 
 <script>
-// 🔧 INITIALISATION FORCÉE DU CONVERTISSEUR DE MONNAIE + DEBUG MOBILE
+// 🔧 INITIALISATION FORCÉE DU CONVERTISSEUR DE MONNAIE
 // Ce script garantit que le convertisseur s'initialise même si l'IntersectionObserver ne se déclenche pas
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('🚀 [DEBUG] Initialisation forcée du convertisseur...');
-  
-  // DEBUG MOBILE SPÉCIFIQUE
-  const isMobile = window.innerWidth <= 768;
-  console.log(`📱 [DEBUG] Mode mobile détecté: ${isMobile} (largeur: ${window.innerWidth}px)`);
-  
-  // Vérifier la visibilité des sections principales
-  const sectionsToCheck = [
-    'currency-converter-premium',
-    'coin-lots-recommendations',
-    'coin-lots-content'
-  ];
-  
-  sectionsToCheck.forEach(sectionId => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      const computedStyle = window.getComputedStyle(section);
-      const isVisible = computedStyle.display !== 'none' && computedStyle.visibility !== 'hidden';
-      console.log(`📊 [DEBUG] Section ${sectionId}: présente=${!!section}, visible=${isVisible}, display=${computedStyle.display}`);
-      
-      // Forcer la visibilité sur mobile
-      if (isMobile && !isVisible) {
-        section.style.display = 'block';
-        section.style.opacity = '1';
-        console.log(`🔧 [CORRECTION] Section ${sectionId} forcée visible sur mobile`);
-      }
-    } else {
-      console.warn(`❌ [DEBUG] Section ${sectionId} non trouvée dans le DOM`);
-    }
-  });
-  
-  // Vérifier la présence du container
-  const converterContainer = document.getElementById('currency-converter-premium');
-  if (!converterContainer) {
-    console.warn('❌ [DEBUG] Container currency-converter-premium non trouvé');
-    return;
-  }
-  
-  // Vérifier la présence des classes
-  if (typeof CurrencyConverterPremium === 'undefined') {
-    console.error('❌ [DEBUG] CurrencyConverterPremium non disponible');
-    return;
-  }
-  
-  // Attendre un peu pour s'assurer que tous les scripts sont chargés
-  setTimeout(() => {
-    try {
-      // Forcer l'initialisation même si l'instance existe déjà
-      if (!window.converterInstance || typeof window.converterInstance.getCurrentValues !== 'function') {
-        console.log('✅ [DEBUG] Création nouvelle instance du convertisseur...');
-        window.converterInstance = new CurrencyConverterPremium();
-        window.currencyConverter = window.converterInstance;
-        
-        console.log('✅ [DEBUG] Convertisseur initialisé avec succès');
-        
-        // Test de base
-        const testValue = window.converterInstance.getTotalBaseValue();
-        console.log(`✅ [DEBUG] Test de base réussi: ${testValue} cuivres`);
+(function() {
+  'use strict';
 
-      } else {
-        console.log('ℹ️ [DEBUG] Convertisseur déjà initialisé');
-      }
-      
-    } catch (error) {
-      console.error('❌ [DEBUG] Erreur initialisation convertisseur:', error);
-      
-      // Ajouter un indicateur d'erreur
-      const errorIndicator = document.createElement('div');
-      errorIndicator.style.cssText = 'position: fixed; top: 10px; right: 10px; background: #dc3545; color: white; padding: 8px 12px; border-radius: 4px; font-size: 12px; z-index: 9999;';
-      errorIndicator.textContent = '❌ Erreur Convertisseur: ' + error.message;
-      document.body.appendChild(errorIndicator);
-      
-      // Retirer l'indicateur d'erreur après 5 secondes
-      setTimeout(() => {
-        if (errorIndicator.parentNode) {
-          errorIndicator.parentNode.removeChild(errorIndicator);
+  const isDebugMode = window.location.hash === '#debug' || window.location.search.includes('debug=1');
+
+  document.addEventListener('DOMContentLoaded', function() {
+    if (isDebugMode) console.log('🚀 [DEBUG] Initialisation forcée du convertisseur...');
+
+    // Détection mobile
+    const isMobile = window.innerWidth <= 768;
+    if (isDebugMode) console.log(`📱 [DEBUG] Mode mobile: ${isMobile} (${window.innerWidth}px)`);
+
+    // Vérifier la visibilité des sections principales
+    const sectionsToCheck = [
+      'currency-converter-premium',
+      'coin-lots-recommendations',
+      'coin-lots-content'
+    ];
+
+    sectionsToCheck.forEach(sectionId => {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        const computedStyle = window.getComputedStyle(section);
+        const isVisible = computedStyle.display !== 'none' && computedStyle.visibility !== 'hidden';
+
+        if (isDebugMode) {
+          console.log(`📊 [DEBUG] Section ${sectionId}: visible=${isVisible}`);
         }
-      }, 5000);
+
+        // Forcer la visibilité sur mobile
+        if (isMobile && !isVisible) {
+          section.style.display = 'block';
+          section.style.opacity = '1';
+          if (isDebugMode) console.log(`🔧 [CORRECTION] Section ${sectionId} forcée visible`);
+        }
+      } else if (isDebugMode) {
+        console.warn(`❌ [DEBUG] Section ${sectionId} non trouvée`);
+      }
+    });
+
+    // Vérifier la présence du container
+    const converterContainer = document.getElementById('currency-converter-premium');
+    if (!converterContainer) {
+      if (isDebugMode) console.warn('❌ [DEBUG] Container non trouvé');
+      return;
     }
-  }, 1000); // Attendre 1 seconde pour s'assurer que tout est chargé
-  
-});
 
-// Détection spécifique mobile pour améliorer l'initialisation
-function isMobileDevice() {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
-         (navigator.maxTouchPoints && navigator.maxTouchPoints > 1);
-}
+    // Vérifier la présence des classes
+    if (typeof CurrencyConverterPremium === 'undefined') {
+      if (isDebugMode) console.error('❌ [DEBUG] CurrencyConverterPremium non disponible');
+      return;
+    }
 
-// Initialisation spéciale pour mobile
-if (isMobileDevice()) {
-  console.log('📱 [DEBUG] Appareil mobile détecté, initialisation adaptée...');
-  
-  // Attendre que l'appareil soit stable
-  window.addEventListener('load', function() {
+    // Attendre un peu pour s'assurer que tous les scripts sont chargés
     setTimeout(() => {
-      if (!window.converterInstance && document.getElementById('currency-converter-premium')) {
-        console.log('📱 [DEBUG] Initialisation mobile forcée...');
-        try {
+      try {
+        // Forcer l'initialisation même si l'instance existe déjà
+        if (!window.converterInstance || typeof window.converterInstance.getCurrentValues !== 'function') {
+          if (isDebugMode) console.log('✅ [DEBUG] Création instance convertisseur');
           window.converterInstance = new CurrencyConverterPremium();
-          console.log('✅ [DEBUG] Initialisation mobile réussie');
-        } catch (error) {
-          console.error('❌ [DEBUG] Erreur initialisation mobile:', error);
-        }
-      }
-    }, 2000); // Délai plus long pour mobile
-  });
-}
+          window.currencyConverter = window.converterInstance;
 
-// Debug supplémentaire pour les événements - support mobile et desktop
-['click', 'touchend'].forEach(eventType => {
-  document.addEventListener(eventType, function(e) {
-    if (e.target.closest('#currency-converter-premium')) {
-      console.log('🖱️ [DEBUG] Interaction détectée sur le convertisseur:', eventType);
-      
-      // Forcer la ré-initialisation si nécessaire
-      if (!window.converterInstance) {
-        console.log('🔄 [DEBUG] Ré-initialisation suite à l\'interaction...');
-        try {
-          window.converterInstance = new CurrencyConverterPremium();
-          console.log('✅ [DEBUG] Ré-initialisation réussie');
-        } catch (error) {
-          console.error('❌ [DEBUG] Erreur ré-initialisation:', error);
+          if (isDebugMode) {
+            const testValue = window.converterInstance.getTotalBaseValue();
+            console.log(`✅ [DEBUG] Convertisseur OK: ${testValue} cuivres`);
+          }
+        } else if (isDebugMode) {
+          console.log('ℹ️ [DEBUG] Convertisseur déjà initialisé');
+        }
+
+      } catch (error) {
+        if (isDebugMode) {
+          console.error('❌ [DEBUG] Erreur init:', error);
+
+          // Indicateur d'erreur en mode debug uniquement
+          const errorIndicator = document.createElement('div');
+          errorIndicator.style.cssText = 'position: fixed; top: 10px; right: 10px; background: #dc3545; color: white; padding: 8px 12px; border-radius: 4px; font-size: 12px; z-index: 9999;';
+          errorIndicator.textContent = '❌ Erreur Convertisseur: ' + error.message;
+          document.body.appendChild(errorIndicator);
+
+          setTimeout(() => {
+            if (errorIndicator.parentNode) {
+              errorIndicator.parentNode.removeChild(errorIndicator);
+            }
+          }, 5000);
         }
       }
-    }
-  }, { passive: false }); // Retirer passive pour permettre preventDefault si nécessaire
-});
+    }, 1000);
+
+  });
+
+  // Détection spécifique mobile
+  function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+           (navigator.maxTouchPoints && navigator.maxTouchPoints > 1);
+  }
+
+  // Initialisation spéciale pour mobile
+  if (isMobileDevice()) {
+    if (isDebugMode) console.log('📱 [DEBUG] Appareil mobile, init adaptée');
+
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        if (!window.converterInstance && document.getElementById('currency-converter-premium')) {
+          if (isDebugMode) console.log('📱 [DEBUG] Init mobile forcée');
+          try {
+            window.converterInstance = new CurrencyConverterPremium();
+            if (isDebugMode) console.log('✅ [DEBUG] Init mobile OK');
+          } catch (error) {
+            if (isDebugMode) console.error('❌ [DEBUG] Erreur init mobile:', error);
+          }
+        }
+      }, 2000);
+    });
+  }
+
+  // Ré-initialisation sur interaction si nécessaire
+  ['click', 'touchend'].forEach(eventType => {
+    document.addEventListener(eventType, function(e) {
+      if (e.target.closest('#currency-converter-premium')) {
+        if (isDebugMode) console.log('🖱️ [DEBUG] Interaction:', eventType);
+
+        if (!window.converterInstance) {
+          if (isDebugMode) console.log('🔄 [DEBUG] Ré-init suite interaction');
+          try {
+            window.converterInstance = new CurrencyConverterPremium();
+            if (isDebugMode) console.log('✅ [DEBUG] Ré-init OK');
+          } catch (error) {
+            if (isDebugMode) console.error('❌ [DEBUG] Erreur ré-init:', error);
+          }
+        }
+      }
+    }, { passive: false });
+  });
+})();
 </script>
 
 </body>
