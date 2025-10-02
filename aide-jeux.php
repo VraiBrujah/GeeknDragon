@@ -1047,21 +1047,18 @@ echo $snipcartInit;
 
   <!-- ===== HERO ===== -->
   <section class="min-h-screen flex items-center justify-center text-center relative text-white">
-    <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="/media/videos/backgrounds/trip2_compressed.mp4" data-videos='["/media/videos/backgrounds/Carte1_compressed.mp4","/media/videos/backgrounds/cascade_HD_compressed.mp4","/media/videos/backgrounds/fontaine1_compressed.mp4","/media/videos/backgrounds/fontaine2_compressed.mp4","/media/videos/backgrounds/fontaine3_compressed.mp4","/media/videos/backgrounds/fontaine4_compressed.mp4","/media/videos/backgrounds/fontaine11_compressed.mp4"]'></div>
+    <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="/media/videos/backgrounds/mage_compressed.mp4" data-videos='["/media/videos/backgrounds/cascade_HD_compressed.mp4","/media/videos/backgrounds/fontaine11_compressed.mp4","/media/videos/backgrounds/Carte1_compressed.mp4","/media/videos/backgrounds/fontaine4_compressed.mp4","/media/videos/backgrounds/fontaine3_compressed.mp4","/media/videos/backgrounds/fontaine2_compressed.mp4","/media/videos/backgrounds/fontaine1_compressed.mp4","/media/videos/backgrounds/trip2_compressed.mp4"]'></div>
     <div class="absolute inset-0 bg-black/60"></div>
-    <div class="relative z-10 max-w-4xl p-6 hero-text">
+    <div class="relative z-10 max-w-3xl p-6 hero-text">
       <h1 class="text-5xl font-extrabold mb-6" data-i18n="gameHelp.hero.title">
         <?= __('gameHelp.hero.title', 'Guide des Triptyques') ?>
       </h1>
-      <p class="text-xl mb-8 txt-court" data-i18n="gameHelp.hero.subtitle">
+      <p class="text-xl mb-2 txt-court" data-i18n="gameHelp.hero.subtitle">
         <?= __('gameHelp.hero.subtitle', 'Maîtrisez vos fiches de personnage Geek & Dragon') ?>
       </p>
-      <div class="hero-cta flex flex-wrap justify-center gap-4">
-        <a href="#guide-triptyques" class="btn btn-primary"><?= __('gameHelp.buttons.discover', 'Découvrir les Triptyques') ?></a>
-        <a href="#guide-cartes" class="btn btn-primary"><?= __('gameHelp.buttons.cardsGuide', 'Guide des Cartes') ?></a>
-        <a href="#guide-monnaie" class="btn btn-primary"><?= __('gameHelp.buttons.moneyGuide', 'Guide de la Monnaie') ?></a>
-        <a href="<?= langUrl('boutique.php') ?>" class="btn btn-outline"><?= __('gameHelp.buttons.goToShop', 'Visiter la Boutique') ?></a>
-      </div>
+      <a href="#guide-triptyques" class="btn btn-primary" data-hide-price="1" data-i18n="gameHelp.buttons.discover">
+        <?= __('gameHelp.buttons.discover', 'Découvrir les Triptyques') ?>
+      </a>
     </div>
   </section>
 
