@@ -1088,12 +1088,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const cmpStatus = htmlElement.getAttribute('data-cmp-status');
     
     // Logging CMP réduit - uniquement pour les erreurs importantes
+    const isDebugMode = window.location.hash === '#debug' || window.location.search.includes('debug=1');
+
     if (cmpStatus === 'error') {
       console.warn('[GD] CMP: Erreur de chargement - Mode dégradé activé');
-    } else if (cmpStatus === 'timeout') {
-      console.warn('[GD] CMP: Timeout - Fonctionnement en mode essentiel');
+    } else if (cmpStatus === 'timeout' && isDebugMode) {
+      console.warn('[GD] CMP: Timeout - Fonctionnement en mode essentiel (debug)');
     }
-    // Note: Status 'loaded' ne log plus pour réduire le bruit console
+    // Note: Status 'loaded' et 'timeout' ne loggent plus par défaut pour réduire le bruit console
   };
   
   // Configuration des cookies e-commerce essentiels

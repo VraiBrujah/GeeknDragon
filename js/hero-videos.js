@@ -574,53 +574,47 @@
                 }
             });
 
-            // FORCE ABSOLUE - garantit la lecture perpétuelle (logique corrigée)
+            // Surveillance de récupération uniquement en cas de problème
             const forceGlobalLoop = () => {
                 if (document.visibilityState !== 'visible') return;
 
                 const allVideos = container.querySelectorAll('video');
                 if (allVideos.length === 0) return;
 
-                // Trouver la vidéo actuellement visible (opacity proche de 1)
-                let activeVideo = null;
+                // Vérifier s'il y a au moins une vidéo en lecture
+                let hasPlayingVideo = false;
                 for (const video of allVideos) {
-                    const opacity = parseFloat(video.style.opacity || '0');
-                    if (opacity > 0.5) { // Plus robuste que === '1'
-                        activeVideo = video;
-                        break; // IMPORTANT: sortir de la boucle dès qu'on trouve LA vidéo active
+                    if (!video.paused && !video.ended) {
+                        hasPlayingVideo = true;
+                        break;
                     }
                 }
 
-                // Si on a une vidéo active, s'assurer qu'elle joue
-                if (activeVideo) {
-                    if (activeVideo.paused || activeVideo.ended) {
-                        activeVideo.currentTime = 0;
-                        activeVideo.play().catch(() => {});
+                // Si aucune vidéo ne joue ET qu'il y a des vidéos, tenter récupération
+                if (!hasPlayingVideo) {
+                    // Trouver la vidéo visible ou la première
+                    let targetVideo = null;
+                    for (const video of allVideos) {
+                        const opacity = parseFloat(video.style.opacity || '0');
+                        if (opacity > 0.5) {
+                            targetVideo = video;
+                            break;
+                        }
                     }
-                } else {
-                    // Aucune vidéo visible : activer la première
-                    const firstVideo = allVideos[0];
-                    if (firstVideo) {
-                        // Masquer toutes les autres d'abord
-                        allVideos.forEach((v) => {
-                            if (v !== firstVideo) {
-                                v.style.opacity = '0';
-                                v.style.filter = 'blur(8px)';
-                                v.pause();
-                            }
-                        });
 
-                        // Activer la première
-                        firstVideo.style.opacity = '1';
-                        firstVideo.style.filter = 'blur(0)';
-                        firstVideo.currentTime = 0;
-                        firstVideo.play().catch(() => {});
+                    if (!targetVideo) {
+                        targetVideo = allVideos[0];
+                    }
+
+                    if (targetVideo && autoPlayAllowed) {
+                        targetVideo.currentTime = 0;
+                        targetVideo.play().catch(() => {});
                     }
                 }
             };
 
-            // Vérification plus modérée toutes les 5 secondes (évite les conflits d'extensions)
-            containerLoopInterval = setInterval(forceGlobalLoop, 5000);
+            // Vérification de récupération seulement toutes les 15 secondes (réduit les interférences)
+            containerLoopInterval = setInterval(forceGlobalLoop, 15000);
 
             // Nettoyage propre à la fermeture de page
             const cleanup = () => {

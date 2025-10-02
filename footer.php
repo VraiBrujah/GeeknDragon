@@ -30,23 +30,32 @@ switch ($currentPage) {
 
 <!-- Script de validation du chargement -->
 <script>
-// Vérification que les classes critiques sont disponibles
+// Vérification que les classes critiques sont disponibles (seulement sur les pages qui les utilisent)
 document.addEventListener('DOMContentLoaded', function() {
+    // Vérifier si la page nécessite ces classes (présence du convertisseur ou des outils)
+    const needsConverter = document.getElementById('currency-converter-premium');
+    const needsOptimizer = document.getElementById('coin-lots-recommendations');
+
+    // Ne vérifier que si les éléments sont présents
+    if (!needsConverter && !needsOptimizer) {
+        return; // Pas de vérification nécessaire sur cette page
+    }
+
     const requiredClasses = {
         'CurrencyConverterPremium': typeof CurrencyConverterPremium !== 'undefined',
         'CoinLotOptimizer': typeof CoinLotOptimizer !== 'undefined',
         'SnipcartUtils': typeof SnipcartUtils !== 'undefined'
     };
-    
+
     let missingClasses = [];
     for (const [className, isAvailable] of Object.entries(requiredClasses)) {
         if (!isAvailable) {
             missingClasses.push(className);
         }
     }
-    
+
     if (missingClasses.length > 0) {
-        console.warn('⚠️ Classes manquantes:', missingClasses);
+        console.warn('⚠️ Classes requises manquantes pour cette page:', missingClasses);
         
         // Tentative de rechargement des scripts individuels
         if (missingClasses.includes('CurrencyConverterPremium')) {
