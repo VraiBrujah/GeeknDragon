@@ -133,11 +133,11 @@ echo $snipcartInit;
           class="shop-quick-links flex flex-wrap items-center justify-center gap-3"
           aria-label="<?= __('shop.hero.quickLinks.ariaLabel', 'Navigation rapide vers les catégories de la boutique') ?>"
         >
-          <a href="#pieces" class="shop-quick-link btn btn-secondary" data-i18n="shop.hero.quickLinks.pieces">Monnaie</a>
-          <a href="#cartes" class="shop-quick-link btn btn-secondary" data-i18n="shop.hero.quickLinks.cards">Cartes</a>
-          <a href="#triptyques" class="shop-quick-link btn btn-secondary" data-i18n="shop.hero.quickLinks.triptychs">Triptyques</a>
+          <a href="#pieces" class="shop-quick-link shop-quick-link-coins btn btn-secondary" data-i18n="shop.hero.quickLinks.pieces">Monnaie</a>
+          <a href="#cartes" class="shop-quick-link shop-quick-link-cards btn btn-secondary" data-i18n="shop.hero.quickLinks.cards">Cartes</a>
+          <a href="#triptyques" class="shop-quick-link shop-quick-link-triptychs btn btn-secondary" data-i18n="shop.hero.quickLinks.triptychs">Triptyques</a>
           <div class="w-full"></div>
-          <a href="#bundle-deluxe" class="shop-quick-link shop-quick-link-featured btn btn-primary bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-500 hover:to-yellow-500 border-amber-500 shadow-lg shadow-amber-600/30" data-i18n="shop.hero.quickLinks.bundle">Coffre du Dragon</a>
+          <a href="#bundle-deluxe" class="shop-quick-link shop-quick-link-featured shop-quick-link-dragon btn btn-primary shadow-lg shadow-amber-600/30" data-i18n="shop.hero.quickLinks.bundle">Coffre du Dragon</a>
         </nav>
       </div>
   </section>

@@ -269,6 +269,109 @@ h6 {
   max-width: 100%;
 }
 
+/* Classes avec images de fond pour chaque type de bouton */
+.shop-quick-link-coins {
+  background-image: url('/media/ui/button/piece.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.shop-quick-link-coins::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: inherit;
+  transition: all 0.3s ease;
+}
+
+.shop-quick-link-coins:hover::before {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.shop-quick-link-cards {
+  background-image: url('/media/ui/button/carte.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.shop-quick-link-cards::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: inherit;
+  transition: all 0.3s ease;
+}
+
+.shop-quick-link-cards:hover::before {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.shop-quick-link-triptychs {
+  background-image: url('/media/ui/button/triptyque.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.shop-quick-link-triptychs::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: inherit;
+  transition: all 0.3s ease;
+}
+
+.shop-quick-link-triptychs:hover::before {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.shop-quick-link-dragon {
+  background-image: url('/media/ui/button/dragon.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 0, 0, 0.7);
+  border-color: rgba(245, 158, 11, 0.6);
+}
+
+.shop-quick-link-dragon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: inherit;
+  transition: all 0.3s ease;
+}
+
+.shop-quick-link-dragon:hover::before {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Assurer que le texte reste au-dessus de l'overlay */
+.shop-quick-link-coins > *,
+.shop-quick-link-cards > *,
+.shop-quick-link-triptychs > *,
+.shop-quick-link-dragon > * {
+  position: relative;
+  z-index: 1;
+}
+
 @media (max-width: 1024px) {
   .shop-quick-links {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1415,10 +1518,17 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
 /* Lien actif dans la navigation sticky */
 .shop-quick-links.sticky-active a.active {
   position: relative;
-  background: rgba(99, 102, 241, 0.2);
   border-color: rgba(99, 102, 241, 0.6);
   color: #a5b4fc;
   font-weight: 600;
+}
+
+/* Overlay plus foncé pour les liens actifs avec images de fond */
+.shop-quick-links.sticky-active a.active.shop-quick-link-coins::before,
+.shop-quick-links.sticky-active a.active.shop-quick-link-cards::before,
+.shop-quick-links.sticky-active a.active.shop-quick-link-triptychs::before,
+.shop-quick-links.sticky-active a.active.shop-quick-link-dragon::before {
+  background: rgba(99, 102, 241, 0.3);
 }
 
 /* Indicateur visuel sous le lien actif */
