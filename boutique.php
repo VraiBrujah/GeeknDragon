@@ -37,6 +37,11 @@ $extraHead = <<<HTML
     margin-right: -1.5rem;
     /* Ajouter du padding interne pour que les produits soient visibles */
     padding: 1.5rem;
+    /* Forcer l'alignement à gauche (écrase tout centrage hérité) */
+    justify-content: flex-start;
+    justify-items: stretch;
+    align-content: flex-start;
+    align-items: stretch;
     /* Scrollbar moderne */
     scrollbar-width: thin;
     scrollbar-color: #6366f1 #374151;
@@ -67,6 +72,11 @@ $extraHead = <<<HTML
       margin-left: -1.5rem;
       margin-right: -1.5rem;
       padding: 1rem 1.5rem;
+      /* Forcer l'alignement à gauche sur mobile aussi */
+      justify-content: flex-start;
+      justify-items: stretch;
+      align-content: flex-start;
+      align-items: stretch;
     }
   }
 </style>
