@@ -67,6 +67,7 @@ class ScriptLoader {
 
         // Scripts utilitaires (NON inclus dans le bundle)
         $this->loadScripts([
+            'header-scroll-animation',
             'hero-videos',
             'snipcart-utils',
             'account-icon-switcher',
@@ -85,6 +86,7 @@ class ScriptLoader {
 
         // Scripts spécifiques aide-jeux
         $this->loadScripts([
+            'header-scroll-animation',
             'hero-videos',
             'boutique-premium',
             'snipcart-utils',
@@ -131,6 +133,7 @@ function load_optimized_scripts($type = 'basic', $baseDir = null) {
             
         case 'main-bundle':
             $loader->loadMainBundle();
+            $loader->loadScript('header-scroll-animation');
             $loader->loadScript('hero-videos');
             $loader->loadScript('account-icon-switcher');
             break;
