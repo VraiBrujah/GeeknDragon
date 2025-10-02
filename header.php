@@ -29,6 +29,13 @@ $navItems = [
 ];
 
 $headerNavLinks = [
+  '/index.php' => [
+    'slug' => 'accueil',
+    'label' => 'Accueil',
+    'i18n' => 'nav.home',
+    'image' => '/media/ui/button/accueil.webp',
+    'class' => 'header-nav-icon'
+  ],
   '/boutique.php' => [
     'slug' => 'boutique',
     'label' => 'Boutique',

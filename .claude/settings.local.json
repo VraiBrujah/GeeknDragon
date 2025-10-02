@@ -15,7 +15,8 @@
       "Bash(npm run build:css:*)",
       "Bash(npm run:*)",
       "Bash(git add:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []
