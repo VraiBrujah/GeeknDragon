@@ -174,9 +174,9 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
   </div>
 
   <!-- LIGNE 2 : Navigation icônes -->
-  <div class="header-icon-nav border-t border-white/10 transition-all duration-300 overflow-x-auto" id="icon-nav">
+  <div class="header-icon-nav border-t border-white/10 transition-all duration-300 overflow-x-auto scrollbar-thin" id="icon-nav">
     <div class="max-w-7xl mx-auto px-4 md:px-6 py-2">
-      <nav class="flex items-center justify-start md:justify-center gap-2 md:gap-3" aria-label="Navigation principale">
+      <nav class="flex items-center justify-start md:justify-center gap-2 md:gap-3 flex-nowrap" aria-label="Navigation principale">
         <?php foreach ($headerNavLinks as $href => $item): ?>
           <a href="<?= langUrl($href) ?>"
              class="header-nav-icon-btn flex-shrink-0 aspect-square w-16 md:w-20 lg:w-24 overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/50"

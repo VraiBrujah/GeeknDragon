@@ -211,6 +211,26 @@ h6 {
   max-height: 120px;
   overflow: hidden;
   will-change: max-height, opacity;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 92, 246, 0.3) transparent;
+}
+
+.header-icon-nav::-webkit-scrollbar {
+  height: 4px;
+}
+
+.header-icon-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.header-icon-nav::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.3);
+  border-radius: 2px;
+}
+
+.header-icon-nav::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.5);
 }
 
 .header-icon-nav.hidden-nav {
