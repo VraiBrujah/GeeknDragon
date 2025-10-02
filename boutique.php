@@ -87,6 +87,13 @@ $extraHead = <<<HTML
       justify-items: stretch;
       align-content: flex-start;
       align-items: stretch;
+      /* Masquer la scrollbar sur mobile (scroll tactile natif) */
+      scrollbar-width: none;
+    }
+
+    /* Masquer scrollbar webkit sur mobile */
+    .shop-grid::-webkit-scrollbar {
+      display: none;
     }
   }
 </style>

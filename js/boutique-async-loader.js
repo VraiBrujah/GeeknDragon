@@ -138,8 +138,34 @@ class BoutiqueAsyncLoader {
         document.querySelectorAll('.shop-grid').forEach(grid => {
             grid.scrollLeft = 0;
 
+            // Détection du type d'appareil
+            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+            if (isTouchDevice) {
+                // Mobile/Tablette : scroll natif tactile (horizontal/vertical automatique selon le geste)
+                // Pas besoin d'intervention JavaScript, le CSS overflow gère tout
+                return;
+            }
+
+            // Desktop uniquement : scroll horizontal avec molette après délai
+            let scrollEnabled = false;
+            let hoverTimeout = null;
+
+            // Activer le scroll horizontal après 1 seconde de survol (PC seulement)
+            grid.addEventListener('mouseenter', () => {
+                hoverTimeout = setTimeout(() => {
+                    scrollEnabled = true;
+                }, 1000);
+            });
+
+            // Désactiver immédiatement quand on quitte la zone
+            grid.addEventListener('mouseleave', () => {
+                clearTimeout(hoverTimeout);
+                scrollEnabled = false;
+            });
+
             grid.addEventListener('wheel', (e) => {
-                if (Math.abs(e.deltaY) > 0) {
+                if (scrollEnabled && Math.abs(e.deltaY) > 0) {
                     e.preventDefault();
 
                     // Scroll direct sans animation pour éviter les saccades

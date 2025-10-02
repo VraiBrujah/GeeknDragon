@@ -102,6 +102,12 @@
             .shop-grid {
                 gap: 1rem;
                 padding: 0.75rem 0;
+                /* Masquer la scrollbar sur mobile (scroll tactile natif) */
+                scrollbar-width: none;
+            }
+
+            .shop-grid::-webkit-scrollbar {
+                display: none;
             }
 
             .product-card {
@@ -175,16 +181,48 @@
         // Forcer position initiale
         grid.scrollLeft = 0;
 
-        // Gérer le scroll avec la molette
-        grid.addEventListener('wheel', (e) => {
-            if (e.deltaY !== 0) {
-                e.preventDefault();
-                grid.scrollBy({
-                    left: e.deltaY,
-                    behavior: 'smooth'
-                });
-            }
-        }, { passive: false });
+        // Détection du type d'appareil
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+        if (isTouchDevice) {
+            // Mobile/Tablette : scroll natif tactile (horizontal/vertical automatique selon le geste)
+            console.log('📱 Appareil tactile détecté - scroll natif activé');
+            console.log('✅ Scroll horizontal: glisser le doigt horizontalement');
+            console.log('✅ Scroll vertical: glisser le doigt verticalement');
+        } else {
+            // Desktop uniquement : scroll horizontal avec molette après délai
+            let scrollEnabled = false;
+            let hoverTimeout = null;
+
+            // Activer le scroll horizontal après 1 seconde de survol (PC seulement)
+            grid.addEventListener('mouseenter', () => {
+                console.log('🖱️ Souris sur la grille - attente 1 seconde...');
+                hoverTimeout = setTimeout(() => {
+                    scrollEnabled = true;
+                    console.log('✅ Scroll horizontal activé');
+                }, 1000);
+            });
+
+            // Désactiver immédiatement quand on quitte la zone
+            grid.addEventListener('mouseleave', () => {
+                clearTimeout(hoverTimeout);
+                scrollEnabled = false;
+                console.log('❌ Scroll horizontal désactivé');
+            });
+
+            // Gérer le scroll avec la molette
+            grid.addEventListener('wheel', (e) => {
+                if (scrollEnabled && e.deltaY !== 0) {
+                    e.preventDefault();
+                    grid.scrollBy({
+                        left: e.deltaY,
+                        behavior: 'auto'
+                    });
+                }
+            }, { passive: false });
+
+            console.log('🖥️ Desktop détecté - scroll horizontal avec molette (délai 1s)');
+        }
 
         console.log('✅ Test scroll horizontal chargé');
         console.log('📍 Position initiale:', grid.scrollLeft);
