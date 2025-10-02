@@ -114,9 +114,10 @@
             "quickLinks": {
                 "title": "Quick links",
                 "ariaLabel": "Quick navigation to the shop categories",
-                "pieces": "Browse coins",
-                "cards": "Explore cards",
-                "triptychs": "View triptychs"
+                "pieces": "Coins",
+                "cards": "Cards",
+                "triptychs": "Triptychs",
+                "bundle": "Dragon's Vault"
             }
         },
         "intro": {

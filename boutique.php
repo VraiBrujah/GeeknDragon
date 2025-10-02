@@ -129,19 +129,15 @@ echo $snipcartInit;
       <div class="relative z-10 max-w-3xl p-6 hero-text">
         <h1 class="text-5xl font-extrabold mb-6" data-i18n="shop.hero.title">Boutique Geek & Dragon</h1>
         <p class="text-xl mb-8 txt-court" data-i18n="shop.hero.description">Offrez à vos parties l'élégance et la durabilité de pièces et cartes d'équipement conçues au Québec, plus précieuses qu'une figurine de dragon à 300 $, laquelle ne sert qu'exceptionnellement, nos pièces sont présentes à chaque session pour des années d'aventures.</p>
-        <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
-          <a href="#pieces" class="btn btn-primary" data-i18n="shop.hero.button">Choisir mes trésors</a>
-          <a href="#bundle-deluxe" class="btn btn-primary bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-500 hover:to-yellow-500 border-amber-500 shadow-lg shadow-amber-600/30" data-i18n="shop.hero.bundleButton">
-            <?= __('shop.hero.bundleButton', '⭐ Coffre du Dragon') ?>
-          </a>
-        </div>
         <nav
-          class="shop-quick-links mt-8 flex flex-wrap items-center justify-center gap-3"
+          class="shop-quick-links flex flex-wrap items-center justify-center gap-3"
           aria-label="<?= __('shop.hero.quickLinks.ariaLabel', 'Navigation rapide vers les catégories de la boutique') ?>"
         >
-          <a href="#pieces" class="shop-quick-link btn btn-secondary" data-i18n="shop.hero.quickLinks.pieces">Pièces métalliques</a>
-          <a href="#cartes" class="shop-quick-link btn btn-secondary" data-i18n="shop.hero.quickLinks.cartes">Cartes d'équipement</a>
-          <a href="#triptyques" class="shop-quick-link btn btn-secondary" data-i18n="shop.hero.quickLinks.triptyques">Triptyques mystères</a>
+          <a href="#pieces" class="shop-quick-link btn btn-secondary" data-i18n="shop.hero.quickLinks.pieces">Monnaie</a>
+          <a href="#cartes" class="shop-quick-link btn btn-secondary" data-i18n="shop.hero.quickLinks.cards">Cartes</a>
+          <a href="#triptyques" class="shop-quick-link btn btn-secondary" data-i18n="shop.hero.quickLinks.triptychs">Triptyques</a>
+          <div class="w-full"></div>
+          <a href="#bundle-deluxe" class="shop-quick-link shop-quick-link-featured btn btn-primary bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-500 hover:to-yellow-500 border-amber-500 shadow-lg shadow-amber-600/30" data-i18n="shop.hero.quickLinks.bundle">Coffre du Dragon</a>
         </nav>
       </div>
   </section>

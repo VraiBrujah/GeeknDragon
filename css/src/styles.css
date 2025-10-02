@@ -263,6 +263,12 @@ h6 {
   transform: translateX(4px);
 }
 
+/* Lien featured (Coffre du Dragon) - centré et plus large */
+.shop-quick-link-featured {
+  flex-basis: 100%;
+  max-width: 100%;
+}
+
 @media (max-width: 1024px) {
   .shop-quick-links {
     grid-template-columns: repeat(2, minmax(0, 1fr));

@@ -114,9 +114,10 @@
             "quickLinks": {
                 "title": "Accès rapide",
                 "ariaLabel": "Navigation rapide vers les catégories de la boutique",
-                "pieces": "Découvrir les pièces",
-                "cards": "Explorer les cartes",
-                "triptychs": "Voir les triptyques"
+                "pieces": "Monnaie",
+                "cards": "Cartes",
+                "triptychs": "Triptyques",
+                "bundle": "Coffre du Dragon"
             }
         },
         "intro": {
