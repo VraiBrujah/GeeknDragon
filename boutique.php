@@ -197,9 +197,48 @@ echo $snipcartInit;
   <section class="min-h-screen flex items-center justify-center text-center relative text-white">
     <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="/media/videos/backgrounds/coffreFic_compressed.mp4" data-videos='["/media/videos/backgrounds/cascade_HD_compressed.mp4","/media/videos/backgrounds/fontaine11_compressed.mp4","/media/videos/backgrounds/Carte1_compressed.mp4","/media/videos/backgrounds/fontaine4_compressed.mp4","/media/videos/backgrounds/fontaine3_compressed.mp4","/media/videos/backgrounds/fontaine2_compressed.mp4","/media/videos/backgrounds/fontaine1_compressed.mp4","/media/videos/backgrounds/trip2_compressed.mp4"]'></div>
     <div class="absolute inset-0 bg-black/60"></div>
-      <div class="relative z-10 max-w-3xl p-6 hero-text">
+      <div class="relative z-10 max-w-5xl p-6 hero-text">
         <h1 class="text-5xl font-extrabold mb-6" data-i18n="shop.hero.title">Boutique Geek & Dragon</h1>
         <p class="text-xl mb-8 txt-court" data-i18n="shop.hero.description">Offrez à vos parties l'élégance et la durabilité de pièces et cartes d'équipement conçues au Québec, plus précieuses qu'une figurine de dragon à 300 $, laquelle ne sert qu'exceptionnellement, nos pièces sont présentes à chaque session pour des années d'aventures.</p>
+
+        <!-- Navigation rapide vers les catégories -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 max-w-4xl mx-auto">
+          <a href="#pieces" class="group relative overflow-hidden rounded-xl border-2 border-amber-500/50 hover:border-amber-400 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-amber-500/30">
+            <div class="aspect-square relative">
+              <img src="/media/ui/button/piece.webp" alt="<?= __('shop.hero.quickLinks.pieces', 'Monnaie') ?>" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-4">
+                <span class="text-white font-bold text-lg md:text-xl tracking-wide" data-i18n="shop.hero.quickLinks.pieces">Monnaie</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="#cartes" class="group relative overflow-hidden rounded-xl border-2 border-blue-500/50 hover:border-blue-400 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30">
+            <div class="aspect-square relative">
+              <img src="/media/ui/button/carte.webp" alt="<?= __('shop.hero.quickLinks.cards', 'Cartes') ?>" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-4">
+                <span class="text-white font-bold text-lg md:text-xl tracking-wide" data-i18n="shop.hero.quickLinks.cards">Cartes</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="#triptyques" class="group relative overflow-hidden rounded-xl border-2 border-purple-500/50 hover:border-purple-400 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/30">
+            <div class="aspect-square relative">
+              <img src="/media/ui/button/triptyque.webp" alt="<?= __('shop.hero.quickLinks.triptychs', 'Triptyques') ?>" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-4">
+                <span class="text-white font-bold text-lg md:text-xl tracking-wide" data-i18n="shop.hero.quickLinks.triptychs">Triptyques</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="#bundle-deluxe" class="group relative overflow-hidden rounded-xl border-2 border-red-500/50 hover:border-red-400 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-red-500/30">
+            <div class="aspect-square relative">
+              <img src="/media/ui/button/dragon.webp" alt="<?= __('shop.hero.quickLinks.bundle', 'Coffre du Dragon') ?>" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-4">
+                <span class="text-white font-bold text-lg md:text-xl tracking-wide" data-i18n="shop.hero.quickLinks.bundle">Coffre du Dragon</span>
+              </div>
+            </div>
+          </a>
+        </div>
       </div>
   </section>
 
