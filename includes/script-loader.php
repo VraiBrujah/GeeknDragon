@@ -136,6 +136,8 @@ function load_optimized_scripts($type = 'basic', $baseDir = null) {
             $loader->loadScript('header-scroll-animation');
             $loader->loadScript('hero-videos');
             $loader->loadScript('account-icon-switcher');
+            $loader->loadScript('snipcart-utils'); // Pour ajout au panier
+            $loader->loadScript('shop-grid-scroll'); // Pour scroll horizontal produits
             break;
             
         case 'basic':

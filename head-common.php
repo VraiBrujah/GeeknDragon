@@ -46,6 +46,7 @@ if (is_string($gaMeasurementId)) {
   <link rel="stylesheet" href="/css/vendor.bundle.min.css?v=<?= filemtime(__DIR__.'/css/vendor.bundle.min.css') ?>" />
   <script src="/js/vendor.bundle.min.js?v=<?= filemtime(__DIR__.'/js/vendor.bundle.min.js') ?>"></script>
   <link rel="stylesheet" href="/css/styles.css?v=<?= filemtime(__DIR__.'/css/styles.css') ?>">
+  <link rel="stylesheet" href="/css/shop-grid.css?v=<?= filemtime(__DIR__.'/css/shop-grid.css') ?>">
   <?php if (!empty($gaMeasurementId)): ?>
     <!-- Google Analytics : chargement conditionnel après consentement CMP -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=<?= rawurlencode($gaMeasurementId) ?>"></script>

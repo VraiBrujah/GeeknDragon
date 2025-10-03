@@ -42,6 +42,24 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
       </div>
     </section>
 
+    <!-- ===== PRODUITS PHARES ===== -->
+    <?php
+    // Chargement des produits
+    $products = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true);
+
+    // Configuration de la section produits phares
+    $sectionId = 'featured-home';
+    $sectionTitle = __('home.featured.title', 'Produits Phares');
+    $productIds = [
+      'coin-merchant-essence-double',      // Essence du Marchand (pièces)
+      'cards-adventurer-arsenal-190',      // Arsenal de l'Aventurier (cartes)
+      'triptych-mystery-hero'              // Triptyques Mystères
+    ];
+
+    // Inclusion du partial réutilisable
+    include __DIR__ . '/partials/products-grid-section.php';
+    ?>
+
     <!-- ===== PRODUITS ===== -->
     <section id="produits" class="py-24 bg-gray-900/80 scroll-mt-24">
       <div class="max-w-6xl mx-auto px-6">
