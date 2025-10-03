@@ -155,18 +155,16 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       </div>
 
       <?php if ($snipcartKey): ?>
-      <!-- Compte + Panier côte à côte, alignés verticalement -->
-      <div class="flex items-center gap-3 h-12">
-        <button class="snipcart-customer-signin snipcart-btn flex items-center gap-2 hover:opacity-80 transition-opacity h-full" aria-label="Compte">
-          <img src="/media/branding/icons/compte_non_connecter.webp" alt="" class="w-6 h-6 account-icon-disconnected" width="24" height="24">
-          <img src="/media/branding/icons/compte_connecter.webp" alt="" class="w-6 h-6 account-icon-connected hidden" width="24" height="24">
-          <span class="text-white text-sm font-medium account-label" data-i18n="nav.account">Compte</span>
+      <!-- Compte + Panier : icônes uniquement, taille augmentée -->
+      <div class="flex items-center gap-4">
+        <button class="snipcart-customer-signin hover:scale-110 transition-transform duration-200" aria-label="Compte" title="Compte">
+          <img src="/media/branding/icons/compte_non_connecter.webp" alt="" class="w-10 h-10 account-icon-disconnected" width="40" height="40">
+          <img src="/media/branding/icons/compte_connecter.webp" alt="" class="w-10 h-10 account-icon-connected hidden" width="40" height="40">
         </button>
 
-        <button class="snipcart-checkout snipcart-btn flex items-center gap-2 hover:opacity-80 transition-opacity relative h-full" aria-label="Panier">
-          <img src="/media/branding/icons/panier.webp" alt="" class="w-6 h-6" width="24" height="24">
+        <button class="snipcart-checkout hover:scale-110 transition-transform duration-200 relative" aria-label="Panier" title="Panier">
+          <img src="/media/branding/icons/panier.webp" alt="" class="w-10 h-10" width="40" height="40">
           <span class="snipcart-items-count absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold"></span>
-          <span class="text-white text-sm font-medium" data-i18n="nav.cart">Panier</span>
         </button>
       </div>
       <?php endif; ?>
@@ -210,19 +208,15 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       </div>
 
       <?php if ($snipcartKey): ?>
-      <div class="flex flex-col w-full gap-6 pt-2">
-        <button class="snipcart-customer-signin snipcart-btn w-full text-center text-lg uppercase tracking-wide hover:opacity-80 transition-opacity duration-200 flex flex-col items-center gap-2" aria-label="Compte" title="Se connecter">
-          <img src="/media/branding/icons/compte_non_connecter.webp" alt="" class="w-8 h-8 account-icon-disconnected transition-all duration-300" width="32" height="32">
-          <img src="/media/branding/icons/compte_connecter.webp" alt="" class="w-8 h-8 account-icon-connected hidden transition-all duration-300" width="32" height="32">
-          <span class="account-label text-sm" data-i18n="nav.account">Se connecter</span>
+      <div class="flex items-center justify-center w-full gap-8 pt-2">
+        <button class="snipcart-customer-signin hover:scale-110 transition-transform duration-200" aria-label="Compte" title="Compte">
+          <img src="/media/branding/icons/compte_non_connecter.webp" alt="" class="w-12 h-12 account-icon-disconnected" width="48" height="48">
+          <img src="/media/branding/icons/compte_connecter.webp" alt="" class="w-12 h-12 account-icon-connected hidden" width="48" height="48">
         </button>
 
-        <button class="snipcart-checkout snipcart-btn w-full text-center text-lg uppercase tracking-wide hover:opacity-80 transition-opacity duration-200 flex flex-col items-center gap-2 relative" aria-label="Panier" title="Mon panier">
-          <div class="relative">
-            <img src="/media/branding/icons/panier.webp" alt="" class="w-8 h-8 transition-transform duration-200 hover:scale-110" width="32" height="32">
-            <span class="snipcart-items-count absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold"></span>
-          </div>
-          <span class="text-sm" data-i18n="nav.cart">Panier</span>
+        <button class="snipcart-checkout hover:scale-110 transition-transform duration-200 relative" aria-label="Panier" title="Panier">
+          <img src="/media/branding/icons/panier.webp" alt="" class="w-12 h-12" width="48" height="48">
+          <span class="snipcart-items-count absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold"></span>
         </button>
       </div>
       <?php endif; ?>
