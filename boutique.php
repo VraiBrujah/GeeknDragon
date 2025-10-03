@@ -564,9 +564,6 @@ echo $snipcartInit;
           <p data-i18n="shop.collective.description3">Complétez la <em>carte de propriété</em> ci‑contre en indiquant votre nom et le nombre de pièces achetées, signez-la et remettez vos trésors au maître de jeu. À la fin de la campagne, il vous les restituera sans difficulté.</p>
         </div>
       </div>
-
-      <!-- Logo Fabriqué au Québec en bas de section -->
-      <?php include __DIR__ . '/includes/logo-fabrique-qc.php'; ?>
     </div>
   </section>
   

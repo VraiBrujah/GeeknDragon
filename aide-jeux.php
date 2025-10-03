@@ -2330,28 +2330,34 @@ echo $snipcartInit;
       </p>
       
       <div class="flex flex-col md:flex-row gap-4 justify-center">
-        <a href="<?= langUrl('boutique.php#triptyques') ?>" class="btn btn-primary btn-triptyque text-lg px-6 py-4">
-          <?= __('callToAction.buttons.triptychs', '📁 Triptyques') ?>
+        <a href="<?= langUrl('boutique.php#triptyques') ?>"
+           class="btn btn-primary btn-triptyque"
+           aria-label="<?= __('callToAction.buttons.triptychs', 'Triptyques') ?>"
+           title="<?= __('callToAction.buttons.triptychs', 'Triptyques') ?>">
+          <span class="sr-only"><?= __('callToAction.buttons.triptychs', 'Triptyques') ?></span>
         </a>
-        <a href="<?= langUrl('boutique.php#cartes') ?>" class="btn btn-primary btn-carte text-lg px-6 py-4">
-          <?= __('callToAction.buttons.cards', '🃏 Cartes d\'Équipement') ?>
+        <a href="<?= langUrl('boutique.php#cartes') ?>"
+           class="btn btn-primary btn-carte"
+           aria-label="<?= __('callToAction.buttons.cards', 'Cartes d\'Équipement') ?>"
+           title="<?= __('callToAction.buttons.cards', 'Cartes d\'Équipement') ?>">
+          <span class="sr-only"><?= __('callToAction.buttons.cards', 'Cartes d\'Équipement') ?></span>
         </a>
-        <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-primary btn-piece text-lg px-6 py-4">
-          <?= __('callToAction.buttons.coins', '🪙 Pièces Métalliques') ?>
+        <a href="<?= langUrl('boutique.php#pieces') ?>"
+           class="btn btn-primary btn-piece"
+           aria-label="<?= __('callToAction.buttons.coins', 'Pièces Métalliques') ?>"
+           title="<?= __('callToAction.buttons.coins', 'Pièces Métalliques') ?>">
+          <span class="sr-only"><?= __('callToAction.buttons.coins', 'Pièces Métalliques') ?></span>
         </a>
-        <a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary btn-boutique text-lg px-6 py-4">
-          <?= __('callToAction.buttons.shop', '🛒 Voir toute la boutique') ?>
+        <a href="<?= langUrl('boutique.php') ?>"
+           class="btn btn-primary btn-boutique"
+           aria-label="<?= __('callToAction.buttons.shop', 'Voir toute la boutique') ?>"
+           title="<?= __('callToAction.buttons.shop', 'Voir toute la boutique') ?>">
+          <span class="sr-only"><?= __('callToAction.buttons.shop', 'Voir toute la boutique') ?></span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Section finale avec logo Fabriqué au Québec -->
-  <section class="py-8 bg-gray-900/80">
-    <div class="max-w-6xl mx-auto px-6">
-      <?php include __DIR__ . '/includes/logo-fabrique-qc.php'; ?>
-    </div>
-  </section>
 
 </main>
 
