@@ -36,11 +36,11 @@
 /* BASE SNIPCART OVERRIDE                                              */
 /* =================================================================== */
 
-/* Container principal */
+/* Container principal - TEXTE BLANC PAR DÉFAUT */
 #snipcart, .snipcart {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--gd-bg-primary) !important;
-  color: var(--gd-text-primary) !important;
+  color: #ffffff !important;
 
   /* Variables d'entrée réappliquées au scope dynamique de Snipcart */
   --bgColor-input: var(--gd-bg-secondary);
@@ -68,12 +68,13 @@
   border-color: var(--gd-border) !important;
 }
 
-/* Headers et titres */
+/* Headers et titres - CONTRASTE MAXIMAL */
 .snipcart h1, .snipcart h2, .snipcart h3,
 .snipcart .snipcart__font--title,
 .snipcart .snipcart__font--subtitle {
-  color: var(--gd-text-primary) !important;
-  font-weight: 600 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
 }
 
 /* =================================================================== */
@@ -125,12 +126,13 @@
   color: var(--gd-text-muted) !important;
 }
 
-/* Labels */
+/* Labels - PLUS VISIBLES */
 .snipcart label,
 .snipcart .snipcart-form__label {
-  color: var(--gd-text-secondary) !important;
-  font-weight: 500 !important;
-  margin-bottom: 6px !important;
+  color: #f1f5f9 !important;
+  font-weight: 600 !important;
+  margin-bottom: 8px !important;
+  font-size: 14px !important;
 }
 
 /* =================================================================== */
@@ -215,51 +217,53 @@
 /* BOUTONS                                                              */
 /* =================================================================== */
 
-/* Bouton principal */
+/* Bouton principal - CONTRASTE AMÉLIORÉ */
 .snipcart .snipcart__button--primary,
 .snipcart .snipcart-button-primary {
-  background: var(--gd-accent) !important;
-  color: white !important;
+  background: #10b981 !important;
+  color: #ffffff !important;
   border: none !important;
-  border-radius: 8px !important;
-  padding: 12px 24px !important;
-  font-weight: 600 !important;
-  font-size: 14px !important;
+  border-radius: 10px !important;
+  padding: 14px 28px !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
-  box-shadow: var(--gd-shadow) !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
 }
 
 .snipcart .snipcart-button-primary[disabled],
 .snipcart .snipcart-button-primary:disabled {
   cursor: not-allowed !important;
-  opacity: 0.6 !important;
-  background: rgba(139, 92, 246, 0.5) !important;
+  opacity: 0.5 !important;
+  background: #6b7280 !important;
   box-shadow: none !important;
 }
 
 .snipcart .snipcart__button--primary:hover {
-  background: #7c3aed !important;
-  transform: translateY(-1px) !important;
-  box-shadow: var(--gd-shadow-lg) !important;
+  background: #059669 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45) !important;
 }
 
-/* Boutons secondaires */
+/* Boutons secondaires - MEILLEUR CONTRASTE */
 .snipcart .snipcart__button--secondary,
 .snipcart .snipcart-button-secondary {
-  background: var(--gd-bg-secondary) !important;
-  color: var(--gd-text-primary) !important;
-  border: 2px solid var(--gd-border) !important;
-  border-radius: 8px !important;
+  background: transparent !important;
+  color: #ffffff !important;
+  border: 2px solid #cbd5e1 !important;
+  border-radius: 10px !important;
   padding: 12px 24px !important;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
 }
 
 .snipcart .snipcart__button--secondary:hover {
-  border-color: var(--gd-accent) !important;
-  color: var(--gd-accent) !important;
+  border-color: #10b981 !important;
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #10b981 !important;
 }
 
 /* Boutons quantité */
@@ -329,9 +333,10 @@
 
 .snipcart .snipcart-item-line__price,
 .snipcart .snipcart__font--large {
-  color: var(--gd-accent) !important;
+  color: #10b981 !important;
   font-weight: 700 !important;
   font-size: 18px !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
 }
 
 /* Bouton supprimer avec icône poubelle SVG */
@@ -609,12 +614,12 @@ select[id*="triptych"] {
   flex-basis: 180px !important;
 }
 
-/* Labels des dropdowns page produit */
+/* Labels des dropdowns page produit - BLANC POUR VISIBILITÉ */
 label[for*="metal"],
 label[for*="multiplier"],
 label[for*="language"],
 label[for*="triptych"] {
-  color: var(--gd-text-secondary) !important;
+  color: #ffffff !important;
   font-weight: 600 !important;
   font-size: 14px !important;
   margin-bottom: 8px !important;
@@ -634,10 +639,10 @@ div[class*="wrapper"] {
 /* UTILITAIRES                                                         */
 /* =================================================================== */
 
-/* Textes */
+/* Textes - BLANC AU LIEU DE GRIS */
 .snipcart .snipcart__font--small,
 .snipcart .snipcart__font--tiny {
-  color: var(--gd-text-muted) !important;
+  color: #f1f5f9 !important;
 }
 
 /* Liens */
@@ -704,7 +709,7 @@ div[class*="wrapper"] {
 }
 
 .snipcart .snipcart-discount-box .snipcart-input::placeholder {
-  color: var(--gd-text-muted) !important;
+  color: #94a3b8 !important;
 }
 
 /* Boutons code promo en bas */
@@ -980,4 +985,44 @@ div[class*="wrapper"] {
   background: #7c3aed !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 5px 12px rgba(139, 92, 246, 0.4) !important;
+}
+
+/* =================================================================== */
+/* CORRECTION GLOBALE - TOUS LES TEXTES EN BLANC                     */
+/* =================================================================== */
+
+/* Forcer TOUS les textes, spans, divs, p à être blancs */
+.snipcart *:not(input):not(select):not(option) {
+  color: #ffffff !important;
+}
+
+/* FORCER le texte des boutons en BLANC */
+.snipcart button,
+.snipcart button *,
+.snipcart .snipcart__button--primary,
+.snipcart .snipcart__button--primary *,
+.snipcart .snipcart-button-primary,
+.snipcart .snipcart-button-primary *,
+.snipcart .snipcart__button--secondary,
+.snipcart .snipcart__button--secondary *,
+.snipcart .snipcart-button-secondary,
+.snipcart .snipcart-button-secondary * {
+  color: #ffffff !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Textes secondaires restent légèrement gris mais lisibles */
+.snipcart .snipcart__font--small,
+.snipcart .snipcart__font--tiny,
+.snipcart [class*="secondary"] {
+  color: #e2e8f0 !important;
+}
+
+/* Prix et montants importants - vert éclatant */
+.snipcart .snipcart-summary-fees__amount,
+.snipcart .snipcart-cart-summary__amount,
+.snipcart [class*="amount"],
+.snipcart [class*="price"] {
+  color: #10b981 !important;
+  font-weight: 700 !important;
 }
