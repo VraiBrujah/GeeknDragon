@@ -957,7 +957,7 @@ echo $snipcartInit;
 <main id="main" class="pt-[var(--header-height)]">
 
   <!-- ===== HERO ===== -->
-  <section class="min-h-screen flex items-center justify-center text-center relative text-white">
+  <section id="hero-guides" class="min-h-screen flex items-center justify-center text-center relative text-white scroll-mt-24">
     <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="/media/videos/backgrounds/mage_compressed.mp4" data-videos='["/media/videos/backgrounds/cascade_HD_compressed.mp4","/media/videos/backgrounds/fontaine11_compressed.mp4","/media/videos/backgrounds/Carte1_compressed.mp4","/media/videos/backgrounds/fontaine4_compressed.mp4","/media/videos/backgrounds/fontaine3_compressed.mp4","/media/videos/backgrounds/fontaine2_compressed.mp4","/media/videos/backgrounds/fontaine1_compressed.mp4","/media/videos/backgrounds/trip2_compressed.mp4"]'></div>
     <div class="absolute inset-0 bg-black/60"></div>
     <div class="relative z-10 max-w-5xl p-6 hero-text">
@@ -1531,7 +1531,7 @@ echo $snipcartInit;
       
       <!-- Bouton de retour au hero -->
       <?php
-      $href = 'aide-jeux.php';
+      $href = '#hero-guides';
       $ariaLabel = __('gameHelp.backToMain', 'Retour aux guides principaux');
       include __DIR__ . '/partials/back-button.php';
       ?>
@@ -1758,7 +1758,7 @@ echo $snipcartInit;
       
       <!-- Bouton de retour au hero -->
       <?php
-      $href = 'aide-jeux.php';
+      $href = '#hero-guides';
       $ariaLabel = __('gameHelp.cards.backToMain', 'Retour aux guides principaux');
       include __DIR__ . '/partials/back-button.php';
       ?>
@@ -2313,7 +2313,7 @@ echo $snipcartInit;
       
       <!-- Bouton de retour au hero -->
       <?php
-      $href = 'aide-jeux.php';
+      $href = '#hero-guides';
       $ariaLabel = __('money.backToMain', 'Retour aux guides principaux');
       include __DIR__ . '/partials/back-button.php';
       ?>
