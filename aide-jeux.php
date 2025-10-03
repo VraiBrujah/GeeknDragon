@@ -63,9 +63,9 @@ $extraHead = <<<HTML
     padding: 12px !important;
   }
   
-  /* Assurer que les boutons sont assez grands pour le touch */
-  .btn,
-  button:not(.music-btn):not(#music-mute):not(#music-prev):not(#music-next):not(#music-play-pause) {
+  /* Assurer que les boutons sont assez grands pour le touch (sauf header et nav) */
+  main .btn,
+  main button:not(.music-btn):not(#music-mute):not(#music-prev):not(#music-next):not(#music-play-pause) {
     min-height: 44px !important;
     padding: 12px 16px !important;
     touch-action: manipulation !important;
@@ -875,94 +875,7 @@ $extraHead = <<<HTML
   }
 }
 
-/* === FIX NAVIGATION HEADER === */
-/* Force l'affichage de la navigation qui était masquée */
-@media (min-width: 768px) {
-  /* Forcer l'affichage de la navigation desktop */
-  header nav[aria-label="Navigation principale"] {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    position: static !important;
-    transform: none !important;
-  }
-  
-  /* Forcer l'affichage des liens de navigation */
-  header nav[aria-label="Navigation principale"] > ul {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-  
-  header nav[aria-label="Navigation principale"] > ul > li {
-    display: list-item !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-  
-  /* Masquer les sous-menus par défaut */
-  header nav[aria-label="Navigation principale"] li ul {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-  }
-  
-  /* Afficher les sous-menus seulement au hover */
-  header nav[aria-label="Navigation principale"] li:hover > ul {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-  
-  /* Plus spécifique : uniquement les liens DANS la navigation */
-  header nav[aria-label="Navigation principale"] ul a {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    color: white !important;
-  }
-  
-  header #lang-switcher {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-}
-
-/* Fix navigation mobile */
-@media (max-width: 767px) {
-  header nav[aria-label="Navigation principale"] {
-    display: none !important;
-  }
-  
-  header #mobile-menu {
-    display: none !important;
-  }
-  
-  header #menu-btn {
-    display: block !important;
-  }
-}
-
-/* Assurer que UNIQUEMENT les liens de navigation sont visibles - pas le titre */
-header nav[aria-label="Navigation principale"] .nav-link {
-  opacity: 1 !important;
-  visibility: visible !important;
-  color: white !important;
-}
-
-/* Assurer que les boutons langue sont visibles */
-header .flag-btn {
-  opacity: 1 !important;
-  visibility: visible !important;
-}
-
-/* S'assurer que le titre reste intact et visible */
-.site-title {
-  opacity: 1 !important;
-  visibility: visible !important;
-  color: white !important;
-}
+/* Header utilise les styles globaux - pas de surcharge ici */
 </style>
 HTML;
 
@@ -1047,41 +960,33 @@ echo $snipcartInit;
   <section class="min-h-screen flex items-center justify-center text-center relative text-white">
     <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="/media/videos/backgrounds/mage_compressed.mp4" data-videos='["/media/videos/backgrounds/cascade_HD_compressed.mp4","/media/videos/backgrounds/fontaine11_compressed.mp4","/media/videos/backgrounds/Carte1_compressed.mp4","/media/videos/backgrounds/fontaine4_compressed.mp4","/media/videos/backgrounds/fontaine3_compressed.mp4","/media/videos/backgrounds/fontaine2_compressed.mp4","/media/videos/backgrounds/fontaine1_compressed.mp4","/media/videos/backgrounds/trip2_compressed.mp4"]'></div>
     <div class="absolute inset-0 bg-black/60"></div>
-    <div class="relative z-10 max-w-3xl p-6 hero-text">
+    <div class="relative z-10 max-w-5xl p-6 hero-text">
       <h1 class="text-5xl font-extrabold mb-6" data-i18n="gameHelp.hero.title">
         <?= __('gameHelp.hero.title', 'Guide des Triptyques') ?>
       </h1>
-      <p class="text-xl mb-2 txt-court" data-i18n="gameHelp.hero.subtitle">
+      <p class="text-xl mb-8 txt-court" data-i18n="gameHelp.hero.subtitle">
         <?= __('gameHelp.hero.subtitle', 'Maîtrisez vos fiches de personnage Geek & Dragon') ?>
       </p>
-      <a href="#guide-triptyques" class="btn btn-primary" data-hide-price="1" data-i18n="gameHelp.buttons.discover">
-        <?= __('gameHelp.buttons.discover', 'Découvrir les Triptyques') ?>
-      </a>
-    </div>
-  </section>
 
-  <!-- ===== NAVIGATION RAPIDE ===== -->
-  <section id="menu-guides" class="py-12 bg-gray-800/50 scroll-mt-24">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-2xl font-bold text-center mb-8 text-white"><?= __('gameHelp.navigation.quickNav', 'Navigation Rapide') ?></h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <a href="#guide-triptyques" class="group bg-gradient-to-br from-indigo-900/50 to-purple-900/50 rounded-xl p-6 border border-indigo-500/30 hover:border-indigo-400/50 transition-all">
+      <!-- Navigation des guides -->
+      <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <a href="#guide-triptyques" class="group bg-gradient-to-br from-indigo-900/50 to-purple-900/50 rounded-xl p-6 border border-indigo-500/30 hover:border-indigo-400/50 transition-all backdrop-blur-sm">
           <div class="text-center">
             <div class="text-4xl mb-3">📜</div>
             <h3 class="text-xl font-bold text-indigo-400 mb-2"><?= __('gameHelp.navigation.triptychsGuide', 'Guide des Triptyques') ?></h3>
             <p class="text-gray-300 text-sm"><?= __('gameHelp.navigation.triptychsSubtitle', 'Espèce, Classe, Historique - D&D 2024') ?></p>
           </div>
         </a>
-        
-        <a href="#guide-cartes" class="group bg-gradient-to-br from-emerald-900/50 to-teal-900/50 rounded-xl p-6 border border-emerald-500/30 hover:border-emerald-400/50 transition-all">
+
+        <a href="#guide-cartes" class="group bg-gradient-to-br from-emerald-900/50 to-teal-900/50 rounded-xl p-6 border border-emerald-500/30 hover:border-emerald-400/50 transition-all backdrop-blur-sm">
           <div class="text-center">
             <div class="text-4xl mb-3">🃏</div>
             <h3 class="text-xl font-bold text-emerald-400 mb-2"><?= __('gameHelp.navigation.cardsGuide', 'Guide des Cartes') ?></h3>
             <p class="text-gray-300 text-sm"><?= __('gameHelp.navigation.cardsSubtitle', 'Armes, Équipements, Sorts') ?></p>
           </div>
         </a>
-        
-        <a href="#guide-monnaie" class="group bg-gradient-to-br from-amber-900/50 to-yellow-900/50 rounded-xl p-6 border border-amber-500/30 hover:border-amber-400/50 transition-all">
+
+        <a href="#guide-monnaie" class="group bg-gradient-to-br from-amber-900/50 to-yellow-900/50 rounded-xl p-6 border border-amber-500/30 hover:border-amber-400/50 transition-all backdrop-blur-sm">
           <div class="text-center">
             <div class="text-4xl mb-3">💰</div>
             <h3 class="text-xl font-bold text-amber-400 mb-2"><?= __('gameHelp.navigation.coinGuide', 'Guide de la Monnaie') ?></h3>
@@ -2176,8 +2081,12 @@ echo $snipcartInit;
           <!-- Image carte de propriété cliquable -->
           <div class="order-2 md:order-1 flex flex-col">
             <div class="bg-gray-800/30 rounded-xl p-6 border border-amber-600/20">
+              <?php
+              // Détection automatique de la langue pour l'image de la carte de propriété
+              $carteProprietePath = ($lang === 'en') ? '/media/content/carte_propriete-en.webp' : '/media/content/carte_propriete.webp';
+              ?>
               <div class="relative group cursor-pointer" onclick="downloadMoneySheet()">
-                <img src="/media/content/carte_propriete.webp" alt="<?= __('gameHelp.images.propertyCard', 'Carte de propriété des pièces Geek & Dragon') ?>" 
+                <img src="<?= $carteProprietePath ?>" alt="<?= __('gameHelp.images.propertyCard', 'Carte de propriété des pièces Geek & Dragon') ?>"
                      class="rounded-lg shadow-lg w-full object-cover border border-amber-600/30 transition-all duration-300 group-hover:shadow-2xl group-hover:scale-105" loading="lazy">
                 
                 <!-- Overlay de téléchargement au survol -->
@@ -2738,10 +2647,14 @@ function closeDownloadPopup() {
 }
 
 function confirmDownload() {
-    // Lancer le téléchargement
+    // Lancer le téléchargement avec détection automatique de la langue
+    const currentLang = document.documentElement.lang || 'fr';
+    const imagePath = (currentLang === 'en') ? '/media/content/carte_propriete-en.webp' : '/media/content/carte_propriete.webp';
+    const fileName = (currentLang === 'en') ? 'currency-sheet-geek-dragon.webp' : 'fiche-monnaie-geek-dragon.webp';
+
     const link = document.createElement('a');
-    link.href = '/media/content/carte_propriete.webp';
-    link.download = 'fiche-monnaie-geek-dragon.webp';
+    link.href = imagePath;
+    link.download = fileName;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

@@ -504,7 +504,11 @@ echo $snipcartInit;
   <section class="py-16 bg-gray-900/80">
     <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
       <div class="md:w-1/3">
-        <img src="/media/content/carte_propriete.webp" alt="Carte de propriété à remplir" class="rounded-xl shadow-lg w-full object-cover" loading="lazy">
+        <?php
+        // Détection automatique de la langue pour l'image de la carte de propriété
+        $carteProprietePath = ($lang === 'en') ? '/media/content/carte_propriete-en.webp' : '/media/content/carte_propriete.webp';
+        ?>
+        <img src="<?= $carteProprietePath ?>" alt="<?= __('shop.collective.propertyCard.alt', 'Carte de propriété à remplir') ?>" class="rounded-xl shadow-lg w-full object-cover" loading="lazy">
       </div>
       <div class="md:w-2/3 text-gray-200 space-y-4">
         <h3 class="text-3xl font-bold" data-i18n="shop.collective.title">Investissez ensemble, partagez l’aventure</h3>

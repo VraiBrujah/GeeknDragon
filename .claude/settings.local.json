@@ -17,7 +17,12 @@
       "Bash(git add:*)",
       "Bash(cat:*)",
       "Bash(curl:*)",
-      "Bash(start test-scroll.html)"
+      "Bash(start test-scroll.html)",
+      "Bash(dir:*)",
+      "Bash(start http://localhost/test-header.php)",
+      "Bash(start test-header.php)",
+      "Bash(php -r \"include ''''header.php'''';\")",
+      "Bash(start http://localhost/aide-jeux.php)"
     ],
     "deny": [],
     "ask": []
