@@ -169,11 +169,6 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
           <p class="mb-2 txt-court"><a href="mailto:contact@geekndragon.com" class="text-indigo-400 hover:underline">contact@geekndragon.com</a></p>
           <p class="mb-4 txt-court"><a href="mailto:commande@geekndragon.com" class="text-indigo-400 hover:underline">commande@geekndragon.com</a></p>
 
-          <!-- Logo Fabriqué au Québec -->
-          <div class="inline-flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl px-4 py-2 my-6">
-            <img src="/media/branding/logos/logo_fabrique_qc.png" alt="Fabriqué au Québec" class="h-auto" loading="lazy">
-          </div>
-
           <div class="mt-6">
             <a href="<?= langUrl('index.php#contact') ?>" class="btn btn-primary" data-i18n="contact.requestQuote">
               Demander un devis

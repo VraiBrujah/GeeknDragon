@@ -1,5 +1,12 @@
 <footer class="bg-gray-800 py-6 text-center text-gray-400 txt-court">
-  © <?= date('Y'); ?> Geek & Dragon — <span data-i18n="footer.made">Conçu au Québec.</span>
+  <div class="flex flex-col items-center justify-center gap-4">
+    <div class="inline-flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2">
+      <img src="/media/branding/logos/logo_fabrique_qc.png" alt="Fabriqué au Québec" class="h-auto" loading="lazy">
+    </div>
+    <div>
+      © <?= date('Y'); ?> Geek & Dragon — <span data-i18n="footer.made">Conçu au Québec.</span>
+    </div>
+  </div>
 </footer>
 
 <?php

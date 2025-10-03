@@ -125,6 +125,13 @@ $ogImage = '/media/content/es_tu_game_demo.webp';
 
       </div>
     </section>
+
+    <!-- Section finale avec logo Fabriqué au Québec -->
+    <section class="py-8 bg-gray-900/80">
+      <div class="max-w-6xl mx-auto px-6">
+        <?php include __DIR__ . '/../includes/logo-fabrique-qc.php'; ?>
+      </div>
+    </section>
   </main>
 
   <?php include '../footer.php'; ?>

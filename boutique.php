@@ -541,20 +541,25 @@ echo $snipcartInit;
   
   <!-- ===== Investissement collectif & Carte de propriété ===== -->
   <section class="py-16 bg-gray-900/80">
-    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
-      <div class="md:w-1/3">
-        <?php
-        // Détection automatique de la langue pour l'image de la carte de propriété
-        $carteProprietePath = ($lang === 'en') ? '/media/content/carte_propriete-en.webp' : '/media/content/carte_propriete.webp';
-        ?>
-        <img src="<?= $carteProprietePath ?>" alt="<?= __('shop.collective.propertyCard.alt', 'Carte de propriété à remplir') ?>" class="rounded-xl shadow-lg w-full object-cover" loading="lazy">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row items-center gap-10 mb-12">
+        <div class="md:w-1/3">
+          <?php
+          // Détection automatique de la langue pour l'image de la carte de propriété
+          $carteProprietePath = ($lang === 'en') ? '/media/content/carte_propriete-en.webp' : '/media/content/carte_propriete.webp';
+          ?>
+          <img src="<?= $carteProprietePath ?>" alt="<?= __('shop.collective.propertyCard.alt', 'Carte de propriété à remplir') ?>" class="rounded-xl shadow-lg w-full object-cover" loading="lazy">
+        </div>
+        <div class="md:w-2/3 text-gray-200 space-y-4">
+          <h3 class="text-3xl font-bold" data-i18n="shop.collective.title">Investissez ensemble, partagez l'aventure</h3>
+          <p data-i18n="shop.collective.description1">Ne laissez pas le maître de jeu se ruiner pour votre plaisir&nbsp;: chaque joueur pourra bientôt contribuer en achetant son triptyque, ses cartes et ses pièces.</p>
+          <p data-i18n="shop.collective.description2">À titre de comparaison, certaines figurines de dragon se vendent plus de <strong>300&nbsp;$</strong> l'unité et ne sont généralement utilisées qu'une seule fois dans toute une campagne — et encore, seulement lorsque le scénario le permet, car ce n'est pas systématique. Nos pièces, elles, servent à chaque session et pour des années de campagne.</p>
+          <p data-i18n="shop.collective.description3">Complétez la <em>carte de propriété</em> ci‑contre en indiquant votre nom et le nombre de pièces achetées, signez-la et remettez vos trésors au maître de jeu. À la fin de la campagne, il vous les restituera sans difficulté.</p>
+        </div>
       </div>
-      <div class="md:w-2/3 text-gray-200 space-y-4">
-        <h3 class="text-3xl font-bold" data-i18n="shop.collective.title">Investissez ensemble, partagez l’aventure</h3>
-        <p data-i18n="shop.collective.description1">Ne laissez pas le maître de jeu se ruiner pour votre plaisir&nbsp;: chaque joueur pourra bientôt contribuer en achetant son triptyque, ses cartes et ses pièces.</p>
-        <p data-i18n="shop.collective.description2">À titre de comparaison, certaines figurines de dragon se vendent plus de <strong>300&nbsp;$</strong> l'unité et ne sont généralement utilisées qu’une seule fois dans toute une campagne — et encore, seulement lorsque le scénario le permet, car ce n’est pas systématique. Nos pièces, elles, servent à chaque session et pour des années de campagne.</p>
-        <p data-i18n="shop.collective.description3">Complétez la <em>carte de propriété</em> ci‑contre en indiquant votre nom et le nombre de pièces achetées, signez-la et remettez vos trésors au maître de jeu. À la fin de la campagne, il vous les restituera sans difficulté.</p>
-      </div>
+
+      <!-- Logo Fabriqué au Québec en bas de section -->
+      <?php include __DIR__ . '/includes/logo-fabrique-qc.php'; ?>
     </div>
   </section>
   
