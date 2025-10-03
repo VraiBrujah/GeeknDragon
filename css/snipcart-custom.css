@@ -1026,3 +1026,120 @@ div[class*="wrapper"] {
   color: #10b981 !important;
   font-weight: 700 !important;
 }
+
+/* =================================================================== */
+/* PROMOTIONS DYNAMIQUES - AFFICHAGE SANS POPUP                      */
+/* =================================================================== */
+
+/* Masquer la ligne "Promotions" avec popup Snipcart */
+.snipcart .snipcart-cart-summary-item[data-gd-hidden="true"],
+.snipcart .snipcart-summary-fees__item[data-gd-hidden="true"] {
+  display: none !important;
+}
+
+/* Ligne de promotion appliquée */
+.snipcart .__gd-promo-line {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 12px 0 !important;
+  border-bottom: 1px solid var(--gd-border, rgba(255,255,255,0.1)) !important;
+  color: var(--gd-success, #10b981) !important;
+  font-size: 0.95rem !important;
+  background: transparent !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Animation d'apparition douce */
+@keyframes fadeInPromo {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.snipcart .__gd-promo-line {
+  animation: fadeInPromo 0.4s ease-out !important;
+}
+
+/* Nom de la promotion */
+.snipcart .__gd-promo-name {
+  flex: 1 !important;
+  font-weight: 500 !important;
+  color: var(--gd-success, #10b981) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+/* Icône de promotion (optionnel) */
+.snipcart .__gd-promo-name::before {
+  content: "🎁" !important;
+  font-size: 1.1rem !important;
+  display: inline-block !important;
+}
+
+/* Montant de la réduction */
+.snipcart .__gd-promo-amount {
+  font-weight: 600 !important;
+  color: var(--gd-success, #10b981) !important;
+  white-space: nowrap !important;
+  margin-left: 12px !important;
+}
+
+/* Effet de survol sur les lignes de promotion */
+.snipcart .__gd-promo-line:hover {
+  background: rgba(16, 185, 129, 0.05) !important;
+  padding-left: 8px !important;
+  border-radius: 6px !important;
+}
+
+/* Ligne de séparation après les promotions */
+.snipcart .__gd-promo-line:last-of-type {
+  margin-bottom: 8px !important;
+  border-bottom: 2px solid var(--gd-success, #10b981) !important;
+  padding-bottom: 16px !important;
+}
+
+/* Ajustement de l'espacement pour le sous-total */
+.snipcart .snipcart-cart-summary-item--subtotal {
+  margin-top: 8px !important;
+  padding-top: 16px !important;
+  border-top: 2px solid var(--gd-border, rgba(255,255,255,0.2)) !important;
+}
+
+/* Message "Économie totale" (si plusieurs promotions) */
+.snipcart .__gd-promo-total {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 16px 0 !important;
+  margin-top: 8px !important;
+  border-top: 2px solid var(--gd-success, #10b981) !important;
+  border-bottom: 2px solid var(--gd-success, #10b981) !important;
+  font-weight: 700 !important;
+  font-size: 1.05rem !important;
+  color: var(--gd-success, #10b981) !important;
+  background: rgba(16, 185, 129, 0.1) !important;
+  border-radius: 8px !important;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+}
+
+/* Badge de promotion (nombre de promos appliquées) */
+.snipcart .__gd-promo-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: var(--gd-success, #10b981) !important;
+  color: white !important;
+  border-radius: 12px !important;
+  padding: 2px 8px !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  margin-left: 8px !important;
+}

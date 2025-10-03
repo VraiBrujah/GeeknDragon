@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Affichage Promotions Dynamiques - Geek & Dragon</title>
+
+  <!-- Variables CSS -->
+  <style>
+    :root {
+      --gd-bg-primary: #0f172a;
+      --gd-bg-secondary: #1e293b;
+      --gd-bg-tertiary: #334155;
+      --gd-text-primary: #f8fafc;
+      --gd-text-secondary: #cbd5e1;
+      --gd-text-muted: #94a3b8;
+      --gd-border: #475569;
+      --gd-accent: #8b5cf6;
+      --gd-focus: #22d3ee;
+      --gd-success: #10b981;
+      --gd-error: #ef4444;
+      --gd-header-h: 96px;
+    }
+
+    body {
+      background: var(--gd-bg-primary);
+      color: var(--gd-text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      padding: 40px;
+      margin: 0;
+    }
+
+    .test-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: var(--gd-success);
+      margin-bottom: 30px;
+    }
+
+    .info-box {
+      background: var(--gd-bg-secondary);
+      border: 2px solid var(--gd-border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .info-box h2 {
+      color: var(--gd-accent);
+      margin-top: 0;
+    }
+
+    .info-box ul {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+
+    .info-box li {
+      margin: 8px 0;
+      color: var(--gd-text-secondary);
+    }
+
+    .test-button {
+      background: var(--gd-success);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin: 10px 10px 10px 0;
+    }
+
+    .test-button:hover {
+      background: #059669;
+      transform: translateY(-2px);
+    }
+
+    .test-button.secondary {
+      background: var(--gd-accent);
+    }
+
+    .test-button.secondary:hover {
+      background: #7c3aed;
+    }
+
+    .preview-summary {
+      background: var(--gd-bg-secondary);
+      border: 1px solid var(--gd-border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 30px;
+    }
+
+    .preview-summary h3 {
+      color: var(--gd-text-primary);
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    /* Styles des promotions (identiques à snipcart-custom.css) */
+    .__gd-promo-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--gd-border);
+      color: var(--gd-success);
+      font-size: 0.95rem;
+      animation: fadeInPromo 0.4s ease-out;
+    }
+
+    @keyframes fadeInPromo {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .__gd-promo-name {
+      flex: 1;
+      font-weight: 500;
+      color: var(--gd-success);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .__gd-promo-name::before {
+      content: "🎁";
+      font-size: 1.1rem;
+    }
+
+    .__gd-promo-amount {
+      font-weight: 600;
+      color: var(--gd-success);
+      white-space: nowrap;
+      margin-left: 12px;
+    }
+
+    .__gd-promo-line:hover {
+      background: rgba(16, 185, 129, 0.05);
+      padding-left: 8px;
+      border-radius: 6px;
+    }
+
+    .__gd-promo-line:last-of-type {
+      margin-bottom: 8px;
+      border-bottom: 2px solid var(--gd-success);
+      padding-bottom: 16px;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--gd-border);
+    }
+
+    .summary-item.subtotal {
+      margin-top: 8px;
+      padding-top: 16px;
+      border-top: 2px solid var(--gd-border);
+    }
+
+    .summary-item.total {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--gd-success);
+      margin-top: 12px;
+      padding-top: 16px;
+      border-top: 2px solid var(--gd-accent);
+    }
+
+    .status {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+
+    .status.success {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--gd-success);
+    }
+
+    .status.info {
+      background: rgba(34, 211, 238, 0.2);
+      color: var(--gd-focus);
+    }
+
+    code {
+      background: var(--gd-bg-primary);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--gd-focus);
+      font-family: 'Courier New', monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <h1>🧪 Test Affichage Promotions Dynamiques</h1>
+
+    <div class="info-box">
+      <h2>📋 Instructions de Test</h2>
+      <ul>
+        <li>Cliquez sur <strong>"Simuler Promotions"</strong> pour afficher 3 promotions exemple</li>
+        <li>Vérifiez que les promotions apparaissent <strong>avant le sous-total</strong></li>
+        <li>Confirmez que le sous-total, livraison, taxes et total sont <strong>décalés vers le bas</strong></li>
+        <li>Testez le bouton <strong>"Effacer"</strong> pour supprimer les promotions</li>
+        <li>Survolez les lignes de promotion pour voir l'<strong>effet de hover</strong></li>
+      </ul>
+    </div>
+
+    <div class="info-box">
+      <h2>✅ Points de Vérification</h2>
+      <ul>
+        <li>Icône cadeau 🎁 devant chaque promotion <span class="status success">✓</span></li>
+        <li>Couleur verte (#10b981) pour les montants <span class="status success">✓</span></li>
+        <li>Animation fadeIn à l'apparition <span class="status success">✓</span></li>
+        <li>Bordure verte en bas de la dernière promotion <span class="status success">✓</span></li>
+        <li>Séparation claire entre promotions et sous-total <span class="status success">✓</span></li>
+      </ul>
+    </div>
+
+    <div>
+      <button class="test-button" onclick="simulatePromotions()">🎁 Simuler Promotions</button>
+      <button class="test-button secondary" onclick="clearPromotions()">🗑️ Effacer</button>
+      <button class="test-button secondary" onclick="simulateOnePromo()">1️⃣ Une Seule Promotion</button>
+    </div>
+
+    <div class="preview-summary">
+      <h3>Aperçu Résumé du Panier</h3>
+      <div id="promo-container">
+        <!-- Les promotions seront insérées ici -->
+      </div>
+      <div class="summary-item subtotal">
+        <span>Sous-total</span>
+        <span>500,00 $</span>
+      </div>
+      <div class="summary-item">
+        <span>Livraison</span>
+        <span>17,00 $</span>
+      </div>
+      <div class="summary-item">
+        <span>Taxes</span>
+        <span>36,49 $</span>
+      </div>
+      <div class="summary-item total">
+        <span>TOTAL</span>
+        <span>553,49 $</span>
+      </div>
+    </div>
+
+    <div class="info-box" style="margin-top: 30px;">
+      <h2>🔧 Implémentation Snipcart</h2>
+      <p>Dans le panier Snipcart réel, les promotions sont extraites via :</p>
+      <pre style="background: var(--gd-bg-primary); padding: 15px; border-radius: 8px; overflow-x: auto;"><code>const cart = window.Snipcart?.store?.getState()?.cart;
+const discounts = cart.discounts || [];
+
+discounts.forEach((discount, index) => {
+  // Créer ligne de promotion
+  // Format: discount.name, discount.amount, discount.rate
+});</code></pre>
+      <p style="margin-top: 15px;">
+        <strong>Événements écoutés :</strong>
+        <code>discount.applied</code>,
+        <code>discount.removed</code>,
+        <code>cart.opened</code>,
+        <code>item.updated</code>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    /**
+     * Simule l'affichage de 3 promotions
+     */
+    function simulatePromotions() {
+      const container = document.getElementById('promo-container');
+
+      // Effacer les promotions existantes
+      container.innerHTML = '';
+
+      // Promotions exemple (identiques aux logs de la console)
+      const promos = [
+        { name: 'Cadeau Livraison Gratuite - 17$ de réduction', amount: -17.00 },
+        { name: 'Partez à l\'Aventure Game - 10% de réduction', rate: 0.10 },
+        { name: 'Geek & Dragon Livraison', amount: -5.00 }
+      ];
+
+      promos.forEach((promo, index) => {
+        const promoLine = document.createElement('div');
+        promoLine.className = '__gd-promo-line';
+
+        const nameSpan = document.createElement('span');
+        nameSpan.className = '__gd-promo-name';
+        nameSpan.textContent = promo.name;
+
+        const amountSpan = document.createElement('span');
+        amountSpan.className = '__gd-promo-amount';
+
+        if (promo.amount) {
+          amountSpan.textContent = formatCurrency(promo.amount);
+        } else if (promo.rate) {
+          amountSpan.textContent = `-${(promo.rate * 100).toFixed(0)}%`;
+        }
+
+        promoLine.appendChild(nameSpan);
+        promoLine.appendChild(amountSpan);
+        container.appendChild(promoLine);
+      });
+
+      console.log('✅ 3 promotions affichées');
+    }
+
+    /**
+     * Simule l'affichage d'une seule promotion
+     */
+    function simulateOnePromo() {
+      const container = document.getElementById('promo-container');
+      container.innerHTML = '';
+
+      const promoLine = document.createElement('div');
+      promoLine.className = '__gd-promo-line';
+
+      const nameSpan = document.createElement('span');
+      nameSpan.className = '__gd-promo-name';
+      nameSpan.textContent = 'Promotion Spéciale - 20% de réduction';
+
+      const amountSpan = document.createElement('span');
+      amountSpan.className = '__gd-promo-amount';
+      amountSpan.textContent = '-20%';
+
+      promoLine.appendChild(nameSpan);
+      promoLine.appendChild(amountSpan);
+      container.appendChild(promoLine);
+
+      console.log('✅ 1 promotion affichée');
+    }
+
+    /**
+     * Efface toutes les promotions
+     */
+    function clearPromotions() {
+      const container = document.getElementById('promo-container');
+      container.innerHTML = '';
+      console.log('🗑️ Promotions effacées');
+    }
+
+    /**
+     * Formate un montant en devise
+     */
+    function formatCurrency(amount) {
+      return new Intl.NumberFormat('fr-CA', {
+        style: 'currency',
+        currency: 'CAD'
+      }).format(amount);
+    }
+
+    // Affiche automatiquement les promotions au chargement de la page
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('🧪 Page de test chargée - Prêt pour les tests');
+      console.log('📍 Répertoire de travail : E:\\GitHub\\GeeknDragon');
+    });
+  </script>
+</body>
+</html>

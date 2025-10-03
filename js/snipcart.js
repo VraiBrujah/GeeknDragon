@@ -199,15 +199,244 @@
     if (!root || root.__observerMounted) return;
 
     const obs = new MutationObserver((mutations) => {
+      let shouldUpdatePromotions = false;
+
       for (const m of mutations) {
         if (m.type === 'childList') {
+          // Traiter les lignes d'articles
           $$('.snipcart-item-line', m.target).forEach(processItemLine);
+
+          // Vérifier si le résumé du panier a été modifié
+          if (m.target.classList?.contains('snipcart-cart-summary') ||
+              m.target.classList?.contains('snipcart-checkout__content--summary') ||
+              m.target.classList?.contains('snipcart-summary') ||
+              m.target.querySelector?.('.snipcart-cart-summary, .snipcart-checkout__content--summary, .snipcart-summary')) {
+            shouldUpdatePromotions = true;
+          }
         }
+      }
+
+      // Rafraîchir les promotions si le résumé a changé
+      if (shouldUpdatePromotions) {
+        setTimeout(displayPromotionsDynamically, 50);
       }
     });
 
     obs.observe(root, { subtree: true, childList: true });
     root.__observerMounted = true;
+  }
+
+  /**
+   * Masque la ligne "Promotions" avec popup et affiche les détails
+   */
+  function hidePromotionsPopup() {
+    // Masquer la ligne "Promotions" qui ouvre le popup
+    const promoLines = $$('.snipcart-cart-summary-item, .snipcart-summary-fees__item');
+    promoLines.forEach(line => {
+      const text = line.textContent || '';
+      if (text.includes('Promotions') || text.includes('Promotion')) {
+        // Vérifier si c'est bien la ligne avec le montant total des promos
+        const amountSpan = $('.snipcart-cart-summary-fees__amount', line) ||
+                          $('.snipcart-summary-fees__amount', line);
+        if (amountSpan && amountSpan.textContent.includes('-')) {
+          line.style.display = 'none';
+          line.setAttribute('data-gd-hidden', 'true');
+        }
+      }
+    });
+
+    // Masquer aussi le bouton/lien qui ouvre le popup
+    $$('button, a').forEach(el => {
+      const text = el.textContent || '';
+      if (text.includes('Promotions') && el.closest('.snipcart-cart-summary-item')) {
+        el.style.display = 'none';
+      }
+    });
+  }
+
+  /**
+   * Affiche les promotions appliquées dynamiquement dans le panier
+   * Les promotions sont extraites du panier et affichées les unes après les autres
+   * sans popup, décalant automatiquement le sous-total, livraison, taxes et total
+   */
+  function displayPromotionsDynamically() {
+    try {
+      // Trouver la section résumé du panier avec TOUS les sélecteurs possibles
+      const summarySection =
+        $('.snipcart-cart-summary') ||
+        $('.snipcart-checkout__content--summary') ||
+        $('.snipcart-summary') ||
+        $('.snipcart__box--summary') ||
+        $('.snipcart-summary-fees') ||
+        $('[class*="summary"]');
+
+      if (!summarySection) {
+        console.warn('⚠️ Section résumé du panier non trouvée');
+        // Essayer de trouver n'importe quel élément contenant "sous-total"
+        const allElements = $$('*');
+        const foundElement = allElements.find(el => el.textContent?.toLowerCase().includes('sous-total'));
+        if (foundElement) {
+          console.log('✅ Élément contenant "sous-total" trouvé, utilisation du parent');
+          return displayPromotionsDynamically.call(null, foundElement.closest('[class*="summary"]') || foundElement.parentElement);
+        }
+        return;
+      }
+
+      // Récupérer les données du panier via l'API Snipcart
+      const cart = window.Snipcart?.store?.getState()?.cart;
+      if (!cart) {
+        console.warn('⚠️ Données du panier non disponibles');
+        return;
+      }
+
+      // Extraire les promotions depuis les discount - SÉCURITÉ : vérifier que c'est un tableau
+      let discounts = cart.discounts;
+
+      // Debug : afficher la structure
+      console.log('🔍 cart.discounts brut:', discounts);
+      console.log('🔍 Type de discounts:', typeof discounts, 'IsArray:', Array.isArray(discounts));
+
+      // Si discounts n'est pas un tableau, essayer de le convertir
+      if (!Array.isArray(discounts)) {
+        if (discounts && typeof discounts === 'object') {
+          // Si c'est un objet avec une propriété items ou similar
+          if (discounts.items && Array.isArray(discounts.items)) {
+            discounts = discounts.items;
+          } else if (discounts.discounts && Array.isArray(discounts.discounts)) {
+            discounts = discounts.discounts;
+          } else {
+            // Sinon convertir l'objet en tableau
+            discounts = Object.values(discounts);
+          }
+        } else {
+          discounts = [];
+        }
+      }
+
+      // Filtrer les éléments vides ou invalides
+      discounts = discounts.filter(d => d && (d.name || d.amount || d.rate));
+
+      console.log('🔍 Promotions après traitement:', discounts);
+
+      // Supprimer les promotions précédemment affichées
+      $$('.__gd-promo-line').forEach(el => el.remove());
+
+      // Masquer la ligne "Promotions" avec popup
+      hidePromotionsPopup();
+
+      if (discounts.length === 0) {
+        console.log('ℹ️ Aucune promotion à afficher');
+        return;
+      }
+
+      // Trouver la ligne du sous-total pour insérer les promotions avant
+      const subtotalLine =
+        $('.snipcart-cart-summary-item--subtotal', summarySection) ||
+        $('.snipcart-summary-fees__item--subtotal', summarySection) ||
+        $('.snipcart-cart-summary-item', summarySection) ||
+        $('.snipcart-summary-fees__item', summarySection) ||
+        Array.from($$('*', summarySection)).find(el => el.textContent?.toLowerCase().includes('sous-total'));
+
+      if (!subtotalLine) {
+        console.warn('⚠️ Ligne sous-total non trouvée');
+        return;
+      }
+
+      // Créer une ligne pour chaque promotion
+      discounts.forEach((discount, index) => {
+        // Vue.js utilise des getters - extraire les valeurs réelles
+        const name = typeof discount.name === 'function' ? discount.name() : discount.name;
+        const type = typeof discount.type === 'function' ? discount.type() : discount.type;
+        const amountSaved = typeof discount.amountSaved === 'function' ? discount.amountSaved() : discount.amountSaved;
+        const value = typeof discount.value === 'function' ? discount.value() : discount.value;
+
+        console.log(`🔍 Promotion ${index + 1}:`, {
+          name,
+          type,
+          amountSaved,
+          value,
+          raw: discount
+        });
+
+        const promoLine = document.createElement('div');
+        promoLine.className = '__gd-promo-line snipcart-cart-summary-item';
+        promoLine.style.cssText = `
+          display: flex !important;
+          justify-content: space-between;
+          align-items: center;
+          padding: 12px 0;
+          border-bottom: 1px solid var(--gd-border, rgba(255,255,255,0.1));
+          color: var(--gd-success, #10b981);
+          font-size: 0.95rem;
+        `;
+
+        // Nom de la promotion
+        const nameSpan = document.createElement('span');
+        nameSpan.className = '__gd-promo-name';
+        nameSpan.textContent = name || `Promotion ${index + 1}`;
+        nameSpan.style.cssText = `
+          flex: 1;
+          font-weight: 500;
+          color: var(--gd-success, #10b981);
+        `;
+
+        // Montant de la réduction
+        const amountSpan = document.createElement('span');
+        amountSpan.className = '__gd-promo-amount';
+
+        // Formater le montant selon le type de réduction - utiliser les valeurs extraites
+        let discountText = '';
+
+        console.log(`💰 Calcul montant promotion ${index + 1}:`, {
+          amountSaved,
+          value,
+          type
+        });
+
+        if (type === 'FixedAmount' || amountSaved > 0) {
+          discountText = `-${formatCurrency(amountSaved, cart.currency)}`;
+        } else if (value > 0) {
+          discountText = `-${(value * 100).toFixed(0)}%`;
+        } else {
+          // Fallback : afficher "Appliqué" si on ne trouve pas le montant
+          discountText = 'Appliqué';
+        }
+
+        amountSpan.textContent = discountText;
+        amountSpan.style.cssText = `
+          font-weight: 600;
+          color: var(--gd-success, #10b981);
+        `;
+
+        promoLine.appendChild(nameSpan);
+        promoLine.appendChild(amountSpan);
+
+        // Insérer la ligne de promotion avant le sous-total
+        subtotalLine.parentNode.insertBefore(promoLine, subtotalLine);
+      });
+
+      console.log(`✅ ${discounts.length} promotion(s) affichée(s) dynamiquement`);
+    } catch (error) {
+      console.error('Erreur lors de l\'affichage des promotions:', error);
+    }
+  }
+
+  /**
+   * Formate un montant en devise
+   * @param {number} amount - Montant à formater
+   * @param {string} currency - Code devise (CAD, USD, EUR...)
+   * @returns {string} Montant formaté
+   */
+  function formatCurrency(amount, currency = 'CAD') {
+    try {
+      return new Intl.NumberFormat('fr-CA', {
+        style: 'currency',
+        currency: currency
+      }).format(amount);
+    } catch (error) {
+      // Fallback simple si Intl échoue
+      return `${amount.toFixed(2)} ${currency}`;
+    }
   }
 
   // Fonction d'initialisation principale
@@ -230,11 +459,20 @@
       processAll();
       mountObserver();
 
+      // Afficher les promotions dynamiquement
+      displayPromotionsDynamically();
+
       // Écoute des évènements Snipcart (pour rafraîchir la mise en forme)
       const ev = window.Snipcart?.events;
       if (ev?.on) {
-        ['item.added', 'item.updated', 'cart.opened', 'cart.closed', 'cart.confirmed']
-          .forEach(evt => ev.on(evt, processAll));
+        ['item.added', 'item.updated', 'cart.opened', 'cart.closed', 'cart.confirmed', 'discount.applied', 'discount.removed']
+          .forEach(evt => {
+            ev.on(evt, () => {
+              processAll();
+              // Rafraîchir l'affichage des promotions après un court délai
+              setTimeout(displayPromotionsDynamically, 100);
+            });
+          });
       }
 
       // Debug info
