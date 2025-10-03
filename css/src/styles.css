@@ -214,12 +214,16 @@ h6 {
 .btn-triptyque:hover { background-image: url('/media/ui/button/triptyque.webp') !important; }
 .btn-dragon:hover { background-image: url('/media/ui/button/dragon.webp') !important; }
 
-/* Taille agrandie pour les boutons de retour (sans texte) */
+/* Taille agrandie pour les boutons avec images (sans texte) */
 .btn-aidejeux,
 .btn-boutique,
 .btn-carte,
 .btn-piece,
-.btn-triptyque {
+.btn-triptyque,
+.btn-contact,
+.btn-accueil,
+.btn-actualite,
+.btn-dragon {
   display: inline-block;
   min-width: 240px;
   min-height: 100px;
@@ -229,13 +233,17 @@ h6 {
   line-height: 100px;
 }
 
-/* Responsive pour boutons de retour */
+/* Responsive pour boutons avec images */
 @media (max-width: 768px) {
   .btn-aidejeux,
   .btn-boutique,
   .btn-carte,
   .btn-piece,
-  .btn-triptyque {
+  .btn-triptyque,
+  .btn-contact,
+  .btn-accueil,
+  .btn-actualite,
+  .btn-dragon {
     min-width: 200px;
     min-height: 80px;
     width: 200px;
@@ -249,7 +257,11 @@ h6 {
   .btn-boutique,
   .btn-carte,
   .btn-piece,
-  .btn-triptyque {
+  .btn-triptyque,
+  .btn-contact,
+  .btn-accueil,
+  .btn-actualite,
+  .btn-dragon {
     min-width: 160px;
     min-height: 64px;
     width: 160px;

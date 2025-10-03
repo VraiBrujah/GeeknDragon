@@ -253,8 +253,12 @@ echo $snipcartInit;
       $i18nKey = '';
       $classes = '';
       ?>
-      <a href="<?= $href ?>" class="btn btn-primary btn-boutique <?= $classes ?>">
-        <span data-i18n="product.back"><?= $text ?></span>
+      <a href="<?= $href ?>"
+         class="btn btn-primary btn-boutique <?= $classes ?>"
+         aria-label="<?= $text ?>"
+         title="<?= $text ?>"
+         data-i18n="product.back">
+        <span class="sr-only"><?= $text ?></span>
       </a>
     </div>
 

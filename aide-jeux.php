@@ -1442,9 +1442,10 @@ echo $snipcartInit;
               <button
                 type="button"
                 onclick="copyEmailToClipboard('<?= __('gameHelp.customTriptychs.contact.email', 'commande@geekndragon.com') ?>', this)"
-                class="btn btn-primary btn-contact text-lg px-6 py-3 relative"
+                class="btn btn-primary btn-contact relative"
+                aria-label="<?= __('gameHelp.customTriptychs.contact.copyTooltip', 'Cliquer pour copier l\'email') ?>"
                 title="<?= __('gameHelp.customTriptychs.contact.copyTooltip', 'Cliquer pour copier l\'email') ?>">
-                📧 <?= __('gameHelp.customTriptychs.contact.email', 'commande@geekndragon.com') ?>
+                <span class="sr-only"><?= __('gameHelp.customTriptychs.contact.email', 'commande@geekndragon.com') ?></span>
                 <span class="copy-feedback hidden absolute -top-10 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-3 py-1 rounded text-sm whitespace-nowrap">
                   ✓ <?= __('gameHelp.customTriptychs.contact.copied', 'Copié !') ?>
                 </span>
@@ -2299,11 +2300,17 @@ echo $snipcartInit;
                 <?= __('money.physicalCoins.order.description', 'Découvrez notre collection complète de pièces métalliques et donnez vie à l\'économie de vos parties !') ?>
               </p>
               <div class="space-y-4">
-                <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-primary btn-piece w-full">
-                  <?= __('money.physicalCoins.order.shopButton', '🛒 Voir les Pièces en Boutique') ?>
+                <a href="<?= langUrl('boutique.php#pieces') ?>"
+                   class="btn btn-primary btn-piece w-full"
+                   aria-label="<?= __('money.physicalCoins.order.shopButton', 'Voir les Pièces en Boutique') ?>"
+                   title="<?= __('money.physicalCoins.order.shopButton', 'Voir les Pièces en Boutique') ?>">
+                  <span class="sr-only"><?= __('money.physicalCoins.order.shopButton', 'Voir les Pièces en Boutique') ?></span>
                 </a>
-                <a href="<?= langUrl('product.php?id=coin-lord-treasury-uniform&from=pieces') ?>" class="btn btn-primary btn-dragon w-full">
-                  <?= __('money.physicalCoins.order.treasuryButton', '⭐ Set Complet de Trésorerie') ?>
+                <a href="<?= langUrl('product.php?id=coin-lord-treasury-uniform&from=pieces') ?>"
+                   class="btn btn-primary btn-dragon w-full"
+                   aria-label="<?= __('money.physicalCoins.order.treasuryButton', 'Set Complet de Trésorerie') ?>"
+                   title="<?= __('money.physicalCoins.order.treasuryButton', 'Set Complet de Trésorerie') ?>">
+                  <span class="sr-only"><?= __('money.physicalCoins.order.treasuryButton', 'Set Complet de Trésorerie') ?></span>
                 </a>
               </div>
             </div>
@@ -3259,5 +3266,55 @@ if (document.readyState === 'loading') {
 })();
 </script>
 
+<script>
+// Fonction pour copier l'email dans le presse-papiers
+function copyEmailToClipboard(email, buttonElement) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(email)
+      .then(() => {
+        const feedback = buttonElement.querySelector('.copy-feedback');
+        if (feedback) {
+          feedback.classList.remove('hidden');
+          feedback.classList.add('animate-pulse');
+          setTimeout(() => {
+            feedback.classList.add('hidden');
+            feedback.classList.remove('animate-pulse');
+          }, 2000);
+        }
+      })
+      .catch(() => {
+        fallbackCopyEmail(email, buttonElement);
+      });
+  } else {
+    fallbackCopyEmail(email, buttonElement);
+  }
+}
+
+function fallbackCopyEmail(email, buttonElement) {
+  const textarea = document.createElement('textarea');
+  textarea.value = email;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.select();
+
+  try {
+    document.execCommand('copy');
+    const feedback = buttonElement.querySelector('.copy-feedback');
+    if (feedback) {
+      feedback.classList.remove('hidden');
+      feedback.classList.add('animate-pulse');
+      setTimeout(() => {
+        feedback.classList.add('hidden');
+        feedback.classList.remove('animate-pulse');
+      }, 2000);
+    }
+  } catch (err) {
+    console.error('Erreur copie:', err);
+  } finally {
+    document.body.removeChild(textarea);
+  }
+}
+</script>
 </body>
 </html>

@@ -36,8 +36,13 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
         <h1 class="text-5xl font-extrabold mb-6" data-i18n="hero.title">L'immersion au cœur du jeu</h1>
           <p class="text-xl mb-2 txt-court" data-i18n="hero.subtitle1">Cartes, pièces et fiches prêtes à jouer pour vos parties D&D</p>
           <p class="text-xl mb-8 txt-court" data-i18n="hero.subtitle2">Conçues au Québec</p>
-<a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary btn-boutique" data-hide-price="1" data-i18n="hero.visitShop">
-            Visiter la boutique
+<a href="<?= langUrl('boutique.php') ?>"
+             class="btn btn-primary btn-boutique"
+             data-hide-price="1"
+             aria-label="<?= __('hero.visitShop', 'Visiter la boutique') ?>"
+             title="<?= __('hero.visitShop', 'Visiter la boutique') ?>"
+             data-i18n="hero.visitShop">
+            <span class="sr-only"><?= __('hero.visitShop', 'Visiter la boutique') ?></span>
           </a>
       </div>
     </section>
@@ -108,11 +113,20 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
               <img src="/media/ui/payments/american-express.svg" alt="Logo American Express" loading="lazy">
           </p>
         <div class="flex flex-col md:flex-row gap-6 justify-center">
-          <a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary btn-boutique" data-hide-price="1" data-i18n="hero.visitShop">
-            Visiter la boutique
+          <a href="<?= langUrl('boutique.php') ?>"
+             class="btn btn-primary btn-boutique"
+             data-hide-price="1"
+             aria-label="<?= __('hero.visitShop', 'Visiter la boutique') ?>"
+             title="<?= __('hero.visitShop', 'Visiter la boutique') ?>"
+             data-i18n="hero.visitShop">
+            <span class="sr-only"><?= __('hero.visitShop', 'Visiter la boutique') ?></span>
           </a>
-          <a href="<?= langUrl('index.php#contact') ?>" class="btn btn-primary btn-contact" data-i18n="contact.requestQuote">
-            Demander un devis
+          <a href="<?= langUrl('index.php#contact') ?>"
+             class="btn btn-primary btn-contact"
+             aria-label="<?= __('contact.requestQuote', 'Demander un devis') ?>"
+             title="<?= __('contact.requestQuote', 'Demander un devis') ?>"
+             data-i18n="contact.requestQuote">
+            <span class="sr-only"><?= __('contact.requestQuote', 'Demander un devis') ?></span>
           </a>
         </div>
       </div>
@@ -135,7 +149,13 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
             Notre première démonstration de pièces au FLIM 2025 a pris la forme d’un one-shot légendaire animé par Es‑tu Game ?.
           </p>
           <div class="text-center">
-            <a href="<?= langUrl('actualites/es-tu-game.php') ?>" class="btn btn-primary btn-actualite" data-i18n="news.flim2025.read">Lire l'article</a>
+            <a href="<?= langUrl('actualites/es-tu-game.php') ?>"
+               class="btn btn-primary btn-actualite"
+               aria-label="<?= __('news.flim2025.read', 'Lire l\'article') ?>"
+               title="<?= __('news.flim2025.read', 'Lire l\'article') ?>"
+               data-i18n="news.flim2025.read">
+              <span class="sr-only"><?= __('news.flim2025.read', 'Lire l\'article') ?></span>
+            </a>
           </div>
         </article>
     

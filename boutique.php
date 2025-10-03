@@ -447,8 +447,12 @@ echo $snipcartInit;
                 <?= __('shop.deluxeBundle.limited', 'Production limitée à 500 exemplaires') ?>
               </p>
 
-              <a href="<?= langUrl('index.php#contact') ?>" class="btn btn-primary btn-dragon text-lg px-8 py-4 mb-3 inline-block shadow-lg shadow-amber-600/30 hover:shadow-amber-500/50 transition-all" data-i18n="shop.deluxeBundle.cta">
-                <?= __('shop.deluxeBundle.cta', 'Réserver Mon Édition') ?>
+              <a href="<?= langUrl('index.php#contact') ?>"
+                 class="btn btn-primary btn-dragon mb-3 inline-block shadow-lg shadow-amber-600/30 hover:shadow-amber-500/50 transition-all"
+                 aria-label="<?= __('shop.deluxeBundle.cta', 'Réserver Mon Édition') ?>"
+                 title="<?= __('shop.deluxeBundle.cta', 'Réserver Mon Édition') ?>"
+                 data-i18n="shop.deluxeBundle.cta">
+                <span class="sr-only"><?= __('shop.deluxeBundle.cta', 'Réserver Mon Édition') ?></span>
               </a>
 
               <p class="text-sm text-gray-300" data-i18n="shop.deluxeBundle.contact">
