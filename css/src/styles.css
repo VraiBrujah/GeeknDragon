@@ -1743,6 +1743,74 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
   50% { opacity: 1; }
 }
 
+/* ========================================================================
+   SYSTÈME DE CHARGEMENT UNIFIÉ - Engrenage celtique tournant
+   ===================================================================== */
+
+@keyframes spinGear {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Conteneur de chargement centré */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+/* Image de l'engrenage avec animation */
+.loading-gear {
+  width: 64px;
+  height: 64px;
+  animation: spinGear 2s linear infinite;
+  filter: drop-shadow(0 4px 8px rgba(217, 119, 6, 0.4));
+}
+
+/* Variantes de taille */
+.loading-gear.loading-gear-sm {
+  width: 32px;
+  height: 32px;
+}
+
+.loading-gear.loading-gear-lg {
+  width: 96px;
+  height: 96px;
+}
+
+.loading-gear.loading-gear-xl {
+  width: 128px;
+  height: 128px;
+}
+
+/* États de chargement pour différents contextes */
+[data-loading="true"] {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Overlay de chargement pour sections complètes */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
 /* Amélioration du hover dans l'état sticky */
 .shop-quick-links.sticky-active a:not(.active):hover {
   background: rgba(99, 102, 241, 0.1);

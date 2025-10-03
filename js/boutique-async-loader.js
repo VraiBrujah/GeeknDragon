@@ -275,7 +275,7 @@ class BoutiqueAsyncLoader {
                 container.innerHTML = `
                     <div class="col-span-full text-center py-8 text-gray-400">
                         <div class="text-4xl mb-4">⚠️</div>
-                        <p>Erreur de chargement des produits</p>
+                        <p>Erreur lors du chargement</p>
                         <button onclick="window.boutiqueLoader.startLoading()"
                                 class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
                             Réessayer

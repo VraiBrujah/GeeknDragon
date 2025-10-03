@@ -151,20 +151,18 @@ $extraHead = <<<HTML
   position: relative;
 }
 .flip-container::after {
-  content: '🔄';
+  content: '';
   position: absolute;
   top: 10px;
   right: 10px;
-  background: rgba(0,0,0,0.7);
-  color: white;
-  border-radius: 50%;
   width: 40px;
   height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-image: url('/media/branding/icons/roue.webp');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: spinGear 2s linear infinite;
   z-index: 10;
-  font-size: 18px;
   opacity: 0.7;
   transition: all 0.3s ease;
 }
@@ -1734,7 +1732,9 @@ echo $snipcartInit;
           <h4 class="text-xl font-bold mb-4 text-yellow-400"><?= __('gameHelp.cards.usage.proTips.title', '⭐ Conseils de Pro') ?></h4>
           <div class="grid md:grid-cols-3 gap-4">
             <div class="text-center">
-              <div class="text-2xl mb-2">🔄</div>
+              <div class="flex justify-center mb-2">
+                <img src="/media/branding/icons/roue.webp" alt="Rotation" class="loading-gear loading-gear-sm" style="animation: none;">
+              </div>
               <p class="text-gray-300 text-sm">
                 <?= __('gameHelp.cards.usage.proTips.rotation', '<strong>Rotation :</strong> Changez vos cartes selon vos aventures') ?>
               </p>
@@ -1831,7 +1831,7 @@ echo $snipcartInit;
 
         <!-- Tableau de Conversion -->
         <div class="bg-gradient-to-b from-gray-900/30 to-slate-900/20 p-8 rounded-xl border border-slate-700/50">
-          <h3 class="text-2xl font-bold mb-6 text-center text-slate-400"><?= __('money.conversionTable.title', '🔄 Tableau de Conversion') ?></h3>
+          <h3 class="text-2xl font-bold mb-6 text-center text-slate-400"><?= __('money.conversionTable.title', 'Tableau de Conversion') ?></h3>
           
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
