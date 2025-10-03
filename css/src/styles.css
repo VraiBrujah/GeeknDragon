@@ -215,34 +215,46 @@ h6 {
 .btn-dragon:hover { background-image: url('/media/ui/button/dragon.webp') !important; }
 
 /* Taille agrandie pour les boutons de retour (sans texte) */
-.btn-aidejeux {
+.btn-aidejeux,
+.btn-boutique,
+.btn-carte,
+.btn-piece,
+.btn-triptyque {
   display: inline-block;
-  min-width: 200px;
-  min-height: 80px;
-  width: 200px;
-  height: 80px;
+  min-width: 240px;
+  min-height: 100px;
+  width: 240px;
+  height: 100px;
   padding: 0;
-  line-height: 80px;
+  line-height: 100px;
 }
 
 /* Responsive pour boutons de retour */
 @media (max-width: 768px) {
-  .btn-aidejeux {
+  .btn-aidejeux,
+  .btn-boutique,
+  .btn-carte,
+  .btn-piece,
+  .btn-triptyque {
+    min-width: 200px;
+    min-height: 80px;
+    width: 200px;
+    height: 80px;
+    line-height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-aidejeux,
+  .btn-boutique,
+  .btn-carte,
+  .btn-piece,
+  .btn-triptyque {
     min-width: 160px;
     min-height: 64px;
     width: 160px;
     height: 64px;
     line-height: 64px;
-  }
-}
-
-@media (max-width: 480px) {
-  .btn-aidejeux {
-    min-width: 140px;
-    min-height: 56px;
-    width: 140px;
-    height: 56px;
-    line-height: 56px;
   }
 }
 

@@ -278,8 +278,11 @@ echo $snipcartInit;
               Notre convertisseur de monnaie interactif a été déplacé vers la page d'aide des jeux
               pour une meilleure organisation et une expérience utilisateur optimisée.
             </p>
-            <a href="<?= langUrl('aide-jeux.php#guide-monnaie') ?>" class="btn btn-primary btn-aidejeux">
-              Utiliser le Convertisseur
+            <a href="<?= langUrl('aide-jeux.php#guide-monnaie') ?>"
+               class="btn btn-primary btn-aidejeux"
+               aria-label="Accéder au convertisseur de monnaie"
+               title="Accéder au convertisseur de monnaie">
+              <span class="sr-only">Accéder au convertisseur de monnaie</span>
             </a>
           </div>
         </div>
@@ -287,7 +290,8 @@ echo $snipcartInit;
         <!-- Bouton retour au menu -->
         <?php
         $href = '#main';
-        $ariaLabel = __('shop.pieces.backToTop', 'Retour au menu principal');
+        $ariaLabel = __('nav.shop', 'Boutique');
+        $btnImage = 'btn-boutique';
         include __DIR__ . '/partials/back-button.php';
         ?>
       </div>
@@ -458,7 +462,8 @@ echo $snipcartInit;
         <!-- Bouton retour au menu -->
         <?php
         $href = '#main';
-        $ariaLabel = __('shop.deluxeBundle.backToTop', 'Retour au menu principal');
+        $ariaLabel = __('nav.shop', 'Boutique');
+        $btnImage = 'btn-boutique';
         include __DIR__ . '/partials/back-button.php';
         ?>
 
@@ -495,7 +500,8 @@ echo $snipcartInit;
         <!-- Bouton retour au menu -->
         <?php
         $href = '#main';
-        $ariaLabel = __('shop.cards.backToTop', 'Retour au menu principal');
+        $ariaLabel = __('nav.shop', 'Boutique');
+        $btnImage = 'btn-boutique';
         include __DIR__ . '/partials/back-button.php';
         ?>
       </div>
@@ -531,7 +537,8 @@ echo $snipcartInit;
         <!-- Bouton retour au menu -->
         <?php
         $href = '#main';
-        $ariaLabel = __('shop.triptychs.backToTop', 'Retour au menu principal');
+        $ariaLabel = __('nav.shop', 'Boutique');
+        $btnImage = 'btn-boutique';
         include __DIR__ . '/partials/back-button.php';
         ?>
       </div>

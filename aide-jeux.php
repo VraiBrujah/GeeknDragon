@@ -1530,7 +1530,7 @@ echo $snipcartInit;
       <!-- Bouton de retour au hero -->
       <?php
       $href = '#hero-guides';
-      $ariaLabel = __('gameHelp.backToMain', 'Retour aux guides principaux');
+      $ariaLabel = __('nav.gameHelp', 'Aide de Jeux');
       include __DIR__ . '/partials/back-button.php';
       ?>
     </div>
@@ -1759,7 +1759,7 @@ echo $snipcartInit;
       <!-- Bouton de retour au hero -->
       <?php
       $href = '#hero-guides';
-      $ariaLabel = __('gameHelp.cards.backToMain', 'Retour aux guides principaux');
+      $ariaLabel = __('nav.gameHelp', 'Aide de Jeux');
       include __DIR__ . '/partials/back-button.php';
       ?>
 
@@ -2314,7 +2314,7 @@ echo $snipcartInit;
       <!-- Bouton de retour au hero -->
       <?php
       $href = '#hero-guides';
-      $ariaLabel = __('money.backToMain', 'Retour aux guides principaux');
+      $ariaLabel = __('nav.gameHelp', 'Aide de Jeux');
       include __DIR__ . '/partials/back-button.php';
       ?>
 
