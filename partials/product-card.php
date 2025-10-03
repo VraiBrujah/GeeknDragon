@@ -178,9 +178,13 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
           <div class="flex flex-col items-center">
                 <label class="mb-2 text-center" data-i18n="product.quantity"><?= __('product.quantity', 'Quantité') ?></label>
                 <div class="quantity-selector mx-auto text-center" data-id="<?= htmlspecialchars($id) ?>">
-                  <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
+                  <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>" aria-label="<?= __('product.decreaseQuantity', 'Diminuer la quantité') ?>">
+                    <img src="/media/branding/icons/-.webp" alt="-" class="quantity-btn-icon" loading="lazy">
+                  </button>
                   <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
-                  <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
+                  <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>" aria-label="<?= __('product.increaseQuantity', 'Augmenter la quantité') ?>">
+                    <img src="/media/branding/icons/+.webp" alt="+" class="quantity-btn-icon" loading="lazy">
+                  </button>
                 </div>
           </div>
 
@@ -274,8 +278,8 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
 
 
 
-          <!-- Bouton ajouter -->
-          <button class="snipcart-add-item btn btn-shop px-6 whitespace-nowrap"
+          <!-- Bouton ajouter avec icône -->
+          <button class="snipcart-add-item btn-cart-icon"
                 data-item-id="<?= htmlspecialchars($id) ?>"
                 data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
                 data-item-name-fr="<?= htmlspecialchars(strip_tags($nameFr)) ?>"
@@ -311,8 +315,13 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
                   data-item-custom<?= (int) $multiplierFieldIndex ?>-options="<?= htmlspecialchars(implode('|', $multiplierOptions)) ?>"
                   data-item-custom<?= (int) $multiplierFieldIndex ?>-value="<?= htmlspecialchars($multiplierOptions[0] ?? '') ?>"
                 <?php endif; ?>
+                aria-label="<?= __('product.add', 'Ajouter au panier') ?>"
+                title="<?= __('product.add', 'Ajouter au panier') ?>"
           >
-                <span data-i18n="product.add"><?= __('product.add', 'Ajouter') ?></span>
+                <img src="/media/branding/icons/ajout.webp"
+                     alt="<?= __('product.add', 'Ajouter au panier') ?>"
+                     class="btn-cart-icon-img"
+                     loading="lazy">
           </button>
         </div>
 

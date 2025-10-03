@@ -10,14 +10,28 @@ class SnipcartUtils {
         const {
             quantity = 1,
             customFields = {},
-            className = 'snipcart-add-item btn btn-primary',
+            className = 'snipcart-add-item btn-cart-icon',
             text = 'Ajouter au panier',
+            useIconButton = true,
             ...extraAttributes
         } = options;
 
         const button = document.createElement('button');
         button.className = className;
-        button.textContent = text;
+
+        // Utiliser l'icône panier au lieu du texte
+        if (useIconButton) {
+            const img = document.createElement('img');
+            img.src = '/media/branding/icons/ajout.webp';
+            img.alt = text;
+            img.className = 'btn-cart-icon-img';
+            img.loading = 'lazy';
+            button.appendChild(img);
+            button.setAttribute('aria-label', text);
+            button.setAttribute('title', text);
+        } else {
+            button.textContent = text;
+        }
 
         // Attributs de base Snipcart
         const baseAttributes = {

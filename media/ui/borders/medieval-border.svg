@@ -1,0 +1,41 @@
+<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Bordure médiévale ornée pour les sections -->
+  <!-- Conception: motifs celtiques et enluminures -->
+
+  <!-- Coin supérieur gauche -->
+  <path d="M0,0 L30,0 Q25,5 20,5 L10,5 Q5,5 5,10 L5,20 Q5,25 0,30 Z" fill="#8b7355" opacity="0.6"/>
+  <circle cx="15" cy="15" r="3" fill="#d4af37" opacity="0.8"/>
+
+  <!-- Motif décoratif supérieur -->
+  <path d="M40,0 Q45,3 50,0 Q55,3 60,0" stroke="#8b7355" stroke-width="2" fill="none" opacity="0.5"/>
+
+  <!-- Coin supérieur droit -->
+  <path d="M100,0 L70,0 Q75,5 80,5 L90,5 Q95,5 95,10 L95,20 Q95,25 100,30 Z" fill="#8b7355" opacity="0.6"/>
+  <circle cx="85" cy="15" r="3" fill="#d4af37" opacity="0.8"/>
+
+  <!-- Motif décoratif latéral gauche -->
+  <path d="M0,40 Q3,45 0,50 Q3,55 0,60" stroke="#8b7355" stroke-width="2" fill="none" opacity="0.5"/>
+
+  <!-- Motif central -->
+  <circle cx="50" cy="50" r="4" fill="#d4af37" opacity="0.3"/>
+
+  <!-- Motif décoratif latéral droit -->
+  <path d="M100,40 Q97,45 100,50 Q97,55 100,60" stroke="#8b7355" stroke-width="2" fill="none" opacity="0.5"/>
+
+  <!-- Coin inférieur gauche -->
+  <path d="M0,100 L30,100 Q25,95 20,95 L10,95 Q5,95 5,90 L5,80 Q5,75 0,70 Z" fill="#8b7355" opacity="0.6"/>
+  <circle cx="15" cy="85" r="3" fill="#d4af37" opacity="0.8"/>
+
+  <!-- Motif décoratif inférieur -->
+  <path d="M40,100 Q45,97 50,100 Q55,97 60,100" stroke="#8b7355" stroke-width="2" fill="none" opacity="0.5"/>
+
+  <!-- Coin inférieur droit -->
+  <path d="M100,100 L70,100 Q75,95 80,95 L90,95 Q95,95 95,90 L95,80 Q95,75 100,70 Z" fill="#8b7355" opacity="0.6"/>
+  <circle cx="85" cy="85" r="3" fill="#d4af37" opacity="0.8"/>
+
+  <!-- Détails enluminures (petits points décoratifs) -->
+  <circle cx="25" cy="50" r="1.5" fill="#d4af37" opacity="0.6"/>
+  <circle cx="75" cy="50" r="1.5" fill="#d4af37" opacity="0.6"/>
+  <circle cx="50" cy="25" r="1.5" fill="#d4af37" opacity="0.6"/>
+  <circle cx="50" cy="75" r="1.5" fill="#d4af37" opacity="0.6"/>
+</svg>

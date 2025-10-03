@@ -303,9 +303,13 @@ echo $snipcartInit;
             <div>
               <label class="block mb-3 text-lg font-medium text-white" data-i18n="product.quantity">Quantité</label>
               <div class="quantity-selector" data-id="<?= htmlspecialchars($id) ?>">
-                <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
+                <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>" aria-label="<?= __('product.decreaseQuantity', 'Diminuer la quantité') ?>">
+                  <img src="/media/branding/icons/-.webp" alt="-" class="quantity-btn-icon" loading="lazy">
+                </button>
                 <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
-                <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
+                <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>" aria-label="<?= __('product.increaseQuantity', 'Augmenter la quantité') ?>">
+                  <img src="/media/branding/icons/+.webp" alt="+" class="quantity-btn-icon" loading="lazy">
+                </button>
               </div>
             </div>
 
@@ -389,7 +393,7 @@ echo $snipcartInit;
             <?php endif; ?>
 
 
-            <button class="snipcart-add-item btn btn-primary w-full text-lg py-4 font-bold bg-indigo-600 hover:bg-indigo-700 transform hover:scale-105 transition-all duration-200 shadow-lg"
+            <button class="snipcart-add-item btn-cart-icon mx-auto"
               data-item-id="<?= htmlspecialchars($id) ?>"
               data-item-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
               data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
@@ -425,8 +429,13 @@ echo $snipcartInit;
                 data-item-custom<?= (int) $multiplierFieldIndex ?>-options="<?= htmlspecialchars(implode('|', $multiplierOptions)) ?>"
                 data-item-custom<?= (int) $multiplierFieldIndex ?>-value="<?= htmlspecialchars($multiplierOptions[0] ?? '') ?>"
               <?php endif; ?>
+              aria-label="<?= __('product.add', 'Ajouter au panier') ?> — <?= htmlspecialchars(number_format((float)$product['price'], 2, ',', ' ')) ?> $ CAD"
+              title="<?= __('product.add', 'Ajouter au panier') ?> — <?= htmlspecialchars(number_format((float)$product['price'], 2, ',', ' ')) ?> $ CAD"
             >
-              🛒 <span data-i18n="product.add">Ajouter au panier</span> — <?= htmlspecialchars(number_format((float)$product['price'], 2, ',', ' ')) ?> $ CAD
+              <img src="/media/branding/icons/ajout.webp"
+                   alt="<?= __('product.add', 'Ajouter au panier') ?>"
+                   class="btn-cart-icon-img"
+                   loading="lazy">
             </button>
 
             <p class="mt-4 text-center text-sm text-gray-400">

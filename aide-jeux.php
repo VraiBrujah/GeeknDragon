@@ -2025,13 +2025,17 @@ echo $snipcartInit;
               <!-- Le contenu sera injecté dynamiquement par JavaScript -->
             </div>
             
-            <!-- Bouton d'ajout au panier global -->
+            <!-- Bouton d'ajout au panier global avec icône -->
             <div class="text-center">
               <button id="add-all-lots-to-cart"
-                      class="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-200 shadow-sm hover:shadow-md"
-                      style="display: none;">
-
-                <?= __('money.converter.lotsRecommendations.addAllButton', 'Ajouter tous les lots au panier') ?>
+                      class="btn-cart-icon mx-auto"
+                      style="display: none;"
+                      aria-label="<?= __('money.converter.lotsRecommendations.addAllButton', 'Ajouter tous les lots au panier') ?>"
+                      title="<?= __('money.converter.lotsRecommendations.addAllButton', 'Ajouter tous les lots au panier') ?>">
+                <img src="/media/branding/icons/ajout.webp"
+                     alt="<?= __('money.converter.lotsRecommendations.addAllButton', 'Ajouter tous les lots au panier') ?>"
+                     class="btn-cart-icon-img"
+                     loading="lazy">
               </button>
               
               <p class="text-sm text-gray-400 mt-4">

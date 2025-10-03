@@ -676,6 +676,83 @@ a[aria-current="page"]{
 .btn-shop:focus { outline:none; box-shadow:0 0 0 3px rgba(126,34,206,.4); }
 .btn-shop:disabled { background-color:#4b5563; color:#d1d5db; cursor:not-allowed; transform:none; box-shadow:none; }
 
+/* Bouton panier avec icône uniquement - Image WebP utilisateur */
+.btn-cart-icon {
+  display: inline-block;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 120px;
+  height: 60px;
+  flex-shrink: 0;
+}
+.btn-cart-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+  transition: all 0.3s ease;
+}
+.btn-cart-icon:hover .btn-cart-icon-img {
+  transform: scale(1.08) translateY(-2px);
+  filter: drop-shadow(0 4px 12px rgba(217,119,6,0.6)) brightness(1.15);
+}
+.btn-cart-icon:active .btn-cart-icon-img {
+  transform: scale(0.98);
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.4));
+}
+.btn-cart-icon:focus {
+  outline: none;
+}
+.btn-cart-icon:focus .btn-cart-icon-img {
+  filter: drop-shadow(0 0 0 3px rgba(217,119,6,0.5));
+}
+.btn-cart-icon:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn-cart-icon:disabled .btn-cart-icon-img {
+  filter: grayscale(1) opacity(0.5);
+  transform: none;
+}
+
+/* Responsive: taille adaptée mobile */
+@media (max-width: 768px) {
+  .btn-cart-icon {
+    width: 100px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-cart-icon {
+    width: 90px;
+    height: 45px;
+  }
+}
+
+/* Styles pour les icônes de boutons de quantité */
+.quantity-btn-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  transition: all 0.3s ease;
+}
+.quantity-btn:hover .quantity-btn-icon {
+  filter: drop-shadow(0 4px 8px rgba(217,119,6,0.6)) brightness(1.15);
+  transform: scale(1.1);
+}
+.quantity-btn:active .quantity-btn-icon {
+  transform: scale(0.95);
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+}
+.quantity-btn:disabled .quantity-btn-icon {
+  filter: grayscale(1) opacity(0.3);
+}
+
 /* Slider styles (Swiper) */
 .swiper { width:100%; position:relative; }
 .swiper-slide img { width:100%; height:auto; max-height:20rem; object-fit:contain; }
@@ -1481,6 +1558,16 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
 .card-product:hover .btn-shop{
   box-shadow:0 8px 25px rgba(79,70,229,.4), 0 0 20px rgba(126,34,206,.2);
   transform:translateY(-2px);
+}
+
+/* Bouton icône panier centré dans la carte */
+.card-product .btn-cart-icon {
+  margin: 0 auto;
+  display: block;
+}
+.card-product:hover .btn-cart-icon .btn-cart-icon-img {
+  transform: scale(1.15) translateY(-3px);
+  filter: drop-shadow(0 6px 16px rgba(217,119,6,0.7)) brightness(1.2);
 }
 
 /* Animation subtile d'entrée au scroll */
