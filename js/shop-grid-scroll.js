@@ -34,46 +34,86 @@ class ShopGridScroll {
    * @param {HTMLElement} grid - Élément .shop-grid
    */
   initGridScroll(grid) {
-    // Position initiale à gauche
-    grid.scrollLeft = 0;
+    // Vérifier si le scroll horizontal est nécessaire
+    const checkScrollNeed = () => {
+      // Largeur du contenu scrollable vs largeur visible
+      const hasOverflow = grid.scrollWidth > grid.clientWidth;
 
-    // Détection du type d'appareil
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-    if (isTouchDevice) {
-      // Mobile/Tablette : scroll natif tactile (pas d'intervention JS)
-      return;
-    }
-
-    // Desktop uniquement : scroll horizontal avec molette après délai
-    let scrollEnabled = false;
-    let hoverTimeout = null;
-
-    // Activer le scroll horizontal après 1 seconde de survol (PC seulement)
-    grid.addEventListener('mouseenter', () => {
-      hoverTimeout = setTimeout(() => {
-        scrollEnabled = true;
-      }, 1000);
-    });
-
-    // Désactiver immédiatement quand on quitte la zone
-    grid.addEventListener('mouseleave', () => {
-      clearTimeout(hoverTimeout);
-      scrollEnabled = false;
-    });
-
-    // Gérer le scroll avec la molette
-    grid.addEventListener('wheel', (e) => {
-      if (scrollEnabled && Math.abs(e.deltaY) > 0) {
-        e.preventDefault();
-
-        // Scroll direct sans animation pour éviter les saccades
-        grid.scrollBy({
-          left: e.deltaY,
-          behavior: 'auto' // Pas de smooth, c'est plus fluide
-        });
+      if (!hasOverflow) {
+        // Pas de débordement : désactiver le scroll horizontal
+        grid.style.overflowX = 'visible';
+        grid.style.gridAutoFlow = 'row';
+        grid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(320px, 1fr))';
+        return false;
+      } else {
+        // Débordement : activer le scroll horizontal
+        grid.style.overflowX = 'auto';
+        grid.style.gridAutoFlow = 'column';
+        grid.style.gridTemplateColumns = '';
+        return true;
       }
-    }, { passive: false });
+    };
+
+    // Vérification initiale après un court délai (pour laisser le DOM se stabiliser)
+    setTimeout(() => {
+      const needsScroll = checkScrollNeed();
+
+      if (!needsScroll) {
+        return; // Pas besoin de scroll, on arrête ici
+      }
+
+      // Position initiale à gauche
+      grid.scrollLeft = 0;
+
+      // Détection du type d'appareil
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+      if (isTouchDevice) {
+        // Mobile/Tablette : scroll natif tactile (pas d'intervention JS)
+        return;
+      }
+
+      // Desktop uniquement : scroll horizontal avec molette après délai
+      let scrollEnabled = false;
+      let hoverTimeout = null;
+
+      // Activer le scroll horizontal après 1 seconde de survol (PC seulement)
+      grid.addEventListener('mouseenter', () => {
+        // Re-vérifier si le scroll est toujours nécessaire (fenêtre redimensionnée)
+        if (grid.scrollWidth > grid.clientWidth) {
+          hoverTimeout = setTimeout(() => {
+            scrollEnabled = true;
+          }, 1000);
+        }
+      });
+
+      // Désactiver immédiatement quand on quitte la zone
+      grid.addEventListener('mouseleave', () => {
+        clearTimeout(hoverTimeout);
+        scrollEnabled = false;
+      });
+
+      // Gérer le scroll avec la molette
+      grid.addEventListener('wheel', (e) => {
+        // Vérifier que le scroll est toujours nécessaire
+        const hasOverflow = grid.scrollWidth > grid.clientWidth;
+
+        if (scrollEnabled && hasOverflow && Math.abs(e.deltaY) > 0) {
+          e.preventDefault();
+
+          // Scroll direct sans animation pour éviter les saccades
+          grid.scrollBy({
+            left: e.deltaY,
+            behavior: 'auto' // Pas de smooth, c'est plus fluide
+          });
+        }
+      }, { passive: false });
+
+      // Re-vérifier au redimensionnement de la fenêtre
+      window.addEventListener('resize', () => {
+        checkScrollNeed();
+      });
+    }, 100);
   }
 
   /**

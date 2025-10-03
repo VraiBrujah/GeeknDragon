@@ -18,10 +18,6 @@
 
 // Vérifications des variables obligatoires
 if (!isset($sectionId) || !isset($productIds) || !isset($products)) {
-    echo '<!-- DEBUG: Variables manquantes dans products-grid-section.php -->';
-    echo '<!-- sectionId: ' . (isset($sectionId) ? 'OK' : 'MANQUANT') . ' -->';
-    echo '<!-- productIds: ' . (isset($productIds) ? 'OK' : 'MANQUANT') . ' -->';
-    echo '<!-- products: ' . (isset($products) ? 'OK' : 'MANQUANT') . ' -->';
     error_log('[products-grid-section.php] Variables manquantes : sectionId, productIds ou products');
     return;
 }
@@ -44,16 +40,9 @@ $lang = $lang ?? 'fr';
     <!-- Grille de produits avec scroll horizontal -->
     <div class="shop-grid" data-section="<?= htmlspecialchars($sectionId) ?>">
       <?php
-      // DEBUG
-      echo '<!-- DEBUG: Nombre de productIds: ' . count($productIds) . ' -->';
-      echo '<!-- DEBUG: Nombre total produits: ' . count($products) . ' -->';
-
       // Affichage des produits avec product-card.php
       foreach ($productIds as $productId) {
-        echo '<!-- DEBUG: Recherche produit ' . $productId . ' -->';
-
         if (isset($products[$productId])) {
-          echo '<!-- DEBUG: Produit ' . $productId . ' TROUVÉ -->';
           $product = $products[$productId];
 
           // IMPORTANT : Ajouter l'ID au produit (product-card.php l'attend)
@@ -61,8 +50,6 @@ $lang = $lang ?? 'fr';
 
           // Inclusion du partial product-card.php (même affichage que boutique)
           include __DIR__ . '/product-card.php';
-        } else {
-          echo '<!-- DEBUG: Produit ' . $productId . ' NON TROUVÉ -->';
         }
       }
       ?>

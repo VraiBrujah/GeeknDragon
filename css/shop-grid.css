@@ -10,13 +10,13 @@
   opacity: 1;
   transition: opacity 0.3s ease;
 
-  /* Scroll horizontal moderne avec CSS Grid */
+  /* Scroll horizontal moderne avec CSS Grid (géré dynamiquement par JS) */
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: minmax(320px, 320px);
   gap: 1.5rem;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: visible; /* Permet le scroll vertical quand pas de débordement */
   scroll-behavior: smooth;
 
   /* Sortir du padding parent (px-6 = 1.5rem) */
