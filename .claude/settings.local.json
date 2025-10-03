@@ -28,7 +28,8 @@
       "Bash(php -r \"$p = json_decode(file_get_contents(''data/products.json''), true); echo isset($p[''coin-merchant-essence-double'']) ? ''Produit trouvé'' : ''Produit NON trouvé''; echo PHP_EOL; echo ''Total produits: '' . count($p);\")",
       "Bash(start:*)",
       "Bash(findstr:*)",
-      "Bash(copy:*)"
+      "Bash(copy:*)",
+      "Bash(python:*)"
     ],
     "deny": [],
     "ask": []
