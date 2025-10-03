@@ -196,25 +196,8 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
   <div id="menu-overlay" class="fixed inset-0 bg-black/60 hidden md:hidden z-10 opacity-0 transition-opacity duration-200"></div>
   <nav id="mobile-menu" class="fixed inset-0 z-20 bg-gray-900/95 flex flex-col items-center justify-center p-8 text-white hidden md:hidden uppercase tracking-wide transform transition-transform duration-200 translate-x-full overflow-y-auto" aria-hidden="true" aria-label="Navigation mobile">
 
-    <!-- Navigation avec icônes -->
-    <div class="grid grid-cols-2 gap-4 w-full max-w-xs mb-8">
-      <?php foreach ($headerNavLinks as $href => $item): ?>
-        <a href="<?= langUrl($href) ?>"
-           class="flex flex-col items-center gap-3 p-4 rounded-xl bg-gray-800/60 border border-white/10 hover:border-indigo-400/60 transition-all duration-300 hover:scale-105">
-          <div class="w-20 h-20 rounded-lg overflow-hidden border border-white/20">
-            <img src="<?= $item['image'] ?>"
-                 alt="<?= __($item['i18n'], $item['label']) ?>"
-                 class="w-full h-full object-cover">
-          </div>
-          <span class="text-sm font-medium text-center" data-i18n="<?= $item['i18n'] ?>">
-            <?= __($item['i18n'], $item['label']) ?>
-          </span>
-        </a>
-      <?php endforeach; ?>
-    </div>
-
-    <!-- Langues + actions dans le même panneau -->
-    <div class="mt-8 flex flex-col items-center gap-6 w-full">
+    <!-- Langues + actions -->
+    <div class="flex flex-col items-center gap-6 w-full max-w-xs">
       <div class="flex items-center gap-2">
         <button type="button" data-lang="fr" class="flag-btn" aria-label="Français" aria-current="false">
           <img src="/media/ui/flags/flag-fr-medieval-rim-on-top.svg" width="32" height="24" alt="">
