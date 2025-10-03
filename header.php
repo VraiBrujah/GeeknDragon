@@ -197,18 +197,20 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
   <nav id="mobile-menu" class="fixed inset-0 z-20 bg-gray-900/95 flex flex-col items-center justify-center p-8 text-white hidden md:hidden uppercase tracking-wide transform transition-transform duration-200 translate-x-full overflow-y-auto" aria-hidden="true" aria-label="Navigation mobile">
 
     <!-- Langues + actions -->
-    <div class="flex flex-col items-center gap-6 w-full max-w-xs">
-      <div class="flex items-center gap-2">
+    <div class="flex flex-col items-center w-full max-w-xs gap-8">
+      <div class="w-full flex flex-col items-center gap-3">
+        <div class="flex items-center justify-center gap-3">
         <button type="button" data-lang="fr" class="flag-btn" aria-label="Français" aria-current="false">
           <img src="/media/ui/flags/flag-fr-medieval-rim-on-top.svg" width="32" height="24" alt="">
         </button>
         <button type="button" data-lang="en" class="flag-btn" aria-label="English" aria-current="false">
           <img src="/media/ui/flags/flag-en-us-uk-diagonal-medieval.svg" width="32" height="24" alt="">
         </button>
+        </div>
       </div>
 
       <?php if ($snipcartKey): ?>
-      <div class="flex flex-col w-full gap-6">
+      <div class="flex flex-col w-full gap-6 pt-2">
         <button class="snipcart-customer-signin snipcart-btn w-full text-center text-lg uppercase tracking-wide hover:opacity-80 transition-opacity duration-200 flex flex-col items-center gap-2" aria-label="Compte" title="Se connecter">
           <img src="/media/branding/icons/compte_non_connecter.webp" alt="" class="w-8 h-8 account-icon-disconnected transition-all duration-300" width="32" height="32">
           <img src="/media/branding/icons/compte_connecter.webp" alt="" class="w-8 h-8 account-icon-connected hidden transition-all duration-300" width="32" height="32">
