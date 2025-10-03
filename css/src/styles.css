@@ -209,7 +209,8 @@ h6 {
               margin-top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
               margin-bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   max-height: 120px;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   will-change: max-height, opacity;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
