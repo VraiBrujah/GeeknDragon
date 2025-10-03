@@ -27,7 +27,8 @@
       "Bash(php -r \"echo file_exists(''E:/GitHub/GeeknDragon/data/products.json'') ? ''OK'' : ''ERREUR'';\")",
       "Bash(php -r \"$p = json_decode(file_get_contents(''data/products.json''), true); echo isset($p[''coin-merchant-essence-double'']) ? ''Produit trouvé'' : ''Produit NON trouvé''; echo PHP_EOL; echo ''Total produits: '' . count($p);\")",
       "Bash(start:*)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Bash(copy:*)"
     ],
     "deny": [],
     "ask": []

@@ -171,7 +171,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
 
           <!-- Logo Fabriqué au Québec -->
           <div class="inline-flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl px-8 py-4 my-6">
-            <img src="/media/branding/logos/logo_fabrique_qc.webp" alt="Fabriqué au Québec" class="h-20 w-auto" loading="lazy">
+            <img src="/media/branding/logos/logo_fabrique_qc.png" alt="Fabriqué au Québec" class="h-20 w-auto" loading="lazy">
           </div>
 
           <div class="mt-6">
