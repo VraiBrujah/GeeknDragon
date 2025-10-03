@@ -2289,7 +2289,7 @@ echo $snipcartInit;
                 <?= __('money.physicalCoins.order.description', 'Découvrez notre collection complète de pièces métalliques et donnez vie à l\'économie de vos parties !') ?>
               </p>
               <div class="space-y-4">
-                <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-primary w-full">
+                <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-shop w-full">
                   <?= __('money.physicalCoins.order.shopButton', '🛒 Voir les Pièces en Boutique') ?>
                 </a>
                 <a href="<?= langUrl('product.php?id=coin-lord-treasury-uniform&from=pieces') ?>" class="btn btn-outline w-full">
@@ -2320,16 +2320,16 @@ echo $snipcartInit;
       </p>
       
       <div class="flex flex-col md:flex-row gap-4 justify-center">
-        <a href="<?= langUrl('boutique.php#triptyques') ?>" class="btn btn-primary text-lg px-6 py-4">
+        <a href="<?= langUrl('boutique.php#triptyques') ?>" class="btn btn-shop text-lg px-6 py-4">
           <?= __('callToAction.buttons.triptychs', '📁 Triptyques') ?>
         </a>
-        <a href="<?= langUrl('boutique.php#cartes') ?>" class="btn btn-primary text-lg px-6 py-4">
+        <a href="<?= langUrl('boutique.php#cartes') ?>" class="btn btn-shop text-lg px-6 py-4">
           <?= __('callToAction.buttons.cards', '🃏 Cartes d\'Équipement') ?>
         </a>
-        <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-primary text-lg px-6 py-4">
+        <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-shop text-lg px-6 py-4">
           <?= __('callToAction.buttons.coins', '🪙 Pièces Métalliques') ?>
         </a>
-        <a href="<?= langUrl('boutique.php') ?>" class="btn btn-outline text-lg px-6 py-4">
+        <a href="<?= langUrl('boutique.php') ?>" class="btn btn-shop text-lg px-6 py-4">
           <?= __('callToAction.buttons.shop', '🛒 Voir toute la boutique') ?>
         </a>
       </div>
