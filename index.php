@@ -36,7 +36,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
         <h1 class="text-5xl font-extrabold mb-6" data-i18n="hero.title">L'immersion au cœur du jeu</h1>
           <p class="text-xl mb-2 txt-court" data-i18n="hero.subtitle1">Cartes, pièces et fiches prêtes à jouer pour vos parties D&D</p>
           <p class="text-xl mb-8 txt-court" data-i18n="hero.subtitle2">Conçues au Québec</p>
-<a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
+<a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary btn-boutique" data-hide-price="1" data-i18n="hero.visitShop">
             Visiter la boutique
           </a>
       </div>
@@ -108,7 +108,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
               <img src="/media/ui/payments/american-express.svg" alt="Logo American Express" loading="lazy">
           </p>
         <div class="flex flex-col md:flex-row gap-6 justify-center">
-          <a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
+          <a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary btn-boutique" data-hide-price="1" data-i18n="hero.visitShop">
             Visiter la boutique
           </a>
           <a href="<?= langUrl('index.php#contact') ?>" class="btn btn-outline" data-i18n="contact.requestQuote">

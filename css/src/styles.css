@@ -189,6 +189,28 @@ h6 {
   box-shadow: 0 0 0 3px rgba(126, 34, 206, 0.4);
 }
 
+.btn-boutique {
+  color: #f9fafb;
+  background-image: url('/media/ui/button/boutique.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 2px solid rgba(226, 232, 240, 0.45);
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.45);
+  text-shadow: 0 2px 6px rgba(15, 23, 42, 0.65);
+}
+
+.btn-boutique:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.55);
+  filter: brightness(1.08);
+}
+
+.btn-boutique:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.45);
+}
+
 .btn-outline {
   color: #c7d2fe;             /* text-indigo-200 */
   border: 2px solid #818cf8;  /* border-indigo-400 */
