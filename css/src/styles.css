@@ -1360,14 +1360,20 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
   transform: scaleX(1); 
 }
 
-/* Grille pleine largeur sur mobile pour éliminer tout défilement horizontal */
+/* Grille mobile : laisser agir css/shop-grid.css (scroll horizontal, etc.) */
 @media (max-width: 640px) {
   .shop-grid {
+    grid-template-columns: unset;
+    padding-inline: 0;
+  }
+
+  /* Ancienne variante empilée (à activer via .shop-grid.is-stack) */
+  .shop-grid.is-stack {
     grid-template-columns: minmax(0, 1fr);
     padding-inline: var(--boutique-space-md);
   }
 
-  .shop-grid .card {
+  .shop-grid.is-stack .card {
     width: 100%;
   }
 }
