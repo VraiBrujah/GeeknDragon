@@ -552,6 +552,21 @@ $extraHead = <<<HTML
   margin: 0 auto;
 }
 
+@media (min-width: 1024px) {
+  .music-player-container {
+    left: 32px;
+    right: auto;
+    justify-content: flex-start;
+    align-items: flex-end;
+  }
+
+  .music-player {
+    margin: 0;
+    width: 240px;
+    max-width: 240px;
+  }
+}
+
 .music-player:hover {
   border-color: rgba(139, 92, 246, 0.6);
   box-shadow: 
