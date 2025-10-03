@@ -1389,3 +1389,86 @@ document.addEventListener('DOMContentLoaded', () => {
     new StickyShopNav();
   }
 })();
+
+/* ========================================================================
+   COPY EMAIL TO CLIPBOARD - Aide-jeux
+   Fonction pour copier l'email dans le presse-papiers avec feedback visuel
+   ===================================================================== */
+function copyEmailToClipboard(email, buttonElement) {
+  'use strict';
+
+  // Utiliser l'API Clipboard moderne
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(email)
+      .then(() => {
+        showCopyFeedback(buttonElement, true);
+      })
+      .catch((err) => {
+        console.warn('Erreur copie clipboard API:', err);
+        fallbackCopyEmail(email, buttonElement);
+      });
+  } else {
+    // Fallback pour navigateurs anciens
+    fallbackCopyEmail(email, buttonElement);
+  }
+}
+
+/**
+ * Méthode fallback pour copier l'email (navigateurs anciens)
+ */
+function fallbackCopyEmail(email, buttonElement) {
+  'use strict';
+
+  const textarea = document.createElement('textarea');
+  textarea.value = email;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.select();
+
+  try {
+    const successful = document.execCommand('copy');
+    showCopyFeedback(buttonElement, successful);
+  } catch (err) {
+    console.error('Erreur copie fallback:', err);
+    showCopyFeedback(buttonElement, false);
+  } finally {
+    document.body.removeChild(textarea);
+  }
+}
+
+/**
+ * Affiche le feedback visuel de copie
+ */
+function showCopyFeedback(buttonElement, success) {
+  'use strict';
+
+  const feedback = buttonElement.querySelector('.copy-feedback');
+  if (!feedback) return;
+
+  if (success) {
+    feedback.classList.remove('hidden');
+    feedback.classList.add('animate-pulse');
+
+    // Masquer après 2 secondes
+    setTimeout(() => {
+      feedback.classList.add('hidden');
+      feedback.classList.remove('animate-pulse');
+    }, 2000);
+  } else {
+    // En cas d'échec, afficher un message d'erreur
+    const originalText = feedback.textContent;
+    feedback.textContent = '✗ Erreur';
+    feedback.classList.remove('hidden', 'bg-green-600');
+    feedback.classList.add('bg-red-600');
+
+    setTimeout(() => {
+      feedback.textContent = originalText;
+      feedback.classList.add('hidden', 'bg-green-600');
+      feedback.classList.remove('bg-red-600');
+    }, 2000);
+  }
+}
+
+// Export global pour utilisation dans onclick
+window.copyEmailToClipboard = copyEmailToClipboard;

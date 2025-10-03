@@ -170,28 +170,9 @@ h6 {
   font-family: 'Cinzel', serif;
 }
 
+/* Système de boutons avec images - base réutilisable */
 .btn-primary {
-  color: white;
-  background-image: linear-gradient(to right, #4338ca, #6b21a8); /* indigo-700 → purple-700 */
-  border: 2px solid #3730a3;  /* border-indigo-800 */
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); /* shadow-lg */
-}
-
-.btn-primary:hover {
-  background-image: linear-gradient(to right, #4f46e5, #7e22ce); /* indigo-600 → purple-600 */
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 12px 28px -4px rgba(94, 58, 237, 0.5);
-  border-color: #4f46e5;
-}
-
-.btn-primary:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(126, 34, 206, 0.4);
-}
-
-.btn-boutique {
   color: #f9fafb;
-  background-image: url('/media/ui/button/boutique.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -200,17 +181,69 @@ h6 {
   text-shadow: 0 2px 6px rgba(15, 23, 42, 0.65);
 }
 
-.btn-boutique:hover {
-  /* Surcharge pour empêcher le gradient indigo de .btn-primary */
-  background-image: url('/media/ui/button/boutique.webp') !important;
+.btn-primary:hover {
   transform: translateY(-4px) scale(1.05);
   box-shadow: 0 14px 32px rgba(15, 23, 42, 0.55);
   filter: brightness(1.08);
 }
 
-.btn-boutique:focus {
+.btn-primary:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.5);
+}
+
+/* Classes modificatrices pour images de boutons */
+.btn-boutique { background-image: url('/media/ui/button/boutique.webp'); }
+.btn-contact { background-image: url('/media/ui/button/contact.webp'); }
+.btn-actualite { background-image: url('/media/ui/button/actualite.webp'); }
+.btn-aidejeux { background-image: url('/media/ui/button/aidejeux.webp'); }
+.btn-accueil { background-image: url('/media/ui/button/accueil.webp'); }
+.btn-carte { background-image: url('/media/ui/button/carte.webp'); }
+.btn-piece { background-image: url('/media/ui/button/piece.webp'); }
+.btn-triptyque { background-image: url('/media/ui/button/triptyque.webp'); }
+.btn-dragon { background-image: url('/media/ui/button/dragon.webp'); }
+
+/* Préserver l'image au hover (répéter explicitement) */
+.btn-boutique:hover { background-image: url('/media/ui/button/boutique.webp') !important; }
+.btn-contact:hover { background-image: url('/media/ui/button/contact.webp') !important; }
+.btn-actualite:hover { background-image: url('/media/ui/button/actualite.webp') !important; }
+.btn-aidejeux:hover { background-image: url('/media/ui/button/aidejeux.webp') !important; }
+.btn-accueil:hover { background-image: url('/media/ui/button/accueil.webp') !important; }
+.btn-carte:hover { background-image: url('/media/ui/button/carte.webp') !important; }
+.btn-piece:hover { background-image: url('/media/ui/button/piece.webp') !important; }
+.btn-triptyque:hover { background-image: url('/media/ui/button/triptyque.webp') !important; }
+.btn-dragon:hover { background-image: url('/media/ui/button/dragon.webp') !important; }
+
+/* Taille agrandie pour les boutons de retour (sans texte) */
+.btn-aidejeux {
+  display: inline-block;
+  min-width: 200px;
+  min-height: 80px;
+  width: 200px;
+  height: 80px;
+  padding: 0;
+  line-height: 80px;
+}
+
+/* Responsive pour boutons de retour */
+@media (max-width: 768px) {
+  .btn-aidejeux {
+    min-width: 160px;
+    min-height: 64px;
+    width: 160px;
+    height: 64px;
+    line-height: 64px;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-aidejeux {
+    min-width: 140px;
+    min-height: 56px;
+    width: 140px;
+    height: 56px;
+    line-height: 56px;
+  }
 }
 
 .btn-outline {

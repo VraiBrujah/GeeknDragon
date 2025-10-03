@@ -278,18 +278,18 @@ echo $snipcartInit;
               Notre convertisseur de monnaie interactif a été déplacé vers la page d'aide des jeux
               pour une meilleure organisation et une expérience utilisateur optimisée.
             </p>
-            <a href="<?= langUrl('aide-jeux.php#guide-monnaie') ?>" class="btn btn-primary">
+            <a href="<?= langUrl('aide-jeux.php#guide-monnaie') ?>" class="btn btn-primary btn-aidejeux">
               Utiliser le Convertisseur
             </a>
           </div>
         </div>
 
         <!-- Bouton retour au menu -->
-        <div class="text-center mt-16">
-          <a href="#main" class="btn btn-outline" data-i18n="shop.pieces.backToTop">
-            <?= __('shop.pieces.backToTop', '🔝 Retour au menu principal') ?>
-          </a>
-        </div>
+        <?php
+        $href = '#main';
+        $ariaLabel = __('shop.pieces.backToTop', 'Retour au menu principal');
+        include __DIR__ . '/partials/back-button.php';
+        ?>
       </div>
     </section>
 
@@ -443,7 +443,7 @@ echo $snipcartInit;
                 <?= __('shop.deluxeBundle.limited', 'Production limitée à 500 exemplaires') ?>
               </p>
 
-              <a href="<?= langUrl('index.php#contact') ?>" class="btn btn-primary text-lg px-8 py-4 mb-3 inline-block shadow-lg shadow-amber-600/30 hover:shadow-amber-500/50 transition-all" data-i18n="shop.deluxeBundle.cta">
+              <a href="<?= langUrl('index.php#contact') ?>" class="btn btn-primary btn-dragon text-lg px-8 py-4 mb-3 inline-block shadow-lg shadow-amber-600/30 hover:shadow-amber-500/50 transition-all" data-i18n="shop.deluxeBundle.cta">
                 <?= __('shop.deluxeBundle.cta', 'Réserver Mon Édition') ?>
               </a>
 
@@ -456,11 +456,11 @@ echo $snipcartInit;
         </div>
 
         <!-- Bouton retour au menu -->
-        <div class="text-center mt-16">
-          <a href="#main" class="btn btn-outline" data-i18n="shop.deluxeBundle.backToTop">
-            <?= __('shop.deluxeBundle.backToTop', '🔝 Retour au menu principal') ?>
-          </a>
-        </div>
+        <?php
+        $href = '#main';
+        $ariaLabel = __('shop.deluxeBundle.backToTop', 'Retour au menu principal');
+        include __DIR__ . '/partials/back-button.php';
+        ?>
 
       </div>
     </section>
@@ -493,11 +493,11 @@ echo $snipcartInit;
         </p>
 
         <!-- Bouton retour au menu -->
-        <div class="text-center mt-16">
-          <a href="#main" class="btn btn-outline" data-i18n="shop.cards.backToTop">
-            <?= __('shop.cards.backToTop', '🔝 Retour au menu principal') ?>
-          </a>
-        </div>
+        <?php
+        $href = '#main';
+        $ariaLabel = __('shop.cards.backToTop', 'Retour au menu principal');
+        include __DIR__ . '/partials/back-button.php';
+        ?>
       </div>
     </section>
 
@@ -529,11 +529,11 @@ echo $snipcartInit;
         </p>
 
         <!-- Bouton retour au menu -->
-        <div class="text-center mt-16">
-          <a href="#main" class="btn btn-outline" data-i18n="shop.triptychs.backToTop">
-            <?= __('shop.triptychs.backToTop', '🔝 Retour au menu principal') ?>
-          </a>
-        </div>
+        <?php
+        $href = '#main';
+        $ariaLabel = __('shop.triptychs.backToTop', 'Retour au menu principal');
+        include __DIR__ . '/partials/back-button.php';
+        ?>
       </div>
     </section>
 

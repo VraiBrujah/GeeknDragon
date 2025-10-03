@@ -247,8 +247,14 @@ echo $snipcartInit;
 <main id="main" class="py-10 pt-[var(--header-height)] main-product">
   <section class="max-w-6xl mx-auto px-6">
     <div class="flex justify-center mb-6">
-      <a href="boutique.php#<?= htmlspecialchars($from) ?>" class="btn btn-outline">&larr;
-        <span data-i18n="product.back">Retour à la boutique</span>
+      <?php
+      $href = 'boutique.php#' . htmlspecialchars($from);
+      $text = '&larr; ' . __('product.back', 'Retour à la boutique');
+      $i18nKey = '';
+      $classes = '';
+      ?>
+      <a href="<?= $href ?>" class="btn btn-primary btn-boutique <?= $classes ?>">
+        <span data-i18n="product.back"><?= $text ?></span>
       </a>
     </div>
 

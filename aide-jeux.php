@@ -1441,10 +1441,16 @@ echo $snipcartInit;
               <?= __('gameHelp.customTriptychs.contact.description', 'Pour un triptyque entièrement personnalisé, contactez-nous par email avec les détails de votre personnage :') ?>
             </p>
             <div class="flex flex-col md:flex-row items-center justify-center gap-4">
-              <a href="mailto:<?= __('gameHelp.customTriptychs.contact.email', 'commande@geekndragon.com') ?>?subject=<?= __('gameHelp.customTriptychs.contact.subject', 'Triptyque Personnalisé') ?>" 
-                 class="btn btn-primary text-lg px-6 py-3">
+              <button
+                type="button"
+                onclick="copyEmailToClipboard('<?= __('gameHelp.customTriptychs.contact.email', 'commande@geekndragon.com') ?>', this)"
+                class="btn btn-primary btn-contact text-lg px-6 py-3 relative"
+                title="<?= __('gameHelp.customTriptychs.contact.copyTooltip', 'Cliquer pour copier l\'email') ?>">
                 📧 <?= __('gameHelp.customTriptychs.contact.email', 'commande@geekndragon.com') ?>
-              </a>
+                <span class="copy-feedback hidden absolute -top-10 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-3 py-1 rounded text-sm whitespace-nowrap">
+                  ✓ <?= __('gameHelp.customTriptychs.contact.copied', 'Copié !') ?>
+                </span>
+              </button>
               <span class="text-gray-400"><?= __('gameHelp.customTriptychs.contact.subjectLabel', 'Sujet : "Triptyque Personnalisé"') ?></span>
             </div>
           </div>
@@ -1524,11 +1530,11 @@ echo $snipcartInit;
       </div>
       
       <!-- Bouton de retour au hero -->
-      <div class="text-center mt-16">
-        <a href="#menu-guides" class="btn btn-outline">
-          <?= __('gameHelp.backToMain', '⬆️ Retour aux guides principaux') ?>
-        </a>
-      </div>
+      <?php
+      $href = 'aide-jeux.php';
+      $ariaLabel = __('gameHelp.backToMain', 'Retour aux guides principaux');
+      include __DIR__ . '/partials/back-button.php';
+      ?>
     </div>
   </section>
 
@@ -1751,11 +1757,11 @@ echo $snipcartInit;
       </div>
       
       <!-- Bouton de retour au hero -->
-      <div class="text-center mt-16">
-        <a href="#menu-guides" class="btn btn-outline">
-          <?= __('gameHelp.cards.backToMain', '⬆️ Retour aux guides principaux') ?>
-        </a>
-      </div>
+      <?php
+      $href = 'aide-jeux.php';
+      $ariaLabel = __('gameHelp.cards.backToMain', 'Retour aux guides principaux');
+      include __DIR__ . '/partials/back-button.php';
+      ?>
 
     </div>
   </section>
@@ -2293,10 +2299,10 @@ echo $snipcartInit;
                 <?= __('money.physicalCoins.order.description', 'Découvrez notre collection complète de pièces métalliques et donnez vie à l\'économie de vos parties !') ?>
               </p>
               <div class="space-y-4">
-                <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-primary w-full">
+                <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-primary btn-piece w-full">
                   <?= __('money.physicalCoins.order.shopButton', '🛒 Voir les Pièces en Boutique') ?>
                 </a>
-                <a href="<?= langUrl('product.php?id=coin-lord-treasury-uniform&from=pieces') ?>" class="btn btn-outline w-full">
+                <a href="<?= langUrl('product.php?id=coin-lord-treasury-uniform&from=pieces') ?>" class="btn btn-primary btn-dragon w-full">
                   <?= __('money.physicalCoins.order.treasuryButton', '⭐ Set Complet de Trésorerie') ?>
                 </a>
               </div>
@@ -2306,11 +2312,11 @@ echo $snipcartInit;
       </div>
       
       <!-- Bouton de retour au hero -->
-      <div class="text-center mt-16">
-        <a href="#menu-guides" class="btn btn-outline">
-          <?= __('money.backToMain', '⬆️ Retour aux guides principaux') ?>
-        </a>
-      </div>
+      <?php
+      $href = 'aide-jeux.php';
+      $ariaLabel = __('money.backToMain', 'Retour aux guides principaux');
+      include __DIR__ . '/partials/back-button.php';
+      ?>
 
     </div>
   </section>
@@ -2324,16 +2330,16 @@ echo $snipcartInit;
       </p>
       
       <div class="flex flex-col md:flex-row gap-4 justify-center">
-        <a href="<?= langUrl('boutique.php#triptyques') ?>" class="btn btn-primary text-lg px-6 py-4">
+        <a href="<?= langUrl('boutique.php#triptyques') ?>" class="btn btn-primary btn-triptyque text-lg px-6 py-4">
           <?= __('callToAction.buttons.triptychs', '📁 Triptyques') ?>
         </a>
-        <a href="<?= langUrl('boutique.php#cartes') ?>" class="btn btn-primary text-lg px-6 py-4">
+        <a href="<?= langUrl('boutique.php#cartes') ?>" class="btn btn-primary btn-carte text-lg px-6 py-4">
           <?= __('callToAction.buttons.cards', '🃏 Cartes d\'Équipement') ?>
         </a>
-        <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-primary text-lg px-6 py-4">
+        <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-primary btn-piece text-lg px-6 py-4">
           <?= __('callToAction.buttons.coins', '🪙 Pièces Métalliques') ?>
         </a>
-        <a href="<?= langUrl('boutique.php') ?>" class="btn btn-outline text-lg px-6 py-4">
+        <a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary btn-boutique text-lg px-6 py-4">
           <?= __('callToAction.buttons.shop', '🛒 Voir toute la boutique') ?>
         </a>
       </div>
