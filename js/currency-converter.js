@@ -1208,10 +1208,8 @@ class CurrencyConverterPremium {
 
         const formatted = breakdown.map((item) => {
             const data = this.currencyData[item.currency];
-            if (item.multiplier === 1) {
-                return `${this.nf.format(item.quantity)} ${data.emoji} ${this.getCurrencyName(item.currency).toLowerCase()}`;
-            }
-            return `${this.nf.format(item.quantity)} ${data.emoji} ${this.getCurrencyName(item.currency).toLowerCase()}(×${this.nf.format(item.multiplier)})`;
+            // Toujours afficher le multiplicateur pour cohérence avec les lots recommandés
+            return `${this.nf.format(item.quantity)} ${data.emoji} ${this.getCurrencyName(item.currency).toLowerCase()} (×${this.nf.format(item.multiplier)})`;
         });
 
         // Joindre avec "et"
