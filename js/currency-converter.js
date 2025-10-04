@@ -258,7 +258,7 @@ class CurrencyConverterPremium {
 
         this.updateMetalCards(baseValue);
         this.updateOptimalRecommendations(baseValue);
-        this.updateCoinLotsRecommendations(baseValue);
+        this.updateCoinLotsRecommendations(baseValue, true); // true = toujours utiliser tableau multiplicateur
     }
 
     updateFromMultipliers() {
