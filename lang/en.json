@@ -146,7 +146,10 @@
         "quantity": "Quantity",
         "unit": "single",
         "add": "Add",
-        "outOfStock": "Out of stock",
+        "outOfStock": {
+            "title": "Treasure Depleted",
+            "subtitle": "Unfortunately, this artifact is no longer available at the moment"
+        },
         "insufficientStock": "Insufficient stock",
         "securePayment": "Secure payment via Snipcart",
         "realTimeStock": "Stock updated in real time"

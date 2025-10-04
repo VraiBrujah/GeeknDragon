@@ -1,7 +1,7 @@
 <?php
 /**
- * Partial OPTIMISÉ pour grille de produits page d'accueil
- * Version allégée utilisant product-card-simple.php
+ * Partial pour grille de produits page d'accueil
+ * Utilise product-card.php pour affichage identique à la boutique
  *
  * Variables attendues:
  * @var string $sectionId - ID unique de la section
@@ -37,8 +37,8 @@ $lang = $lang ?? 'fr';
           $product = $products[$productId];
           $product['id'] = $productId;
 
-          // Utiliser la version SIMPLE de product-card
-          include __DIR__ . '/product-card-simple.php';
+          // Utiliser la version COMPLÈTE de product-card (même rendu que boutique)
+          include __DIR__ . '/product-card.php';
         }
       }
       ?>
