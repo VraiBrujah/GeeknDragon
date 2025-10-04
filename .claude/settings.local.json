@@ -37,7 +37,8 @@
       "Bash(find:*)",
       "Bash(node:*)",
       "Bash(del test-aide-jeux.php)",
-      "Bash(del:*)"
+      "Bash(del:*)",
+      "Bash(rm:*)"
     ],
     "deny": [],
     "ask": []

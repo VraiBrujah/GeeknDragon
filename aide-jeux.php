@@ -2696,98 +2696,42 @@ document.addEventListener('DOMContentLoaded', function() {
         };
       });
       
-      // Utiliser les utilitaires Snipcart pour ajouter au panier
+      // Utiliser les utilitaires Snipcart optimisés pour ajouter au panier
       if (window.SnipcartUtils) {
-        window.SnipcartUtils.addMultipleToCart(productsToAdd, (added, total, processed) => {
-          // Ne traiter le résultat final que quand tous les produits ont été traités
-          if (processed === total) {
-            const lang = document.documentElement.lang || 'fr';
-            
-            let message, className, icon;
-            if (added === total) {
-              // Tous les produits ont été ajoutés avec succès
-              message = lang === 'en' ? 
-                `${total} product(s) added to cart successfully!` : 
-                `${total} produit(s) ajouté(s) au panier avec succès !`;
-              className = 'bg-green-600';
-              icon = '✅';
-            } else if (added > 0) {
-              // Certains produits ont été ajoutés
-              message = lang === 'en' ? 
-                `${added}/${total} product(s) added to cart (${total - added} failed)` : 
-                `${added}/${total} produit(s) ajouté(s) au panier (${total - added} ont échoué)`;
-              className = 'bg-yellow-600';
-              icon = '⚠️';
-            } else {
-              // Aucun produit n'a pu être ajouté
-              message = lang === 'en' ? 
-                `Failed to add products to cart` : 
-                `Échec de l'ajout des produits au panier`;
-              className = 'bg-red-600';
-              icon = '❌';
-            }
-            
-            // Afficher un message de résultat
-            const resultDiv = document.createElement('div');
-            resultDiv.className = `fixed top-4 right-4 ${className} text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300`;
-            resultDiv.innerHTML = `
-              <div class="flex items-center gap-2">
-                <span class="text-xl">${icon}</span>
-                <span>${message}</span>
-              </div>
-            `;
-            
-            document.body.appendChild(resultDiv);
-            
-            // Animation d'entrée
-            setTimeout(() => {
-              resultDiv.style.transform = 'translateX(0)';
-            }, 100);
-            
-            // Animation de sortie et suppression
-            setTimeout(() => {
-              resultDiv.style.transform = 'translateX(100%)';
-              setTimeout(() => {
-                if (resultDiv.parentNode) {
-                  resultDiv.parentNode.removeChild(resultDiv);
-                }
-              }, 300);
-            }, added === total ? 3000 : 5000); // Message plus long en cas d'erreurs
-            
-            // Forcer le rafraîchissement du panier Snipcart après l'ajout
-            if (window.Snipcart && window.Snipcart.api && window.Snipcart.api.cart) {
-              setTimeout(() => {
-                try {
-                  // Méthode plus douce : forcer la re-render de l'interface panier
-                  if (window.Snipcart.store && window.Snipcart.store.getState) {
-                    const cartState = window.Snipcart.store.getState().cart;
-                    if (cartState && cartState.status === 'visible') {
-                      // Si le panier est ouvert, le fermer puis le rouvrir pour forcer la mise à jour
-                      window.Snipcart.api.theme.cart.close();
-                      setTimeout(() => {
-                        window.Snipcart.api.theme.cart.open();
-                      }, 100);
-                    }
+        // Version async optimisée pour performance maximale
+        (async () => {
+          try {
+            await window.SnipcartUtils.addMultipleToCart(productsToAdd, (added, total, processed) => {
+              // Feedback de progression simple
+              if (processed === total) {
+                const lang = document.documentElement.lang || 'fr';
+                const message = lang === 'en' ? 
+                  `${added} product(s) added to cart` : 
+                  `${added} produit(s) ajouté(s) au panier`;
+                
+                const resultDiv = document.createElement('div');
+                resultDiv.className = `fixed top-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50`;
+                resultDiv.innerHTML = `<span>✅ ${message}</span>`;
+                
+                document.body.appendChild(resultDiv);
+                setTimeout(() => {
+                  if (resultDiv.parentNode) {
+                    resultDiv.parentNode.removeChild(resultDiv);
                   }
-                } catch (error) {
-                  // Fallback silencieux
-                }
-              }, 1500); // Délai plus long pour être sûr que tous les ajouts sont terminés
-            }
-            
-            // Réactiver le bouton après la fin du processus
-            setTimeout(() => {
-              this.disabled = false;
-              this.dataset.adding = 'false';
-            }, 2000);
+                }, 3000);
+              }
+            });
+          } catch (error) {
+            // Gestion silencieuse des erreurs en production
           }
-        });
-      } else {
-        // Erreur silencieuse en production, alerter uniquement
-        alert("Erreur : impossible d'ajouter au panier");
+        })();
+      }
+      
+      // Réactiver le bouton après la fin du processus optimisé
+      setTimeout(() => {
         this.disabled = false;
         this.dataset.adding = 'false';
-      }
+      }, 1000);
     });
   }
 

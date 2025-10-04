@@ -132,7 +132,7 @@ class CurrencyConverterPremium {
             try {
                 callback(data);
             } catch (error) {
-                console.warn('Erreur callback:', error);
+                // Gestion silencieuse des erreurs de callbacks pour éviter les logs en production
             }
         });
     }

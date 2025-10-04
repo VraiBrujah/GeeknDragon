@@ -1,23 +1,35 @@
 /**
  * CoinLotOptimizer - Algorithme de sac à dos pour optimisation des lots de pièces D&D
  *
+ * Architecture : Pattern Strategy pour l'optimisation multi-critères
  * Responsabilité : Trouver la combinaison de lots la moins chère qui couvre exactement
  * les besoins de pièces, avec surplus autorisé mais déficit interdit.
  *
- * Expansion complète des variations :
+ * Algorithme : Sac à dos dynamique avec génération exhaustive des variations produits
  * - Pièces Personnalisées : 25 variations (5 métaux × 5 multiplicateurs)
  * - Trio de Pièces : 25 variations (3 pièces même métal/multiplicateur)
  * - Quintessence Métallique : 5 variations (1 par multiplicateur, tous métaux)
  * - Septuple Libre : 25 variations (7 pièces même métal/multiplicateur)
- * - Produits fixes : parsing structure coin_lots
+ * - Produits fixes : parsing dynamique structure coin_lots
+ *
+ * @author Brujah - Geek & Dragon
+ * @version 2.0.0 - Production
  */
 class CoinLotOptimizer {
+    /**
+     * Initialise l'optimiseur avec les taux D&D standard et la configuration des multiplicateurs
+     * Configuration monétaire basée sur les règles officielles D&D 5e
+     */
     constructor() {
-
+        // Taux de change standards D&D (base cuivre)
         this.rates = {
             copper: 1, silver: 10, electrum: 50, gold: 100, platinum: 1000,
         };
+        
+        // Multiplicateurs physiques disponibles pour les pièces personnalisées
         this.multipliers = [1, 10, 100, 1000, 10000];
+        
+        // Traductions des noms de métaux pour l'affichage multilingue
         this.metalNames = {
             fr: {
                 copper: 'Cuivre', silver: 'Argent', electrum: 'Électrum', gold: 'Or', platinum: 'Platine',
@@ -28,16 +40,26 @@ class CoinLotOptimizer {
         };
     }
 
-
+    
+    /**
+     * Obtient la langue actuelle du document pour les traductions
+     * @returns {string} Code langue (fr/en)
+     */
     getCurrentLang() {
         return document.documentElement?.lang || 'fr';
     }
 
     /**
-   * Point d'entrée principal - trouve la combinaison optimale de lots
-   * @param {Object} needs - Besoins exacts {"copper_1": 2, "platinum_10": 1, ...}
-   * @returns {Array} Solution optimale formatée pour Snipcart
-   */
+     * Point d'entrée principal : trouve la combinaison optimale de lots
+     * Utilise l'algorithme de sac à dos pour minimiser le coût total
+     * 
+     * @param {Object} needs - Besoins exacts par type de pièce {"copper_1": 2, "platinum_10": 1, ...}
+     * @returns {Array} Solution optimale formatée pour ajout au panier Snipcart
+     * @example
+     * const needs = {"copper_1": 5, "gold_100": 2};
+     * const solution = optimizer.findOptimalProductCombination(needs);
+     * // Retourne: [{product: {...}, quantity: 1, displayName: "...", totalCost: 35}]
+     */
     findOptimalProductCombination(needs) {
         if (!needs || Object.keys(needs).length === 0) {
             return [];

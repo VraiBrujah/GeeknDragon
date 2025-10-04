@@ -1047,8 +1047,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
       if (snipcartBtn && customIndex) {
         snipcartBtn.setAttribute(`data-item-custom${customIndex}-value`, select.value);
-        // Sync silencieux pour éviter le spam console
-        // console.log(`Synced custom${customIndex} to:`, select.value, 'for product:', targetId);
+        // Synchronisation réussie des champs personnalisés
       }
     };
 
@@ -1065,8 +1064,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetId = btn.dataset.itemId || btn.getAttribute('data-item-id');
         const selects = document.querySelectorAll(`select[data-target="${targetId}"]`);
         selects.forEach(select => syncSelect(select));
-        // Pre-sync silencieux
-        // console.log('Pre-sync before add to cart for:', targetId);
+        // Pré-synchronisation des champs avant ajout au panier
       });
     });
   };

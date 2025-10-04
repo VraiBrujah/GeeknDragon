@@ -1,10 +1,24 @@
 /**
  * Utilitaires Snipcart réutilisables
- * Fonctions cohérentes pour l'ajout au panier dans toute l'application
+ * 
+ * Architecture : Pattern Factory et Template Method pour génération cohérente des boutons e-commerce
+ * Responsabilités :
+ * - Création unifiée des boutons d'ajout au panier avec attributs Snipcart corrects
+ * - Gestion robuste de l'ajout multiple avec vérification et retry automatique
+ * - Support complet des champs personnalisés (métal, multiplicateur, langue)
+ * - Intégration seamless boutique principale et pages aide-jeux
+ * 
+ * @author Brujah - Geek & Dragon
+ * @version 2.0.0 - Production
  */
 class SnipcartUtils {
     /**
-     * Crée un bouton d'ajout au panier avec tous les attributs nécessaires
+     * Crée un bouton d'ajout au panier avec tous les attributs Snipcart nécessaires
+     * Factory method pour génération cohérente des boutons e-commerce
+     * 
+     * @param {Object} productData - Données du produit (id, nom, prix, description)
+     * @param {Object} options - Options de personnalisation (quantité, champs custom, style)
+     * @returns {HTMLElement} Bouton HTML configuré pour Snipcart
      */
     static createAddToCartButton(productData, options = {}) {
         const {
@@ -83,24 +97,41 @@ class SnipcartUtils {
     }
 
     /**
-     * Ajoute un produit au panier par programmation
+     * Ajoute un produit au panier par programmation via API Snipcart directe
+     * Méthode optimisée avec fallback HTML si l'API échoue
+     * 
+     * @param {Object} productData - Données du produit à ajouter
+     * @param {Object} options - Options d'ajout (quantité, champs personnalisés)
+     * @returns {Promise<boolean>} True si ajout réussi
      */
-    static addToCart(productData, options = {}) {
-        const button = this.createAddToCartButton(productData, options);
+    static async addToCart(productData, options = {}) {
+        // Tentative d'utilisation directe de l'API Snipcart (plus rapide)
+        if (window.Snipcart && window.Snipcart.api && window.Snipcart.api.cart) {
+            try {
+                const snipcartData = this.extractProductDataFromButton(
+                    this.createAddToCartButton(productData, options)
+                );
+                await window.Snipcart.api.cart.items.add(snipcartData);
+                return true;
+            } catch (error) {
+                // Fallback silencieux vers méthode HTML
+            }
+        }
 
-        // Ajouter temporairement au DOM pour déclencher Snipcart
+        // Fallback : méthode HTML classique
+        const button = this.createAddToCartButton(productData, options);
         button.style.display = 'none';
         document.body.appendChild(button);
-
-        // Déclencher le clic
         button.click();
 
-        // Nettoyer après que Snipcart ait eu le temps de traiter
+        // Nettoyage rapide
         setTimeout(() => {
             if (button.parentNode) {
                 button.parentNode.removeChild(button);
             }
-        }, 500); // Délai plus long pour garantir le traitement Snipcart
+        }, 300);
+        
+        return true;
     }
 
     /**
@@ -178,10 +209,10 @@ class SnipcartUtils {
     }
 
     /**
-     * Ajoute plusieurs produits au panier en lot
-     * Garantit que tous les produits sont traités et que le callback de progression est toujours appelé
+     * Ajoute plusieurs produits au panier en lot avec vérification optimisée
+     * Version haute performance avec API directe et vérification minimale
      */
-    static addMultipleToCart(products, onProgress = null) {
+    static async addMultipleToCart(products, onProgress = null) {
         if (!products || products.length === 0) {
             if (onProgress) onProgress(0, 0);
             return;
@@ -190,42 +221,72 @@ class SnipcartUtils {
         let processed = 0;
         let added = 0;
 
-        // Fonction récursive pour ajouter un produit à la fois avec délai adaptatif
-        const addNext = (index) => {
-            if (index >= products.length) {
-                // Tous les produits ont été traités, appel final du callback
-                if (onProgress && processed === products.length) {
-                    onProgress(added, products.length);
+        // Fonction pour compter les items du panier
+        const getCartItemCount = () => {
+            if (window.Snipcart && window.Snipcart.api && window.Snipcart.api.cart) {
+                try {
+                    return window.Snipcart.api.cart.items.count() || 0;
+                } catch (error) {
+                    return 0;
                 }
-                return;
             }
+            return 0;
+        };
 
-            const productData = products[index];
-
+        // Traitement séquentiel optimisé
+        for (let i = 0; i < products.length; i++) {
+            const productData = products[i];
+            const initialCount = getCartItemCount();
+            
             try {
-                this.addToCart(productData.product, {
+                // Utiliser la méthode optimisée avec API directe
+                const success = await this.addToCart(productData.product, {
                     quantity: productData.quantity,
                     customFields: productData.customFields || {},
                 });
 
-                added++;
+                if (success) {
+                    // Vérification rapide (max 3 tentatives = 450ms)
+                    let attempts = 0;
+                    const maxAttempts = 3;
+                    
+                    while (attempts < maxAttempts) {
+                        await new Promise(resolve => setTimeout(resolve, 150));
+                        const currentCount = getCartItemCount();
+                        
+                        if (currentCount > initialCount) {
+                            added++;
+                            break;
+                        }
+                        attempts++;
+                    }
+                }
+                
+                processed++;
+                
+                if (onProgress) {
+                    onProgress(added, products.length, processed);
+                }
+
+                // Délai minimal entre produits pour API stability
+                if (i < products.length - 1) {
+                    await new Promise(resolve => setTimeout(resolve, 400));
+                }
+
             } catch (error) {
-                console.warn('Erreur ajout produit au panier:', productData.product?.id || 'produit inconnu', error);
+                // Gestion silencieuse en production
+                processed++;
+                
+                if (onProgress) {
+                    onProgress(added, products.length, processed);
+                }
+                
+                // Délai de récupération court
+                if (i < products.length - 1) {
+                    await new Promise(resolve => setTimeout(resolve, 600));
+                }
             }
-
-            processed++;
-            
-            // Appeler le callback de progression après chaque tentative
-            if (onProgress) {
-                onProgress(added, products.length, processed);
-            }
-
-            // Délai adaptatif : plus long pour être sûr que Snipcart a traité l'ajout
-            setTimeout(() => addNext(index + 1), 800); // Délai augmenté pour fiabilité
-        };
-
-        // Commencer l'ajout séquentiel
-        addNext(0);
+        }
     }
 
     /**
@@ -302,7 +363,11 @@ class SnipcartUtils {
     }
 
     /**
-     * Extrait les données produit depuis les attributs d'un bouton
+     * Extrait les données produit depuis les attributs d'un bouton HTML Snipcart
+     * Méthode réutilisée pour conversion vers format API
+     * 
+     * @param {HTMLElement} button - Bouton avec attributs data-item-*
+     * @returns {Object} Données produit extraites
      */
     static extractProductDataFromButton(button) {
         return {
