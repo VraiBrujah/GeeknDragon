@@ -1143,3 +1143,31 @@ div[class*="wrapper"] {
   font-weight: 700 !important;
   margin-left: 8px !important;
 }
+
+/* =================================================================== */
+/* VARIATIONS DYNAMIQUES DANS LE SOMMAIRE                             */
+/* =================================================================== */
+
+/* Variations affichées dans les titres du sommaire (métal, multiplicateur) */
+.snipcart .gd-item-variations {
+  color: #94a3b8 !important;
+  font-weight: 400 !important;
+  font-size: 0.9em !important;
+  margin-left: 0.25rem !important;
+}
+
+/* Animation d'apparition fluide */
+@keyframes fadeInVariations {
+  from {
+    opacity: 0;
+    transform: translateX(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.snipcart .gd-item-variations {
+  animation: fadeInVariations 0.3s ease-out !important;
+}

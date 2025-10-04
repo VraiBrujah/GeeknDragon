@@ -452,6 +452,195 @@
     }
   }
 
+  // ============================================================================
+  // SYSTÈME DE VARIATIONS DYNAMIQUES
+  // ============================================================================
+
+  /**
+   * Construit le nom du produit avec ses variations (métal, multiplicateur)
+   * @param {Object} item - Item du panier Snipcart
+   * @returns {string} Nom avec variations entre parenthèses
+   */
+  function buildProductNameWithVariations(item) {
+    // Nom de base (nettoyer les variations existantes)
+    let baseName = typeof item.name === 'function' ? item.name() : item.name;
+    baseName = baseName.replace(/\s*\([^)]+\)\s*$/, '').trim();
+
+    const customFields = item.customFields || [];
+    const variations = [];
+
+    customFields.forEach(field => {
+      const fieldName = (typeof field.name === 'function' ? field.name() : field.name) || '';
+      const fieldValue = (typeof field.value === 'function' ? field.value() : field.value) || '';
+
+      if (fieldName.toLowerCase().includes('métal') || fieldName.toLowerCase().includes('metal')) {
+        variations.push(fieldValue);
+      } else if (fieldName.toLowerCase().includes('multiplicateur') || fieldName.toLowerCase().includes('multiplier')) {
+        variations.push(`×${fieldValue}`);
+      }
+    });
+
+    return variations.length > 0 ? `${baseName} (${variations.join(' ')})` : baseName;
+  }
+
+  /**
+   * Met à jour le nom d'un item dans le store Snipcart
+   * @param {string} itemId - ID unique de l'item
+   * @param {string} newName - Nouveau nom avec variations
+   */
+  function updateItemNameInStore(itemId, newName) {
+    try {
+      window.Snipcart?.api?.cart?.items?.update({
+        uniqueId: itemId,
+        name: newName
+      });
+      console.log(`✅ Nom mis à jour: ${newName}`);
+    } catch (error) {
+      console.warn('⚠️ Erreur mise à jour nom:', error);
+    }
+  }
+
+  /**
+   * Injecte les variations dans le DOM du sommaire (fallback visuel)
+   */
+  function injectVariationsInSummaryDOM() {
+    const cart = window.Snipcart?.store?.getState()?.cart;
+    if (!cart) return;
+
+    const items = cart.items || [];
+
+    // Sélecteurs pour les titres dans le sommaire
+    const summaryItems = $$('.snipcart-summary-item__title, .snipcart__item__title, .snipcart-order-item__title');
+
+    summaryItems.forEach(titleEl => {
+      // Éviter de traiter deux fois
+      if (titleEl.dataset.gdVariationsInjected === 'true') return;
+
+      const titleText = titleEl.textContent.trim();
+
+      // Trouver l'item correspondant
+      const matchingItem = items.find(item => {
+        const itemName = typeof item.name === 'function' ? item.name() : item.name;
+        return itemName.includes(titleText) || titleText.includes(itemName);
+      });
+
+      if (!matchingItem) return;
+
+      // Construire le nom complet avec variations
+      const fullName = buildProductNameWithVariations(matchingItem);
+
+      // Si le titre actuel ne contient pas les variations
+      if (!titleText.includes('(') && fullName !== titleText) {
+        const variationsMatch = fullName.match(/\(([^)]+)\)/);
+        if (variationsMatch) {
+          const variationsSpan = document.createElement('span');
+          variationsSpan.className = 'gd-item-variations';
+          variationsSpan.style.cssText = `
+            color: #94a3b8;
+            font-weight: 400;
+            font-size: 0.9em;
+            margin-left: 0.25rem;
+          `;
+          variationsSpan.textContent = ` (${variationsMatch[1]})`;
+
+          titleEl.appendChild(variationsSpan);
+          titleEl.dataset.gdVariationsInjected = 'true';
+        }
+      }
+    });
+  }
+
+  /**
+   * Initialise le système de variations dynamiques
+   */
+  function initDynamicVariations() {
+    try {
+      const events = window.Snipcart?.events;
+      if (!events) {
+        console.warn('⚠️ Events Snipcart non disponibles pour variations dynamiques');
+        return;
+      }
+
+      // Écouter les changements d'items dans le panier
+      events.on('item.updated', (item) => {
+        const itemData = item.item || item;
+        const uniqueId = typeof itemData.uniqueId === 'function' ? itemData.uniqueId() : itemData.uniqueId;
+        const newName = buildProductNameWithVariations(itemData);
+        const currentName = typeof itemData.name === 'function' ? itemData.name() : itemData.name;
+
+        // Mettre à jour seulement si le nom a changé
+        if (currentName !== newName) {
+          updateItemNameInStore(uniqueId, newName);
+        }
+      });
+
+      // Écouter l'ajout d'items
+      events.on('item.added', (item) => {
+        const itemData = item.item || item;
+        const uniqueId = typeof itemData.uniqueId === 'function' ? itemData.uniqueId() : itemData.uniqueId;
+
+        // Petit délai pour laisser Snipcart initialiser
+        setTimeout(() => {
+          const newName = buildProductNameWithVariations(itemData);
+          updateItemNameInStore(uniqueId, newName);
+        }, 100);
+      });
+
+      // Observer les changements de page (panier → checkout)
+      events.on('page.change', () => {
+        setTimeout(injectVariationsInSummaryDOM, 200);
+      });
+
+      // Quand le panier s'ouvre
+      events.on('cart.opened', () => {
+        setTimeout(injectVariationsInSummaryDOM, 200);
+      });
+
+      // MutationObserver pour détecter l'apparition du sommaire
+      const snipcartContainer = document.getElementById('snipcart');
+      if (snipcartContainer && !snipcartContainer.__gdVariationsObserverMounted) {
+        const observer = new MutationObserver((mutations) => {
+          let shouldUpdate = false;
+
+          for (const mutation of mutations) {
+            if (mutation.type === 'childList') {
+              const summaryAdded = Array.from(mutation.addedNodes).some(node =>
+                node.nodeType === 1 && (
+                  node.classList?.contains('snipcart-summary') ||
+                  node.classList?.contains('snipcart-checkout__content--summary') ||
+                  node.querySelector?.('.snipcart-summary, .snipcart-checkout__content--summary')
+                )
+              );
+
+              if (summaryAdded) {
+                shouldUpdate = true;
+                break;
+              }
+            }
+          }
+
+          if (shouldUpdate) {
+            setTimeout(injectVariationsInSummaryDOM, 50);
+          }
+        });
+
+        observer.observe(snipcartContainer, {
+          childList: true,
+          subtree: true
+        });
+
+        snipcartContainer.__gdVariationsObserverMounted = true;
+      }
+
+      // Injection initiale après un court délai
+      setTimeout(injectVariationsInSummaryDOM, 500);
+
+      console.log('🎨 Système de variations dynamiques initialisé');
+    } catch (error) {
+      console.error('💥 Erreur initialisation variations dynamiques:', error);
+    }
+  }
+
   // Fonction d'initialisation principale
   function initializeSnipcartCustomizations() {
     try {
@@ -474,6 +663,9 @@
 
       // Afficher les promotions dynamiquement
       displayPromotionsDynamically();
+
+      // Initialiser le système de variations dynamiques
+      initDynamicVariations();
 
       // Écoute des évènements Snipcart (pour rafraîchir la mise en forme)
       const ev = window.Snipcart?.events;
