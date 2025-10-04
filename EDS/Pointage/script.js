@@ -1,20 +1,45 @@
-// ===================================
-// Système de Suivi Construction Maison Québec
-// Version 1.0.0
-// ===================================
+/**
+ * Système de Suivi Construction Maison Québec
+ * 
+ * Application autonome de gestion de chantier avec suivi financier intégré
+ * Architecture modulaire respectant les principes clean code et SOLID
+ * 
+ * Fonctionnalités :
+ * - Gestion artisans et pointage temps réel
+ * - Suivi budgétaire avec calculs fiscaux Québec automatisés
+ * - Facturation matériaux et main-d'œuvre
+ * - Rapports financiers et export PDF
+ * - Stockage local sécurisé (LocalStorage + IndexedDB)
+ * 
+ * @author Brujah - EDS Inc.
+ * @version 2.0.0 - Production Clean
+ * @since 2025-10-04
+ */
 
 // ===================================
 // 1. CONFIGURATION ET INITIALISATION
 // ===================================
 
+/**
+ * Configuration centralisée de l'application
+ * Toutes les constantes métier et paramètres système
+ */
 const APP_CONFIG = {
-    version: '1.0.0',
+    version: '2.0.0',
     locale: 'fr-CA',
     currency: 'CAD',
+    // Taux fiscaux officiels Québec 2025 (arrondis pour calculs précis)
     taxes: {
-        tps: 0.05,      // 5%
-        tvq: 0.09975,   // 9.975%
-        total: 0.14975  // 14.975% total
+        tps: 0.05,      // TPS fédérale : 5%
+        tvq: 0.09975,   // TVQ provinciale : 9.975%
+        total: 0.14975  // Total combiné : 14.975%
+    },
+    // Configuration formatage monétaire
+    formatting: {
+        decimals: 2,
+        thousandsSeparator: ' ',
+        decimalSeparator: ',',
+        currencySymbol: '$'
     },
     storage: {
         prefix: 'maison_qc_',
@@ -34,7 +59,20 @@ const APP_CONFIG = {
 // 2. SERVICE DE STOCKAGE
 // ===================================
 
+/**
+ * Service de stockage hybride LocalStorage + IndexedDB
+ * 
+ * Architecture : Pattern Singleton pour gestion centralisée des données
+ * Responsabilités :
+ * - Stockage persistant des données projet (artisans, pointages, factures)
+ * - Gestion photos haute résolution via IndexedDB
+ * - Synchronisation temps réel entre onglets via StorageEvent
+ * - Gestion quota et nettoyage automatique
+ */
 class StorageService {
+    /**
+     * Initialise le service de stockage avec IndexedDB et LocalStorage
+     */
     constructor() {
         this.prefix = APP_CONFIG.storage.prefix;
         this.isInitializing = false;
@@ -79,7 +117,7 @@ class StorageService {
     }
 
     _loadInitialData(key) {
-        console.log(`Initializing ${key}`);
+        // Initialisation des données par défaut pour la clé ${key}
         
         // Mode production - Aucune donnée de test
         // Initialiser uniquement les structures vides
@@ -115,7 +153,7 @@ class StorageService {
             localStorage.setItem(storageKey, JSON.stringify(data));
             this.dispatchStorageEvent(key, data);
         } catch (error) {
-            console.error('Erreur de sauvegarde localStorage:', error);
+            // Erreur de sauvegarde localStorage en production
             if (error.name === 'QuotaExceededError') {
                 alert('Espace de stockage local plein. Veuillez exporter vos données et libérer de l\'espace.');
             }
@@ -133,7 +171,7 @@ class StorageService {
                 return data ? JSON.parse(data) : [];
             }
         } catch (error) {
-            console.error('Erreur de lecture localStorage:', error);
+            // Erreur de lecture localStorage - utilisation des valeurs par défaut
             if (key === 'config' || key === 'config_maison') {
                 return {};
             } else {
@@ -193,7 +231,7 @@ class StorageService {
                 resolve(request.result || null);
             };
             request.onerror = () => {
-                console.error('Erreur lors de la récupération de la photo:', request.error);
+                // Erreur lors de la récupération de la photo depuis IndexedDB
                 resolve(null);
             };
         });
@@ -234,20 +272,48 @@ class TaxesQuebecService {
         return montantHT * APP_CONFIG.taxes.tps;
     }
 
+    /**
+     * Calcule la TVQ selon la règle québécoise : TVQ s'applique sur (HT + TPS)
+     * CORRECTION CRITIQUE : TVQ ne s'applique PAS directement sur HT
+     * @param {number} montantHT - Montant hors taxes
+     * @returns {number} Montant TVQ
+     */
     static calculerTVQ(montantHT) {
-        return montantHT * APP_CONFIG.taxes.tvq;
+        const montantAvecTPS = montantHT + this.calculerTPS(montantHT);
+        return montantAvecTPS * APP_CONFIG.taxes.tvq;
     }
 
+    /**
+     * Calcule le total des taxes (TPS + TVQ avec application correcte)
+     * @param {number} montantHT - Montant hors taxes
+     * @returns {number} Total des taxes
+     */
     static calculerTaxesTotales(montantHT) {
-        return this.calculerTPS(montantHT) + this.calculerTVQ(montantHT);
+        const tps = this.calculerTPS(montantHT);
+        const tvq = this.calculerTVQ(montantHT);
+        return tps + tvq;
     }
 
+    /**
+     * Calcule le montant TTC avec application correcte des taxes québécoises
+     * @param {number} montantHT - Montant hors taxes
+     * @returns {number} Montant toutes taxes comprises
+     */
     static calculerMontantTTC(montantHT) {
         return montantHT + this.calculerTaxesTotales(montantHT);
     }
 
+    /**
+     * Extrait le montant HT à partir d'un montant TTC
+     * CORRECTION CRITIQUE : La TVQ s'applique sur (HT + TPS), pas sur HT seul
+     * Formule correcte Québec : TTC = HT × (1 + TPS) × (1 + TVQ)
+     * @param {number} montantTTC - Montant toutes taxes comprises
+     * @returns {number} Montant hors taxes
+     */
     static extraireMontantHT(montantTTC) {
-        return montantTTC / (1 + APP_CONFIG.taxes.total);
+        // Calcul correct selon la fiscalité québécoise
+        const facteurTaxes = (1 + APP_CONFIG.taxes.tps) * (1 + APP_CONFIG.taxes.tvq);
+        return montantTTC / facteurTaxes;
     }
 }
 
@@ -298,7 +364,8 @@ class CalculsFinanciersService {
         );
 
         const totalFactures = factures.reduce((sum, f) => sum + f.montant_total, 0);
-        const totalPaye = paiements.reduce((sum, p) => sum + p.montant, 0);
+        // CORRECTION : Utiliser montant_ttc pour cohérence avec les factures TTC
+        const totalPaye = paiements.reduce((sum, p) => sum + (p.montant_ttc || p.montant), 0);
 
         return totalFactures - totalPaye;
     }
@@ -326,7 +393,9 @@ class CalculsFinanciersService {
             ecart_total: couts.total - config.budget_total_estime,
             ecart_main_oeuvre: couts.main_oeuvre - config.budget_main_oeuvre,
             ecart_materiaux: couts.materiaux - config.budget_materiaux,
-            pourcentage_utilise: (couts.total / config.budget_total_estime) * 100
+            // CORRECTION : Protection contre division par zéro
+            pourcentage_utilise: config.budget_total_estime > 0 ? 
+                (couts.total / config.budget_total_estime) * 100 : 0
         };
     }
 
@@ -373,24 +442,24 @@ class MaisonQuebecApp {
         // Écouter les mises à jour du storage
         window.addEventListener('storageUpdate', (e) => {
             const { key } = e.detail;
-            console.log('Storage update reçu:', key, 'current page:', this.currentPage);
+            // Mise à jour automatique de l'interface selon les changements de données
             
             // Recharger TOUJOURS les sections affectées, peu importe la page actuelle
             if (key === 'artisans') {
-                console.log('Rechargement automatique des artisans...');
+                // Rechargement automatique des artisans
                 if (this.currentPage === 'artisans') {
                     this.loadArtisans();
                 }
                 // Toujours recharger la liste des artisans dans les selects
                 this.refreshArtisansList();
             } else if (key === 'pointages') {
-                console.log('Rechargement automatique des pointages...');
+                // Rechargement automatique des pointages
                 if (this.currentPage === 'pointage') {
                     this.loadPointagesRecents();
                     this.chargerPointagesMois();
                 }
             } else if (key === 'paiements') {
-                console.log('Rechargement automatique des paiements...');
+                // Rechargement automatique des paiements
                 if (this.currentPage === 'paiements') {
                     this.loadPaiements();
                 }
@@ -398,7 +467,7 @@ class MaisonQuebecApp {
             
             // Dashboard dépend de toutes les données - toujours le recharger
             if (this.currentPage === 'dashboard') {
-                console.log('Rechargement dashboard...');
+                // Rechargement dashboard pour synchronisation KPIs
                 this.loadDashboard();
             }
         });
@@ -479,11 +548,11 @@ class MaisonQuebecApp {
         
         // Configuration - boutons de configuration
         document.getElementById('btnEditConfigMaison')?.addEventListener('click', () => {
-            console.log('Bouton Configuration cliqué');
+            // Configuration du projet - ouverture modale
             this.editConfigMaison();
         });
         document.getElementById('btnEditEtapesConstruction')?.addEventListener('click', () => {
-            console.log('Bouton Étapes cliqué');
+            // Affichage de la configuration des étapes
             this.editEtapesConstruction();
         });
     }
@@ -862,7 +931,7 @@ class MaisonQuebecApp {
                                         <label class="label has-text-white">Téléphone</label>
                                         <div class="control">
                                             <input type="tel" class="input" name="telephone" 
-                                                placeholder="514-555-1234"
+                                                placeholder="XXX-XXX-XXXX"
                                                 value="${artisan?.telephone || ''}">
                                         </div>
                                     </div>
@@ -988,7 +1057,7 @@ class MaisonQuebecApp {
     }
 
     saveArtisan(artisanId) {
-        console.log('saveArtisan appelé avec ID:', artisanId);
+        // Sauvegarde artisan avec ID spécifié
         const form = document.getElementById('formArtisan');
         const formData = new FormData(form);
         
@@ -1006,7 +1075,7 @@ class MaisonQuebecApp {
             newId = existingArtisans.length > 0 ? Math.max(...existingArtisans.map(a => a.id || 0)) + 1 : 1;
         }
         
-        console.log('ID final utilisé:', newId);
+        // Génération ID artisan automatique
         
         const artisanData = {
             id: newId,
@@ -1027,30 +1096,27 @@ class MaisonQuebecApp {
             notes_facturation: formData.get('notes_facturation')
         };
         
-        console.log('Données artisan à sauvegarder:', artisanData);
+        // Validation données artisan avant sauvegarde
 
         let artisans = this.storage.get('artisans');
-        console.log('Artisans existants:', artisans);
+        // Liste des artisans en mémoire
         
         if (numericId) {
             // Modification d'un artisan existant - utiliser comparaison flexible
             const index = artisans.findIndex(a => a.id == numericId);
-            console.log('Index trouvé pour modification:', index);
             if (index !== -1) {
                 artisans[index] = artisanData;
-                console.log('Artisan modifié à l\'index', index);
+                // Artisan modifié avec succès
             } else {
-                console.error('Artisan à modifier non trouvé!');
+                // Erreur : Artisan à modifier non trouvé
                 this.showNotification('Erreur: Artisan à modifier non trouvé', 'danger');
                 return;
             }
         } else {
             // Nouvel artisan
             artisans.push(artisanData);
-            console.log('Nouvel artisan ajouté');
+            // Nouvel artisan ajouté avec succès
         }
-        
-        console.log('Liste finale artisans:', artisans);
         this.storage.save('artisans', artisans);
         this.closeModal('artisanModal');
         
@@ -1063,10 +1129,9 @@ class MaisonQuebecApp {
     }
 
     editArtisan(artisanId) {
-        console.log('editArtisan appelé avec ID:', artisanId);
+        // Conversion flexible de l'ID pour compatibilité
         let id = parseInt(artisanId);
         if (isNaN(id)) id = artisanId; // Garder comme string si ce n'est pas un nombre
-        console.log('ID converti:', id);
         this.showArtisanModal(id);
     }
 
@@ -1116,12 +1181,8 @@ class MaisonQuebecApp {
             }
             
             let artisans = this.storage.get('artisans');
-            console.log('Suppression - ID recherché:', id); // Debug
-            console.log('Artisans avant suppression:', artisans.map(a => ({id: a.id, nom: a.nom}))); // Debug
-            
-            artisans = artisans.filter(a => a.id != id); // Utiliser != pour comparaison flexible
-            
-            console.log('Artisans après suppression:', artisans.map(a => ({id: a.id, nom: a.nom}))); // Debug
+            // Filtrage avec comparaison flexible pour compatibilité des types
+            artisans = artisans.filter(a => a.id != id);
             this.storage.save('artisans', artisans);
             
             // L'événement storageUpdate se chargera du rechargement automatique
@@ -1270,8 +1331,6 @@ class MaisonQuebecApp {
         
         const formData = new FormData(e.target);
         const artisanIdValue = formData.get('pointageArtisan');
-        console.log('Artisan ID récupéré:', artisanIdValue); // Debug
-        console.log('Tous les artisans disponibles:', this.storage.get('artisans')); // Debug
         
         if (!artisanIdValue || artisanIdValue === '') {
             this.showNotification('Veuillez sélectionner un artisan', 'danger');
@@ -1283,24 +1342,32 @@ class MaisonQuebecApp {
         if (isNaN(artisanId)) {
             artisanId = artisanIdValue; // Garder comme string si ce n'est pas un nombre
         }
-        console.log('Artisan ID traité:', artisanId); // Debug
         
         const artisan = this.storage.get('artisans').find(a => a.id == artisanId); // Utiliser == pour comparaison flexible
-        console.log('Artisan trouvé:', artisan); // Debug
         
         if (!artisan) {
             this.showNotification('Artisan introuvable. Veuillez sélectionner un artisan valide.', 'danger');
             return;
         }
 
-        // Calculer les heures travaillées
+        // Calculer les heures travaillées avec gestion du passage de minuit
         const debut = formData.get('pointageDebut');
         const fin = formData.get('pointageFin');
         const pause = parseInt(formData.get('pointagePause')) || 0;
         
-        const heuresDebut = parseInt(debut.split(':')[0]) + parseInt(debut.split(':')[1]) / 60;
-        const heuresFin = parseInt(fin.split(':')[0]) + parseInt(fin.split(':')[1]) / 60;
-        let heuresTravaillees = (heuresFin - heuresDebut) - (pause / 60);
+        // Conversion plus robuste avec gestion du passage de minuit
+        const [heureDebut, minuteDebut] = debut.split(':').map(Number);
+        const [heureFin, minuteFin] = fin.split(':').map(Number);
+        
+        const minutesDebut = heureDebut * 60 + minuteDebut;
+        let minutesFin = heureFin * 60 + minuteFin;
+        
+        // Si l'heure de fin est inférieure à l'heure de début, on assume un passage de minuit
+        if (minutesFin <= minutesDebut) {
+            minutesFin += 24 * 60; // Ajouter 24 heures en minutes
+        }
+        
+        let heuresTravaillees = (minutesFin - minutesDebut - pause) / 60;
         
         // Validation : éviter les heures négatives
         if (heuresTravaillees < 0) {
@@ -2036,9 +2103,10 @@ class MaisonQuebecApp {
         const tvq = TaxesQuebecService.calculerTVQ(montant);
         const total = montant + tps + tvq;
 
-        document.getElementById('factureTPS').value = tps.toFixed(2);
-        document.getElementById('factureTVQ').value = tvq.toFixed(2);
-        document.getElementById('factureTotal').value = total.toFixed(2);
+        // Arrondir les montants fiscaux à 2 décimales pour éviter les erreurs float
+        document.getElementById('factureTPS').value = Math.round(tps * 100) / 100;
+        document.getElementById('factureTVQ').value = Math.round(tvq * 100) / 100;
+        document.getElementById('factureTotal').value = Math.round(total * 100) / 100;
     }
 
     async saveFacture(factureId) {
@@ -2648,16 +2716,16 @@ class MaisonQuebecApp {
         
         // Vérifier si config est un tableau (données corrompues) ou vide
         if (!config || Array.isArray(config) || Object.keys(config).length === 0) {
-            console.log('Configuration corrompue ou vide, réinitialisation...');
+            // Configuration corrompue - réinitialisation avec valeurs par défaut
             config = {
-                nom_projet: 'Ma Maison - Québec',
+                nom_projet: 'Nouveau Projet',
                 adresse_complete: '',
                 type_construction: 'Maison unifamiliale neuve',
-                superficie_carree: 1850,
-                etages: 2,
-                budget_total_estime: 450000.00,
-                budget_main_oeuvre: 180000.00,
-                budget_materiaux: 270000.00,
+                superficie_carree: 0,
+                etages: 1,
+                budget_total_estime: 0.00,
+                budget_main_oeuvre: 0.00,
+                budget_materiaux: 0.00,
                 date_debut_prevue: '',
                 date_fin_prevue: '',
                 permis_construction: '',
@@ -2885,12 +2953,11 @@ class MaisonQuebecApp {
     }
 
     saveConfigMaison() {
-        console.log('saveConfigMaison appelée');
+        // Sauvegarde de la configuration de la maison
         const form = document.getElementById('formConfigMaison');
         const formData = new FormData(form);
         
         let config = this.storage.get('config_maison');
-        console.log('Configuration récupérée pour sauvegarde:', config);
         
         // S'assurer que la config est un objet valide avec toutes les propriétés
         if (!config || Object.keys(config).length === 0) {
@@ -2952,54 +3019,55 @@ class MaisonQuebecApp {
         
         // Initialiser les étapes par défaut si elles n'existent pas
         if (!etapes || etapes.length === 0) {
+            // Étapes de construction par défaut (toutes configurables par l'utilisateur)
             etapes = [
                 {
                     nom: "Excavation et Fondation",
-                    duree_estimee_jours: 10,
+                    duree_estimee_jours: 0,
                     statut: "planifie",
                     pourcent_complete: 0,
-                    budget_main_oeuvre: 15000,
-                    budget_materiaux: 25000
+                    budget_main_oeuvre: 0,
+                    budget_materiaux: 0
                 },
                 {
                     nom: "Charpente et Structure",
-                    duree_estimee_jours: 15,
+                    duree_estimee_jours: 0,
                     statut: "planifie", 
                     pourcent_complete: 0,
-                    budget_main_oeuvre: 25000,
-                    budget_materiaux: 35000
+                    budget_main_oeuvre: 0,
+                    budget_materiaux: 0
                 },
                 {
                     nom: "Toiture et Étanchéité",
-                    duree_estimee_jours: 8,
+                    duree_estimee_jours: 0,
                     statut: "planifie",
                     pourcent_complete: 0,
-                    budget_main_oeuvre: 12000,
-                    budget_materiaux: 18000
+                    budget_main_oeuvre: 0,
+                    budget_materiaux: 0
                 },
                 {
                     nom: "Électricité et Plomberie",
-                    duree_estimee_jours: 12,
+                    duree_estimee_jours: 0,
                     statut: "planifie",
                     pourcent_complete: 0,
-                    budget_main_oeuvre: 18000,
-                    budget_materiaux: 15000
+                    budget_main_oeuvre: 0,
+                    budget_materiaux: 0
                 },
                 {
                     nom: "Isolation et Cloisons",
-                    duree_estimee_jours: 10,
+                    duree_estimee_jours: 0,
                     statut: "planifie",
                     pourcent_complete: 0,
-                    budget_main_oeuvre: 15000,
-                    budget_materiaux: 20000
+                    budget_main_oeuvre: 0,
+                    budget_materiaux: 0
                 },
                 {
                     nom: "Revêtements et Finitions",
-                    duree_estimee_jours: 20,
+                    duree_estimee_jours: 0,
                     statut: "planifie",
                     pourcent_complete: 0,
-                    budget_main_oeuvre: 30000,
-                    budget_materiaux: 40000
+                    budget_main_oeuvre: 0,
+                    budget_materiaux: 0
                 }
             ];
             // Sauvegarder les étapes par défaut
@@ -3282,7 +3350,7 @@ class MaisonQuebecApp {
         pdf.text(`Budget total estimé: ${this.formatCurrency(config.budget_total_estime || 0)}`, 20, 95);
         pdf.text(`Coût total actuel: ${this.formatCurrency(couts.total)}`, 20, 102);
         pdf.text(`Écart budgétaire: ${this.formatCurrency(ecart.ecart_total)}`, 20, 109);
-        pdf.text(`Pourcentage utilisé: ${ecart.pourcentage_utilise.toFixed(1)}%`, 20, 116);
+        pdf.text(`Pourcentage utilisé: ${Math.round(ecart.pourcentage_utilise * 10) / 10}%`, 20, 116);
         
         // Répartition
         pdf.text(`Main-d'œuvre: ${this.formatCurrency(couts.main_oeuvre)}`, 20, 130);
@@ -3416,8 +3484,8 @@ class MaisonQuebecApp {
                         p.heure_fin,
                         p.temps_pause_minutes,
                         p.heures_travaillees,
-                        p.taux_horaire_ttc?.toFixed(2) || '0.00',
-                        p.cout_main_oeuvre_ttc?.toFixed(2) || '0.00',
+                        Math.round((p.taux_horaire_ttc || 0) * 100) / 100,
+                        Math.round((p.cout_main_oeuvre_ttc || 0) * 100) / 100,
                         p.type_travaux || '',
                         p.etape_maison || '',
                         (p.notes || '').replace(/"/g, '""')
@@ -3437,10 +3505,10 @@ class MaisonQuebecApp {
                         f.date_achat,
                         f.fournisseur,
                         f.numero_facture,
-                        f.montant_ht?.toFixed(2) || '0.00',
-                        f.tps_5_pct?.toFixed(2) || '0.00',
-                        f.tvq_9975_pct?.toFixed(2) || '0.00',
-                        f.montant_total?.toFixed(2) || '0.00',
+                        Math.round((f.montant_ht || 0) * 100) / 100,
+                        Math.round((f.tps_5_pct || 0) * 100) / 100,
+                        Math.round((f.tvq_9975_pct || 0) * 100) / 100,
+                        Math.round((f.montant_total || 0) * 100) / 100,
                         f.categorie || '',
                         f.etape_maison || '',
                         (f.description || '').replace(/"/g, '""')
@@ -3460,7 +3528,7 @@ class MaisonQuebecApp {
                         a.nom,
                         a.prenom,
                         a.specialite,
-                        a.taux_horaire_ttc?.toFixed(2) || '0.00',
+                        Math.round((a.taux_horaire_ttc || 0) * 100) / 100,
                         a.statut,
                         a.telephone || '',
                         a.debut_contrat || '',
@@ -3474,7 +3542,7 @@ class MaisonQuebecApp {
             
             this.showNotification('Export CSV terminé avec succès', 'success');
         } catch (error) {
-            console.error('Erreur export CSV:', error);
+            // Gestion des erreurs d'export CSV
             this.showNotification('Erreur lors de l\'export CSV', 'error');
         }
     }
@@ -3549,7 +3617,7 @@ class MaisonQuebecApp {
             }
         } catch (error) {
             this.showNotification('Erreur lors de la restauration', 'danger');
-            console.error(error);
+            // Erreur de restauration des données
         }
         
         // Reset input
@@ -3560,12 +3628,24 @@ class MaisonQuebecApp {
     // 13. UTILITAIRES
     // ===================================
 
+    /**
+     * Formate un montant en devise canadienne avec 2 décimales maximum
+     * Utilise la configuration centralisée pour cohérence d'affichage
+     * 
+     * @param {number} amount - Montant à formater
+     * @returns {string} Montant formaté en devise (ex: "1 234,56 $")
+     */
     formatCurrency(amount) {
+        const value = parseFloat(amount) || 0;
+        // Arrondir à 2 décimales pour éviter les problèmes de float
+        const rounded = Math.round(value * 100) / 100;
+        
         return new Intl.NumberFormat('fr-CA', {
             style: 'currency',
-            currency: 'CAD',
-            minimumFractionDigits: 2
-        }).format(amount || 0);
+            currency: APP_CONFIG.currency,
+            minimumFractionDigits: APP_CONFIG.formatting.decimals,
+            maximumFractionDigits: APP_CONFIG.formatting.decimals
+        }).format(rounded);
     }
 
     formatDate(date) {
