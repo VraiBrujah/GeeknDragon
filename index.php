@@ -41,7 +41,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
              data-hide-price="1"
              aria-label="<?= __('hero.visitShop', 'Visiter la boutique') ?>"
              title="<?= __('hero.visitShop', 'Visiter la boutique') ?>"
-             data-i18n="hero.visitShop">
+">
             <span class="btn-text-overlay">
               <span class="hidden md:inline"><?= __('btnOverlay.shop.desktop', 'L\'Échoppe') ?></span>
               <span class="md:hidden"><?= __('btnOverlay.shop.mobile', 'Échoppe') ?></span>
@@ -121,7 +121,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
              data-hide-price="1"
              aria-label="<?= __('hero.visitShop', 'Visiter la boutique') ?>"
              title="<?= __('hero.visitShop', 'Visiter la boutique') ?>"
-             data-i18n="hero.visitShop">
+">
             <span class="btn-text-overlay">
               <span class="hidden md:inline"><?= __('btnOverlay.shop.desktop', 'L\'Échoppe') ?></span>
               <span class="md:hidden"><?= __('btnOverlay.shop.mobile', 'Échoppe') ?></span>
@@ -131,7 +131,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
              class="btn btn-primary btn-contact"
              aria-label="<?= __('contact.requestQuote', 'Demander un devis') ?>"
              title="<?= __('contact.requestQuote', 'Demander un devis') ?>"
-             data-i18n="contact.requestQuote">
+">
             <span class="btn-text-overlay">
               <span class="hidden md:inline"><?= __('btnOverlay.contact.desktop', 'Message') ?></span>
               <span class="md:hidden"><?= __('btnOverlay.contact.mobile', 'Contact') ?></span>
@@ -162,7 +162,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
                class="btn btn-primary btn-actualite"
                aria-label="<?= __('news.flim2025.read', 'Lire l\'article') ?>"
                title="<?= __('news.flim2025.read', 'Lire l\'article') ?>"
-               data-i18n="news.flim2025.read">
+  ">
               <span class="btn-text-overlay">
                 <span class="hidden md:inline"><?= __('btnOverlay.news.desktop', 'Chroniques') ?></span>
                 <span class="md:hidden"><?= __('btnOverlay.news.mobile', 'Actus') ?></span>

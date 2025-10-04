@@ -27,7 +27,7 @@ $extraHead = '';
          class="btn btn-primary btn-accueil"
          aria-label="<?= __('thankyou.backHome', 'Retour à l\'accueil') ?>"
          title="<?= __('thankyou.backHome', 'Retour à l\'accueil') ?>"
-         data-i18n="thankyou.backHome">
+">
         <span class="btn-text-overlay">
           <span class="hidden md:inline"><?= __('btnOverlay.home.desktop', 'Taverne') ?></span>
           <span class="md:hidden"><?= __('btnOverlay.home.mobile', 'Taverne') ?></span>

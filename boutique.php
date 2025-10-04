@@ -454,7 +454,7 @@ echo $snipcartInit;
                  class="btn btn-primary btn-dragon mb-3 inline-block shadow-lg shadow-amber-600/30 hover:shadow-amber-500/50 transition-all"
                  aria-label="<?= __('shop.deluxeBundle.cta', 'Réserver Mon Édition') ?>"
                  title="<?= __('shop.deluxeBundle.cta', 'Réserver Mon Édition') ?>"
-                 data-i18n="shop.deluxeBundle.cta">
+">
                 <span class="btn-text-overlay">
                   <span class="hidden md:inline"><?= __('btnOverlay.reservation.desktop', 'Réservation') ?></span>
                   <span class="md:hidden"><?= __('btnOverlay.reservation.mobile', 'Réserver') ?></span>
