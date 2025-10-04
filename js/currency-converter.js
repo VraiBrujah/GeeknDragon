@@ -257,7 +257,7 @@ class CurrencyConverterPremium {
         this.updateMultiplierTableWithOptimization(baseValue);
 
         this.updateMetalCards(baseValue);
-        this.updateOptimalRecommendations(baseValue);
+        this.updateOptimalRecommendationsFromUser(baseValue); // Toujours utiliser la logique tableau (🤖 vs ✏️)
         this.updateCoinLotsRecommendations(baseValue, true); // true = toujours utiliser tableau multiplicateur
     }
 
@@ -862,63 +862,7 @@ class CurrencyConverterPremium {
         return breakdown.join(', ');
     }
 
-    updateOptimalRecommendations(baseValue) {
-        if (!this.bestDisplay) {
-            this.refreshDOMReferences();
-        }
-
-        if (!this.bestDisplay) return;
-
-        if (baseValue === 0) {
-            const enterAmountsText = this.getTranslation('shop.converter.enterAmounts', 'Entrez des montants pour voir les recommandations optimales');
-            this.bestDisplay.innerHTML = enterAmountsText;
-            return;
-        }
-
-        // NOUVELLE LOGIQUE: Utiliser l'algorithme optimisé avec lots 3/7
-        const optimalSolution = this.findMinimalCoins(baseValue, false); // false = conversion automatique
-        const optimal = this.formatSolutionForDisplay(optimalSolution);
-        const totalPieces = this.calculateTotalPiecesFromSolution(optimalSolution);
-        const totalCost = this.calculateSolutionCost(optimalSolution);
-        const economyGained = this.calculateEconomyGained(optimalSolution);
-
-        // Calcul de la valeur en or avec reste
-        const goldValue = Math.floor(baseValue / this.rates.gold);
-        const goldRemainder = baseValue % this.rates.gold;
-
-        let goldValueDisplay = '';
-        if (goldValue > 0) {
-            goldValueDisplay = `${this.nf.format(goldValue)} 🥇 ${this.getCurrencyName('gold').toLowerCase()}`;
-            if (goldRemainder > 0) {
-                const remainderBreakdown = this.getOptimalBreakdown(goldRemainder);
-                goldValueDisplay += ` ${this.getTranslation('shop.converter.and', 'et')} ${remainderBreakdown}`;
-            }
-        } else {
-            goldValueDisplay = this.getOptimalBreakdown(baseValue);
-        }
-
-        const optimalConversionText = this.getTranslation('shop.converter.optimalConversion', 'Conversion optimale');
-        const totalText = this.getTranslation('shop.converter.total', 'Total');
-        const costText = this.getTranslation('shop.converter.cost', 'Coût');
-        const economyText = this.getTranslation('shop.converter.economy', 'Économie');
-        const valueText = this.getTranslation('shop.converter.value', 'Valeur');
-
-        let economyDisplay = '';
-        if (economyGained > 0) {
-            economyDisplay = `<p class="text-sm text-green-400">💰 ${economyText}: $${economyGained.toFixed(2)}</p>`;
-        }
-
-        this.bestDisplay.innerHTML = `
-      <div class="text-center">
-        <p class="text-lg mb-2"><strong>${optimalConversionText}:</strong> 🎯</p>
-        <p class="text-indigo-300 font-medium mb-2">${optimal}</p>
-        <p class="text-sm text-gray-400">${totalText}: ${this.nf.format(totalPieces)} ${this.getTranslation('shop.converter.coins', 'pièces')}</p>
-        <p class="text-sm text-gray-400">${costText}: $${totalCost.toFixed(2)}</p>
-        ${economyDisplay}
-        <p class="text-sm text-gray-400"><br>${valueText}: ${goldValueDisplay}</p>
-      </div>
-    `;
-    }
+    // FONCTION updateOptimalRecommendations SUPPRIMÉE - Remplacée par updateOptimalRecommendationsFromUser partout
 
     // NOUVELLE MÉTHODE: Formater solution pour affichage
     formatSolutionForDisplay(solution) {
