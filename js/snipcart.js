@@ -206,17 +206,29 @@
           // Traiter les lignes d'articles
           $$('.snipcart-item-line', m.target).forEach(processItemLine);
 
-          // Vérifier si le résumé du panier a été modifié
+          // Vérifier si le résumé du panier a été modifié OU ajouté
           if (m.target.classList?.contains('snipcart-cart-summary') ||
               m.target.classList?.contains('snipcart-checkout__content--summary') ||
               m.target.classList?.contains('snipcart-summary') ||
               m.target.querySelector?.('.snipcart-cart-summary, .snipcart-checkout__content--summary, .snipcart-summary')) {
             shouldUpdatePromotions = true;
           }
+
+          // Détecter l'apparition du sommaire dans les nœuds ajoutés
+          Array.from(m.addedNodes).forEach(node => {
+            if (node.nodeType === 1) { // Element node
+              if (node.classList?.contains('snipcart-cart-summary') ||
+                  node.classList?.contains('snipcart-checkout__content--summary') ||
+                  node.classList?.contains('snipcart-summary') ||
+                  node.querySelector?.('.snipcart-cart-summary, .snipcart-checkout__content--summary, .snipcart-summary')) {
+                shouldUpdatePromotions = true;
+              }
+            }
+          });
         }
       }
 
-      // Rafraîchir les promotions si le résumé a changé
+      // Rafraîchir les promotions si le résumé a changé ou est apparu
       if (shouldUpdatePromotions) {
         setTimeout(displayPromotionsDynamically, 50);
       }
@@ -270,15 +282,9 @@
         $('.snipcart-summary-fees') ||
         $('[class*="summary"]');
 
+      // CONDITION STRICTE : Ne rien faire si le DOM n'est pas prêt
       if (!summarySection) {
-        console.warn('⚠️ Section résumé du panier non trouvée');
-        // Essayer de trouver n'importe quel élément contenant "sous-total"
-        const allElements = $$('*');
-        const foundElement = allElements.find(el => el.textContent?.toLowerCase().includes('sous-total'));
-        if (foundElement) {
-          console.log('✅ Élément contenant "sous-total" trouvé, utilisation du parent');
-          return displayPromotionsDynamically.call(null, foundElement.closest('[class*="summary"]') || foundElement.parentElement);
-        }
+        // Pas de warning si le panier n'est simplement pas ouvert
         return;
       }
 
@@ -661,8 +667,9 @@
       processAll();
       mountObserver();
 
-      // Afficher les promotions dynamiquement
-      displayPromotionsDynamically();
+      // NE PAS appeler displayPromotionsDynamically() ici !
+      // Le MutationObserver et les événements Snipcart s'en chargeront
+      // quand le DOM sera réellement prêt
 
       // Initialiser le système de variations dynamiques
       initDynamicVariations();
@@ -670,7 +677,7 @@
       // Écoute des évènements Snipcart (pour rafraîchir la mise en forme)
       const ev = window.Snipcart?.events;
       if (ev?.on) {
-        ['item.added', 'item.updated', 'cart.opened', 'cart.closed', 'cart.confirmed', 'discount.applied', 'discount.removed']
+        ['item.added', 'item.updated', 'cart.closed', 'cart.confirmed', 'discount.applied', 'discount.removed']
           .forEach(evt => {
             ev.on(evt, () => {
               processAll();
@@ -678,6 +685,14 @@
               setTimeout(displayPromotionsDynamically, 100);
             });
           });
+
+        // Événement spécifique pour l'ouverture du panier
+        ev.on('cart.opened', () => {
+          processAll();
+          // Le MutationObserver se chargera de détecter l'apparition du sommaire
+          // On ajoute juste un appel de sécurité au cas où
+          setTimeout(displayPromotionsDynamically, 300);
+        });
       }
 
       // Debug info
