@@ -316,7 +316,20 @@
       // Filtrer les éléments vides ou invalides
       discounts = discounts.filter(d => d && (d.name || d.amount || d.rate));
 
-      console.log('🔍 Promotions après traitement:', discounts);
+      // Trier les promotions : FixedAmount d'abord, puis Rate (%)
+      // Cela reflète l'ordre d'application : réduction fixe puis % sur le prix réduit
+      discounts.sort((a, b) => {
+        const typeA = typeof a.type === 'function' ? a.type() : a.type;
+        const typeB = typeof b.type === 'function' ? b.type() : b.type;
+
+        // FixedAmount (0) avant Rate (1)
+        const orderA = typeA === 'FixedAmount' ? 0 : 1;
+        const orderB = typeB === 'FixedAmount' ? 0 : 1;
+
+        return orderA - orderB;
+      });
+
+      console.log('🔍 Promotions après traitement et tri:', discounts);
 
       // Supprimer les promotions précédemment affichées
       $$('.__gd-promo-line').forEach(el => el.remove());
