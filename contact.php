@@ -85,6 +85,5 @@ unset($_SESSION['errors'], $_SESSION['old']);
   </main>
 
   <?php include 'footer.php'; ?>
-  <script src="/js/app.js"></script>
 </body>
 </html>

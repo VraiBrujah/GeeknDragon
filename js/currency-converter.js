@@ -94,7 +94,7 @@ class CurrencyConverterPremium {
                 this.productPrices.septuple = window.products['coin-septuple-free']?.price || 50;
             }
         } catch (error) {
-            // Prix par défaut déjà initialisés, fonctionnement dégradé silencieux
+            // Prix par défaut utilisés en cas d'échec de chargement
         }
     }
 
@@ -132,7 +132,7 @@ class CurrencyConverterPremium {
             try {
                 callback(data);
             } catch (error) {
-                // Erreur dans callback silencieuse pour éviter pollution console
+                console.warn('Erreur callback:', error);
             }
         });
     }
@@ -1305,19 +1305,6 @@ window.addEventListener('beforeunload', () => {
     }
 });
 
-/**
- * Affiche les informations d'optimisation en mode développement uniquement
- * Règles d'optimisation :
- * 1. Lots 3/7 pièces pour économies
- * 2. Priorité métal > multiplicateur
- * 3. Mode tableau préserve choix utilisateur
- * 4. Économies substantielles avec lots groupés
- */
-function logOptimizationInfo() {
-    if (window.location.hash === '#debug' || window.location.search.includes('debug=1')) {
-        console.info('🔧 Mode debug : Règles d\'optimisation activées');
-    }
-}
 
 // Initialisation paresseuse du convertisseur - ne charge que si l'utilisateur interagit
 let converterInitialized = false;
@@ -1332,9 +1319,6 @@ const initConverter = () => {
             window.converterInstance = new CurrencyConverterPremium();
             // Référence globale simplifiée pour les boutons
             window.currencyConverter = window.converterInstance;
-
-            // Validation silencieuse de l'initialisation
-            logOptimizationInfo();
         }
     }, 100);
 };

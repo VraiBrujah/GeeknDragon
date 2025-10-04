@@ -204,6 +204,5 @@ $ogImage = '/media/content/es_tu_game_demo.webp';
     lazyVideos.forEach(video => videoObserver.observe(video));
   });
   </script>
-  <script src="/js/app.js"></script>
 </body>
 </html>

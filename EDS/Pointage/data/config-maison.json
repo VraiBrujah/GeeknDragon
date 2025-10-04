@@ -1,0 +1,14 @@
+{
+  "id": "config_maison",
+  "nom_projet": "",
+  "adresse_complete": "",
+  "type_construction": "Maison unifamiliale neuve",
+  "superficie_carree": 0,
+  "budget_total_estime": 0.00,
+  "budget_main_oeuvre": 0.00,
+  "budget_materiaux": 0.00,
+  "date_debut_prevue": "",
+  "date_fin_prevue": "",
+  "permis_construction": "",
+  "licence_rbq": ""
+}

@@ -6,13 +6,14 @@
 
 class ScriptLoader {
     private $baseDir;
+    private static $loadedScripts = [];
     
     public function __construct($baseDir = null) {
         $this->baseDir = $baseDir ?: dirname(__DIR__);
     }
     
     /**
-     * Charge le bundle principal (app, currency-converter, coin-lot-optimizer)
+     * Charge le bundle principal
      */
     public function loadMainBundle() {
         $bundlePath = $this->baseDir . '/js/app.bundle.min.js';
@@ -21,7 +22,6 @@ class ScriptLoader {
             echo '<script src="/js/app.bundle.min.js?v=' . filemtime($bundlePath) . '"></script>' . "\n";
             return true;
         } else {
-            // Fallback : charger les fichiers individuels
             $this->loadScript('app');
             $this->loadScript('currency-converter');
             $this->loadScript('coin-lot-optimizer');
@@ -30,17 +30,23 @@ class ScriptLoader {
     }
     
     /**
-     * Charge un script individuel (version optimisée si disponible)
+     * Charge un script individuel avec protection contre les doubles chargements
      */
     public function loadScript($name, $fallbackToOriginal = true) {
+        if (in_array($name, self::$loadedScripts)) {
+            return 'already_loaded';
+        }
+        
         $minPath = $this->baseDir . '/js/' . $name . '.min.js';
         $originalPath = $this->baseDir . '/js/' . $name . '.js';
         
         if (file_exists($minPath)) {
             echo '<script src="/js/' . $name . '.min.js?v=' . filemtime($minPath) . '"></script>' . "\n";
+            self::$loadedScripts[] = $name;
             return 'minified';
         } elseif ($fallbackToOriginal && file_exists($originalPath)) {
             echo '<script src="/js/' . $name . '.js?v=' . filemtime($originalPath) . '"></script>' . "\n";
+            self::$loadedScripts[] = $name;
             return 'original';
         }
         
@@ -48,7 +54,7 @@ class ScriptLoader {
     }
     
     /**
-     * Charge plusieurs scripts avec optimisation automatique
+     * Charge plusieurs scripts
      */
     public function loadScripts(array $scriptNames) {
         $results = [];
@@ -59,13 +65,10 @@ class ScriptLoader {
     }
     
     /**
-     * Charge les scripts de la boutique/aide-jeux avec configuration optimale
+     * Charge les scripts pour la boutique
      */
     public function loadShopScripts() {
-        // Bundle principal (contient app, currency-converter, coin-lot-optimizer)
         $this->loadMainBundle();
-
-        // Scripts utilitaires (NON inclus dans le bundle)
         $this->loadScripts([
             'header-scroll-animation',
             'hero-videos',
@@ -81,10 +84,7 @@ class ScriptLoader {
      * Charge les scripts pour l'aide de jeux
      */
     public function loadGameHelpScripts() {
-        // Bundle principal
         $this->loadMainBundle();
-
-        // Scripts spécifiques aide-jeux
         $this->loadScripts([
             'header-scroll-animation',
             'hero-videos',
@@ -96,25 +96,16 @@ class ScriptLoader {
     }
     
     /**
-     * Charge les scripts génériques (pages simples)
+     * Charge les scripts de base
      */
     public function loadBasicScripts() {
-        // Juste app.js (ou son équivalent minifié)
         $this->loadScript('app');
     }
     
-    /**
-     * Charge les scripts de debug conditionnellement
-     */
-    public function loadDebugScripts() {
-        if (isset($_GET['debug']) || strpos($_SERVER['REQUEST_URI'] ?? '', '#debug') !== false) {
-            $this->loadScript('currency-converter-tests', false);
-        }
-    }
 }
 
 /**
- * Fonction helper globale pour faciliter l'utilisation
+ * Interface principale pour le chargement de scripts optimisé
  */
 function load_optimized_scripts($type = 'basic', $baseDir = null) {
     $loader = new ScriptLoader($baseDir);
@@ -128,7 +119,6 @@ function load_optimized_scripts($type = 'basic', $baseDir = null) {
         case 'game-help':
         case 'aide-jeux':
             $loader->loadGameHelpScripts();
-            $loader->loadDebugScripts();
             break;
             
         case 'main-bundle':

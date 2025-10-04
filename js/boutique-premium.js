@@ -354,7 +354,7 @@
         initializeBoutiquePremium();
     }
 
-    // Exposer les fonctionnalités pour debug
+    // Interface publique
     window.BoutiquePremium = {
         ScrollAnimations,
         InteractiveEnhancements,

@@ -32,15 +32,15 @@
                 const playPromise = video.play();
                 if (playPromise && typeof playPromise.catch === 'function') {
                     return await playPromise.catch((error) => {
-                        // Log seulement si ce n'est pas une erreur d'extension connue
+                        // Ignorer les erreurs d'interruption connues
                         if (!error.message?.includes('interrupted') && !error.message?.includes('aborted')) {
-                            console.debug('Hero Videos: Play error handled:', error.name);
+                            // Erreur non-critique ignorée
                         }
                         return Promise.resolve(); // Résoudre silencieusement
                     });
                 }
             } catch (error) {
-                console.debug('Hero Videos: Play error handled:', error.name);
+                // Erreur de lecture ignorée
             }
         };
 
@@ -68,7 +68,7 @@
                 try {
                     candidate.load();
                 } catch (error) {
-                    console.debug('Hero Videos: Load error ignored:', error);
+                    // Erreur de chargement ignorée
                 }
             };
 
@@ -217,7 +217,7 @@
                         if (autoPlayAllowed && vid.paused) {
                             // Protection renforcée contre les extensions
                             vid.play().catch((error) => {
-                                console.debug('Hero Videos: Play error ignored:', error);
+                                // Erreur de lecture ignorée silencieusement
                             });
                         }
                         requestAnimationFrame(() => {

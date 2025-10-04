@@ -1,33 +1,35 @@
 <?php
-/**  header.php  —  barre de navigation commune
- *  Usage :  <?php include 'header.php'; ?>
- *  $active (optionnel) = chaîne « produits », « boutique », « actus », « contact »…
+/**
+ * Header avec navigation commune du site Geek & Dragon
+ * 
+ * Affiche la barre de navigation avec logo, menu principal et actions utilisateur.
+ * Supporte la navigation mobile responsive et l'internationalisation.
+ * 
+ * Variables d'entrée :
+ * - $active (optionnel) : slug de la page active pour le highlight ('boutique', 'contact', etc.)
+ * - $snipcartKey (optionnel) : clé API Snipcart pour afficher panier/compte
+ * 
+ * @author Brujah - Geek & Dragon
+ * @version 2.0.0
  */
+
 $active = $active ?? '';
 
-function navClass($key, $active) {
-  // Classe "active" sobre, on laisse le style au CSS
-  return $key === $active ? 'is-active' : '';
+/**
+ * Détermine la classe CSS pour un lien de navigation actif
+ * 
+ * @param string $key Slug de l'item de navigation  
+ * @param string $active Slug de la page courante
+ * @return string Classe CSS 'is-active' si actif, sinon vide
+ */
+function navClass(string $key, string $active): string {
+    return $key === $active ? 'is-active' : '';
 }
 
-$navItems = [
-  '/index.php#actus' => [
-    'slug'  => 'actus',
-    'label' => 'Actualités',
-    'i18n'  => 'nav.news'
-  ],
-  '/aide-jeux.php' => [
-    'slug'  => 'aide-jeux',
-    'label' => 'Aide de Jeux',
-    'i18n'  => 'nav.gameHelp'
-  ],
-  '/index.php#contact' => [
-    'slug'  => 'contact',
-    'label' => 'Contact',
-    'i18n'  => 'nav.contact'
-  ]
-];
-
+/**
+ * Configuration complète de la navigation avec icônes
+ * Centralisée pour éviter la duplication de données
+ */
 $headerNavLinks = [
   '/index.php' => [
     'slug' => 'accueil',
@@ -107,10 +109,17 @@ $snipcartKey = $snipcartKey
   ?? $_ENV['SNIPCART_API_KEY']
   ?? $_SERVER['SNIPCART_API_KEY'];
 
+/**
+ * Génère le HTML d'un menu de navigation
+ * 
+ * @param array $items Configuration des items de navigation
+ * @param string $active Slug de la page active pour le highlight
+ * @param bool $mobile Mode mobile avec styles adaptés
+ */
 function renderNav(array $items, string $active, bool $mobile = false): void {
     foreach ($items as $href => $item) {
-    // Le menu utilise déjà Cinzel via le CSS, inutile d'ajouter "txt-court"
-    $class = 'nav-link font-medium transition-colors duration-200 ' . ($mobile ? 'text-lg' : 'text-sm md:text-base') . ' ' . navClass($item['slug'], $active);
+        // Construction des classes CSS adaptées au contexte mobile/desktop
+        $class = 'nav-link font-medium transition-colors duration-200 ' . ($mobile ? 'text-lg' : 'text-sm md:text-base') . ' ' . navClass($item['slug'], $active);
     $link = langUrl($href);
     if (isset($item['children']) && !$mobile) {
       echo '<li class="relative group">';

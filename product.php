@@ -494,7 +494,6 @@ echo $snipcartInit;
 </script>
 
 <script>window.stock = <?= json_encode([$id => getStock($id)]) ?>;</script>
-<script src="js/app.js"></script>
 
 <!-- Synchronisation Snipcart selon documentation officielle -->
 <script>

@@ -15,13 +15,6 @@
   const qs = (sel, root = document) => root.querySelector(sel);
   const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  // Système de debug conditionnel pour production
-  const DEBUG_MODE = window.location.search.includes('debug=1') || window.location.hash.includes('debug');
-  const log = (...args) => { 
-    if (DEBUG_MODE) {
-      try { console.log('[GD]', ...args); } catch (_) {} 
-    }
-  };
 
   // Throttle / Debounce
   const throttle = (fn, wait = 100) => {
@@ -1125,15 +1118,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const htmlElement = document.documentElement;
     const cmpStatus = htmlElement.getAttribute('data-cmp-status');
     
-    // Logging CMP réduit - uniquement pour les erreurs importantes
-    const isDebugMode = window.location.hash === '#debug' || window.location.search.includes('debug=1');
-
-    if (cmpStatus === 'error') {
-      if (DEBUG_MODE) console.warn('[GD] CMP: Erreur de chargement - Mode dégradé activé');
-    } else if (cmpStatus === 'timeout' && isDebugMode) {
-      if (DEBUG_MODE) console.warn('[GD] CMP: Timeout - Fonctionnement en mode essentiel (debug)');
-    }
-    // Note: Status 'loaded' et 'timeout' ne loggent plus par défaut pour réduire le bruit console
+    // Traitement silencieux des statuts CMP
+    // Note: Status traités de manière silencieuse pour optimiser les performances
   };
   
   // Configuration des cookies e-commerce essentiels
@@ -1404,7 +1390,6 @@ function copyEmailToClipboard(email, buttonElement) {
         showCopyFeedback(buttonElement, true);
       })
       .catch((err) => {
-        if (DEBUG_MODE) console.warn('Erreur copie clipboard API:', err);
         fallbackCopyEmail(email, buttonElement);
       });
   } else {
@@ -1430,7 +1415,6 @@ function fallbackCopyEmail(email, buttonElement) {
     const successful = document.execCommand('copy');
     showCopyFeedback(buttonElement, successful);
   } catch (err) {
-    if (DEBUG_MODE) console.error('Erreur copie fallback:', err);
     showCopyFeedback(buttonElement, false);
   } finally {
     document.body.removeChild(textarea);

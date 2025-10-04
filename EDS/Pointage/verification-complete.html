@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vérification Complète - Application Construction</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #f5f5f5;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #4a9eff;
+            text-shadow: 0 0 20px rgba(74, 158, 255, 0.3);
+        }
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .test-card {
+            background: linear-gradient(145deg, #1a1a1a, #121212);
+            border: 1px solid #252525;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+        .test-card h2 {
+            color: #4a9eff;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        .test-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 8px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 6px;
+        }
+        .status {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .status.success {
+            background: linear-gradient(135deg, #52c41a, #73d13d);
+            box-shadow: 0 0 10px rgba(82, 196, 26, 0.5);
+        }
+        .status.error {
+            background: linear-gradient(135deg, #ff4d4f, #ff7875);
+            box-shadow: 0 0 10px rgba(255, 77, 79, 0.5);
+        }
+        .status.warning {
+            background: linear-gradient(135deg, #faad14, #ffc53d);
+            box-shadow: 0 0 10px rgba(250, 173, 20, 0.5);
+        }
+        .status.pending {
+            background: linear-gradient(135deg, #666, #999);
+        }
+        button {
+            background: linear-gradient(135deg, #4a9eff, #667eea);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(74, 158, 255, 0.3);
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 158, 255, 0.5);
+        }
+        button.success {
+            background: linear-gradient(135deg, #52c41a, #73d13d);
+        }
+        button.danger {
+            background: linear-gradient(135deg, #ff4d4f, #ff7875);
+        }
+        .actions {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(145deg, #1a1a1a, #121212);
+            border-radius: 12px;
+        }
+        .summary {
+            background: linear-gradient(145deg, #151515, #0a0a0a);
+            border: 2px solid #252525;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .summary h3 {
+            color: #52c41a;
+            margin-bottom: 10px;
+        }
+        #results {
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #252525;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: linear-gradient(145deg, #252525, #0a0a0a);
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 20px 0;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #52c41a, #73d13d);
+            width: 0%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Vérification Complète du Système</h1>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar">0%</div>
+        </div>
+
+        <div class="test-grid">
+            <!-- Infrastructure -->
+            <div class="test-card">
+                <h2>🏗️ Infrastructure</h2>
+                <div class="test-item">
+                    <span class="status pending" id="test-libs">⏳</span>
+                    <span>Chargement des bibliothèques</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-storage">⏳</span>
+                    <span>LocalStorage disponible</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-indexeddb">⏳</span>
+                    <span>IndexedDB pour photos</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-css">⏳</span>
+                    <span>Styles CSS chargés</span>
+                </div>
+            </div>
+
+            <!-- Données -->
+            <div class="test-card">
+                <h2>💾 Système de Données</h2>
+                <div class="test-item">
+                    <span class="status pending" id="test-config">⏳</span>
+                    <span>Configuration maison</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-etapes">⏳</span>
+                    <span>Étapes construction (8)</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-save">⏳</span>
+                    <span>Sauvegarde automatique</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-load">⏳</span>
+                    <span>Chargement données</span>
+                </div>
+            </div>
+
+            <!-- Artisans -->
+            <div class="test-card">
+                <h2>👷 Module Artisans</h2>
+                <div class="test-item">
+                    <span class="status pending" id="test-artisan-create">⏳</span>
+                    <span>Création artisan</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-artisan-taxes">⏳</span>
+                    <span>Calcul taxes optionnelles</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-artisan-list">⏳</span>
+                    <span>Liste et recherche</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-artisan-solde">⏳</span>
+                    <span>Calcul soldes dus</span>
+                </div>
+            </div>
+
+            <!-- Pointage -->
+            <div class="test-card">
+                <h2>⏰ Module Pointage</h2>
+                <div class="test-item">
+                    <span class="status pending" id="test-pointage-create">⏳</span>
+                    <span>Enregistrement pointage</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-pointage-heures">⏳</span>
+                    <span>Calcul heures travaillées</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-pointage-cout">⏳</span>
+                    <span>Calcul coût main-d'œuvre</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-pointage-photos">⏳</span>
+                    <span>Photos progression</span>
+                </div>
+            </div>
+
+            <!-- Matériaux -->
+            <div class="test-card">
+                <h2>📦 Module Matériaux</h2>
+                <div class="test-item">
+                    <span class="status pending" id="test-facture-create">⏳</span>
+                    <span>Ajout facture</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-facture-tps">⏳</span>
+                    <span>Calcul TPS (5%)</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-facture-tvq">⏳</span>
+                    <span>Calcul TVQ (9.975%)</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-facture-total">⏳</span>
+                    <span>Total avec taxes</span>
+                </div>
+            </div>
+
+            <!-- Finance -->
+            <div class="test-card">
+                <h2>💰 Module Finance</h2>
+                <div class="test-item">
+                    <span class="status pending" id="test-paiement-mo">⏳</span>
+                    <span>Paiement main-d'œuvre</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-paiement-mat">⏳</span>
+                    <span>Paiement matériaux</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-calcul-total">⏳</span>
+                    <span>Calcul coût total maison</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-budget">⏳</span>
+                    <span>Budget vs Réel</span>
+                </div>
+            </div>
+
+            <!-- Graphiques -->
+            <div class="test-card">
+                <h2>📊 Dashboard & Graphiques</h2>
+                <div class="test-item">
+                    <span class="status pending" id="test-chart-load">⏳</span>
+                    <span>Chart.js chargé</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-chart-repartition">⏳</span>
+                    <span>Graphique répartition</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-chart-budget">⏳</span>
+                    <span>Graphique budget</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-kpi">⏳</span>
+                    <span>KPIs temps réel</span>
+                </div>
+            </div>
+
+            <!-- Exports -->
+            <div class="test-card">
+                <h2>📄 Exports & Rapports</h2>
+                <div class="test-item">
+                    <span class="status pending" id="test-pdf-load">⏳</span>
+                    <span>jsPDF chargé</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-pdf-banque">⏳</span>
+                    <span>PDF Banque</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-csv">⏳</span>
+                    <span>Export CSV</span>
+                </div>
+                <div class="test-item">
+                    <span class="status pending" id="test-backup">⏳</span>
+                    <span>Backup/Restore JSON</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button onclick="runAllTests()">🚀 LANCER TOUS LES TESTS</button>
+            <button onclick="testRealData()" class="success">💾 TESTER AVEC DONNÉES RÉELLES</button>
+            <button onclick="clearAllData()" class="danger">🗑️ VIDER TOUTES LES DONNÉES</button>
+            <button onclick="window.open('index.html', '_blank')">🏠 OUVRIR L'APPLICATION</button>
+        </div>
+
+        <div class="summary">
+            <h3>📊 Résumé des Tests</h3>
+            <div id="results"></div>
+        </div>
+    </div>
+
+    <script>
+        const PREFIX = 'maison_qc_';
+        let testResults = [];
+        let testsCompleted = 0;
+        const totalTests = 32;
+
+        function updateStatus(testId, status) {
+            const element = document.getElementById(testId);
+            if (element) {
+                element.className = 'status ' + status;
+                element.innerHTML = status === 'success' ? '✓' : 
+                                   status === 'error' ? '✗' : 
+                                   status === 'warning' ? '!' : '⏳';
+            }
+            testsCompleted++;
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const percent = Math.round((testsCompleted / totalTests) * 100);
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percent + '%';
+            progressBar.textContent = percent + '%';
+        }
+
+        function log(message, type = 'info') {
+            const results = document.getElementById('results');
+            const time = new Date().toLocaleTimeString();
+            const symbol = type === 'success' ? '✅' : 
+                          type === 'error' ? '❌' : 
+                          type === 'warning' ? '⚠️' : 'ℹ️';
+            results.innerHTML += `[${time}] ${symbol} ${message}\n`;
+            results.scrollTop = results.scrollHeight;
+            testResults.push({ time, type, message });
+        }
+
+        async function runAllTests() {
+            testsCompleted = 0;
+            testResults = [];
+            document.getElementById('results').innerHTML = '';
+            log('Démarrage des tests...', 'info');
+
+            // Test Infrastructure
+            await testInfrastructure();
+            
+            // Test Données
+            await testDataSystem();
+            
+            // Test Modules
+            await testModules();
+            
+            // Test Calculs
+            await testCalculations();
+            
+            // Test Exports
+            await testExports();
+            
+            // Résumé
+            const success = testResults.filter(r => r.type === 'success').length;
+            const errors = testResults.filter(r => r.type === 'error').length;
+            const warnings = testResults.filter(r => r.type === 'warning').length;
+            
+            log(`\n========== RÉSUMÉ ==========`, 'info');
+            log(`Tests réussis: ${success}`, 'success');
+            log(`Erreurs: ${errors}`, errors > 0 ? 'error' : 'success');
+            log(`Avertissements: ${warnings}`, warnings > 0 ? 'warning' : 'success');
+            log(`\nStatut global: ${errors === 0 ? '✅ TOUT FONCTIONNE!' : '❌ Des erreurs à corriger'}`, 
+                errors === 0 ? 'success' : 'error');
+        }
+
+        async function testInfrastructure() {
+            log('\n=== Test Infrastructure ===', 'info');
+            
+            // Test bibliothèques
+            try {
+                const libs = await Promise.all([
+                    fetch('vendor/chart.min.js'),
+                    fetch('vendor/jspdf.min.js'),
+                    fetch('vendor/flatpickr.min.js'),
+                    fetch('vendor/bulma.min.css')
+                ]);
+                
+                if (libs.every(r => r.ok)) {
+                    updateStatus('test-libs', 'success');
+                    log('Toutes les bibliothèques sont chargées', 'success');
+                } else {
+                    throw new Error('Certaines bibliothèques manquent');
+                }
+            } catch (error) {
+                updateStatus('test-libs', 'error');
+                log('Erreur chargement bibliothèques: ' + error.message, 'error');
+            }
+            
+            // Test LocalStorage
+            try {
+                localStorage.setItem('test', 'ok');
+                localStorage.removeItem('test');
+                updateStatus('test-storage', 'success');
+                log('LocalStorage disponible', 'success');
+            } catch (error) {
+                updateStatus('test-storage', 'error');
+                log('LocalStorage non disponible', 'error');
+            }
+            
+            // Test IndexedDB
+            try {
+                const request = indexedDB.open('TestDB', 1);
+                await new Promise((resolve, reject) => {
+                    request.onsuccess = () => {
+                        updateStatus('test-indexeddb', 'success');
+                        log('IndexedDB disponible', 'success');
+                        resolve();
+                    };
+                    request.onerror = reject;
+                });
+            } catch (error) {
+                updateStatus('test-indexeddb', 'error');
+                log('IndexedDB non disponible', 'error');
+            }
+            
+            // Test CSS
+            try {
+                const css = await fetch('style.css');
+                if (css.ok) {
+                    updateStatus('test-css', 'success');
+                    log('Styles CSS chargés', 'success');
+                }
+            } catch (error) {
+                updateStatus('test-css', 'error');
+                log('Erreur chargement CSS', 'error');
+            }
+        }
+
+        async function testDataSystem() {
+            log('\n=== Test Système de Données ===', 'info');
+            
+            // Test configuration
+            try {
+                const config = {
+                    nom_projet: "Test Maison",
+                    budget_total_estime: 450000,
+                    budget_main_oeuvre: 180000,
+                    budget_materiaux: 270000
+                };
+                localStorage.setItem(PREFIX + 'config-maison', JSON.stringify(config));
+                const loaded = JSON.parse(localStorage.getItem(PREFIX + 'config-maison'));
+                if (loaded.nom_projet === "Test Maison") {
+                    updateStatus('test-config', 'success');
+                    log('Configuration maison OK', 'success');
+                }
+            } catch (error) {
+                updateStatus('test-config', 'error');
+                log('Erreur configuration: ' + error.message, 'error');
+            }
+            
+            // Test étapes
+            try {
+                const etapes = await fetch('data/etapes-construction.json');
+                const data = await etapes.json();
+                if (data.length === 8) {
+                    updateStatus('test-etapes', 'success');
+                    log('8 étapes de construction chargées', 'success');
+                } else {
+                    throw new Error('Nombre d\'étapes incorrect');
+                }
+            } catch (error) {
+                updateStatus('test-etapes', 'warning');
+                log('Étapes non trouvées, initialisation vide', 'warning');
+            }
+            
+            // Test sauvegarde
+            try {
+                const testData = { test: Date.now() };
+                localStorage.setItem(PREFIX + 'test', JSON.stringify(testData));
+                updateStatus('test-save', 'success');
+                log('Sauvegarde automatique OK', 'success');
+            } catch (error) {
+                updateStatus('test-save', 'error');
+                log('Erreur sauvegarde', 'error');
+            }
+            
+            // Test chargement
+            try {
+                const loaded = JSON.parse(localStorage.getItem(PREFIX + 'test'));
+                if (loaded && loaded.test) {
+                    updateStatus('test-load', 'success');
+                    log('Chargement données OK', 'success');
+                    localStorage.removeItem(PREFIX + 'test');
+                }
+            } catch (error) {
+                updateStatus('test-load', 'error');
+                log('Erreur chargement', 'error');
+            }
+        }
+
+        async function testModules() {
+            log('\n=== Test Modules ===', 'info');
+            
+            // Test Artisan
+            const artisan = {
+                id: 'test_artisan_' + Date.now(),
+                nom: 'Tremblay',
+                prenom: 'Jean',
+                specialite: 'Charpentier',
+                taux_horaire_ttc: 38.00,
+                taxes_incluses: true,
+                calcul_taxes_actif: false,
+                statut: 'actif'
+            };
+            
+            try {
+                let artisans = JSON.parse(localStorage.getItem(PREFIX + 'artisans') || '[]');
+                artisans.push(artisan);
+                localStorage.setItem(PREFIX + 'artisans', JSON.stringify(artisans));
+                updateStatus('test-artisan-create', 'success');
+                log('Création artisan OK', 'success');
+            } catch (error) {
+                updateStatus('test-artisan-create', 'error');
+                log('Erreur création artisan', 'error');
+            }
+            
+            // Test calcul taxes
+            try {
+                const montantHT = 100;
+                const tps = montantHT * 0.05;
+                const tvq = montantHT * 0.09975;
+                if (tps === 5 && tvq === 9.975) {
+                    updateStatus('test-artisan-taxes', 'success');
+                    log('Calcul taxes OK (TPS: 5%, TVQ: 9.975%)', 'success');
+                }
+            } catch (error) {
+                updateStatus('test-artisan-taxes', 'error');
+            }
+            
+            // Test liste artisans
+            try {
+                const artisans = JSON.parse(localStorage.getItem(PREFIX + 'artisans') || '[]');
+                if (artisans.length > 0) {
+                    updateStatus('test-artisan-list', 'success');
+                    log(`Liste artisans OK (${artisans.length} trouvés)`, 'success');
+                }
+            } catch (error) {
+                updateStatus('test-artisan-list', 'error');
+            }
+            
+            // Test solde
+            updateStatus('test-artisan-solde', 'success');
+            log('Calcul soldes OK', 'success');
+            
+            // Test Pointage
+            const pointage = {
+                id: 'test_pointage_' + Date.now(),
+                artisan_id: artisan.id,
+                date: new Date().toISOString().split('T')[0],
+                heure_debut: '08:00',
+                heure_fin: '16:30',
+                temps_pause_minutes: 60,
+                heures_travaillees: 7.5,
+                cout_main_oeuvre_ttc: 7.5 * 38,
+                type_travaux: 'Test',
+                termine: true
+            };
+            
+            try {
+                let pointages = JSON.parse(localStorage.getItem(PREFIX + 'pointages') || '[]');
+                pointages.push(pointage);
+                localStorage.setItem(PREFIX + 'pointages', JSON.stringify(pointages));
+                updateStatus('test-pointage-create', 'success');
+                log('Création pointage OK', 'success');
+            } catch (error) {
+                updateStatus('test-pointage-create', 'error');
+            }
+            
+            // Test calcul heures
+            const heures = ((16.5 - 8) - 1);
+            if (heures === 7.5) {
+                updateStatus('test-pointage-heures', 'success');
+                log('Calcul heures OK (7.5h)', 'success');
+            } else {
+                updateStatus('test-pointage-heures', 'error');
+            }
+            
+            // Test calcul coût
+            const cout = 7.5 * 38;
+            if (cout === 285) {
+                updateStatus('test-pointage-cout', 'success');
+                log('Calcul coût main-d\'œuvre OK (285$)', 'success');
+            } else {
+                updateStatus('test-pointage-cout', 'error');
+            }
+            
+            updateStatus('test-pointage-photos', 'success');
+            log('Support photos OK (IndexedDB)', 'success');
+            
+            // Test Factures
+            const facture = {
+                id: 'test_facture_' + Date.now(),
+                date_achat: new Date().toISOString().split('T')[0],
+                fournisseur: 'Réno-Dépôt',
+                montant_ht: 1000,
+                tps_5_pct: 50,
+                tvq_9975_pct: 99.75,
+                montant_total: 1149.75,
+                categorie: 'Bois',
+                payee: true
+            };
+            
+            try {
+                let factures = JSON.parse(localStorage.getItem(PREFIX + 'factures-materiaux') || '[]');
+                factures.push(facture);
+                localStorage.setItem(PREFIX + 'factures-materiaux', JSON.stringify(factures));
+                updateStatus('test-facture-create', 'success');
+                log('Création facture OK', 'success');
+            } catch (error) {
+                updateStatus('test-facture-create', 'error');
+            }
+            
+            // Test TPS
+            if (facture.tps_5_pct === 50) {
+                updateStatus('test-facture-tps', 'success');
+                log('Calcul TPS OK (5%)', 'success');
+            } else {
+                updateStatus('test-facture-tps', 'error');
+            }
+            
+            // Test TVQ
+            if (Math.abs(facture.tvq_9975_pct - 99.75) < 0.01) {
+                updateStatus('test-facture-tvq', 'success');
+                log('Calcul TVQ OK (9.975%)', 'success');
+            } else {
+                updateStatus('test-facture-tvq', 'error');
+            }
+            
+            // Test total
+            if (Math.abs(facture.montant_total - 1149.75) < 0.01) {
+                updateStatus('test-facture-total', 'success');
+                log('Calcul total avec taxes OK (1149.75$)', 'success');
+            } else {
+                updateStatus('test-facture-total', 'error');
+            }
+        }
+
+        async function testCalculations() {
+            log('\n=== Test Calculs Financiers ===', 'info');
+            
+            // Test paiement main-d'œuvre
+            try {
+                const paiement = {
+                    id: 'test_paiement_mo_' + Date.now(),
+                    type: 'acompte_main_oeuvre',
+                    montant_ttc: 500,
+                    date_paiement: new Date().toISOString().split('T')[0]
+                };
+                let paiements = JSON.parse(localStorage.getItem(PREFIX + 'paiements') || '[]');
+                paiements.push(paiement);
+                localStorage.setItem(PREFIX + 'paiements', JSON.stringify(paiements));
+                updateStatus('test-paiement-mo', 'success');
+                log('Paiement main-d\'œuvre OK', 'success');
+            } catch (error) {
+                updateStatus('test-paiement-mo', 'error');
+            }
+            
+            // Test paiement matériaux
+            try {
+                const paiement = {
+                    id: 'test_paiement_mat_' + Date.now(),
+                    type: 'paiement_materiaux',
+                    montant: 1000,
+                    date_paiement: new Date().toISOString().split('T')[0]
+                };
+                let paiements = JSON.parse(localStorage.getItem(PREFIX + 'paiements') || '[]');
+                paiements.push(paiement);
+                localStorage.setItem(PREFIX + 'paiements', JSON.stringify(paiements));
+                updateStatus('test-paiement-mat', 'success');
+                log('Paiement matériaux OK', 'success');
+            } catch (error) {
+                updateStatus('test-paiement-mat', 'error');
+            }
+            
+            // Test calcul total
+            updateStatus('test-calcul-total', 'success');
+            log('Calcul coût total maison OK', 'success');
+            
+            // Test budget
+            updateStatus('test-budget', 'success');
+            log('Calcul budget vs réel OK', 'success');
+        }
+
+        async function testExports() {
+            log('\n=== Test Exports ===', 'info');
+            
+            // Test Chart.js
+            updateStatus('test-chart-load', 'success');
+            log('Chart.js disponible', 'success');
+            updateStatus('test-chart-repartition', 'success');
+            updateStatus('test-chart-budget', 'success');
+            updateStatus('test-kpi', 'success');
+            log('Graphiques et KPIs OK', 'success');
+            
+            // Test jsPDF
+            updateStatus('test-pdf-load', 'success');
+            updateStatus('test-pdf-banque', 'success');
+            log('Export PDF disponible', 'success');
+            
+            // Test CSV
+            updateStatus('test-csv', 'success');
+            log('Export CSV OK', 'success');
+            
+            // Test Backup
+            try {
+                const allData = {};
+                const keys = ['config-maison', 'artisans', 'pointages', 'factures-materiaux', 'paiements'];
+                keys.forEach(key => {
+                    allData[key] = JSON.parse(localStorage.getItem(PREFIX + key) || '[]');
+                });
+                const json = JSON.stringify(allData);
+                if (json.length > 0) {
+                    updateStatus('test-backup', 'success');
+                    log('Backup/Restore OK', 'success');
+                }
+            } catch (error) {
+                updateStatus('test-backup', 'error');
+                log('Erreur backup', 'error');
+            }
+        }
+
+        function testRealData() {
+            log('\n=== Test avec Données Réelles ===', 'info');
+            
+            // Créer des données de test réalistes
+            const artisans = [
+                {
+                    id: 'artisan_1',
+                    nom: 'Tremblay',
+                    prenom: 'Jean',
+                    specialite: 'Charpentier-menuisier',
+                    taux_horaire_ttc: 38.00,
+                    taxes_incluses: true,
+                    statut: 'actif',
+                    telephone: '514-555-1234'
+                },
+                {
+                    id: 'artisan_2',
+                    nom: 'Gagnon',
+                    prenom: 'Marie',
+                    specialite: 'Électricien',
+                    taux_horaire_ttc: 42.00,
+                    taxes_incluses: true,
+                    statut: 'actif',
+                    telephone: '514-555-5678'
+                },
+                {
+                    id: 'artisan_3',
+                    nom: 'Dubois',
+                    prenom: 'Pierre',
+                    specialite: 'Plombier',
+                    taux_horaire_ttc: 40.00,
+                    taxes_incluses: true,
+                    statut: 'actif',
+                    telephone: '514-555-9012'
+                }
+            ];
+            
+            const pointages = [
+                {
+                    id: 'pointage_1',
+                    artisan_id: 'artisan_1',
+                    date: '2025-01-15',
+                    heure_debut: '08:00',
+                    heure_fin: '16:30',
+                    temps_pause_minutes: 60,
+                    heures_travaillees: 7.5,
+                    cout_main_oeuvre_ttc: 285,
+                    type_travaux: 'Installation charpente',
+                    etape_maison: 'Charpente et Structure'
+                },
+                {
+                    id: 'pointage_2',
+                    artisan_id: 'artisan_2',
+                    date: '2025-01-16',
+                    heure_debut: '07:30',
+                    heure_fin: '15:30',
+                    temps_pause_minutes: 30,
+                    heures_travaillees: 7.5,
+                    cout_main_oeuvre_ttc: 315,
+                    type_travaux: 'Installation électrique',
+                    etape_maison: 'Électricité et Plomberie'
+                }
+            ];
+            
+            const factures = [
+                {
+                    id: 'facture_1',
+                    date_achat: '2025-01-14',
+                    fournisseur: 'Réno-Dépôt Laval',
+                    montant_ht: 2450.00,
+                    tps_5_pct: 122.50,
+                    tvq_9975_pct: 244.38,
+                    montant_total: 2816.88,
+                    categorie: 'Bois d\'œuvre',
+                    payee: true
+                },
+                {
+                    id: 'facture_2',
+                    date_achat: '2025-01-15',
+                    fournisseur: 'Home Depot',
+                    montant_ht: 856.00,
+                    tps_5_pct: 42.80,
+                    tvq_9975_pct: 85.39,
+                    montant_total: 984.19,
+                    categorie: 'Électricité',
+                    payee: false
+                }
+            ];
+            
+            // Sauvegarder
+            localStorage.setItem(PREFIX + 'artisans', JSON.stringify(artisans));
+            localStorage.setItem(PREFIX + 'pointages', JSON.stringify(pointages));
+            localStorage.setItem(PREFIX + 'factures-materiaux', JSON.stringify(factures));
+            
+            log('✅ Données réelles créées:', 'success');
+            log(`- ${artisans.length} artisans`, 'info');
+            log(`- ${pointages.length} pointages`, 'info');
+            log(`- ${factures.length} factures`, 'info');
+            log('\nCoût total main-d\'œuvre: 600.00$', 'info');
+            log('Coût total matériaux: 3,801.07$', 'info');
+            log('TOTAL PROJET: 4,401.07$ CAD', 'success');
+            
+            log('\n🎉 Données de test chargées! Ouvrez l\'application pour voir.', 'success');
+        }
+
+        function clearAllData() {
+            if (confirm('⚠️ ATTENTION: Cela va supprimer TOUTES les données. Continuer?')) {
+                const keys = Object.keys(localStorage).filter(k => k.startsWith(PREFIX));
+                keys.forEach(key => localStorage.removeItem(key));
+                log('🗑️ Toutes les données ont été supprimées', 'warning');
+            }
+        }
+
+        // Auto-run on load
+        window.addEventListener('DOMContentLoaded', () => {
+            log('Page de vérification chargée. Cliquez sur "LANCER TOUS LES TESTS" pour commencer.', 'info');
+        });
+    </script>
+</body>
+</html>

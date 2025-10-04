@@ -35,45 +35,52 @@ switch ($currentPage) {
 }
 ?>
 
-<!-- Chargement automatique et silencieux des dépendances manquantes -->
+<!-- Chargement automatique des dépendances manquantes -->
 <script>
-// Chargement automatique des dépendances sans logs en production
 (function() {
     'use strict';
+    
+    let dependenciesChecked = false; // Protection anti-boucle
 
-    const isDebugMode = window.location.hash === '#debug' || window.location.search.includes('debug=1');
-
-    // Attendre que tous les scripts soient chargés
     function ensureDependencies() {
+        if (dependenciesChecked) {
+            return; // Éviter les vérifications multiples
+        }
+        dependenciesChecked = true;
+        
         const needsConverter = document.getElementById('currency-converter-premium');
         const needsOptimizer = document.getElementById('coin-lots-recommendations');
 
-        // Ne rien faire si ces éléments ne sont pas présents
         if (!needsConverter && !needsOptimizer) {
             return;
         }
 
         const missing = [];
+        const loadedScripts = [];
 
-        if (typeof CurrencyConverterPremium === 'undefined') missing.push('currency-converter');
-        if (typeof CoinLotOptimizer === 'undefined') missing.push('coin-lot-optimizer');
-        if (typeof SnipcartUtils === 'undefined') missing.push('snipcart-utils');
-
-        // Charger silencieusement les scripts manquants
-        missing.forEach(function(scriptName) {
-            const script = document.createElement('script');
-            script.src = '/js/' + scriptName + '.js?v=' + Date.now();
-            script.async = true;
-            document.head.appendChild(script);
-        });
-
-        // Log uniquement en mode debug
-        if (isDebugMode && missing.length > 0) {
-            console.log('[GD Debug] Chargement automatique:', missing);
+        if (needsConverter && typeof CurrencyConverterPremium === 'undefined') {
+            missing.push('currency-converter');
         }
+        if (needsOptimizer && typeof CoinLotOptimizer === 'undefined') {
+            missing.push('coin-lot-optimizer');
+        }
+        if ((needsConverter || needsOptimizer) && typeof SnipcartUtils === 'undefined') {
+            missing.push('snipcart-utils');
+        }
+
+        missing.forEach(function(scriptName) {
+            // Vérifier si le script n'est pas déjà en cours de chargement
+            if (!document.querySelector(`script[src*="${scriptName}.js"]`)) {
+                const script = document.createElement('script');
+                script.src = '/js/' + scriptName + '.js?v=' + Date.now();
+                script.async = true;
+                script.onload = () => loadedScripts.push(scriptName);
+                script.onerror = () => console.warn('Impossible de charger:', scriptName);
+                document.head.appendChild(script);
+            }
+        });
     }
 
-    // Vérifier après DOMContentLoaded et après un délai pour laisser les scripts se charger
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(ensureDependencies, 100);

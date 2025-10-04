@@ -609,13 +609,6 @@ echo $snipcartInit;
   "url": "https://geekndragon.com/boutique.php"
 }
 </script>
-  <!-- Scripts chargés automatiquement via footer.php -->
-  <!-- Chargement asynchrone des produits pour performance optimale -->
-  <script src="/js/app.js?v=<?= filemtime(__DIR__.'/js/app.js') ?>"></script>
-  <script src="/js/async-stock-loader.js?v=<?= filemtime(__DIR__.'/js/async-stock-loader.js') ?>"></script>
-  <script src="/js/boutique-async-loader.js?v=<?= filemtime(__DIR__.'/js/boutique-async-loader.js') ?>"></script>
-
-  <!-- Snipcart fonctionne nativement avec les attributs data-item-* selon la documentation officielle -->
 </body>
 
 

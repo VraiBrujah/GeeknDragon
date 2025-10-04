@@ -270,7 +270,6 @@ $extraHead = <<<HTML
   50% { transform: scale(1.05) rotate(180deg); }
   75% { transform: scale(1.1) rotate(270deg); }
 }
-}
 .dice-result {
   font-size: 1.5rem;
   font-weight: bold;
@@ -2614,6 +2613,12 @@ function confirmDownload() {
 <script>
 // Gestionnaire pour le bouton d'ajout au panier (utilise les utilitaires réutilisables)
 document.addEventListener('DOMContentLoaded', function() {
+  // Traductions définies côté PHP
+  const translations = {
+    noLotsMessage: <?= json_encode(__('money.converter.lotsRecommendations.noLotsMessage', 'Aucun lot à ajouter au panier.')) ?>,
+    productSummary: <?= json_encode(__('money.converter.productSummary', 'Lot de pièces D&D')) ?>
+  };
+  
   const addToCartButton = document.getElementById('add-all-lots-to-cart');
   
   if (addToCartButton) {
@@ -2621,11 +2626,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const lotsData = JSON.parse(this.dataset.lotsData || '[]');
       
       if (lotsData.length === 0) {
-        const lang = document.documentElement.lang || 'fr';
-        const message = lang === 'en' ? 
-          '<?= __('money.converter.lotsRecommendations.noLotsMessage', 'Aucun lot à ajouter au panier.') ?>' :
-          '<?= __('money.converter.lotsRecommendations.noLotsMessage', 'Aucun lot à ajouter au panier.') ?>';
-        alert(message);
+        alert(translations.noLotsMessage);
         return;
       }
       
@@ -2653,7 +2654,7 @@ document.addEventListener('DOMContentLoaded', function() {
           Object.entries(lot.customFields).forEach(([fieldKey, fieldData]) => {
             if (fieldData.role === 'metal') {
               convertedCustomFields[`custom${customIndex}`] = {
-                name: 'Métal',
+                name: 'Metal',
                 type: 'dropdown', 
                 options: 'cuivre|argent|électrum|or|platine',
                 value: translateMetal(fieldData.value) // TRADUCTION AJOUTÉE
@@ -2675,9 +2676,9 @@ document.addEventListener('DOMContentLoaded', function() {
           product: {
             id: lot.productId,
             name: product?.name || lot.productId, // Utiliser le nom de base du produit
-            summary: product?.summary || `<?= __('money.converter.productSummary', 'Lot de pièces D&D') ?> - ${product?.name || lot.productId}`,
+            summary: product?.summary || translations.productSummary + ' - ' + (product?.name || lot.productId),
             price: lot.price,
-            url: lot.url || `product.php?id=${encodeURIComponent(lot.productId)}`
+            url: lot.url || 'product.php?id=' + encodeURIComponent(lot.productId)
           },
           quantity: lot.quantity,
           customFields: convertedCustomFields
@@ -2686,39 +2687,61 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Utiliser les utilitaires Snipcart pour ajouter au panier
       if (window.SnipcartUtils) {
-        window.SnipcartUtils.addMultipleToCart(productsToAdd, (added, total) => {
-          if (added === total) {
+        window.SnipcartUtils.addMultipleToCart(productsToAdd, (added, total, processed) => {
+          // Ne traiter le résultat final que quand tous les produits ont été traités
+          if (processed === total) {
             const lang = document.documentElement.lang || 'fr';
-            const message = lang === 'en' ? 
-              `${total} product(s) added to cart successfully!` : 
-              `${total} produit(s) ajouté(s) au panier avec succès !`;
             
-            // Afficher un message de succès plus élégant
-            const successDiv = document.createElement('div');
-            successDiv.className = 'fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300';
-            successDiv.innerHTML = `
+            let message, className, icon;
+            if (added === total) {
+              // Tous les produits ont été ajoutés avec succès
+              message = lang === 'en' ? 
+                `${total} product(s) added to cart successfully!` : 
+                `${total} produit(s) ajouté(s) au panier avec succès !`;
+              className = 'bg-green-600';
+              icon = '✅';
+            } else if (added > 0) {
+              // Certains produits ont été ajoutés
+              message = lang === 'en' ? 
+                `${added}/${total} product(s) added to cart (${total - added} failed)` : 
+                `${added}/${total} produit(s) ajouté(s) au panier (${total - added} ont échoué)`;
+              className = 'bg-yellow-600';
+              icon = '⚠️';
+            } else {
+              // Aucun produit n'a pu être ajouté
+              message = lang === 'en' ? 
+                `Failed to add products to cart` : 
+                `Échec de l'ajout des produits au panier`;
+              className = 'bg-red-600';
+              icon = '❌';
+            }
+            
+            // Afficher un message de résultat
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `fixed top-4 right-4 ${className} text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300`;
+            resultDiv.innerHTML = `
               <div class="flex items-center gap-2">
-                <span class="text-xl">✅</span>
+                <span class="text-xl">${icon}</span>
                 <span>${message}</span>
               </div>
             `;
             
-            document.body.appendChild(successDiv);
+            document.body.appendChild(resultDiv);
             
             // Animation d'entrée
             setTimeout(() => {
-              successDiv.style.transform = 'translateX(0)';
+              resultDiv.style.transform = 'translateX(0)';
             }, 100);
             
             // Animation de sortie et suppression
             setTimeout(() => {
-              successDiv.style.transform = 'translateX(full)';
+              resultDiv.style.transform = 'translateX(100%)';
               setTimeout(() => {
-                if (successDiv.parentNode) {
-                  successDiv.parentNode.removeChild(successDiv);
+                if (resultDiv.parentNode) {
+                  resultDiv.parentNode.removeChild(resultDiv);
                 }
               }, 300);
-            }, 3000);
+            }, added === total ? 3000 : 5000); // Message plus long en cas d'erreurs
           }
         });
       } else {

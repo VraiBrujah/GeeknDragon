@@ -31,7 +31,13 @@
       "Bash(copy:*)",
       "Bash(python:*)",
       "Bash(php:*)",
-      "Bash(ffmpeg:*)"
+      "Bash(ffmpeg:*)",
+      "Bash(move:*)",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(node:*)",
+      "Bash(del test-aide-jeux.php)",
+      "Bash(del:*)"
     ],
     "deny": [],
     "ask": []

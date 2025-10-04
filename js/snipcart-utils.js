@@ -179,6 +179,7 @@ class SnipcartUtils {
 
     /**
      * Ajoute plusieurs produits au panier en lot
+     * Garantit que tous les produits sont traités et que le callback de progression est toujours appelé
      */
     static addMultipleToCart(products, onProgress = null) {
         if (!products || products.length === 0) {
@@ -186,11 +187,18 @@ class SnipcartUtils {
             return;
         }
 
+        let processed = 0;
         let added = 0;
 
         // Fonction récursive pour ajouter un produit à la fois avec délai adaptatif
         const addNext = (index) => {
-            if (index >= products.length) return;
+            if (index >= products.length) {
+                // Tous les produits ont été traités, appel final du callback
+                if (onProgress && processed === products.length) {
+                    onProgress(added, products.length);
+                }
+                return;
+            }
 
             const productData = products[index];
 
@@ -201,16 +209,19 @@ class SnipcartUtils {
                 });
 
                 added++;
-                if (onProgress) {
-                    onProgress(added, products.length);
-                }
-
-                // Délai plus long pour être sûr que Snipcart a traité l'ajout
-                setTimeout(() => addNext(index + 1), 500);
             } catch (error) {
-                // Continuer avec le produit suivant même en cas d'erreur
-                setTimeout(() => addNext(index + 1), 500);
+                console.warn('Erreur ajout produit au panier:', productData.product?.id || 'produit inconnu', error);
             }
+
+            processed++;
+            
+            // Appeler le callback de progression après chaque tentative
+            if (onProgress) {
+                onProgress(added, products.length, processed);
+            }
+
+            // Délai adaptatif : plus long pour être sûr que Snipcart a traité l'ajout
+            setTimeout(() => addNext(index + 1), 600);
         };
 
         // Commencer l'ajout séquentiel

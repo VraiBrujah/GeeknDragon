@@ -66,7 +66,6 @@
             window.Snipcart.events.on('customer.signedin', updateAccountIcon);
             window.Snipcart.events.on('customer.signedout', updateAccountIcon);
 
-            console.log('[GD] Account icon switcher initialisé');
         } else {
             // Réessayer après 500ms si Snipcart n'est pas encore chargé
             setTimeout(initAccountIconSwitcher, 500);

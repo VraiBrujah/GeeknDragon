@@ -12,8 +12,13 @@ require_once __DIR__ . '/includes/i18n-helper.php';
 
 $availableLangs = ['fr', 'en', 'es', 'de'];
 
-// Fonction pour détecter la langue préférée du navigateur
-function getBrowserLanguage($availableLangs) {
+/**
+ * Détecte la langue préférée du navigateur basée sur Accept-Language
+ * 
+ * @param array $availableLangs Liste des langues supportées par l'application
+ * @return string Code langue préférée ou 'fr' par défaut
+ */
+function getBrowserLanguage(array $availableLangs): string {
     if (!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
         return 'fr'; // Défaut si pas d'en-tête
     }
@@ -39,7 +44,13 @@ if (!in_array($lang, $availableLangs, true)) {
 setcookie('lang', $lang, time() + 31536000, '/');
 
 /**
- * Ajoute la langue courante comme paramètre de requête à une URL.
+ * Ajoute la langue courante comme paramètre de requête à une URL
+ * 
+ * Ne modifie pas l'URL si la langue est française (langue par défaut).
+ * Préserve les fragments d'ancre (#) et gère les paramètres existants.
+ * 
+ * @param string $url URL à traiter
+ * @return string URL avec paramètre de langue si nécessaire
  */
 function langUrl(string $url): string
 {
@@ -64,7 +75,14 @@ function langUrl(string $url): string
 $translations = json_decode(file_get_contents(__DIR__ . "/lang/$lang.json"), true) ?: [];
 
 /**
- * Alias global pour la fonction t() du helper
+ * Alias global pour la fonction t() du helper d'internationalisation
+ * 
+ * Utilise la convention __ (double underscore) pour simplifier l'usage
+ * dans les templates et maintenir la compatibilité avec d'autres frameworks.
+ * 
+ * @param string $key Clé de traduction (notation pointée supportée)
+ * @param string $fallback Texte de fallback si la traduction n'existe pas
+ * @return string Texte traduit ou fallback
  */
 function __(string $key, string $fallback = ''): string 
 {

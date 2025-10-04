@@ -13,8 +13,6 @@
  */
 class CoinLotOptimizer {
     constructor() {
-        // Mode debug conditionnel basé sur URL pour développement
-        this.DEBUG_MODE = window.location.hash === '#debug' || window.location.search.includes('debug=1');
 
         this.rates = {
             copper: 1, silver: 10, electrum: 50, gold: 100, platinum: 1000,
@@ -30,12 +28,6 @@ class CoinLotOptimizer {
         };
     }
 
-    // Log conditionnel pour le debug
-    debugLog(...args) {
-        if (this.DEBUG_MODE) {
-            console.log(...args);
-        }
-    }
 
     getCurrentLang() {
         return document.documentElement?.lang || 'fr';
@@ -47,21 +39,17 @@ class CoinLotOptimizer {
    * @returns {Array} Solution optimale formatée pour Snipcart
    */
     findOptimalProductCombination(needs) {
-        this.debugLog('🎯 CoinLotOptimizer: Recherche solution optimale pour:', needs);
-
         if (!needs || Object.keys(needs).length === 0) {
             return [];
         }
 
         // Vérifier disponibilité des produits
         if (!window.products) {
-            // Produits non disponibles - retour vide silencieux
             return [];
         }
 
         // 1. Générer toutes les variations possibles de tous les produits
         const allVariations = this.generateAllProductVariations();
-        this.debugLog(`📦 CoinLotOptimizer: ${allVariations.length} variations générées`);
 
         // 2. Appliquer l'algorithme de sac à dos pour trouver la solution optimale
         const optimalSolution = this.knapsackOptimize(needs, allVariations);
@@ -87,7 +75,6 @@ class CoinLotOptimizer {
             }
         });
 
-        this.debugLog(`✅ CoinLotOptimizer: ${variations.length} variations générées au total`);
         return variations;
     }
 
@@ -106,7 +93,6 @@ class CoinLotOptimizer {
             // CAS SPÉCIAL : Quintessence Métallique
             // 5 variations (1 par multiplicateur)
             // Chaque variation donne 1 pièce de chaque métal avec le même multiplicateur
-            this.debugLog(`🔸 CoinLotOptimizer: ${product.name} - Type Quintessence (${multipliers.length} variations)`);
 
             multipliers.forEach((mult) => {
                 const capacity = {};
@@ -129,7 +115,6 @@ class CoinLotOptimizer {
             // 25 variations (5 métaux × 5 multiplicateurs)
             // Chaque variation donne N pièces du même métal/multiplicateur
             const coinsPerLot = Object.values(product.coin_lots)[0] || 1;
-            this.debugLog(`🔹 CoinLotOptimizer: ${product.name} - Type normal (${metals.length * multipliers.length} variations, ${coinsPerLot} pièces par lot)`);
 
             metals.forEach((metal) => {
                 multipliers.forEach((mult) => {
@@ -160,7 +145,6 @@ class CoinLotOptimizer {
    * @param {Array} variations - Array à remplir
    */
     generateFixedVariations(productId, product, variations) {
-        this.debugLog(`🔳 CoinLotOptimizer: ${product.name} - Produit fixe`);
 
         const multipliers = product.multipliers || [];
 
@@ -234,7 +218,6 @@ class CoinLotOptimizer {
    * @returns {Array} Solution optimale
    */
     knapsackOptimize(needs, variations) {
-        this.debugLog('🧮 CoinLotOptimizer: Algorithme de sac à dos...');
 
         const solutions = [];
 
@@ -256,7 +239,6 @@ class CoinLotOptimizer {
                     type: 'single',
                 });
 
-                this.debugLog(`💡 CoinLotOptimizer: Solution unique: ${variation.name} (${variation.type}) x${quantity} = ${cost}$`);
             }
         });
 
@@ -274,7 +256,6 @@ class CoinLotOptimizer {
                 type: 'quintessence_multiple',
             });
 
-            this.debugLog(`🌟 CoinLotOptimizer: Combinaison Quintessence: ${totalCost}$ (${combination.length} Quintessences)`);
         });
 
         // ÉTAPE 4: Décomposition intelligente avec Quintessences partielles
@@ -289,7 +270,6 @@ class CoinLotOptimizer {
             });
 
             const totalCost = solution.reduce((sum, item) => sum + (item.variation.price * item.quantity), 0);
-            this.debugLog(`🧩 CoinLotOptimizer: Décomposition intelligente: ${totalCost}$ (${solution.length} produits)`);
         });
 
         // ÉTAPE 5: Solutions combinées avec quintessence + complément
@@ -312,7 +292,6 @@ class CoinLotOptimizer {
                         type: 'combined',
                     });
 
-                    this.debugLog(`🔗 CoinLotOptimizer: Solution combinée: ${totalCost}$ (${allItems.length} produits)`);
                 }
             }
         });
@@ -330,7 +309,6 @@ class CoinLotOptimizer {
                     type: 'custom_fallback',
                 });
 
-                this.debugLog(`🔧 CoinLotOptimizer: Solution pièces personnalisées (fallback): ${totalCost}$ (${customSolution.length} produits)`);
             }
         }
 
@@ -365,7 +343,6 @@ class CoinLotOptimizer {
 
         if (optimizedSolutions.length > 0) {
             const best = optimizedSolutions[0];
-            this.debugLog(`🏆 CoinLotOptimizer: Solution optimale: ${best.totalCost}$ (${best.type})`);
             return best.items;
         }
 
@@ -455,12 +432,10 @@ class CoinLotOptimizer {
    * @returns {Array} Solutions trouvées triées par coût
    */
     findBruteForceOptimal(needs, variations) {
-        this.debugLog('🚀 CoinLotOptimizer: Brute-force intelligent...');
 
         const solutions = [];
         const maxQuantity = this.calculateMaxReasonableQuantity(needs);
 
-        this.debugLog(`🔍 CoinLotOptimizer: Test quantités jusqu'à ${maxQuantity} par produit`);
 
         // Test 1: Solutions à produit unique avec quantités multiples
         variations.forEach((variation) => {
@@ -468,7 +443,6 @@ class CoinLotOptimizer {
                 if (this.canCoverWithQuantity(variation, needs, qty)) {
                     // LOGIQUE ANTI-GASPILLAGE: Éviter Quintessence pour besoins simples
                     if (this.isWastefulSolution(variation, needs, qty)) {
-                        this.debugLog(`⚠️ CoinLotOptimizer: ${variation.name} x${qty} rejeté (gaspillage excessif)`);
                         continue;
                     }
 
@@ -480,7 +454,6 @@ class CoinLotOptimizer {
                         type: 'brute_force_single',
                     });
 
-                    this.debugLog(`✅ CoinLotOptimizer: ${variation.name} x${qty} = ${cost}$ (couvre avec surplus acceptable)`);
                 }
             }
         });
@@ -492,7 +465,6 @@ class CoinLotOptimizer {
 
         // FALLBACK: Si aucune solution économique trouvée, créer solution par pièces individuelles
         if (solutions.length === 0 || solutions.every((s) => s.totalCost > 50)) {
-            this.debugLog('🔄 CoinLotOptimizer: Fallback vers pièces individuelles');
             const individualSolution = this.createIndividualSolution(needs, variations);
             if (individualSolution) {
                 solutions.push(individualSolution);
@@ -528,7 +500,6 @@ class CoinLotOptimizer {
                                 type: 'brute_force_double',
                             });
 
-                            this.debugLog(`✅ CoinLotOptimizer: ${var1.name} x${qty1} + ${var2.name} x${qty2} = ${cost}$`);
                         }
                     }
                 }
@@ -573,7 +544,6 @@ class CoinLotOptimizer {
 
             // Si seulement 1-2 métaux demandés, Quintessence est gaspilleuse
             if (uniqueMetals.length <= 2) {
-                this.debugLog(`🚫 Anti-gaspillage: Quintessence rejetée (${uniqueMetals.length} métaux vs 5 fournis)`);
                 return true;
             }
 
@@ -583,13 +553,11 @@ class CoinLotOptimizer {
             const individualCost = totalNeeded * 10; // Prix pièce personnalisée = $10
 
             if (individualCost < quintessenceCost) {
-                this.debugLog(`🚫 Anti-gaspillage: Quintessence rejetée (${uniqueMetals.length} métaux, $${quintessenceCost} vs $${individualCost} individuel)`);
                 return true;
             }
 
             // Si besoins totaux très faibles ET peu de métaux, Quintessence disproportionnée
             if (totalNeeded <= 3 && uniqueMetals.length <= 2) {
-                this.debugLog(`🚫 Anti-gaspillage: Quintessence rejetée (${totalNeeded} pièces, ${uniqueMetals.length} métaux)`);
                 return true;
             }
         }
@@ -601,7 +569,6 @@ class CoinLotOptimizer {
 
         // Rejeter si plus de 70% de gaspillage
         if (wasteRatio > 0.7) {
-            this.debugLog(`🚫 Anti-gaspillage: ${variation.name} rejeté (${Math.round(wasteRatio * 100)}% gaspillage)`);
             return true;
         }
 
@@ -630,9 +597,7 @@ class CoinLotOptimizer {
             if (individualVariation) {
                 items.push({ variation: individualVariation, quantity });
                 totalCost += individualVariation.price * quantity;
-                this.debugLog(`  + ${quantity}x ${individualVariation.name} ($${individualVariation.price})`);
             } else {
-                this.debugLog(`⚠️ CoinLotOptimizer: Pièce individuelle non trouvée pour ${coinKey}`);
                 return null;
             }
         }
@@ -641,7 +606,6 @@ class CoinLotOptimizer {
             return null;
         }
 
-        this.debugLog(`🏗️ CoinLotOptimizer: Solution individuelle créée - $${totalCost}`);
 
         return {
             items,
@@ -803,7 +767,6 @@ class CoinLotOptimizer {
         const patterns = this.multipliers.map((mult) => this.identifyQuintessencePattern(needs, mult))
             .filter((p) => p.matches >= 4); // SEUIL REHAUSSÉ: Minimum 4 métaux sur 5
 
-        this.debugLog(`🔍 CoinLotOptimizer: ${patterns.length} patterns Quintessence détectés`);
 
         // 1. Tester combinaisons de 2 patterns viables avec complétion (INTELLIGENT)
         for (let i = 0; i < patterns.length; i++) {
@@ -845,7 +808,6 @@ class CoinLotOptimizer {
 
                             // Vérifier que la solution complète couvre tous les besoins
                             if (this.validateSolution(completeSolution, needs)) {
-                                this.debugLog(`🌟 CoinLotOptimizer: Combo optimal Quintessence ×${pattern1.multiplier} + ×${pattern2.multiplier} + custom: ${totalCost}$`);
                                 combinations.push(completeSolution);
                             }
                         }
@@ -1054,7 +1016,7 @@ class CoinLotOptimizer {
     validateSolution(solution, originalNeeds) {
         const coverage = {};
 
-        // Calculer la couverture totale avec debug
+        // Calculer la couverture totale
         solution.forEach((item) => {
             if (!item.variation || !item.variation.capacity) {
                 // Variation sans capacity - ignorée silencieusement
@@ -1095,7 +1057,6 @@ class CoinLotOptimizer {
    * @returns {Array} Solutions optimisées avec lots
    */
     findBulkOptimizedSolutions(needs, variations) {
-        this.debugLog('🎯 CoinLotOptimizer: Recherche solutions avec lots trio/septuple...');
 
         const solutions = [];
 
@@ -1221,7 +1182,6 @@ class CoinLotOptimizer {
             const cost = bestSolution.reduce((sum, item) => sum + (item.variation.price * item.quantity), 0);
             const singleCost = quantity * (singleVariation?.price || 10);
 
-            this.debugLog(`💰 CoinLotOptimizer: ${metal}×${multiplier} x${quantity} - Lots: ${cost}$ vs Individuelles: ${singleCost}$`);
 
             return bestSolution;
         }
@@ -1274,7 +1234,6 @@ class CoinLotOptimizer {
                         const originalCost = totalQuantity * variation.price;
 
                         if (bulkCost < originalCost) {
-                            this.debugLog(`🎯 CoinLotOptimizer: Optimisation ${metal}×${multiplier} x${totalQuantity}: ${originalCost}$ → ${bulkCost}$ (économie ${originalCost - bulkCost}$)`);
                             optimizedSolution.push(...bulkSolution);
                             return;
                         }

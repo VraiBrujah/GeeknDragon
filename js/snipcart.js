@@ -1,26 +1,21 @@
-/* snipcart.js — overrides UI Snipcart
-   - Corbeille à gauche du nom
-   - Stepper -/+ sombre sur la quantité
-   - Compatible rerenders Snipcart (MutationObserver + events)
-*/
+/**
+ * Personnalisations interface Snipcart pour Geek & Dragon
+ */
 
 (function () {
   // Utilitaires
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  // Attendre Snipcart prêt avec stratégie d'attente plus patiente
   function whenSnipcartReady(cb) {
-    // Vérification immédiate plus simple
     if (window.Snipcart && window.Snipcart.events) {
       return cb();
     }
 
     let retryCount = 0;
-    const maxRetries = 100; // 10 secondes max (plus patient)
+    const maxRetries = 100;
     let handlerRemoved = false;
 
-    // Event listener pour snipcart.ready
     const readyHandler = () => {
       if (handlerRemoved) return;
       handlerRemoved = true;
@@ -30,12 +25,9 @@
     };
     
     document.addEventListener('snipcart.ready', readyHandler);
-
-    // Polling simplifié
     const t = setInterval(() => {
       retryCount++;
       
-      // Vérification plus simple
       if (window.Snipcart && window.Snipcart.events) {
         if (!handlerRemoved) {
           handlerRemoved = true;
@@ -46,42 +38,25 @@
         return;
       }
 
-      // Debug périodique
-      if (retryCount % 20 === 0) { // Chaque 2 secondes
-        console.log(`Snipcart: attente... (${retryCount/10}s)`, {
-          snipcart: !!window.Snipcart,
-          events: !!(window.Snipcart && window.Snipcart.events)
-        });
-      }
-
       if (retryCount >= maxRetries) {
-        console.error('Snipcart: échec de chargement après 10s');
         if (!handlerRemoved) {
           handlerRemoved = true;
           document.removeEventListener('snipcart.ready', readyHandler);
           clearInterval(t);
         }
-        
-        // Dernière tentative sans conditions
-        setTimeout(() => {
-          console.warn('Snipcart: tentative d\'initialisation forcée...');
-          cb();
-        }, 500);
+        setTimeout(() => cb(), 500);
       }
     }, 100);
   }
 
-  // Déplacer le bouton "supprimer" (corbeille) à gauche du titre
   function moveTrashLeft(itemLine) {
     if (!itemLine || itemLine.dataset.trashMoved === '1') return;
 
-    // Titre (essayons plusieurs sélecteurs selon versions)
     const title =
       $('.snipcart-item-line__title', itemLine) ||
       $('.snipcart-item-line__information .snipcart__font--regular', itemLine) ||
       $('[data-item-name]', itemLine);
 
-    // Bouton supprimer (plusieurs fallback)
     const removeBtn =
       $('.snipcart-item-line__actions button', itemLine) ||
       $('[data-action="item:remove"]', itemLine) ||
@@ -90,52 +65,40 @@
 
     if (!title || !removeBtn) return;
 
-    // Ensure the remove button doesn't keep an auto margin that pushes it to the right
     removeBtn.style.margin = '0';
-
-    // Wrapper esthétique + petit espace
     let leftWrap = $('.__remove-left', itemLine);
     if (!leftWrap) {
       leftWrap = document.createElement('span');
       leftWrap.className = '__remove-left';
       leftWrap.style.display = 'inline-flex';
       leftWrap.style.alignItems = 'center';
-      leftWrap.style.marginRight = '8px'; // petit espace
+      leftWrap.style.marginRight = '8px';
     }
 
-    // Insérer juste avant le titre
     title.parentNode.insertBefore(leftWrap, title);
     leftWrap.appendChild(removeBtn);
-
-    // Marqueur pour éviter les doublons
     itemLine.dataset.trashMoved = '1';
   }
 
-  // Ajouter un stepper sombre - / + autour de l'input quantité
   function enhanceQuantity(itemLine) {
     if (!itemLine) return;
 
-    // Bloc quantité
     const qtyBlock =
       $('.snipcart-item-line__quantity', itemLine) ||
       $('[data-item-quantity]', itemLine) ||
       itemLine;
 
-    // Input quantité
     const input =
       $('input[type="number"]', qtyBlock) ||
       $('input[name="quantity"]', qtyBlock);
 
     if (!input || input.closest('.__qty-stepped')) return;
 
-    // Wrapper
     const wrap = document.createElement('div');
     wrap.className = '__qty-stepped';
     wrap.style.display = 'inline-flex';
     wrap.style.alignItems = 'center';
     wrap.style.gap = '6px';
-
-    // Boutons - / +
     const mkBtn = (txt, aria) => {
       const b = document.createElement('button');
       b.type = 'button';
@@ -291,16 +254,12 @@
       // Récupérer les données du panier via l'API Snipcart
       const cart = window.Snipcart?.store?.getState()?.cart;
       if (!cart) {
-        console.warn('⚠️ Données du panier non disponibles');
         return;
       }
 
       // Extraire les promotions depuis les discount - SÉCURITÉ : vérifier que c'est un tableau
       let discounts = cart.discounts;
 
-      // Debug : afficher la structure
-      console.log('🔍 cart.discounts brut:', discounts);
-      console.log('🔍 Type de discounts:', typeof discounts, 'IsArray:', Array.isArray(discounts));
 
       // Si discounts n'est pas un tableau, essayer de le convertir
       if (!Array.isArray(discounts)) {
@@ -335,7 +294,6 @@
         return orderA - orderB;
       });
 
-      console.log('🔍 Promotions après traitement et tri:', discounts);
 
       // Supprimer les promotions précédemment affichées
       $$('.__gd-promo-line').forEach(el => el.remove());
@@ -344,7 +302,6 @@
       hidePromotionsPopup();
 
       if (discounts.length === 0) {
-        console.log('ℹ️ Aucune promotion à afficher');
         return;
       }
 
@@ -357,7 +314,6 @@
         Array.from($$('*', summarySection)).find(el => el.textContent?.toLowerCase().includes('sous-total'));
 
       if (!subtotalLine) {
-        console.warn('⚠️ Ligne sous-total non trouvée');
         return;
       }
 
@@ -369,13 +325,6 @@
         const amountSaved = typeof discount.amountSaved === 'function' ? discount.amountSaved() : discount.amountSaved;
         const value = typeof discount.value === 'function' ? discount.value() : discount.value;
 
-        console.log(`🔍 Promotion ${index + 1}:`, {
-          name,
-          type,
-          amountSaved,
-          value,
-          raw: discount
-        });
 
         const promoLine = document.createElement('div');
         promoLine.className = '__gd-promo-line snipcart-cart-summary-item';
@@ -406,11 +355,6 @@
         // Formater le montant selon le type de réduction - utiliser les valeurs extraites
         let discountText = '';
 
-        console.log(`💰 Calcul montant promotion ${index + 1}:`, {
-          amountSaved,
-          value,
-          type
-        });
 
         if (type === 'FixedAmount' || amountSaved > 0) {
           discountText = `-${formatCurrency(amountSaved, cart.currency)}`;
@@ -434,7 +378,6 @@
         subtotalLine.parentNode.insertBefore(promoLine, subtotalLine);
       });
 
-      console.log(`✅ ${discounts.length} promotion(s) affichée(s) dynamiquement`);
     } catch (error) {
       console.error('Erreur lors de l\'affichage des promotions:', error);
     }
@@ -500,9 +443,8 @@
         uniqueId: itemId,
         name: newName
       });
-      console.log(`✅ Nom mis à jour: ${newName}`);
     } catch (error) {
-      console.warn('⚠️ Erreur mise à jour nom:', error);
+      // Erreur silencieuse en production
     }
   }
 
@@ -563,7 +505,6 @@
     try {
       const events = window.Snipcart?.events;
       if (!events) {
-        console.warn('⚠️ Events Snipcart non disponibles pour variations dynamiques');
         return;
       }
 
@@ -641,9 +582,8 @@
       // Injection initiale après un court délai
       setTimeout(injectVariationsInSummaryDOM, 500);
 
-      console.log('🎨 Système de variations dynamiques initialisé');
     } catch (error) {
-      console.error('💥 Erreur initialisation variations dynamiques:', error);
+      // Erreur silencieuse en production pour éviter pollution console
     }
   }
 
@@ -652,7 +592,6 @@
     try {
       // Vérification de sécurité avant toute opération
       if (!window.Snipcart) {
-        console.warn('⚠️ Snipcart non disponible lors de l\'initialisation des customizations');
         return;
       }
 
@@ -695,21 +634,8 @@
         });
       }
 
-      // Debug info
-      if (window.location.hash === '#debug' || window.location.search.includes('debug=1')) {
-        console.log('🎨 Snipcart customizations initialisées:', {
-          api: !!window.Snipcart?.api,
-          events: !!window.Snipcart?.events,
-          store: !!window.Snipcart?.store
-        });
-      }
     } catch (error) {
-      console.error('💥 Erreur lors de l\'initialisation des customizations Snipcart:', error);
-      console.error('État Snipcart:', {
-        snipcart: !!window.Snipcart,
-        api: !!(window.Snipcart?.api),
-        events: !!(window.Snipcart?.events)
-      });
+      // Erreur silencieuse en production
     }
   }
 
