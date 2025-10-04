@@ -616,7 +616,6 @@ $extraHead = <<<HTML
 
 /* Règle .hidden spécifique pour les outils uniquement (ne pas affecter le header) */
 .tool-card .hidden,
-#debug-section.hidden,
 .music-player-container .hidden {
   display: none !important;
 }
@@ -889,7 +888,7 @@ $extraHead .= <<<'SCRIPT'
     const isDebugMode = window.location.hash === '#debug' || window.location.search.includes('debug=1');
 
     if (window.innerWidth <= 768) {
-      if (isDebugMode) console.log('📱 [MOBILE-FIX] Correctif affichage mobile');
+      // Correctif affichage mobile appliqué
       
       // CSS d'urgence injecté directement
       const emergencyCSS = `
@@ -2060,37 +2059,6 @@ echo $snipcartInit;
         </div>
       </div>
 
-      <!-- ===== TESTS SYSTÈME CONVERTISSEUR (DEBUG) ===== -->
-      <div class="bg-gradient-to-r from-blue-900/30 to-indigo-900/20 rounded-xl p-8 border border-blue-700/50 mb-16" id="debug-section" style="display: none;">
-        <h3 class="text-3xl font-bold mb-6 text-center text-blue-400"><?= __('money.tests.title', '🔬 Tests du Système de Conversion') ?></h3>
-        
-        <div class="max-w-4xl mx-auto">
-          <p class="text-center text-gray-300 mb-6">
-            <?= __('money.converter.debugSection.title', 'Section de débogage pour valider les algorithmes métaheuristiques de conversion et recommandations de lots.') ?>
-          </p>
-          
-          <div class="grid md:grid-cols-2 gap-6 mb-6">
-            <button id="run-basic-tests" class="btn btn-primary">
-              <?= __('money.tests.basicButton', '🧪 Tests de Base') ?>
-            </button>
-            <button id="run-advanced-tests" class="btn btn-secondary">
-              <?= __('money.tests.advancedButton', '🔬 Tests Avancés') ?>
-            </button>
-          </div>
-          
-          <div class="bg-gray-800/50 rounded-lg p-6">
-            <div class="flex justify-between items-center mb-4">
-              <h4 class="text-xl font-semibold text-blue-300"><?= __('money.tests.results', 'Résultats des Tests') ?></h4>
-              <button id="clear-test-results" class="text-sm text-gray-400 hover:text-white">
-                🗑️ Effacer
-              </button>
-            </div>
-            <div id="test-results" class="text-sm font-mono">
-              <div class="text-gray-400"><?= __('money.tests.noTests', 'Aucun test exécuté...') ?></div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!-- ===== L'IMPORTANCE DU TRÉSOR PHYSIQUE ===== -->
       <div class="bg-gradient-to-r from-amber-900/30 to-yellow-900/20 rounded-xl p-8 border border-amber-700/50 mb-16">
@@ -2836,129 +2804,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // ===== INTÉGRATION DES TESTS SYSTÈME =====
-  
-  // Afficher/masquer la section de tests avec raccourci clavier
-  let debugSectionVisible = false;
-  
-  // Raccourci clavier Ctrl+Shift+T pour afficher les tests
-  document.addEventListener('keydown', function(e) {
-    if (e.ctrlKey && e.shiftKey && e.key === 'T') {
-      e.preventDefault();
-      debugSectionVisible = !debugSectionVisible;
-      const debugSection = document.getElementById('debug-section');
-      if (debugSection) {
-        debugSection.style.display = debugSectionVisible ? 'block' : 'none';
-        if (debugSectionVisible) {
-          debugSection.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-    }
-  });
-
-  // Gestionnaires des boutons de test
-  const runBasicTestsBtn = document.getElementById('run-basic-tests');
-  const runAdvancedTestsBtn = document.getElementById('run-advanced-tests');
-  const clearResultsBtn = document.getElementById('clear-test-results');
-  const testResults = document.getElementById('test-results');
-
-  if (runBasicTestsBtn) {
-    runBasicTestsBtn.addEventListener('click', function() {
-      if (window.CurrencyConverterTests) {
-        testResults.innerHTML = "<div class=\"text-yellow-400\"><?= __('money.tests.runningBasic', 'Exécution des tests de base...') ?></div>";
-        
-        setTimeout(() => {
-          const results = window.CurrencyConverterTests.runBasicTests();
-          displayTestResults(results, '<?= __('money.tests.basic', 'Tests de Base') ?>');
-        }, 100);
-      } else {
-        testResults.innerHTML = "<div class=\"text-red-400\"><?= __('money.tests.notAvailable', '❌ CurrencyConverterTests non disponible') ?></div>";
-      }
-    });
-  }
-
-  if (runAdvancedTestsBtn) {
-    runAdvancedTestsBtn.addEventListener('click', function() {
-      if (window.CurrencyConverterTests) {
-        testResults.innerHTML = "<div class=\"text-yellow-400\"><?= __('money.tests.runningAdvanced', 'Exécution des tests avancés...') ?></div>";
-        
-        setTimeout(() => {
-          const results = window.CurrencyConverterTests.runAdvancedTests();
-          displayTestResults(results, '<?= __('money.tests.advanced', 'Tests Avancés') ?>');
-        }, 100);
-      } else {
-        testResults.innerHTML = "<div class=\"text-red-400\"><?= __('money.tests.notAvailable', '❌ CurrencyConverterTests non disponible') ?></div>";
-      }
-    });
-  }
-
-  if (clearResultsBtn) {
-    clearResultsBtn.addEventListener('click', function() {
-      testResults.innerHTML = "<div class=\"text-gray-400\"><?= __('money.tests.noTests', 'Aucun test exécuté...') ?></div>";
-    });
-  }
-
-  function displayTestResults(results, testType) {
-    if (!results) {
-      testResults.innerHTML = "<div class=\"text-red-400\"><?= __('money.tests.error', '❌ Erreur lors de l\'exécution des tests') ?></div>";
-      return;
-    }
-
-    const passed = results.filter(r => r.passed).length;
-    const total = results.length;
-    const success = passed === total;
-
-    let html = `<div class="mb-4">
-      <div class="text-lg font-semibold ${success ? 'text-green-400' : 'text-red-400'}">
-        ${testType}: ${passed}/${total} <?= __('money.tests.successText', 'tests réussis') ?> ${success ? '✅' : '❌'}
-      </div>
-    </div>`;
-
-    results.forEach((result, index) => {
-      const statusClass = result.passed ? 'text-green-400' : 'text-red-400';
-      const statusIcon = result.passed ? '✅' : '❌';
-      
-      html += `<div class="mb-3 p-3 bg-gray-700/50 rounded">
-        <div class="${statusClass} font-semibold">
-          ${statusIcon} Test ${index + 1}: ${result.name}
-        </div>`;
-      
-      if (result.details) {
-        html += `<div class="text-gray-300 text-xs mt-1 pl-4">${result.details}</div>`;
-      }
-      
-      if (!result.passed && result.error) {
-        html += `<div class="text-red-300 text-xs mt-1 pl-4"><?= __('money.tests.errorLabel', 'Erreur') ?>: ${result.error}</div>`;
-      }
-      
-      html += '</div>';
-    });
-
-    // Ajouter un résumé de performance si disponible
-    const timeData = results.find(r => r.timing);
-    if (timeData && timeData.timing) {
-      html += `<div class="mt-4 p-3 bg-blue-900/30 rounded text-blue-300">
-        <div class="font-semibold">⏱️ <?= __('money.tests.performance', 'Performance') ?></div>
-        <div class="text-xs"><?= __('money.tests.totalTime', 'Temps total') ?>: ${timeData.timing}ms</div>
-      </div>`;
-    }
-
-    testResults.innerHTML = html;
-  }
-
-  // Auto-run tests basiques au chargement si en mode debug
-  if (window.location.hash === '#debug' || window.location.search.includes('debug=1')) {
-    debugSectionVisible = true;
-    const debugSection = document.getElementById('debug-section');
-    if (debugSection) {
-      debugSection.style.display = 'block';
-      
-      // Attendre que tous les scripts soient chargés
-      setTimeout(() => {
-        if (runBasicTestsBtn) runBasicTestsBtn.click();
-      }, 1000);
-    }
-  }
   
   // Ajouter des animations de scroll et d'apparition
   const sectionsToAnimate = document.querySelectorAll('section, .card-product, .navigation-rapide a');

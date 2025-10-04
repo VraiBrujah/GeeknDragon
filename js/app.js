@@ -515,7 +515,7 @@ document.addEventListener('DOMContentLoaded', () => {
   videos.forEach((vid) => {
     // DOUBLE PROTECTION : Vérifier que ce n'est pas une vidéo hero
     if (vid.closest('.hero-videos')) {
-      console.log('[GD] Skipping hero video from app.js management:', vid);
+      log('Skipping hero video from app.js management:', vid);
       return;
     }
     
@@ -1129,9 +1129,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const isDebugMode = window.location.hash === '#debug' || window.location.search.includes('debug=1');
 
     if (cmpStatus === 'error') {
-      console.warn('[GD] CMP: Erreur de chargement - Mode dégradé activé');
+      if (DEBUG_MODE) console.warn('[GD] CMP: Erreur de chargement - Mode dégradé activé');
     } else if (cmpStatus === 'timeout' && isDebugMode) {
-      console.warn('[GD] CMP: Timeout - Fonctionnement en mode essentiel (debug)');
+      if (DEBUG_MODE) console.warn('[GD] CMP: Timeout - Fonctionnement en mode essentiel (debug)');
     }
     // Note: Status 'loaded' et 'timeout' ne loggent plus par défaut pour réduire le bruit console
   };
@@ -1404,7 +1404,7 @@ function copyEmailToClipboard(email, buttonElement) {
         showCopyFeedback(buttonElement, true);
       })
       .catch((err) => {
-        console.warn('Erreur copie clipboard API:', err);
+        if (DEBUG_MODE) console.warn('Erreur copie clipboard API:', err);
         fallbackCopyEmail(email, buttonElement);
       });
   } else {
@@ -1430,7 +1430,7 @@ function fallbackCopyEmail(email, buttonElement) {
     const successful = document.execCommand('copy');
     showCopyFeedback(buttonElement, successful);
   } catch (err) {
-    console.error('Erreur copie fallback:', err);
+    if (DEBUG_MODE) console.error('Erreur copie fallback:', err);
     showCopyFeedback(buttonElement, false);
   } finally {
     document.body.removeChild(textarea);

@@ -117,19 +117,15 @@ class SnipcartUtils {
         // Extraire les données du bouton HTML
         const productData = this.extractProductDataFromButton(button);
 
-        // Tenter d'utiliser l'API Snipcart directement si disponible
+        // Tentative d'utilisation de l'API Snipcart directe
         if (window.Snipcart && window.Snipcart.api && window.Snipcart.api.cart) {
             try {
                 window.Snipcart.api.cart.items.add(productData);
-                console.log('✅ Produit ajouté via API Snipcart:', productData);
                 return true;
             } catch (error) {
-                console.warn('⚠️ Erreur API Snipcart, fallback vers méthode HTML:', error);
+                // Fallback silencieux vers méthode HTML
             }
         }
-
-        // Fallback : créer un événement click simulé pour déclencher Snipcart
-        console.log('📦 Utilisation du système Snipcart HTML standard');
 
         // Créer un nouveau bouton temporaire avec les mêmes attributs
         const tempButton = button.cloneNode(true);
@@ -212,8 +208,7 @@ class SnipcartUtils {
                 // Délai plus long pour être sûr que Snipcart a traité l'ajout
                 setTimeout(() => addNext(index + 1), 500);
             } catch (error) {
-                console.error('Erreur ajout produit au panier:', error, productData);
-                // Continuer avec le suivant même en cas d'erreur
+                // Continuer avec le produit suivant même en cas d'erreur
                 setTimeout(() => addNext(index + 1), 500);
             }
         };

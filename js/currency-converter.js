@@ -1,10 +1,35 @@
-// Convertisseur de monnaie autonome avec détection dynamique des éléments DOM
+/**
+ * Convertisseur de monnaie D&D autonome avec optimisation algorithmique
+ * 
+ * Responsabilités :
+ * - Conversion entre monnaies D&D avec multiplicateurs physiques
+ * - Optimisation du nombre minimal de pièces (métaheuristiques)
+ * - Intégration avec système de recommandations de lots
+ * - Interface utilisateur réactive avec feedback temps réel
+ * 
+ * Architecture :
+ * - Stratégie : Multiple algorithmes d'optimisation (glouton, équilibré, hybride)
+ * - Observer : Callbacks pour notifications de changements
+ * - Template Method : Structure commune, implémentations variables
+ * 
+ * @author Brujah - Geek & Dragon
+ * @version 2.0.0 - Production
+ */
 class CurrencyConverterPremium {
+    /**
+     * Initialise le convertisseur avec les taux de change D&D standard
+     * et la configuration des multiplicateurs physiques disponibles
+     */
     constructor() {
+        // Configuration monétaire D&D standard (base cuivre)
         this.rates = {
             copper: 1, silver: 10, electrum: 50, gold: 100, platinum: 1000,
         };
+        
+        // Multiplicateurs physiques disponibles pour les pièces
         this.multipliers = [1, 10, 100, 1000, 10000];
+        
+        // Formateur numérique français pour l'affichage
         this.nf = new Intl.NumberFormat('fr-FR');
         this.editMode = true;
 
@@ -15,12 +40,13 @@ class CurrencyConverterPremium {
             septuple: 50, // coin-septuple-free
         };
 
-        // Références dynamiques aux éléments DOM
+        // Références dynamiques aux éléments DOM (lazy loading)
         this.sourceInputs = null;
         this.multiplierInputs = null;
         this.bestDisplay = null;
         this.metalCards = {};
 
+        // Configuration des métaux avec données d'affichage
         this.currencyData = {
             copper: {
                 name: 'Cuivre', nameEn: 'Copper', emoji: '🪙', color: 'amber',
@@ -39,7 +65,7 @@ class CurrencyConverterPremium {
             },
         };
 
-        // Callbacks pour les événements de changement
+        // Pattern Observer : callbacks pour réactivité
         this.changeCallbacks = [];
 
         this.init();
@@ -56,30 +82,34 @@ class CurrencyConverterPremium {
         this.displayDefaultRecommendationMessage();
     }
 
-    // Chargement dynamique non-bloquant des prix depuis products.json
+    /**
+     * Charge les prix dynamiques depuis products.json de manière non-bloquante
+     * Utilise les prix par défaut en cas d'échec
+     */
     async loadProductPrices() {
         try {
             if (window.products) {
-                // Si products.json déjà chargé, utiliser les prix
                 this.productPrices.single = window.products['coin-custom-single']?.price || 10;
                 this.productPrices.trio = window.products['coin-trio-customizable']?.price || 25;
                 this.productPrices.septuple = window.products['coin-septuple-free']?.price || 50;
             }
         } catch (error) {
-            console.warn('Impossible de charger les prix dynamiques, utilisation des prix par défaut');
+            // Prix par défaut déjà initialisés, fonctionnement dégradé silencieux
         }
     }
 
-    // Méthode pour rafraîchir dynamiquement les références DOM
+    /**
+     * Actualise les références DOM de manière paresseuse
+     * Optimise les performances en évitant les requêtes inutiles
+     */
     refreshDOMReferences() {
-    // Tentative de détection des différents types de convertisseurs
         const container = document.getElementById('currency-converter-premium');
         if (container) {
             this.sourceInputs = container.querySelectorAll('input[data-currency]');
             this.multiplierInputs = container.querySelectorAll('.multiplier-input');
             this.bestDisplay = document.getElementById('currency-best');
 
-            // Références dynamiques aux cartes
+            // Référencement des cartes de métaux pour affichage
             Object.keys(this.currencyData).forEach((currency) => {
                 const cardElement = document.getElementById(`${currency}-card`);
                 if (cardElement) {
@@ -102,7 +132,7 @@ class CurrencyConverterPremium {
             try {
                 callback(data);
             } catch (error) {
-                console.warn('Erreur dans callback du convertisseur:', error);
+                // Erreur dans callback silencieuse pour éviter pollution console
             }
         });
     }
@@ -137,8 +167,7 @@ class CurrencyConverterPremium {
     // Utilisation de la délégation d'événements pour réduire le nombre de listeners
         const converterContainer = document.getElementById('currency-converter-premium');
         if (!converterContainer) {
-            console.warn('Container currency-converter-premium non trouvé');
-            return;
+            return; // Container non disponible
         }
 
         // Débounce pour éviter les calculs trop fréquents
@@ -1005,14 +1034,12 @@ class CurrencyConverterPremium {
                         this.displayNoRecommendationsMessage();
                     }
                 } catch (error) {
-                    console.error('Erreur calcul recommandations:', error);
                     this.displayNoRecommendationsMessage();
                 } finally {
                     this.hideCalculatingIndicator();
                 }
             }, 100);
         } else {
-            console.warn('CoinLotOptimizer non disponible');
             this.displayNoRecommendationsMessage();
         }
     }
@@ -1278,18 +1305,18 @@ window.addEventListener('beforeunload', () => {
     }
 });
 
-// Fonction utilitaire pour afficher les nouvelles règles d'optimisation
+/**
+ * Affiche les informations d'optimisation en mode développement uniquement
+ * Règles d'optimisation :
+ * 1. Lots 3/7 pièces pour économies
+ * 2. Priorité métal > multiplicateur
+ * 3. Mode tableau préserve choix utilisateur
+ * 4. Économies substantielles avec lots groupés
+ */
 function logOptimizationInfo() {
-    console.log('💰 Nouvelles règles d\'optimisation activées:');
-    console.log('1. 📦 Lots 3/7 pièces: 4→(3+1), 6→(3+3), 8→(7+1), 10→(7+3)');
-    console.log('2. 🥇 Priorité métal > multiplicateur: Platine > Or > Électrum > Argent > Cuivre');
-    console.log('3. ✏️ Mode tableau: préserve métaux utilisateur, optimise multiplicateurs');
-    console.log('4. 💸 Économies: Trio 25$ vs 30$, Septuple 50$ vs 70$');
-}
-
-// Afficher les infos au chargement en mode debug
-if (window.location.hash === '#debug' || window.location.search.includes('debug=1')) {
-    setTimeout(logOptimizationInfo, 1000);
+    if (window.location.hash === '#debug' || window.location.search.includes('debug=1')) {
+        console.info('🔧 Mode debug : Règles d\'optimisation activées');
+    }
 }
 
 // Initialisation paresseuse du convertisseur - ne charge que si l'utilisateur interagit
@@ -1306,10 +1333,8 @@ const initConverter = () => {
             // Référence globale simplifiée pour les boutons
             window.currencyConverter = window.converterInstance;
 
-            // Log des nouvelles fonctionnalités en mode debug
-            if (window.location.hash === '#debug' || window.location.search.includes('debug=1')) {
-                console.log('✅ CurrencyConverterPremium initialisé avec nouvelles règles d\'optimisation');
-            }
+            // Validation silencieuse de l'initialisation
+            logOptimizationInfo();
         }
     }, 100);
 };

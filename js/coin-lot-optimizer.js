@@ -13,8 +13,8 @@
  */
 class CoinLotOptimizer {
     constructor() {
-    // Mode debug - mettre à true pour voir les logs détaillés
-        this.DEBUG_MODE = false;
+        // Mode debug conditionnel basé sur URL pour développement
+        this.DEBUG_MODE = window.location.hash === '#debug' || window.location.search.includes('debug=1');
 
         this.rates = {
             copper: 1, silver: 10, electrum: 50, gold: 100, platinum: 1000,
