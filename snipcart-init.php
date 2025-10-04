@@ -182,12 +182,12 @@ if (!$snipcartKey) {
 
   document.head.appendChild(snipcartScript);
 
-  // Vérification du chargement Snipcart
-  setTimeout(() => {
-    if (!window.Snipcart || !window.Snipcart.events) {
-      console.error('Snipcart non chargé');
-    }
-  }, 3000);
+  // Vérification silencieuse du chargement Snipcart (production)
+  // setTimeout(() => {
+  //   if (!window.Snipcart || !window.Snipcart.events) {
+  //     console.error('Snipcart non chargé');
+  //   }
+  // }, 3000);
 
   // Désactiver tous les logs Snipcart en production
   (function() {

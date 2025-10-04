@@ -182,7 +182,6 @@
   window.GD = Object.assign(window.GD || {}, {
     qs,
     qsa,
-    log,
     throttle,
     debounce,
     createEl,
