@@ -367,6 +367,11 @@
             "title": "Guides d'Aide aux Jeux",
             "subtitle": "Maîtrisez tous vos accessoires Geek & Dragon : triptyques, cartes et monnaie"
         },
+        "navigation": {
+            "triptychsGuide": "Forger vos Héros",
+            "cardsGuide": "Équiper vos Aventures",
+            "coinGuide": "Compter vos Trésors"
+        },
         "triptychGuide": {
             "title": "Les 3 Triptyques de votre Personnage",
             "intro": "Nos triptyques sont des <strong class=\"text-purple-300\">fiches de personnage robustes</strong> imprimées sur <strong class=\"text-pink-300\">carton rigide recto-verso</strong>. Trois pages cartonnées indépendantes et complémentaires (Espèce, Classe, Historique) avec <strong class=\"text-amber-300\">toutes les règles nécessaires</strong>. Les fiches de Classe contiennent <strong class=\"text-yellow-300\">tous les niveaux de 1 à 20</strong> plus les cartes d'équipement et sorts spécifiques recommandés. <strong class=\"text-green-400\">Jouez sans ouvrir le manuel</strong> !",

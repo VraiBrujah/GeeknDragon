@@ -960,36 +960,42 @@ echo $snipcartInit;
     <div class="absolute inset-0 bg-black/60"></div>
     <div class="relative z-10 max-w-5xl p-6 hero-text">
       <h1 class="text-5xl font-extrabold mb-6" data-i18n="gameHelp.hero.title">
-        <?= __('gameHelp.hero.title', 'Guide des Triptyques') ?>
+        <?= __('gameHelp.hero.title', 'Guides d\'Aide aux Jeux') ?>
       </h1>
       <p class="text-xl mb-8 txt-court" data-i18n="gameHelp.hero.subtitle">
-        <?= __('gameHelp.hero.subtitle', 'Maîtrisez vos fiches de personnage Geek & Dragon') ?>
+        <?= __('gameHelp.hero.subtitle', 'Maîtrisez tous vos accessoires Geek & Dragon : triptyques, cartes et monnaie') ?>
       </p>
 
-      <!-- Navigation des guides -->
+      <!-- Navigation des guides avec boutons images -->
       <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-        <a href="#guide-triptyques" class="group bg-gradient-to-br from-indigo-900/50 to-purple-900/50 rounded-xl p-6 border border-indigo-500/30 hover:border-indigo-400/50 transition-all backdrop-blur-sm">
-          <div class="text-center">
-            <div class="text-4xl mb-3">📜</div>
-            <h3 class="text-xl font-bold text-indigo-400 mb-2"><?= __('gameHelp.navigation.triptychsGuide', 'Guide des Triptyques') ?></h3>
-            <p class="text-gray-300 text-sm"><?= __('gameHelp.navigation.triptychsSubtitle', 'Espèce, Classe, Historique - D&D 2024') ?></p>
-          </div>
+        <a href="#guide-triptyques"
+           class="btn btn-primary btn-triptyque"
+           aria-label="<?= __('gameHelp.navigation.triptychsGuide', 'Guide des Triptyques') ?>"
+           title="<?= __('gameHelp.navigation.triptychsGuide', 'Guide des Triptyques') ?>">
+          <span class="btn-text-overlay">
+            <span class="hidden md:inline"><?= __('gameHelp.navigation.triptychsGuide', 'Forger vos Héros') ?></span>
+            <span class="md:hidden"><?= __('btnOverlay.triptychs.mobile', 'Héros') ?></span>
+          </span>
         </a>
 
-        <a href="#guide-cartes" class="group bg-gradient-to-br from-emerald-900/50 to-teal-900/50 rounded-xl p-6 border border-emerald-500/30 hover:border-emerald-400/50 transition-all backdrop-blur-sm">
-          <div class="text-center">
-            <div class="text-4xl mb-3">🃏</div>
-            <h3 class="text-xl font-bold text-emerald-400 mb-2"><?= __('gameHelp.navigation.cardsGuide', 'Guide des Cartes') ?></h3>
-            <p class="text-gray-300 text-sm"><?= __('gameHelp.navigation.cardsSubtitle', 'Armes, Équipements, Sorts') ?></p>
-          </div>
+        <a href="#guide-cartes"
+           class="btn btn-primary btn-carte"
+           aria-label="<?= __('gameHelp.navigation.cardsGuide', 'Guide des Cartes') ?>"
+           title="<?= __('gameHelp.navigation.cardsGuide', 'Guide des Cartes') ?>">
+          <span class="btn-text-overlay">
+            <span class="hidden md:inline"><?= __('gameHelp.navigation.cardsGuide', 'Équiper vos Aventures') ?></span>
+            <span class="md:hidden"><?= __('btnOverlay.cards.mobile', 'Arsenal') ?></span>
+          </span>
         </a>
 
-        <a href="#guide-monnaie" class="group bg-gradient-to-br from-amber-900/50 to-yellow-900/50 rounded-xl p-6 border border-amber-500/30 hover:border-amber-400/50 transition-all backdrop-blur-sm">
-          <div class="text-center">
-            <div class="text-4xl mb-3">💰</div>
-            <h3 class="text-xl font-bold text-amber-400 mb-2"><?= __('gameHelp.navigation.coinGuide', 'Guide de la Monnaie') ?></h3>
-            <p class="text-gray-300 text-sm"><?= __('gameHelp.navigation.coinSubtitle', 'Système monétaire + Convertisseur') ?></p>
-          </div>
+        <a href="#guide-monnaie"
+           class="btn btn-primary btn-piece"
+           aria-label="<?= __('gameHelp.navigation.coinGuide', 'Guide de la Monnaie') ?>"
+           title="<?= __('gameHelp.navigation.coinGuide', 'Guide de la Monnaie') ?>">
+          <span class="btn-text-overlay">
+            <span class="hidden md:inline"><?= __('gameHelp.navigation.coinGuide', 'Compter vos Trésors') ?></span>
+            <span class="md:hidden"><?= __('btnOverlay.coins.mobile', 'Trésor') ?></span>
+          </span>
         </a>
       </div>
     </div>

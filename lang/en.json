@@ -367,6 +367,11 @@
             "title": "Game Help Guides",
             "subtitle": "Master all your Geek & Dragon accessories: triptychs, cards and currency"
         },
+        "navigation": {
+            "triptychsGuide": "Forge your Heroes",
+            "cardsGuide": "Equip your Adventures",
+            "coinGuide": "Count your Treasures"
+        },
         "triptychGuide": {
             "title": "The 3 Triptychs of your Character",
             "intro": "Our triptychs are <strong class=\"text-purple-300\">sturdy character sheets</strong> printed on <strong class=\"text-pink-300\">rigid double-sided cardboard</strong>. Three independent and complementary cardboard pages (Species, Class, Background) with <strong class=\"text-amber-300\">all necessary rules</strong>. Class sheets contain <strong class=\"text-yellow-300\">all levels from 1 to 20</strong> plus specific recommended equipment and spell cards. <strong class=\"text-green-400\">Play without opening the manual</strong>!",
