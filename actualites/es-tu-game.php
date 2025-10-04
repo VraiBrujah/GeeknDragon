@@ -10,6 +10,28 @@ $ogImage = '/media/content/es_tu_game_demo.webp';
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
 <?php include '../head-common.php'; ?>
+<link rel="preload" as="image" href="/media/videos/demos/poster-video1.webp">
+<link rel="preload" as="image" href="/media/videos/demos/poster-video2.webp">
+<link rel="preload" as="image" href="/media/videos/demos/poster-video3.webp">
+<style>
+  /* Assurer que le poster et la vidéo ont exactement la même taille */
+  .video-container {
+    position: relative;
+    aspect-ratio: 16/9;
+    background-color: #1f2937;
+  }
+  .video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .video-loader {
+    transition: opacity 0.3s ease;
+  }
+</style>
 <body>
   <?php
   ob_start();
@@ -92,8 +114,8 @@ $ogImage = '/media/content/es_tu_game_demo.webp';
               </div>
               <video id="video1"
                      data-src="/media/videos/demos/leMaireDoneUnePieceDargentFLIM_compressed.mp4"
-                     poster="/media/content/es_tu_game_demo.webp"
-                     class="rounded shadow-lg w-full aspect-video transition-transform duration-300 lazy-video"
+                     poster="/media/videos/demos/poster-video1.webp"
+                     class="rounded shadow-lg transition-transform duration-300 lazy-video"
                      playsinline preload="none"></video>
               <button class="mute-btn hidden group-hover:block absolute top-2 right-2 z-10
                              bg-black/60 text-white text-sm px-2 py-1 rounded"
@@ -109,8 +131,8 @@ $ogImage = '/media/content/es_tu_game_demo.webp';
               </div>
               <video id="video2"
                      data-src="/media/videos/demos/pileoufaceled2duFLIM2025_compressed.mp4"
-                     poster="/media/content/es_tu_game_demo.webp"
-                     class="rounded shadow-lg w-full aspect-video transition-transform duration-300 lazy-video"
+                     poster="/media/videos/demos/poster-video2.webp"
+                     class="rounded shadow-lg transition-transform duration-300 lazy-video"
                      playsinline preload="none"></video>
               <button class="mute-btn hidden group-hover:block
                              absolute top-2 right-2 z-10 bg-black/60 text-white text-sm px-2 py-1 rounded"
@@ -126,8 +148,8 @@ $ogImage = '/media/content/es_tu_game_demo.webp';
               </div>
               <video id="video3"
                      data-src="/media/videos/demos/finestugameFLIM2025_compressed.mp4"
-                     poster="/media/content/es_tu_game_demo.webp"
-                     class="rounded shadow-lg w-full aspect-video transition-transform duration-300 lazy-video"
+                     poster="/media/videos/demos/poster-video3.webp"
+                     class="rounded shadow-lg transition-transform duration-300 lazy-video"
                      playsinline preload="none"></video>
               <button class="mute-btn hidden group-hover:block absolute top-2 right-2 z-10
                              bg-black/60 text-white text-sm px-2 py-1 rounded"

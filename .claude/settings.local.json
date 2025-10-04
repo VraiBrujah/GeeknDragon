@@ -30,7 +30,8 @@
       "Bash(findstr:*)",
       "Bash(copy:*)",
       "Bash(python:*)",
-      "Bash(php:*)"
+      "Bash(php:*)",
+      "Bash(ffmpeg:*)"
     ],
     "deny": [],
     "ask": []
