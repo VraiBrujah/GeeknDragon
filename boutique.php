@@ -208,43 +208,43 @@ echo $snipcartInit;
         <p class="text-xl mb-8 txt-court" data-i18n="shop.hero.description">Offrez à vos parties l'élégance et la durabilité de pièces et cartes d'équipement conçues au Québec, plus précieuses qu'une figurine de dragon à 300 $, laquelle ne sert qu'exceptionnellement, nos pièces sont présentes à chaque session pour des années d'aventures.</p>
 
         <!-- Navigation rapide vers les catégories -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 max-w-4xl mx-auto">
-          <a href="#pieces" class="group relative overflow-hidden rounded-xl border-2 border-amber-500/50 hover:border-amber-400 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-amber-500/30">
-            <div class="aspect-square relative">
-              <img src="/media/ui/button/piece.webp" alt="<?= __('shop.hero.quickLinks.pieces', 'Monnaie') ?>" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-4">
-                <span class="text-white font-bold text-lg md:text-xl tracking-wide" data-i18n="shop.hero.quickLinks.pieces">Monnaie</span>
-              </div>
-            </div>
-          </a>
-
-          <a href="#cartes" class="group relative overflow-hidden rounded-xl border-2 border-blue-500/50 hover:border-blue-400 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30">
-            <div class="aspect-square relative">
-              <img src="/media/ui/button/carte.webp" alt="<?= __('shop.hero.quickLinks.cards', 'Cartes') ?>" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-4">
-                <span class="text-white font-bold text-lg md:text-xl tracking-wide" data-i18n="shop.hero.quickLinks.cards">Cartes</span>
-              </div>
-            </div>
-          </a>
-
-          <a href="#triptyques" class="group relative overflow-hidden rounded-xl border-2 border-purple-500/50 hover:border-purple-400 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/30">
-            <div class="aspect-square relative">
-              <img src="/media/ui/button/triptyque.webp" alt="<?= __('shop.hero.quickLinks.triptychs', 'Triptyques') ?>" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-4">
-                <span class="text-white font-bold text-lg md:text-xl tracking-wide" data-i18n="shop.hero.quickLinks.triptychs">Triptyques</span>
-              </div>
-            </div>
-          </a>
-
-          <a href="#bundle-deluxe" class="group relative overflow-hidden rounded-xl border-2 border-red-500/50 hover:border-red-400 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-red-500/30">
-            <div class="aspect-square relative">
-              <img src="/media/ui/button/dragon.webp" alt="<?= __('shop.hero.quickLinks.bundle', 'Coffre du Dragon') ?>" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-4">
-                <span class="text-white font-bold text-lg md:text-xl tracking-wide" data-i18n="shop.hero.quickLinks.bundle">Coffre du Dragon</span>
-              </div>
-            </div>
-          </a>
-        </div>
+        <?php
+        $buttons = [
+          [
+            'href' => '#pieces',
+            'image' => '/media/ui/button/piece.webp',
+            'alt' => __('shop.hero.quickLinks.pieces', 'Monnaie'),
+            'label' => __('shop.hero.quickLinks.pieces', 'Monnaie'),
+            'labelKey' => 'shop.hero.quickLinks.pieces',
+            'borderColor' => 'amber-500'
+          ],
+          [
+            'href' => '#cartes',
+            'image' => '/media/ui/button/carte.webp',
+            'alt' => __('shop.hero.quickLinks.cards', 'Cartes'),
+            'label' => __('shop.hero.quickLinks.cards', 'Cartes'),
+            'labelKey' => 'shop.hero.quickLinks.cards',
+            'borderColor' => 'blue-500'
+          ],
+          [
+            'href' => '#triptyques',
+            'image' => '/media/ui/button/triptyque.webp',
+            'alt' => __('shop.hero.quickLinks.triptychs', 'Triptyques'),
+            'label' => __('shop.hero.quickLinks.triptychs', 'Triptyques'),
+            'labelKey' => 'shop.hero.quickLinks.triptychs',
+            'borderColor' => 'purple-500'
+          ],
+          [
+            'href' => '#bundle-deluxe',
+            'image' => '/media/ui/button/dragon.webp',
+            'alt' => __('shop.hero.quickLinks.bundle', 'Coffre du Dragon'),
+            'label' => __('shop.hero.quickLinks.bundle', 'Coffre du Dragon'),
+            'labelKey' => 'shop.hero.quickLinks.bundle',
+            'borderColor' => 'red-500'
+          ]
+        ];
+        include __DIR__ . '/partials/hero-guide-buttons.php';
+        ?>
       </div>
   </section>
 

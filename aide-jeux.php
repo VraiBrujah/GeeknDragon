@@ -16,12 +16,12 @@ $metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/aide-je
 
 $extraHead = <<<HTML
 <style>
-.tool-content { 
+.tool-content {
   display: none;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
 }
-.tool-content.active { 
+.tool-content.active {
   display: block;
   opacity: 1;
   animation: fadeInUp 0.5s ease-out;
@@ -966,38 +966,36 @@ echo $snipcartInit;
         <?= __('gameHelp.hero.subtitle', 'Maîtrisez tous vos accessoires Geek & Dragon : triptyques, cartes et monnaie') ?>
       </p>
 
-      <!-- Navigation des guides avec boutons images -->
-      <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-        <a href="#guide-triptyques"
-           class="btn btn-primary btn-triptyque"
-           aria-label="<?= __('gameHelp.navigation.triptychsGuide', 'Guide des Triptyques') ?>"
-           title="<?= __('gameHelp.navigation.triptychsGuide', 'Guide des Triptyques') ?>">
-          <span class="btn-text-overlay">
-            <span class="hidden md:inline"><?= __('gameHelp.navigation.triptychsGuide', 'Forger vos Héros') ?></span>
-            <span class="md:hidden"><?= __('btnOverlay.triptychs.mobile', 'Héros') ?></span>
-          </span>
-        </a>
-
-        <a href="#guide-cartes"
-           class="btn btn-primary btn-carte"
-           aria-label="<?= __('gameHelp.navigation.cardsGuide', 'Guide des Cartes') ?>"
-           title="<?= __('gameHelp.navigation.cardsGuide', 'Guide des Cartes') ?>">
-          <span class="btn-text-overlay">
-            <span class="hidden md:inline"><?= __('gameHelp.navigation.cardsGuide', 'Équiper vos Aventures') ?></span>
-            <span class="md:hidden"><?= __('btnOverlay.cards.mobile', 'Arsenal') ?></span>
-          </span>
-        </a>
-
-        <a href="#guide-monnaie"
-           class="btn btn-primary btn-piece"
-           aria-label="<?= __('gameHelp.navigation.coinGuide', 'Guide de la Monnaie') ?>"
-           title="<?= __('gameHelp.navigation.coinGuide', 'Guide de la Monnaie') ?>">
-          <span class="btn-text-overlay">
-            <span class="hidden md:inline"><?= __('gameHelp.navigation.coinGuide', 'Compter vos Trésors') ?></span>
-            <span class="md:hidden"><?= __('btnOverlay.coins.mobile', 'Trésor') ?></span>
-          </span>
-        </a>
-      </div>
+      <!-- Navigation des guides avec boutons images carrés arrondis -->
+      <?php
+      $buttons = [
+        [
+          'href' => '#guide-triptyques',
+          'image' => '/media/ui/button/triptyque.webp',
+          'alt' => __('gameHelp.navigation.triptychsGuide', 'Guide des Triptyques'),
+          'label' => __('gameHelp.navigation.triptychsGuide', 'Forger vos Héros'),
+          'labelKey' => 'gameHelp.navigation.triptychsGuide',
+          'borderColor' => 'purple-500'
+        ],
+        [
+          'href' => '#guide-cartes',
+          'image' => '/media/ui/button/carte.webp',
+          'alt' => __('gameHelp.navigation.cardsGuide', 'Guide des Cartes'),
+          'label' => __('gameHelp.navigation.cardsGuide', 'Équiper vos Aventures'),
+          'labelKey' => 'gameHelp.navigation.cardsGuide',
+          'borderColor' => 'blue-500'
+        ],
+        [
+          'href' => '#guide-monnaie',
+          'image' => '/media/ui/button/piece.webp',
+          'alt' => __('gameHelp.navigation.coinGuide', 'Guide de la Monnaie'),
+          'label' => __('gameHelp.navigation.coinGuide', 'Compter vos Trésors'),
+          'labelKey' => 'gameHelp.navigation.coinGuide',
+          'borderColor' => 'amber-500'
+        ]
+      ];
+      include __DIR__ . '/partials/hero-guide-buttons.php';
+      ?>
     </div>
   </section>
 
