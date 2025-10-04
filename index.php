@@ -52,7 +52,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
 
     <!-- ===== PRODUITS PHARES ===== -->
     <?php
-    // Chargement des produits
+    // Chargement des produits UNE SEULE FOIS pour toute la page
     $products = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true);
 
     // Configuration de la section produits phares
@@ -64,8 +64,18 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
       'triptych-mystery-hero'              // Triptyques Mystères
     ];
 
-    // Inclusion du partial réutilisable
-    include __DIR__ . '/partials/products-grid-section.php';
+    // Récupération de l'image du premier produit de pièces (pour section "Nos Incontournables")
+    $coinProduct = null;
+    foreach ($products as $id => $product) {
+        if (str_starts_with($id, "coin-")) {
+            $coinProduct = $product;
+            break;
+        }
+    }
+    $defaultCoinImage = $coinProduct["images"][0] ?? "/media/products/bundles/default-coins.webp";
+
+    // Inclusion du partial OPTIMISÉ pour page d'accueil (version allégée)
+    include __DIR__ . '/partials/products-grid-home.php';
     ?>
 
     <!-- ===== PRODUITS ===== -->
@@ -81,19 +91,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
           <a href="<?= langUrl('boutique.php#pieces') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.coins.title">Pièces métalliques</h4>
             <p class="text-center" data-i18n="home.mustHave.coins.desc">Monnaie physique pour ressentir chaque trésor et influencer la chance à la table</p>
-              <?php
-    // Récupération dynamique du premier produit de pièces
-    $products = json_decode(file_get_contents("data/products.json"), true);
-    $coinProduct = null;
-    foreach ($products as $id => $product) {
-        if (str_starts_with($id, "coin-")) {
-            $coinProduct = $product;
-            break;
-        }
-    }
-    $defaultImage = $coinProduct["images"][0] ?? "/media/products/bundles/default-coins.webp";
-    ?>
-    <img src="<?= $defaultImage ?>" alt="Pièces métalliques gravées pour JDR" class="rounded mb-4" loading="lazy">
+              <img src="<?= $defaultCoinImage ?>" alt="Pièces métalliques gravées pour JDR" class="rounded mb-4" loading="lazy">
           </a>
           <a href="<?= langUrl('boutique.php#triptyques') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.triptych.title">Fiche Triptyque</h4>
