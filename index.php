@@ -205,8 +205,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
             <a href="<?= langUrl('index.php#contact') ?>"
                class="btn btn-primary btn-contact"
                aria-label="<?= __('contact.requestQuote', 'Demander un devis') ?>"
-               title="<?= __('contact.requestQuote', 'Demander un devis') ?>"
-               data-i18n="contact.requestQuote">
+               title="<?= __('contact.requestQuote', 'Demander un devis') ?>">
               <span class="btn-text-overlay">
                 <span class="hidden md:inline"><?= __('btnOverlay.contact.desktop', 'Message') ?></span>
                 <span class="md:hidden"><?= __('btnOverlay.contact.mobile', 'Contact') ?></span>
