@@ -1153,7 +1153,7 @@ class CurrencyConverterPremium {
         if (addToCartButton) {
             addToCartButton.style.display = 'block';
             addToCartButton.dataset.lotsData = JSON.stringify(recommendations);
-            addToCartButton.textContent = 'Ajouter tous les lots au panier';
+            // Ne pas écraser le contenu HTML - le bouton a déjà l'image correcte définie dans le HTML
         }
     }
 
