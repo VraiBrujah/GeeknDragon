@@ -2020,13 +2020,13 @@ echo $snipcartInit;
       <div id="coin-lots-recommendations" class="mt-12 mb-16" style="display: block;">
         <div class="bg-gradient-to-r from-green-900/30 to-emerald-900/20 rounded-xl p-8 border border-green-700/50">
           <h4 class="text-2xl font-bold text-center text-gray-200 mb-8">
-            <?= __('money.converter.lotsRecommendedTitle', '🛒 Lots de pièces recommandés') ?>
+            <?= __('money.converter.lotsRecommendedTitle', 'Collections optimales pour votre aventure') ?>
           </h4>
           
           <div class="max-w-4xl mx-auto">
             <div class="text-center mb-6">
               <p class="text-gray-300 mb-4">
-                <?= __('money.converter.lotsRecommendations.description', 'Voici les lots minimaux recommandés pour couvrir exactement vos besoins en pièces physiques :') ?>
+                <?= __('money.converter.lotsRecommendations.description', 'Voici les collections de pièces les plus avantageuses pour obtenir exactement le trésor défini dans votre tableau multiplicateur. Ces lots optimisent votre investissement tout en vous garantissant les pièces précises dont vous avez besoin pour vos sessions.') ?>
               </p>
             </div>
             
@@ -2040,16 +2040,16 @@ echo $snipcartInit;
               <button id="add-all-lots-to-cart"
                       class="btn-cart-icon mx-auto"
                       style="display: none;"
-                      aria-label="<?= __('money.converter.lotsRecommendations.addAllButton', 'Ajouter tous les lots au panier') ?>"
-                      title="<?= __('money.converter.lotsRecommendations.addAllButton', 'Ajouter tous les lots au panier') ?>">
+                      aria-label="<?= __('money.converter.lotsRecommendations.addAllButton', 'Acquérir toutes les collections') ?>"
+                      title="<?= __('money.converter.lotsRecommendations.addAllButton', 'Acquérir toutes les collections') ?>">
                 <img src="/media/branding/icons/ajout.webp"
-                     alt="<?= __('money.converter.lotsRecommendations.addAllButton', 'Ajouter tous les lots au panier') ?>"
+                     alt="<?= __('money.converter.lotsRecommendations.addAllButton', 'Acquérir toutes les collections') ?>"
                      class="btn-cart-icon-img"
                      loading="lazy">
               </button>
               
               <p class="text-sm text-gray-400 mt-4">
-                <?= __('money.converter.lotsRecommendations.optimizationNote', 'Ces recommandations optimisent le nombre de lots nécessaires pour le prix le plus avantageux.') ?>
+                <?= __('money.converter.lotsRecommendations.optimizationNote', 'Ces collections représentent le minimum requis pour constituer votre trésor au coût le plus avantageux, en respectant exactement les quantités de votre tableau.') ?>
               </p>
             </div>
           </div>

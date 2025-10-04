@@ -1021,8 +1021,8 @@ class CurrencyConverterPremium {
             recommendationsContent.innerHTML = `
         <div class="text-center py-8">
           <div class="text-6xl mb-4">🪙</div>
-          <p class="text-gray-300 text-lg mb-2">Entrez des montants dans le convertisseur</p>
-          <p class="text-gray-400 text-sm">pour voir les lots de pièces recommandés</p>
+          <p class="text-gray-300 text-lg mb-2">Définissez votre trésor dans le convertisseur</p>
+          <p class="text-gray-400 text-sm">pour découvrir les collections optimales</p>
         </div>
       `;
         }
@@ -1040,8 +1040,8 @@ class CurrencyConverterPremium {
             recommendationsContent.innerHTML = `
         <div class="text-center py-8">
           <div class="text-6xl mb-4">🔍</div>
-          <p class="text-gray-300 text-lg mb-2">Aucune recommandation trouvée</p>
-          <p class="text-gray-400 text-sm">Essayez avec d'autres montants</p>
+          <p class="text-gray-300 text-lg mb-2">Aucune collection disponible</p>
+          <p class="text-gray-400 text-sm">Modifiez votre trésor pour découvrir de nouvelles options</p>
         </div>
       `;
         }
