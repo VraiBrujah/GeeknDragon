@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Vider Cache Stock</title>
+</head>
+<body>
+    <h1>Nettoyage Cache Stock</h1>
+    <button onclick="clearCache()">Vider le cache stock</button>
+    <pre id="result"></pre>
+
+    <script>
+        function clearCache() {
+            const result = document.getElementById('result');
+            let cleared = 0;
+
+            // Lister tous les items du cache stock
+            const keys = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('stock_')) {
+                    keys.push(key);
+                }
+            }
+
+            // Supprimer
+            keys.forEach(key => {
+                localStorage.removeItem(key);
+                cleared++;
+            });
+
+            result.textContent = `✅ ${cleared} entrées de cache supprimées\n\nClés supprimées:\n${keys.join('\n')}`;
+        }
+
+        // Afficher le contenu actuel du cache
+        window.addEventListener('DOMContentLoaded', () => {
+            const keys = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('stock_')) {
+                    const data = JSON.parse(localStorage.getItem(key));
+                    keys.push(`${key}: stock=${data.stock}, age=${Math.round((Date.now() - data.timestamp) / 1000)}s`);
+                }
+            }
+
+            if (keys.length > 0) {
+                document.getElementById('result').textContent = `Cache actuel (${keys.length} entrées):\n\n${keys.join('\n')}`;
+            } else {
+                document.getElementById('result').textContent = 'Aucune entrée de cache trouvée.';
+            }
+        });
+    </script>
+</body>
+</html>

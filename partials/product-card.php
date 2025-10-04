@@ -333,8 +333,11 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
         <!-- État rupture de stock (masqué par défaut) -->
         <div class="stock-unavailable-overlay absolute inset-0 bg-gray-900/80 flex items-center justify-center rounded-xl" style="display: none;">
           <div class="text-center text-red-400">
-            <div class="text-lg font-bold mb-2">😞</div>
-            <div class="text-sm" data-i18n="product.outOfStock">Rupture de stock</div>
+            <div class="mb-2">
+              <img src="/media/branding/icons/rupture.webp" alt="Rupture de stock" class="w-16 h-16 mx-auto" loading="lazy">
+            </div>
+            <div class="text-base font-bold mb-1" data-i18n="product.outOfStock.title">Trésor Épuisé</div>
+            <div class="text-xs opacity-80" data-i18n="product.outOfStock.subtitle">Malheureusement, cet artefact n'est plus disponible pour le moment</div>
           </div>
         </div>
 </div>

@@ -277,14 +277,8 @@ window.asyncStockLoader = new AsyncStockLoader({
     retryAttempts: 2,
 });
 
-// Auto-initialisation quand le DOM est prêt
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        window.asyncStockLoader.initAutoLoad();
-    });
-} else {
-    window.asyncStockLoader.initAutoLoad();
-}
+// N'auto-initialise PAS automatiquement
+// L'initialisation sera déclenchée par boutique-async-loader.js APRÈS injection des produits
+// Ou manuellement via window.asyncStockLoader.initAutoLoad()
 
-// Debug dans la console
 // Production: log global supprimé

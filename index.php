@@ -214,9 +214,26 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
     </section>
 
   </main>
- 
+
 
 
   <?php include 'footer.php'; ?>
+
+  <!-- Chargement du stock asynchrone pour produits phares -->
+  <script src="/js/async-stock-loader.js?v=<?= filemtime(__DIR__.'/js/async-stock-loader.js') ?>"></script>
+  <script>
+    // Initialiser le chargement du stock après que le DOM soit prêt
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        if (window.asyncStockLoader) {
+          window.asyncStockLoader.initAutoLoad();
+        }
+      });
+    } else {
+      if (window.asyncStockLoader) {
+        window.asyncStockLoader.initAutoLoad();
+      }
+    }
+  </script>
 </body>
 </html>

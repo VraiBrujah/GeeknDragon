@@ -80,12 +80,18 @@ function getStockBatch(array $productIds, string $snipcartSecret = null, array $
     $curlHandles = [];
 
     foreach ($productIds as $id) {
-        $ch = curl_init('https://app.snipcart.com/api/inventory/' . urlencode($id));
+        // Endpoint correct Snipcart v3: /api/products avec filtre userDefinedId
+        $url = 'https://app.snipcart.com/api/products?userDefinedId=' . urlencode($id);
+
+        $ch = curl_init($url);
         curl_setopt_array($ch, [
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_USERPWD => $snipcartSecret . ':',
-            CURLOPT_TIMEOUT => 3,
-            CURLOPT_CONNECTTIMEOUT => 2,
+            CURLOPT_HTTPHEADER => [
+                'Accept: application/json',
+                'Authorization: Basic ' . base64_encode($snipcartSecret . ':')
+            ],
+            CURLOPT_TIMEOUT => 5,
+            CURLOPT_CONNECTTIMEOUT => 3,
             CURLOPT_FOLLOWLOCATION => false,
             CURLOPT_MAXREDIRS => 0,
             CURLOPT_SSL_VERIFYPEER => true
@@ -108,10 +114,20 @@ function getStockBatch(array $productIds, string $snipcartSecret = null, array $
         $httpCode = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
 
         if ($response !== false && $httpCode >= 200 && $httpCode < 400) {
-            $inv = json_decode($response, true);
-            $results[$id] = $inv['stock'] ?? $inv['available'] ?? null;
+            $data = json_decode($response, true);
+
+            // L'API retourne {"items": [...], "totalItems": X}
+            if (!empty($data['items']) && isset($data['items'][0])) {
+                $product = $data['items'][0];
+                // Stock peut être dans 'stock', 'inventory.stock', ou 'inventoryManagementMethod'
+                $results[$id] = $product['stock'] ?? $product['inventory']['stock'] ?? null;
+            } else {
+                // Produit pas trouvé dans Snipcart = stock inconnu (null)
+                $results[$id] = null;
+            }
         } else {
-            // Fallback sur données locales
+            // Erreur API : log et fallback
+            error_log("Snipcart API error for {$id}: HTTP {$httpCode}");
             $results[$id] = $stockData[$id] ?? null;
         }
 
