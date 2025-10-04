@@ -95,12 +95,12 @@ class SnipcartUtils {
         // Déclencher le clic
         button.click();
 
-        // Nettoyer
+        // Nettoyer après que Snipcart ait eu le temps de traiter
         setTimeout(() => {
             if (button.parentNode) {
                 button.parentNode.removeChild(button);
             }
-        }, 100);
+        }, 500); // Délai plus long pour garantir le traitement Snipcart
     }
 
     /**
@@ -221,7 +221,7 @@ class SnipcartUtils {
             }
 
             // Délai adaptatif : plus long pour être sûr que Snipcart a traité l'ajout
-            setTimeout(() => addNext(index + 1), 600);
+            setTimeout(() => addNext(index + 1), 800); // Délai augmenté pour fiabilité
         };
 
         // Commencer l'ajout séquentiel

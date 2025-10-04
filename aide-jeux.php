@@ -2621,12 +2621,23 @@ document.addEventListener('DOMContentLoaded', function() {
   
   const addToCartButton = document.getElementById('add-all-lots-to-cart');
   
-  if (addToCartButton) {
+  if (addToCartButton && !addToCartButton.hasAttribute('data-listener-added')) {
+    addToCartButton.setAttribute('data-listener-added', 'true');
     addToCartButton.addEventListener('click', function() {
+      // Protection contre les clics multiples
+      if (this.disabled || this.dataset.adding === 'true') {
+        return;
+      }
+      
+      this.disabled = true;
+      this.dataset.adding = 'true';
+      
       const lotsData = JSON.parse(this.dataset.lotsData || '[]');
       
       if (lotsData.length === 0) {
         alert(translations.noLotsMessage);
+        this.disabled = false;
+        this.dataset.adding = 'false';
         return;
       }
       
@@ -2742,11 +2753,40 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
               }, 300);
             }, added === total ? 3000 : 5000); // Message plus long en cas d'erreurs
+            
+            // Forcer le rafraîchissement du panier Snipcart après l'ajout
+            if (window.Snipcart && window.Snipcart.api && window.Snipcart.api.cart) {
+              setTimeout(() => {
+                try {
+                  // Méthode plus douce : forcer la re-render de l'interface panier
+                  if (window.Snipcart.store && window.Snipcart.store.getState) {
+                    const cartState = window.Snipcart.store.getState().cart;
+                    if (cartState && cartState.status === 'visible') {
+                      // Si le panier est ouvert, le fermer puis le rouvrir pour forcer la mise à jour
+                      window.Snipcart.api.theme.cart.close();
+                      setTimeout(() => {
+                        window.Snipcart.api.theme.cart.open();
+                      }, 100);
+                    }
+                  }
+                } catch (error) {
+                  // Fallback silencieux
+                }
+              }, 1500); // Délai plus long pour être sûr que tous les ajouts sont terminés
+            }
+            
+            // Réactiver le bouton après la fin du processus
+            setTimeout(() => {
+              this.disabled = false;
+              this.dataset.adding = 'false';
+            }, 2000);
           }
         });
       } else {
         // Erreur silencieuse en production, alerter uniquement
         alert("Erreur : impossible d'ajouter au panier");
+        this.disabled = false;
+        this.dataset.adding = 'false';
       }
     });
   }

@@ -110,6 +110,10 @@ if (!$snipcartKey) {
         addProductBehavior: '<?= htmlspecialchars($snipcartAddProductBehavior) ?>',
         locale: lang,
         customerAccount: { enabled: true },
+        logger: { enabled: false }, // Désactiver les logs en production
+        analytics: { enabled: false }, // Désactiver les analytics pour performance
+        debug: false, // Mode production strict
+        silent: true, // Supprimer tous les logs console
         payment: {
           stripeElementsOptions: {
             appearance: {
@@ -184,6 +188,29 @@ if (!$snipcartKey) {
       console.error('Snipcart non chargé');
     }
   }, 3000);
+
+  // Désactiver tous les logs Snipcart en production
+  (function() {
+    const originalLog = console.log;
+    const originalWarn = console.warn;
+    
+    console.log = function(...args) {
+      const message = args.join(' ');
+      if (message.includes('snipcart') || message.includes('gtag') || message.includes('GTag') || 
+          message.includes('Enabling GTag') || message.includes('Sending event')) {
+        return; // Bloquer les logs Snipcart/GTag
+      }
+      originalLog.apply(console, args);
+    };
+    
+    console.warn = function(...args) {
+      const message = args.join(' ');
+      if (message.includes('snipcart') || message.includes('gtag') || message.includes('GTag')) {
+        return; // Bloquer les warnings Snipcart/GTag
+      }
+      originalWarn.apply(console, args);
+    };
+  })();
 
 })();
 </script>
