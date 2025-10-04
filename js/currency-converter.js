@@ -1,19 +1,67 @@
 /**
  * Convertisseur de monnaie D&D autonome avec optimisation algorithmique
  * 
- * Responsabilités :
- * - Conversion entre monnaies D&D avec multiplicateurs physiques
- * - Optimisation du nombre minimal de pièces (métaheuristiques)
- * - Intégration avec système de recommandations de lots
+ * REFACTORISATION MAJEURE v2.1.0 :
+ * =====================================
+ * - API complètement standardisée avec formats d'entrée/sortie uniformes
+ * - Nomenclature française pour améliorer la lisibilité du code
+ * - Documentation complète avec exemples concrets
+ * - Méthodes de validation et nettoyage intégrées
+ * - Cache optimisé pour les performances
+ * 
+ * RESPONSABILITÉS PRINCIPALES :
+ * ==============================
+ * - Conversion entre monnaies D&D avec multiplicateurs physiques (1x à 10000x)
+ * - Optimisation du nombre minimal de pièces (métaheuristiques multi-stratégies)
+ * - Intégration avec système de recommandations de lots CoinLotOptimizer
  * - Interface utilisateur réactive avec feedback temps réel
  * 
- * Architecture :
- * - Stratégie : Multiple algorithmes d'optimisation (glouton, équilibré, hybride)
- * - Observer : Callbacks pour notifications de changements
+ * ARCHITECTURE PATTERNS :
+ * ======================
+ * - Strategy Pattern : Multiple algorithmes d'optimisation (glouton, équilibré, hybride)
+ * - Observer Pattern : Callbacks pour notifications de changements
  * - Template Method : Structure commune, implémentations variables
+ * - Factory Pattern : Génération d'objets formatés standardisés
+ * 
+ * FORMAT STANDARDISÉ API v2.1.0 :
+ * ===============================
+ * 
+ * ENTRÉE (CoinData) :
+ * {
+ *   metal: string,           // 'copper', 'silver', 'electrum', 'gold', 'platinum'
+ *   multiplicateur: number,  // 1, 10, 100, 1000, 10000
+ *   quantite: number        // Nombre de pièces (>= 0)
+ * }
+ * 
+ * SORTIE (ExtendedCoinData[]) :
+ * [{
+ *   metal: string,
+ *   multiplicateur: number,
+ *   quantite: number,
+ *   valeurUnitaire: number,    // Valeur en cuivre de cette pièce
+ *   valeurTotale: number,      // valeurUnitaire * quantite
+ *   typeLot?: string           // 'single', 'trio', 'septuple'
+ * }]
+ * 
+ * MÉTHODES PRINCIPALES API v2.1.0 :
+ * =================================
+ * - convertirMontant(montantCuivre, multiplicateurs?, conserverMetaux?)
+ * - calculerTotalPieces(repartition)
+ * - calculerValeurTotale(repartition)
+ * - formaterPourAffichage(repartition, afficherMultiplicateurs?)
+ * - obtenirRepartitionUtilisateur()
+ * - validerDonnees(donnees, type)
+ * - viderCache()
+ * 
+ * COMPATIBILITÉ :
+ * ==============
+ * Toutes les anciennes méthodes sont conservées avec des alias pour éviter
+ * la casse du code existant. Migration progressive recommandée vers la nouvelle API.
  * 
  * @author Brujah - Geek & Dragon
- * @version 2.0.0 - Production
+ * @version 2.1.0 - API Standardisée et Refactorisée
+ * @since 1.0.0 - Version initiale
+ * @updated 2024-12-XX - Refactorisation majeure
  */
 class CurrencyConverterPremium {
     /**
@@ -22,12 +70,12 @@ class CurrencyConverterPremium {
      */
     constructor() {
         // Configuration monétaire D&D standard (base cuivre)
-        this.rates = {
+        this.tauxChange = {
             copper: 1, silver: 10, electrum: 50, gold: 100, platinum: 1000,
         };
         
         // Multiplicateurs physiques disponibles pour les pièces
-        this.multipliers = [1, 10, 100, 1000, 10000];
+        this.multiplicateursDisponibles = [1, 10, 100, 1000, 10000];
         
         // Formateur numérique français pour l'affichage
         this.nf = new Intl.NumberFormat('fr-FR');
@@ -47,7 +95,7 @@ class CurrencyConverterPremium {
         this.metalCards = {};
 
         // Configuration des métaux avec données d'affichage
-        this.currencyData = {
+        this.donneesMetaux = {
             copper: {
                 name: 'Cuivre', nameEn: 'Copper', emoji: '🪙', color: 'amber',
             },
@@ -66,7 +114,17 @@ class CurrencyConverterPremium {
         };
 
         // Pattern Observer : callbacks pour réactivité
-        this.changeCallbacks = [];
+        this.callbacksChangement = [];
+        
+        // Cache pour les calculs optimisés (amélioration performances)
+        this.cacheCalculs = new Map();
+        
+        // Statistiques d'utilisation pour le débogage
+        this.stats = {
+            conversionsTotal: 0,
+            cacheHits: 0,
+            dernierCalcul: null
+        };
 
         this.init();
     }
@@ -110,7 +168,7 @@ class CurrencyConverterPremium {
             this.bestDisplay = document.getElementById('currency-best');
 
             // Référencement des cartes de métaux pour affichage
-            Object.keys(this.currencyData).forEach((currency) => {
+            Object.keys(this.donneesMetaux).forEach((currency) => {
                 const cardElement = document.getElementById(`${currency}-card`);
                 if (cardElement) {
                     this.metalCards[currency] = cardElement;
@@ -119,18 +177,26 @@ class CurrencyConverterPremium {
         }
     }
 
-    // Méthode pour ajouter des callbacks d'événements
-    onChange(callback) {
+    /**
+     * Ajoute un callback pour les notifications de changement
+     * 
+     * @param {Function} callback - Fonction à exécuter lors des changements
+     */
+    ajouterCallbackChangement(callback) {
         if (typeof callback === 'function') {
-            this.changeCallbacks.push(callback);
+            this.callbacksChangement.push(callback);
         }
     }
 
-    // Méthode pour notifier les changements
-    notifyChange(data) {
-        this.changeCallbacks.forEach((callback) => {
+    /**
+     * Notifie tous les callbacks enregistrés d'un changement
+     * 
+     * @param {Object} donnees - Données du changement
+     */
+    notifierChangement(donnees) {
+        this.callbacksChangement.forEach((callback) => {
             try {
-                callback(data);
+                callback(donnees);
             } catch (error) {
                 // Gestion silencieuse des erreurs de callbacks pour éviter les logs en production
             }
@@ -157,10 +223,16 @@ class CurrencyConverterPremium {
         return fallback;
     }
 
-    getCurrencyName(currency) {
+    /**
+     * Obtient le nom du métal dans la langue courante
+     * 
+     * @param {string} metal - Type de métal ('copper', 'silver', etc.)
+     * @returns {string} Nom localisé du métal
+     */
+    obtenirNomMetal(metal) {
         const lang = this.getCurrentLang();
-        const data = this.currencyData[currency];
-        return lang === 'en' ? data.nameEn : data.name;
+        const donneesMétal = this.donneesMetaux[metal];
+        return lang === 'en' ? donneesMétal.nameEn : donneesMétal.name;
     }
 
     setupEventListeners() {
@@ -180,13 +252,13 @@ class CurrencyConverterPremium {
         };
 
         const debouncedUpdateSources = debounce(() => {
-            this.updateFromSources();
-            this.notifyChange(this.getCurrentValues());
+            this.mettreAJourDepuisSources();
+            this.notifierChangement(this.obtenirValeursActuelles());
         }, 150);
 
         const debouncedUpdateMultipliers = debounce(() => {
-            this.updateFromMultipliers();
-            this.notifyChange(this.getCurrentValues());
+            this.mettreAJourDepuisMultiplicateurs();
+            this.notifierChangement(this.obtenirValeursActuelles());
         }, 150);
 
         // Délégation d'événements sur le container principal
@@ -206,6 +278,189 @@ class CurrencyConverterPremium {
             }
         }, { passive: true });
     }
+
+    /**
+     * ==================== API STANDARDISÉE ====================
+     * Méthodes avec entrées/sorties uniformisées pour faciliter
+     * la réutilisation et l'extension future
+     * ========================================================
+     */
+
+    /**
+     * Convertit un montant total en cuivre vers une répartition optimale de pièces
+     * 
+     * @param {number} montantCuivre - Montant total en pièces de cuivre
+     * @param {Array<number>} multiplicateursDisponibles - Liste des multiplicateurs possibles
+     * @param {boolean} conserverMetaux - Si true, conserve la répartition existante
+     * @returns {Array<Object>} Répartition optimale par métal et multiplicateur
+     * @throws {Error} Si le montant est négatif ou les multiplicateurs invalides
+     * 
+     * @example
+     * const resultat = convertisseur.convertirMontant(1661, [1, 10, 100, 1000, 10000]);
+     * // Retourne: [{metal: 'platinum', multiplicateur: 1, quantite: 1, ...}, ...]
+     */
+    convertirMontant(montantCuivre, multiplicateursDisponibles = this.multiplicateursDisponibles, conserverMetaux = false) {
+        if (montantCuivre < 0) {
+            throw new Error('Le montant ne peut pas être négatif');
+        }
+        
+        if (!Array.isArray(multiplicateursDisponibles) || multiplicateursDisponibles.length === 0) {
+            throw new Error('Les multiplicateurs doivent être un tableau non vide');
+        }
+
+        // Incrémenter les statistiques
+        this.stats.conversionsTotal++;
+        this.stats.dernierCalcul = new Date();
+
+        // Utiliser le cache si disponible
+        const cleCache = `${montantCuivre}_${multiplicateursDisponibles.join('_')}_${conserverMetaux}`;
+        if (this.cacheCalculs.has(cleCache)) {
+            this.stats.cacheHits++;
+            return this.cacheCalculs.get(cleCache);
+        }
+
+        const resultat = this.calculerRepartitionOptimale(montantCuivre, multiplicateursDisponibles, conserverMetaux);
+        
+        // Mettre en cache pour 5 minutes
+        setTimeout(() => this.cacheCalculs.delete(cleCache), 300000);
+        this.cacheCalculs.set(cleCache, resultat);
+        
+        return resultat;
+    }
+
+    /**
+     * Calcule la répartition optimale de pièces pour un montant donné
+     * 
+     * @param {number} montantCuivre - Montant en cuivre à convertir
+     * @param {Array<number>} multiplicateurs - Multiplicateurs autorisés
+     * @param {boolean} conserverMetaux - Conserver la répartition utilisateur
+     * @returns {Array<Object>} Tableau de pièces optimales
+     */
+    calculerRepartitionOptimale(montantCuivre, multiplicateurs, conserverMetaux) {
+        if (montantCuivre === 0) {
+            return [];
+        }
+
+        if (conserverMetaux) {
+            return this.obtenirRepartitionUtilisateur();
+        }
+
+        // Appliquer la stratégie d'optimisation actuelle
+        const solutionBrute = this.findMinimalCoins(montantCuivre, false);
+        return this.formaterSolutionStandard(solutionBrute);
+    }
+
+    /**
+     * Convertit des données brutes vers le format standardisé uniforme
+     * 
+     * Transforme les résultats de l'algorithme d'optimisation en format standardisé
+     * avec toutes les métadonnées nécessaires pour les calculs et l'affichage
+     * 
+     * @param {Array} donneesBrutes - Résultats bruts de l'algorithme d'optimisation
+     * @returns {Array<Object>} Liste standardisée avec métadonnées complètes
+     */
+    formaterSolutionStandard(donneesBrutes) {
+        if (!donneesBrutes || donneesBrutes.length === 0) {
+            return [];
+        }
+
+        return donneesBrutes.map(element => ({
+            metal: element.currency,
+            multiplicateur: element.multiplier,
+            quantite: element.quantity,
+            valeurUnitaire: this.tauxChange[element.currency] * element.multiplier,
+            valeurTotale: this.tauxChange[element.currency] * element.multiplier * element.quantity,
+            typeLot: element.lotType || 'unitaire'
+        }));
+    }
+
+    /**
+     * Calcule le nombre total de pièces physiques pour une répartition donnée
+     * 
+     * @param {Array<Object>} repartition - Répartition au format standardisé
+     * @returns {number} Nombre total de pièces physiques
+     * 
+     * @example
+     * const total = convertisseur.calculerTotalPieces(repartition);
+     * // Retourne: 4 (pour 1 platine + 1 or + 1 argent + 1 cuivre)
+     */
+    calculerTotalPieces(repartition) {
+        if (!Array.isArray(repartition)) {
+            return 0;
+        }
+        
+        return repartition.reduce((total, piece) => {
+            return total + (piece.quantite || 0);
+        }, 0);
+    }
+
+    /**
+     * Calcule la valeur totale en cuivre d'une répartition de pièces
+     * 
+     * @param {Array<Object>} repartition - Répartition au format standardisé
+     * @returns {number} Valeur totale en cuivre
+     */
+    calculerValeurTotale(repartition) {
+        if (!Array.isArray(repartition)) {
+            return 0;
+        }
+        
+        return repartition.reduce((total, piece) => {
+            return total + (piece.valeurTotale || 0);
+        }, 0);
+    }
+
+    /**
+     * Formate une répartition de pièces pour l'affichage utilisateur
+     * 
+     * @param {Array<Object>} repartition - Répartition au format standardisé
+     * @param {boolean} afficherMultiplicateurs - Inclure les multiplicateurs dans l'affichage
+     * @returns {string} Texte formaté pour l'affichage
+     * 
+     * @example
+     * const texte = convertisseur.formaterPourAffichage(repartition, true);
+     * // Retourne: "1 💎 platine (×1), 1 🥇 or (×100) et 1 🥈 argent (×1)"
+     */
+    formaterPourAffichage(repartition, afficherMultiplicateurs = true) {
+        if (!Array.isArray(repartition) || repartition.length === 0) {
+            return '';
+        }
+
+        const elementsDeTexte = repartition.map(piece => {
+            const informationsMétal = this.donneesMetaux[piece.metal];
+            const nomMetal = this.obtenirNomMetal(piece.metal);
+            const quantiteFormatee = this.nf.format(piece.quantite);
+            
+            let textePiece = `${quantiteFormatee} ${informationsMétal.emoji} ${nomMetal.toLowerCase()}`;
+            
+            // Ajouter le multiplicateur si nécessaire et demandé
+            if (afficherMultiplicateurs && piece.multiplicateur !== 1) {
+                textePiece += ` (×${this.nf.format(piece.multiplicateur)})`;
+            }
+            
+            // Ajouter un indicateur visuel pour les lots groupés (trio, septuple)
+            if (piece.typeLot === 'trio' || piece.typeLot === 'septuple') {
+                textePiece += ' 📦';
+            }
+            
+            return textePiece;
+        });
+
+        // Joindre avec "et" pour le dernier élément (grammaire française)
+        if (elementsDeTexte.length > 1) {
+            const dernierElement = elementsDeTexte.pop();
+            return `${elementsDeTexte.join(', ')} ${this.getTranslation('shop.converter.and', 'et')} ${dernierElement}`;
+        }
+
+        return elementsDeTexte[0] || '';
+    }
+
+    /**
+     * ==================== MÉTHODES HÉRITÉES ====================
+     * Méthodes conservées pour compatibilité avec le code existant
+     * Redirection vers les nouvelles méthodes standardisées
+     * ====================================================
+     */
 
     // Méthode pour obtenir les valeurs actuelles du convertisseur
     getCurrentValues() {
@@ -232,6 +487,39 @@ class CurrencyConverterPremium {
             breakdown: this.getOptimalBreakdown(baseValue),
         };
     }
+    
+    // Alias pour compatibilité
+    obtenirValeursActuelles() {
+        return this.getCurrentValues();
+    }
+
+    /**
+     * Récupère la répartition de pièces saisie par l'utilisateur dans le tableau éditable
+     * 
+     * @returns {Array<Object>} Liste des pièces avec quantités au format standardisé
+     * @example
+     * // Si l'utilisateur a saisi 1 électrum ×1 et 1 argent ×1
+     * // Retourne: [{metal: 'electrum', multiplicateur: 1, quantite: 1, ...}, ...]
+     */
+    obtenirRepartitionUtilisateur() {
+        const donneesBrutes = this.getUserMultiplierBreakdown();
+        return this.formaterSolutionStandard(donneesBrutes);
+    }
+
+    // Alias pour l'ancienne méthode
+    onChange(callback) {
+        this.ajouterCallbackChangement(callback);
+    }
+
+    // Alias pour l'ancienne méthode
+    notifyChange(data) {
+        this.notifierChangement(data);
+    }
+
+    // Alias pour l'ancienne méthode
+    getCurrencyName(currency) {
+        return this.obtenirNomMetal(currency);
+    }
 
     getTotalBaseValue() {
         if (!this.sourceInputs) {
@@ -245,45 +533,57 @@ class CurrencyConverterPremium {
         return Array.from(this.sourceInputs).reduce((sum, input) => {
             const { currency } = input.dataset;
             const amount = Math.max(0, parseInt(input.value) || 0);
-            return sum + amount * this.rates[currency];
+            return sum + amount * this.tauxChange[currency];
         }, 0);
     }
 
+    /**
+     * Met à jour tous les affichages depuis les valeurs sources saisies
+     */
+    mettreAJourDepuisSources() {
+        const valeurBase = this.getTotalBaseValue();
+
+        // Mettre à jour le tableau multiplicateur avec optimisation
+        this.updateMultiplierTableWithOptimization(valeurBase);
+
+        this.updateMetalCards(valeurBase);
+        this.updateOptimalRecommendationsFromUser(valeurBase);
+        this.updateCoinLotsRecommendations(valeurBase, true);
+    }
+    
+    // Alias pour compatibilité
     updateFromSources() {
-        const baseValue = this.getTotalBaseValue();
-
-        // Mettre à jour le tableau multiplicateur avec les NOUVELLES RÈGLES d'optimisation
-        // Priorité métal > multiplicateur + lots 3/7 pour conversions automatiques
-        this.updateMultiplierTableWithOptimization(baseValue);
-
-        this.updateMetalCards(baseValue);
-        this.updateOptimalRecommendationsFromUser(baseValue); // Toujours utiliser la logique tableau (🤖 vs ✏️)
-        this.updateCoinLotsRecommendations(baseValue, true); // true = toujours utiliser tableau multiplicateur
+        this.mettreAJourDepuisSources();
     }
 
-    updateFromMultipliers() {
-    // Calculer la valeur totale depuis les inputs multiplicateur
-        let totalValue = 0;
+    /**
+     * Met à jour tous les affichages depuis les valeurs du tableau multiplicateur
+     */
+    mettreAJourDepuisMultiplicateurs() {
+        // Calculer la valeur totale depuis les inputs multiplicateur
+        let valeurTotale = 0;
         this.multiplierInputs.forEach((input) => {
             const { currency } = input.closest('tr').dataset;
             const multiplier = parseInt(input.dataset.multiplier);
             const quantity = parseInt(input.value.replace(/\s/g, '')) || 0;
-            totalValue += quantity * this.rates[currency] * multiplier;
+            valeurTotale += quantity * this.tauxChange[currency] * multiplier;
         });
 
-        // Mettre à jour les sources
+        // Vider les sources
         this.sourceInputs.forEach((input) => {
             input.value = '0';
         });
 
-        // COMPORTEMENT ORIGINAL RESTAURÉ : Garder les valeurs utilisateur du tableau multiplicateur
-        // au lieu de les redistribuer de manière optimale
-        this.distributeOptimally(totalValue);
-        this.updateMetalCards(totalValue);
-
-        // Utiliser les valeurs utilisateur pour les recommandations optimales
-        this.updateOptimalRecommendationsFromUser(totalValue);
-        this.updateCoinLotsRecommendations(totalValue, true); // true = utiliser valeurs utilisateur
+        // Redistribuer de manière optimale dans les sources
+        this.distributeOptimally(valeurTotale);
+        this.updateMetalCards(valeurTotale);
+        this.updateOptimalRecommendationsFromUser(valeurTotale);
+        this.updateCoinLotsRecommendations(valeurTotale, true);
+    }
+    
+    // Alias pour compatibilité
+    updateFromMultipliers() {
+        this.mettreAJourDepuisMultiplicateurs();
     }
 
     // NOUVELLE MÉTHODE: Mise à jour tableau avec optimisations (conversions automatiques uniquement)
@@ -324,11 +624,11 @@ class CurrencyConverterPremium {
 
         currencies.forEach((currency) => {
             const input = document.querySelector(`input[data-currency="${currency}"]`);
-            const rate = this.rates[currency];
-            const count = Math.floor(remaining / rate);
+            const taux = this.tauxChange[currency];
+            const count = Math.floor(remaining / taux);
             if (count > 0) {
                 input.value = count.toString();
-                remaining -= count * rate;
+                remaining -= count * taux;
             }
         });
     }
@@ -343,54 +643,54 @@ class CurrencyConverterPremium {
             return;
         }
 
-        Object.keys(this.rates).forEach((currency) => {
+        Object.keys(this.tauxChange).forEach((currency) => {
             if (!this.metalCards[currency]) return;
 
-            const data = this.currencyData[currency];
-            const rate = this.rates[currency];
-            const totalUnits = Math.floor(baseValue / rate);
+            const donneesMétal = this.donneesMetaux[currency];
+            const taux = this.tauxChange[currency];
+            const unitesTotales = Math.floor(baseValue / taux);
 
-            if (totalUnits === 0) {
+            if (unitesTotales === 0) {
                 this.metalCards[currency].innerHTML = '';
                 return;
             }
 
             // Calcul du nombre minimal de pièces avec multiplicateurs
-            const minimalCoins = this.getMinimalCoinsBreakdown(totalUnits);
-            const remainderValue = baseValue % rate;
-            let remainderText = '';
-            if (remainderValue > 0) {
-                remainderText = this.getOptimalBreakdown(remainderValue);
+            const piecesMinimales = this.getMinimalCoinsBreakdown(unitesTotales);
+            const valeurReste = baseValue % taux;
+            let texteReste = '';
+            if (valeurReste > 0) {
+                texteReste = this.getOptimalBreakdown(valeurReste);
             }
 
             this.metalCards[currency].innerHTML = `
-        <div class="currency-total-card bg-gradient-to-br from-${data.color}-900/20 to-${data.color}-800/20 rounded-xl p-6 border border-${data.color}-700/30">
+        <div class="currency-total-card bg-gradient-to-br from-${donneesMétal.color}-900/20 to-${donneesMétal.color}-800/20 rounded-xl p-6 border border-${donneesMétal.color}-700/30">
           <div class="flex items-center justify-between mb-4">
-            <h6 class="text-${data.color}-300 font-bold text-lg">${data.emoji} ${this.getCurrencyName(currency)}</h6>
-            <span class="text-2xl font-bold text-${data.color}-300">${this.nf.format(totalUnits)}</span>
+            <h6 class="text-${donneesMétal.color}-300 font-bold text-lg">${donneesMétal.emoji} ${this.obtenirNomMetal(currency)}</h6>
+            <span class="text-2xl font-bold text-${donneesMétal.color}-300">${this.nf.format(unitesTotales)}</span>
           </div>
           
           <div class="space-y-2 mb-4">
             <div class="text-sm">
               <span class="text-gray-300">${this.getTranslation('shop.converter.minimalCoins', 'Nombre minimal de pièces')}:</span>
             </div>
-            ${minimalCoins.map((item) => `
+            ${piecesMinimales.map((item) => `
               <div class="flex justify-between text-sm pl-2">
                 <span class="text-gray-300">${item.multiplier === 1 ? this.getTranslation('shop.converter.units', 'Unités') : `Multiplicateur ×${this.nf.format(item.multiplier)}`}:</span>
-                <span class="text-${data.color}-300 font-medium">${this.nf.format(item.quantity)}</span>
+                <span class="text-${donneesMétal.color}-300 font-medium">${this.nf.format(item.quantity)}</span>
               </div>
             `).join('')}
-            <div class="border-t border-${data.color}-700/30 pt-2 mt-3">
+            <div class="border-t border-${donneesMétal.color}-700/30 pt-2 mt-3">
               <div class="flex justify-between text-sm">
                 <span class="text-gray-300">${this.getTranslation('shop.converter.totalCoins', 'Total pièces')}:</span>
-                <span class="text-${data.color}-300 font-bold">${this.nf.format(minimalCoins.reduce((sum, item) => sum + item.quantity, 0))}</span>
+                <span class="text-${donneesMétal.color}-300 font-bold">${this.nf.format(piecesMinimales.reduce((sum, item) => sum + item.quantity, 0))}</span>
               </div>
             </div>
           </div>
           
-          ${remainderText ? `
-            <div class="border-t border-${data.color}-700/30 pt-3">
-              <p class="text-xs text-gray-400">${this.getTranslation('shop.converter.remainder', 'Reste')}: ${remainderText}</p>
+          ${texteReste ? `
+            <div class="border-t border-${donneesMétal.color}-700/30 pt-3">
+              <p class="text-xs text-gray-400">${this.getTranslation('shop.converter.remainder', 'Reste')}: ${texteReste}</p>
             </div>
           ` : ''}
         </div>
@@ -403,7 +703,7 @@ class CurrencyConverterPremium {
         let remaining = totalUnits;
 
         // Calcul de la répartition optimale par multiplicateur (du plus grand au plus petit)
-        this.multipliers.slice().reverse().forEach((mult) => {
+        this.multiplicateursDisponibles.slice().reverse().forEach((mult) => {
             const qty = Math.floor(remaining / mult);
             if (qty > 0) {
                 breakdown.push({
@@ -494,14 +794,14 @@ class CurrencyConverterPremium {
         metalPriority.forEach((metal) => {
             if (remaining <= 0) return;
 
-            const metalRate = this.rates[metal];
+            const tauxMetal = this.tauxChange[metal];
 
             // Essayer les multiplicateurs du plus petit au plus grand
-            for (const multiplier of this.multipliers) {
-                const coinValue = metalRate * multiplier;
+            for (const multiplier of this.multiplicateursDisponibles) {
+                const valeurPiece = tauxMetal * multiplier;
 
-                if (remaining >= coinValue) {
-                    const quantity = Math.floor(remaining / coinValue);
+                if (remaining >= valeurPiece) {
+                    const quantity = Math.floor(remaining / valeurPiece);
                     if (quantity > 0) {
                         // Appliquer logique lots 3/7 avant d'ajouter
                         const optimizedQuantity = this.optimizeQuantityForBulk(quantity, metal, multiplier);
@@ -510,7 +810,7 @@ class CurrencyConverterPremium {
                             currency: metal,
                             multiplier,
                             quantity: optimizedQuantity.quantity,
-                            value: coinValue,
+                            value: valeurPiece,
                         });
 
                         remaining -= optimizedQuantity.totalValue;
@@ -617,22 +917,22 @@ class CurrencyConverterPremium {
         metalPriority.forEach((metal) => {
             if (remaining <= 0) return;
 
-            const metalRate = this.rates[metal];
+            const tauxMetal = this.tauxChange[metal];
 
             // Pour chaque métal, utiliser le plus petit multiplicateur possible
-            for (const multiplier of this.multipliers) {
-                const coinValue = metalRate * multiplier;
+            for (const multiplier of this.multiplicateursDisponibles) {
+                const valeurPiece = tauxMetal * multiplier;
 
-                if (remaining >= coinValue) {
-                    const quantity = Math.floor(remaining / coinValue);
+                if (remaining >= valeurPiece) {
+                    const quantity = Math.floor(remaining / valeurPiece);
                     if (quantity > 0) {
                         result.push({
                             currency: metal,
                             multiplier,
                             quantity,
-                            value: coinValue,
+                            value: valeurPiece,
                         });
-                        remaining -= quantity * coinValue;
+                        remaining -= quantity * valeurPiece;
                         break; // Passer au métal suivant
                     }
                 }
@@ -644,13 +944,13 @@ class CurrencyConverterPremium {
 
     // NOUVELLE MÉTHODE: Optimiser quantité pour lots économiques
     optimizeQuantityForBulk(quantity, metal, multiplier) {
-        const coinValue = this.rates[metal] * multiplier;
+        const valeurPiece = this.tauxChange[metal] * multiplier;
 
         // Si quantité >= 7, privilégier les septuples
         if (quantity >= 7) {
             return {
                 quantity,
-                totalValue: quantity * coinValue,
+                totalValue: quantity * valeurPiece,
                 hasBulkDiscount: true,
             };
         }
@@ -659,14 +959,14 @@ class CurrencyConverterPremium {
         if (quantity >= 3) {
             return {
                 quantity,
-                totalValue: quantity * coinValue,
+                totalValue: quantity * valeurPiece,
                 hasBulkDiscount: true,
             };
         }
 
         return {
             quantity,
-            totalValue: quantity * coinValue,
+            totalValue: quantity * valeurPiece,
             hasBulkDiscount: false,
         };
     }
@@ -687,11 +987,11 @@ class CurrencyConverterPremium {
     findFallbackSolution(targetValue) {
         const denoms = [];
         ['platinum', 'gold', 'electrum', 'silver', 'copper'].forEach((currency) => {
-            this.multipliers.forEach((multiplier) => {
+            this.multiplicateursDisponibles.forEach((multiplier) => {
                 denoms.push({
                     currency,
                     multiplier,
-                    value: this.rates[currency] * multiplier,
+                    value: this.tauxChange[currency] * multiplier,
                 });
             });
         });
@@ -726,7 +1026,7 @@ class CurrencyConverterPremium {
         // Stratégie équilibrée : 1 pièce de chaque métal pour chaque multiplicateur
         // Traiter multiplicateur par multiplicateur, du plus grand au plus petit
 
-        for (const multiplier of this.multipliers.slice().reverse()) {
+        for (const multiplier of this.multiplicateursDisponibles.slice().reverse()) {
             // Pour chaque multiplicateur, essayer d'ajouter 1 pièce de chaque métal
             const metalOrder = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
 
@@ -829,11 +1129,11 @@ class CurrencyConverterPremium {
         const currencies = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
 
         currencies.forEach((currency) => {
-            const rate = this.rates[currency];
-            const count = Math.floor(remaining / rate);
+            const taux = this.tauxChange[currency];
+            const count = Math.floor(remaining / taux);
             if (count > 0) {
                 pieces += count;
-                remaining -= count * rate;
+                remaining -= count * taux;
             }
         });
 
@@ -846,17 +1146,17 @@ class CurrencyConverterPremium {
         const currencies = ['platinum', 'gold', 'electrum', 'silver'];
 
         currencies.forEach((currency) => {
-            const rate = this.rates[currency];
-            const count = Math.floor(remaining / rate);
+            const taux = this.tauxChange[currency];
+            const count = Math.floor(remaining / taux);
             if (count > 0) {
-                const data = this.currencyData[currency];
-                breakdown.push(`${count} ${data.emoji} ${this.getCurrencyName(currency).toLowerCase()}`);
-                remaining -= count * rate;
+                const donneesMétal = this.donneesMetaux[currency];
+                breakdown.push(`${count} ${donneesMétal.emoji} ${this.obtenirNomMetal(currency).toLowerCase()}`);
+                remaining -= count * taux;
             }
         });
 
         if (remaining > 0) {
-            breakdown.push(`${remaining} ${this.currencyData.copper.emoji} ${this.getCurrencyName('copper').toLowerCase()}`);
+            breakdown.push(`${remaining} ${this.donneesMetaux.copper.emoji} ${this.getCurrencyName('copper').toLowerCase()}`);
         }
 
         return breakdown.join(', ');
@@ -888,14 +1188,14 @@ class CurrencyConverterPremium {
         });
 
         const formatted = Object.values(grouped).map((item) => {
-            const data = this.currencyData[item.currency];
+            const donneesMétal = this.donneesMetaux[item.currency];
             const hasLots = item.lotTypes.some((type) => type === 'trio' || type === 'septuple');
             const lotIndicator = hasLots ? '📦' : '';
 
             if (item.multiplier === 1) {
-                return `${this.nf.format(item.totalQuantity)} ${data.emoji} ${this.getCurrencyName(item.currency).toLowerCase()} ${lotIndicator}`;
+                return `${this.nf.format(item.totalQuantity)} ${donneesMétal.emoji} ${this.obtenirNomMetal(item.currency).toLowerCase()} ${lotIndicator}`;
             }
-            return `${this.nf.format(item.totalQuantity)} ${data.emoji} ${this.getCurrencyName(item.currency).toLowerCase()}(×${this.nf.format(item.multiplier)}) ${lotIndicator}`;
+            return `${this.nf.format(item.totalQuantity)} ${donneesMétal.emoji} ${this.obtenirNomMetal(item.currency).toLowerCase()}(×${this.nf.format(item.multiplier)}) ${lotIndicator}`;
         });
 
         if (formatted.length > 1) {
@@ -1119,6 +1419,76 @@ class CurrencyConverterPremium {
         }
     }
 
+    /**
+     * ==================== MÉTHODES DE NETTOYAGE ====================
+     * Méthodes pour la maintenance et l'optimisation des performances
+     * ===========================================================
+     */
+
+    /**
+     * Vide le cache des calculs pour libérer la mémoire
+     */
+    viderCache() {
+        this.cacheCalculs.clear();
+        this.stats.cacheHits = 0;
+    }
+
+    /**
+     * Obtient les statistiques d'utilisation du convertisseur
+     * 
+     * @returns {Object} Statistiques d'utilisation
+     */
+    obtenirStatistiques() {
+        return {
+            ...this.stats,
+            tailleCache: this.cacheCalculs.size,
+            tauxCacheHit: this.stats.conversionsTotal > 0 
+                ? (this.stats.cacheHits / this.stats.conversionsTotal * 100).toFixed(2) + '%'
+                : '0%'
+        };
+    }
+
+    /**
+     * Réinitialise toutes les statistiques
+     */
+    reinitialiserStatistiques() {
+        this.stats = {
+            conversionsTotal: 0,
+            cacheHits: 0,
+            dernierCalcul: null
+        };
+    }
+
+    /**
+     * Valide les données d'entrée avant traitement
+     * 
+     * @param {*} donnees - Données à valider
+     * @param {string} typeAttendu - Type attendu ('number', 'array', etc.)
+     * @returns {boolean} True si les données sont valides
+     */
+    validerDonnees(donnees, typeAttendu) {
+        switch (typeAttendu) {
+            case 'number':
+                return typeof donnees === 'number' && !isNaN(donnees) && donnees >= 0;
+            case 'array':
+                return Array.isArray(donnees) && donnees.length > 0;
+            case 'repartition':
+                return Array.isArray(donnees) && donnees.every(item => 
+                    item.metal && 
+                    typeof item.multiplicateur === 'number' && 
+                    typeof item.quantite === 'number'
+                );
+            default:
+                return false;
+        }
+    }
+
+    /**
+     * ==================== MÉTHODES HÉRITÉES (COMPATIBILITÉ) ====================
+     * Conservées pour la compatibilité avec le code existant
+     * =======================================================
+     */
+
     // Nouvelle méthode pour récupérer les valeurs du tableau multiplicateur utilisateur
     getUserMultiplierBreakdown() {
         if (!this.multiplierInputs) {
@@ -1137,7 +1507,7 @@ class CurrencyConverterPremium {
                         currency,
                         multiplier,
                         quantity,
-                        value: this.rates[currency] * multiplier,
+                        value: this.tauxChange[currency] * multiplier,
                     });
                 }
             });
@@ -1146,23 +1516,31 @@ class CurrencyConverterPremium {
         return userBreakdown;
     }
 
-    // Nouvelle méthode pour formater un breakdown en texte
-    formatBreakdownText(breakdown) {
-        if (!breakdown || breakdown.length === 0) return '';
+    /**
+     * Formate une répartition de pièces vers le format standardisé pour compatibilité
+     * 
+     * Convertit les anciennes données de répartition vers le nouveau format uniforme
+     * tout en maintenant la compatibilité avec le code existant
+     * 
+     * @param {Array} repartitionAncienFormat - Répartition au format hérité
+     * @returns {string} Texte formaté pour affichage utilisateur
+     */
+    formatBreakdownText(repartitionAncienFormat) {
+        if (!repartitionAncienFormat || repartitionAncienFormat.length === 0) return '';
 
-        const formatted = breakdown.map((item) => {
-            const data = this.currencyData[item.currency];
+        const elementsFormmates = repartitionAncienFormat.map((element) => {
+            const informationsMétal = this.donneesMetaux[element.currency];
             // Toujours afficher le multiplicateur pour cohérence avec les lots recommandés
-            return `${this.nf.format(item.quantity)} ${data.emoji} ${this.getCurrencyName(item.currency).toLowerCase()} (×${this.nf.format(item.multiplier)})`;
+            return `${this.nf.format(element.quantity)} ${informationsMétal.emoji} ${this.obtenirNomMetal(element.currency).toLowerCase()} (×${this.nf.format(element.multiplier)})`;
         });
 
-        // Joindre avec "et"
-        if (formatted.length > 1) {
-            const last = formatted.pop();
-            return `${formatted.join(', ')} ${this.getTranslation('shop.converter.and', 'et')} ${last}`;
+        // Assembler avec "et" pour respecter la grammaire française
+        if (elementsFormmates.length > 1) {
+            const dernierElement = elementsFormmates.pop();
+            return `${elementsFormmates.join(', ')} ${this.getTranslation('shop.converter.and', 'et')} ${dernierElement}`;
         }
 
-        return formatted.join('');
+        return elementsFormmates.join('');
     }
 
     // Méthode améliorée pour les recommandations depuis les valeurs utilisateur
@@ -1211,8 +1589,8 @@ class CurrencyConverterPremium {
             : '<span class="text-green-600">🤖</span>';
 
         // Calcul de la valeur en or avec reste (comme dans la méthode originale)
-        const goldValue = Math.floor(baseValue / this.rates.gold);
-        const goldRemainder = baseValue % this.rates.gold;
+        const goldValue = Math.floor(baseValue / this.tauxChange.gold);
+        const goldRemainder = baseValue % this.tauxChange.gold;
 
         let goldValueDisplay = '';
         if (goldValue > 0) {

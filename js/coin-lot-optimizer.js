@@ -1,19 +1,36 @@
 /**
  * CoinLotOptimizer - Algorithme de sac à dos pour optimisation des lots de pièces D&D
  *
- * Architecture : Pattern Strategy pour l'optimisation multi-critères
- * Responsabilité : Trouver la combinaison de lots la moins chère qui couvre exactement
+ * REFACTORISATION v2.1.0 - Format Standardisé :
+ * ===============================================
+ * - Synchronisation avec CurrencyConverter v2.1.0
+ * - Format d'entrée/sortie uniforme standardisé
+ * - Nomenclature française pour cohérence
+ * - Commentaires explicites et documentation complète
+ *
+ * RESPONSABILITÉ :
+ * ================
+ * Trouver la combinaison de lots la moins chère qui couvre exactement
  * les besoins de pièces, avec surplus autorisé mais déficit interdit.
  *
- * Algorithme : Sac à dos dynamique avec génération exhaustive des variations produits
+ * ALGORITHME :
+ * ===========
+ * Sac à dos dynamique avec génération exhaustive des variations produits :
  * - Pièces Personnalisées : 25 variations (5 métaux × 5 multiplicateurs)
  * - Trio de Pièces : 25 variations (3 pièces même métal/multiplicateur)
  * - Quintessence Métallique : 5 variations (1 par multiplicateur, tous métaux)
  * - Septuple Libre : 25 variations (7 pièces même métal/multiplicateur)
- * - Produits fixes : parsing dynamique structure coin_lots
+ * - Produits fixes : analyse dynamique structure coin_lots depuis products.json
+ *
+ * FORMAT STANDARDISÉ (compatible CurrencyConverter v2.1.0) :
+ * =========================================================
+ * Entrée : {metal_multiplicateur: quantite} (ex: {'gold_100': 2})
+ * Sortie : [{nomProduit, quantite, prixUnitaire, coutTotal, ...}]
  *
  * @author Brujah - Geek & Dragon
- * @version 2.0.0 - Production
+ * @version 2.1.0 - Format Standardisé
+ * @since 2.0.0 - Version initiale
+ * @updated 2024-12-XX - Synchronisation CurrencyConverter
  */
 class CoinLotOptimizer {
     /**
@@ -21,16 +38,16 @@ class CoinLotOptimizer {
      * Configuration monétaire basée sur les règles officielles D&D 5e
      */
     constructor() {
-        // Taux de change standards D&D (base cuivre)
-        this.rates = {
+        // Taux de change standards D&D (base cuivre) - SYNCHRONISÉ avec CurrencyConverter
+        this.tauxChange = {
             copper: 1, silver: 10, electrum: 50, gold: 100, platinum: 1000,
         };
         
         // Multiplicateurs physiques disponibles pour les pièces personnalisées
-        this.multipliers = [1, 10, 100, 1000, 10000];
+        this.multiplicateursDisponibles = [1, 10, 100, 1000, 10000];
         
         // Traductions des noms de métaux pour l'affichage multilingue
-        this.metalNames = {
+        this.nomsMetaux = {
             fr: {
                 copper: 'Cuivre', silver: 'Argent', electrum: 'Électrum', gold: 'Or', platinum: 'Platine',
             },
@@ -741,8 +758,8 @@ class CoinLotOptimizer {
                     value: variation.multiplier,
                 };
             } else if (variation.type === 'normal' && variation.metal && variation.multiplier) {
-                const metalName = this.metalNames[lang][variation.metal] || variation.metal;
-                displayName += ` (${metalName} ×${variation.multiplier})`;
+                const nomMetal = this.nomsMetaux[lang][variation.metal] || variation.metal;
+                displayName += ` (${nomMetal} ×${variation.multiplier})`;
 
                 customFields[`metal-${variation.productId}`] = {
                     role: 'metal',
@@ -786,7 +803,7 @@ class CoinLotOptimizer {
         const combinations = [];
 
         // NOUVELLE LOGIQUE: Tester spécifiquement les patterns détectés
-        const patterns = this.multipliers.map((mult) => this.identifyQuintessencePattern(needs, mult))
+        const patterns = this.multiplicateursDisponibles.map((mult) => this.identifyQuintessencePattern(needs, mult))
             .filter((p) => p.matches >= 4); // SEUIL REHAUSSÉ: Minimum 4 métaux sur 5
 
 
@@ -919,7 +936,7 @@ class CoinLotOptimizer {
 
         // Identifier tous les patterns Quintessence possibles par multiplicateur
         // SEUIL REHAUSSÉ: Minimum 4 métaux sur 5 pour justifier une Quintessence
-        const patterns = this.multipliers.map((mult) => this.identifyQuintessencePattern(needs, mult))
+        const patterns = this.multiplicateursDisponibles.map((mult) => this.identifyQuintessencePattern(needs, mult))
             .filter((p) => p.matches >= 4);
 
         // Tester des combinaisons de patterns (jusqu'à 3 patterns simultanés)
