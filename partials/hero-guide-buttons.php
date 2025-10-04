@@ -22,6 +22,25 @@ if (!isset($buttons) || empty($buttons)) {
 $gridCols = count($buttons) === 3 ? 'md:grid-cols-3' : 'md:grid-cols-4';
 ?>
 
+<!-- Style responsive pour overlay texte hero -->
+<style>
+@media (max-width: 768px) {
+  .hero-btn-overlay {
+    font-size: 13px !important;
+    padding: 8px 10px !important;
+    min-height: 32px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-btn-overlay {
+    font-size: 12px !important;
+    padding: 6px 8px !important;
+    min-height: 28px !important;
+  }
+}
+</style>
+
 <div class="grid grid-cols-1 <?= $gridCols ?> gap-4 mt-12 max-w-6xl mx-auto">
   <?php foreach ($buttons as $button):
     // Mapping des couleurs de bordure pour classes Tailwind complètes
@@ -39,9 +58,9 @@ $gridCols = count($buttons) === 3 ? 'md:grid-cols-3' : 'md:grid-cols-4';
         <img src="<?= htmlspecialchars($button['image']) ?>"
              alt="<?= htmlspecialchars($button['alt']) ?>"
              class="w-full h-full object-cover">
-        <!-- Overlay avec même style que les autres boutons du site -->
-        <div style="position: absolute; bottom: 0; left: 0; right: 0; width: 100%; padding: 12px; background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%); backdrop-filter: blur(2px); display: flex; align-items: center; justify-content: center; min-height: 50px;">
-          <span style="color: white; font-weight: 600; font-size: 1rem; text-align: center; line-height: 1.2; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);"
+        <!-- Overlay avec même style que btn-text-overlay -->
+        <div class="hero-btn-overlay" style="position: absolute; bottom: 0; left: 0; right: 0; width: 100%; padding: 10px 12px; background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%); backdrop-filter: blur(2px); display: flex; align-items: center; justify-content: center; min-height: 36px; pointer-events: none;">
+          <span style="color: white; font-weight: 600; font-size: 14px; text-align: center; line-height: 1.2; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);"
                 <?php if (isset($button['labelKey'])): ?>data-i18n="<?= htmlspecialchars($button['labelKey']) ?>"<?php endif; ?>>
             <?= htmlspecialchars($button['label']) ?>
           </span>
