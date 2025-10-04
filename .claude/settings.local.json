@@ -29,7 +29,8 @@
       "Bash(start:*)",
       "Bash(findstr:*)",
       "Bash(copy:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(php:*)"
     ],
     "deny": [],
     "ask": []

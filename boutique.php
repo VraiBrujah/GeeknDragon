@@ -282,7 +282,10 @@ echo $snipcartInit;
                class="btn btn-primary btn-aidejeux"
                aria-label="Accéder au convertisseur de monnaie"
                title="Accéder au convertisseur de monnaie">
-              <span class="sr-only">Accéder au convertisseur de monnaie</span>
+              <span class="btn-text-overlay">
+                <span class="hidden md:inline"><?= __('btnOverlay.gameHelp.desktop', 'Grimoire') ?></span>
+                <span class="md:hidden"><?= __('btnOverlay.gameHelp.mobile', 'Grimoire') ?></span>
+              </span>
             </a>
           </div>
         </div>
@@ -452,7 +455,10 @@ echo $snipcartInit;
                  aria-label="<?= __('shop.deluxeBundle.cta', 'Réserver Mon Édition') ?>"
                  title="<?= __('shop.deluxeBundle.cta', 'Réserver Mon Édition') ?>"
                  data-i18n="shop.deluxeBundle.cta">
-                <span class="sr-only"><?= __('shop.deluxeBundle.cta', 'Réserver Mon Édition') ?></span>
+                <span class="btn-text-overlay">
+                  <span class="hidden md:inline"><?= __('btnOverlay.reservation.desktop', 'Réservation') ?></span>
+                  <span class="md:hidden"><?= __('btnOverlay.reservation.mobile', 'Réserver') ?></span>
+                </span>
               </a>
 
               <p class="text-sm text-gray-300" data-i18n="shop.deluxeBundle.contact">

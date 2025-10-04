@@ -39,7 +39,50 @@
         "account": "Account",
         "pieces": "Coins",
         "cards": "Cards",
-        "triptychs": "Triptychs"
+        "triptychs": "Triptychs",
+        "home": "Home"
+    },
+    "btnOverlay": {
+        "shop": {
+            "desktop": "The Shop",
+            "mobile": "Shop"
+        },
+        "gameHelp": {
+            "desktop": "Grimoire",
+            "mobile": "Grimoire"
+        },
+        "contact": {
+            "desktop": "Message",
+            "mobile": "Contact"
+        },
+        "news": {
+            "desktop": "Chronicles",
+            "mobile": "News"
+        },
+        "home": {
+            "desktop": "Tavern",
+            "mobile": "Tavern"
+        },
+        "coins": {
+            "desktop": "Treasury",
+            "mobile": "Treasury"
+        },
+        "cards": {
+            "desktop": "Arsenal",
+            "mobile": "Arsenal"
+        },
+        "triptychs": {
+            "desktop": "Heroes",
+            "mobile": "Heroes"
+        },
+        "bundle": {
+            "desktop": "Chest",
+            "mobile": "Chest"
+        },
+        "reservation": {
+            "desktop": "Reservation",
+            "mobile": "Reserve"
+        }
     },
     "hero": {
         "title": "Immersion at the heart of the game",

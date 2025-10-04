@@ -39,7 +39,50 @@
         "account": "Compte",
         "pieces": "Pièces",
         "cards": "Cartes",
-        "triptychs": "Triptyques"
+        "triptychs": "Triptyques",
+        "home": "Accueil"
+    },
+    "btnOverlay": {
+        "shop": {
+            "desktop": "L'Échoppe",
+            "mobile": "Échoppe"
+        },
+        "gameHelp": {
+            "desktop": "Grimoire",
+            "mobile": "Grimoire"
+        },
+        "contact": {
+            "desktop": "Message",
+            "mobile": "Contact"
+        },
+        "news": {
+            "desktop": "Chroniques",
+            "mobile": "Actus"
+        },
+        "home": {
+            "desktop": "Taverne",
+            "mobile": "Taverne"
+        },
+        "coins": {
+            "desktop": "Trésor",
+            "mobile": "Trésor"
+        },
+        "cards": {
+            "desktop": "Arsenal",
+            "mobile": "Arsenal"
+        },
+        "triptychs": {
+            "desktop": "Héros",
+            "mobile": "Héros"
+        },
+        "bundle": {
+            "desktop": "Coffre",
+            "mobile": "Coffre"
+        },
+        "reservation": {
+            "desktop": "Réservation",
+            "mobile": "Réserver"
+        }
     },
     "hero": {
         "title": "L'immersion au cœur du jeu",

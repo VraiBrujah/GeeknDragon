@@ -34,63 +34,72 @@ $headerNavLinks = [
     'label' => 'Accueil',
     'i18n' => 'nav.home',
     'image' => '/media/ui/button/accueil.webp',
-    'class' => 'header-nav-icon'
+    'class' => 'header-nav-icon',
+    'overlay' => 'home'
   ],
   '/boutique.php' => [
     'slug' => 'boutique',
     'label' => 'Boutique',
     'i18n' => 'nav.shop',
     'image' => '/media/ui/button/boutique.webp',
-    'class' => 'header-nav-icon'
+    'class' => 'header-nav-icon',
+    'overlay' => 'shop'
   ],
   '/boutique.php#pieces' => [
     'slug' => 'pieces',
     'label' => 'Monnaie',
     'i18n' => 'shop.hero.quickLinks.pieces',
     'image' => '/media/ui/button/piece.webp',
-    'class' => 'header-nav-icon'
+    'class' => 'header-nav-icon',
+    'overlay' => 'coins'
   ],
   '/boutique.php#cartes' => [
     'slug' => 'cartes',
     'label' => 'Cartes',
     'i18n' => 'shop.hero.quickLinks.cards',
     'image' => '/media/ui/button/carte.webp',
-    'class' => 'header-nav-icon'
+    'class' => 'header-nav-icon',
+    'overlay' => 'cards'
   ],
   '/boutique.php#triptyques' => [
     'slug' => 'triptyques',
     'label' => 'Triptyques',
     'i18n' => 'shop.hero.quickLinks.triptychs',
     'image' => '/media/ui/button/triptyque.webp',
-    'class' => 'header-nav-icon'
+    'class' => 'header-nav-icon',
+    'overlay' => 'triptychs'
   ],
   '/boutique.php#bundle-deluxe' => [
     'slug' => 'bundle',
     'label' => 'Coffre du Dragon',
     'i18n' => 'shop.hero.quickLinks.bundle',
     'image' => '/media/ui/button/dragon.webp',
-    'class' => 'header-nav-icon'
+    'class' => 'header-nav-icon',
+    'overlay' => 'bundle'
   ],
   '/index.php#actus' => [
     'slug' => 'actus',
     'label' => 'Actualités',
     'i18n' => 'nav.news',
     'image' => '/media/ui/button/actualite.webp',
-    'class' => 'header-nav-icon'
+    'class' => 'header-nav-icon',
+    'overlay' => 'news'
   ],
   '/aide-jeux.php' => [
     'slug' => 'aide-jeux',
     'label' => 'Aide de Jeux',
     'i18n' => 'nav.gameHelp',
     'image' => '/media/ui/button/aidejeux.webp',
-    'class' => 'header-nav-icon'
+    'class' => 'header-nav-icon',
+    'overlay' => 'gameHelp'
   ],
   '/index.php#contact' => [
     'slug' => 'contact',
     'label' => 'Contact',
     'i18n' => 'nav.contact',
     'image' => '/media/ui/button/contact.webp',
-    'class' => 'header-nav-icon'
+    'class' => 'header-nav-icon',
+    'overlay' => 'contact'
   ]
 ];
 
@@ -184,6 +193,10 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
                  alt="<?= __($item['i18n'], $item['label']) ?>"
                  class="w-full h-full object-cover rounded-xl"
                  loading="lazy">
+            <span class="btn-text-overlay">
+              <span class="hidden md:inline"><?= __('btnOverlay.' . $item['overlay'] . '.desktop', $item['label']) ?></span>
+              <span class="md:hidden"><?= __('btnOverlay.' . $item['overlay'] . '.mobile', $item['label']) ?></span>
+            </span>
           </a>
         <?php endforeach; ?>
       </nav>

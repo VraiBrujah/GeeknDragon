@@ -230,7 +230,8 @@ h6 {
   width: 240px;
   height: 100px;
   padding: 0;
-  line-height: 100px;
+  position: relative;
+  overflow: hidden;
 }
 
 /* Responsive pour boutons avec images */
@@ -248,7 +249,6 @@ h6 {
     min-height: 80px;
     width: 200px;
     height: 80px;
-    line-height: 80px;
   }
 }
 
@@ -266,8 +266,99 @@ h6 {
     min-height: 64px;
     width: 160px;
     height: 64px;
-    line-height: 64px;
   }
+}
+
+/* Overlay gradient pour texte sur boutons avec images */
+.btn-aidejeux .btn-text-overlay,
+.btn-boutique .btn-text-overlay,
+.btn-carte .btn-text-overlay,
+.btn-piece .btn-text-overlay,
+.btn-triptyque .btn-text-overlay,
+.btn-contact .btn-text-overlay,
+.btn-accueil .btn-text-overlay,
+.btn-actualite .btn-text-overlay,
+.btn-dragon .btn-text-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 10px 12px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%);
+  backdrop-filter: blur(2px);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  line-height: 1.2;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+}
+
+/* Responsive texte overlay - Tablette */
+@media (max-width: 768px) {
+  .btn-aidejeux .btn-text-overlay,
+  .btn-boutique .btn-text-overlay,
+  .btn-carte .btn-text-overlay,
+  .btn-piece .btn-text-overlay,
+  .btn-triptyque .btn-text-overlay,
+  .btn-contact .btn-text-overlay,
+  .btn-accueil .btn-text-overlay,
+  .btn-actualite .btn-text-overlay,
+  .btn-dragon .btn-text-overlay {
+    font-size: 13px;
+    padding: 8px 10px;
+    min-height: 32px;
+  }
+}
+
+/* Responsive texte overlay - Mobile */
+@media (max-width: 480px) {
+  .btn-aidejeux .btn-text-overlay,
+  .btn-boutique .btn-text-overlay,
+  .btn-carte .btn-text-overlay,
+  .btn-piece .btn-text-overlay,
+  .btn-triptyque .btn-text-overlay,
+  .btn-contact .btn-text-overlay,
+  .btn-accueil .btn-text-overlay,
+  .btn-actualite .btn-text-overlay,
+  .btn-dragon .btn-text-overlay {
+    font-size: 12px;
+    padding: 6px 8px;
+    min-height: 28px;
+  }
+}
+
+/* Header navigation buttons (smaller) */
+.header-nav-icon-btn {
+  position: relative;
+}
+
+.header-nav-icon-btn .btn-text-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 4px 6px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.90) 0%, rgba(0, 0, 0, 0.75) 60%, transparent 100%);
+  backdrop-filter: blur(2px);
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  line-height: 1.1;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 20px;
 }
 
 .btn-outline {

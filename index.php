@@ -42,7 +42,10 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
              aria-label="<?= __('hero.visitShop', 'Visiter la boutique') ?>"
              title="<?= __('hero.visitShop', 'Visiter la boutique') ?>"
              data-i18n="hero.visitShop">
-            <span class="sr-only"><?= __('hero.visitShop', 'Visiter la boutique') ?></span>
+            <span class="btn-text-overlay">
+              <span class="hidden md:inline"><?= __('btnOverlay.shop.desktop', 'L\'Échoppe') ?></span>
+              <span class="md:hidden"><?= __('btnOverlay.shop.mobile', 'Échoppe') ?></span>
+            </span>
           </a>
       </div>
     </section>
@@ -119,14 +122,20 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
              aria-label="<?= __('hero.visitShop', 'Visiter la boutique') ?>"
              title="<?= __('hero.visitShop', 'Visiter la boutique') ?>"
              data-i18n="hero.visitShop">
-            <span class="sr-only"><?= __('hero.visitShop', 'Visiter la boutique') ?></span>
+            <span class="btn-text-overlay">
+              <span class="hidden md:inline"><?= __('btnOverlay.shop.desktop', 'L\'Échoppe') ?></span>
+              <span class="md:hidden"><?= __('btnOverlay.shop.mobile', 'Échoppe') ?></span>
+            </span>
           </a>
           <a href="<?= langUrl('index.php#contact') ?>"
              class="btn btn-primary btn-contact"
              aria-label="<?= __('contact.requestQuote', 'Demander un devis') ?>"
              title="<?= __('contact.requestQuote', 'Demander un devis') ?>"
              data-i18n="contact.requestQuote">
-            <span class="sr-only"><?= __('contact.requestQuote', 'Demander un devis') ?></span>
+            <span class="btn-text-overlay">
+              <span class="hidden md:inline"><?= __('btnOverlay.contact.desktop', 'Message') ?></span>
+              <span class="md:hidden"><?= __('btnOverlay.contact.mobile', 'Contact') ?></span>
+            </span>
           </a>
         </div>
       </div>
@@ -154,7 +163,10 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
                aria-label="<?= __('news.flim2025.read', 'Lire l\'article') ?>"
                title="<?= __('news.flim2025.read', 'Lire l\'article') ?>"
                data-i18n="news.flim2025.read">
-              <span class="sr-only"><?= __('news.flim2025.read', 'Lire l\'article') ?></span>
+              <span class="btn-text-overlay">
+                <span class="hidden md:inline"><?= __('btnOverlay.news.desktop', 'Chroniques') ?></span>
+                <span class="md:hidden"><?= __('btnOverlay.news.mobile', 'Actus') ?></span>
+              </span>
             </a>
           </div>
         </article>
@@ -190,8 +202,15 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
           <p class="mb-4 txt-court"><a href="mailto:commande@geekndragon.com" class="text-indigo-400 hover:underline">commande@geekndragon.com</a></p>
 
           <div class="mt-6">
-            <a href="<?= langUrl('index.php#contact') ?>" class="btn btn-primary btn-contact" data-i18n="contact.requestQuote">
-              Demander un devis
+            <a href="<?= langUrl('index.php#contact') ?>"
+               class="btn btn-primary btn-contact"
+               aria-label="<?= __('contact.requestQuote', 'Demander un devis') ?>"
+               title="<?= __('contact.requestQuote', 'Demander un devis') ?>"
+               data-i18n="contact.requestQuote">
+              <span class="btn-text-overlay">
+                <span class="hidden md:inline"><?= __('btnOverlay.contact.desktop', 'Message') ?></span>
+                <span class="md:hidden"><?= __('btnOverlay.contact.mobile', 'Contact') ?></span>
+              </span>
             </a>
           </div>
       </div>

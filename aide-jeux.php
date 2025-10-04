@@ -1445,7 +1445,10 @@ echo $snipcartInit;
                 class="btn btn-primary btn-contact relative"
                 aria-label="<?= __('gameHelp.customTriptychs.contact.copyTooltip', 'Cliquer pour copier l\'email') ?>"
                 title="<?= __('gameHelp.customTriptychs.contact.copyTooltip', 'Cliquer pour copier l\'email') ?>">
-                <span class="sr-only"><?= __('gameHelp.customTriptychs.contact.email', 'commande@geekndragon.com') ?></span>
+                <span class="btn-text-overlay">
+                  <span class="hidden md:inline"><?= __('btnOverlay.contact.desktop', 'Message') ?></span>
+                  <span class="md:hidden"><?= __('btnOverlay.contact.mobile', 'Contact') ?></span>
+                </span>
                 <span class="copy-feedback hidden absolute -top-10 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-3 py-1 rounded text-sm whitespace-nowrap">
                   ✓ <?= __('gameHelp.customTriptychs.contact.copied', 'Copié !') ?>
                 </span>
@@ -2304,13 +2307,19 @@ echo $snipcartInit;
                    class="btn btn-primary btn-piece w-full"
                    aria-label="<?= __('money.physicalCoins.order.shopButton', 'Voir les Pièces en Boutique') ?>"
                    title="<?= __('money.physicalCoins.order.shopButton', 'Voir les Pièces en Boutique') ?>">
-                  <span class="sr-only"><?= __('money.physicalCoins.order.shopButton', 'Voir les Pièces en Boutique') ?></span>
+                  <span class="btn-text-overlay">
+                    <span class="hidden md:inline"><?= __('btnOverlay.coins.desktop', 'Trésor') ?></span>
+                    <span class="md:hidden"><?= __('btnOverlay.coins.mobile', 'Trésor') ?></span>
+                  </span>
                 </a>
                 <a href="<?= langUrl('product.php?id=coin-lord-treasury-uniform&from=pieces') ?>"
                    class="btn btn-primary btn-dragon w-full"
                    aria-label="<?= __('money.physicalCoins.order.treasuryButton', 'Set Complet de Trésorerie') ?>"
                    title="<?= __('money.physicalCoins.order.treasuryButton', 'Set Complet de Trésorerie') ?>">
-                  <span class="sr-only"><?= __('money.physicalCoins.order.treasuryButton', 'Set Complet de Trésorerie') ?></span>
+                  <span class="btn-text-overlay">
+                    <span class="hidden md:inline"><?= __('btnOverlay.bundle.desktop', 'Coffre') ?></span>
+                    <span class="md:hidden"><?= __('btnOverlay.bundle.mobile', 'Coffre') ?></span>
+                  </span>
                 </a>
               </div>
             </div>
@@ -2341,25 +2350,37 @@ echo $snipcartInit;
            class="btn btn-primary btn-triptyque"
            aria-label="<?= __('callToAction.buttons.triptychs', 'Triptyques') ?>"
            title="<?= __('callToAction.buttons.triptychs', 'Triptyques') ?>">
-          <span class="sr-only"><?= __('callToAction.buttons.triptychs', 'Triptyques') ?></span>
+          <span class="btn-text-overlay">
+            <span class="hidden md:inline"><?= __('btnOverlay.triptychs.desktop', 'Héros') ?></span>
+            <span class="md:hidden"><?= __('btnOverlay.triptychs.mobile', 'Héros') ?></span>
+          </span>
         </a>
         <a href="<?= langUrl('boutique.php#cartes') ?>"
            class="btn btn-primary btn-carte"
            aria-label="<?= __('callToAction.buttons.cards', 'Cartes d\'Équipement') ?>"
            title="<?= __('callToAction.buttons.cards', 'Cartes d\'Équipement') ?>">
-          <span class="sr-only"><?= __('callToAction.buttons.cards', 'Cartes d\'Équipement') ?></span>
+          <span class="btn-text-overlay">
+            <span class="hidden md:inline"><?= __('btnOverlay.cards.desktop', 'Arsenal') ?></span>
+            <span class="md:hidden"><?= __('btnOverlay.cards.mobile', 'Arsenal') ?></span>
+          </span>
         </a>
         <a href="<?= langUrl('boutique.php#pieces') ?>"
            class="btn btn-primary btn-piece"
            aria-label="<?= __('callToAction.buttons.coins', 'Pièces Métalliques') ?>"
            title="<?= __('callToAction.buttons.coins', 'Pièces Métalliques') ?>">
-          <span class="sr-only"><?= __('callToAction.buttons.coins', 'Pièces Métalliques') ?></span>
+          <span class="btn-text-overlay">
+            <span class="hidden md:inline"><?= __('btnOverlay.coins.desktop', 'Trésor') ?></span>
+            <span class="md:hidden"><?= __('btnOverlay.coins.mobile', 'Trésor') ?></span>
+          </span>
         </a>
         <a href="<?= langUrl('boutique.php') ?>"
            class="btn btn-primary btn-boutique"
            aria-label="<?= __('callToAction.buttons.shop', 'Voir toute la boutique') ?>"
            title="<?= __('callToAction.buttons.shop', 'Voir toute la boutique') ?>">
-          <span class="sr-only"><?= __('callToAction.buttons.shop', 'Voir toute la boutique') ?></span>
+          <span class="btn-text-overlay">
+            <span class="hidden md:inline"><?= __('btnOverlay.shop.desktop', 'L\'Échoppe') ?></span>
+            <span class="md:hidden"><?= __('btnOverlay.shop.mobile', 'Échoppe') ?></span>
+          </span>
         </a>
       </div>
     </div>

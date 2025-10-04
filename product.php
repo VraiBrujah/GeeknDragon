@@ -258,7 +258,10 @@ echo $snipcartInit;
          aria-label="<?= $text ?>"
          title="<?= $text ?>"
          data-i18n="product.back">
-        <span class="sr-only"><?= $text ?></span>
+        <span class="btn-text-overlay">
+          <span class="hidden md:inline"><?= __('buttons.shop.desktop', 'L\'Échoppe') ?></span>
+          <span class="md:hidden"><?= __('buttons.shop.mobile', 'Échoppe') ?></span>
+        </span>
       </a>
     </div>
 
