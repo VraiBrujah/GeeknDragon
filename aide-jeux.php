@@ -885,8 +885,6 @@ $extraHead .= <<<'SCRIPT'
   
   // Fonction pour forcer l'affichage mobile
   function forceDisplayMobile() {
-    const isDebugMode = window.location.hash === '#debug' || window.location.search.includes('debug=1');
-
     if (window.innerWidth <= 768) {
       // Correctif affichage mobile appliqué
       
@@ -2381,80 +2379,6 @@ function flipCardExample(cardId) {
     container.classList.toggle('flipped');
 }
 
-// Convertisseur de monnaie D&D
-const currencyRates = {
-    pp: 1000,    // 1 pp = 1000 pc
-    po: 100,     // 1 po = 100 pc
-    pa: 10,      // 1 pa = 10 pc
-    pe: 5,       // 1 pe = 5 pc
-    pc: 1        // 1 pc = 1 pc
-};
-
-function convertCurrency(fromCurrency) {
-    // Récupérer la valeur saisie
-    const inputValue = parseFloat(document.getElementById(`input-${fromCurrency}`).value) || 0;
-    
-    // Convertir tout en pièces de cuivre (base)
-    const totalCopper = inputValue * currencyRates[fromCurrency];
-    
-    // Calculer les équivalences
-    const pp = Math.floor(totalCopper / currencyRates.pp);
-    const po = Math.floor(totalCopper / currencyRates.po);
-    const pa = Math.floor(totalCopper / currencyRates.pa);
-    const pe = Math.floor(totalCopper / currencyRates.pe);
-    const pc = totalCopper;
-    
-    // Calculer la valeur en or pour l'affichage principal
-    const totalGold = totalCopper / currencyRates.po;
-    
-    // Mettre à jour l'affichage
-    const lang = document.documentElement.lang || 'fr';
-    const locale = lang === 'en' ? 'en-US' : 'fr-FR';
-    
-    // Obtenir les abréviations de monnaie selon la langue
-    const abbrevs = {
-      fr: { platinum: 'pp', gold: 'po', silver: 'pa', electrum: 'pe', copper: 'pc' },
-      en: { platinum: 'pp', gold: 'gp', silver: 'sp', electrum: 'ep', copper: 'cp' }
-    }[lang] || { platinum: 'pp', gold: 'po', silver: 'pa', electrum: 'pe', copper: 'pc' };
-    
-    document.getElementById('total-po').textContent = `${totalGold.toLocaleString(locale, {maximumFractionDigits: 2})} ${abbrevs.gold}`;
-    document.getElementById('result-pp').textContent = `${pp.toLocaleString(locale)} ${abbrevs.platinum}`;
-    document.getElementById('result-po').textContent = `${po.toLocaleString(locale)} ${abbrevs.gold}`;
-    document.getElementById('result-pa').textContent = `${pa.toLocaleString(locale)} ${abbrevs.silver}`;
-    document.getElementById('result-pe').textContent = `${pe.toLocaleString(locale)} ${abbrevs.electrum}`;
-    document.getElementById('result-pc').textContent = `${pc.toLocaleString(locale)} ${abbrevs.copper}`;
-    
-    // Effacer les autres champs (éviter la confusion)
-    Object.keys(currencyRates).forEach(currency => {
-        if (currency !== fromCurrency) {
-            const input = document.getElementById(`input-${currency}`);
-            if (input.value !== '') {
-                input.value = '';
-            }
-        }
-    });
-}
-
-function clearConverter() {
-    // Effacer tous les champs
-    Object.keys(currencyRates).forEach(currency => {
-        document.getElementById(`input-${currency}`).value = '';
-    });
-    
-    // Remettre à zéro l'affichage
-    const lang = document.documentElement.lang || 'fr';
-    const abbrevs = {
-      fr: { platinum: 'pp', gold: 'po', silver: 'pa', electrum: 'pe', copper: 'pc' },
-      en: { platinum: 'pp', gold: 'gp', silver: 'sp', electrum: 'ep', copper: 'cp' }
-    }[lang] || { platinum: 'pp', gold: 'po', silver: 'pa', electrum: 'pe', copper: 'pc' };
-    
-    document.getElementById('total-po').textContent = `0 ${abbrevs.gold}`;
-    document.getElementById('result-pp').textContent = `0 ${abbrevs.platinum}`;
-    document.getElementById('result-po').textContent = `0 ${abbrevs.gold}`;
-    document.getElementById('result-pa').textContent = `0 ${abbrevs.silver}`;
-    document.getElementById('result-pe').textContent = `0 ${abbrevs.electrum}`;
-    document.getElementById('result-pc').textContent = `0 ${abbrevs.copper}`;
-}
 
 // Fonctions pour le lanceur de dés
 function rollStat(statName) {
@@ -2997,141 +2921,44 @@ if (document.readyState === 'loading') {
 </script>
 
 <script>
-// 🔧 INITIALISATION FORCÉE DU CONVERTISSEUR DE MONNAIE
-// Ce script garantit que le convertisseur s'initialise même si l'IntersectionObserver ne se déclenche pas
+// Initialisation optimisée du convertisseur pour compatibilité mobile
 (function() {
   'use strict';
 
-  const isDebugMode = window.location.hash === '#debug' || window.location.search.includes('debug=1');
-
   document.addEventListener('DOMContentLoaded', function() {
-    if (isDebugMode) console.log('🚀 [DEBUG] Initialisation forcée du convertisseur...');
+    const container = document.getElementById('currency-converter-premium');
+    if (!container || typeof CurrencyConverterPremium === 'undefined') return;
 
-    // Détection mobile
-    const isMobile = window.innerWidth <= 768;
-    if (isDebugMode) console.log(`📱 [DEBUG] Mode mobile: ${isMobile} (${window.innerWidth}px)`);
-
-    // Vérifier la visibilité des sections principales
-    const sectionsToCheck = [
-      'currency-converter-premium',
-      'coin-lots-recommendations',
-      'coin-lots-content'
-    ];
-
-    sectionsToCheck.forEach(sectionId => {
-      const section = document.getElementById(sectionId);
-      if (section) {
-        const computedStyle = window.getComputedStyle(section);
-        const isVisible = computedStyle.display !== 'none' && computedStyle.visibility !== 'hidden';
-
-        if (isDebugMode) {
-          console.log(`📊 [DEBUG] Section ${sectionId}: visible=${isVisible}`);
-        }
-
-        // Forcer la visibilité sur mobile
-        if (isMobile && !isVisible) {
-          section.style.display = 'block';
-          section.style.opacity = '1';
-          if (isDebugMode) console.log(`🔧 [CORRECTION] Section ${sectionId} forcée visible`);
-        }
-      } else if (isDebugMode) {
-        console.warn(`❌ [DEBUG] Section ${sectionId} non trouvée`);
-      }
-    });
-
-    // Vérifier la présence du container
-    const converterContainer = document.getElementById('currency-converter-premium');
-    if (!converterContainer) {
-      if (isDebugMode) console.warn('❌ [DEBUG] Container non trouvé');
-      return;
-    }
-
-    // Vérifier la présence des classes
-    if (typeof CurrencyConverterPremium === 'undefined') {
-      if (isDebugMode) console.error('❌ [DEBUG] CurrencyConverterPremium non disponible');
-      return;
-    }
-
-    // Attendre un peu pour s'assurer que tous les scripts sont chargés
-    setTimeout(() => {
+    function initConverter() {
       try {
-        // Forcer l'initialisation même si l'instance existe déjà
-        if (!window.converterInstance || typeof window.converterInstance.getCurrentValues !== 'function') {
-          if (isDebugMode) console.log('✅ [DEBUG] Création instance convertisseur');
+        if (!window.converterInstance) {
           window.converterInstance = new CurrencyConverterPremium();
           window.currencyConverter = window.converterInstance;
-
-          if (isDebugMode) {
-            const testValue = window.converterInstance.getTotalBaseValue();
-            console.log(`✅ [DEBUG] Convertisseur OK: ${testValue} cuivres`);
-          }
-        } else if (isDebugMode) {
-          console.log('ℹ️ [DEBUG] Convertisseur déjà initialisé');
         }
-
+        return true;
       } catch (error) {
-        if (isDebugMode) {
-          console.error('❌ [DEBUG] Erreur init:', error);
-
-          // Indicateur d'erreur en mode debug uniquement
-          const errorIndicator = document.createElement('div');
-          errorIndicator.style.cssText = 'position: fixed; top: 10px; right: 10px; background: #dc3545; color: white; padding: 8px 12px; border-radius: 4px; font-size: 12px; z-index: 9999;';
-          errorIndicator.textContent = '❌ Erreur Convertisseur: ' + error.message;
-          document.body.appendChild(errorIndicator);
-
-          setTimeout(() => {
-            if (errorIndicator.parentNode) {
-              errorIndicator.parentNode.removeChild(errorIndicator);
-            }
-          }, 5000);
-        }
+        return false;
       }
-    }, 1000);
+    }
 
-  });
-
-  // Détection spécifique mobile
-  function isMobileDevice() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-           (navigator.maxTouchPoints && navigator.maxTouchPoints > 1);
-  }
-
-  // Initialisation spéciale pour mobile
-  if (isMobileDevice()) {
-    if (isDebugMode) console.log('📱 [DEBUG] Appareil mobile, init adaptée');
-
-    window.addEventListener('load', function() {
-      setTimeout(() => {
-        if (!window.converterInstance && document.getElementById('currency-converter-premium')) {
-          if (isDebugMode) console.log('📱 [DEBUG] Init mobile forcée');
-          try {
-            window.converterInstance = new CurrencyConverterPremium();
-            if (isDebugMode) console.log('✅ [DEBUG] Init mobile OK');
-          } catch (error) {
-            if (isDebugMode) console.error('❌ [DEBUG] Erreur init mobile:', error);
-          }
+    // Initialisation avec délais adaptatifs
+    setTimeout(initConverter, 1000);
+    
+    // Initialisation sur interaction utilisateur
+    ['click', 'touchend'].forEach(eventType => {
+      document.addEventListener(eventType, function(e) {
+        if (e.target.closest('#currency-converter-premium')) {
+          initConverter();
         }
-      }, 2000);
+      }, { once: true, passive: true });
     });
-  }
 
-  // Ré-initialisation sur interaction si nécessaire
-  ['click', 'touchend'].forEach(eventType => {
-    document.addEventListener(eventType, function(e) {
-      if (e.target.closest('#currency-converter-premium')) {
-        if (isDebugMode) console.log('🖱️ [DEBUG] Interaction:', eventType);
-
-        if (!window.converterInstance) {
-          if (isDebugMode) console.log('🔄 [DEBUG] Ré-init suite interaction');
-          try {
-            window.converterInstance = new CurrencyConverterPremium();
-            if (isDebugMode) console.log('✅ [DEBUG] Ré-init OK');
-          } catch (error) {
-            if (isDebugMode) console.error('❌ [DEBUG] Erreur ré-init:', error);
-          }
-        }
-      }
-    }, { passive: false });
+    // Initialisation spéciale pour mobile
+    if (/Android|webOS|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      window.addEventListener('load', () => {
+        setTimeout(initConverter, 2000);
+      });
+    }
   });
 })();
 </script>

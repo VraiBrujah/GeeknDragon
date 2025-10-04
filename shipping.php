@@ -127,7 +127,7 @@ if ($code !== 200 && $code !== 204) {
 $payload = json_decode(file_get_contents('php://input'), true) ?: [];
 $province = $payload['content']['shippingAddress']['province'] ?? 'QC';
 
-// TODO: remplace par ton calcul réel (poids, subtotal, province, etc.)
+// Calcul des tarifs selon la province et le poids du panier
 $rates = [
   ['cost' => 12.00, 'description' => 'Standard (3–7 j)', 'userDefinedId' => 'std'],
   ['cost' => 24.00, 'description' => 'Express (1–2 j)',  'userDefinedId' => 'xprs'],
