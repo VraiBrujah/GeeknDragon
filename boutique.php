@@ -171,7 +171,13 @@ $products = [];
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
 <?php include 'head-common.php'; ?>
-
+<style>
+  /* Optimisation: cacher temporairement les sections non-critiques pendant le chargement */
+  .lazy-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 800px;
+  }
+</style>
 <body>
 
 <?php
@@ -604,7 +610,9 @@ echo $snipcartInit;
 }
 </script>
   <!-- Scripts chargés automatiquement via footer.php -->
-  <!-- Pas besoin de charger manuellement ici, footer.php s'en occupe -->
+  <!-- Chargement asynchrone des produits pour performance optimale -->
+  <script src="/js/app.js?v=<?= filemtime(__DIR__.'/js/app.js') ?>"></script>
+  <script src="/js/boutique-async-loader.js?v=<?= filemtime(__DIR__.'/js/boutique-async-loader.js') ?>"></script>
 
   <!-- Snipcart fonctionne nativement avec les attributs data-item-* selon la documentation officielle -->
 </body>
