@@ -790,32 +790,35 @@ class CurrencyConverterPremium {
             return this.getUserMultiplierBreakdown();
         }
 
-        // Mode conversion automatique : priorité métal > multiplicateur
+        // Mode conversion automatique : algorithme glouton optimal corrigé
+        // CORRECTION MAJEURE : Créer toutes les dénominations et les trier par valeur décroissante
+        const denominations = [];
         metalPriority.forEach((metal) => {
-            if (remaining <= 0) return;
+            // ORDRE INVERSÉ : Du plus grand multiplicateur au plus petit pour minimiser les pièces
+            this.multiplicateursDisponibles.slice().reverse().forEach((multiplier) => {
+                denominations.push({
+                    currency: metal,
+                    multiplier,
+                    value: this.tauxChange[metal] * multiplier,
+                });
+            });
+        });
 
-            const tauxMetal = this.tauxChange[metal];
+        // Trier par valeur décroissante pour l'algorithme glouton optimal
+        denominations.sort((a, b) => b.value - a.value);
 
-            // Essayer les multiplicateurs du plus petit au plus grand
-            for (const multiplier of this.multiplicateursDisponibles) {
-                const valeurPiece = tauxMetal * multiplier;
-
-                if (remaining >= valeurPiece) {
-                    const quantity = Math.floor(remaining / valeurPiece);
-                    if (quantity > 0) {
-                        // Appliquer logique lots 3/7 avant d'ajouter
-                        const optimizedQuantity = this.optimizeQuantityForBulk(quantity, metal, multiplier);
-
-                        result.push({
-                            currency: metal,
-                            multiplier,
-                            quantity: optimizedQuantity.quantity,
-                            value: valeurPiece,
-                        });
-
-                        remaining -= optimizedQuantity.totalValue;
-                        break; // Passer au métal suivant
-                    }
+        // Algorithme glouton pour minimisation du nombre de pièces
+        denominations.forEach((denom) => {
+            if (remaining >= denom.value) {
+                const quantity = Math.floor(remaining / denom.value);
+                if (quantity > 0) {
+                    result.push({
+                        currency: denom.currency,
+                        multiplier: denom.multiplier,
+                        quantity,
+                        value: denom.value,
+                    });
+                    remaining -= quantity * denom.value;
                 }
             }
         });
@@ -914,27 +917,34 @@ class CurrencyConverterPremium {
         // Priorité métal > multiplicateur
         const metalPriority = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
 
+        // CORRECTION : Utiliser l'algorithme glouton optimal identique
+        const denominations = [];
         metalPriority.forEach((metal) => {
-            if (remaining <= 0) return;
+            // Du plus grand multiplicateur au plus petit pour minimiser les pièces
+            this.multiplicateursDisponibles.slice().reverse().forEach((multiplier) => {
+                denominations.push({
+                    currency: metal,
+                    multiplier,
+                    value: this.tauxChange[metal] * multiplier,
+                });
+            });
+        });
 
-            const tauxMetal = this.tauxChange[metal];
+        // Trier par valeur décroissante pour l'algorithme glouton optimal
+        denominations.sort((a, b) => b.value - a.value);
 
-            // Pour chaque métal, utiliser le plus petit multiplicateur possible
-            for (const multiplier of this.multiplicateursDisponibles) {
-                const valeurPiece = tauxMetal * multiplier;
-
-                if (remaining >= valeurPiece) {
-                    const quantity = Math.floor(remaining / valeurPiece);
-                    if (quantity > 0) {
-                        result.push({
-                            currency: metal,
-                            multiplier,
-                            quantity,
-                            value: valeurPiece,
-                        });
-                        remaining -= quantity * valeurPiece;
-                        break; // Passer au métal suivant
-                    }
+        // Algorithme glouton pour minimisation du nombre de pièces
+        denominations.forEach((denom) => {
+            if (remaining >= denom.value) {
+                const quantity = Math.floor(remaining / denom.value);
+                if (quantity > 0) {
+                    result.push({
+                        currency: denom.currency,
+                        multiplier: denom.multiplier,
+                        quantity,
+                        value: denom.value,
+                    });
+                    remaining -= quantity * denom.value;
                 }
             }
         });
