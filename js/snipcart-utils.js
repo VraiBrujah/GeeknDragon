@@ -573,7 +573,7 @@ class SnipcartUtils {
             normalized[`custom${customIndex}`] = {
                 name: lang === 'fr' ? 'Multiplicateur' : 'Multiplier',
                 type: 'dropdown',
-                options: '1[+0.00]|10[+10.00]|100[+95.00]|1000[+950.00]|10000[+9500.00]',
+                options: '1|10|100|1000|10000', // Pas de variation de prix
                 value: multData.value.toString(),
                 role: 'multiplier'
             };
