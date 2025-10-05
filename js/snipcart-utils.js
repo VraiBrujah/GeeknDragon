@@ -114,7 +114,10 @@ class SnipcartUtils {
         });
 
         // Ajouter les champs personnalisés
-        Object.entries(customFields).forEach(([fieldKey, fieldData]) => {
+        // Gérer deux formats: {custom1: {...}} OU {metal-productId: {...}}
+        const normalizedFields = this.normalizeCustomFields(customFields);
+
+        Object.entries(normalizedFields).forEach(([fieldKey, fieldData]) => {
             const index = fieldKey.replace('custom', '');
             button.setAttribute(`data-item-custom${index}-name`, fieldData.name);
             button.setAttribute(`data-item-custom${index}-type`, fieldData.type);
@@ -423,6 +426,54 @@ class SnipcartUtils {
         }
 
         return null;
+    }
+
+    /**
+     * Normalise les customFields pour accepter deux formats
+     * Format 1 (boutique): {custom1: {name, type, options, value, role}}
+     * Format 2 (optimizer): {metal-productId: {role, value}}
+     *
+     * @param {Object} customFields - Champs personnalisés à normaliser
+     * @returns {Object} Champs normalisés au format custom1, custom2, etc.
+     */
+    static normalizeCustomFields(customFields) {
+        const normalized = {};
+        let customIndex = 1;
+
+        // Si déjà au bon format (custom1, custom2), retourner tel quel
+        if (customFields.custom1 || customFields.custom2) {
+            return customFields;
+        }
+
+        // Convertir format optimizer vers format boutique
+        const metalField = Object.entries(customFields).find(([key]) => key.includes('metal'));
+        const multiplierField = Object.entries(customFields).find(([key]) => key.includes('multiplier'));
+        const lang = document.documentElement?.lang || 'fr';
+
+        if (metalField) {
+            const [, metalData] = metalField;
+            normalized.custom1 = {
+                name: lang === 'fr' ? 'Métal' : 'Metal',
+                type: 'dropdown',
+                options: 'copper[+0.00]|silver[+0.00]|electrum[+0.00]|gold[+0.00]|platinum[+0.00]',
+                value: metalData.value,
+                role: 'metal'
+            };
+            customIndex++;
+        }
+
+        if (multiplierField) {
+            const [, multData] = multiplierField;
+            normalized[`custom${customIndex}`] = {
+                name: lang === 'fr' ? 'Multiplicateur' : 'Multiplier',
+                type: 'dropdown',
+                options: '1[+0.00]|10[+10.00]|100[+95.00]|1000[+950.00]|10000[+9500.00]',
+                value: multData.value.toString(),
+                role: 'multiplier'
+            };
+        }
+
+        return normalized;
     }
 
     /**

@@ -3183,18 +3183,20 @@ document.addEventListener('DOMContentLoaded', function() {
           Object.entries(lot.customFields).forEach(([fieldKey, fieldData]) => {
             if (fieldData.role === 'metal') {
               convertedCustomFields[`custom${customIndex}`] = {
-                name: 'Metal',
-                type: 'dropdown', 
-                options: 'cuivre|argent|électrum|or|platine',
-                value: translateMetal(fieldData.value) // TRADUCTION AJOUTÉE
+                name: 'Métal',
+                type: 'dropdown',
+                options: 'copper[+0.00]|silver[+0.00]|electrum[+0.00]|gold[+0.00]|platinum[+0.00]',
+                value: fieldData.value, // Garder la valeur anglaise (copper, silver, etc.)
+                role: 'metal'
               };
               customIndex++;
             } else if (fieldData.role === 'multiplier') {
               convertedCustomFields[`custom${customIndex}`] = {
                 name: 'Multiplicateur',
                 type: 'dropdown',
-                options: '1|10|100|1000|10000', 
-                value: fieldData.value.toString()
+                options: '1[+0.00]|10[+10.00]|100[+95.00]|1000[+950.00]|10000[+9500.00]',
+                value: fieldData.value.toString(),
+                role: 'multiplier'
               };
               customIndex++;
             }
@@ -3253,7 +3255,111 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  
+  // Event listener pour le bouton "Collection la Plus Efficace"
+  const addOptimalLotsButton = document.getElementById('add-all-optimal-lots-to-cart');
+
+  if (addOptimalLotsButton && !addOptimalLotsButton.hasAttribute('data-listener-added')) {
+    addOptimalLotsButton.setAttribute('data-listener-added', 'true');
+    addOptimalLotsButton.addEventListener('click', function() {
+      // Protection contre les clics multiples
+      if (this.disabled || this.dataset.adding === 'true') {
+        return;
+      }
+
+      this.disabled = true;
+      this.dataset.adding = 'true';
+
+      const lotsData = JSON.parse(this.dataset.lotsData || '[]');
+
+      if (lotsData.length === 0) {
+        alert(translations.noLotsMessage);
+        this.disabled = false;
+        this.dataset.adding = 'false';
+        return;
+      }
+
+      // Convertir les données en format SnipcartUtils (même logique que add-all-lots-to-cart)
+      const productsToAdd = lotsData.map(lot => {
+        const product = window.products?.[lot.productId];
+
+        // Convertir customFields du format CoinLotOptimizer vers format SnipcartUtils
+        const convertedCustomFields = {};
+        let customIndex = 1;
+
+        if (lot.customFields) {
+          Object.entries(lot.customFields).forEach(([fieldKey, fieldData]) => {
+            if (fieldData.role === 'metal') {
+              convertedCustomFields[`custom${customIndex}`] = {
+                name: 'Métal',
+                type: 'dropdown',
+                options: 'copper[+0.00]|silver[+0.00]|electrum[+0.00]|gold[+0.00]|platinum[+0.00]',
+                value: fieldData.value,
+                role: 'metal'
+              };
+              customIndex++;
+            } else if (fieldData.role === 'multiplier') {
+              convertedCustomFields[`custom${customIndex}`] = {
+                name: 'Multiplicateur',
+                type: 'dropdown',
+                options: '1[+0.00]|10[+10.00]|100[+95.00]|1000[+950.00]|10000[+9500.00]',
+                value: fieldData.value.toString(),
+                role: 'multiplier'
+              };
+              customIndex++;
+            }
+          });
+        }
+
+        return {
+          product: {
+            id: lot.productId,
+            name: product?.name || lot.productId,
+            summary: product?.summary || translations.productSummary + ' - ' + (product?.name || lot.productId),
+            price: lot.price,
+            url: lot.url || 'product.php?id=' + encodeURIComponent(lot.productId)
+          },
+          quantity: lot.quantity,
+          customFields: convertedCustomFields
+        };
+      });
+
+      // Utiliser les utilitaires Snipcart optimisés pour ajouter au panier
+      if (window.SnipcartUtils) {
+        (async () => {
+          try {
+            await window.SnipcartUtils.addMultipleToCart(productsToAdd, (added, total, processed) => {
+              if (processed === total) {
+                const lang = document.documentElement.lang || 'fr';
+                const message = lang === 'en' ?
+                  `${added} product(s) added to cart` :
+                  `${added} produit(s) ajouté(s) au panier`;
+
+                const resultDiv = document.createElement('div');
+                resultDiv.className = `fixed top-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50`;
+                resultDiv.innerHTML = `<span>✅ ${message}</span>`;
+
+                document.body.appendChild(resultDiv);
+                setTimeout(() => {
+                  if (resultDiv.parentNode) {
+                    resultDiv.parentNode.removeChild(resultDiv);
+                  }
+                }, 3000);
+              }
+            });
+          } catch (error) {
+            // Gestion silencieuse des erreurs en production
+          }
+        })();
+      }
+
+      // Réactiver le bouton après la fin du processus optimisé
+      setTimeout(() => {
+        this.disabled = false;
+        this.dataset.adding = 'false';
+      }, 1000);
+    });
+  }
+
   // Ajouter des animations de scroll et d'apparition
   const sectionsToAnimate = document.querySelectorAll('section, .card-product, .card-example, .navigation-rapide a');
 

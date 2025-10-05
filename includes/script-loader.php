@@ -72,7 +72,7 @@ class ScriptLoader {
         $this->loadScripts([
             'header-scroll-animation',
             'hero-videos',
-            'snipcart-utils',
+            // 'snipcart-utils', // Déjà inclus dans app.bundle.min.js
             'account-icon-switcher',
             'boutique-premium',
             'boutique-async-loader',
@@ -89,7 +89,7 @@ class ScriptLoader {
             'header-scroll-animation',
             'hero-videos',
             'boutique-premium',
-            'snipcart-utils',
+            // 'snipcart-utils', // Déjà inclus dans app.bundle.min.js
             'account-icon-switcher',
             'dnd-music-player'
         ]);
@@ -126,7 +126,7 @@ function load_optimized_scripts($type = 'basic', $baseDir = null) {
             $loader->loadScript('header-scroll-animation');
             $loader->loadScript('hero-videos');
             $loader->loadScript('account-icon-switcher');
-            $loader->loadScript('snipcart-utils'); // Pour ajout au panier
+            // $loader->loadScript('snipcart-utils'); // Déjà inclus dans app.bundle.min.js
             $loader->loadScript('shop-grid-scroll'); // Pour scroll horizontal produits
             $loader->loadScript('async-stock-loader'); // Pour affichage rupture de stock
             break;
