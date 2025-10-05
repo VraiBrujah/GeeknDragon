@@ -30,12 +30,26 @@ $extraHead = <<<HTML
 /* CORRECTION MOBILE: Sections toujours visibles sur mobile */
 @media (max-width: 768px) {
   #currency-converter-premium,
+  #optimal-lots-recommendations,
+  #optimal-lots-content,
   #coin-lots-recommendations,
   #coin-lots-content {
     display: block !important;
     opacity: 1 !important;
     visibility: visible !important;
   }
+  
+  /* Empiler les sections de recommandations sur mobile */
+  .grid.lg\\:grid-cols-2 {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Réduire le padding sur mobile pour les sections de recommandations */
+  #optimal-lots-recommendations > div,
+  #coin-lots-recommendations > div {
+    padding: 1rem !important;
+  }
+}
   
   /* Assurer que les grids fonctionnent sur mobile */
   .currency-input-grid {
@@ -891,11 +905,22 @@ $extraHead .= <<<'SCRIPT'
       const emergencyCSS = `
         @media (max-width: 768px) {
           #currency-converter-premium,
+          #optimal-lots-recommendations,
+          #optimal-lots-content,
           #coin-lots-recommendations,
           #coin-lots-content {
             display: block !important;
             opacity: 1 !important;
             visibility: visible !important;
+          }
+          
+          .grid.lg\\:grid-cols-2 {
+            grid-template-columns: 1fr !important;
+          }
+          
+          #optimal-lots-recommendations > div,
+          #coin-lots-recommendations > div {
+            padding: 1rem !important;
           }
           .currency-input-grid {
             display: grid !important;
@@ -2016,43 +2041,84 @@ echo $snipcartInit;
         </div>
       </div>
 
-      <!-- ===== RECOMMANDATIONS DE LOTS DE PIÈCES ===== -->
-      <div id="coin-lots-recommendations" class="mt-12 mb-16" style="display: block;">
-        <div class="bg-gradient-to-r from-green-900/30 to-emerald-900/20 rounded-xl p-8 border border-green-700/50">
-          <h4 class="text-2xl font-bold text-center text-gray-200 mb-8">
-            <?= __('money.converter.lotsRecommendedTitle', 'Collections optimales pour votre aventure') ?>
-          </h4>
+      <!-- ===== RECOMMANDATIONS DE COLLECTIONS CÔTE À CÔTE ===== -->
+      <div class="mt-12 mb-16">
+        <div class="grid lg:grid-cols-2 gap-8">
           
-          <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-6">
-              <p class="text-gray-300 mb-4">
-                <?= __('money.converter.lotsRecommendations.description', 'Voici les collections de pièces les plus avantageuses pour obtenir exactement le trésor défini dans votre tableau multiplicateur. Ces lots optimisent votre investissement tout en vous garantissant les pièces précises dont vous avez besoin pour vos sessions.') ?>
-              </p>
-            </div>
-            
-            <!-- Contenu des recommandations -->
-            <div id="coin-lots-content" class="mb-8">
-              <!-- Le contenu sera injecté dynamiquement par JavaScript -->
-            </div>
-            
-            <!-- Bouton d'ajout au panier global avec icône -->
-            <div class="text-center">
-              <button id="add-all-lots-to-cart"
-                      class="btn-cart-icon mx-auto"
-                      style="display: none;"
-                      aria-label="<?= __('money.converter.lotsRecommendations.addAllButton', 'Acquérir toutes les collections') ?>"
-                      title="<?= __('money.converter.lotsRecommendations.addAllButton', 'Acquérir toutes les collections') ?>">
-                <img src="/media/branding/icons/ajout.webp"
-                     alt="<?= __('money.converter.lotsRecommendations.addAllButton', 'Acquérir toutes les collections') ?>"
-                     class="btn-cart-icon-img"
-                     loading="lazy">
-              </button>
+          <!-- COLLECTION EFFICACE (ALGORITHME OPTIMAL) -->
+          <div id="optimal-lots-recommendations" style="display: block;">
+            <div class="bg-gradient-to-br from-purple-900/40 to-indigo-900/30 rounded-xl p-6 border border-purple-700/50 h-full">
+              <div class="text-center mb-6">
+                <h4 class="text-xl font-bold text-purple-200 mb-3">
+                  <?= __('money.converter.optimalLotsTitle', 'Collection la Plus Efficace') ?>
+                </h4>
+                <p class="text-gray-300 text-sm leading-relaxed">
+                  <?= __('money.converter.optimalLots.description', 'Les maîtres-forgerons recommandent cette sélection pour obtenir votre trésor avec le nombre minimal de pièces. Optimisez votre espace de coffre et simplifiez vos comptages lors des échanges commerciaux.') ?>
+                </p>
+              </div>
               
-              <p class="text-sm text-gray-400 mt-4">
-                <?= __('money.converter.lotsRecommendations.optimizationNote', 'Ces collections représentent le minimum requis pour constituer votre trésor au coût le plus avantageux, en respectant exactement les quantités de votre tableau.') ?>
-              </p>
+              <!-- Contenu des recommandations optimales -->
+              <div id="optimal-lots-content" class="mb-6">
+                <!-- Le contenu sera injecté dynamiquement par JavaScript -->
+              </div>
+              
+              <!-- Bouton d'ajout au panier optimal -->
+              <div class="text-center">
+                <button id="add-all-optimal-lots-to-cart"
+                        class="btn-cart-icon mx-auto"
+                        style="display: none;"
+                        aria-label="<?= __('money.converter.optimalLots.addAllButton', 'Acquérir la collection efficace') ?>"
+                        title="<?= __('money.converter.optimalLots.addAllButton', 'Acquérir la collection efficace') ?>">
+                  <img src="/media/branding/icons/ajout.webp"
+                       alt="<?= __('money.converter.optimalLots.addAllButton', 'Acquérir la collection efficace') ?>"
+                       class="btn-cart-icon-img"
+                       loading="lazy">
+                </button>
+                
+                <p class="text-xs text-purple-300/80 mt-3">
+                  <?= __('money.converter.optimalLots.optimizationNote', 'Solution recommandée par les experts pour minimiser la gestion de votre trésor') ?>
+                </p>
+              </div>
             </div>
           </div>
+
+          <!-- COLLECTION PERSONNALISÉE (TABLEAU UTILISATEUR) -->
+          <div id="coin-lots-recommendations" style="display: block;">
+            <div class="bg-gradient-to-br from-green-900/40 to-emerald-900/30 rounded-xl p-6 border border-green-700/50 h-full">
+              <div class="text-center mb-6">
+                <h4 class="text-xl font-bold text-green-200 mb-3">
+                  <?= __('money.converter.lotsRecommendedTitle', 'Collection Personnalisée') ?>
+                </h4>
+                <p class="text-gray-300 text-sm leading-relaxed">
+                  <?= __('money.converter.lotsRecommendations.description', 'Constituez votre trésor selon vos préférences exactes définies dans le tableau. Ces collections respectent vos choix stratégiques et s\'adaptent à votre style de jeu unique.') ?>
+                </p>
+              </div>
+              
+              <!-- Contenu des recommandations -->
+              <div id="coin-lots-content" class="mb-6">
+                <!-- Le contenu sera injecté dynamiquement par JavaScript -->
+              </div>
+              
+              <!-- Bouton d'ajout au panier global -->
+              <div class="text-center">
+                <button id="add-all-lots-to-cart"
+                        class="btn-cart-icon mx-auto"
+                        style="display: none;"
+                        aria-label="<?= __('money.converter.lotsRecommendations.addAllButton', 'Acquérir votre collection') ?>"
+                        title="<?= __('money.converter.lotsRecommendations.addAllButton', 'Acquérir votre collection') ?>">
+                  <img src="/media/branding/icons/ajout.webp"
+                       alt="<?= __('money.converter.lotsRecommendations.addAllButton', 'Acquérir votre collection') ?>"
+                       class="btn-cart-icon-img"
+                       loading="lazy">
+                </button>
+                
+                <p class="text-xs text-green-300/80 mt-3">
+                  <?= __('money.converter.lotsRecommendations.optimizationNote', 'Collections adaptées à votre répartition personnalisée pour un trésor sur-mesure') ?>
+                </p>
+              </div>
+            </div>
+          </div>
+          
         </div>
       </div>
 

@@ -136,7 +136,8 @@ class CurrencyConverterPremium {
         this.setupEventListeners();
         this.updateDisplay();
 
-        // Afficher le message par défaut des recommandations dès l'initialisation
+        // Afficher les messages par défaut des recommandations dès l'initialisation
+        this.displayDefaultOptimalRecommendationMessage();
         this.displayDefaultRecommendationMessage();
     }
 
@@ -548,6 +549,7 @@ class CurrencyConverterPremium {
 
         this.updateMetalCards(valeurBase);
         this.updateOptimalRecommendationsFromUser(valeurBase);
+        this.updateOptimalLotsRecommendations(valeurBase);
         this.updateCoinLotsRecommendations(valeurBase, true);
     }
     
@@ -578,6 +580,7 @@ class CurrencyConverterPremium {
         this.distributeOptimally(valeurTotale);
         this.updateMetalCards(valeurTotale);
         this.updateOptimalRecommendationsFromUser(valeurTotale);
+        this.updateOptimalLotsRecommendations(valeurTotale);
         this.updateCoinLotsRecommendations(valeurTotale, true);
     }
     
@@ -1298,25 +1301,75 @@ class CurrencyConverterPremium {
         }
     }
 
+    /**
+     * Mise à jour des recommandations optimales basées sur le tri optimal (nombre minimal de pièces)
+     * Cette méthode utilise directement la solution algorithmique optimale du convertisseur
+     */
+    updateOptimalLotsRecommendations(baseValue) {
+        const optimalContainer = document.getElementById('optimal-lots-recommendations');
+        if (!optimalContainer) return;
+
+        optimalContainer.style.display = 'block';
+
+        if (baseValue === 0) {
+            this.displayDefaultOptimalRecommendationMessage();
+            return;
+        }
+
+        // Déléguer à CoinLotOptimizer si disponible
+        if (window.CoinLotOptimizer) {
+            this.showOptimalCalculatingIndicator();
+
+            setTimeout(() => {
+                try {
+                    const needs = {};
+
+                    // TOUJOURS utiliser la solution algorithmique optimale (tri optimal)
+                    const optimalSolution = this.findMinimalCoins(baseValue, false);
+                    optimalSolution.forEach((item) => {
+                        const key = `${item.currency}_${item.multiplier}`;
+                        needs[key] = (needs[key] || 0) + item.quantity;
+                    });
+
+                    // Utiliser CoinLotOptimizer pour trouver les lots optimaux
+                    const optimizer = new window.CoinLotOptimizer();
+                    const recommendations = optimizer.findOptimalProductCombination(needs);
+
+                    if (recommendations && recommendations.length > 0) {
+                        this.displayOptimalRecommendations(recommendations);
+                    } else {
+                        this.displayNoOptimalRecommendationsMessage();
+                    }
+                } catch (error) {
+                    this.displayNoOptimalRecommendationsMessage();
+                } finally {
+                    this.hideOptimalCalculatingIndicator();
+                }
+            }, 100);
+        } else {
+            this.displayNoOptimalRecommendationsMessage();
+        }
+    }
+
     // Méthodes d'affichage délégués vers CoinLotOptimizer
     showCalculatingIndicator() {
         const recommendationsContent = document.getElementById('coin-lots-content');
         if (!recommendationsContent) return;
 
         const lang = this.getCurrentLang();
-        const calculatingText = lang === 'en' ? 'Calculating optimal lots...' : 'Calcul des lots optimaux...';
+        const calculatingText = lang === 'en' ? 'Analyzing personalized collections...' : 'Analyse des collections personnalisées...';
 
         recommendationsContent.innerHTML = `
       <div class="calculating-indicator flex items-center justify-center p-8">
         <div class="text-center">
-          <div class="abacus-animation mb-4">
-            <div class="text-6xl animate-bounce">🧮</div>
+          <div class="mb-4">
+            <div class="w-8 h-8 border-4 border-green-400 border-t-transparent rounded-full animate-spin mx-auto"></div>
           </div>
-          <p class="text-amber-300 font-medium">${calculatingText}</p>
+          <p class="text-green-300 font-medium">${calculatingText}</p>
           <div class="flex justify-center mt-2 space-x-1">
-            <div class="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
-            <div class="w-2 h-2 bg-amber-400 rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
-            <div class="w-2 h-2 bg-amber-400 rounded-full animate-pulse" style="animation-delay: 0.4s"></div>
+            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
+            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse" style="animation-delay: 0.4s"></div>
           </div>
         </div>
       </div>
@@ -1330,9 +1383,11 @@ class CurrencyConverterPremium {
         if (recommendationsContent) {
             recommendationsContent.innerHTML = `
         <div class="text-center py-8">
-          <div class="text-6xl mb-4">🪙</div>
-          <p class="text-gray-300 text-lg mb-2">Définissez votre trésor dans le convertisseur</p>
-          <p class="text-gray-400 text-sm">pour découvrir les collections optimales</p>
+          <div class="w-16 h-16 bg-green-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div class="w-8 h-8 bg-green-500/50 rounded-full"></div>
+          </div>
+          <p class="text-gray-300 text-sm mb-2">Définissez votre trésor dans le convertisseur</p>
+          <p class="text-gray-400 text-xs">pour découvrir vos collections personnalisées</p>
         </div>
       `;
         }
@@ -1349,9 +1404,11 @@ class CurrencyConverterPremium {
         if (recommendationsContent) {
             recommendationsContent.innerHTML = `
         <div class="text-center py-8">
-          <div class="text-6xl mb-4">🔍</div>
-          <p class="text-gray-300 text-lg mb-2">Aucune collection disponible</p>
-          <p class="text-gray-400 text-sm">Modifiez votre trésor pour découvrir de nouvelles options</p>
+          <div class="w-16 h-16 bg-gray-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div class="w-8 h-8 border-2 border-gray-500/50 rounded-full border-dashed"></div>
+          </div>
+          <p class="text-gray-300 text-sm mb-2">Aucune collection disponible</p>
+          <p class="text-gray-400 text-xs">Modifiez votre trésor pour découvrir de nouvelles options</p>
         </div>
       `;
         }
@@ -1413,6 +1470,125 @@ class CurrencyConverterPremium {
 
     hideCalculatingIndicator() {
     // L'indicateur sera remplacé par displayRecommendations()
+    }
+
+    // ===== MÉTHODES D'AFFICHAGE POUR LA SECTION OPTIMALE =====
+
+    showOptimalCalculatingIndicator() {
+        const optimalContent = document.getElementById('optimal-lots-content');
+        if (!optimalContent) return;
+
+        const lang = this.getCurrentLang();
+        const calculatingText = lang === 'en' ? 'Analyzing optimal forging combinations...' : 'Analyse des combinaisons de forge optimales...';
+
+        optimalContent.innerHTML = `
+      <div class="calculating-indicator flex items-center justify-center p-8">
+        <div class="text-center">
+          <div class="mb-4">
+            <div class="w-8 h-8 border-4 border-purple-400 border-t-transparent rounded-full animate-spin mx-auto"></div>
+          </div>
+          <p class="text-purple-300 font-medium">${calculatingText}</p>
+          <div class="flex justify-center mt-2 space-x-1">
+            <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+            <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
+            <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style="animation-delay: 0.4s"></div>
+          </div>
+        </div>
+      </div>
+    `;
+    }
+
+    displayDefaultOptimalRecommendationMessage() {
+        const optimalContent = document.getElementById('optimal-lots-content');
+        const addOptimalButton = document.getElementById('add-all-optimal-lots-to-cart');
+
+        if (optimalContent) {
+            optimalContent.innerHTML = `
+        <div class="text-center py-8">
+          <div class="w-16 h-16 bg-purple-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div class="w-8 h-8 bg-purple-500/50 rounded-full"></div>
+          </div>
+          <p class="text-gray-300 text-sm mb-2">Configurez votre trésor dans le convertisseur</p>
+          <p class="text-gray-400 text-xs">pour découvrir les collections les plus efficaces</p>
+        </div>
+      `;
+        }
+
+        if (addOptimalButton) {
+            addOptimalButton.style.display = 'none';
+        }
+    }
+
+    displayNoOptimalRecommendationsMessage() {
+        const optimalContent = document.getElementById('optimal-lots-content');
+        const addOptimalButton = document.getElementById('add-all-optimal-lots-to-cart');
+
+        if (optimalContent) {
+            optimalContent.innerHTML = `
+        <div class="text-center py-8">
+          <div class="w-16 h-16 bg-gray-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div class="w-8 h-8 border-2 border-gray-500/50 rounded-full border-dashed"></div>
+          </div>
+          <p class="text-gray-300 text-sm mb-2">Aucune collection optimale disponible</p>
+          <p class="text-gray-400 text-xs">Ajustez votre trésor pour découvrir de nouvelles options</p>
+        </div>
+      `;
+        }
+
+        if (addOptimalButton) {
+            addOptimalButton.style.display = 'none';
+        }
+    }
+
+    displayOptimalRecommendations(recommendations) {
+        const optimalContent = document.getElementById('optimal-lots-content');
+        const addOptimalButton = document.getElementById('add-all-optimal-lots-to-cart');
+
+        if (!optimalContent) return;
+
+        const lang = this.getCurrentLang();
+        let html = '<div class="space-y-4">';
+        let totalPrice = 0;
+
+        recommendations.forEach((item, index) => {
+            const totalItemPrice = item.totalCost || (item.price * item.quantity);
+            totalPrice += totalItemPrice;
+
+            html += `
+        <div class="bg-purple-800/30 rounded-lg p-4 border border-purple-600/40">
+          <div class="flex justify-between items-center">
+            <div class="flex-1">
+              <h6 class="font-medium text-gray-200">${item.displayName}</h6>
+              <p class="text-sm text-gray-400">Quantité: ${item.quantity}</p>
+            </div>
+            <div class="text-right">
+              <p class="font-bold text-purple-400">$${totalItemPrice.toFixed(2)}</p>
+              <p class="text-xs text-gray-400">$${item.price.toFixed(2)} / unité</p>
+            </div>
+          </div>
+        </div>
+      `;
+        });
+
+        html += `
+      <div class="border-t border-purple-600/30 pt-4">
+        <div class="flex justify-between items-center text-lg font-bold">
+          <span class="text-gray-200">Total optimal:</span>
+          <span class="text-purple-400">$${totalPrice.toFixed(2)}</span>
+        </div>
+      </div>
+    </div>`;
+
+        optimalContent.innerHTML = html;
+
+        if (addOptimalButton) {
+            addOptimalButton.style.display = 'block';
+            addOptimalButton.dataset.lotsData = JSON.stringify(recommendations);
+        }
+    }
+
+    hideOptimalCalculatingIndicator() {
+    // L'indicateur sera remplacé par displayOptimalRecommendations()
     }
 
     updateDisplay() {
