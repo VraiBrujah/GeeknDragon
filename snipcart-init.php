@@ -114,21 +114,6 @@ if (!$snipcartKey) {
         analytics: { enabled: false }, // Désactiver les analytics pour performance
         debug: false, // Mode production strict
         silent: true, // Supprimer tous les logs console
-        // Configuration des champs d'adresse pour éviter les conflits
-        fields: {
-          address: {
-            province: {
-              type: 'dropdown',
-              required: false
-            }
-          }
-        },
-        // Configuration de validation d'adresse
-        validation: {
-          address: {
-            enabled: false // Désactiver la validation EasyPost si problématique
-          }
-        },
         payment: {
           stripeElementsOptions: {
             appearance: {
