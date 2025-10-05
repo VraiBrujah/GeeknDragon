@@ -97,4 +97,10 @@
     
     # Politique de référent restrictive
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Permissions Policy pour les paiements (nécessaire pour Snipcart)
+    Header always set Permissions-Policy "payment=*, publickey-credentials-get=*, geolocation=(), microphone=(), camera=()"
+    
+    # Content Security Policy adaptée à Snipcart
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.snipcart.com https://js.stripe.com https://checkout.stripe.com; style-src 'self' 'unsafe-inline' https://cdn.snipcart.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdn.snipcart.com; img-src 'self' data: https:; connect-src 'self' https://api.snipcart.com https://api.stripe.com https://checkout.stripe.com; frame-src https://js.stripe.com https://checkout.stripe.com https://hooks.stripe.com; frame-ancestors 'self'"
 </IfModule>
