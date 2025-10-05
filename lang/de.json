@@ -755,7 +755,7 @@
             }
         },
         "physicalTreasure": {
-            "title": "[TO_TRANSLATE_de] 🏆 Pourquoi le Trésor Physique ?",
+            "title": "🏆 Ein Greifbarer Schatz",
             "paragraph1": "[TO_TRANSLATE_de] Dans Donjons & Dragons, les <strong class=\"text-amber-400\">deux objectifs principaux</strong> sont l'expérience et le trésor. Devoir écrire le trésor sur papier puis le gommer ne lui rend pas hommage. Le trésor mérite d'être <strong class=\"text-yellow-400\">tangible, pesé, manipulé</strong>.",
             "paragraph2": "[TO_TRANSLATE_de] Nos pièces physiques transforment chaque récompense en moment mémorable. Quand le MJ fait <em class=\"text-amber-300\">tinter les pièces d'or</em> dans sa main avant de les distribuer, c'est toute l'immersion qui s'intensifie.",
             "property": "[TO_TRANSLATE_de] 📋 Système de Propriété",

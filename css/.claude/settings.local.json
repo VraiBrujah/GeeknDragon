@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Read(//e/GitHub/GeeknDragon/**)",
-      "Bash(npm run build:complete:*)"
+      "Bash(npm run build:complete:*)",
+      "Bash(awk:*)"
     ],
     "deny": [],
     "ask": []

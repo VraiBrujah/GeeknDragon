@@ -2537,7 +2537,7 @@ echo $snipcartInit;
           
           <!-- Texte explicatif avec plus d'espacement -->
           <div class="order-1 md:order-2 space-y-8 flex flex-col justify-center px-4 md:px-8">
-            <h3 class="text-3xl font-bold text-amber-400"><?= __('money.physicalTreasure.title', '🏆 Pourquoi le Trésor Physique ?') ?></h3>
+            <h3 class="text-3xl font-bold text-amber-400"><?= __('money.physicalTreasure.title', 'Un Trésor Tangible') ?></h3>
             
             <div class="space-y-6 text-gray-300">
               <blockquote class="text-lg font-medium text-amber-300 italic border-l-4 border-amber-500 pl-6 bg-amber-900/10 py-4 rounded-r-lg">
