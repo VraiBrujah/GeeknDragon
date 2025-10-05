@@ -1521,6 +1521,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Méthode 1: Événement Snipcart natif (quand Snipcart est prêt)
   document.addEventListener('snipcart.ready', () => {
     window.Snipcart.events.on('item.added', (item) => {
+      // DEBUG: Logger l'item ajouté depuis TOUTES les sources
+      console.log('=== SNIPCART ITEM.ADDED EVENT ===');
+      console.log('Item reçu par Snipcart:', JSON.stringify(item, null, 2));
+      console.log('Page source:', window.location.pathname);
+
       playSound('media/sounds/coin-drop.mp3', 0.5);
     });
   });

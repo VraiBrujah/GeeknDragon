@@ -108,6 +108,11 @@ class SnipcartUtils {
             baseAttributes['data-item-url'] = productData.url;
         }
 
+        // Ajouter l'image du produit si disponible
+        if (productData.image) {
+            baseAttributes['data-item-image'] = productData.image;
+        }
+
         // Appliquer les attributs de base
         Object.entries(baseAttributes).forEach(([key, value]) => {
             button.setAttribute(key, value);
@@ -115,7 +120,9 @@ class SnipcartUtils {
 
         // Ajouter les champs personnalisés
         // Gérer deux formats: {custom1: {...}} OU {metal-productId: {...}}
+        console.log('DEBUG createAddToCartButton - customFields reçus:', customFields);
         const normalizedFields = this.normalizeCustomFields(customFields);
+        console.log('DEBUG createAddToCartButton - normalizedFields:', normalizedFields);
 
         Object.entries(normalizedFields).forEach(([fieldKey, fieldData]) => {
             const index = fieldKey.replace('custom', '');
@@ -134,6 +141,14 @@ class SnipcartUtils {
         Object.entries(extraAttributes).forEach(([key, value]) => {
             button.setAttribute(key, value);
         });
+
+        // DEBUG: Vérifier les attributs réellement présents sur le bouton
+        console.log('DEBUG - Attributs du bouton créé:');
+        for (let attr of button.attributes) {
+            if (attr.name.startsWith('data-item')) {
+                console.log(`  ${attr.name} = "${attr.value}"`);
+            }
+        }
 
         return button;
     }
@@ -172,13 +187,61 @@ class SnipcartUtils {
         // Tentative d'utilisation directe de l'API Snipcart (plus rapide)
         if (window.Snipcart && window.Snipcart.api && window.Snipcart.api.cart) {
             try {
-                const snipcartData = this.extractProductDataFromButton(
-                    this.createAddToCartButton(productData, options),
-                );
+                console.log('=== AVANT CRÉATION BOUTON ===');
+                console.log('productData:', productData);
+                console.log('options:', options);
+
+                const button = this.createAddToCartButton(productData, options);
+                console.log('✅ Bouton créé');
+
+                const snipcartData = this.extractProductDataFromButton(button);
+                console.log('✅ Données extraites - snipcartData:', snipcartData);
+
+                // DEBUG: Afficher les données extraites
+                console.log('=== SNIPCART API DATA ===');
+                console.log('snipcartData.customFields type:', typeof snipcartData.customFields);
+                console.log('snipcartData.customFields isArray:', Array.isArray(snipcartData.customFields));
+                console.log('snipcartData.customFields contenu:', snipcartData.customFields);
+                console.log('snipcartData.customFields length:', snipcartData.customFields?.length);
+
+                // Snipcart attend un format spécifique pour customFields
+                // Il faut transformer le tableau en format avec options en tant qu'objets
+                if (Array.isArray(snipcartData.customFields) && snipcartData.customFields.length > 0) {
+                    const lang = document.documentElement?.lang || 'fr';
+
+                    snipcartData.customFields = snipcartData.customFields.map(field => {
+                        const result = {
+                            name: field.name,
+                            value: this.translateValue(field.value, lang)
+                        };
+
+                        // Ajouter le type si présent (OBLIGATOIRE pour les dropdowns)
+                        if (field.type) {
+                            result.type = field.type;
+                        }
+
+                        // Convertir options format "copper[+0.00]|silver[+0.00]|..."
+                        // en tableau d'objets [{name: "cuivre"}, {name: "argent"}, ...]
+                        if (field.options && typeof field.options === 'string') {
+                            result.options = field.options.split('|').map(opt => {
+                                const optionValue = opt.split('[')[0]; // Enlever le prix
+                                return {
+                                    name: this.translateValue(optionValue, lang)
+                                };
+                            });
+                        }
+
+                        return result;
+                    });
+                    console.log('customFields transformé:', snipcartData.customFields);
+                }
+
                 await window.Snipcart.api.cart.items.add(snipcartData);
+                console.log('✅ Ajouté à Snipcart via API');
                 return true;
             } catch (error) {
-                // Fallback silencieux vers méthode HTML
+                console.error('❌ ERREUR API SNIPCART:', error);
+                console.log('→ Fallback vers méthode HTML');
             }
         }
 
@@ -243,6 +306,15 @@ class SnipcartUtils {
      * Extrait les données produit depuis un bouton HTML Snipcart
      */
     static extractProductDataFromButton(button) {
+        // DEBUG: Afficher tous les attributs du bouton
+        console.log('=== EXTRACTION DEPUIS BOUTON ===');
+        console.log('Attributs du bouton:');
+        for (let attr of button.attributes) {
+            if (attr.name.startsWith('data-item')) {
+                console.log(`  ${attr.name}: ${attr.value}`);
+            }
+        }
+
         const data = {
             id: button.getAttribute('data-item-id'),
             name: button.getAttribute('data-item-name'),
@@ -263,12 +335,26 @@ class SnipcartUtils {
         for (let i = 1; i <= 5; i++) {
             const customName = button.getAttribute(`data-item-custom${i}-name`);
             const customValue = button.getAttribute(`data-item-custom${i}-value`);
+            const customType = button.getAttribute(`data-item-custom${i}-type`);
+            const customOptions = button.getAttribute(`data-item-custom${i}-options`);
 
             if (customName && customValue) {
-                data.customFields.push({
+                const field = {
                     name: customName,
                     value: customValue,
-                });
+                };
+
+                // Ajouter le type si présent (ex: 'dropdown')
+                if (customType) {
+                    field.type = customType;
+                }
+
+                // Ajouter les options si présentes (ex: 'copper[+0.00]|silver[+0.00]|...')
+                if (customOptions) {
+                    field.options = customOptions;
+                }
+
+                data.customFields.push(field);
             }
         }
 
@@ -476,23 +562,6 @@ class SnipcartUtils {
         return normalized;
     }
 
-    /**
-     * Extrait les données produit depuis les attributs d'un bouton HTML Snipcart
-     * Méthode réutilisée pour conversion vers format API
-     *
-     * @param {HTMLElement} button - Bouton avec attributs data-item-*
-     * @returns {Object} Données produit extraites
-     */
-    static extractProductDataFromButton(button) {
-        return {
-            id: button.getAttribute('data-item-id'),
-            name: button.getAttribute('data-item-name'),
-            description: button.getAttribute('data-item-description'),
-            price: parseFloat(button.getAttribute('data-item-price')),
-            quantity: parseInt(button.getAttribute('data-item-quantity')),
-            url: button.getAttribute('data-item-url'),
-        };
-    }
 
     /**
      * Crée les données de produit pour les lots recommandés
@@ -513,6 +582,23 @@ class SnipcartUtils {
             quantity,
             customFields: customFields || {},
         };
+    }
+
+    /**
+     * Traduit une valeur (métal ou multiplicateur) selon la langue
+     *
+     * @param {string} value - Valeur à traduire (copper, silver, 1, 10, etc.)
+     * @param {string} lang - Langue cible ('fr' ou 'en')
+     * @returns {string} Valeur traduite
+     */
+    static translateValue(value, lang = 'fr') {
+        // Si c'est un nombre ou ressemble à un nombre, retourner tel quel
+        if (!isNaN(value)) {
+            return value.toString();
+        }
+
+        // Sinon, utiliser translateMetal
+        return this.translateMetal(value, lang);
     }
 
     /**

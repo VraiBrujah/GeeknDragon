@@ -3207,7 +3207,10 @@ document.addEventListener('DOMContentLoaded', function() {
           product: {
             id: lot.productId,
             name: product?.name || lot.productId, // Utiliser le nom de base du produit
+            name_en: product?.name_en,
             summary: product?.summary || translations.productSummary + ' - ' + (product?.name || lot.productId),
+            summary_en: product?.summary_en,
+            image: product?.images?.[0], // Première image du produit
             price: lot.price,
             url: lot.url || 'product.php?id=' + encodeURIComponent(lot.productId)
           },
@@ -3314,7 +3317,10 @@ document.addEventListener('DOMContentLoaded', function() {
           product: {
             id: lot.productId,
             name: product?.name || lot.productId,
+            name_en: product?.name_en,
             summary: product?.summary || translations.productSummary + ' - ' + (product?.name || lot.productId),
+            summary_en: product?.summary_en,
+            image: product?.images?.[0], // Première image du produit
             price: lot.price,
             url: lot.url || 'product.php?id=' + encodeURIComponent(lot.productId)
           },
@@ -3322,6 +3328,10 @@ document.addEventListener('DOMContentLoaded', function() {
           customFields: convertedCustomFields
         };
       });
+
+      // DEBUG: Afficher les données envoyées
+      console.log('=== DONNÉES ENVOYÉES À SNIPCART (Collection Efficace) ===');
+      console.log('productsToAdd:', JSON.stringify(productsToAdd, null, 2));
 
       // Utiliser les utilitaires Snipcart optimisés pour ajouter au panier
       if (window.SnipcartUtils) {
