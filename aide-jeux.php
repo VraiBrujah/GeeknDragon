@@ -2882,12 +2882,11 @@ function playSound(soundPath, volume = 0.5) {
     try {
         const audio = new Audio(soundPath);
         audio.volume = Math.max(0, Math.min(1, volume));
-        audio.play().catch(error => {
-            // Gestion silencieuse des erreurs d'autoplay
-            console.debug('Audio autoplay bloqué:', error);
+        audio.play().catch(() => {
+            // Gestion silencieuse des erreurs d'autoplay (navigateur bloque autoplay)
         });
     } catch (error) {
-        console.debug('Erreur lecture audio:', error);
+        // Gestion silencieuse des erreurs audio
     }
 }
 
@@ -3329,10 +3328,6 @@ document.addEventListener('DOMContentLoaded', function() {
         };
       });
 
-      // DEBUG: Afficher les données envoyées
-      console.log('=== DONNÉES ENVOYÉES À SNIPCART (Collection Efficace) ===');
-      console.log('productsToAdd:', JSON.stringify(productsToAdd, null, 2));
-
       // Utiliser les utilitaires Snipcart optimisés pour ajouter au panier
       if (window.SnipcartUtils) {
         (async () => {
@@ -3690,10 +3685,8 @@ class CompactAudioWidget {
     const checkPlayer = () => {
       if (window.dndMusicPlayer && window.dndMusicPlayer.isInitialized) {
         this.dndPlayer = window.dndMusicPlayer;
-        console.log('🎵 CompactAudioWidget: Connexion au DnDMusicPlayer réussie');
         this.syncPlayerState();
       } else {
-        console.log('🔄 CompactAudioWidget: En attente du DnDMusicPlayer...');
         setTimeout(checkPlayer, 500);
       }
     };
@@ -3817,22 +3810,16 @@ class CompactAudioWidget {
   }
   
   togglePlayPause() {
-    console.log('🎵 CompactAudioWidget: togglePlayPause appelé');
     if (!this.dndPlayer) {
-      console.error('❌ CompactAudioWidget: dndPlayer non connecté');
       return;
     }
-    
-    console.log('🎵 État actuel:', this.dndPlayer.isPlaying ? 'Playing' : 'Paused');
-    
+
     if (this.dndPlayer.isPlaying) {
       this.dndPlayer.pause();
-      console.log('⏸️ CompactAudioWidget: Musique mise en pause');
     } else {
       this.dndPlayer.play();
-      console.log('▶️ CompactAudioWidget: Musique lancée');
     }
-    
+
     // Mettre à jour l'interface
     setTimeout(() => {
       this.syncPlayerState();

@@ -44,6 +44,7 @@ The application expects a few secrets to be provided through the environment:
 - `SENDGRID_API_KEY` – API key for the SendGrid SMTP service used to send emails.
 - `QUOTE_EMAIL` – recipient for quote requests (defaults to `contact@geekndragon.com`).
 - `ADMIN_PASSWORD_HASH` – hachage du mot de passe d'accès à l'espace d'administration généré avec `password_hash`. Utilisez un mot de passe fort et ne stockez jamais la valeur en clair dans le dépôt.
+- `DEBUG_MODE` – active les logs de débogage dans la console du navigateur (`true` en développement, `false` en production par défaut).
 
 To send emails from the contact form using SendGrid's SMTP service, configure credentials for the fixed sender address `no-reply@geekndragon.com`:
 

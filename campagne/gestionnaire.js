@@ -920,10 +920,7 @@
             
             // Afficher le résultat animé
             showDiceResult(result.total);
-            
-            // Enregistrer le résultat
-            console.log(`${actionName}: ${diceExpression} = ${result.details} = ${result.total}`);
-            
+
             // Mettre à jour le personnage si c'est de la guérison
             const character = campaignData.characters[characterId];
             const action = character.actions.find(a => a.name === actionName);
@@ -2749,7 +2746,6 @@
                     mapState: mapState
                 };
                 localStorage.setItem('campaignData_coffre_fort', JSON.stringify(dataToSave));
-                console.log('✅ Données sauvegardées (incluant état carte)');
             } catch (e) {
                 console.error('❌ Erreur de sauvegarde:', e);
                 alert('Erreur lors de la sauvegarde des données');
@@ -2813,7 +2809,3 @@
                 saveData();
             }
         });
-
-        console.log('🎮 Gestionnaire de Campagne - Le Coffre-fort oublié initialisé');
-        console.log('🎵 Système de musique contextuel activé');
-        console.log('💾 Sauvegarde automatique activée');

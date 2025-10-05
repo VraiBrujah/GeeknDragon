@@ -2710,9 +2710,7 @@ class MaisonQuebecApp {
     }
 
     editConfigMaison() {
-        console.log('editConfigMaison appelée');
         let config = this.storage.get('config_maison');
-        console.log('Configuration chargée:', config);
         
         // Vérifier si config est un tableau (données corrompues) ou vide
         if (!config || Array.isArray(config) || Object.keys(config).length === 0) {
@@ -2742,7 +2740,6 @@ class MaisonQuebecApp {
                     telephone: ''
                 }
             };
-            console.log('Configuration par défaut créée:', config);
         }
         
         // S'assurer que les sous-objets existent même si la config existe déjà
@@ -2996,9 +2993,7 @@ class MaisonQuebecApp {
         config.entrepreneur_general.nom = formData.get('entrepreneur_nom') || '';
         config.entrepreneur_general.licence_rbq = formData.get('licence_rbq') || '';
         config.entrepreneur_general.telephone = formData.get('entrepreneur_telephone') || '';
-        
-        console.log('Configuration finale à sauvegarder:', config);
-        
+
         this.storage.save('config_maison', config);
         
         this.closeModal('configMaisonModal');
@@ -3007,13 +3002,10 @@ class MaisonQuebecApp {
     }
 
     editEtapesConstruction() {
-        console.log('editEtapesConstruction appelée');
         let etapes = this.storage.get('etapes_construction');
-        console.log('Étapes chargées:', etapes);
-        
+
         // S'assurer qu'on a un tableau
         if (!Array.isArray(etapes)) {
-            console.log('Étapes n\'est pas un tableau, conversion...');
             etapes = [];
         }
         
@@ -3072,7 +3064,6 @@ class MaisonQuebecApp {
             ];
             // Sauvegarder les étapes par défaut
             this.storage.save('etapes_construction', etapes);
-            console.log('Étapes par défaut créées:', etapes);
         }
         
         let etapesHTML = '';
@@ -3199,7 +3190,7 @@ class MaisonQuebecApp {
                 const store = transaction.objectStore('photos');
                 store.clear();
             } catch (error) {
-                console.log('Aucune photo à supprimer');
+                // Aucune photo à supprimer - erreur silencieuse
             }
         }
         

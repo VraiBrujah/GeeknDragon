@@ -19,8 +19,15 @@ if (is_string($gaMeasurementId)) {
     $gaMeasurementId = trim($gaMeasurementId);
 }
 
+// Mode debug global - désactivé en production
+$debugMode = ($_ENV['DEBUG_MODE'] ?? 'false') === 'true';
+
 ?>
 <head>
+  <script>
+    // Mode debug global - contrôle tous les logs de débogage
+    window.DEBUG_MODE = <?php echo $debugMode ? 'true' : 'false'; ?>;
+  </script>
   <?php 
   // CMP réactivé avec exemption Snipcart configurée
   include __DIR__ . '/includes/cmp-consent.php'; 

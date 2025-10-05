@@ -267,12 +267,11 @@ class BoutiqueAsyncLoader {
         try {
             const audio = new Audio(soundPath);
             audio.volume = Math.max(0, Math.min(1, volume));
-            audio.play().catch(error => {
+            audio.play().catch(() => {
                 // Gestion silencieuse des erreurs d'autoplay
-                console.debug('Audio autoplay bloqué:', error);
             });
         } catch (error) {
-            console.debug('Erreur lecture audio:', error);
+            // Gestion silencieuse des erreurs audio
         }
     }
 

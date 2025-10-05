@@ -29,6 +29,23 @@
  */
 class SnipcartUtils {
     /**
+     * Mode debug activé uniquement si window.DEBUG_MODE = true
+     * @private
+     */
+    static get debugMode() {
+        return window.DEBUG_MODE === true;
+    }
+
+    /**
+     * Log conditionnel en mode debug uniquement
+     * @private
+     */
+    static debugLog(...args) {
+        if (this.debugMode) {
+            console.log(...args);
+        }
+    }
+    /**
      * Crée un bouton d'ajout au panier avec tous les attributs Snipcart nécessaires
      * 
      * Factory method pour génération cohérente des boutons e-commerce.
@@ -120,9 +137,9 @@ class SnipcartUtils {
 
         // Ajouter les champs personnalisés
         // Gérer deux formats: {custom1: {...}} OU {metal-productId: {...}}
-        console.log('DEBUG createAddToCartButton - customFields reçus:', customFields);
+        this.debugLog('DEBUG createAddToCartButton - customFields reçus:', customFields);
         const normalizedFields = this.normalizeCustomFields(customFields);
-        console.log('DEBUG createAddToCartButton - normalizedFields:', normalizedFields);
+        this.debugLog('DEBUG createAddToCartButton - normalizedFields:', normalizedFields);
 
         Object.entries(normalizedFields).forEach(([fieldKey, fieldData]) => {
             const index = fieldKey.replace('custom', '');
@@ -143,10 +160,12 @@ class SnipcartUtils {
         });
 
         // DEBUG: Vérifier les attributs réellement présents sur le bouton
-        console.log('DEBUG - Attributs du bouton créé:');
-        for (let attr of button.attributes) {
-            if (attr.name.startsWith('data-item')) {
-                console.log(`  ${attr.name} = "${attr.value}"`);
+        if (this.debugMode) {
+            this.debugLog('DEBUG - Attributs du bouton créé:');
+            for (let attr of button.attributes) {
+                if (attr.name.startsWith('data-item')) {
+                    this.debugLog(`  ${attr.name} = "${attr.value}"`);
+                }
             }
         }
 
@@ -163,12 +182,11 @@ class SnipcartUtils {
         try {
             const audio = new Audio(soundPath);
             audio.volume = Math.max(0, Math.min(1, volume));
-            audio.play().catch(error => {
-                // Gestion silencieuse des erreurs d'autoplay
-                console.debug('Audio autoplay bloqué:', error);
+            audio.play().catch(() => {
+                // Gestion silencieuse des erreurs d'autoplay (navigateur bloque autoplay)
             });
         } catch (error) {
-            console.debug('Erreur lecture audio:', error);
+            // Gestion silencieuse des erreurs audio
         }
     }
 
@@ -187,22 +205,22 @@ class SnipcartUtils {
         // Tentative d'utilisation directe de l'API Snipcart (plus rapide)
         if (window.Snipcart && window.Snipcart.api && window.Snipcart.api.cart) {
             try {
-                console.log('=== AVANT CRÉATION BOUTON ===');
-                console.log('productData:', productData);
-                console.log('options:', options);
+                this.debugLog('=== AVANT CRÉATION BOUTON ===');
+                this.debugLog('productData:', productData);
+                this.debugLog('options:', options);
 
                 const button = this.createAddToCartButton(productData, options);
-                console.log('✅ Bouton créé');
+                this.debugLog('✅ Bouton créé');
 
                 const snipcartData = this.extractProductDataFromButton(button);
-                console.log('✅ Données extraites - snipcartData:', snipcartData);
+                this.debugLog('✅ Données extraites - snipcartData:', snipcartData);
 
                 // DEBUG: Afficher les données extraites
-                console.log('=== SNIPCART API DATA ===');
-                console.log('snipcartData.customFields type:', typeof snipcartData.customFields);
-                console.log('snipcartData.customFields isArray:', Array.isArray(snipcartData.customFields));
-                console.log('snipcartData.customFields contenu:', snipcartData.customFields);
-                console.log('snipcartData.customFields length:', snipcartData.customFields?.length);
+                this.debugLog('=== SNIPCART API DATA ===');
+                this.debugLog('snipcartData.customFields type:', typeof snipcartData.customFields);
+                this.debugLog('snipcartData.customFields isArray:', Array.isArray(snipcartData.customFields));
+                this.debugLog('snipcartData.customFields contenu:', snipcartData.customFields);
+                this.debugLog('snipcartData.customFields length:', snipcartData.customFields?.length);
 
                 // Snipcart attend un format spécifique pour customFields
                 // Il faut transformer le tableau en format avec options en tant qu'objets
@@ -233,15 +251,15 @@ class SnipcartUtils {
 
                         return result;
                     });
-                    console.log('customFields transformé:', snipcartData.customFields);
+                    this.debugLog('customFields transformé:', snipcartData.customFields);
                 }
 
                 await window.Snipcart.api.cart.items.add(snipcartData);
-                console.log('✅ Ajouté à Snipcart via API');
+                this.debugLog('✅ Ajouté à Snipcart via API');
                 return true;
             } catch (error) {
-                console.error('❌ ERREUR API SNIPCART:', error);
-                console.log('→ Fallback vers méthode HTML');
+                this.debugLog('❌ ERREUR API SNIPCART:', error);
+                this.debugLog('→ Fallback vers méthode HTML');
             }
         }
 
@@ -307,11 +325,13 @@ class SnipcartUtils {
      */
     static extractProductDataFromButton(button) {
         // DEBUG: Afficher tous les attributs du bouton
-        console.log('=== EXTRACTION DEPUIS BOUTON ===');
-        console.log('Attributs du bouton:');
-        for (let attr of button.attributes) {
-            if (attr.name.startsWith('data-item')) {
-                console.log(`  ${attr.name}: ${attr.value}`);
+        if (this.debugMode) {
+            this.debugLog('=== EXTRACTION DEPUIS BOUTON ===');
+            this.debugLog('Attributs du bouton:');
+            for (let attr of button.attributes) {
+                if (attr.name.startsWith('data-item')) {
+                    this.debugLog(`  ${attr.name}: ${attr.value}`);
+                }
             }
         }
 
