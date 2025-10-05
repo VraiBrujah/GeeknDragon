@@ -1476,7 +1476,12 @@ function initializeGlobalVariables() {
 function formatNumber(num) {
     return Math.round(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
-// Fonction pour mettre à jour les calculs basés sur le nombre de voiturettes
+
+/**
+ * Met à jour tous les calculs financiers basés sur le nombre de voiturettes
+ * Fonction centrale appelée à chaque changement de slider
+ * Calcule les coûts, économies et métriques pour la flotte sélectionnée
+ */
 function updateCartCalculation() {
     if (!data.pricing || !data.problem || !data.comparison) return;
     const currency = ' $';
