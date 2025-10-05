@@ -1518,6 +1518,28 @@ function playSound(soundPath, volume = 0.5) {
  * Utilise l'API Snipcart pour détecter l'ajout réel au panier
  */
 document.addEventListener('DOMContentLoaded', () => {
+  // Fonction pour forcer l'ordre correct des items dans le panier (anti-reverse)
+  const fixCartItemsOrder = () => {
+    const snipcartRoot = document.getElementById('snipcart');
+    if (!snipcartRoot) return;
+
+    // Forcer direction LTR sur tous les items
+    snipcartRoot.querySelectorAll('[class*="item-line"]').forEach((item) => {
+      item.style.flexDirection = 'row';
+      item.style.direction = 'ltr';
+
+      // Forcer sur les enfants aussi
+      item.querySelectorAll('*').forEach((child) => {
+        if (child.style.flexDirection === 'row-reverse') {
+          child.style.flexDirection = 'row';
+        }
+        if (child.getAttribute('dir') === 'rtl') {
+          child.setAttribute('dir', 'ltr');
+        }
+      });
+    });
+  };
+
   // Méthode 1: Événement Snipcart natif (quand Snipcart est prêt)
   document.addEventListener('snipcart.ready', () => {
     window.Snipcart.events.on('item.added', (item) => {
@@ -1527,7 +1549,28 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Page source:', window.location.pathname);
 
       playSound('media/sounds/coin-drop.mp3', 0.5);
+
+      // Forcer l'ordre correct après ajout d'item
+      setTimeout(fixCartItemsOrder, 100);
     });
+
+    // Observer les mutations du DOM Snipcart pour réappliquer les fixes
+    const snipcartRoot = document.getElementById('snipcart');
+    if (snipcartRoot) {
+      const observer = new MutationObserver(() => {
+        fixCartItemsOrder();
+      });
+
+      observer.observe(snipcartRoot, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['style', 'dir']
+      });
+    }
+
+    // Fix initial au chargement
+    fixCartItemsOrder();
   });
 
   // Méthode 2: Fallback pour clic direct (si Snipcart pas encore chargé)

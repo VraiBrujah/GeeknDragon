@@ -317,6 +317,40 @@
   padding: 20px !important;
   margin: 16px 0 !important;
   transition: all 0.2s ease !important;
+  direction: ltr !important; /* Force left-to-right pour éviter l'inversion en anglais */
+}
+
+/* Force l'ordre correct des éléments dans les items du panier */
+.snipcart .snipcart-item-line,
+.snipcart .snipcart-item-line > *,
+.snipcart .snipcart-item-line__container,
+.snipcart .snipcart-item-line__content,
+.snipcart [class*="item-line"] {
+  flex-direction: row !important; /* Force row au lieu de row-reverse */
+  direction: ltr !important;
+}
+
+/* Règle globale anti-reverse pour tout le panier */
+.snipcart [dir="rtl"],
+.snipcart [style*="flex-direction: row-reverse"] {
+  flex-direction: row !important;
+  direction: ltr !important;
+}
+
+/* S'assurer que les actions (bouton poubelle) sont toujours à droite */
+.snipcart .snipcart-item-line__actions,
+.snipcart [class*="__actions"] {
+  order: 999 !important; /* Force à la fin du flex container */
+  margin-left: auto !important; /* Pousse vers la droite */
+  margin-right: 0 !important;
+}
+
+/* S'assurer que le contenu (image, titre, etc.) est à gauche */
+.snipcart .snipcart-item-line__product,
+.snipcart [class*="__product"] {
+  order: 1 !important; /* Force au début */
+  margin-right: auto !important;
+  margin-left: 0 !important;
 }
 
 .snipcart .snipcart-item-line:hover {
