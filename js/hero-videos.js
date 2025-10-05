@@ -15,6 +15,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         const FADE_MS = 1000;
         const LOAD_AHEAD_SECONDS = 10; // Augmenté pour les videos lourdes
+        const PRELOAD_STRATEGY = 'metadata'; // Optimisation chargement initial
         const supportsMatchMedia = typeof window.matchMedia === 'function';
         const reduceMotionQuery = supportsMatchMedia
             ? window.matchMedia('(prefers-reduced-motion: reduce)')

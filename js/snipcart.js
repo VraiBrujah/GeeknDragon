@@ -379,7 +379,7 @@
       });
 
     } catch (error) {
-      console.error('Erreur lors de l\'affichage des promotions:', error);
+      // Erreur promotions silencieuse en production
     }
   }
 

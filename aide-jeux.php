@@ -863,6 +863,464 @@ $extraHead = <<<HTML
   animation: musicPlayerFadeIn 0.6s ease-out;
 }
 
+/* === WIDGET AUDIO COMPACT UNIVERSEL === */
+/* Widget audio compact pour toutes les plateformes */
+.music-widget-mobile-compact {
+  position: fixed;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 20px);
+  right: calc(env(safe-area-inset-right, 0px) + 16px);
+  z-index: 1001;
+  display: block;
+}
+
+/* État compact - juste bouton play/pause */
+.music-compact-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
+  backdrop-filter: blur(15px);
+  border: 1.5px solid rgba(139, 92, 246, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(139, 92, 246, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.music-compact-button:active {
+  transform: scale(0.95);
+}
+
+.music-compact-button:hover {
+  border-color: rgba(139, 92, 246, 0.6);
+  box-shadow: 
+    0 12px 32px rgba(0, 0, 0, 0.4),
+    0 0 25px rgba(139, 92, 246, 0.3);
+}
+
+/* Indicateur LED intégré */
+.music-compact-button::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+  animation: musicPulseMobile 2s ease-in-out infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.music-compact-button.playing::before {
+  opacity: 1;
+}
+
+.music-compact-button.paused::before {
+  background: linear-gradient(135deg, #6b7280, #4b5563);
+  box-shadow: 0 0 4px rgba(107, 114, 128, 0.4);
+  animation: none;
+  opacity: 0.7;
+}
+
+/* Icône play/pause dans le bouton compact */
+.music-compact-icon {
+  width: 28px;
+  height: 28px;
+  color: #ffffff;
+  transition: transform 0.2s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+/* État étendu - contrôles complets */
+.music-expanded-controls {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 240px;
+  height: 130px;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
+  backdrop-filter: blur(15px);
+  border: 1.5px solid rgba(139, 92, 246, 0.4);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px 16px 20px 16px;
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(139, 92, 246, 0.2);
+  transform: scale(0) translateX(25px);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: bottom right;
+}
+
+.music-expanded-controls.visible {
+  transform: scale(1) translateX(0);
+  opacity: 1;
+}
+
+/* Masquer le bouton compact quand étendu */
+.music-widget-mobile-compact.expanded .music-compact-button {
+  opacity: 0;
+  transform: scale(0);
+}
+
+/* Contrôles dans l'état étendu */
+.music-mobile-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.music-mobile-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.8), rgba(139, 92, 246, 0.8));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.music-mobile-btn:active {
+  transform: scale(0.9);
+}
+
+.music-mobile-btn:hover {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+}
+
+.music-mobile-btn svg {
+  width: 28px;
+  height: 28px;
+  color: #ffffff;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+
+/* Toutes les icônes à la même taille que play/pause */
+.music-mobile-btn.control-btn svg,
+.music-mobile-btn.volume-btn svg {
+  width: 28px;
+  height: 28px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+
+/* Bouton play/pause plus grand */
+.music-mobile-btn.play-pause {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.music-mobile-btn.play-pause:hover {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.5);
+}
+
+.music-mobile-btn.play-pause svg {
+  width: 28px;
+  height: 28px;
+  color: #ffffff;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+
+/* Slider de volume mobile */
+.music-mobile-volume {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  justify-content: center;
+}
+
+.music-mobile-volume-slider {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.music-mobile-volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+}
+
+.music-mobile-volume-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+}
+
+/* Animation pour l'indicateur mobile */
+@keyframes musicPulseMobile {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.6; 
+    transform: scale(1.2);
+  }
+}
+
+/* Masquer l'ancien widget desktop sur toutes les plateformes */
+.music-player-container {
+  display: none !important;
+}
+    backdrop-filter: blur(15px);
+    border: 1.5px solid rgba(139, 92, 246, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+      0 8px 24px rgba(0, 0, 0, 0.3),
+      0 0 15px rgba(139, 92, 246, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .music-compact-button:active {
+    transform: scale(0.95);
+  }
+  
+  .music-compact-button:hover {
+    border-color: rgba(139, 92, 246, 0.6);
+    box-shadow: 
+      0 12px 32px rgba(0, 0, 0, 0.4),
+      0 0 25px rgba(139, 92, 246, 0.3);
+  }
+  
+  /* Indicateur LED intégré */
+  .music-compact-button::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10b981, #059669);
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+    animation: musicPulseMobile 2s ease-in-out infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .music-compact-button.playing::before {
+    opacity: 1;
+  }
+  
+  .music-compact-button.paused::before {
+    background: linear-gradient(135deg, #6b7280, #4b5563);
+    box-shadow: 0 0 4px rgba(107, 114, 128, 0.4);
+    animation: none;
+    opacity: 0.7;
+  }
+  
+  /* Icône play/pause dans le bouton compact */
+  .music-compact-icon {
+    width: 28px;
+    height: 28px;
+    color: #ffffff;
+    transition: transform 0.2s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+  }
+  
+  /* État étendu - contrôles complets */
+  .music-expanded-controls {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 240px;
+    height: 130px;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
+    backdrop-filter: blur(15px);
+    border: 1.5px solid rgba(139, 92, 246, 0.4);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px 16px 20px 16px;
+    box-shadow: 
+      0 8px 24px rgba(0, 0, 0, 0.3),
+      0 0 15px rgba(139, 92, 246, 0.2);
+    transform: scale(0) translateX(25px);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: bottom right;
+  }
+  
+  .music-expanded-controls.visible {
+    transform: scale(1) translateX(0);
+    opacity: 1;
+  }
+  
+  /* Masquer le bouton compact quand étendu */
+  .music-widget-mobile-compact.expanded .music-compact-button {
+    opacity: 0;
+    transform: scale(0);
+  }
+  
+  /* Contrôles dans l'état étendu */
+  .music-mobile-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+  }
+  
+  .music-mobile-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.8), rgba(139, 92, 246, 0.8));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+  }
+  
+  .music-mobile-btn:active {
+    transform: scale(0.9);
+  }
+  
+  .music-mobile-btn:hover {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+  }
+  
+  .music-mobile-btn svg {
+    width: 28px;
+    height: 28px;
+    color: #ffffff;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+  }
+  
+  /* Toutes les icônes à la même taille que play/pause */
+  .music-mobile-btn.control-btn svg,
+  .music-mobile-btn.volume-btn svg {
+    width: 28px;
+    height: 28px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+  }
+  
+  /* Bouton play/pause plus grand */
+  .music-mobile-btn.play-pause {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+  }
+  
+  .music-mobile-btn.play-pause:hover {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.5);
+  }
+  
+  .music-mobile-btn.play-pause svg {
+    width: 28px;
+    height: 28px;
+    color: #ffffff;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+  }
+  
+  /* Slider de volume mobile */
+  .music-mobile-volume {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .music-mobile-volume-slider {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .music-mobile-volume-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+  }
+  
+  .music-mobile-volume-slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+  }
+  
+  /* Animation pour l'indicateur mobile */
+  @keyframes musicPulseMobile {
+    0%, 100% { 
+      opacity: 1; 
+      transform: scale(1);
+    }
+    50% { 
+      opacity: 0.6; 
+      transform: scale(1.2);
+    }
+  }
+  
+  /* Masquer l'ancien widget desktop sur toutes les plateformes */
+  .music-player-container {
+    display: none !important;
+  }
+}
+
 /* Améliorer la responsivité des tableaux existants */
 @media (max-width: 768px) {
   .table-responsive {
@@ -2469,6 +2927,65 @@ echo $snipcartInit;
     </div>
   </section>
 
+  <!-- Widget Audio Mobile Compact -->
+  <div id="music-widget-mobile" class="music-widget-mobile-compact" style="display: none;">
+    <!-- Bouton compact (état initial) -->
+    <div class="music-compact-button" id="music-compact-btn">
+      <svg class="music-compact-icon play-icon" viewBox="0 0 32 32" fill="currentColor">
+        <path d="M8 4v24l20-12z" stroke="currentColor" stroke-width="1"/>
+      </svg>
+      <svg class="music-compact-icon pause-icon hidden" viewBox="0 0 32 32" fill="currentColor">
+        <rect x="7" y="4" width="6" height="24" stroke="currentColor" stroke-width="1"/>
+        <rect x="19" y="4" width="6" height="24" stroke="currentColor" stroke-width="1"/>
+      </svg>
+    </div>
+    
+    <!-- Contrôles étendus (état étendu) -->
+    <div class="music-expanded-controls" id="music-expanded-controls">
+      <!-- Contrôle de volume (en haut) -->
+      <div class="music-mobile-volume">
+        <button class="music-mobile-btn volume-btn" id="mobile-music-mute">
+          <svg class="volume-icon" viewBox="0 0 32 32" fill="currentColor">
+            <path d="M4 10v12h6l8 8V2l-8 8z" stroke="currentColor" stroke-width="1"/>
+            <path d="M23 8c3 2 3 14 0 16" stroke="currentColor" stroke-width="2" fill="none"/>
+            <path d="M20 11c1.5 1 1.5 9 0 10" stroke="currentColor" stroke-width="2" fill="none"/>
+          </svg>
+          <svg class="mute-icon hidden" viewBox="0 0 32 32" fill="currentColor">
+            <path d="M4 10v12h6l8 8V2l-8 8z" stroke="currentColor" stroke-width="1"/>
+            <path d="M22 8l8 8m-8 0l8-8" stroke="currentColor" stroke-width="3" fill="none"/>
+          </svg>
+        </button>
+        <input type="range" class="music-mobile-volume-slider" id="mobile-music-volume" min="0" max="100" value="15">
+      </div>
+      
+      <!-- Contrôles principaux (en bas) -->
+      <div class="music-mobile-controls">
+        <button class="music-mobile-btn control-btn" id="mobile-music-prev">
+          <svg viewBox="0 0 32 32" fill="currentColor">
+            <rect x="6" y="4" width="4" height="24"/>
+            <path d="M26 4v24L14 16z"/>
+          </svg>
+        </button>
+        
+        <button class="music-mobile-btn play-pause control-btn" id="mobile-music-play-pause">
+          <svg class="play-icon" viewBox="0 0 32 32" fill="currentColor">
+            <path d="M8 4v24l20-12z" stroke="currentColor" stroke-width="1"/>
+          </svg>
+          <svg class="pause-icon hidden" viewBox="0 0 32 32" fill="currentColor">
+            <rect x="7" y="4" width="6" height="24" stroke="currentColor" stroke-width="1"/>
+            <rect x="19" y="4" width="6" height="24" stroke="currentColor" stroke-width="1"/>
+          </svg>
+        </button>
+        
+        <button class="music-mobile-btn control-btn" id="mobile-music-next">
+          <svg viewBox="0 0 32 32" fill="currentColor">
+            <rect x="22" y="4" width="4" height="24"/>
+            <path d="M6 4v24l12-12z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
 
 </main>
 
@@ -3133,6 +3650,217 @@ function fallbackCopyEmail(email, buttonElement) {
     document.body.removeChild(textarea);
   }
 }
+</script>
+
+<script>
+/**
+ * Widget Audio Mobile Compact pour aide-jeux.php
+ * Gère l'expansion/réduction et l'intégration avec le lecteur D&D existant
+ */
+class MobileAudioWidget {
+  constructor() {
+    this.widget = document.getElementById('music-widget-mobile');
+    this.compactBtn = document.getElementById('music-compact-btn');
+    this.expandedControls = document.getElementById('music-expanded-controls');
+    this.isExpanded = false;
+    this.scrollTimeout = null;
+    this.inactivityTimeout = null;
+    this.dndPlayer = null;
+    
+    // Initialiser sur toutes les plateformes
+    this.init();
+  }
+  
+  init() {
+    this.widget.style.display = 'block';
+    this.setupEventListeners();
+    this.setupScrollDetection();
+    this.connectToDndPlayer();
+  }
+  
+  hide() {
+    this.widget.style.display = 'none';
+  }
+  
+  connectToDndPlayer() {
+    // Attendre que le lecteur D&D soit initialisé
+    const checkPlayer = () => {
+      if (window.dndMusicPlayer && window.dndMusicPlayer.isInitialized) {
+        this.dndPlayer = window.dndMusicPlayer;
+        this.syncPlayerState();
+      } else {
+        setTimeout(checkPlayer, 500);
+      }
+    };
+    checkPlayer();
+  }
+  
+  syncPlayerState() {
+    if (!this.dndPlayer) return;
+    
+    // Synchroniser l'état play/pause
+    const isPlaying = this.dndPlayer.isPlaying;
+    this.updatePlayPauseButton(isPlaying);
+    
+    // Synchroniser le volume
+    const volumeSlider = document.getElementById('mobile-music-volume');
+    if (volumeSlider) {
+      volumeSlider.value = this.dndPlayer.volume * 100;
+    }
+    
+    // Mettre à jour l'indicateur LED
+    const compactBtn = this.compactBtn;
+    compactBtn.classList.toggle('playing', isPlaying);
+    compactBtn.classList.toggle('paused', !isPlaying);
+  }
+  
+  setupEventListeners() {
+    // Tap sur le bouton compact pour étendre
+    this.compactBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.expand();
+    });
+    
+    // Contrôles de lecture
+    document.getElementById('mobile-music-play-pause').addEventListener('click', () => {
+      this.togglePlayPause();
+    });
+    
+    document.getElementById('mobile-music-prev').addEventListener('click', () => {
+      if (this.dndPlayer) this.dndPlayer.playPrevious();
+    });
+    
+    document.getElementById('mobile-music-next').addEventListener('click', () => {
+      if (this.dndPlayer) this.dndPlayer.playNext();
+    });
+    
+    // Contrôle volume
+    document.getElementById('mobile-music-volume').addEventListener('input', (e) => {
+      const volume = e.target.value / 100;
+      if (this.dndPlayer) this.dndPlayer.setVolume(volume);
+    });
+    
+    document.getElementById('mobile-music-mute').addEventListener('click', () => {
+      if (this.dndPlayer) this.dndPlayer.toggleMute();
+    });
+    
+    // Clic en dehors pour réduire
+    document.addEventListener('click', (e) => {
+      if (this.isExpanded && !this.widget.contains(e.target)) {
+        this.collapse();
+      }
+    });
+    
+    // Toucher en dehors pour réduire (mobile)
+    document.addEventListener('touchstart', (e) => {
+      if (this.isExpanded && !this.widget.contains(e.target)) {
+        this.collapse();
+      }
+    }, { passive: true });
+  }
+  
+  setupScrollDetection() {
+    let isScrolling = false;
+    
+    window.addEventListener('scroll', () => {
+      if (this.isExpanded) {
+        this.collapse();
+      }
+      
+      isScrolling = true;
+      clearTimeout(this.scrollTimeout);
+      
+      this.scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+      }, 150);
+    }, { passive: true });
+  }
+  
+  expand() {
+    if (this.isExpanded) return;
+    
+    this.isExpanded = true;
+    this.widget.classList.add('expanded');
+    this.expandedControls.classList.add('visible');
+    
+    // Synchroniser l'état du lecteur
+    this.syncPlayerState();
+    
+    // Auto-collapse après 5 secondes d'inactivité
+    this.resetInactivityTimer();
+    
+    // Ajouter les listeners pour réinitialiser le timer
+    this.expandedControls.addEventListener('touchstart', this.resetInactivityTimer.bind(this));
+    this.expandedControls.addEventListener('click', this.resetInactivityTimer.bind(this));
+  }
+  
+  collapse() {
+    if (!this.isExpanded) return;
+    
+    this.isExpanded = false;
+    this.widget.classList.remove('expanded');
+    this.expandedControls.classList.remove('visible');
+    
+    clearTimeout(this.inactivityTimeout);
+  }
+  
+  resetInactivityTimer() {
+    clearTimeout(this.inactivityTimeout);
+    this.inactivityTimeout = setTimeout(() => {
+      this.collapse();
+    }, 5000); // 5 secondes
+  }
+  
+  togglePlayPause() {
+    if (!this.dndPlayer) return;
+    
+    if (this.dndPlayer.isPlaying) {
+      this.dndPlayer.pause();
+    } else {
+      this.dndPlayer.play();
+    }
+    
+    // Mettre à jour l'interface
+    setTimeout(() => {
+      this.syncPlayerState();
+    }, 100);
+  }
+  
+  updatePlayPauseButton(isPlaying) {
+    // Bouton compact
+    const compactPlayIcon = this.compactBtn.querySelector('.play-icon');
+    const compactPauseIcon = this.compactBtn.querySelector('.pause-icon');
+    
+    if (isPlaying) {
+      compactPlayIcon.classList.add('hidden');
+      compactPauseIcon.classList.remove('hidden');
+    } else {
+      compactPlayIcon.classList.remove('hidden');
+      compactPauseIcon.classList.add('hidden');
+    }
+    
+    // Bouton étendu
+    const expandedBtn = document.getElementById('mobile-music-play-pause');
+    const expandedPlayIcon = expandedBtn.querySelector('.play-icon');
+    const expandedPauseIcon = expandedBtn.querySelector('.pause-icon');
+    
+    if (isPlaying) {
+      expandedPlayIcon.classList.add('hidden');
+      expandedPauseIcon.classList.remove('hidden');
+    } else {
+      expandedPlayIcon.classList.remove('hidden');
+      expandedPauseIcon.classList.add('hidden');
+    }
+  }
+}
+
+// Initialiser le widget mobile quand le DOM est prêt
+document.addEventListener('DOMContentLoaded', () => {
+  // Attendre un peu pour que le lecteur D&D soit initialisé
+  setTimeout(() => {
+    window.mobileAudioWidget = new MobileAudioWidget();
+  }, 1000);
+});
 </script>
 </body>
 </html>

@@ -1,1 +1,0 @@
-Pièce métallique personnalisable avec choix du métal et du multiplicateur.

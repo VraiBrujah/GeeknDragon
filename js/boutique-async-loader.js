@@ -52,7 +52,7 @@ class BoutiqueAsyncLoader {
 
             // Production: log succès supprimé
         } catch (error) {
-            console.error('❌ Erreur chargement produits:', error);
+            // Erreur chargement silencieuse en production
             this.showErrorState();
         } finally {
             this.loading = false;
@@ -135,7 +135,7 @@ class BoutiqueAsyncLoader {
     }
 
     initHorizontalScroll() {
-        document.querySelectorAll('.shop-grid').forEach(grid => {
+        document.querySelectorAll('.shop-grid').forEach((grid) => {
             grid.scrollLeft = 0;
 
             // Détection du type d'appareil
@@ -171,7 +171,7 @@ class BoutiqueAsyncLoader {
                     // Scroll direct sans animation pour éviter les saccades
                     grid.scrollBy({
                         left: e.deltaY,
-                        behavior: 'auto' // Pas de smooth, c'est plus fluide
+                        behavior: 'auto', // Pas de smooth, c'est plus fluide
                     });
                 }
             }, { passive: false });

@@ -1,0 +1,44 @@
+/**
+ * SASS PRINCIPAL - Geek & Dragon - Standards v2.1.0
+ * 
+ * Feuille de style principale avec système de variables avancé
+ * et mixins réutilisables pour développement efficace.
+ * 
+ * ORGANISATION SASS :
+ * ==================
+ * - Variables centralisées par domaine (couleurs, typographie, spacing)
+ * - Mixins réutilisables pour patterns communs
+ * - Fonctions utilitaires pour calculs automatiques
+ * - Components modulaires avec BEM methodology
+ * - Responsive design mobile-first
+ * 
+ * @author Brujah - Geek & Dragon
+ * @version 2.1.0 - SCSS Modulaire Français
+ * @since 2.0.0
+ * @category Styles
+ * @package GeeknDragon\SCSS
+ */
+
+/* ========================================================================
+   IMPORTS - Organisation modulaire
+   ===================================================================== */
+@import 'abstracts/variables';
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
+
+@import 'base/reset';
+@import 'base/typography';
+
+@import 'components/buttons';
+@import 'components/cards';
+@import 'components/forms';
+@import 'components/metal-system';
+
+@import 'layout/grid';
+@import 'layout/containers';
+
+@import 'pages/shop';
+@import 'pages/converter';
+
+@import 'utilities/helpers';
+@import 'utilities/responsive';

@@ -42,10 +42,10 @@ class CoinLotOptimizer {
         this.tauxChange = {
             copper: 1, silver: 10, electrum: 50, gold: 100, platinum: 1000,
         };
-        
+
         // Multiplicateurs physiques disponibles pour les pièces personnalisées
         this.multiplicateursDisponibles = [1, 10, 100, 1000, 10000];
-        
+
         // Traductions des noms de métaux pour l'affichage multilingue
         this.nomsMetaux = {
             fr: {
@@ -57,7 +57,6 @@ class CoinLotOptimizer {
         };
     }
 
-    
     /**
      * Obtient la langue actuelle du document pour les traductions
      * @returns {string} Code langue (fr/en)
@@ -69,7 +68,7 @@ class CoinLotOptimizer {
     /**
      * Point d'entrée principal : trouve la combinaison optimale de lots
      * Utilise l'algorithme de sac à dos pour minimiser le coût total
-     * 
+     *
      * @param {Object} needs - Besoins exacts par type de pièce {"copper_1": 2, "platinum_10": 1, ...}
      * @returns {Array} Solution optimale formatée pour ajout au panier Snipcart
      * @example
@@ -184,7 +183,6 @@ class CoinLotOptimizer {
    * @param {Array} variations - Array à remplir
    */
     generateFixedVariations(productId, product, variations) {
-
         const multipliers = product.multipliers || [];
 
         if (multipliers.length > 0) {
@@ -257,7 +255,6 @@ class CoinLotOptimizer {
    * @returns {Array} Solution optimale
    */
     knapsackOptimize(needs, variations) {
-
         const solutions = [];
 
         // ÉTAPE 1: BRUTE-FORCE INTELLIGENT (NOUVEAU - Prioritaire)
@@ -277,7 +274,6 @@ class CoinLotOptimizer {
                     totalCost: cost,
                     type: 'single',
                 });
-
             }
         });
 
@@ -294,7 +290,6 @@ class CoinLotOptimizer {
                 totalCost,
                 type: 'quintessence_multiple',
             });
-
         });
 
         // ÉTAPE 4: Décomposition intelligente avec Quintessences partielles
@@ -330,7 +325,6 @@ class CoinLotOptimizer {
                         totalCost,
                         type: 'combined',
                     });
-
                 }
             }
         });
@@ -347,7 +341,6 @@ class CoinLotOptimizer {
                     totalCost,
                     type: 'custom_fallback',
                 });
-
             }
         }
 
@@ -471,10 +464,8 @@ class CoinLotOptimizer {
    * @returns {Array} Solutions trouvées triées par coût
    */
     findBruteForceOptimal(needs, variations) {
-
         const solutions = [];
         const maxQuantity = this.calculateMaxReasonableQuantity(needs);
-
 
         // Test 1: Solutions à produit unique avec quantités multiples
         variations.forEach((variation) => {
@@ -492,7 +483,6 @@ class CoinLotOptimizer {
                         totalCost: cost,
                         type: 'brute_force_single',
                     });
-
                 }
             }
         });
@@ -538,7 +528,6 @@ class CoinLotOptimizer {
                                 totalCost: cost,
                                 type: 'brute_force_double',
                             });
-
                         }
                     }
                 }
@@ -644,7 +633,6 @@ class CoinLotOptimizer {
         if (items.length === 0) {
             return null;
         }
-
 
         return {
             items,
@@ -805,7 +793,6 @@ class CoinLotOptimizer {
         // NOUVELLE LOGIQUE: Tester spécifiquement les patterns détectés
         const patterns = this.multiplicateursDisponibles.map((mult) => this.identifyQuintessencePattern(needs, mult))
             .filter((p) => p.matches >= 4); // SEUIL REHAUSSÉ: Minimum 4 métaux sur 5
-
 
         // 1. Tester combinaisons de 2 patterns viables avec complétion (INTELLIGENT)
         for (let i = 0; i < patterns.length; i++) {
@@ -1096,7 +1083,6 @@ class CoinLotOptimizer {
    * @returns {Array} Solutions optimisées avec lots
    */
     findBulkOptimizedSolutions(needs, variations) {
-
         const solutions = [];
 
         // Analyser chaque besoin pour les opportunités de lots
@@ -1220,7 +1206,6 @@ class CoinLotOptimizer {
 
             const cost = bestSolution.reduce((sum, item) => sum + (item.variation.price * item.quantity), 0);
             const singleCost = quantity * (singleVariation?.price || 10);
-
 
             return bestSolution;
         }

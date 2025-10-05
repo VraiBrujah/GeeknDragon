@@ -602,12 +602,12 @@
         }
 
         function initializeCampaign() {
-            // Load saved data if available
+            // Charger les données sauvegardées si disponibles
             const saved = localStorage.getItem('campaignData_coffre_fort');
             if (saved) {
                 try {
                     const savedData = JSON.parse(saved);
-                    // Merge with default data to ensure all properties exist
+                    // Fusionner avec les données par défaut pour assurer toutes les propriétés
                     campaignData = { ...campaignData, ...savedData };
                 } catch (e) {
                     console.error('Error loading saved data:', e);
@@ -668,7 +668,7 @@
         function navigateTo(nodeId) {
             campaignData.currentNode = nodeId;
             
-            // Update active navigation
+            // Mettre à jour la navigation active
             document.querySelectorAll('.nav-label').forEach(label => {
                 label.classList.remove('active');
             });
@@ -676,14 +676,14 @@
             const targetLabel = document.querySelector(`[onclick*="${nodeId}"]`);
             if (targetLabel) targetLabel.classList.add('active');
             
-            // Update path
+            // Mettre à jour le chemin
             updatePath(nodeId);
             
-            // Show content
+            // Afficher le contenu
             showContent(nodeId);
             
             
-            // Save state
+            // Sauvegarder l'état
             saveData();
         }
 
@@ -691,10 +691,10 @@
             const path = [];
             let current = nodeId;
             
-            // Build path from current to root
+            // Construire le chemin depuis actuel vers racine
             while (current && campaignData.structure[current]) {
                 path.unshift(current);
-                // Find parent
+                // Trouver le parent
                 let parent = null;
                 for (const [id, node] of Object.entries(campaignData.structure)) {
                     if (node.children && node.children.includes(current)) {
@@ -707,7 +707,7 @@
             
             campaignData.currentPath = path;
             
-            // Update breadcrumb
+            // Mettre à jour le fil d'Ariane
             const breadcrumb = document.getElementById('breadcrumbPath');
             const pathLabels = path.map(id => campaignData.structure[id]?.label || id);
             breadcrumb.textContent = pathLabels.join(' > ');
@@ -721,11 +721,11 @@
             const node = campaignData.structure[nodeId];
             if (!node) return;
             
-            // Update header
+            // Mettre à jour l'en-tête
             document.getElementById('contentIcon').className = node.icon;
             document.getElementById('contentTitle').textContent = node.label;
             
-            // Update overview content
+            // Mettre à jour le contenu de présentation
             const overview = document.getElementById('overviewContent');
             overview.innerHTML = `
                 <div class="card">
@@ -751,23 +751,23 @@
                 </div>
             `;
             
-            // Update map if available
+            // Mettre à jour la carte si disponible
             if (node.mapId && campaignData.maps[node.mapId]) {
                 const mapImg = document.getElementById('mapImage');
                 mapImg.src = campaignData.maps[node.mapId].image;
                 updateMapPins(node.mapId);
             }
             
-            // Update characters
+            // Mettre à jour les personnages
             updateCharactersDisplay();
             
-            // Update quests
+            // Mettre à jour les quêtes
             updateQuestsDisplay();
             
-            // Update inventories
+            // Mettre à jour les inventaires
             updateInventoriesDisplay();
             
-            // Update calendar
+            // Mettre à jour le calendrier
             updateCalendarDisplay();
         }
 
@@ -776,13 +776,13 @@
         // ========================================
         
         function showTab(tabName) {
-            // Update tab buttons
+            // Mettre à jour les boutons d'onglets
             document.querySelectorAll('.tab-button').forEach(btn => {
                 btn.classList.remove('active');
             });
             event.target.classList.add('active');
             
-            // Update tab content
+            // Mettre à jour le contenu des onglets
             document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.remove('active');
             });
@@ -918,13 +918,13 @@
         function rollAction(characterId, actionName, diceExpression) {
             const result = rollDice(diceExpression);
             
-            // Show animated result
+            // Afficher le résultat animé
             showDiceResult(result.total);
             
-            // Log result
+            // Enregistrer le résultat
             console.log(`${actionName}: ${diceExpression} = ${result.details} = ${result.total}`);
             
-            // Update character if it's healing
+            // Mettre à jour le personnage si c'est de la guérison
             const character = campaignData.characters[characterId];
             const action = character.actions.find(a => a.name === actionName);
             if (action && action.heal) {
@@ -935,7 +935,7 @@
         }
 
         function rollDice(expression) {
-            // Parse dice expression (e.g., "1d20+5", "2d6", "1d4+3")
+            // Analyser l'expression de dés (ex: "1d20+5", "2d6", "1d4+3")
             const match = expression.match(/(\d+)d(\d+)([+\-]\d+)?/);
             if (!match) return { total: 0, details: "Invalid dice expression" };
             

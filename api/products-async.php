@@ -1,7 +1,23 @@
 <?php
 /**
- * API endpoint pour chargement asynchrone des produits
- * Retourne le HTML des cartes produits par catégorie
+ * API endpoint pour chargement asynchrone des produits - Geek & Dragon
+ * 
+ * Génère et retourne le HTML des cartes produits organisées par catégorie
+ * pour optimiser les performances de chargement de la boutique.
+ * 
+ * @endpoint GET /api/products-async.php?category={all|pieces|cards|triptychs}&lang={fr|en}
+ * @return application/json Structure contenant HTML des cartes et métadonnées
+ * 
+ * @example
+ * GET /api/products-async.php?category=pieces&lang=fr
+ * Retourne : {
+ *   "pieces": "<div class='product-card'>...</div>",
+ *   "counts": {"pieces": 15},
+ *   "error": null
+ * }
+ * 
+ * @author Brujah - Geek & Dragon
+ * @version 1.0.0
  */
 
 header('Content-Type: application/json');

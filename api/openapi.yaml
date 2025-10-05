@@ -1,0 +1,619 @@
+openapi: 3.1.0
+info:
+  title: Geek & Dragon Internal API
+  version: 2.1.0
+  description: |
+    API interne pour gestion des produits D&D et conversion monétaire
+    
+    ## Fonctionnalités principales
+    
+    - **Conversion monnaie D&D** : Algorithmes d'optimisation pour répartition optimale
+    - **Recommandations de lots** : Intelligence artificielle pour suggestions d'achat
+    - **Gestion de stock** : Synchronisation temps réel avec Snipcart
+    - **Système multilingue** : Support français/anglais complet
+    
+    ## Standards techniques
+    
+    - Types stricts PHP 8.0+ avec validation complète
+    - Documentation française pour maintenabilité
+    - Sécurité renforcée avec validation d'entrée
+    - Performance optimisée avec cache intelligent
+    
+  contact:
+    name: Geek & Dragon Support
+    url: https://geekndragon.com/contact
+    email: contact@geekndragon.com
+  license:
+    name: Propriétaire
+    url: https://geekndragon.com/license
+
+servers:
+  - url: https://geekndragon.com/api
+    description: Serveur de production
+  - url: http://localhost:8000/api
+    description: Serveur de développement
+
+security:
+  - ApiKeyAuth: []
+
+paths:
+  /currency/convert:
+    post:
+      summary: Convertit un montant en distribution optimale de pièces D&D
+      description: |
+        Utilise des algorithmes métaheuristiques pour calculer la répartition
+        optimale minimisant le nombre de pièces physiques nécessaires.
+        
+        ### Algorithmes utilisés
+        - Stratégie gloutonne multi-approches
+        - Optimisation globale avec cache intelligent
+        - Validation stricte des entrées
+        
+      tags:
+        - Conversion Monétaire
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConversionRequest'
+            examples:
+              cas_simple:
+                summary: Conversion simple de 100 cuivres
+                value:
+                  amount: 100
+                  multipliers: [1, 10, 100, 1000, 10000]
+              cas_complexe:
+                summary: Cas de référence 1661 cuivres
+                value:
+                  amount: 1661
+                  multipliers: [1, 10, 100, 1000, 10000]
+                  conserve_metals: false
+      responses:
+        '200':
+          description: Distribution optimale calculée avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversionResponse'
+              examples:
+                solution_optimale:
+                  summary: Solution optimale pour 1661 cuivres
+                  value:
+                    repartition:
+                      - metal: "platinum"
+                        multiplicateur: 1
+                        quantite: 1
+                        valeurUnitaire: 1000
+                        valeurTotale: 1000
+                      - metal: "gold"
+                        multiplicateur: 100
+                        quantite: 6
+                        valeurUnitaire: 100
+                        valeurTotale: 600
+                      - metal: "electrum"
+                        multiplicateur: 10
+                        quantite: 1
+                        valeurUnitaire: 50
+                        valeurTotale: 50
+                      - metal: "copper"
+                        multiplicateur: 1
+                        quantite: 11
+                        valeurUnitaire: 1
+                        valeurTotale: 11
+                    totalPieces: 4
+                    valeurTotale: 1661
+                    strategie: 0
+                    tempsCalcul: 15
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /currency/recommend-lots:
+    post:
+      summary: Recommande des lots de produits optimaux pour besoins donnés
+      description: |
+        Algorithme du sac à dos pour trouver la combinaison de produits
+        la moins chère couvrant exactement les besoins spécifiés.
+        
+      tags:
+        - Recommandations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LotRecommendationRequest'
+      responses:
+        '200':
+          description: Recommandations générées avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LotRecommendationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /products:
+    get:
+      summary: Liste tous les produits disponibles
+      description: Récupère la liste complète des produits avec données de stock
+      tags:
+        - Produits
+      parameters:
+        - name: category
+          in: query
+          description: Filtrer par catégorie
+          schema:
+            type: string
+            enum: [coins, cards, triptychs, lots]
+        - name: in_stock
+          in: query
+          description: Inclure seulement les produits en stock
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: Liste des produits récupérée
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+
+  /products/{productId}:
+    get:
+      summary: Récupère un produit spécifique
+      tags:
+        - Produits
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+          example: coin-merchant-essence-double
+      responses:
+        '200':
+          description: Produit trouvé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /stock/{productId}:
+    get:
+      summary: Vérifie le stock d'un produit
+      tags:
+        - Stock
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Stock récupéré
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StockInfo'
+
+  /translations/{language}:
+    get:
+      summary: Récupère les traductions pour une langue
+      tags:
+        - Localisation
+      parameters:
+        - name: language
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [fr, en]
+      responses:
+        '200':
+          description: Traductions récupérées
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TranslationDictionary'
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+
+  schemas:
+    # ========================================================================
+    # SYSTÈME MONÉTAIRE D&D
+    # ========================================================================
+    
+    MetalType:
+      type: string
+      enum: [copper, silver, electrum, gold, platinum]
+      description: Types de métaux précieux D&D
+      example: gold
+
+    MultiplierType:
+      type: integer
+      enum: [1, 10, 100, 1000, 10000]
+      description: Multiplicateurs de valeur disponibles
+      example: 100
+
+    CoinData:
+      type: object
+      required: [metal, multiplicateur, quantite]
+      properties:
+        metal:
+          $ref: '#/components/schemas/MetalType'
+        multiplicateur:
+          $ref: '#/components/schemas/MultiplierType'
+        quantite:
+          type: integer
+          minimum: 0
+          description: Nombre de pièces de ce type
+          example: 6
+      example:
+        metal: gold
+        multiplicateur: 100
+        quantite: 6
+
+    ExtendedCoinData:
+      allOf:
+        - $ref: '#/components/schemas/CoinData'
+        - type: object
+          properties:
+            valeurUnitaire:
+              type: integer
+              description: Valeur en cuivre d'une pièce
+              example: 100
+            valeurTotale:
+              type: integer
+              description: Valeur totale (quantité × valeur unitaire)
+              example: 600
+            typeLot:
+              type: string
+              enum: [single, trio, septuple, quintessence]
+              description: Type de lot pour recommandations
+
+    # ========================================================================
+    # REQUÊTES ET RÉPONSES
+    # ========================================================================
+    
+    ConversionRequest:
+      type: object
+      required: [amount]
+      properties:
+        amount:
+          type: integer
+          minimum: 0
+          maximum: 1000000
+          description: Montant en pièces de cuivre à convertir
+          example: 1661
+        multipliers:
+          type: array
+          items:
+            $ref: '#/components/schemas/MultiplierType'
+          description: Multiplicateurs disponibles (optionnel)
+          default: [1, 10, 100, 1000, 10000]
+        conserve_metals:
+          type: boolean
+          description: Conserver les métaux d'origine si possible
+          default: false
+
+    ConversionResponse:
+      type: object
+      required: [repartition, totalPieces, valeurTotale, strategie, tempsCalcul]
+      properties:
+        repartition:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExtendedCoinData'
+          description: Distribution optimale des pièces
+        totalPieces:
+          type: integer
+          description: Nombre total de pièces physiques
+          example: 4
+        valeurTotale:
+          type: integer
+          description: Valeur totale en cuivre (vérification)
+          example: 1661
+        strategie:
+          type: integer
+          description: Stratégie d'optimisation utilisée (0-2)
+          example: 0
+        tempsCalcul:
+          type: number
+          description: Temps de calcul en millisecondes
+          example: 15.3
+
+    LotRecommendationRequest:
+      type: object
+      required: [needs]
+      properties:
+        needs:
+          type: object
+          additionalProperties:
+            type: integer
+            minimum: 1
+          description: Besoins par métal et multiplicateur (format "metal_multiplier")
+          example:
+            copper_1: 11
+            electrum_10: 1
+            gold_100: 6
+            platinum_1: 1
+
+    LotRecommendationResponse:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              productId:
+                type: string
+                example: coin-quintessence-metals
+              name:
+                type: string
+                example: Quintessence Métallique
+              quantity:
+                type: integer
+                example: 1
+              price:
+                type: number
+                format: float
+                example: 49.99
+              totalPrice:
+                type: number
+                format: float
+                example: 49.99
+              coverage:
+                type: object
+                additionalProperties:
+                  type: integer
+                description: Couverture fournie par ce produit
+        totalPrice:
+          type: number
+          format: float
+          description: Prix total de la solution recommandée
+          example: 74.98
+        exactCoverage:
+          type: boolean
+          description: Si la couverture est exacte (pas de surplus)
+          example: true
+        surplus:
+          type: object
+          additionalProperties:
+            type: integer
+          description: Surplus par rapport aux besoins
+        savings:
+          type: number
+          format: float
+          description: Économies par rapport à achat individuel
+          example: 25.01
+
+    # ========================================================================
+    # PRODUITS ET STOCK
+    # ========================================================================
+    
+    Product:
+      type: object
+      required: [id, name, price, description, images]
+      properties:
+        id:
+          type: string
+          pattern: '^[a-zA-Z0-9_-]+$'
+          description: Identifiant unique du produit
+          example: coin-merchant-essence-double
+        name:
+          type: string
+          description: Nom d'affichage du produit
+          example: Pièce Marchande Essence Double
+        price:
+          type: number
+          format: float
+          minimum: 0
+          description: Prix en dollars canadiens
+          example: 15.99
+        description:
+          type: string
+          description: Description détaillée du produit
+          example: Pièce gravée authentique pour vos aventures D&D
+        images:
+          type: array
+          items:
+            type: string
+            format: uri
+          description: URLs des images du produit
+          example: ["/media/products/coins/coin-gold-1.webp"]
+        coin_lots:
+          $ref: '#/components/schemas/CoinLots'
+        stock:
+          type: integer
+          minimum: 0
+          description: Quantité en stock
+          example: 50
+        weight:
+          type: number
+          format: float
+          description: Poids en grammes
+          example: 25.5
+        dimensions:
+          type: object
+          properties:
+            length:
+              type: number
+              format: float
+            width:
+              type: number
+              format: float
+            height:
+              type: number
+              format: float
+
+    CoinLots:
+      type: object
+      required: [type]
+      properties:
+        type:
+          type: string
+          enum: [customizable, fixed_quantity_chosen_multiplier, fixed_complete]
+          description: Type de personnalisation disponible
+        multipliers:
+          type: array
+          items:
+            $ref: '#/components/schemas/MultiplierType'
+          description: Multiplicateurs disponibles (pour types customizable)
+        fixed_lots:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: integer
+          description: Lots prédéfinis (pour type fixed_complete)
+        total_quantity:
+          type: integer
+          description: Quantité totale (pour type fixed_quantity_chosen_multiplier)
+
+    StockInfo:
+      type: object
+      required: [stock, lastUpdated, source]
+      properties:
+        stock:
+          type: integer
+          minimum: 0
+          description: Quantité disponible
+          example: 50
+        lastUpdated:
+          type: string
+          format: date-time
+          description: Dernière mise à jour du stock
+          example: "2024-10-05T14:30:00Z"
+        source:
+          type: string
+          enum: [local, snipcart, manual]
+          description: Source de la donnée de stock
+          example: snipcart
+
+    # ========================================================================
+    # LOCALISATION
+    # ========================================================================
+    
+    TranslationDictionary:
+      type: object
+      properties:
+        meta:
+          type: object
+          description: Métadonnées de pages
+        common:
+          type: object
+          additionalProperties:
+            type: string
+          description: Textes communs
+        shop:
+          type: object
+          additionalProperties:
+            type: string
+          description: Interface boutique
+        converter:
+          type: object
+          description: Convertisseur de monnaie
+        errors:
+          type: object
+          additionalProperties:
+            type: string
+          description: Messages d'erreur
+
+    # ========================================================================
+    # ERREURS STANDARDISÉES
+    # ========================================================================
+    
+    ApiError:
+      type: object
+      required: [code, message, trace_id]
+      properties:
+        code:
+          type: string
+          description: Code d'erreur standardisé
+          example: INVALID_AMOUNT
+        message:
+          type: string
+          description: Message d'erreur en français
+          example: Le montant doit être un entier positif
+        details:
+          type: object
+          description: Détails supplémentaires sur l'erreur
+        trace_id:
+          type: string
+          description: Identifiant de traçage pour debugging
+          example: req_abc123def456
+        retry_after:
+          type: integer
+          description: Délai en secondes avant retry (si applicable)
+
+  responses:
+    BadRequest:
+      description: Requête invalide
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            montant_invalide:
+              summary: Montant invalide
+              value:
+                code: INVALID_AMOUNT
+                message: Le montant doit être un entier positif entre 0 et 1000000
+                trace_id: req_abc123def456
+
+    NotFound:
+      description: Ressource non trouvée
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            produit_inexistant:
+              summary: Produit inexistant
+              value:
+                code: PRODUCT_NOT_FOUND
+                message: Le produit spécifié n'existe pas
+                trace_id: req_abc123def456
+
+    InternalError:
+      description: Erreur interne du serveur
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          examples:
+            erreur_calcul:
+              summary: Erreur de calcul
+              value:
+                code: CALCULATION_ERROR
+                message: Erreur lors du calcul de conversion
+                trace_id: req_abc123def456
+                retry_after: 5
+
+tags:
+  - name: Conversion Monétaire
+    description: Algorithmes d'optimisation pour conversion de monnaie D&D
+  - name: Recommandations
+    description: Intelligence artificielle pour suggestions de produits
+  - name: Produits
+    description: Gestion du catalogue de produits
+  - name: Stock
+    description: Synchronisation et vérification de stock
+  - name: Localisation
+    description: Système de traductions multilingue

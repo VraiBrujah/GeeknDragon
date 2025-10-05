@@ -1,0 +1,327 @@
+/**
+ * VARIABLES SASS - Système de Design Geek & Dragon
+ * 
+ * Variables centralisées pour cohérence visuelle et facilité de maintenance.
+ * Organisées par domaine fonctionnel avec nomenclature française claire.
+ */
+
+/* ========================================================================
+   MÉTAUX D&D - Système de couleurs principal
+   ===================================================================== */
+
+// Cuivre - Chaleur artisanale
+$copper: (
+  50: #fef3c7,
+  100: #fde68a,
+  200: #fcd34d,
+  300: #fbbf24,
+  400: #f59e0b,
+  500: #f59e0b,  // Référence principale
+  600: #d97706,
+  700: #b45309,
+  800: #92400e,
+  900: #78350f
+);
+
+// Argent - Élégance discrète
+$silver: (
+  50: #f8fafc,
+  100: #f1f5f9,
+  200: #e2e8f0,
+  300: #cbd5e1,
+  400: #94a3b8,
+  500: #64748b,  // Référence principale
+  600: #475569,
+  700: #334155,
+  800: #1e293b,
+  900: #0f172a
+);
+
+// Or - Prestige aventurier
+$gold: (
+  50: #fefce8,
+  100: #fef3c7,
+  200: #fde68a,
+  300: #fcd34d,
+  400: #fbbf24,
+  500: #f59e0b,  // Référence principale
+  600: #d97706,
+  700: #b45309,
+  800: #92400e,
+  900: #78350f
+);
+
+// Platine - Rareté ultime
+$platinum: (
+  50: #f8fafc,
+  100: #f1f5f9,
+  200: #e2e8f0,
+  300: #cbd5e1,
+  400: #94a3b8,
+  500: #64748b,  // Référence principale
+  600: #475569,
+  700: #334155,
+  800: #1e293b,
+  900: #0f172a
+);
+
+// Électrum - Mystère magique
+$electrum: (
+  50: #f0fdf4,
+  100: #dcfce7,
+  200: #bbf7d0,
+  300: #86efac,
+  400: #4ade80,
+  500: #22c55e,  // Référence principale
+  600: #16a34a,
+  700: #15803d,
+  800: #166534,
+  900: #14532d
+);
+
+/* ========================================================================
+   COULEURS FONCTIONNELLES - États et interactions
+   ===================================================================== */
+
+// Succès - Confirmations positives
+$success: (
+  light: #d1fae5,
+  base: #10b981,
+  dark: #059669,
+  contrast: #ffffff
+);
+
+// Danger - Erreurs et alertes
+$danger: (
+  light: #fecaca,
+  base: #ef4444,
+  dark: #dc2626,
+  contrast: #ffffff
+);
+
+// Avertissement - Attention requise
+$warning: (
+  light: #fef3c7,
+  base: #f59e0b,
+  dark: #d97706,
+  contrast: #ffffff
+);
+
+// Information - Détails et conseils
+$info: (
+  light: #dbeafe,
+  base: #3b82f6,
+  dark: #2563eb,
+  contrast: #ffffff
+);
+
+/* ========================================================================
+   TYPOGRAPHIE - Échelle harmonieuse
+   ===================================================================== */
+
+// Polices de caractères
+$font-family-heading: 'Cinzel', 'Times New Roman', serif !default;
+$font-family-body: 'Crimson Text', 'Georgia', serif !default;
+$font-family-ui: 'Inter', 'Helvetica Neue', sans-serif !default;
+$font-family-mono: 'JetBrains Mono', 'Fira Code', monospace !default;
+
+// Échelle typographique (ratio 1.25 - Major Third)
+$font-sizes: (
+  xs: 0.75rem,    // 12px
+  sm: 0.875rem,   // 14px
+  base: 1rem,     // 16px
+  lg: 1.125rem,   // 18px
+  xl: 1.25rem,    // 20px
+  2xl: 1.5rem,    // 24px
+  3xl: 1.875rem,  // 30px
+  4xl: 2.25rem,   // 36px
+  5xl: 3rem,      // 48px
+  6xl: 3.75rem    // 60px
+);
+
+// Poids des polices
+$font-weights: (
+  thin: 100,
+  light: 300,
+  normal: 400,
+  medium: 500,
+  semibold: 600,
+  bold: 700,
+  extrabold: 800,
+  black: 900
+);
+
+// Hauteurs de ligne
+$line-heights: (
+  tight: 1.25,
+  snug: 1.375,
+  normal: 1.5,
+  relaxed: 1.625,
+  loose: 2
+);
+
+/* ========================================================================
+   ESPACEMENT - Grille harmonieuse
+   ===================================================================== */
+
+// Base d'espacement (0.25rem = 4px)
+$spacing-base: 0.25rem;
+
+// Échelle d'espacement
+$spacing: (
+  0: 0,
+  1: $spacing-base,      // 4px
+  2: $spacing-base * 2,  // 8px
+  3: $spacing-base * 3,  // 12px
+  4: $spacing-base * 4,  // 16px
+  5: $spacing-base * 5,  // 20px
+  6: $spacing-base * 6,  // 24px
+  8: $spacing-base * 8,  // 32px
+  10: $spacing-base * 10, // 40px
+  12: $spacing-base * 12, // 48px
+  16: $spacing-base * 16, // 64px
+  20: $spacing-base * 20, // 80px
+  24: $spacing-base * 24, // 96px
+  32: $spacing-base * 32  // 128px
+);
+
+/* ========================================================================
+   DIMENSIONS - Tailles et contraintes
+   ===================================================================== */
+
+// Points de rupture responsive
+$breakpoints: (
+  xs: 0,
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  2xl: 1536px
+);
+
+// Largeurs maximales de conteneur
+$container-max-widths: (
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  2xl: 1536px
+);
+
+// Z-index organisé
+$z-index: (
+  dropdown: 1000,
+  sticky: 1020,
+  fixed: 1030,
+  modal-backdrop: 1040,
+  modal: 1050,
+  popover: 1060,
+  tooltip: 1070,
+  toast: 1080
+);
+
+/* ========================================================================
+   BORDURES ET RAYONS - Géométrie cohérente
+   ===================================================================== */
+
+// Largeurs de bordure
+$border-widths: (
+  0: 0,
+  1: 1px,
+  2: 2px,
+  4: 4px,
+  8: 8px
+);
+
+// Rayons de bordure
+$border-radius: (
+  none: 0,
+  sm: 0.25rem,   // 4px
+  base: 0.375rem, // 6px
+  md: 0.5rem,    // 8px
+  lg: 0.75rem,   // 12px
+  xl: 1rem,      // 16px
+  2xl: 1.5rem,   // 24px
+  3xl: 2rem,     // 32px
+  full: 9999px
+);
+
+/* ========================================================================
+   OMBRES - Profondeur et hiérarchie
+   ===================================================================== */
+
+// Ombres standard
+$shadows: (
+  none: none,
+  sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05),
+  base: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+  md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+  xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+  2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25),
+  inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)
+);
+
+// Ombres colorées pour métaux
+$metal-shadows: (
+  copper: 0 4px 6px -1px rgba(180, 83, 9, 0.3),
+  gold: 0 4px 6px -1px rgba(217, 119, 6, 0.3),
+  silver: 0 4px 6px -1px rgba(100, 116, 139, 0.3),
+  platinum: 0 4px 6px -1px rgba(148, 163, 184, 0.3)
+);
+
+/* ========================================================================
+   ANIMATIONS - Timing et transitions
+   ===================================================================== */
+
+// Durées d'animation
+$durations: (
+  fast: 150ms,
+  normal: 300ms,
+  slow: 500ms,
+  slower: 700ms
+);
+
+// Courbes d'animation
+$easings: (
+  linear: linear,
+  ease: ease,
+  ease-in: ease-in,
+  ease-out: ease-out,
+  ease-in-out: ease-in-out,
+  bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55),
+  smooth: cubic-bezier(0.4, 0, 0.2, 1)
+);
+
+// Transitions par défaut
+$transitions: (
+  all: all map-get($durations, normal) map-get($easings, smooth),
+  colors: color map-get($durations, fast) map-get($easings, smooth),
+  opacity: opacity map-get($durations, fast) map-get($easings, smooth),
+  transform: transform map-get($durations, normal) map-get($easings, smooth)
+);
+
+/* ========================================================================
+   VARIABLES PERSONNALISÉES CSS - Export pour compatibilité
+   ===================================================================== */
+
+:root {
+  // Couleurs principales
+  --color-copper-500: #{map-get($copper, 500)};
+  --color-silver-500: #{map-get($silver, 500)};
+  --color-gold-500: #{map-get($gold, 500)};
+  --color-platinum-500: #{map-get($platinum, 500)};
+  
+  // Espacement
+  --spacing-4: #{map-get($spacing, 4)};
+  --spacing-8: #{map-get($spacing, 8)};
+  --spacing-16: #{map-get($spacing, 16)};
+  
+  // Typographie
+  --font-size-base: #{map-get($font-sizes, base)};
+  --font-family-ui: #{$font-family-ui};
+  
+  // Animations
+  --duration-normal: #{map-get($durations, normal)};
+  --easing-smooth: #{map-get($easings, smooth)};
+}

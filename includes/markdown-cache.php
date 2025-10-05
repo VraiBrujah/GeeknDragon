@@ -1,16 +1,36 @@
 <?php
 /**
- * Cache Markdown optimisé pour éviter les conversions répétitives
- * Système de cache en mémoire avec fallback fichier pour de meilleures performances
+ * Cache Markdown optimisé - Standards v2.1.0
+ * 
+ * Système de cache haute performance pour conversions Markdown vers HTML/texte.
+ * Évite les conversions répétitives avec cache mémoire + fichier pour optimiser
+ * les temps de réponse des pages produits et descriptions.
+ * 
+ * @author Brujah - Geek & Dragon
+ * @version 2.1.0
+ * @since 1.0.0
+ * @category Cache
+ * @package GeeknDragon\Includes
  */
 
 class MarkdownCache {
+    /** @var array Cache en mémoire pour accès ultra-rapide */
     private static $memoryCache = [];
+    
+    /** @var string Répertoire de stockage du cache sur disque */
     private static $cacheDir = __DIR__ . '/../cache/markdown/';
+    
+    /** @var Parsedown|null Instance du parseur Markdown */
     private static $parsedown = null;
     
     /**
-     * Initialise le cache et s'assure que le répertoire existe
+     * Initialise le système de cache Markdown
+     * 
+     * Crée le répertoire de cache et configure l'instance Parsedown
+     * avec les paramètres de sécurité appropriés.
+     * 
+     * @return void
+     * @throws Exception Si impossible de créer le répertoire de cache
      */
     public static function init(): void {
         if (!is_dir(self::$cacheDir)) {

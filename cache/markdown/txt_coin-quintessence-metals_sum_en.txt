@@ -1,1 +1,0 @@
-Collection of five coins with one of each metal and uniform multiplier.

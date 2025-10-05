@@ -1,6 +1,6 @@
 /**
  * Convertisseur de monnaie D&D autonome avec optimisation algorithmique
- * 
+ *
  * REFACTORISATION MAJEURE v2.1.0 :
  * =====================================
  * - API complètement standardisée avec formats d'entrée/sortie uniformes
@@ -8,31 +8,31 @@
  * - Documentation complète avec exemples concrets
  * - Méthodes de validation et nettoyage intégrées
  * - Cache optimisé pour les performances
- * 
+ *
  * RESPONSABILITÉS PRINCIPALES :
  * ==============================
  * - Conversion entre monnaies D&D avec multiplicateurs physiques (1x à 10000x)
  * - Optimisation du nombre minimal de pièces (métaheuristiques multi-stratégies)
  * - Intégration avec système de recommandations de lots CoinLotOptimizer
  * - Interface utilisateur réactive avec feedback temps réel
- * 
+ *
  * ARCHITECTURE PATTERNS :
  * ======================
  * - Strategy Pattern : Multiple algorithmes d'optimisation (glouton, équilibré, hybride)
  * - Observer Pattern : Callbacks pour notifications de changements
  * - Template Method : Structure commune, implémentations variables
  * - Factory Pattern : Génération d'objets formatés standardisés
- * 
+ *
  * FORMAT STANDARDISÉ API v2.1.0 :
  * ===============================
- * 
+ *
  * ENTRÉE (CoinData) :
  * {
  *   metal: string,           // 'copper', 'silver', 'electrum', 'gold', 'platinum'
  *   multiplicateur: number,  // 1, 10, 100, 1000, 10000
  *   quantite: number        // Nombre de pièces (>= 0)
  * }
- * 
+ *
  * SORTIE (ExtendedCoinData[]) :
  * [{
  *   metal: string,
@@ -42,7 +42,7 @@
  *   valeurTotale: number,      // valeurUnitaire * quantite
  *   typeLot?: string           // 'single', 'trio', 'septuple'
  * }]
- * 
+ *
  * MÉTHODES PRINCIPALES API v2.1.0 :
  * =================================
  * - convertirMontant(montantCuivre, multiplicateurs?, conserverMetaux?)
@@ -52,12 +52,12 @@
  * - obtenirRepartitionUtilisateur()
  * - validerDonnees(donnees, type)
  * - viderCache()
- * 
+ *
  * COMPATIBILITÉ :
  * ==============
  * Toutes les anciennes méthodes sont conservées avec des alias pour éviter
  * la casse du code existant. Migration progressive recommandée vers la nouvelle API.
- * 
+ *
  * @author Brujah - Geek & Dragon
  * @version 2.1.0 - API Standardisée et Refactorisée
  * @since 1.0.0 - Version initiale
@@ -73,10 +73,10 @@ class CurrencyConverterPremium {
         this.tauxChange = {
             copper: 1, silver: 10, electrum: 50, gold: 100, platinum: 1000,
         };
-        
+
         // Multiplicateurs physiques disponibles pour les pièces
         this.multiplicateursDisponibles = [1, 10, 100, 1000, 10000];
-        
+
         // Formateur numérique français pour l'affichage
         this.nf = new Intl.NumberFormat('fr-FR');
         this.editMode = true;
@@ -115,15 +115,15 @@ class CurrencyConverterPremium {
 
         // Pattern Observer : callbacks pour réactivité
         this.callbacksChangement = [];
-        
+
         // Cache pour les calculs optimisés (amélioration performances)
         this.cacheCalculs = new Map();
-        
+
         // Statistiques d'utilisation pour le débogage
         this.stats = {
             conversionsTotal: 0,
             cacheHits: 0,
-            dernierCalcul: null
+            dernierCalcul: null,
         };
 
         this.init();
@@ -180,7 +180,7 @@ class CurrencyConverterPremium {
 
     /**
      * Ajoute un callback pour les notifications de changement
-     * 
+     *
      * @param {Function} callback - Fonction à exécuter lors des changements
      */
     ajouterCallbackChangement(callback) {
@@ -191,7 +191,7 @@ class CurrencyConverterPremium {
 
     /**
      * Notifie tous les callbacks enregistrés d'un changement
-     * 
+     *
      * @param {Object} donnees - Données du changement
      */
     notifierChangement(donnees) {
@@ -226,7 +226,7 @@ class CurrencyConverterPremium {
 
     /**
      * Obtient le nom du métal dans la langue courante
-     * 
+     *
      * @param {string} metal - Type de métal ('copper', 'silver', etc.)
      * @returns {string} Nom localisé du métal
      */
@@ -289,13 +289,13 @@ class CurrencyConverterPremium {
 
     /**
      * Convertit un montant total en cuivre vers une répartition optimale de pièces
-     * 
+     *
      * @param {number} montantCuivre - Montant total en pièces de cuivre
      * @param {Array<number>} multiplicateursDisponibles - Liste des multiplicateurs possibles
      * @param {boolean} conserverMetaux - Si true, conserve la répartition existante
      * @returns {Array<Object>} Répartition optimale par métal et multiplicateur
      * @throws {Error} Si le montant est négatif ou les multiplicateurs invalides
-     * 
+     *
      * @example
      * const resultat = convertisseur.convertirMontant(1661, [1, 10, 100, 1000, 10000]);
      * // Retourne: [{metal: 'platinum', multiplicateur: 1, quantite: 1, ...}, ...]
@@ -304,7 +304,7 @@ class CurrencyConverterPremium {
         if (montantCuivre < 0) {
             throw new Error('Le montant ne peut pas être négatif');
         }
-        
+
         if (!Array.isArray(multiplicateursDisponibles) || multiplicateursDisponibles.length === 0) {
             throw new Error('Les multiplicateurs doivent être un tableau non vide');
         }
@@ -321,17 +321,17 @@ class CurrencyConverterPremium {
         }
 
         const resultat = this.calculerRepartitionOptimale(montantCuivre, multiplicateursDisponibles, conserverMetaux);
-        
+
         // Mettre en cache pour 5 minutes
         setTimeout(() => this.cacheCalculs.delete(cleCache), 300000);
         this.cacheCalculs.set(cleCache, resultat);
-        
+
         return resultat;
     }
 
     /**
      * Calcule la répartition optimale de pièces pour un montant donné
-     * 
+     *
      * @param {number} montantCuivre - Montant en cuivre à convertir
      * @param {Array<number>} multiplicateurs - Multiplicateurs autorisés
      * @param {boolean} conserverMetaux - Conserver la répartition utilisateur
@@ -353,10 +353,10 @@ class CurrencyConverterPremium {
 
     /**
      * Convertit des données brutes vers le format standardisé uniforme
-     * 
+     *
      * Transforme les résultats de l'algorithme d'optimisation en format standardisé
      * avec toutes les métadonnées nécessaires pour les calculs et l'affichage
-     * 
+     *
      * @param {Array} donneesBrutes - Résultats bruts de l'algorithme d'optimisation
      * @returns {Array<Object>} Liste standardisée avec métadonnées complètes
      */
@@ -365,22 +365,22 @@ class CurrencyConverterPremium {
             return [];
         }
 
-        return donneesBrutes.map(element => ({
+        return donneesBrutes.map((element) => ({
             metal: element.currency,
             multiplicateur: element.multiplier,
             quantite: element.quantity,
             valeurUnitaire: this.tauxChange[element.currency] * element.multiplier,
             valeurTotale: this.tauxChange[element.currency] * element.multiplier * element.quantity,
-            typeLot: element.lotType || 'unitaire'
+            typeLot: element.lotType || 'unitaire',
         }));
     }
 
     /**
      * Calcule le nombre total de pièces physiques pour une répartition donnée
-     * 
+     *
      * @param {Array<Object>} repartition - Répartition au format standardisé
      * @returns {number} Nombre total de pièces physiques
-     * 
+     *
      * @example
      * const total = convertisseur.calculerTotalPieces(repartition);
      * // Retourne: 4 (pour 1 platine + 1 or + 1 argent + 1 cuivre)
@@ -389,15 +389,13 @@ class CurrencyConverterPremium {
         if (!Array.isArray(repartition)) {
             return 0;
         }
-        
-        return repartition.reduce((total, piece) => {
-            return total + (piece.quantite || 0);
-        }, 0);
+
+        return repartition.reduce((total, piece) => total + (piece.quantite || 0), 0);
     }
 
     /**
      * Calcule la valeur totale en cuivre d'une répartition de pièces
-     * 
+     *
      * @param {Array<Object>} repartition - Répartition au format standardisé
      * @returns {number} Valeur totale en cuivre
      */
@@ -405,19 +403,17 @@ class CurrencyConverterPremium {
         if (!Array.isArray(repartition)) {
             return 0;
         }
-        
-        return repartition.reduce((total, piece) => {
-            return total + (piece.valeurTotale || 0);
-        }, 0);
+
+        return repartition.reduce((total, piece) => total + (piece.valeurTotale || 0), 0);
     }
 
     /**
      * Formate une répartition de pièces pour l'affichage utilisateur
-     * 
+     *
      * @param {Array<Object>} repartition - Répartition au format standardisé
      * @param {boolean} afficherMultiplicateurs - Inclure les multiplicateurs dans l'affichage
      * @returns {string} Texte formaté pour l'affichage
-     * 
+     *
      * @example
      * const texte = convertisseur.formaterPourAffichage(repartition, true);
      * // Retourne: "1 💎 platine (×1), 1 🥇 or (×100) et 1 🥈 argent (×1)"
@@ -427,23 +423,23 @@ class CurrencyConverterPremium {
             return '';
         }
 
-        const elementsDeTexte = repartition.map(piece => {
+        const elementsDeTexte = repartition.map((piece) => {
             const informationsMétal = this.donneesMetaux[piece.metal];
             const nomMetal = this.obtenirNomMetal(piece.metal);
             const quantiteFormatee = this.nf.format(piece.quantite);
-            
+
             let textePiece = `${quantiteFormatee} ${informationsMétal.emoji} ${nomMetal.toLowerCase()}`;
-            
+
             // Ajouter le multiplicateur si nécessaire et demandé
             if (afficherMultiplicateurs && piece.multiplicateur !== 1) {
                 textePiece += ` (×${this.nf.format(piece.multiplicateur)})`;
             }
-            
+
             // Ajouter un indicateur visuel pour les lots groupés (trio, septuple)
             if (piece.typeLot === 'trio' || piece.typeLot === 'septuple') {
                 textePiece += ' 📦';
             }
-            
+
             return textePiece;
         });
 
@@ -488,7 +484,7 @@ class CurrencyConverterPremium {
             breakdown: this.getOptimalBreakdown(baseValue),
         };
     }
-    
+
     // Alias pour compatibilité
     obtenirValeursActuelles() {
         return this.getCurrentValues();
@@ -496,7 +492,7 @@ class CurrencyConverterPremium {
 
     /**
      * Récupère la répartition de pièces saisie par l'utilisateur dans le tableau éditable
-     * 
+     *
      * @returns {Array<Object>} Liste des pièces avec quantités au format standardisé
      * @example
      * // Si l'utilisateur a saisi 1 électrum ×1 et 1 argent ×1
@@ -552,7 +548,7 @@ class CurrencyConverterPremium {
         this.updateOptimalLotsRecommendations(valeurBase);
         this.updateCoinLotsRecommendations(valeurBase, true);
     }
-    
+
     // Alias pour compatibilité
     updateFromSources() {
         this.mettreAJourDepuisSources();
@@ -583,7 +579,7 @@ class CurrencyConverterPremium {
         this.updateOptimalLotsRecommendations(valeurTotale);
         this.updateCoinLotsRecommendations(valeurTotale, true);
     }
-    
+
     // Alias pour compatibilité
     updateFromMultipliers() {
         this.mettreAJourDepuisMultiplicateurs();
@@ -632,8 +628,8 @@ class CurrencyConverterPremium {
 
         // Générer toutes les dénominations possibles (métal × multiplicateur)
         const denoms = [];
-        Object.keys(this.tauxChange).forEach(currency => {
-            this.multiplicateursDisponibles.forEach(multiplier => {
+        Object.keys(this.tauxChange).forEach((currency) => {
+            this.multiplicateursDisponibles.forEach((multiplier) => {
                 denoms.push({
                     currency,
                     multiplier,
@@ -1428,7 +1424,7 @@ class CurrencyConverterPremium {
         if (recommendationsContent) {
             const promptMessage = this.getTranslation('money.converter.lotsRecommendations.promptMessage', 'Définissez votre trésor dans le convertisseur');
             const promptSubMessage = this.getTranslation('money.converter.lotsRecommendations.promptSubMessage', 'pour découvrir vos collections personnalisées');
-            
+
             recommendationsContent.innerHTML = `
         <div class="text-center py-8">
           <div class="w-16 h-16 bg-green-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -1452,7 +1448,7 @@ class CurrencyConverterPremium {
         if (recommendationsContent) {
             const noLotsMessage = this.getTranslation('money.converter.lotsRecommendations.noLotsMessage', 'Aucune collection disponible.');
             const noLotsSubMessage = this.getTranslation('money.converter.lotsRecommendations.noLotsSubMessage', 'Modifiez votre trésor pour découvrir de nouvelles options');
-            
+
             recommendationsContent.innerHTML = `
         <div class="text-center py-8">
           <div class="w-16 h-16 bg-gray-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -1556,7 +1552,7 @@ class CurrencyConverterPremium {
         if (optimalContent) {
             const promptMessage = this.getTranslation('money.converter.optimalLots.promptMessage', 'Configurez votre trésor dans le convertisseur');
             const promptSubMessage = this.getTranslation('money.converter.optimalLots.promptSubMessage', 'pour découvrir les collections les plus efficaces');
-            
+
             optimalContent.innerHTML = `
         <div class="text-center py-8">
           <div class="w-16 h-16 bg-purple-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -1580,7 +1576,7 @@ class CurrencyConverterPremium {
         if (optimalContent) {
             const noLotsMessage = this.getTranslation('money.converter.optimalLots.noLotsMessage', 'Aucune solution optimale disponible.');
             const noLotsSubMessage = this.getTranslation('money.converter.optimalLots.noLotsSubMessage', 'Ajustez votre trésor pour explorer d\'autres configurations');
-            
+
             optimalContent.innerHTML = `
         <div class="text-center py-8">
           <div class="w-16 h-16 bg-gray-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -1678,16 +1674,16 @@ class CurrencyConverterPremium {
 
     /**
      * Obtient les statistiques d'utilisation du convertisseur
-     * 
+     *
      * @returns {Object} Statistiques d'utilisation
      */
     obtenirStatistiques() {
         return {
             ...this.stats,
             tailleCache: this.cacheCalculs.size,
-            tauxCacheHit: this.stats.conversionsTotal > 0 
-                ? (this.stats.cacheHits / this.stats.conversionsTotal * 100).toFixed(2) + '%'
-                : '0%'
+            tauxCacheHit: this.stats.conversionsTotal > 0
+                ? `${(this.stats.cacheHits / this.stats.conversionsTotal * 100).toFixed(2)}%`
+                : '0%',
         };
     }
 
@@ -1698,31 +1694,29 @@ class CurrencyConverterPremium {
         this.stats = {
             conversionsTotal: 0,
             cacheHits: 0,
-            dernierCalcul: null
+            dernierCalcul: null,
         };
     }
 
     /**
      * Valide les données d'entrée avant traitement
-     * 
+     *
      * @param {*} donnees - Données à valider
      * @param {string} typeAttendu - Type attendu ('number', 'array', etc.)
      * @returns {boolean} True si les données sont valides
      */
     validerDonnees(donnees, typeAttendu) {
         switch (typeAttendu) {
-            case 'number':
-                return typeof donnees === 'number' && !isNaN(donnees) && donnees >= 0;
-            case 'array':
-                return Array.isArray(donnees) && donnees.length > 0;
-            case 'repartition':
-                return Array.isArray(donnees) && donnees.every(item => 
-                    item.metal && 
-                    typeof item.multiplicateur === 'number' && 
-                    typeof item.quantite === 'number'
-                );
-            default:
-                return false;
+        case 'number':
+            return typeof donnees === 'number' && !isNaN(donnees) && donnees >= 0;
+        case 'array':
+            return Array.isArray(donnees) && donnees.length > 0;
+        case 'repartition':
+            return Array.isArray(donnees) && donnees.every((item) => item.metal
+                    && typeof item.multiplicateur === 'number'
+                    && typeof item.quantite === 'number');
+        default:
+            return false;
         }
     }
 
@@ -1761,10 +1755,10 @@ class CurrencyConverterPremium {
 
     /**
      * Formate une répartition de pièces vers le format standardisé pour compatibilité
-     * 
+     *
      * Convertit les anciennes données de répartition vers le nouveau format uniforme
      * tout en maintenant la compatibilité avec le code existant
-     * 
+     *
      * @param {Array} repartitionAncienFormat - Répartition au format hérité
      * @returns {string} Texte formaté pour affichage utilisateur
      */
@@ -1867,7 +1861,6 @@ window.addEventListener('beforeunload', () => {
         window.converterInstance.destroy();
     }
 });
-
 
 // Initialisation paresseuse du convertisseur - ne charge que si l'utilisateur interagit
 let converterInitialized = false;

@@ -72,7 +72,7 @@ class AsyncStockLoader {
         try {
             await this.fetchStockBatch(productIds);
         } catch (error) {
-            console.error('Erreur chargement stock:', error);
+            // Erreur silencieuse en production
             // Remettre dans la queue pour retry
             productIds.forEach((id) => this.pendingProducts.add(id));
         }
@@ -127,7 +127,7 @@ class AsyncStockLoader {
 
             // Production: log stock supprimé
         } catch (error) {
-            console.error('Erreur API stock:', error);
+            // Erreur API silencieuse en production
 
             // Marquer comme erreur et utiliser fallback
             productIds.forEach((id) => {

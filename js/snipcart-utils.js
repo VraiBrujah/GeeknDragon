@@ -1,24 +1,63 @@
 /**
- * Utilitaires Snipcart réutilisables
- * 
- * Architecture : Pattern Factory et Template Method pour génération cohérente des boutons e-commerce
- * Responsabilités :
+ * Utilitaires Snipcart réutilisables - Standards v2.1.0
+ *
+ * REFACTORISATION v2.1.0 - Format Standardisé :
+ * ===============================================
+ * - Documentation française complète avec exemples concrets
+ * - API unifiée pour intégration boutique/aide-jeux
+ * - Gestion d'erreurs robuste avec retry automatique
+ * - Support complet des produits personnalisables D&D
+ *
+ * RESPONSABILITÉS PRINCIPALES :
+ * =============================
  * - Création unifiée des boutons d'ajout au panier avec attributs Snipcart corrects
  * - Gestion robuste de l'ajout multiple avec vérification et retry automatique
  * - Support complet des champs personnalisés (métal, multiplicateur, langue)
- * - Intégration seamless boutique principale et pages aide-jeux
- * 
+ * - Intégration transparente boutique principale et pages aide-jeux
+ *
+ * ARCHITECTURE PATTERNS :
+ * ======================
+ * - Factory Pattern : Génération cohérente des boutons e-commerce
+ * - Template Method : Structure commune pour tous les types de produits
+ * - Observer Pattern : Callbacks pour feedback utilisateur
+ *
  * @author Brujah - Geek & Dragon
- * @version 2.0.0 - Production
+ * @version 2.1.0 - Standards Français
+ * @since 2.0.0
+ * @category E-Commerce
+ * @package GeeknDragon\JavaScript
  */
 class SnipcartUtils {
     /**
      * Crée un bouton d'ajout au panier avec tous les attributs Snipcart nécessaires
-     * Factory method pour génération cohérente des boutons e-commerce
      * 
-     * @param {Object} productData - Données du produit (id, nom, prix, description)
-     * @param {Object} options - Options de personnalisation (quantité, champs custom, style)
-     * @returns {HTMLElement} Bouton HTML configuré pour Snipcart
+     * Factory method pour génération cohérente des boutons e-commerce.
+     * Gère automatiquement la configuration des champs personnalisés pour
+     * les produits D&D (métal, multiplicateur, langue).
+     *
+     * @param {Object} productData Données complètes du produit
+     * @param {string} productData.id Identifiant unique du produit
+     * @param {string} productData.name Nom d'affichage du produit
+     * @param {number} productData.price Prix unitaire en dollars canadiens
+     * @param {string} productData.description Description détaillée
+     * @param {Object} [options={}] Options de personnalisation du bouton
+     * @param {number} [options.quantity=1] Quantité par défaut à ajouter
+     * @param {Object} [options.customFields={}] Champs personnalisés Snipcart
+     * @param {string} [options.className] Classes CSS du bouton
+     * @param {string} [options.text] Texte d'accessibilité
+     * @param {boolean} [options.useIconButton=true] Utiliser icône vs texte
+     * @returns {HTMLElement} Bouton HTML configuré pour intégration Snipcart
+     * 
+     * @example
+     * const bouton = SnipcartUtils.createAddToCartButton({
+     *     id: 'coin-merchant-essence-double',
+     *     name: 'Pièce Marchande Essence Double',
+     *     price: 15.99,
+     *     description: 'Pièce gravée authentique'
+     * }, {
+     *     quantity: 2,
+     *     customFields: { metal: 'gold', multiplier: '100' }
+     * });
      */
     static createAddToCartButton(productData, options = {}) {
         const {
@@ -99,7 +138,7 @@ class SnipcartUtils {
     /**
      * Ajoute un produit au panier par programmation via API Snipcart directe
      * Méthode optimisée avec fallback HTML si l'API échoue
-     * 
+     *
      * @param {Object} productData - Données du produit à ajouter
      * @param {Object} options - Options d'ajout (quantité, champs personnalisés)
      * @returns {Promise<boolean>} True si ajout réussi
@@ -109,7 +148,7 @@ class SnipcartUtils {
         if (window.Snipcart && window.Snipcart.api && window.Snipcart.api.cart) {
             try {
                 const snipcartData = this.extractProductDataFromButton(
-                    this.createAddToCartButton(productData, options)
+                    this.createAddToCartButton(productData, options),
                 );
                 await window.Snipcart.api.cart.items.add(snipcartData);
                 return true;
@@ -130,7 +169,7 @@ class SnipcartUtils {
                 button.parentNode.removeChild(button);
             }
         }, 300);
-        
+
         return true;
     }
 
@@ -237,7 +276,7 @@ class SnipcartUtils {
         for (let i = 0; i < products.length; i++) {
             const productData = products[i];
             const initialCount = getCartItemCount();
-            
+
             try {
                 // Utiliser la méthode optimisée avec API directe
                 const success = await this.addToCart(productData.product, {
@@ -249,11 +288,11 @@ class SnipcartUtils {
                     // Vérification rapide (max 3 tentatives = 450ms)
                     let attempts = 0;
                     const maxAttempts = 3;
-                    
+
                     while (attempts < maxAttempts) {
-                        await new Promise(resolve => setTimeout(resolve, 150));
+                        await new Promise((resolve) => setTimeout(resolve, 150));
                         const currentCount = getCartItemCount();
-                        
+
                         if (currentCount > initialCount) {
                             added++;
                             break;
@@ -261,29 +300,28 @@ class SnipcartUtils {
                         attempts++;
                     }
                 }
-                
+
                 processed++;
-                
+
                 if (onProgress) {
                     onProgress(added, products.length, processed);
                 }
 
                 // Délai minimal entre produits pour API stability
                 if (i < products.length - 1) {
-                    await new Promise(resolve => setTimeout(resolve, 400));
+                    await new Promise((resolve) => setTimeout(resolve, 400));
                 }
-
             } catch (error) {
                 // Gestion silencieuse en production
                 processed++;
-                
+
                 if (onProgress) {
                     onProgress(added, products.length, processed);
                 }
-                
+
                 // Délai de récupération court
                 if (i < products.length - 1) {
-                    await new Promise(resolve => setTimeout(resolve, 600));
+                    await new Promise((resolve) => setTimeout(resolve, 600));
                 }
             }
         }
@@ -365,7 +403,7 @@ class SnipcartUtils {
     /**
      * Extrait les données produit depuis les attributs d'un bouton HTML Snipcart
      * Méthode réutilisée pour conversion vers format API
-     * 
+     *
      * @param {HTMLElement} button - Bouton avec attributs data-item-*
      * @returns {Object} Données produit extraites
      */

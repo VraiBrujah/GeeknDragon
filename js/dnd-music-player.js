@@ -42,7 +42,7 @@ class DnDMusicPlayer {
             this.createPlayerInterface();
             this.isInitialized = true;
         } catch (error) {
-            console.error('Erreur initialisation lecteur:', error);
+            // Erreur initialisation silencieuse en production
         }
     }
 
@@ -58,7 +58,7 @@ class DnDMusicPlayer {
             // Créer playlist pondérée avec hero-intro favorisé
             this.createWeightedPlaylist();
         } catch (error) {
-            console.error('Erreur chargement playlist:', error);
+            // Erreur chargement playlist silencieuse en production
             // Playlist de fallback si l'API échoue
             this.playlist = [
                 { path: 'media/musique/hero-intro.mp3', name: 'Hero Intro' },
@@ -92,7 +92,7 @@ class DnDMusicPlayer {
         });
 
         this.audio.addEventListener('error', (e) => {
-            console.warn('Erreur audio:', e);
+            // Erreur audio silencieuse en production
             this.playNext(); // Passer au suivant en cas d'erreur
         });
 
@@ -231,7 +231,7 @@ class DnDMusicPlayer {
         try {
             this.audio.load();
         } catch (error) {
-            console.warn('Erreur chargement piste:', error);
+            // Erreur chargement piste silencieuse en production
         }
     }
 
@@ -241,7 +241,7 @@ class DnDMusicPlayer {
             this.isPlaying = true;
             this.updatePlayButton();
         } catch (error) {
-            console.warn('Impossible de lire la musique:', error);
+            // Erreur lecture silencieuse en production
             this.playNext();
         }
     }

@@ -6,9 +6,7 @@
  * - Connecté : compte_connecter.webp
  */
 
-(function() {
-    'use strict';
-
+(function () {
     /**
      * Met à jour l'affichage de l'icône de compte selon l'état de connexion
      */
@@ -23,27 +21,27 @@
 
         if (isSignedIn) {
             // Utilisateur connecté
-            disconnectedIcons.forEach(icon => icon.classList.add('hidden'));
-            connectedIcons.forEach(icon => icon.classList.remove('hidden'));
-            labels.forEach(label => {
+            disconnectedIcons.forEach((icon) => icon.classList.add('hidden'));
+            connectedIcons.forEach((icon) => icon.classList.remove('hidden'));
+            labels.forEach((label) => {
                 label.textContent = label.getAttribute('data-i18n') === 'nav.account'
                     ? 'Mon compte'
                     : label.textContent;
             });
-            buttons.forEach(btn => {
+            buttons.forEach((btn) => {
                 btn.setAttribute('title', 'Mon compte');
                 btn.setAttribute('aria-label', 'Mon compte');
             });
         } else {
             // Utilisateur déconnecté
-            disconnectedIcons.forEach(icon => icon.classList.remove('hidden'));
-            connectedIcons.forEach(icon => icon.classList.add('hidden'));
-            labels.forEach(label => {
+            disconnectedIcons.forEach((icon) => icon.classList.remove('hidden'));
+            connectedIcons.forEach((icon) => icon.classList.add('hidden'));
+            labels.forEach((label) => {
                 label.textContent = label.getAttribute('data-i18n') === 'nav.account'
                     ? 'Se connecter'
                     : label.textContent;
             });
-            buttons.forEach(btn => {
+            buttons.forEach((btn) => {
                 btn.setAttribute('title', 'Se connecter');
                 btn.setAttribute('aria-label', 'Se connecter');
             });
@@ -65,7 +63,6 @@
             // Écouter les événements de connexion/déconnexion
             window.Snipcart.events.on('customer.signedin', updateAccountIcon);
             window.Snipcart.events.on('customer.signedout', updateAccountIcon);
-
         } else {
             // Réessayer après 500ms si Snipcart n'est pas encore chargé
             setTimeout(initAccountIconSwitcher, 500);
@@ -78,4 +75,4 @@
     } else {
         initAccountIconSwitcher();
     }
-})();
+}());

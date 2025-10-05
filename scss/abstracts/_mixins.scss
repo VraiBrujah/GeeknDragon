@@ -1,0 +1,448 @@
+/**
+ * MIXINS SASS - Geek & Dragon
+ * 
+ * Collection de mixins réutilisables pour développement efficace
+ * et maintien de la cohérence visuelle.
+ */
+
+/* ========================================================================
+   RESPONSIVE DESIGN - Media queries simplifiées
+   ===================================================================== */
+
+/**
+ * Mixin responsive mobile-first
+ * @param {string} $breakpoint - Point de rupture (sm, md, lg, xl, 2xl)
+ */
+@mixin responsive($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $value: map-get($breakpoints, $breakpoint);
+    @if $value > 0 {
+      @media (min-width: $value) {
+        @content;
+      }
+    } @else {
+      @content;
+    }
+  } @else {
+    @warn "Point de rupture '#{$breakpoint}' non défini dans $breakpoints";
+  }
+}
+
+/**
+ * Mixin responsive max-width
+ * @param {string} $breakpoint - Point de rupture maximum
+ */
+@mixin responsive-max($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $value: map-get($breakpoints, $breakpoint);
+    @media (max-width: $value - 1px) {
+      @content;
+    }
+  }
+}
+
+/**
+ * Mixin responsive entre deux points
+ * @param {string} $min - Point de rupture minimum
+ * @param {string} $max - Point de rupture maximum
+ */
+@mixin responsive-between($min, $max) {
+  $min-value: map-get($breakpoints, $min);
+  $max-value: map-get($breakpoints, $max);
+  
+  @media (min-width: $min-value) and (max-width: $max-value - 1px) {
+    @content;
+  }
+}
+
+/* ========================================================================
+   SYSTÈME DE MÉTAUX D&D - Thèmes colorés
+   ===================================================================== */
+
+/**
+ * Applique un thème de métal complet
+ * @param {string} $metal - Type de métal (copper, silver, gold, platinum)
+ * @param {boolean} $hover - Inclure les états hover (défaut: true)
+ */
+@mixin metal-theme($metal, $hover: true) {
+  @if $metal == 'copper' {
+    background: linear-gradient(135deg, map-get($copper, 100), map-get($copper, 200));
+    color: map-get($copper, 900);
+    border-color: map-get($copper, 300);
+    
+    @if $hover {
+      &:hover {
+        background: linear-gradient(135deg, map-get($copper, 200), map-get($copper, 300));
+        border-color: map-get($copper, 500);
+        box-shadow: map-get($metal-shadows, copper);
+        transform: translateY(-1px);
+      }
+    }
+  }
+  
+  @else if $metal == 'silver' {
+    background: linear-gradient(135deg, map-get($silver, 100), map-get($silver, 200));
+    color: map-get($silver, 700);
+    border-color: map-get($silver, 300);
+    
+    @if $hover {
+      &:hover {
+        background: linear-gradient(135deg, map-get($silver, 200), map-get($silver, 300));
+        border-color: map-get($silver, 500);
+        box-shadow: map-get($metal-shadows, silver);
+        transform: translateY(-1px);
+      }
+    }
+  }
+  
+  @else if $metal == 'gold' {
+    background: linear-gradient(135deg, map-get($gold, 200), map-get($gold, 300));
+    color: map-get($gold, 900);
+    border-color: map-get($gold, 400);
+    
+    @if $hover {
+      &:hover {
+        background: linear-gradient(135deg, map-get($gold, 300), map-get($gold, 400));
+        border-color: map-get($gold, 600);
+        box-shadow: map-get($metal-shadows, gold);
+        transform: translateY(-1px);
+      }
+    }
+  }
+  
+  @else if $metal == 'platinum' {
+    background: linear-gradient(135deg, map-get($platinum, 50), map-get($platinum, 100));
+    color: map-get($platinum, 700);
+    border-color: map-get($platinum, 200);
+    
+    @if $hover {
+      &:hover {
+        background: linear-gradient(135deg, map-get($platinum, 100), map-get($platinum, 200));
+        border-color: map-get($platinum, 400);
+        box-shadow: map-get($metal-shadows, platinum);
+        transform: translateY(-1px);
+      }
+    }
+  }
+  
+  @else {
+    @warn "Métal '#{$metal}' non reconnu. Utilisez: copper, silver, gold, platinum";
+  }
+}
+
+/**
+ * Texte avec dégradé de métal
+ * @param {string} $metal - Type de métal
+ */
+@mixin metal-text-gradient($metal) {
+  @if $metal == 'copper' {
+    background: linear-gradient(135deg, map-get($copper, 500), map-get($copper, 700));
+  } @else if $metal == 'gold' {
+    background: linear-gradient(135deg, map-get($gold, 400), map-get($gold, 600));
+  } @else if $metal == 'silver' {
+    background: linear-gradient(135deg, map-get($silver, 400), map-get($silver, 600));
+  } @else if $metal == 'platinum' {
+    background: linear-gradient(135deg, map-get($platinum, 400), map-get($platinum, 600));
+  }
+  
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========================================================================
+   COMPOSANTS UI - Patterns réutilisables
+   ===================================================================== */
+
+/**
+ * Carte de base avec élévation
+ * @param {string} $elevation - Niveau d'ombrage (sm, md, lg, xl)
+ * @param {string} $radius - Rayon de bordure (sm, md, lg, xl)
+ */
+@mixin card($elevation: 'md', $radius: 'lg') {
+  background: white;
+  border-radius: map-get($border-radius, $radius);
+  box-shadow: map-get($shadows, $elevation);
+  border: map-get($border-widths, 1) solid map-get($silver, 200);
+  overflow: hidden;
+  transition: map-get($transitions, all);
+  
+  &:hover {
+    box-shadow: map-get($shadows, xl);
+    transform: translateY(-2px);
+  }
+}
+
+/**
+ * Bouton de base avec variantes
+ * @param {string} $variant - Variante (primary, secondary, outline)
+ * @param {string} $size - Taille (sm, md, lg)
+ */
+@mixin button($variant: 'primary', $size: 'md') {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-family-ui;
+  font-weight: map-get($font-weights, semibold);
+  text-decoration: none;
+  border-radius: map-get($border-radius, md);
+  cursor: pointer;
+  transition: map-get($transitions, all);
+  position: relative;
+  overflow: hidden;
+  
+  // Tailles
+  @if $size == 'sm' {
+    padding: map-get($spacing, 2) map-get($spacing, 4);
+    font-size: map-get($font-sizes, sm);
+    min-height: 36px;
+  } @else if $size == 'md' {
+    padding: map-get($spacing, 3) map-get($spacing, 6);
+    font-size: map-get($font-sizes, base);
+    min-height: 44px;
+  } @else if $size == 'lg' {
+    padding: map-get($spacing, 4) map-get($spacing, 8);
+    font-size: map-get($font-sizes, lg);
+    min-height: 52px;
+  }
+  
+  // Variantes
+  @if $variant == 'primary' {
+    background: linear-gradient(135deg, map-get($copper, 500), map-get($copper, 600));
+    color: white;
+    border: map-get($border-widths, 2) solid map-get($copper, 700);
+    
+    &:hover {
+      background: linear-gradient(135deg, map-get($copper, 400), map-get($copper, 500));
+      transform: translateY(-1px);
+      box-shadow: map-get($shadows, lg);
+    }
+    
+    &:active {
+      transform: translateY(0);
+      box-shadow: map-get($shadows, sm);
+    }
+  }
+  
+  @else if $variant == 'secondary' {
+    background: linear-gradient(135deg, map-get($silver, 100), map-get($silver, 200));
+    color: map-get($silver, 700);
+    border: map-get($border-widths, 2) solid map-get($silver, 300);
+    
+    &:hover {
+      background: linear-gradient(135deg, map-get($silver, 200), map-get($silver, 300));
+      border-color: map-get($silver, 400);
+    }
+  }
+  
+  @else if $variant == 'outline' {
+    background: transparent;
+    color: map-get($copper, 600);
+    border: map-get($border-widths, 2) solid map-get($copper, 500);
+    
+    &:hover {
+      background: map-get($copper, 50);
+      color: map-get($copper, 700);
+    }
+  }
+  
+  // Effet de brillance
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left map-get($durations, slow) map-get($easings, smooth);
+  }
+  
+  &:hover::before {
+    left: 100%;
+  }
+}
+
+/**
+ * Input de formulaire cohérent
+ * @param {string} $state - État (normal, error, success)
+ */
+@mixin form-input($state: 'normal') {
+  display: block;
+  width: 100%;
+  padding: map-get($spacing, 3) map-get($spacing, 4);
+  font-family: $font-family-ui;
+  font-size: map-get($font-sizes, base);
+  line-height: map-get($line-heights, normal);
+  border-radius: map-get($border-radius, md);
+  border: map-get($border-widths, 1) solid map-get($silver, 300);
+  background: white;
+  transition: map-get($transitions, all);
+  
+  @if $state == 'normal' {
+    &:focus {
+      outline: none;
+      border-color: map-get($copper, 500);
+      box-shadow: 0 0 0 3px rgba(map-get($copper, 500), 0.1);
+    }
+  }
+  
+  @else if $state == 'error' {
+    border-color: map-get($danger, base);
+    
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(map-get($danger, base), 0.1);
+    }
+  }
+  
+  @else if $state == 'success' {
+    border-color: map-get($success, base);
+    
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(map-get($success, base), 0.1);
+    }
+  }
+  
+  &::placeholder {
+    color: map-get($silver, 400);
+  }
+  
+  &:disabled {
+    background: map-get($silver, 100);
+    color: map-get($silver, 400);
+    cursor: not-allowed;
+  }
+}
+
+/* ========================================================================
+   ANIMATIONS D&D - Effets immersifs
+   ===================================================================== */
+
+/**
+ * Animation de pièce qui tourne
+ * @param {string} $duration - Durée de l'animation
+ */
+@mixin coin-flip-animation($duration: map-get($durations, slow)) {
+  animation: coin-flip $duration map-get($easings, ease-in-out);
+  
+  @keyframes coin-flip {
+    0% { transform: rotateY(0deg) scale(1); }
+    50% { transform: rotateY(90deg) scale(1.1); }
+    100% { transform: rotateY(0deg) scale(1); }
+  }
+}
+
+/**
+ * Effet de lueur magique pour électrum
+ * @param {color} $color - Couleur de la lueur
+ */
+@mixin magical-glow($color: map-get($electrum, 500)) {
+  animation: magical-glow 2s map-get($easings, ease-in-out) infinite;
+  
+  @keyframes magical-glow {
+    0%, 100% { 
+      box-shadow: 0 0 5px $color; 
+    }
+    50% { 
+      box-shadow: 0 0 20px $color, 0 0 30px $color; 
+    }
+  }
+}
+
+/**
+ * Bounce d'interaction
+ */
+@mixin bounce-interaction() {
+  animation: bounce-interaction map-get($durations, normal) map-get($easings, bounce);
+  
+  @keyframes bounce-interaction {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+}
+
+/* ========================================================================
+   UTILITAIRES - Helpers courants
+   ===================================================================== */
+
+/**
+ * Centrage absolu
+ */
+@mixin center-absolute() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/**
+ * Clearfix pour floats
+ */
+@mixin clearfix() {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+/**
+ * Truncation de texte avec ellipsis
+ * @param {number} $lines - Nombre de lignes (défaut: 1)
+ */
+@mixin text-truncate($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/**
+ * Ratio d'aspect pour conteneurs
+ * @param {number} $width - Largeur du ratio
+ * @param {number} $height - Hauteur du ratio
+ */
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  
+  &::before {
+    content: '';
+    display: block;
+    padding-top: percentage($height / $width);
+  }
+  
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/**
+ * Focus visible pour accessibilité
+ * @param {color} $color - Couleur du focus
+ */
+@mixin focus-visible($color: map-get($copper, 500)) {
+  &:focus-visible {
+    outline: 2px solid $color;
+    outline-offset: 2px;
+  }
+}
+
+/**
+ * Désactiver les animations pour utilisateurs sensibles
+ */
+@mixin respect-motion-preference() {
+  @media (prefers-reduced-motion: reduce) {
+    animation: none !important;
+    transition: none !important;
+  }
+}
