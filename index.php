@@ -28,16 +28,78 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
 
   /* CSS pour affichage produits simple (3 produits en ligne) */
   .shop-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
     opacity: 1;
     transition: opacity 0.3s ease;
+    /* Scroll horizontal moderne avec CSS Grid */
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(320px, 320px);
+    gap: 1.5rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    /* Sortir du padding parent (px-6 = 1.5rem) */
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    /* Ajouter du padding interne pour que les produits soient visibles */
+    padding: 1.5rem;
+    /* Forcer l'alignement à gauche (écrase tout centrage hérité) */
+    justify-content: flex-start;
+    justify-items: stretch;
+    align-content: flex-start;
+    align-items: stretch;
+    /* Optimisations pour fluidité du scroll */
+    will-change: scroll-position;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    /* Scrollbar moderne */
+    scrollbar-width: thin;
+    scrollbar-color: #6366f1 #374151;
   }
 
-  @media (max-width: 768px) {
+  /* Snap sur les cartes pour un scroll fluide */
+  .shop-grid .card {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+  }
+
+  .shop-grid::-webkit-scrollbar {
+    height: 10px;
+  }
+
+  .shop-grid::-webkit-scrollbar-track {
+    background: #374151;
+    border-radius: 5px;
+  }
+
+  .shop-grid::-webkit-scrollbar-thumb {
+    background: #6366f1;
+    border-radius: 5px;
+  }
+
+  .shop-grid::-webkit-scrollbar-thumb:hover {
+    background: #818cf8;
+  }
+
+  @media (max-width: 640px) {
     .shop-grid {
-      grid-template-columns: 1fr;
+      grid-auto-columns: minmax(280px, 280px);
+      gap: 1rem;
+      margin-left: -1.5rem;
+      margin-right: -1.5rem;
+      padding: 1rem 1.5rem;
+      /* Forcer l'alignement à gauche sur mobile aussi */
+      justify-content: flex-start;
+      justify-items: stretch;
+      align-content: flex-start;
+      align-items: stretch;
+      /* Masquer la scrollbar sur mobile (scroll tactile natif) */
+      scrollbar-width: none;
+    }
+
+    /* Masquer scrollbar webkit sur mobile */
+    .shop-grid::-webkit-scrollbar {
+      display: none;
     }
   }
 </style>
