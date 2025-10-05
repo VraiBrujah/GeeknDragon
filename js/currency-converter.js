@@ -1381,13 +1381,16 @@ class CurrencyConverterPremium {
         const addToCartButton = document.getElementById('add-all-lots-to-cart');
 
         if (recommendationsContent) {
+            const promptMessage = this.getTranslation('money.converter.lotsRecommendations.promptMessage', 'Définissez votre trésor dans le convertisseur');
+            const promptSubMessage = this.getTranslation('money.converter.lotsRecommendations.promptSubMessage', 'pour découvrir vos collections personnalisées');
+            
             recommendationsContent.innerHTML = `
         <div class="text-center py-8">
           <div class="w-16 h-16 bg-green-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
             <div class="w-8 h-8 bg-green-500/50 rounded-full"></div>
           </div>
-          <p class="text-gray-300 text-sm mb-2">Définissez votre trésor dans le convertisseur</p>
-          <p class="text-gray-400 text-xs">pour découvrir vos collections personnalisées</p>
+          <p class="text-gray-300 text-sm mb-2">${promptMessage}</p>
+          <p class="text-gray-400 text-xs">${promptSubMessage}</p>
         </div>
       `;
         }
@@ -1402,13 +1405,16 @@ class CurrencyConverterPremium {
         const addToCartButton = document.getElementById('add-all-lots-to-cart');
 
         if (recommendationsContent) {
+            const noLotsMessage = this.getTranslation('money.converter.lotsRecommendations.noLotsMessage', 'Aucune collection disponible.');
+            const noLotsSubMessage = this.getTranslation('money.converter.lotsRecommendations.noLotsSubMessage', 'Modifiez votre trésor pour découvrir de nouvelles options');
+            
             recommendationsContent.innerHTML = `
         <div class="text-center py-8">
           <div class="w-16 h-16 bg-gray-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
             <div class="w-8 h-8 border-2 border-gray-500/50 rounded-full border-dashed"></div>
           </div>
-          <p class="text-gray-300 text-sm mb-2">Aucune collection disponible</p>
-          <p class="text-gray-400 text-xs">Modifiez votre trésor pour découvrir de nouvelles options</p>
+          <p class="text-gray-300 text-sm mb-2">${noLotsMessage}</p>
+          <p class="text-gray-400 text-xs">${noLotsSubMessage}</p>
         </div>
       `;
         }
@@ -1503,13 +1509,16 @@ class CurrencyConverterPremium {
         const addOptimalButton = document.getElementById('add-all-optimal-lots-to-cart');
 
         if (optimalContent) {
+            const promptMessage = this.getTranslation('money.converter.optimalLots.promptMessage', 'Configurez votre trésor dans le convertisseur');
+            const promptSubMessage = this.getTranslation('money.converter.optimalLots.promptSubMessage', 'pour découvrir les collections les plus efficaces');
+            
             optimalContent.innerHTML = `
         <div class="text-center py-8">
           <div class="w-16 h-16 bg-purple-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
             <div class="w-8 h-8 bg-purple-500/50 rounded-full"></div>
           </div>
-          <p class="text-gray-300 text-sm mb-2">Configurez votre trésor dans le convertisseur</p>
-          <p class="text-gray-400 text-xs">pour découvrir les collections les plus efficaces</p>
+          <p class="text-gray-300 text-sm mb-2">${promptMessage}</p>
+          <p class="text-gray-400 text-xs">${promptSubMessage}</p>
         </div>
       `;
         }
@@ -1524,13 +1533,16 @@ class CurrencyConverterPremium {
         const addOptimalButton = document.getElementById('add-all-optimal-lots-to-cart');
 
         if (optimalContent) {
+            const noLotsMessage = this.getTranslation('money.converter.optimalLots.noLotsMessage', 'Aucune solution optimale disponible.');
+            const noLotsSubMessage = this.getTranslation('money.converter.optimalLots.noLotsSubMessage', 'Ajustez votre trésor pour explorer d\'autres configurations');
+            
             optimalContent.innerHTML = `
         <div class="text-center py-8">
           <div class="w-16 h-16 bg-gray-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
             <div class="w-8 h-8 border-2 border-gray-500/50 rounded-full border-dashed"></div>
           </div>
-          <p class="text-gray-300 text-sm mb-2">Aucune collection optimale disponible</p>
-          <p class="text-gray-400 text-xs">Ajustez votre trésor pour découvrir de nouvelles options</p>
+          <p class="text-gray-300 text-sm mb-2">${noLotsMessage}</p>
+          <p class="text-gray-400 text-xs">${noLotsSubMessage}</p>
         </div>
       `;
         }

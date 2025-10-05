@@ -880,13 +880,27 @@
         },
         "converter": {
             "recommendations": {
-                "title": "✨ Optimal recommendations"
+                "title": "Optimal recommendations"
             },
+            "optimalLotsTitle": "Most Efficient Collection",
+            "lotsRecommendedTitle": "Multiplier Table Collections",
             "lotsRecommendations": {
-                "description": "Here are the minimal recommended lots to cover exactly your physical coin needs:",
-                "addAllButton": "Add all lots to cart",
-                "optimizationNote": "These recommendations optimize the number of lots needed for the most advantageous price.",
-                "noLotsMessage": "No lots to add to cart."
+                "description": "These collections correspond exactly to your personalized distribution defined in the editable multiplier table above. Respect your specific choices of metals and multipliers for a custom treasure.",
+                "addAllButton": "Acquire your collection",
+                "optimizationNote": "Collections adapted to your personalized distribution for a custom treasure",
+                "noLotsMessage": "No collection available.",
+                "noLotsSubMessage": "Modify your treasure to discover new options",
+                "promptMessage": "Define your treasure in the converter",
+                "promptSubMessage": "to discover your personalized collections"
+            },
+            "optimalLots": {
+                "description": "Master forgers recommend this selection to obtain your treasure with the minimal number of coins. Optimize your chest space and simplify your counts during commercial exchanges.",
+                "addAllButton": "Acquire the efficient collection",
+                "optimizationNote": "Solution recommended by experts to minimize your treasure management",
+                "noLotsMessage": "No optimal solution available.",
+                "noLotsSubMessage": "Adjust your treasure to explore other configurations",
+                "promptMessage": "Configure your treasure in the converter",
+                "promptSubMessage": "to discover the most efficient collections"
             },
             "abbreviations": {
                 "copper": "cp",

@@ -49,6 +49,29 @@ $extraHead = <<<HTML
   #coin-lots-recommendations > div {
     padding: 1rem !important;
   }
+  
+  /* Améliorer le scroll horizontal pour les monnaies sources sur mobile */
+  .currency-sources-container {
+    padding: 0 1rem;
+  }
+  
+  .currency-input-grid {
+    scrollbar-width: thin;
+    scrollbar-color: #374151 transparent;
+  }
+  
+  .currency-input-grid::-webkit-scrollbar {
+    height: 6px;
+  }
+  
+  .currency-input-grid::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .currency-input-grid::-webkit-scrollbar-thumb {
+    background-color: #374151;
+    border-radius: 3px;
+  }
 }
   
   /* Assurer que les grids fonctionnent sur mobile */
@@ -922,9 +945,27 @@ $extraHead .= <<<'SCRIPT'
           #coin-lots-recommendations > div {
             padding: 1rem !important;
           }
+          
+          .currency-sources-container {
+            padding: 0 1rem;
+          }
+          
           .currency-input-grid {
-            display: grid !important;
-            grid-template-columns: 1fr !important;
+            scrollbar-width: thin;
+            scrollbar-color: #374151 transparent;
+          }
+          
+          .currency-input-grid::-webkit-scrollbar {
+            height: 6px;
+          }
+          
+          .currency-input-grid::-webkit-scrollbar-track {
+            background: transparent;
+          }
+          
+          .currency-input-grid::-webkit-scrollbar-thumb {
+            background-color: #374151;
+            border-radius: 3px;
           }
         }
       `;
@@ -1928,33 +1969,35 @@ echo $snipcartInit;
         
         <!-- Section 1: Monnaies sources avec design premium -->
         <div class="mb-8">
-          <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.sourcesLabel"><?= __('shop.converter.sourcesLabel', '💰 Monnaies sources') ?></h5>
-          <div class="currency-input-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 sm:gap-4 max-w-6xl mx-auto">
-            <div class="currency-input-card bg-gradient-to-br from-amber-900/20 to-orange-800/20 p-4 rounded-xl border border-amber-700/30">
-              <label class="block text-amber-300 font-medium mb-2"><?= __('money.converter.labels.copper', '🪙 Cuivre') ?></label>
+          <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.sourcesLabel"><?= __('shop.converter.sourcesLabel', 'Monnaies sources') ?></h5>
+          <div class="currency-sources-container">
+            <div class="currency-input-grid flex gap-1 overflow-x-auto pb-2 md:grid md:grid-cols-5 md:overflow-x-visible md:gap-1 md:max-w-xl md:mx-auto">
+            <div class="currency-input-card bg-gradient-to-br from-amber-900/20 to-orange-800/20 p-3 rounded-xl border border-amber-700/30 flex-shrink-0 w-24 md:w-auto">
+              <label class="block text-amber-300 font-medium mb-2 text-sm"><?= __('money.converter.labels.copper', 'Cuivre') ?></label>
               <input type="number" min="0" step="1" value="0" data-currency="copper" 
-                     class="w-full bg-gray-800/80 text-amber-300 border border-amber-700/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all" />
+                     class="w-full bg-gray-800/80 text-amber-300 border border-amber-700/50 rounded-lg p-2 text-center font-bold focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all" />
             </div>
-            <div class="currency-input-card bg-gradient-to-br from-gray-600/20 to-gray-500/20 p-4 rounded-xl border border-gray-500/30">
-              <label class="block text-gray-300 font-medium mb-2"><?= __('money.converter.labels.silver', '🥈 Argent') ?></label>
+            <div class="currency-input-card bg-gradient-to-br from-gray-600/20 to-gray-500/20 p-3 rounded-xl border border-gray-500/30 flex-shrink-0 w-24 md:w-auto">
+              <label class="block text-gray-300 font-medium mb-2 text-sm"><?= __('money.converter.labels.silver', 'Argent') ?></label>
               <input type="number" min="0" step="1" value="0" data-currency="silver" 
-                     class="w-full bg-gray-800/80 text-gray-300 border border-gray-500/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all" />
+                     class="w-full bg-gray-800/80 text-gray-300 border border-gray-500/50 rounded-lg p-2 text-center font-bold focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all" />
             </div>
-            <div class="currency-input-card bg-gradient-to-br from-yellow-600/20 to-green-600/20 p-4 rounded-xl border border-yellow-500/30">
-              <label class="block text-yellow-300 font-medium mb-2"><?= __('money.converter.labels.electrum', '⚡ Électrum') ?></label>
+            <div class="currency-input-card bg-gradient-to-br from-yellow-600/20 to-green-600/20 p-3 rounded-xl border border-yellow-500/30 flex-shrink-0 w-24 md:w-auto">
+              <label class="block text-yellow-300 font-medium mb-2 text-sm"><?= __('money.converter.labels.electrum', 'Électrum') ?></label>
               <input type="number" min="0" step="1" value="0" data-currency="electrum" 
-                     class="w-full bg-gray-800/80 text-yellow-300 border border-yellow-500/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all" />
+                     class="w-full bg-gray-800/80 text-yellow-300 border border-yellow-500/50 rounded-lg p-2 text-center font-bold focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all" />
             </div>
-            <div class="currency-input-card bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 p-4 rounded-xl border border-yellow-400/30">
-              <label class="block text-yellow-300 font-medium mb-2"><?= __('money.converter.labels.gold', '🥇 Or') ?></label>
+            <div class="currency-input-card bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 p-3 rounded-xl border border-yellow-400/30 flex-shrink-0 w-24 md:w-auto">
+              <label class="block text-yellow-300 font-medium mb-2 text-sm"><?= __('money.converter.labels.gold', 'Or') ?></label>
               <input type="number" min="0" step="1" value="0" data-currency="gold" 
-                     class="w-full bg-gray-800/80 text-yellow-300 border border-yellow-400/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all" />
+                     class="w-full bg-gray-800/80 text-yellow-300 border border-yellow-400/50 rounded-lg p-2 text-center font-bold focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all" />
             </div>
-            <div class="currency-input-card bg-gradient-to-br from-cyan-500/20 to-blue-600/20 p-4 rounded-xl border border-cyan-400/30">
-              <label class="block text-cyan-300 font-medium mb-2"><?= __('money.converter.labels.platinum', '💎 Platine') ?></label>
+            <div class="currency-input-card bg-gradient-to-br from-cyan-500/20 to-blue-600/20 p-3 rounded-xl border border-cyan-400/30 flex-shrink-0 w-24 md:w-auto">
+              <label class="block text-cyan-300 font-medium mb-2 text-sm"><?= __('money.converter.labels.platinum', 'Platine') ?></label>
               <input type="number" min="0" step="1" value="0" data-currency="platinum" 
-                     class="w-full bg-gray-800/80 text-cyan-300 border border-cyan-400/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all" />
+                     class="w-full bg-gray-800/80 text-cyan-300 border border-cyan-400/50 rounded-lg p-2 text-center font-bold focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all" />
             </div>
+          </div>
           </div>
         </div>
 
@@ -2087,10 +2130,10 @@ echo $snipcartInit;
             <div class="bg-gradient-to-br from-green-900/40 to-emerald-900/30 rounded-xl p-6 border border-green-700/50 h-full">
               <div class="text-center mb-6">
                 <h4 class="text-xl font-bold text-green-200 mb-3">
-                  <?= __('money.converter.lotsRecommendedTitle', 'Collection Personnalisée') ?>
+                  <?= __('money.converter.lotsRecommendedTitle', 'Collections Tableau Multiplicateur') ?>
                 </h4>
                 <p class="text-gray-300 text-sm leading-relaxed">
-                  <?= __('money.converter.lotsRecommendations.description', 'Constituez votre trésor selon vos préférences exactes définies dans le tableau. Ces collections respectent vos choix stratégiques et s\'adaptent à votre style de jeu unique.') ?>
+                  <?= __('money.converter.lotsRecommendations.description', 'Ces collections correspondent exactement à votre répartition personnalisée définie dans le tableau multiplicateur éditable ci-dessus. Respectent vos choix spécifiques de métaux et multiplicateurs pour un trésor sur-mesure.') ?>
                 </p>
               </div>
               
