@@ -622,44 +622,48 @@ class CurrencyConverterPremium {
     }
 
     /**
-     * Calcule la répartition optimale pour le tableau multiplicateur
-     * Utilise la même logique que getMinimalCoinsBreakdown mais pour tous les métaux
+     * Calcule la répartition optimale globale pour le tableau multiplicateur
+     * Utilise un algorithme glouton global qui garantit le minimum absolu de pièces
      */
     calculateOptimalMultiplierTable(baseValue) {
-        const solution = [];
+        if (baseValue === 0) {
+            return [];
+        }
 
-        // Ordre de priorité des métaux (plus précieux d'abord)
-        const metalPriority = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
-
-        // Pour chaque métal, calculer sa part et la répartir par multiplicateurs
-        // MÊME LOGIQUE que dans getMinimalCoinsBreakdown mais pour tous les métaux
-        metalPriority.forEach((metal) => {
-            const taux = this.tauxChange[metal];
-            const unitesTotales = Math.floor(baseValue / taux);
-            
-            if (unitesTotales > 0) {
-                // Appliquer la MÊME logique que getMinimalCoinsBreakdown
-                let remaining = unitesTotales;
-                
-                // Calcul de la répartition optimale par multiplicateur (du plus grand au plus petit)
-                this.multiplicateursDisponibles.slice().reverse().forEach((mult) => {
-                    const qty = Math.floor(remaining / mult);
-                    if (qty > 0) {
-                        solution.push({
-                            currency: metal,
-                            multiplier: mult,
-                            quantity: qty,
-                        });
-                        remaining -= qty * mult;
-                    }
+        // Générer toutes les dénominations possibles (métal × multiplicateur)
+        const denoms = [];
+        Object.keys(this.tauxChange).forEach(currency => {
+            this.multiplicateursDisponibles.forEach(multiplier => {
+                denoms.push({
+                    currency,
+                    multiplier,
+                    value: this.tauxChange[currency] * multiplier,
                 });
-                
-                // Soustraire la valeur utilisée du total
-                baseValue -= unitesTotales * taux;
+            });
+        });
+
+        // Trier par valeur décroissante pour algorithme glouton optimal
+        denoms.sort((a, b) => b.value - a.value);
+
+        // Algorithme glouton global - garantit le minimum de pièces
+        const result = [];
+        let remaining = baseValue;
+
+        denoms.forEach((denom) => {
+            if (remaining >= denom.value) {
+                const qty = Math.floor(remaining / denom.value);
+                if (qty > 0) {
+                    result.push({
+                        currency: denom.currency,
+                        multiplier: denom.multiplier,
+                        quantity: qty,
+                    });
+                    remaining -= qty * denom.value;
+                }
             }
         });
 
-        return solution;
+        return result;
     }
 
     distributeOptimally(totalValue) {
