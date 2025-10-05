@@ -599,16 +599,16 @@ class CurrencyConverterPremium {
             return;
         }
 
-        // Appliquer les nouvelles règles d'optimisation pour conversion automatique
-        const optimizedSolution = this.findMinimalCoins(baseValue, false); // false = conversion auto
+        // Appliquer l'algorithme direct et simple pour le tableau multiplicateur
+        const solution = this.calculateOptimalMultiplierTable(baseValue);
 
         // D'abord, vider tout le tableau
         this.multiplierInputs.forEach((input) => {
             input.value = '';
         });
 
-        // Puis, remplir avec la solution optimisée
-        optimizedSolution.forEach((item) => {
+        // Puis, remplir avec la solution calculée directement
+        solution.forEach((item) => {
             const targetInput = Array.from(this.multiplierInputs).find((input) => {
                 const { currency } = input.closest('tr').dataset;
                 const multiplier = parseInt(input.dataset.multiplier);
@@ -619,6 +619,50 @@ class CurrencyConverterPremium {
                 targetInput.value = this.nf.format(item.quantity);
             }
         });
+    }
+
+    /**
+     * Calcule la répartition optimale pour le tableau multiplicateur
+     * Utilise la même logique que getMinimalCoinsBreakdown mais pour tous les métaux
+     */
+    calculateOptimalMultiplierTable(baseValue) {
+        const solution = [];
+        let remaining = baseValue;
+
+        // Ordre de priorité des métaux (plus précieux d'abord)
+        const metalPriority = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
+
+        // Créer toutes les dénominations et les trier par valeur décroissante
+        const denominations = [];
+        metalPriority.forEach((metal) => {
+            this.multiplicateursDisponibles.slice().reverse().forEach((multiplier) => {
+                denominations.push({
+                    currency: metal,
+                    multiplier,
+                    value: this.tauxChange[metal] * multiplier,
+                });
+            });
+        });
+
+        // Trier par valeur décroissante pour l'algorithme glouton optimal
+        denominations.sort((a, b) => b.value - a.value);
+
+        // Algorithme glouton simple et direct
+        denominations.forEach((denom) => {
+            if (remaining >= denom.value) {
+                const quantity = Math.floor(remaining / denom.value);
+                if (quantity > 0) {
+                    solution.push({
+                        currency: denom.currency,
+                        multiplier: denom.multiplier,
+                        quantity: quantity,
+                    });
+                    remaining -= quantity * denom.value;
+                }
+            }
+        });
+
+        return solution;
     }
 
     distributeOptimally(totalValue) {
@@ -1208,7 +1252,7 @@ class CurrencyConverterPremium {
             if (item.multiplier === 1) {
                 return `${this.nf.format(item.totalQuantity)} ${donneesMétal.emoji} ${this.obtenirNomMetal(item.currency).toLowerCase()} ${lotIndicator}`;
             }
-            return `${this.nf.format(item.totalQuantity)} ${donneesMétal.emoji} ${this.obtenirNomMetal(item.currency).toLowerCase()}(×${this.nf.format(item.multiplier)}) ${lotIndicator}`;
+            return `${this.nf.format(item.totalQuantity)} ${donneesMétal.emoji} ${this.obtenirNomMetal(item.currency).toLowerCase()} (×${this.nf.format(item.multiplier)}) ${lotIndicator}`;
         });
 
         if (formatted.length > 1) {
