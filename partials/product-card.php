@@ -327,7 +327,7 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
 
         <!-- Indicateur de chargement stock -->
         <div class="stock-loading-indicator text-center p-2" style="display: none;">
-          <img src="/media/branding/icons/roue.webp" alt="Chargement" class="loading-gear loading-gear-sm mx-auto" loading="lazy">
+          <img src="/media/branding/icons/roue.webp" alt="Chargement" class="loading-gear loading-gear-sm mx-auto">
         </div>
 
         <!-- État rupture de stock (masqué par défaut) -->

@@ -622,7 +622,9 @@ h6 {
    CARTES PRODUITS
    ===================================================================== */
 
-.card-product{
+/* Cartes produits et cartes d'exemples partagent les mêmes styles de base */
+.card-product,
+.card-example{
   border-radius: 0.75rem;
   --tw-bg-opacity: 1;
   background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
@@ -636,7 +638,8 @@ h6 {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 200ms;
 }
-.card-product:hover{ transform:translateY(-5px) scale(1.02); box-shadow:0 12px 30px -8px rgba(0,0,0,.6); }
+.card-product:hover,
+.card-example:hover{ transform:translateY(-5px) scale(1.02); box-shadow:0 12px 30px -8px rgba(0,0,0,.6); }
 
 /* ========================================================================
    ANIMS
@@ -1634,42 +1637,48 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
 
 /* Effet de brillance supprimé - losange blanc semi-transparent retiré */
 
-.card:hover, .card-product:hover{
+.card:hover, .card-product:hover, .card-example:hover{
   transform:translateY(-8px) scale(1.02) !important;
   box-shadow:0 20px 40px -12px rgba(0,0,0,.8), 0 0 25px rgba(129,140,248,.15) !important;
   border-color:rgba(129,140,248,.3) !important;
 }
 
 /* zone média carrée, l'image s'adapte sans déformer */
-.card-product .media{
+.card-product .media,
+.card-example .media{
   width:100%;aspect-ratio:1/1; /* carré, cf. support: très large */
   position:relative;overflow:hidden;border-radius:.75rem;
   background:rgba(255,255,255,.035);
   transition:transform .3s ease;
 }
-.card-product .media img{
+.card-product .media img,
+.card-example .media img{
   position:absolute;inset:0;width:100%;height:100%;
   object-fit:contain;object-position:center; /* image contenue */
   transition:transform .4s ease;
 }
 
-.card-product:hover .media{
+.card-product:hover .media,
+.card-example:hover .media{
   transform:scale(1.05);
 }
 
-.card-product:hover .media img{
+.card-product:hover .media img,
+.card-example:hover .media img{
   transform:scale(1.1);
 }
 
 /* titres et textes centrés, sans débordement */
-.card-product .title{
+.card-product .title,
+.card-example .title{
   margin-top:.75rem;margin-bottom:.5rem;
   font-family:'Cinzel',serif;font-weight:700;
   font-size:1.125rem;line-height:1.3;
   word-break:break-word;hyphens:auto;
   min-height:2.6rem; /* hauteur fixe pour alignement */
 }
-.card-product .desc{
+.card-product .desc,
+.card-example .desc{
   margin-top:.5rem;margin-bottom:1rem;
   color:#cbd5e1; /* slate-300 */
   font-size:.85rem;line-height:1.4;
@@ -1693,7 +1702,8 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
 }
 
 /* bouton plein largeur & ancré en bas de carte */
-.card-product .btn-shop{
+.card-product .btn-shop,
+.card-example .btn-shop{
   width:100%;margin-top:auto;margin-bottom:0;
   position:relative;overflow:hidden;
   transform:translateY(0);
@@ -1702,17 +1712,20 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
 }
 
 /* Effet de lueur sur le bouton au survol de la carte */
-.card-product:hover .btn-shop{
+.card-product:hover .btn-shop,
+.card-example:hover .btn-shop{
   box-shadow:0 8px 25px rgba(79,70,229,.4), 0 0 20px rgba(126,34,206,.2);
   transform:translateY(-2px);
 }
 
 /* Bouton icône panier centré dans la carte */
-.card-product .btn-cart-icon {
+.card-product .btn-cart-icon,
+.card-example .btn-cart-icon {
   margin: 0 auto;
   display: block;
 }
-.card-product:hover .btn-cart-icon .btn-cart-icon-img {
+.card-product:hover .btn-cart-icon .btn-cart-icon-img,
+.card-example:hover .btn-cart-icon .btn-cart-icon-img {
   transform: scale(1.15) translateY(-3px);
   filter: drop-shadow(0 6px 16px rgba(217,119,6,0.7)) brightness(1.2);
 }
@@ -1723,7 +1736,7 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
   to{opacity:1;transform:translateY(0)}
 }
 
-.card, .card-product{
+.card, .card-product, .card-example{
   animation:fadeInUp .6s ease-out both;
 }
 
@@ -1739,12 +1752,12 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
 }
 
 /* Décalage progressif des cartes */
-.card:nth-child(1), .card-product:nth-child(1){animation-delay:.1s}
-.card:nth-child(2), .card-product:nth-child(2){animation-delay:.2s}
-.card:nth-child(3), .card-product:nth-child(3){animation-delay:.3s}
-.card:nth-child(4), .card-product:nth-child(4){animation-delay:.4s}
-.card:nth-child(5), .card-product:nth-child(5){animation-delay:.5s}
-.card:nth-child(6), .card-product:nth-child(6){animation-delay:.6s}
+.card:nth-child(1), .card-product:nth-child(1), .card-example:nth-child(1){animation-delay:.1s}
+.card:nth-child(2), .card-product:nth-child(2), .card-example:nth-child(2){animation-delay:.2s}
+.card:nth-child(3), .card-product:nth-child(3), .card-example:nth-child(3){animation-delay:.3s}
+.card:nth-child(4), .card-product:nth-child(4), .card-example:nth-child(4){animation-delay:.4s}
+.card:nth-child(5), .card-product:nth-child(5), .card-example:nth-child(5){animation-delay:.5s}
+.card:nth-child(6), .card-product:nth-child(6), .card-example:nth-child(6){animation-delay:.6s}
 
 /* Effet prix pulsant discret */
 @keyframes priceGlow{
@@ -1752,13 +1765,15 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
   50%{text-shadow:0 0 15px rgba(34,197,94,.8), 0 0 25px rgba(34,197,94,.4)}
 }
 
-.card-product .price{
+.card-product .price,
+.card-example .price{
   font-weight:700;color:#22c55e;
   animation:priceGlow 3s ease-in-out infinite;
 }
 
 /* Badge "Populaire" ou "Nouveau" */
-.card-product .badge-corner{
+.card-product .badge-corner,
+.card-example .badge-corner{
   position:absolute;top:.75rem;right:.75rem;
   background:linear-gradient(45deg,#f59e0b,#d97706);
   color:#fff;font-size:.75rem;font-weight:600;

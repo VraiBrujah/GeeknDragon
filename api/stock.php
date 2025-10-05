@@ -50,7 +50,19 @@ if (count($productIds) > 50) {
 
 // Configuration stock
 $snipcartSecret = $config['snipcart_secret_api_key'] ?? null;
-$stockData = []; // Plus de stock.json local - géré par Snipcart
+
+// Charger stock local depuis products.json comme fallback
+$localStockData = [];
+try {
+    $productsData = json_decode(file_get_contents(__DIR__ . '/../data/products.json'), true) ?? [];
+    foreach ($productsData as $productId => $product) {
+        if (isset($product['stock'])) {
+            $localStockData[$productId] = $product['stock'];
+        }
+    }
+} catch (Exception $e) {
+    error_log("Erreur chargement stock local: " . $e->getMessage());
+}
 $snipcartSyncRaw = $_ENV['SNIPCART_SYNC'] ?? null;
 $forceOfflineStock = false;
 
@@ -64,13 +76,13 @@ if ($snipcartSyncRaw !== null) {
 /**
  * Récupération stock optimisée avec parallélisation cURL
  */
-function getStockBatch(array $productIds, string $snipcartSecret = null, array $stockData = [], bool $forceOffline = false): array {
+function getStockBatch(array $productIds, string $snipcartSecret = null, array $localStockData = [], bool $forceOffline = false): array {
     $results = [];
 
     // Si mode offline ou pas d'API, utiliser données locales
     if ($forceOffline || !$snipcartSecret) {
         foreach ($productIds as $id) {
-            $results[$id] = $stockData[$id] ?? null;
+            $results[$id] = $localStockData[$id] ?? null;
         }
         return $results;
     }
@@ -122,13 +134,13 @@ function getStockBatch(array $productIds, string $snipcartSecret = null, array $
                 // Stock peut être dans 'stock', 'inventory.stock', ou 'inventoryManagementMethod'
                 $results[$id] = $product['stock'] ?? $product['inventory']['stock'] ?? null;
             } else {
-                // Produit pas trouvé dans Snipcart = stock inconnu (null)
-                $results[$id] = null;
+                // Produit pas trouvé dans Snipcart = fallback vers stock local
+                $results[$id] = $localStockData[$id] ?? null;
             }
         } else {
-            // Erreur API : log et fallback
+            // Erreur API : log et fallback vers stock local
             error_log("Snipcart API error for {$id}: HTTP {$httpCode}");
-            $results[$id] = $stockData[$id] ?? null;
+            $results[$id] = $localStockData[$id] ?? null;
         }
 
         curl_multi_remove_handle($multiHandle, $ch);
@@ -143,7 +155,7 @@ function getStockBatch(array $productIds, string $snipcartSecret = null, array $
 $startTime = microtime(true);
 
 try {
-    $stockResults = getStockBatch($productIds, $snipcartSecret, $stockData, $forceOfflineStock);
+    $stockResults = getStockBatch($productIds, $snipcartSecret, $localStockData, $forceOfflineStock);
 
     $executionTime = round((microtime(true) - $startTime) * 1000, 2);
 

@@ -110,7 +110,7 @@ $ogImage = '/media/content/es_tu_game_demo.webp';
 
             <div class="relative group video-container">
               <div class="video-loader absolute inset-0 flex items-center justify-center bg-gray-900/90 rounded z-10">
-                <img src="/media/ui/roue.webp" alt="Chargement" class="w-16 h-16 animate-spin">
+                <img src="/media/branding/icons/roue.webp" alt="Chargement" class="loading-gear">
               </div>
               <video id="video1"
                      data-src="/media/videos/demos/leMaireDoneUnePieceDargentFLIM_compressed.mp4"
@@ -127,7 +127,7 @@ $ogImage = '/media/content/es_tu_game_demo.webp';
 
             <div class="relative group video-container">
               <div class="video-loader absolute inset-0 flex items-center justify-center bg-gray-900/90 rounded z-10">
-                <img src="/media/ui/roue.webp" alt="Chargement" class="w-16 h-16 animate-spin">
+                <img src="/media/branding/icons/roue.webp" alt="Chargement" class="loading-gear">
               </div>
               <video id="video2"
                      data-src="/media/videos/demos/pileoufaceled2duFLIM2025_compressed.mp4"
@@ -144,7 +144,7 @@ $ogImage = '/media/content/es_tu_game_demo.webp';
 
             <div class="relative group video-container">
               <div class="video-loader absolute inset-0 flex items-center justify-center bg-gray-900/90 rounded z-10">
-                <img src="/media/ui/roue.webp" alt="Chargement" class="w-16 h-16 animate-spin">
+                <img src="/media/branding/icons/roue.webp" alt="Chargement" class="loading-gear">
               </div>
               <video id="video3"
                      data-src="/media/videos/demos/finestugameFLIM2025_compressed.mp4"

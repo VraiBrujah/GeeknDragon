@@ -91,21 +91,6 @@
         "visitShop": "Visit the shop"
     },
     "home": {
-        "mustHave": {
-            "heading": "Our Must-Haves",
-            "equipment": {
-                "title": "Equipment Cards",
-                "desc": "560 illustrated equipment cards to replace slogging through the rulebook"
-            },
-            "coins": {
-                "title": "Metal Coins",
-                "desc": "Physical currency to feel every treasure and sway luck at the table"
-            },
-            "triptych": {
-                "title": "Triptych Sheet",
-                "desc": "Create and manage your character without opening a book, on three sturdy panels"
-            }
-        }
     },
     "footer": {
         "made": "Designed in Quebec."

@@ -91,21 +91,6 @@
         "visitShop": "Visiter la boutique"
     },
     "home": {
-        "mustHave": {
-            "heading": "Nos Essentiels",
-            "equipment": {
-                "title": "Cartes d’équipement",
-                "desc": "560 cartes d’équipement illustrées pour remplacer la lecture fastidieuse du manuel"
-            },
-            "coins": {
-                "title": "Pièces métalliques",
-                "desc": "Monnaie physique pour ressentir chaque trésor et influencer la chance à la table"
-            },
-            "triptych": {
-                "title": "Fiche Triptyque",
-                "desc": "Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes"
-            }
-        }
     },
     "footer": {
         "made": "Conçu au Québec."

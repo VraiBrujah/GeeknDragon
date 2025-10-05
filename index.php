@@ -9,6 +9,38 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
 <?php include 'head-common.php'; ?>
+<style>
+  .card{@apply bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col; position: relative;}
+  .oos{@apply bg-gray-700 text-gray-400 cursor-not-allowed;}
+
+  /* États de chargement stock asynchrone */
+  [data-stock-status="loading"] .stock-loading-indicator { display: block !important; }
+  [data-stock-status="loading"] { opacity: 0.9; }
+  [data-stock-status="loaded"] .stock-loading-indicator,
+  [data-stock-status="error"] .stock-loading-indicator { display: none !important; }
+  [data-stock-status="loaded"], 
+  [data-stock-status="error"] { opacity: 1; }
+
+  .stock-unavailable-overlay {
+    backdrop-filter: blur(2px);
+    z-index: 10;
+  }
+
+  /* CSS pour affichage produits simple (3 produits en ligne) */
+  .shop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  @media (max-width: 768px) {
+    .shop-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
 
 <body>
 
@@ -51,57 +83,14 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
     </section>
 
     <!-- ===== PRODUITS PHARES ===== -->
-    <?php
-    // Chargement des produits UNE SEULE FOIS pour toute la page
-    $products = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true);
-
-    // Configuration de la section produits phares
-    $sectionId = 'featured-home';
-    $sectionTitle = __('home.featured.title', 'Produits Phares');
-    $productIds = [
-      'coin-merchant-essence-double',      // Essence du Marchand (pièces)
-      'cards-adventurer-arsenal-190',      // Arsenal de l'Aventurier (cartes)
-      'triptych-mystery-hero'              // Triptyques Mystères
-    ];
-
-    // Récupération de l'image du premier produit de pièces (pour section "Nos Incontournables")
-    $coinProduct = null;
-    foreach ($products as $id => $product) {
-        if (str_starts_with($id, "coin-")) {
-            $coinProduct = $product;
-            break;
-        }
-    }
-    $defaultCoinImage = $coinProduct["images"][0] ?? "/media/products/bundles/default-coins.webp";
-
-    // Inclusion du partial OPTIMISÉ pour page d'accueil (version allégée)
-    include __DIR__ . '/partials/products-grid-home.php';
-    ?>
-
-    <!-- ===== PRODUITS ===== -->
-    <section id="produits" class="py-24 bg-gray-900/80 scroll-mt-24">
+    <section id="featured-products" class="py-24 bg-gray-900/80 scroll-mt-24">
       <div class="max-w-6xl mx-auto px-6">
-        <h3 class="text-4xl font-bold text-center mb-12" data-i18n="home.mustHave.heading">Nos Incontournables</h3>
-        <div class="grid md:grid-cols-3 gap-10">
-          <a href="<?= langUrl('boutique.php#cartes') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
-            <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.equipment.title">Cartes d’équipement</h4>
-            <p class="text-center" data-i18n="home.mustHave.equipment.desc">560 cartes d’équipement illustrées pour remplacer la lecture fastidieuse du manuel</p>
-              <img src="/media/content/cartes_equipement.webp" alt="560 cartes d'équipement illustrées" class="rounded mb-4" loading="lazy">
-          </a>
-          <a href="<?= langUrl('boutique.php#pieces') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
-            <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.coins.title">Pièces métalliques</h4>
-            <p class="text-center" data-i18n="home.mustHave.coins.desc">Monnaie physique pour ressentir chaque trésor et influencer la chance à la table</p>
-              <img src="<?= $defaultCoinImage ?>" alt="Pièces métalliques gravées pour JDR" class="rounded mb-4" loading="lazy">
-          </a>
-          <a href="<?= langUrl('boutique.php#triptyques') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
-            <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.triptych.title">Fiche Triptyque</h4>
-            <p class="text-center" data-i18n="home.mustHave.triptych.desc">Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes</p>
-              <img src="/media/content/triptyque_fiche.webp" alt="Fiche de personnage triptyque rigide" class="rounded mb-4" loading="lazy">
-          </a>
-        </div>
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">Nos Incontournables</h2>
+
+        <!-- Grille produits (chargement instantané comme dans boutique) -->
+        <div class="shop-grid"></div>
       </div>
     </section>
-
 
 <!-- ===== BOUTIQUE ===== -->
     <section id="boutique" class="py-16 bg-gray-900/80 scroll-mt-24">

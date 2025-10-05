@@ -738,6 +738,7 @@
     },
     "triptych-mystery-hero": {
         "price": 60,
+        "stock": 0,
         "images": [
             "/media/game/triptychs/examples/race-aasimar-recto.webp",
             "/media/game/triptychs/examples/classe-barbare-recto.webp",

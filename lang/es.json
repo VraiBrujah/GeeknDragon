@@ -45,21 +45,6 @@
         "visitShop": "[TO_TRANSLATE_es] Visiter la boutique"
     },
     "home": {
-        "mustHave": {
-            "heading": "[TO_TRANSLATE_es] Nos Incontournables",
-            "equipment": {
-                "title": "[TO_TRANSLATE_es] Cartes d’équipement",
-                "desc": "[TO_TRANSLATE_es] 560 cartes d’équipement illustrées pour remplacer la lecture fastidieuse du manuel"
-            },
-            "coins": {
-                "title": "[TO_TRANSLATE_es] Pièces métalliques",
-                "desc": "[TO_TRANSLATE_es] Monnaie physique pour ressentir chaque trésor et influencer la chance à la table"
-            },
-            "triptych": {
-                "title": "[TO_TRANSLATE_es] Fiche Triptyque",
-                "desc": "[TO_TRANSLATE_es] Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes"
-            }
-        }
     },
     "footer": {
         "made": "[TO_TRANSLATE_es] Conçu au Québec."

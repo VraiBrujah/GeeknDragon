@@ -128,6 +128,7 @@ function load_optimized_scripts($type = 'basic', $baseDir = null) {
             $loader->loadScript('account-icon-switcher');
             $loader->loadScript('snipcart-utils'); // Pour ajout au panier
             $loader->loadScript('shop-grid-scroll'); // Pour scroll horizontal produits
+            $loader->loadScript('async-stock-loader'); // Pour affichage rupture de stock
             break;
             
         case 'basic':

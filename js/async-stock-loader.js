@@ -168,6 +168,9 @@ class AsyncStockLoader {
             }
 
             // Vérifier disponibilité
+            // null = stock inconnu (disponible par défaut)
+            // 0 = rupture de stock
+            // >0 = en stock
             const isInStock = stock === null || stock > 0;
 
             if (!isInStock) {
@@ -270,7 +273,8 @@ class AsyncStockLoader {
     }
 }
 
-// Instance globale
+// Exporter la classe et créer une instance globale
+window.AsyncStockLoader = AsyncStockLoader;
 window.asyncStockLoader = new AsyncStockLoader({
     batchSize: 20,
     debounceDelay: 100,

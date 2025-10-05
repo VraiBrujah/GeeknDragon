@@ -430,7 +430,9 @@ $extraHead = <<<HTML
     height: 420px;
   }
   .card-product .h-\[6rem\],
-  .card-product .h-\[180px\] {
+  .card-product .h-\[180px\],
+  .card-example .h-\[6rem\],
+  .card-example .h-\[180px\] {
     height: auto;
   }
 }
@@ -1162,11 +1164,11 @@ echo $snipcartInit;
       <div class="triptych-grid mb-16">
         
         <!-- Triptyque d'Espèce -->
-        <div class="card-product">
+        <div class="card-example">
           <div class="h-[6rem] mb-6 flex items-center justify-center">
             <h3 class="text-2xl font-bold text-center text-emerald-400 leading-tight"><?= __('gameHelp.examples.species', '🧝 Espèce') ?></h3>
           </div>
-          
+
           <div class="flip-container" id="species-flip" onclick="flipCard('species-flip')">
             <div class="flipper">
               <div class="front">
@@ -1177,7 +1179,7 @@ echo $snipcartInit;
               </div>
             </div>
           </div>
-          
+
           <div class="text-center h-[180px] flex flex-col justify-start">
             <h4 class="font-semibold mb-2 text-emerald-300"><?= __('gameHelp.species.example', 'Exemple : Aasimar') ?></h4>
             <p class="text-gray-300 text-sm mb-3">
@@ -1192,11 +1194,11 @@ echo $snipcartInit;
         </div>
 
         <!-- Triptyque de Classe -->
-        <div class="card-product">
+        <div class="card-example">
           <div class="h-[6rem] mb-6 flex items-center justify-center">
             <h3 class="text-2xl font-bold text-center text-blue-400 leading-tight"><?= __('gameHelp.examples.class', '⚔️ Classe') ?></h3>
           </div>
-          
+
           <div class="flip-container" id="class-flip" onclick="flipCard('class-flip')">
             <div class="flipper">
               <div class="front">
@@ -1207,7 +1209,7 @@ echo $snipcartInit;
               </div>
             </div>
           </div>
-          
+
           <div class="text-center h-[180px] flex flex-col justify-start">
             <h4 class="font-semibold mb-2 text-blue-300"><?= __('gameHelp.class.example', 'Exemple : Barbare') ?></h4>
             <p class="text-gray-300 text-sm mb-3">
@@ -1223,7 +1225,7 @@ echo $snipcartInit;
         </div>
 
         <!-- Triptyque d'Historique -->
-        <div class="card-product">
+        <div class="card-example">
           <div class="h-[6rem] mb-6 flex items-center justify-center">
             <h3 class="text-2xl font-bold text-center text-purple-400 leading-tight"><?= __('gameHelp.examples.background', '📜 Historique') ?></h3>
           </div>
@@ -2632,7 +2634,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Animation d'apparition des éléments au scroll
-    const elementsToAnimate = document.querySelectorAll('.usage-step, .card-product');
+    const elementsToAnimate = document.querySelectorAll('.usage-step, .card-product, .card-example');
 
     setupIntersectionAnimation(elementsToAnimate, {
         datasetKey: 'usageAnimationVisible',
@@ -2842,7 +2844,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   
   // Ajouter des animations de scroll et d'apparition
-  const sectionsToAnimate = document.querySelectorAll('section, .card-product, .navigation-rapide a');
+  const sectionsToAnimate = document.querySelectorAll('section, .card-product, .card-example, .navigation-rapide a');
 
   setupIntersectionAnimation(sectionsToAnimate, {
     datasetKey: 'sectionAnimationVisible',

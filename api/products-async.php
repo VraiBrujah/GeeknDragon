@@ -30,12 +30,18 @@ require_once __DIR__ . '/../includes/product-card-renderer.php';
 
 // Catégorie demandée
 $category = $_GET['category'] ?? 'all';
-$validCategories = ['pieces', 'cards', 'triptychs', 'all'];
+$validCategories = ['pieces', 'cards', 'triptychs', 'all', 'featured'];
 
 if (!in_array($category, $validCategories)) {
     http_response_code(400);
     echo json_encode(['error' => 'Catégorie invalide']);
     exit;
+}
+
+// Produits spécifiques pour featured
+$featuredProductIds = null;
+if ($category === 'featured' && isset($_GET['products'])) {
+    $featuredProductIds = explode(',', $_GET['products']);
 }
 
 try {
@@ -88,8 +94,28 @@ try {
         }
     }
 
-    // Génération du HTML selon la catégorie
-    $response = [];
+    // Si catégorie featured, filtrer seulement les produits demandés
+    if ($category === 'featured' && $featuredProductIds) {
+        $featuredProducts = [];
+        $allProducts = array_merge($pieces, $cards, $triptychs);
+        
+        foreach ($featuredProductIds as $productId) {
+            foreach ($allProducts as $product) {
+                if ($product['id'] === trim($productId)) {
+                    $featuredProducts[] = $product;
+                    break;
+                }
+            }
+        }
+        
+        // Pour featured, on retourne directement le HTML des produits
+        $response = [
+            'html' => ProductCardRenderer::renderMultiple($featuredProducts, $lang, $translations),
+            'count' => count($featuredProducts)
+        ];
+    } else {
+        // Génération du HTML selon la catégorie
+        $response = [];
 
     if ($category === 'all' || $category === 'pieces') {
         $response['pieces'] = ProductCardRenderer::renderMultiple($pieces, $lang, $translations);
@@ -103,14 +129,16 @@ try {
         $response['triptychs'] = ProductCardRenderer::renderMultiple($triptychs, $lang, $translations);
     }
 
-    // Ajouter les compteurs et métriques
-    $response['counts'] = [
-        'pieces' => count($pieces),
-        'cards' => count($cards),
-        'triptychs' => count($triptychs),
-        'total' => count($pieces) + count($cards) + count($triptychs)
-    ];
+        // Ajouter les compteurs et métriques pour les catégories normales
+        $response['counts'] = [
+            'pieces' => count($pieces),
+            'cards' => count($cards),
+            'triptychs' => count($triptychs),
+            'total' => count($pieces) + count($cards) + count($triptychs)
+        ];
+    }
 
+    // Métriques de performance pour toutes les catégories
     $response['performance'] = [
         'execution_time_ms' => round((microtime(true) - $startTime) * 1000, 2),
         'memory_mb' => round(memory_get_usage() / 1024 / 1024, 2)
