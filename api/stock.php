@@ -147,22 +147,19 @@ try {
 
     $executionTime = round((microtime(true) - $startTime) * 1000, 2);
 
-    // Log des métriques
-    log_gd()->debug("API Stock batch", [
+    // Log des métriques (simple error_log)
+    error_log("API Stock batch: " . json_encode([
         'products_count' => count($productIds),
         'execution_time_ms' => $executionTime,
         'cache_hits' => array_sum(array_map(fn($v) => $v !== null ? 1 : 0, $stockResults)),
         'api_mode' => $forceOfflineStock ? 'offline' : 'snipcart'
-    ]);
+    ]));
 
     // Réponse optimisée
     echo json_encode($stockResults, JSON_UNESCAPED_UNICODE);
 
 } catch (Exception $e) {
-    log_gd()->erreur("API Stock erreur", [
-        'error' => $e->getMessage(),
-        'products' => $productIds
-    ]);
+    error_log("API Stock erreur: " . $e->getMessage() . " - Products: " . implode(',', $productIds));
 
     http_response_code(500);
     echo json_encode(['error' => 'Erreur serveur lors de la récupération du stock']);

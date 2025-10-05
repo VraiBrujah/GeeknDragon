@@ -161,6 +161,14 @@ if (!$snipcartKey) {
     };
 
   })();
+  
+  // Fix permissions policy pour les paiements
+  document.addEventListener('DOMContentLoaded', function() {
+    const meta = document.createElement('meta');
+    meta.setAttribute('http-equiv', 'Permissions-Policy');
+    meta.setAttribute('content', 'payment=*, publickey-credentials-get=*');
+    document.head.appendChild(meta);
+  });
 </script>
 <!-- Chargement Snipcart -->
 <script>
