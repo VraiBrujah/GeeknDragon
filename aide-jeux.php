@@ -74,11 +74,7 @@ $extraHead = <<<HTML
   }
 }
   
-  /* Assurer que les grids fonctionnent sur mobile */
-  .currency-input-grid {
-    grid-template-columns: 1fr !important;
-    gap: 1rem !important;
-  }
+  /* Styles pour mobile optimisés */
   
   .grid-cols-1.sm\\:grid-cols-2.md\\:grid-cols-5 {
     grid-template-columns: 1fr !important;
@@ -1971,28 +1967,28 @@ echo $snipcartInit;
         <div class="mb-8">
           <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.sourcesLabel"><?= __('shop.converter.sourcesLabel', 'Monnaies sources') ?></h5>
           <div class="currency-sources-container">
-            <div class="currency-input-grid flex gap-1 overflow-x-auto pb-2 md:grid md:grid-cols-5 md:overflow-x-visible md:gap-1 md:max-w-xl md:mx-auto">
-            <div class="currency-input-card bg-gradient-to-br from-amber-900/20 to-orange-800/20 p-3 rounded-xl border border-amber-700/30 flex-shrink-0 w-24 md:w-auto">
+            <div class="currency-input-grid grid grid-cols-5 gap-1 pb-2 max-w-4xl mx-auto">
+            <div class="currency-input-card bg-gradient-to-br from-amber-900/20 to-orange-800/20 p-3 rounded-xl border border-amber-700/30 min-w-0 w-auto">
               <label class="block text-amber-300 font-medium mb-2 text-sm"><?= __('money.converter.labels.copper', 'Cuivre') ?></label>
               <input type="number" min="0" step="1" value="0" data-currency="copper" 
                      class="w-full bg-gray-800/80 text-amber-300 border border-amber-700/50 rounded-lg p-2 text-center font-bold focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all" />
             </div>
-            <div class="currency-input-card bg-gradient-to-br from-gray-600/20 to-gray-500/20 p-3 rounded-xl border border-gray-500/30 flex-shrink-0 w-24 md:w-auto">
+            <div class="currency-input-card bg-gradient-to-br from-gray-600/20 to-gray-500/20 p-3 rounded-xl border border-gray-500/30 min-w-0 w-auto">
               <label class="block text-gray-300 font-medium mb-2 text-sm"><?= __('money.converter.labels.silver', 'Argent') ?></label>
               <input type="number" min="0" step="1" value="0" data-currency="silver" 
                      class="w-full bg-gray-800/80 text-gray-300 border border-gray-500/50 rounded-lg p-2 text-center font-bold focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all" />
             </div>
-            <div class="currency-input-card bg-gradient-to-br from-yellow-600/20 to-green-600/20 p-3 rounded-xl border border-yellow-500/30 flex-shrink-0 w-24 md:w-auto">
+            <div class="currency-input-card bg-gradient-to-br from-yellow-600/20 to-green-600/20 p-3 rounded-xl border border-yellow-500/30 min-w-0 w-auto">
               <label class="block text-yellow-300 font-medium mb-2 text-sm"><?= __('money.converter.labels.electrum', 'Électrum') ?></label>
               <input type="number" min="0" step="1" value="0" data-currency="electrum" 
                      class="w-full bg-gray-800/80 text-yellow-300 border border-yellow-500/50 rounded-lg p-2 text-center font-bold focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all" />
             </div>
-            <div class="currency-input-card bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 p-3 rounded-xl border border-yellow-400/30 flex-shrink-0 w-24 md:w-auto">
+            <div class="currency-input-card bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 p-3 rounded-xl border border-yellow-400/30 min-w-0 w-auto">
               <label class="block text-yellow-300 font-medium mb-2 text-sm"><?= __('money.converter.labels.gold', 'Or') ?></label>
               <input type="number" min="0" step="1" value="0" data-currency="gold" 
                      class="w-full bg-gray-800/80 text-yellow-300 border border-yellow-400/50 rounded-lg p-2 text-center font-bold focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all" />
             </div>
-            <div class="currency-input-card bg-gradient-to-br from-cyan-500/20 to-blue-600/20 p-3 rounded-xl border border-cyan-400/30 flex-shrink-0 w-24 md:w-auto">
+            <div class="currency-input-card bg-gradient-to-br from-cyan-500/20 to-blue-600/20 p-3 rounded-xl border border-cyan-400/30 min-w-0 w-auto">
               <label class="block text-cyan-300 font-medium mb-2 text-sm"><?= __('money.converter.labels.platinum', 'Platine') ?></label>
               <input type="number" min="0" step="1" value="0" data-currency="platinum" 
                      class="w-full bg-gray-800/80 text-cyan-300 border border-cyan-400/50 rounded-lg p-2 text-center font-bold focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all" />
