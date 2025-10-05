@@ -1489,3 +1489,50 @@ function showCopyFeedback(buttonElement, success) {
 
 // Export global pour utilisation dans onclick
 window.copyEmailToClipboard = copyEmailToClipboard;
+
+/* ========================================================================
+   EFFETS SONORES - AJOUT AU PANIER GLOBAL
+   ===================================================================== */
+
+/**
+ * Joue un effet sonore avec gestion d'erreurs
+ *
+ * @param {string} soundPath - Chemin vers le fichier audio
+ * @param {number} volume - Volume de lecture (0.0 à 1.0)
+ */
+function playSound(soundPath, volume = 0.5) {
+  try {
+    const audio = new Audio(soundPath);
+    audio.volume = Math.max(0, Math.min(1, volume));
+    audio.play().catch(error => {
+      // Gestion silencieuse des erreurs d'autoplay
+      console.debug('Audio autoplay bloqué:', error);
+    });
+  } catch (error) {
+    console.debug('Erreur lecture audio:', error);
+  }
+}
+
+/**
+ * Event listener global pour les boutons Snipcart
+ * Utilise l'API Snipcart pour détecter l'ajout réel au panier
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  // Méthode 1: Événement Snipcart natif (quand Snipcart est prêt)
+  document.addEventListener('snipcart.ready', () => {
+    window.Snipcart.events.on('item.added', (item) => {
+      playSound('media/sounds/coin-drop.mp3', 0.5);
+    });
+  });
+
+  // Méthode 2: Fallback pour clic direct (si Snipcart pas encore chargé)
+  document.addEventListener('click', (event) => {
+    const snipcartButton = event.target.closest('.snipcart-add-item');
+    if (snipcartButton) {
+      // Petit délai pour s'assurer que le son joue avant l'ouverture du panier
+      setTimeout(() => {
+        playSound('media/sounds/coin-drop.mp3', 0.5);
+      }, 50);
+    }
+  });
+});

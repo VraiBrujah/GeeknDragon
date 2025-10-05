@@ -136,6 +136,25 @@ class SnipcartUtils {
     }
 
     /**
+     * Joue un effet sonore avec gestion d'erreurs
+     *
+     * @param {string} soundPath - Chemin vers le fichier audio
+     * @param {number} volume - Volume de lecture (0.0 à 1.0)
+     */
+    static playSound(soundPath, volume = 0.5) {
+        try {
+            const audio = new Audio(soundPath);
+            audio.volume = Math.max(0, Math.min(1, volume));
+            audio.play().catch(error => {
+                // Gestion silencieuse des erreurs d'autoplay
+                console.debug('Audio autoplay bloqué:', error);
+            });
+        } catch (error) {
+            console.debug('Erreur lecture audio:', error);
+        }
+    }
+
+    /**
      * Ajoute un produit au panier par programmation via API Snipcart directe
      * Méthode optimisée avec fallback HTML si l'API échoue
      *
@@ -144,6 +163,9 @@ class SnipcartUtils {
      * @returns {Promise<boolean>} True si ajout réussi
      */
     static async addToCart(productData, options = {}) {
+        // Jouer l'effet sonore de pièce
+        this.playSound('media/sounds/coin-drop.mp3', 0.5);
+
         // Tentative d'utilisation directe de l'API Snipcart (plus rapide)
         if (window.Snipcart && window.Snipcart.api && window.Snipcart.api.cart) {
             try {
@@ -183,6 +205,9 @@ class SnipcartUtils {
             event.preventDefault();
             event.stopPropagation();
         }
+
+        // Jouer l'effet sonore de pièce
+        this.playSound('media/sounds/coin-drop.mp3', 0.5);
 
         // Extraire les données du bouton HTML
         const productData = this.extractProductDataFromButton(button);

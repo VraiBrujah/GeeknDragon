@@ -248,7 +248,32 @@ class BoutiqueAsyncLoader {
         // Laisser Snipcart gérer les boutons directement selon la documentation officielle
         // Snipcart détecte automatiquement la classe .snipcart-add-item et gère les variations
         const snipcartButtons = document.querySelectorAll('.snipcart-add-item');
-        // Production: log boutons supprimé
+
+        // Ajouter le son sur tous les boutons Snipcart
+        snipcartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                this.playSound('media/sounds/coin-drop.mp3', 0.5);
+            });
+        });
+    }
+
+    /**
+     * Joue un effet sonore avec gestion d'erreurs
+     *
+     * @param {string} soundPath - Chemin vers le fichier audio
+     * @param {number} volume - Volume de lecture (0.0 à 1.0)
+     */
+    playSound(soundPath, volume = 0.5) {
+        try {
+            const audio = new Audio(soundPath);
+            audio.volume = Math.max(0, Math.min(1, volume));
+            audio.play().catch(error => {
+                // Gestion silencieuse des erreurs d'autoplay
+                console.debug('Audio autoplay bloqué:', error);
+            });
+        } catch (error) {
+            console.debug('Erreur lecture audio:', error);
+        }
     }
 
     initAsyncStock() {

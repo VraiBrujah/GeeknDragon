@@ -865,7 +865,7 @@ $extraHead = <<<HTML
 
 /* === WIDGET AUDIO COMPACT UNIVERSEL === */
 /* Widget audio compact pour toutes les plateformes */
-.music-widget-mobile-compact {
+.music-widget-compact {
   position: fixed;
   bottom: calc(env(safe-area-inset-bottom, 0px) + 20px);
   right: calc(env(safe-area-inset-right, 0px) + 16px);
@@ -915,7 +915,7 @@ $extraHead = <<<HTML
   border-radius: 50%;
   background: linear-gradient(135deg, #10b981, #059669);
   box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
-  animation: musicPulseMobile 2s ease-in-out infinite;
+  animation: musicPulse 2s ease-in-out infinite;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -931,13 +931,14 @@ $extraHead = <<<HTML
   opacity: 0.7;
 }
 
-/* Icône play/pause dans le bouton compact */
-.music-compact-icon {
-  width: 28px;
-  height: 28px;
-  color: #ffffff;
+/* Emoji note de musique dans le bouton compact */
+.music-note-emoji {
+  font-size: 28px;
+  line-height: 1;
   transition: transform 0.2s ease;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+  user-select: none;
+  display: block;
 }
 
 /* État étendu - contrôles complets */
@@ -972,13 +973,13 @@ $extraHead = <<<HTML
 }
 
 /* Masquer le bouton compact quand étendu */
-.music-widget-mobile-compact.expanded .music-compact-button {
+.music-widget-compact.expanded .music-compact-button {
   opacity: 0;
   transform: scale(0);
 }
 
 /* Contrôles dans l'état étendu */
-.music-mobile-controls {
+.music-controls {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -986,7 +987,7 @@ $extraHead = <<<HTML
   width: 100%;
 }
 
-.music-mobile-btn {
+.music-btn {
   width: 42px;
   height: 42px;
   border-radius: 50%;
@@ -1001,16 +1002,16 @@ $extraHead = <<<HTML
   backdrop-filter: blur(10px);
 }
 
-.music-mobile-btn:active {
+.music-btn:active {
   transform: scale(0.9);
 }
 
-.music-mobile-btn:hover {
+.music-btn:hover {
   background: linear-gradient(135deg, #6366f1, #8b5cf6);
   box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
 }
 
-.music-mobile-btn svg {
+.music-btn svg {
   width: 28px;
   height: 28px;
   color: #ffffff;
@@ -1018,34 +1019,34 @@ $extraHead = <<<HTML
 }
 
 /* Toutes les icônes à la même taille que play/pause */
-.music-mobile-btn.control-btn svg,
-.music-mobile-btn.volume-btn svg {
+.music-btn.control-btn svg,
+.music-btn.volume-btn svg {
   width: 28px;
   height: 28px;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
 }
 
 /* Bouton play/pause plus grand */
-.music-mobile-btn.play-pause {
+.music-btn.play-pause {
   width: 44px;
   height: 44px;
   background: linear-gradient(135deg, #f59e0b, #d97706);
 }
 
-.music-mobile-btn.play-pause:hover {
+.music-btn.play-pause:hover {
   background: linear-gradient(135deg, #f59e0b, #d97706);
   box-shadow: 0 4px 20px rgba(245, 158, 11, 0.5);
 }
 
-.music-mobile-btn.play-pause svg {
+.music-btn.play-pause svg {
   width: 28px;
   height: 28px;
   color: #ffffff;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
 }
 
-/* Slider de volume mobile */
-.music-mobile-volume {
+/* Slider de volume */
+.music-volume {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1053,7 +1054,7 @@ $extraHead = <<<HTML
   justify-content: center;
 }
 
-.music-mobile-volume-slider {
+.music-volume-slider {
   flex: 1;
   height: 4px;
   border-radius: 2px;
@@ -1063,7 +1064,7 @@ $extraHead = <<<HTML
   cursor: pointer;
 }
 
-.music-mobile-volume-slider::-webkit-slider-thumb {
+.music-volume-slider::-webkit-slider-thumb {
   appearance: none;
   width: 14px;
   height: 14px;
@@ -1073,7 +1074,7 @@ $extraHead = <<<HTML
   box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
 }
 
-.music-mobile-volume-slider::-moz-range-thumb {
+.music-volume-slider::-moz-range-thumb {
   width: 14px;
   height: 14px;
   border-radius: 50%;
@@ -1083,8 +1084,8 @@ $extraHead = <<<HTML
   box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
 }
 
-/* Animation pour l'indicateur mobile */
-@keyframes musicPulseMobile {
+/* Animation pour l'indicateur */
+@keyframes musicPulse {
   0%, 100% { 
     opacity: 1; 
     transform: scale(1);
@@ -1099,9 +1100,8 @@ $extraHead = <<<HTML
 .music-player-container {
   display: none !important;
 }
-    backdrop-filter: blur(15px);
-    border: 1.5px solid rgba(139, 92, 246, 0.4);
-    display: flex;
+
+/* Améliorer la responsivité des tableaux existants */
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -1135,7 +1135,7 @@ $extraHead = <<<HTML
     border-radius: 50%;
     background: linear-gradient(135deg, #10b981, #059669);
     box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
-    animation: musicPulseMobile 2s ease-in-out infinite;
+    animation: musicPulse 2s ease-in-out infinite;
     opacity: 0;
     transition: opacity 0.3s ease;
   }
@@ -1151,14 +1151,6 @@ $extraHead = <<<HTML
     opacity: 0.7;
   }
   
-  /* Icône play/pause dans le bouton compact */
-  .music-compact-icon {
-    width: 28px;
-    height: 28px;
-    color: #ffffff;
-    transition: transform 0.2s ease;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
-  }
   
   /* État étendu - contrôles complets */
   .music-expanded-controls {
@@ -1191,129 +1183,6 @@ $extraHead = <<<HTML
     opacity: 1;
   }
   
-  /* Masquer le bouton compact quand étendu */
-  .music-widget-mobile-compact.expanded .music-compact-button {
-    opacity: 0;
-    transform: scale(0);
-  }
-  
-  /* Contrôles dans l'état étendu */
-  .music-mobile-controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    width: 100%;
-  }
-  
-  .music-mobile-btn {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: none;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.8), rgba(139, 92, 246, 0.8));
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    backdrop-filter: blur(10px);
-  }
-  
-  .music-mobile-btn:active {
-    transform: scale(0.9);
-  }
-  
-  .music-mobile-btn:hover {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
-  }
-  
-  .music-mobile-btn svg {
-    width: 28px;
-    height: 28px;
-    color: #ffffff;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
-  }
-  
-  /* Toutes les icônes à la même taille que play/pause */
-  .music-mobile-btn.control-btn svg,
-  .music-mobile-btn.volume-btn svg {
-    width: 28px;
-    height: 28px;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
-  }
-  
-  /* Bouton play/pause plus grand */
-  .music-mobile-btn.play-pause {
-    width: 44px;
-    height: 44px;
-    background: linear-gradient(135deg, #f59e0b, #d97706);
-  }
-  
-  .music-mobile-btn.play-pause:hover {
-    background: linear-gradient(135deg, #f59e0b, #d97706);
-    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.5);
-  }
-  
-  .music-mobile-btn.play-pause svg {
-    width: 28px;
-    height: 28px;
-    color: #ffffff;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
-  }
-  
-  /* Slider de volume mobile */
-  .music-mobile-volume {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-    justify-content: center;
-  }
-  
-  .music-mobile-volume-slider {
-    flex: 1;
-    height: 4px;
-    border-radius: 2px;
-    background: rgba(255, 255, 255, 0.2);
-    appearance: none;
-    outline: none;
-    cursor: pointer;
-  }
-  
-  .music-mobile-volume-slider::-webkit-slider-thumb {
-    appearance: none;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #8b5cf6, #6366f1);
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
-  }
-  
-  .music-mobile-volume-slider::-moz-range-thumb {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #8b5cf6, #6366f1);
-    cursor: pointer;
-    border: none;
-    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
-  }
-  
-  /* Animation pour l'indicateur mobile */
-  @keyframes musicPulseMobile {
-    0%, 100% { 
-      opacity: 1; 
-      transform: scale(1);
-    }
-    50% { 
-      opacity: 0.6; 
-      transform: scale(1.2);
-    }
-  }
   
   /* Masquer l'ancien widget desktop sur toutes les plateformes */
   .music-player-container {
@@ -2927,24 +2796,18 @@ echo $snipcartInit;
     </div>
   </section>
 
-  <!-- Widget Audio Mobile Compact -->
-  <div id="music-widget-mobile" class="music-widget-mobile-compact" style="display: none;">
+  <!-- Widget Audio Compact Universel -->
+  <div id="music-widget" class="music-widget-compact" style="display: none;">
     <!-- Bouton compact (état initial) -->
     <div class="music-compact-button" id="music-compact-btn">
-      <svg class="music-compact-icon play-icon" viewBox="0 0 32 32" fill="currentColor">
-        <path d="M8 4v24l20-12z" stroke="currentColor" stroke-width="1"/>
-      </svg>
-      <svg class="music-compact-icon pause-icon hidden" viewBox="0 0 32 32" fill="currentColor">
-        <rect x="7" y="4" width="6" height="24" stroke="currentColor" stroke-width="1"/>
-        <rect x="19" y="4" width="6" height="24" stroke="currentColor" stroke-width="1"/>
-      </svg>
+      <span class="music-note-emoji">🎵</span>
     </div>
     
     <!-- Contrôles étendus (état étendu) -->
     <div class="music-expanded-controls" id="music-expanded-controls">
       <!-- Contrôle de volume (en haut) -->
-      <div class="music-mobile-volume">
-        <button class="music-mobile-btn volume-btn" id="mobile-music-mute">
+      <div class="music-volume">
+        <button class="music-btn volume-btn" id="compact-music-mute">
           <svg class="volume-icon" viewBox="0 0 32 32" fill="currentColor">
             <path d="M4 10v12h6l8 8V2l-8 8z" stroke="currentColor" stroke-width="1"/>
             <path d="M23 8c3 2 3 14 0 16" stroke="currentColor" stroke-width="2" fill="none"/>
@@ -2955,19 +2818,19 @@ echo $snipcartInit;
             <path d="M22 8l8 8m-8 0l8-8" stroke="currentColor" stroke-width="3" fill="none"/>
           </svg>
         </button>
-        <input type="range" class="music-mobile-volume-slider" id="mobile-music-volume" min="0" max="100" value="15">
+        <input type="range" class="music-volume-slider" id="compact-music-volume" min="0" max="100" value="15">
       </div>
       
       <!-- Contrôles principaux (en bas) -->
-      <div class="music-mobile-controls">
-        <button class="music-mobile-btn control-btn" id="mobile-music-prev">
+      <div class="music-controls">
+        <button class="music-btn control-btn" id="compact-music-prev">
           <svg viewBox="0 0 32 32" fill="currentColor">
             <rect x="6" y="4" width="4" height="24"/>
             <path d="M26 4v24L14 16z"/>
           </svg>
         </button>
         
-        <button class="music-mobile-btn play-pause control-btn" id="mobile-music-play-pause">
+        <button class="music-btn play-pause control-btn" id="compact-music-play-pause">
           <svg class="play-icon" viewBox="0 0 32 32" fill="currentColor">
             <path d="M8 4v24l20-12z" stroke="currentColor" stroke-width="1"/>
           </svg>
@@ -2977,7 +2840,7 @@ echo $snipcartInit;
           </svg>
         </button>
         
-        <button class="music-mobile-btn control-btn" id="mobile-music-next">
+        <button class="music-btn control-btn" id="compact-music-next">
           <svg viewBox="0 0 32 32" fill="currentColor">
             <rect x="22" y="4" width="4" height="24"/>
             <path d="M6 4v24l12-12z"/>
@@ -3009,31 +2872,52 @@ function flipCardExample(cardId) {
     container.classList.toggle('flipped');
 }
 
+/**
+ * Joue un effet sonore avec gestion d'erreurs
+ *
+ * @param {string} soundPath - Chemin vers le fichier audio
+ * @param {number} volume - Volume de lecture (0.0 à 1.0)
+ */
+function playSound(soundPath, volume = 0.5) {
+    try {
+        const audio = new Audio(soundPath);
+        audio.volume = Math.max(0, Math.min(1, volume));
+        audio.play().catch(error => {
+            // Gestion silencieuse des erreurs d'autoplay
+            console.debug('Audio autoplay bloqué:', error);
+        });
+    } catch (error) {
+        console.debug('Erreur lecture audio:', error);
+    }
+}
 
 // Fonctions pour le lanceur de dés
 function rollStat(statName) {
+    // Jouer l'effet sonore de dés
+    playSound('media/sounds/dice_roll.mp3', 0.6);
+
     // Lancer 4d6 et garder les 3 meilleurs
     const rolls = [];
     for (let i = 0; i < 4; i++) {
         rolls.push(Math.floor(Math.random() * 6) + 1);
     }
-    
+
     // Trier en ordre décroissant et garder les 3 premiers
     rolls.sort((a, b) => b - a);
     const total = rolls[0] + rolls[1] + rolls[2];
-    
+
     // Animation de lancement
     const resultElement = document.getElementById(statName + '-result');
     let animationCount = 0;
-    
+
     const animationInterval = setInterval(() => {
         resultElement.textContent = Math.floor(Math.random() * 18) + 3;
         animationCount++;
-        
+
         if (animationCount > 10) {
             clearInterval(animationInterval);
             resultElement.textContent = total;
-            
+
             // Colorer selon la qualité du résultat
             resultElement.classList.remove('text-red-500', 'text-yellow-500', 'text-green-500');
             if (total >= 15) {
@@ -3043,7 +2927,7 @@ function rollStat(statName) {
             } else {
                 resultElement.classList.add('text-red-400');
             }
-            
+
             // Effet de mise en évidence
             resultElement.style.transform = 'scale(1.2)';
             setTimeout(() => {
@@ -3054,6 +2938,9 @@ function rollStat(statName) {
 }
 
 function rollAllStats() {
+    // Jouer l'effet sonore de dés pour lancement multiple
+    playSound('media/sounds/dice_roll.mp3', 0.6);
+
     const stats = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
 
     // Lancer chaque caractéristique avec un petit délai
@@ -3654,12 +3541,12 @@ function fallbackCopyEmail(email, buttonElement) {
 
 <script>
 /**
- * Widget Audio Mobile Compact pour aide-jeux.php
+ * Widget Audio Compact Universel pour aide-jeux.php
  * Gère l'expansion/réduction et l'intégration avec le lecteur D&D existant
  */
-class MobileAudioWidget {
+class CompactAudioWidget {
   constructor() {
-    this.widget = document.getElementById('music-widget-mobile');
+    this.widget = document.getElementById('music-widget');
     this.compactBtn = document.getElementById('music-compact-btn');
     this.expandedControls = document.getElementById('music-expanded-controls');
     this.isExpanded = false;
@@ -3687,8 +3574,10 @@ class MobileAudioWidget {
     const checkPlayer = () => {
       if (window.dndMusicPlayer && window.dndMusicPlayer.isInitialized) {
         this.dndPlayer = window.dndMusicPlayer;
+        console.log('🎵 CompactAudioWidget: Connexion au DnDMusicPlayer réussie');
         this.syncPlayerState();
       } else {
+        console.log('🔄 CompactAudioWidget: En attente du DnDMusicPlayer...');
         setTimeout(checkPlayer, 500);
       }
     };
@@ -3702,8 +3591,8 @@ class MobileAudioWidget {
     const isPlaying = this.dndPlayer.isPlaying;
     this.updatePlayPauseButton(isPlaying);
     
-    // Synchroniser le volume
-    const volumeSlider = document.getElementById('mobile-music-volume');
+    // Synchroniser le volume - UTILISER LE NOUVEL ID UNIQUE
+    const volumeSlider = document.getElementById('compact-music-volume');
     if (volumeSlider) {
       volumeSlider.value = this.dndPlayer.volume * 100;
     }
@@ -3721,26 +3610,26 @@ class MobileAudioWidget {
       this.expand();
     });
     
-    // Contrôles de lecture
-    document.getElementById('mobile-music-play-pause').addEventListener('click', () => {
+    // Contrôles de lecture - UTILISER LES NOUVEAUX IDs UNIQUES
+    document.getElementById('compact-music-play-pause').addEventListener('click', () => {
       this.togglePlayPause();
     });
     
-    document.getElementById('mobile-music-prev').addEventListener('click', () => {
+    document.getElementById('compact-music-prev').addEventListener('click', () => {
       if (this.dndPlayer) this.dndPlayer.playPrevious();
     });
     
-    document.getElementById('mobile-music-next').addEventListener('click', () => {
+    document.getElementById('compact-music-next').addEventListener('click', () => {
       if (this.dndPlayer) this.dndPlayer.playNext();
     });
     
-    // Contrôle volume
-    document.getElementById('mobile-music-volume').addEventListener('input', (e) => {
+    // Contrôle volume - UTILISER LES NOUVEAUX IDs UNIQUES
+    document.getElementById('compact-music-volume').addEventListener('input', (e) => {
       const volume = e.target.value / 100;
       if (this.dndPlayer) this.dndPlayer.setVolume(volume);
     });
     
-    document.getElementById('mobile-music-mute').addEventListener('click', () => {
+    document.getElementById('compact-music-mute').addEventListener('click', () => {
       if (this.dndPlayer) this.dndPlayer.toggleMute();
     });
     
@@ -3812,12 +3701,20 @@ class MobileAudioWidget {
   }
   
   togglePlayPause() {
-    if (!this.dndPlayer) return;
+    console.log('🎵 CompactAudioWidget: togglePlayPause appelé');
+    if (!this.dndPlayer) {
+      console.error('❌ CompactAudioWidget: dndPlayer non connecté');
+      return;
+    }
+    
+    console.log('🎵 État actuel:', this.dndPlayer.isPlaying ? 'Playing' : 'Paused');
     
     if (this.dndPlayer.isPlaying) {
       this.dndPlayer.pause();
+      console.log('⏸️ CompactAudioWidget: Musique mise en pause');
     } else {
       this.dndPlayer.play();
+      console.log('▶️ CompactAudioWidget: Musique lancée');
     }
     
     // Mettre à jour l'interface
@@ -3827,38 +3724,31 @@ class MobileAudioWidget {
   }
   
   updatePlayPauseButton(isPlaying) {
-    // Bouton compact
-    const compactPlayIcon = this.compactBtn.querySelector('.play-icon');
-    const compactPauseIcon = this.compactBtn.querySelector('.pause-icon');
+    // Le bouton compact utilise maintenant un emoji fixe 🎵
+    // Seul l'indicateur LED change d'état (géré dans syncPlayerState)
     
-    if (isPlaying) {
-      compactPlayIcon.classList.add('hidden');
-      compactPauseIcon.classList.remove('hidden');
-    } else {
-      compactPlayIcon.classList.remove('hidden');
-      compactPauseIcon.classList.add('hidden');
-    }
-    
-    // Bouton étendu
-    const expandedBtn = document.getElementById('mobile-music-play-pause');
-    const expandedPlayIcon = expandedBtn.querySelector('.play-icon');
-    const expandedPauseIcon = expandedBtn.querySelector('.pause-icon');
-    
-    if (isPlaying) {
-      expandedPlayIcon.classList.add('hidden');
-      expandedPauseIcon.classList.remove('hidden');
-    } else {
-      expandedPlayIcon.classList.remove('hidden');
-      expandedPauseIcon.classList.add('hidden');
+    // Bouton étendu - UTILISER LE NOUVEL ID UNIQUE
+    const expandedBtn = document.getElementById('compact-music-play-pause');
+    if (expandedBtn) {
+      const expandedPlayIcon = expandedBtn.querySelector('.play-icon');
+      const expandedPauseIcon = expandedBtn.querySelector('.pause-icon');
+      
+      if (isPlaying) {
+        expandedPlayIcon.classList.add('hidden');
+        expandedPauseIcon.classList.remove('hidden');
+      } else {
+        expandedPlayIcon.classList.remove('hidden');
+        expandedPauseIcon.classList.add('hidden');
+      }
     }
   }
 }
 
-// Initialiser le widget mobile quand le DOM est prêt
+// Initialiser le widget compact quand le DOM est prêt
 document.addEventListener('DOMContentLoaded', () => {
   // Attendre un peu pour que le lecteur D&D soit initialisé
   setTimeout(() => {
-    window.mobileAudioWidget = new MobileAudioWidget();
+    window.compactAudioWidget = new CompactAudioWidget();
   }, 1000);
 });
 </script>

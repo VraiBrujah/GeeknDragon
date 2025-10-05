@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//e/GitHub/GeeknDragon/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

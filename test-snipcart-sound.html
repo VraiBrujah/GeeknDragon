@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Son Snipcart - Geek & Dragon</title>
+
+    <!-- Snipcart CSS -->
+    <link rel="preconnect" href="https://app.snipcart.com">
+    <link rel="preconnect" href="https://cdn.snipcart.com">
+    <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.1/default/snipcart.css" />
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        h1 {
+            color: #DAA520;
+            text-align: center;
+        }
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #2a2a2a;
+            border-radius: 8px;
+        }
+        .product-card {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px;
+            background: #3a3a3a;
+            border-radius: 6px;
+            text-align: center;
+        }
+        button {
+            background: #8B0000;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #660000;
+        }
+        .status {
+            margin-top: 15px;
+            padding: 10px;
+            background: #1a1a1a;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .success {
+            color: #22C55E;
+        }
+        .info {
+            color: #3B82F6;
+        }
+        .snipcart-add-item {
+            background: #8B0000;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .snipcart-add-item:hover {
+            background: #660000;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎵 Test Son Snipcart</h1>
+
+    <div class="test-section">
+        <h2>📦 Produits de Test</h2>
+        <p>Cliquez sur "Ajouter au panier" - Le son devrait se jouer automatiquement</p>
+
+        <div class="product-card">
+            <h3>Pièce Test Or</h3>
+            <p>Prix: 10.00$ CAD</p>
+            <button class="snipcart-add-item"
+                    data-item-id="test-gold-coin"
+                    data-item-price="10.00"
+                    data-item-name="Pièce Test Or"
+                    data-item-description="Pièce de test pour vérifier le son"
+                    data-item-url="http://localhost/test-snipcart-sound.html">
+                🛒 Ajouter au panier
+            </button>
+        </div>
+
+        <div class="product-card">
+            <h3>Pièce Test Argent</h3>
+            <p>Prix: 5.00$ CAD</p>
+            <button class="snipcart-add-item"
+                    data-item-id="test-silver-coin"
+                    data-item-price="5.00"
+                    data-item-name="Pièce Test Argent"
+                    data-item-description="Pièce de test pour vérifier le son"
+                    data-item-url="http://localhost/test-snipcart-sound.html">
+                🛒 Ajouter au panier
+            </button>
+        </div>
+
+        <div class="product-card">
+            <h3>Pièce Test Cuivre</h3>
+            <p>Prix: 1.00$ CAD</p>
+            <button class="snipcart-add-item"
+                    data-item-id="test-copper-coin"
+                    data-item-price="1.00"
+                    data-item-name="Pièce Test Cuivre"
+                    data-item-description="Pièce de test pour vérifier le son"
+                    data-item-url="http://localhost/test-snipcart-sound.html">
+                🛒 Ajouter au panier
+            </button>
+        </div>
+
+        <div id="event-log" class="status info">
+            <strong>📊 Journal des événements :</strong><br>
+            <div id="log-content">Aucun événement encore...</div>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>🔧 Informations Techniques</h2>
+        <div class="status info">
+            <strong>Méthodes de détection :</strong><br>
+            1️⃣ <strong>Événement Snipcart natif :</strong> <code>snipcart.ready</code> → <code>item.added</code><br>
+            2️⃣ <strong>Fallback clic direct :</strong> Délai 50ms pour compatibilité<br><br>
+            <strong>Fichier audio :</strong> media/sounds/coin-drop.mp3<br>
+            <strong>Volume :</strong> 50% (0.5)
+        </div>
+    </div>
+
+    <!-- Snipcart Integration -->
+    <div id="snipcart" data-api-key="YOUR_SNIPCART_API_KEY" hidden></div>
+
+    <!-- Snipcart JS -->
+    <script src="https://cdn.snipcart.com/themes/v3.7.1/default/snipcart.js"></script>
+
+    <script>
+        /**
+         * Fonction de son
+         */
+        function playSound(soundPath, volume = 0.5) {
+            try {
+                const audio = new Audio(soundPath);
+                audio.volume = Math.max(0, Math.min(1, volume));
+                audio.play().catch(error => {
+                    console.debug('Audio autoplay bloqué:', error);
+                    addLog('⚠️ Autoplay bloqué - interaction requise', 'warning');
+                });
+                return true;
+            } catch (error) {
+                console.debug('Erreur lecture audio:', error);
+                return false;
+            }
+        }
+
+        /**
+         * Ajoute un message au journal
+         */
+        function addLog(message, type = 'info') {
+            const logContent = document.getElementById('log-content');
+            const time = new Date().toLocaleTimeString();
+            const colors = {
+                success: '#22C55E',
+                warning: '#F59E0B',
+                info: '#3B82F6',
+                error: '#EF4444'
+            };
+            const color = colors[type] || colors.info;
+
+            const entry = `<span style="color: ${color}">[${time}] ${message}</span><br>`;
+
+            if (logContent.innerHTML === 'Aucun événement encore...') {
+                logContent.innerHTML = entry;
+            } else {
+                logContent.innerHTML = entry + logContent.innerHTML;
+            }
+        }
+
+        /**
+         * Initialisation des événements Snipcart
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            addLog('🚀 Page chargée - En attente de Snipcart...');
+
+            // Méthode 1: Événement Snipcart natif
+            document.addEventListener('snipcart.ready', () => {
+                addLog('✅ Snipcart prêt - Event listeners activés', 'success');
+
+                window.Snipcart.events.on('item.added', (item) => {
+                    addLog(`💰 Item ajouté: ${item.name} - Son joué!`, 'success');
+                    playSound('media/sounds/coin-drop.mp3', 0.5);
+                });
+
+                window.Snipcart.events.on('cart.opened', () => {
+                    addLog('🛒 Panier ouvert', 'info');
+                });
+
+                window.Snipcart.events.on('cart.closed', () => {
+                    addLog('🛒 Panier fermé', 'info');
+                });
+            });
+
+            // Méthode 2: Fallback clic direct
+            document.addEventListener('click', (event) => {
+                const snipcartButton = event.target.closest('.snipcart-add-item');
+                if (snipcartButton) {
+                    const itemName = snipcartButton.getAttribute('data-item-name');
+                    addLog(`🖱️ Clic détecté sur: ${itemName}`, 'info');
+
+                    setTimeout(() => {
+                        playSound('media/sounds/coin-drop.mp3', 0.5);
+                        addLog(`🔊 Son fallback joué (délai 50ms)`, 'warning');
+                    }, 50);
+                }
+            });
+
+            addLog('👂 Event listeners installés', 'success');
+        });
+    </script>
+</body>
+</html>
