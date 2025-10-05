@@ -17,6 +17,9 @@ class DnDMusicPlayer {
         this.heroIntroPath = null;
         this.heroIntroWeight = 2.5; // Pondération pour hero-intro.mp3
 
+        // Stocker la référence du listener pour pouvoir le retirer
+        this.startMusicHandler = () => this.markUserInteraction();
+
         this.initializePlayer();
         this.setupEventListeners();
     }
@@ -183,28 +186,50 @@ class DnDMusicPlayer {
             this.setVolume(e.target.value / 100);
         });
 
+        // Marquer comme interaction utilisateur au toucher du volume
+        volumeSlider.addEventListener('mousedown', () => {
+            this.markUserInteraction();
+        });
+        volumeSlider.addEventListener('touchstart', () => {
+            this.markUserInteraction();
+        });
+
         document.getElementById('music-mute').addEventListener('click', () => {
             this.toggleMute();
         });
     }
 
     setupEventListeners() {
-        // Démarrer la musique à la première interaction utilisateur
-        const startMusic = () => {
-            if (this.firstInteraction && this.isInitialized) {
-                this.startPlayback();
-                this.firstInteraction = false;
+        // Interactions clavier et clic
+        document.addEventListener('click', this.startMusicHandler, true);
+        document.addEventListener('keydown', this.startMusicHandler, true);
+        document.addEventListener('touchstart', this.startMusicHandler, true);
 
-                // Retirer les listeners après la première interaction
-                document.removeEventListener('click', startMusic, true);
-                document.removeEventListener('keydown', startMusic, true);
-                document.removeEventListener('touchstart', startMusic, true);
-            }
-        };
+        // Interactions de scroll (molette souris et scroll tactile)
+        document.addEventListener('wheel', this.startMusicHandler, { passive: true, capture: true });
+        document.addEventListener('scroll', this.startMusicHandler, { passive: true, capture: true });
+        document.addEventListener('touchmove', this.startMusicHandler, { passive: true, capture: true });
+    }
 
-        document.addEventListener('click', startMusic, true);
-        document.addEventListener('keydown', startMusic, true);
-        document.addEventListener('touchstart', startMusic, true);
+    /**
+     * Marque qu'une interaction utilisateur a eu lieu
+     * Lance automatiquement la lecture si c'est la première interaction
+     */
+    markUserInteraction() {
+        if (this.firstInteraction && this.isInitialized) {
+            this.firstInteraction = false;
+
+            // Retirer tous les listeners après la première interaction
+            document.removeEventListener('click', this.startMusicHandler, true);
+            document.removeEventListener('keydown', this.startMusicHandler, true);
+            document.removeEventListener('touchstart', this.startMusicHandler, true);
+            document.removeEventListener('wheel', this.startMusicHandler, true);
+            document.removeEventListener('scroll', this.startMusicHandler, true);
+            document.removeEventListener('touchmove', this.startMusicHandler, true);
+
+            // Lancer automatiquement la lecture
+            this.startPlayback();
+        }
     }
 
     async startPlayback() {
@@ -252,11 +277,23 @@ class DnDMusicPlayer {
         this.updatePlayButton();
     }
 
-    togglePlayPause() {
+    async togglePlayPause() {
+        // Si c'est la première interaction, initialiser la lecture
+        if (this.firstInteraction) {
+            this.markUserInteraction();
+            // startPlayback() est déjà appelé dans markUserInteraction()
+            return;
+        }
+
+        // Sinon, basculer play/pause normalement
         if (this.isPlaying) {
             this.pause();
         } else {
-            this.play();
+            // Si aucune piste n'est chargée, charger la première
+            if (!this.audio.src || this.audio.src === '') {
+                await this.loadCurrentTrack();
+            }
+            await this.play();
         }
     }
 
