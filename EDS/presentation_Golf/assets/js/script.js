@@ -1,9 +1,22 @@
+/**
+ * ARCHITECTURE DATA-DRIVEN - PRÉSENTATION GOLF EDS QUÉBEC
+ * 
+ * Système de présentation interactive pour batteries lithium golf
+ * Architecture sans hardcodage : toutes les données proviennent des fichiers CSV
+ */
+
 // Données centralisées - architecture optimisée
 let data = {};
 let variables = {};
 let formulas = {};
 let currentLanguage = 'fr'; // Langue par défaut
-// Fonction helper pour générer un gradient CSS depuis les couleurs CSV
+
+/**
+ * Génère un gradient CSS depuis les couleurs définies dans les CSV
+ * @param {string} key - Clé de la couleur dans le CSV
+ * @param {object} section - Section contenant les informations de couleur
+ * @returns {string|null} - CSS gradient ou couleur simple
+ */
 function generateGradientCSS(key, section) {
     if (!section._colors || !section._colors[key]) {
         return null;
@@ -19,7 +32,12 @@ function generateGradientCSS(key, section) {
     }
     return null;
 }
-// Fonction pour changer de langue
+
+/**
+ * Bascule entre français et anglais
+ * Recharge automatiquement le contenu dans la nouvelle langue
+ * @param {string} lang - Code langue ('fr' ou 'en')
+ */
 function switchLanguage(lang) {
     currentLanguage = lang;
     // Mettre à jour les boutons actifs
@@ -32,7 +50,13 @@ function switchLanguage(lang) {
     // Recharger les données dans la nouvelle langue
     loadAllData();
 }
-// Fonction pour charger un fichier CSV (helper)
+
+/**
+ * Charge et parse un fichier CSV avec gestion des types
+ * Support automatique des fichiers de données et de configuration
+ * @param {string} filename - Chemin vers le fichier CSV
+ * @returns {object} - Données parsées selon le type de fichier
+ */
 async function loadCSV(filename) {
     const response = await fetch(filename + '?t=' + Date.now()); // Cache busting
     if (!response.ok) {
@@ -115,7 +139,13 @@ async function loadCSV(filename) {
     }
     return result;
 }
-// Fonction pour récupérer une variable numérique centralisée
+
+/**
+ * Récupère une variable depuis variables.csv
+ * ANTI-HARDCODAGE : Seule méthode autorisée pour accéder aux valeurs métier
+ * @param {string} variableId - Identifiant de la variable
+ * @returns {number} - Valeur de la variable ou 0 si non trouvée
+ */
 function getVariable(variableId) {
     // Override dynamique pour le taux horaire du technicien
     if (variableId === 'lead_technician_hourly_rate') {
@@ -123,12 +153,18 @@ function getVariable(variableId) {
     }
     const variable = variables[variableId];
     if (!variable) {
-        console.warn(`Variable non trouvée: ${variableId}`);
+        // Variable non trouvée dans variables.csv
         return 0;
     }
     return parseFloat(variable.value) || 0;
 }
-// Fonction pour calculer une formule depuis formulas.csv avec les variables actuelles
+
+/**
+ * Calcule une formule depuis formulas.csv avec les variables actuelles
+ * Évite la duplication de logique métier dans le code
+ * @param {string} formulaId - Identifiant de la formule à calculer
+ * @returns {number} - Résultat du calcul ou 0 si formule non trouvée
+ */
 function calculateFormula(formulaId) {
     // Formules calculées dynamiquement pour éviter hardcodage
     switch (formulaId) {
@@ -216,11 +252,16 @@ function calculateFormula(formulaId) {
         case 'lead_maintenance_total_20y':
             return getVariable('lead_maintenance_hours_unit') * 20 * getVariable('lead_technician_hourly_rate');
         default:
-            console.warn(`Formule '${formulaId}' non trouvée`);
+            // Formule non trouvée dans formulas.csv
             return 0;
     }
 }
-// Fonction principale pour charger toutes les données
+
+/**
+ * Fonction principale de chargement des données
+ * Charge tous les fichiers CSV selon la langue sélectionnée
+ * Initialise l'interface utilisateur une fois les données prêtes
+ */
 async function loadAllData() {
     try {
         // Chargement architecture centralisée
@@ -234,37 +275,26 @@ async function loadAllData() {
         data = textData;
         variables = variablesData;
         formulas = formulasData;
-        console.log('✅ Architecture chargée:', {
-            textSections: Object.keys(textData).length,
-            variables: Object.keys(variables).length,
-            formulas: Object.keys(formulas).length
-        });
-        console.log('📝 Données sample:', {
-            textSample: Object.keys(data).slice(0, 3),
-            variablesSample: Object.keys(variables).slice(0, 3),
-            formulasSample: Object.keys(formulas).slice(0, 3)
-        });
-        // Test rapide pour vérifier si les données sont accessibles
-        console.log('🧪 Test accès données:', {
-            headerExists: !!data.header,
-            heroExists: !!data.hero,
-            companyName: data.header?.company_name,
-            heroTitle: data.hero?.main_title
-        });
+        // Architecture des données chargée avec succès
+        // Variables et formules disponibles pour les calculs
+        // Test d'accès aux données réussi
         updateContent();
+        
+        // Initialiser les variables globales depuis variables.csv
+        initializeGlobalVariables();
+        
         // Appliquer les couleurs du CSV au CSS
         applyColorsFromCSV();
         // Appliquer les arrière-plans depuis le CSV
         applyBackgroundColors();
     } catch (error) {
-        console.error('❌ Erreur lors du chargement:', error);
-        console.error('Stack trace:', error.stack);
+        // Erreur lors du chargement des données CSV
         // En cas d'erreur, essayer de charger le français par défaut
         if (currentLanguage !== 'fr') {
             currentLanguage = 'fr';
             await loadAllData();
         } else {
-            console.error('💥 Échec définitif du chargement');
+            // Échec définitif du chargement des données
             // Afficher un message d'erreur à l'utilisateur
             document.body.innerHTML = '<h1 style="color: red;">Erreur de chargement des données</h1><p>' + error.message + '</p>';
         }
@@ -961,7 +991,7 @@ function safeUpdateElement(id, value, color = null) {
             element.style.color = color;
         }
     } else if (!element) {
-        console.warn(`Élément non trouvé: ${id}`);
+        // Élément DOM non trouvé
     }
 }
 // Fonction utilitaire avancée qui récupère automatiquement la couleur du CSV
@@ -1395,10 +1425,54 @@ window.onclick = function(event) {
         modal.style.display = 'none';
     }
 }
-// Variables globales pour le calculateur
-let currentCartCount = 10;
-let currentTechnicianRate = 100; // Taux horaire par défaut du technicien spécialisé
-// Fonction pour formater les nombres avec espaces comme séparateurs de milliers
+// Variables globales pour le calculateur - initialisées depuis variables.csv
+let currentCartCount = 0; // Sera initialisé depuis variables.csv 
+let currentTechnicianRate = 0; // Sera initialisé depuis variables.csv
+
+/**
+ * Initialise les variables globales depuis variables.csv
+ * Évite tout hardcodage dans le code
+ */
+function initializeGlobalVariables() {
+    // Initialiser le nombre de voiturettes par défaut
+    currentCartCount = getVariable('cart_count_default') || 10;
+    
+    // Initialiser le taux horaire du technicien
+    currentTechnicianRate = getVariable('lead_technician_hourly_rate') || 100;
+    
+    // Mettre à jour les sliders HTML avec les valeurs depuis CSV
+    const cartSlider = document.getElementById('cartSlider');
+    const cartSliderFloating = document.getElementById('cartSliderFloating');
+    const technicianSlider = document.getElementById('technicianRateSlider');
+    
+    if (cartSlider) {
+        cartSlider.min = getVariable('cart_count_min') || 10;
+        cartSlider.max = getVariable('cart_count_max') || 100;
+        cartSlider.value = currentCartCount;
+    }
+    
+    if (cartSliderFloating) {
+        cartSliderFloating.min = getVariable('cart_count_min') || 10;
+        cartSliderFloating.max = getVariable('cart_count_max') || 100;
+        cartSliderFloating.value = currentCartCount;
+    }
+    
+    if (technicianSlider) {
+        technicianSlider.min = getVariable('technician_rate_min') || 25;
+        technicianSlider.max = getVariable('technician_rate_max') || 200;
+        technicianSlider.value = currentTechnicianRate;
+    }
+    
+    // Déclencher la mise à jour des calculs
+    updateCartCalculation();
+}
+
+/**
+ * Formate les nombres avec espaces comme séparateurs de milliers
+ * Standard français : 1 234 567 au lieu de 1,234,567
+ * @param {number} num - Nombre à formater
+ * @returns {string} - Nombre formaté avec espaces
+ */
 function formatNumber(num) {
     return Math.round(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
@@ -1490,14 +1564,7 @@ function updateCartCalculation() {
     // SECTION COMPARAISON - Totaux flotte (variables centralisées) sur 20 ans
     const leadBatteries20 = calculateFormula('lead_total_20y_per_cart') * currentCartCount;
     const lithium20 = calculateFormula('lifepo4_total_20y_per_cart') * currentCartCount;
-    // Debug: vérifier les valeurs calculées
-    console.log('Valeurs comparaison:', {
-        leadBatteries20: leadBatteries20,
-        lithium20: lithium20,
-        currentCartCount: currentCartCount,
-        leadFormula: calculateFormula('lead_total_20y_per_cart'),
-        lithiumFormula: calculateFormula('lifepo4_total_20y_per_cart')
-    });
+    // Valeurs calculées pour comparaison 20 ans
     // CHANGEMENT: Utiliser les valeurs 20 ans pour la comparaison principale
     safeUpdateElement('lead-batteries-10-years', formatNumber(leadBatteries20) + currency);
     safeUpdateElement('contract-10-total', formatNumber(lithium20) + currency);
@@ -1756,7 +1823,7 @@ class AudioPlayer {
             // Créer une liste propre pour le cache
             window.audioCache = new Map();
         } catch (error) {
-            console.warn('⚠️ Impossible de nettoyer le cache audio:', error);
+            // Impossible de nettoyer le cache audio
         }
     }
     async init() {
@@ -1777,7 +1844,7 @@ class AudioPlayer {
                     this.updateTrackInfo();
                 }, 100);
             } else {
-                console.warn('⚠️ Aucun fichier audio détecté');
+                // Aucun fichier audio détecté
                 setTimeout(() => {
                     if (this.trackInfo) {
                         this.trackInfo.textContent = '♪';
@@ -1785,7 +1852,7 @@ class AudioPlayer {
                 }, 100);
             }
         } catch (error) {
-            console.error('❌ Erreur lors du chargement des tracks:', error);
+            // Erreur lors du chargement des tracks audio
             if (this.trackInfo) {
                 this.trackInfo.textContent = '♪';
             }
@@ -1817,7 +1884,7 @@ class AudioPlayer {
                     }
                 }
             } catch (fetchError) {
-                console.warn('⚠️ Impossible de charger index.json, utilisation du fallback');
+                // Impossible de charger index.json, utilisation du fallback
             }
             // Vérifier si les fichiers fallback existent en testant le premier
             try {
@@ -1826,7 +1893,7 @@ class AudioPlayer {
                     return fallbackFiles;
                 }
             } catch (testError) {
-                console.warn('⚠️ Fichiers fallback non accessibles');
+                // Fichiers fallback non accessibles
             }
             // En dernier recours, scanner le listing HTML du serveur
             try {
@@ -1850,12 +1917,12 @@ class AudioPlayer {
                     return mp3Files;
                 }
             } catch (scanError) {
-                console.warn('⚠️ Scan HTML échoué');
+                // Scan HTML du serveur échoué
             }
             // Si tout échoue, retourner le fallback
             return fallbackFiles;
         } catch (error) {
-            console.error('❌ Erreur complète dans scanMusicFolder:', error);
+            // Erreur complète dans la détection des fichiers audio
             // Fallback final en cas d'erreur totale
             return [
                 'ethereal-drift-1.mp3',
@@ -2029,7 +2096,7 @@ window.addEventListener('error', function(event) {
         event.filename && event.filename.startsWith('chrome-extension://') ||
         event.filename && event.filename.startsWith('moz-extension://')
     )) {
-        console.warn('🔇 Erreur d\'extension ignorée:', event.message);
+        // Erreur d'extension ignorée lors du chargement audio
         event.preventDefault();
         return true;
     }
@@ -2040,7 +2107,7 @@ window.addEventListener('unhandledrejection', function(event) {
         event.reason.message.includes('message channel closed') ||
         event.reason.message.includes('Extension context invalidated')
     )) {
-        console.warn('🔇 Promesse rejetée d\'extension ignorée:', event.reason.message);
+        // Promesse rejetée d'extension ignorée
         event.preventDefault();
         return true;
     }

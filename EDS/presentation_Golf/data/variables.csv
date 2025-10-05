@@ -57,3 +57,10 @@ insurance_increase_yearly,300,$,Majoration assurance annuelle,Annual insurance i
 lead_replacement_calculation_10y,dynamic,text,Calcul remplacement 10 ans,10-year replacement calculation,Calcul dynamique depuis formules,Dynamic calculation from formulas
 autonomy_degradation_5y,50,%,Dégradation autonomie 5 ans,5-year autonomy degradation,Pourcentage de perte d'autonomie après 5 ans (plomb),Percentage of autonomy loss after 5 years (lead)
 performance_until_discharge,95,%,Performance jusqu'à décharge,Performance until discharge,Pourcentage de performance maintenue jusqu'à décharge (LiFePO4),Percentage of performance maintained until discharge (LiFePO4)
+
+# PARAMÈTRES INTERFACE UTILISATEUR - Calculateur dynamique
+cart_count_default,10,units,Nombre voiturettes par défaut,Default cart count,Nombre de voiturettes initial dans le calculateur,Default number of carts in calculator
+cart_count_min,10,units,Minimum voiturettes,Minimum cart count,Nombre minimum de voiturettes dans calculateur,Minimum number of carts in calculator
+cart_count_max,100,units,Maximum voiturettes,Maximum cart count,Nombre maximum de voiturettes dans calculateur,Maximum number of carts in calculator
+technician_rate_min,25,$,Taux technicien minimum,Minimum technician rate,Taux horaire minimum pour technicien,Minimum hourly rate for technician
+technician_rate_max,200,$,Taux technicien maximum,Maximum technician rate,Taux horaire maximum pour technicien,Maximum hourly rate for technician
