@@ -1,0 +1,11 @@
+Critère,Batteries_Plomb,Li-Kart_LiFePO4,Unité,Amélioration_%,Avantage_Li-Kart
+Poids,300,40,kg,86.7,Oui
+Temps_Charge,9,2,heures,77.8,Oui
+Cycles_Vie,500,8000,cycles,1500.0,Oui
+Maintenance,12,0,heures/an,100.0,Oui
+Autonomie_Neuf,100,100,%,0.0,Égal
+Autonomie_5ans,50,95,%,90.0,Oui
+Performance_Décharge,60,95,%,58.3,Oui
+Température_Froid,-40,-20,°C_minimum,50.0,Oui
+Température_Chaud,50,60,°C_maximum,20.0,Oui
+Durée_Vie,5,20,années,300.0,Oui
