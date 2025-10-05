@@ -183,6 +183,7 @@ $extraHead = <<<HTML
   margin-bottom: 1.5rem;
   position: relative;
 }
+/* Indicateur de chargement masqué par défaut */
 .flip-container::after {
   content: '';
   position: absolute;
@@ -196,10 +197,16 @@ $extraHead = <<<HTML
   background-position: center;
   animation: spinGear 2s linear infinite;
   z-index: 10;
-  opacity: 0.7;
+  opacity: 0; /* Masqué par défaut */
   transition: all 0.3s ease;
+  display: none; /* Complètement masqué */
 }
-.flip-container:hover::after {
+/* Uniquement visible sur les éléments avec classe loading */
+.flip-container.loading::after {
+  opacity: 0.7;
+  display: block;
+}
+.flip-container.loading:hover::after {
   opacity: 1;
   transform: scale(1.1);
 }
