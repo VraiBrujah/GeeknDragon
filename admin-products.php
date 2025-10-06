@@ -101,8 +101,9 @@ if (isset($_GET['logout'])) {
 }
 
 
+use GeeknDragon\Includes\CsvProductsManager;
 
-$manager = new \\GeeknDragon\\Includes\\CsvProductsManager();
+$manager = new CsvProductsManager();
 $message = '';
 $messageType = '';
 

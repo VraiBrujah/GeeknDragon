@@ -62,11 +62,8 @@ class DnDMusicPlayer {
             this.createWeightedPlaylist();
         } catch (error) {
             // Erreur chargement playlist silencieuse en production
-            // Playlist de fallback si l'API échoue
-            this.playlist = [
-                { path: 'media/musique/hero-intro.mp3', name: 'Hero Intro' },
-                { path: 'media/musique/dnd/Agdon.mp3', name: 'Agdon' },
-            ];
+            // Playlist vide - les fichiers de musique ont été supprimés pour optimisation
+            this.playlist = [];
         }
     }
 
