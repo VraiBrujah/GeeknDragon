@@ -709,7 +709,6 @@ Le système `scripts/build-complete.js` traite automatiquement :
 - `css/styles.css` → `css/styles.min.css`
 - `css/snipcart-custom.css` → `css/snipcart-custom.min.css`
 - `css/shop-grid.css` → `css/shop-grid.min.css`
-- `css/geekndragon-custom.css` → `css/geekndragon-custom.min.css`
 
 **Fichiers JavaScript sources :**
 - `js/app.js` → `js/app.min.js`

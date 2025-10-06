@@ -38,7 +38,15 @@
     "video:check": "node scripts/optimize-videos.js --check",
     "video:report": "node scripts/optimize-videos.js --report",
     "video:compress": "node scripts/optimize-videos.js --compress",
-    "performance:full": "npm run production:build && npm run video:report && npm run compress"
+    "performance:full": "npm run production:build && npm run video:report && npm run compress",
+    "audit:media": "node scripts/audit-unused-media.cjs",
+    "cleanup:media": "node scripts/safe-media-cleanup.cjs",
+    "optimize:images": "node scripts/optimize-images.cjs",
+    "optimize:images:auto": "node scripts/auto-optimize-images.cjs",
+    "optimize:master": "node scripts/master-optimize.cjs",
+    "optimize:complete": "npm run optimize:master",
+    "pre-deploy": "node scripts/pre-deploy-check.cjs",
+    "deploy": "npm run pre-deploy && npm run deploy:prep"
   },
   "keywords": [],
   "author": "",

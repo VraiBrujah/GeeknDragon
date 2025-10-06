@@ -337,6 +337,8 @@ h6 {
 /* Header navigation buttons (smaller) */
 .header-nav-icon-btn {
   position: relative !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
 .header-nav-icon-btn .btn-text-overlay {
@@ -411,11 +413,6 @@ h6 {
   opacity: 0;
   margin-top: 0;
   margin-bottom: 0;
-}
-
-.header-nav-icon-btn {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
 }
 
 /* ========================================================================
