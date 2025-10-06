@@ -4,10 +4,17 @@
         "vlucas/phpdotenv": "^5.6",
         "symfony/polyfill-ctype": "^1.28",
         "symfony/polyfill-mbstring": "^1.28",
-        "symfony/polyfill-php80": "^1.28"
+        "symfony/polyfill-php80": "^1.28",
+        "erusev/parsedown": "^1.7"
     },
     "config": {},
+    "require-dev": {
+        "phpunit/phpunit": "^10.5",
+        "phpstan/phpstan": "^1.10"
+    },
     "scripts": {
-        "lint": "find . -type f -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n1 -P4 php -l"
+        "lint": "find . -type f -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n1 -P4 php -l",
+        "test": "vendor/bin/phpunit --colors=never",
+        "stan": "vendor/bin/phpstan analyse -l 0 -c phpstan.neon includes"
     }
 }
