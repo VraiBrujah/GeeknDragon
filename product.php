@@ -108,7 +108,7 @@ $summaryEn = $summaryRawEn !== '' ? $toPlainText($summaryRawEn) : $toPlainText($
 $summary = $lang === 'en' ? $summaryEn : $summaryFr;
 
 $title  = $productName . ' | Geek & Dragon';
-$metaDescription = $productDesc;
+$metaDescription = $summary; // Utiliser le résumé plutôt que la description complète
 $metaUrl = $canonicalProductUrl;
 $from = preg_replace('/[^a-z0-9_-]/i', '', $_GET['from'] ?? 'pieces');
 
@@ -224,10 +224,40 @@ if (!empty($multipliers)) {
 $defaultLanguage = $languages[0] ?? '';
 $multiplierOptions = array_map(static fn ($value) => (string) $value, $multipliers);
 
+// Construction Schema.org Product
+$productSchema = [
+    '@context' => 'https://schema.org',
+    '@type' => 'Product',
+    'name' => $productName,
+    'description' => $summary,
+    'image' => !empty($images) ? gd_build_absolute_url(ltrim($images[0], '/')) : gd_build_absolute_url('/media/ui/placeholders/placeholder-product.svg'),
+    'sku' => $id,
+    'url' => $canonicalProductUrl,
+    'offers' => [
+        '@type' => 'Offer',
+        'price' => number_format((float)($product['price'] ?? 0), 2, '.', ''),
+        'priceCurrency' => 'CAD',
+        'availability' => inStock($id) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+        'url' => $canonicalProductUrl,
+        'seller' => [
+            '@type' => 'Organization',
+            'name' => 'Geek & Dragon',
+            'url' => gd_build_absolute_url('/')
+        ]
+    ],
+    'brand' => [
+        '@type' => 'Brand',
+        'name' => 'Geek & Dragon'
+    ]
+];
+
 $extraHead = <<<HTML
 <style>
   /* évite @apply en inline : on garde les classes utilitaires dans le HTML */
 </style>
+<script type="application/ld+json">
+HTML . json_encode($productSchema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . <<<HTML
+</script>
 HTML;
 ?>
 <!DOCTYPE html>

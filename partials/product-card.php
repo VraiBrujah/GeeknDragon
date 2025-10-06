@@ -149,8 +149,10 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
          alt="<?= htmlspecialchars($alt) ?>"
          data-alt-fr="<?= htmlspecialchars($alt) ?>"
          data-alt-en="<?= htmlspecialchars($alt) ?>"
-         class="rounded mb-4 w-full max-h-48 object-contain" 
+         class="rounded mb-4 w-full max-h-48 object-contain"
          loading="lazy"
+         decoding="async"
+         fetchpriority="low"
          onerror="this.src='/media/ui/placeholders/placeholder-product.svg'; this.onerror=null;">
   </a>
 
@@ -321,7 +323,9 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
                 <img src="/media/branding/icons/ajout.webp"
                      alt="<?= __('product.add', 'Ajouter au panier') ?>"
                      class="btn-cart-icon-img"
-                     loading="lazy">
+                     loading="lazy"
+                     decoding="async"
+                     fetchpriority="low">
           </button>
         </div>
 

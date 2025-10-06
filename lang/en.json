@@ -1,19 +1,19 @@
 {
     "meta": {
         "home": {
-            "title": "Geek & Dragon | Immersive game aids",
-            "desc": "Cards, coins and sheets to enrich your D&D sessions."
+            "title": "D&D Metal Coins & Immersive Accessories Quebec | Geek & Dragon",
+            "desc": "Transform your D&D treasures into tactile experiences with our engraved metal coins, illustrated equipment cards, and sturdy character sheets. Crafted in Quebec, fast delivery."
         },
         "gameHelp": {
             "description": "Complete guide for your D&D Geek & Dragon accessories: character triptychs, equipment cards, physical currency and converter. Everything to enrich your role-playing sessions."
         },
         "shop": {
-            "title": "Shop | Geek & Dragon",
-            "desc": "Buy our immersive cards and accessories for D&D."
+            "title": "Shop - D&D Coins, Cards & Triptychs | Geek & Dragon",
+            "desc": "Browse our complete collection: engraved metal coins (copper, silver, gold, platinum), illustrated equipment cards, and sturdy character triptychs. Fast shipping from Quebec."
         },
         "contact": {
-            "title": "Quote request | Geek & Dragon",
-            "desc": "Quote request and information for your immersive projects."
+            "title": "Contact - Questions & Custom Projects | Geek & Dragon",
+            "desc": "Need help or a custom project? Contact our Quebec team for personalized D&D accessories: engraved coins, triptych cards. Fast response guaranteed."
         },
         "thankyou": {
             "title": "Thank you!!! | Geek & Dragon",
@@ -85,20 +85,71 @@
         }
     },
     "hero": {
-        "title": "Immersion at the heart of the game",
-        "subtitle1": "Cards, coins and sheets ready to play for your D&D sessions",
-        "subtitle2": "Designed in Quebec",
-        "visitShop": "Visit the shop"
+        "title": "Your D&D treasures deserve to exist",
+        "subtitle1": "Engraved coins, illustrated cards, sturdy sheets. Touch your adventure.",
+        "subtitle2": "Crafted in Quebec • 10+ years lifespan • Fast delivery",
+        "discoverCreations": "Discover our creations",
+        "shopNow": "See the full collection"
+    },
+    "btnOverlay": {
+        "discover": {
+            "desktop": "Discover",
+            "mobile": "See"
+        },
+        "collection": {
+            "desktop": "Full collection",
+            "mobile": "See all"
+        },
+        "shop": {
+            "desktop": "The Shop",
+            "mobile": "Shop"
+        },
+        "gameHelp": {
+            "desktop": "Grimoire",
+            "mobile": "Grimoire"
+        },
+        "contact": {
+            "desktop": "Message",
+            "mobile": "Contact"
+        },
+        "news": {
+            "desktop": "Chronicles",
+            "mobile": "News"
+        }
     },
     "home": {
+        "featured": {
+            "title": "Start with the essentials",
+            "subtitle": "Our most popular products to transform your first session",
+            "seeAll": "See the full collection"
+        },
+        "why": {
+            "title": "Why physical in 2025?",
+            "subtitle": "Because the best memories don't fade with the next patch",
+            "benefit1": {
+                "title": "Tactile memories",
+                "desc": "Touching your treasures creates emotions that numbers on a sheet can never offer"
+            },
+            "benefit2": {
+                "title": "Legendary durability",
+                "desc": "10+ years of guaranteed adventures. No updates, no subscription, just solid quality"
+            },
+            "benefit3": {
+                "title": "Quebec craftsmanship",
+                "desc": "Designed and crafted in Quebec. Every purchase supports local creation"
+            }
+        }
+    },
+    "reassurance": {
+        "local": "Crafted in Quebec"
     },
     "footer": {
         "made": "Designed in Quebec."
     },
     "contact": {
-        "title": "Quote request",
-        "subtitle": "To receive a personalized offer, fill out this magic form.",
-        "requestQuote": "Request a quote",
+        "title": "Contact Us",
+        "subtitle": "Got a question? Need something custom? Talk directly to our craftspeople.",
+        "requestQuote": "Contact us",
         "form": {
             "name": "Full name",
             "email": "Email address",
@@ -136,7 +187,7 @@
             "subtitle": "Unfortunately, this artifact is no longer available at the moment"
         },
         "insufficientStock": "Insufficient stock",
-        "securePayment": "Secure payment via Snipcart",
+        "securePayment": "Transaction protected by the Merchant's Guild",
         "realTimeStock": "Stock updated in real time"
     },
     "shop": {
@@ -157,7 +208,7 @@
         "intro": {
             "title": "Handcrafted treasures",
             "description": "Collectible items and handcrafted game aids, made in Quebec.",
-            "payment": "Secure payment via Snipcart",
+            "payment": "Transaction protected by the Merchant's Guild",
             "stock": "Stock updated in real time."
         },
         "pieces": {
@@ -287,7 +338,7 @@
     },
     "news": {
         "flim2025": {
-            "heading": "News – FLIM 2025",
+            "heading": "News & Testimonials",
             "title": "Heroes level 20, an overly tenacious raccoon, and... our coins",
             "summary": "Our first demonstration of coins at FLIM 2025 took the form of a legendary one-shot hosted by Es-tu Game?.",
             "read": "Read the article",

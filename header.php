@@ -73,7 +73,7 @@ $headerNavLinks = [
   ],
   '/boutique.php#bundle-deluxe' => [
     'slug' => 'bundle',
-    'label' => 'Coffre du Dragon',
+    'label' => 'Coffre',
     'i18n' => 'shop.hero.quickLinks.bundle',
     'image' => '/media/ui/button/dragon.webp',
     'class' => 'header-nav-icon',

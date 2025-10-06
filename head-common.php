@@ -24,10 +24,14 @@ $debugMode = ($_ENV['DEBUG_MODE'] ?? 'false') === 'true';
 
 ?>
 <head>
-  <!-- Performance hints: preconnect to critical third-parties -->
+  <!-- Performance hints: DNS prefetch et preconnect optimisés -->
+  <link rel="dns-prefetch" href="https://cdn.snipcart.com">
+  <link rel="dns-prefetch" href="https://js.stripe.com">
   <link rel="preconnect" href="https://cdn.snipcart.com" crossorigin>
   <link rel="preconnect" href="https://js.stripe.com" crossorigin>
+  <?php if ($gaMeasurementId): ?>
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <?php endif; ?>
   <link rel="preconnect" href="https://cdn.consentmanager.net" crossorigin>
   <link rel="preconnect" href="https://c.delivery.consentmanager.net" crossorigin>
   <script>
@@ -70,8 +74,11 @@ $debugMode = ($_ENV['DEBUG_MODE'] ?? 'false') === 'true';
   <meta name="twitter:image" content="<?= htmlspecialchars($ogImage ?? '/media/branding/logos/logo.webp') ?>" />
   <link rel="canonical" href="<?= htmlspecialchars($metaUrl) ?>">
 
+  <!-- Preload CSS critique -->
+  <link rel="preload" href="/css/vendor.bundle.min.css?v=<?= filemtime(__DIR__.'/css/vendor.bundle.min.css') ?>" as="style">
   <link rel="stylesheet" href="/css/vendor.bundle.min.css?v=<?= filemtime(__DIR__.'/css/vendor.bundle.min.css') ?>" />
-  <!-- Polices auto-hébergées (à compléter si migration complète) -->
+
+  <!-- Polices auto-hébergées avec preload critique -->
   <?php if (file_exists(__DIR__.'/css/fonts-selfhosted.css')): ?>
     <link rel="stylesheet" href="/css/fonts-selfhosted.css?v=<?= filemtime(__DIR__.'/css/fonts-selfhosted.css') ?>">
     <?php if (file_exists(__DIR__.'/media/fonts/OpenSans-400.woff2')): ?>
@@ -116,7 +123,28 @@ $debugMode = ($_ENV['DEBUG_MODE'] ?? 'false') === 'true';
   <link rel="stylesheet" href="/css/snipcart.css?v=<?= filemtime(__DIR__.'/css/snipcart.css') ?>">
   <link rel="stylesheet" href="/css/snipcart-custom.css?v=<?= filemtime(__DIR__.'/css/snipcart-custom.css') ?>">
 
-  <!-- Monitoring supprimé - Performance réglée -->
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "Geek & Dragon",
+    "description": "Accessoires immersifs pour jeux de rôle - Pièces métalliques, cartes d'équipement et fiches de personnage pour D&D",
+    "url": "<?= htmlspecialchars($metaUrl ?? 'https://geekndragon.com') ?>",
+    "logo": "https://geekndragon.com/media/branding/logos/logo.webp",
+    "image": "<?= htmlspecialchars($ogImage ?? 'https://geekndragon.com/media/branding/logos/logo.webp') ?>",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "CA",
+      "addressRegion": "QC"
+    },
+    "sameAs": [
+      "https://facebook.com/geekndragon",
+      "https://instagram.com/geekndragon"
+    ]
+  }
+  </script>
 
   <?php if (!empty($extraHead)) echo $extraHead; ?>
 </head>

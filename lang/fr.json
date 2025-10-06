@@ -1,19 +1,19 @@
 {
     "meta": {
         "home": {
-            "title": "Geek & Dragon | Aides de jeu immersives",
-            "desc": "Cartes, pièces et fiches pour enrichir vos parties de D&D."
+            "title": "Pièces D&D Métalliques & Accessoires Immersifs Québec | Geek & Dragon",
+            "desc": "Transformez vos trésors D&D en expérience tactile avec nos pièces métalliques gravées, cartes d'équipement illustrées et fiches de personnage robustes. Conçu au Québec, livraison rapide."
         },
         "gameHelp": {
             "description": "Guide complet pour vos accessoires D&D Geek & Dragon : triptyques de personnage, cartes d'équipement, monnaie physique et convertisseur. Tout pour enrichir vos parties de jeu de rôle."
         },
         "shop": {
-            "title": "Boutique | Geek & Dragon",
-            "desc": "Achetez nos cartes et accessoires immersifs pour D&D."
+            "title": "Boutique - Pièces D&D, Cartes & Triptyques | Geek & Dragon",
+            "desc": "Découvrez notre collection complète : pièces métalliques gravées (cuivre, argent, or, platine), cartes d'équipement illustrées et triptyques de personnage robustes. Livraison rapide depuis le Québec."
         },
         "contact": {
-            "title": "Demande de devis | Geek & Dragon",
-            "desc": "Demande de devis et informations pour vos projets immersifs."
+            "title": "Contact - Questions & Projets Personnalisés | Geek & Dragon",
+            "desc": "Besoin d'aide ou d'un projet sur mesure ? Contactez notre équipe québécoise pour des accessoires D&D personnalisés : pièces gravées, cartes triptyques. Réponse rapide garantie."
         },
         "thankyou": {
             "title": "Merci !!! | Geek & Dragon",
@@ -85,20 +85,71 @@
         }
     },
     "hero": {
-        "title": "L'immersion au cœur du jeu",
-        "subtitle1": "Cartes, pièces et fiches prêtes à jouer pour vos parties D&D",
-        "subtitle2": "Conçues au Québec",
-        "visitShop": "Visiter la boutique"
+        "title": "Vos trésors D&D méritent d'exister",
+        "subtitle1": "Pièces gravées, cartes illustrées, fiches robustes. Touchez votre aventure.",
+        "subtitle2": "Fabriqué au Québec • Utilisable 10+ ans • Livraison rapide",
+        "discoverCreations": "Découvrir nos créations",
+        "shopNow": "Voir toute la collection"
+    },
+    "btnOverlay": {
+        "discover": {
+            "desktop": "Découvrir",
+            "mobile": "Voir"
+        },
+        "collection": {
+            "desktop": "Toute la collection",
+            "mobile": "Tout voir"
+        },
+        "shop": {
+            "desktop": "L'Échoppe",
+            "mobile": "Échoppe"
+        },
+        "gameHelp": {
+            "desktop": "Grimoire",
+            "mobile": "Grimoire"
+        },
+        "contact": {
+            "desktop": "Message",
+            "mobile": "Contact"
+        },
+        "news": {
+            "desktop": "Chroniques",
+            "mobile": "Actus"
+        }
     },
     "home": {
+        "featured": {
+            "title": "Commencez par l'essentiel",
+            "subtitle": "Nos produits les plus populaires pour transformer votre première session",
+            "seeAll": "Voir toute la collection"
+        },
+        "why": {
+            "title": "Pourquoi du physique en 2025 ?",
+            "subtitle": "Parce que les meilleurs souvenirs ne s'effacent pas au prochain patch",
+            "benefit1": {
+                "title": "Souvenirs tactiles",
+                "desc": "Toucher vos trésors crée des émotions que les chiffres sur fiche ne peuvent jamais offrir"
+            },
+            "benefit2": {
+                "title": "Durabilité légendaire",
+                "desc": "10+ ans d'aventures garanties. Pas de mise à jour, pas d'abonnement, juste du solide"
+            },
+            "benefit3": {
+                "title": "Artisanat québécois",
+                "desc": "Conçu et fabriqué au Québec. Chaque achat soutient la création locale"
+            }
+        }
+    },
+    "reassurance": {
+        "local": "Fabriqué au Québec"
     },
     "footer": {
         "made": "Conçu au Québec."
     },
     "contact": {
-        "title": "Demande de devis",
-        "subtitle": "Pour recevoir une offre personnalisée, remplis ce formulaire magique.",
-        "requestQuote": "Demander un devis",
+        "title": "Contacte-nous",
+        "subtitle": "Une question ? Un projet sur mesure ? Parle directement à nos artisans.",
+        "requestQuote": "Nous contacter",
         "form": {
             "name": "Nom complet",
             "email": "Adresse e-mail",
@@ -136,7 +187,7 @@
             "subtitle": "Malheureusement, cet artefact n'est plus disponible pour le moment"
         },
         "insufficientStock": "Stock insuffisant",
-        "securePayment": "Paiement sécurisé via Snipcart",
+        "securePayment": "Transaction protégée par la Guilde des Marchands",
         "realTimeStock": "Stocks mis à jour en temps réel."
     },
     "shop": {
@@ -151,13 +202,13 @@
                 "pieces": "Monnaie",
                 "cards": "Cartes",
                 "triptychs": "Triptyques",
-                "bundle": "Coffre du Dragon"
+                "bundle": "Coffre"
             }
         },
         "intro": {
             "title": "Trésors artisanaux",
             "description": "Objets de collection et aides de jeu artisanaux, fabriqués au&nbsp;Québec.",
-            "payment": "Paiement sécurisé via Snipcart",
+            "payment": "Transaction protégée par la Guilde des Marchands",
             "stock": "Stocks mis à jour en temps réel."
         },
         "pieces": {
@@ -287,7 +338,7 @@
     },
     "news": {
         "flim2025": {
-            "heading": "Actualité – FLIM 2025",
+            "heading": "Actualités & Témoignages",
             "title": "Des héros niveau 20, un raton trop tenace, et… nos pièces",
             "summary": "Notre première démonstration de pièces au FLIM 2025 a pris la forme d’un one-shot légendaire animé par Es‑tu Game ?",
             "read": "Lire l’article",
