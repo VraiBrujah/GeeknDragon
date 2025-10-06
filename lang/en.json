@@ -146,7 +146,8 @@
         },
         "info": {
             "role": "Product manager",
-            "roleCommunity": "Product manager & community"
+            "roleCommunity": "Product manager & community",
+            "photoAlt": "Photo of Brujah"
         }
     },
     "thankyou": {
@@ -383,6 +384,16 @@
             "playPause": "Play / Pause",
             "next": "Next",
             "volume": "Volume"
+        },
+        "icons": {
+            "rotation": "Rotation icon",
+            "minus": "Minus",
+            "plus": "Plus"
+        },
+        "payment": {
+            "visa": "Visa logo",
+            "mastercard": "Mastercard logo",
+            "amex": "American Express logo"
         }
     },
     "testimonials": {

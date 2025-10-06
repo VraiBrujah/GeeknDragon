@@ -2116,7 +2116,7 @@ echo $snipcartInit;
           <div class="grid md:grid-cols-3 gap-4">
             <div class="text-center">
               <div class="flex justify-center mb-2">
-                <img src="/media/branding/icons/roue.webp" alt="Rotation" class="loading-gear loading-gear-sm" style="animation: none;">
+                <img src="/media/branding/icons/roue.webp" alt="<?= __('ui.icons.rotation', 'Icône rotation') ?>" class="loading-gear loading-gear-sm" style="animation: none;">
               </div>
               <p class="text-gray-300 text-sm">
                 <?= __('gameHelp.cards.usage.proTips.rotation', '<strong>Rotation :</strong> Changez vos cartes selon vos aventures') ?>

@@ -146,7 +146,8 @@
         },
         "info": {
             "role": "Responsable produit",
-            "roleCommunity": "Responsable produit & communauté"
+            "roleCommunity": "Responsable produit & communauté",
+            "photoAlt": "Photo de Brujah"
         }
     },
     "thankyou": {
@@ -383,6 +384,16 @@
             "playPause": "Lecture / Pause",
             "next": "Suivant",
             "volume": "Volume"
+        },
+        "icons": {
+            "rotation": "Icône rotation",
+            "minus": "Moins",
+            "plus": "Plus"
+        },
+        "payment": {
+            "visa": "Logo Visa",
+            "mastercard": "Logo Mastercard",
+            "amex": "Logo American Express"
         }
     },
     "testimonials": {

@@ -347,11 +347,11 @@ echo $snipcartInit;
               <label class="block mb-3 text-lg font-medium text-white" data-i18n="product.quantity">Quantité</label>
               <div class="quantity-selector" data-id="<?= htmlspecialchars($id) ?>">
                 <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>" aria-label="<?= __('product.decreaseQuantity', 'Diminuer la quantité') ?>">
-                  <img src="/media/branding/icons/-.webp" alt="-" class="quantity-btn-icon" loading="lazy">
+                  <img src="/media/branding/icons/-.webp" alt="<?= __('ui.icons.minus', 'Moins') ?>" class="quantity-btn-icon" loading="lazy">
                 </button>
                 <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
                 <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>" aria-label="<?= __('product.increaseQuantity', 'Augmenter la quantité') ?>">
-                  <img src="/media/branding/icons/+.webp" alt="+" class="quantity-btn-icon" loading="lazy">
+                  <img src="/media/branding/icons/+.webp" alt="<?= __('ui.icons.plus', 'Plus') ?>" class="quantity-btn-icon" loading="lazy">
                 </button>
               </div>
             </div>
@@ -484,9 +484,9 @@ echo $snipcartInit;
             <p class="mt-4 text-center text-sm text-gray-400">
               <span data-i18n="product.securePayment">Paiement sécurisé via Snipcart</span>
               <span class="payment-icons inline-flex gap-1 align-middle ml-2">
-                <img src="/media/ui/payments/visa.svg" alt="Logo Visa" loading="lazy" class="h-4">
-                <img src="/media/ui/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy" class="h-4">
-                <img src="/media/ui/payments/american-express.svg" alt="Logo American Express" loading="lazy" class="h-4">
+                <img src="/media/ui/payments/visa.svg" alt="<?= __('ui.payment.visa', 'Logo Visa') ?>" loading="lazy" class="h-4">
+                <img src="/media/ui/payments/mastercard.svg" alt="<?= __('ui.payment.mastercard', 'Logo Mastercard') ?>" loading="lazy" class="h-4">
+                <img src="/media/ui/payments/american-express.svg" alt="<?= __('ui.payment.amex', 'Logo American Express') ?>" loading="lazy" class="h-4">
               </span>
             </p>
           </div>

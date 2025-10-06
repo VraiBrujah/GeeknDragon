@@ -191,7 +191,7 @@ include 'head-common.php';
     <section id="contact" class="py-16 bg-gray-900/80 scroll-mt-32">
       <div class="max-w-xl mx-auto text-center">
         <h3 class="text-4xl font-bold mb-6" data-i18n="nav.contact">Contact</h3>
-        <img src="/media/content/team_brujah.webp" alt="Brujah" class="mx-auto h-32 w-32 rounded-full mb-4" loading="lazy" decoding="async">
+        <img src="/media/content/team_brujah.webp" alt="<?= __('contact.info.photoAlt', 'Photo de Brujah') ?>" class="mx-auto h-32 w-32 rounded-full mb-4" loading="lazy" decoding="async">
           <p class="mb-2 txt-court"><strong>Brujah</strong> — <span data-i18n="contact.info.roleCommunity">Responsable produit & communauté</span></p>
           <p class="mb-2 txt-court"><a href="mailto:contact@geekndragon.com" class="text-indigo-400 hover:underline">contact@geekndragon.com</a></p>
           <p class="mb-4 txt-court"><a href="mailto:commande@geekndragon.com" class="text-indigo-400 hover:underline">commande@geekndragon.com</a></p>
