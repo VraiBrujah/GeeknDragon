@@ -139,7 +139,7 @@ $debugMode = ($_ENV['DEBUG_MODE'] ?? 'false') === 'true';
       defaultLang: phpLang, // Utiliser la langue PHP pour synchronisation
       availableLangs: ['fr', 'en', 'es', 'de'],
       translationsPath: '/lang/',
-      debug: <?php echo $debugMode ? 'true' : 'false'; ?>,
+      debug: true, // Force debug temporaire pour diagnostic
       cacheExpiry: 24 * 60 * 60 * 1000 // 24 heures
     });
 

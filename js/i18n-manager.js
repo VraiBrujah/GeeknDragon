@@ -337,11 +337,23 @@ class I18nManager {
 
     // 1. Traduire textContent avec data-i18n
     const elements = root.querySelectorAll('[data-i18n]');
+
+    if (this.debug) {
+      console.log(`[I18n] updateDOM() trouvé ${elements.length} éléments avec data-i18n`);
+      console.log(`[I18n] Langue courante: ${this.currentLang}`);
+      console.log('[I18n] Traductions chargées:', Object.keys(this.translations));
+    }
+
     elements.forEach(element => {
       const key = element.getAttribute('data-i18n');
       const fallback = element.textContent || '';
 
       const translated = this.t(key, fallback);
+
+      if (this.debug && key.startsWith('btnOverlay')) {
+        console.log(`[I18n] Clé: ${key}, Fallback: "${fallback}", Traduit: "${translated}"`);
+      }
+
       if (translated && translated !== fallback) {
         element.textContent = translated;
         count++;
