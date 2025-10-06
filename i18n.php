@@ -36,8 +36,9 @@ function getBrowserLanguage(array $availableLangs): string {
     return 'fr'; // Défaut français si aucune langue supportée
 }
 
-// Résolution langue : URL > Cookie > Navigateur > Défaut
-$lang = $_GET['lang'] ?? ($_COOKIE['lang'] ?? getBrowserLanguage($availableLangs));
+// Résolution langue : URL > Cookie > Défaut FR (pas de détection navigateur automatique)
+// La détection navigateur causait des incohérences FR/EN - on force FR par défaut
+$lang = $_GET['lang'] ?? ($_COOKIE['lang'] ?? 'fr');
 if (!in_array($lang, $availableLangs, true)) {
     $lang = 'fr';
 }

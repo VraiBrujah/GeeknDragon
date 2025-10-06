@@ -127,19 +127,22 @@ $debugMode = ($_ENV['DEBUG_MODE'] ?? 'false') === 'true';
   <script type="module">
     import I18nManager from '/js/i18n-manager.js?v=<?= filemtime(__DIR__.'/js/i18n-manager.js') ?>';
 
+    // Langue définie par PHP (synchronisation PHP ↔ JS)
+    const phpLang = '<?= $lang ?? 'fr' ?>';
+
     // Initialisation globale du gestionnaire I18N
     window.i18nManager = new I18nManager({
-      defaultLang: 'fr',
+      defaultLang: phpLang, // Utiliser la langue PHP pour synchronisation
       availableLangs: ['fr', 'en', 'es', 'de'],
       translationsPath: '/lang/',
       debug: <?php echo $debugMode ? 'true' : 'false'; ?>,
       cacheExpiry: 24 * 60 * 60 * 1000 // 24 heures
     });
 
-    // Charger les traductions de la langue courante immédiatement
+    // Charger les traductions de la langue courante immédiatement (synchronisée avec PHP)
     (async () => {
       try {
-        await window.i18nManager.loadTranslations(window.i18nManager.currentLang);
+        await window.i18nManager.loadTranslations(phpLang);
 
         // Mettre à jour le DOM avec les traductions
         window.i18nManager.updateDOM();
