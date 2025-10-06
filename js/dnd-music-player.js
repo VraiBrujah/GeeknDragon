@@ -8,6 +8,7 @@ class DnDMusicPlayer {
     constructor() {
         this.audio = new Audio();
         this.playlist = [];
+        this.weightedPlaylist = [];
         this.currentIndex = 0;
         this.isPlaying = false;
         this.volume = 0.15; // 15% par défaut
@@ -16,6 +17,11 @@ class DnDMusicPlayer {
         this.firstInteraction = true;
         this.heroIntroPath = null;
         this.heroIntroWeight = 2.5; // Pondération pour hero-intro.mp3
+        this.heroIntroPlayed = false; // Track si hero-intro a déjà été joué
+        
+        // Cache pour éviter les recharges inutiles
+        this.lastPlaylistUpdate = 0;
+        this.playlistCacheTimeout = 30000; // 30 secondes
 
         // Stocker la référence du listener pour pouvoir le retirer
         this.startMusicHandler = () => this.markUserInteraction();
@@ -49,29 +55,80 @@ class DnDMusicPlayer {
         }
     }
 
-    async loadPlaylist() {
+    async loadPlaylist(forceRefresh = false) {
+        // Éviter les recharges trop fréquentes (cache 30s)
+        const now = Date.now();
+        if (!forceRefresh && (now - this.lastPlaylistUpdate) < this.playlistCacheTimeout) {
+            return;
+        }
+
         try {
-            const response = await fetch('/api/music-scanner.php');
+            const response = await fetch('/api/music-scanner.php?t=' + now);
             if (!response.ok) throw new Error('Erreur chargement playlist');
 
             const data = await response.json();
-            this.playlist = data.files || [];
+            const newPlaylist = data.files || [];
+            
+            // Vérifier si la playlist a changé
+            const playlistChanged = JSON.stringify(this.playlist) !== JSON.stringify(newPlaylist);
+            
+            this.playlist = newPlaylist;
             this.heroIntroPath = data.heroIntro;
+            this.lastPlaylistUpdate = now;
 
-            // Créer playlist pondérée avec hero-intro favorisé
-            this.createWeightedPlaylist();
+            // Recréer la playlist pondérée seulement si nécessaire
+            if (playlistChanged || !this.weightedPlaylist.length) {
+                this.createWeightedPlaylist();
+            }
+
+            // Log pour debug
+            if (playlistChanged) {
+                console.log(`Playlist mise à jour: ${this.playlist.length} pistes trouvées`);
+            }
+
         } catch (error) {
-            // Erreur chargement playlist silencieuse en production
-            // Playlist vide - les fichiers de musique ont été supprimés pour optimisation
-            this.playlist = [];
+            // Erreur chargement playlist - utilisation fallback intelligent
+            console.warn('Échec chargement playlist API, utilisation fallback');
+            
+            // Fallback dynamique : scanner les fichiers connus + découverte
+            this.playlist = await this.createFallbackPlaylist();
+            this.heroIntroPath = 'media/musique/hero-intro.mp3';
+            this.createWeightedPlaylist();
         }
+    }
+
+    async createFallbackPlaylist() {
+        // Liste des fichiers audio connus
+        const knownFiles = [
+            'media/musique/hero-intro.mp3',
+            'media/musique/Adgon.mp3', 
+            'media/musique/La saga de Diancastraa.mp3'
+        ];
+
+        const playlist = [];
+        
+        // Vérifier quels fichiers existent réellement
+        for (const path of knownFiles) {
+            try {
+                const response = await fetch(`/${path}`, { method: 'HEAD' });
+                if (response.ok) {
+                    const name = path.split('/').pop().replace('.mp3', '');
+                    playlist.push({ path, name });
+                }
+            } catch (e) {
+                // Fichier non accessible, ignorer silencieusement
+            }
+        }
+
+        return playlist;
     }
 
     createWeightedPlaylist() {
         this.weightedPlaylist = [];
 
         this.playlist.forEach((track) => {
-            const weight = (track.path === this.heroIntroPath) ? this.heroIntroWeight : 1;
+            // hero-intro.mp3 a une pondération plus élevée seulement s'il n'a pas encore été joué
+            const weight = (track.path === this.heroIntroPath && !this.heroIntroPlayed) ? this.heroIntroWeight : 1;
             const weightedCount = Math.ceil(weight);
 
             for (let i = 0; i < weightedCount; i++) {
@@ -88,6 +145,12 @@ class DnDMusicPlayer {
         this.audio.preload = 'none';
 
         this.audio.addEventListener('ended', () => {
+            // Si c'était hero-intro.mp3, marquer comme joué et recréer la playlist pondérée
+            if (this.playlist[this.currentIndex] && 
+                this.playlist[this.currentIndex].path === this.heroIntroPath) {
+                this.heroIntroPlayed = true;
+                this.createWeightedPlaylist();
+            }
             this.playNext();
         });
 
@@ -232,12 +295,17 @@ class DnDMusicPlayer {
     async startPlayback() {
         if (!this.playlist.length) return;
 
-        // Commencer par hero-intro.mp3 si disponible
-        if (this.heroIntroPath) {
+        // Commencer par hero-intro.mp3 si disponible et pas encore joué
+        if (this.heroIntroPath && !this.heroIntroPlayed) {
             const heroTrack = this.playlist.find((track) => track.path === this.heroIntroPath);
             if (heroTrack) {
                 this.currentIndex = this.playlist.indexOf(heroTrack);
+                this.heroIntroPlayed = true;
             }
+        } else {
+            // Si hero-intro déjà joué ou non disponible, commencer avec lecture aléatoire
+            await this.playNext();
+            return;
         }
 
         await this.loadCurrentTrack();
@@ -296,10 +364,21 @@ class DnDMusicPlayer {
 
     async playNext() {
         if (this.shuffle) {
-            // Mode aléatoire pondéré
-            this.currentIndex = Math.floor(Math.random() * this.weightedPlaylist.length);
-            const selectedTrack = this.weightedPlaylist[this.currentIndex];
-            this.currentIndex = this.playlist.findIndex((track) => track.path === selectedTrack.path);
+            // Mode aléatoire pondéré - exclure hero-intro si déjà joué
+            let attempts = 0;
+            do {
+                this.currentIndex = Math.floor(Math.random() * this.weightedPlaylist.length);
+                const selectedTrack = this.weightedPlaylist[this.currentIndex];
+                this.currentIndex = this.playlist.findIndex((track) => track.path === selectedTrack.path);
+                attempts++;
+                
+                // Si hero-intro pas encore joué ou on a épuisé les tentatives, accepter la sélection
+                if (!this.heroIntroPlayed || 
+                    this.playlist[this.currentIndex].path !== this.heroIntroPath ||
+                    attempts > 10) {
+                    break;
+                }
+            } while (this.heroIntroPlayed && this.playlist[this.currentIndex].path === this.heroIntroPath);
         } else {
             this.currentIndex = (this.currentIndex + 1) % this.playlist.length;
         }

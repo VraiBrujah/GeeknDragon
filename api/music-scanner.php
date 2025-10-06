@@ -35,8 +35,8 @@ function scanMusicDirectory($baseDir) {
                     
                     $relativePath = str_replace($projectRoot . '/', '', $fullPath);
                     
-                    // Identifier le fichier hero-intro.mp3 principal
-                    if ($file->getBasename() === 'hero-intro.mp3' && strpos($relativePath, 'media/musique/hero-intro.mp3') !== false) {
+                    // Identifier le fichier hero-intro.mp3 (priorité absolue)
+                    if (strtolower($file->getBasename()) === 'hero-intro.mp3') {
                         $heroPath = $relativePath;
                     }
                     
