@@ -33,7 +33,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/vendor/autoload.php';
 
 // Chargement sécurisé des variables d'environnement
-Dotenv\Dotenv::createUnsafeImmutable(__DIR__)->safeLoad();
+Dotenv\Dotenv::createImmutable(__DIR__)->safeLoad();
 
 /**
  * Configuration des métriques de performance pour monitoring
@@ -164,7 +164,7 @@ if (!function_exists('gd_build_absolute_url')) {
         }
         
         // Validation de l'hôte avec fallback sécurisé
-        $host = $_SERVER['HTTP_HOST'] ?? 'geekndragon.com';
+        $host = $_ENV['APP_HOST'] ?? $_SERVER['HTTP_HOST'] ?? 'geekndragon.com';
         $host = filter_var($host, FILTER_SANITIZE_URL);
         
         if (!$host || !filter_var("http://{$host}", FILTER_VALIDATE_URL)) {

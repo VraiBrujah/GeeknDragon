@@ -6,6 +6,10 @@
 
 header('Content-Type: application/json');
 header('Cache-Control: no-cache, must-revalidate');
+require_once __DIR__ . '/../includes/cors-helpers.php';
+if (function_exists('gd_send_cors_headers')) {
+    gd_send_cors_headers(['GET','OPTIONS'], ['Content-Type','X-Requested-With']);
+}
 
 function scanMusicDirectory($baseDir) {
     $musicFiles = [];
@@ -66,7 +70,10 @@ function scanMusicDirectory($baseDir) {
 }
 
 // Vérifier si c'est une requête AJAX valide
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+} elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
     try {
         $result = scanMusicDirectory(__DIR__);
         echo json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);

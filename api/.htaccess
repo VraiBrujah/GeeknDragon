@@ -9,10 +9,7 @@ Header always set X-Content-Type-Options nosniff
 Header always set X-Frame-Options DENY
 Header always set X-XSS-Protection "1; mode=block"
 
-# CORS pour l'API
-Header always set Access-Control-Allow-Origin "https://geekndragon.com"
-Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
-Header always set Access-Control-Allow-Headers "Content-Type, X-Requested-With"
+# CORS géré applicativement par les endpoints PHP (origines en liste blanche)
 
 # Gestion des requêtes OPTIONS (preflight)
 RewriteCond %{REQUEST_METHOD} OPTIONS
@@ -40,3 +37,11 @@ RewriteCond %{REQUEST_FILENAME} !-d
     SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
     SetEnvIfNoCase Request_URI \.(?:exe|t?gz|zip|bz2|sit|rar)$ no-gzip dont-vary
 </IfModule>
+
+# Hardening complémentaire (Apache 2.4)
+<FilesMatch "\.(env|md|json|txt|log)$">
+    Require all denied
+    <IfModule mod_headers.c>
+        Header always set X-Content-Type-Options nosniff
+    </IfModule>
+</FilesMatch>

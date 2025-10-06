@@ -46,7 +46,13 @@
     "optimize:master": "node scripts/master-optimize.cjs",
     "optimize:complete": "npm run optimize:master",
     "pre-deploy": "node scripts/pre-deploy-check.cjs",
-    "deploy": "npm run pre-deploy && npm run deploy:prep"
+    "deploy": "npm run pre-deploy && npm run deploy:prep",
+    "fonts:fetch": "node scripts/fetch-fonts.cjs"
+  },
+  "fonts": {
+    "sources": [
+      "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Cinzel:wght@400;600;700&display=swap"
+    ]
   },
   "keywords": [],
   "author": "",

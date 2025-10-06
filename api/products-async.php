@@ -21,9 +21,10 @@
  */
 
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
+require_once __DIR__ . '/../includes/cors-helpers.php';
+if (function_exists('gd_send_cors_headers')) {
+    gd_send_cors_headers(['GET','POST','OPTIONS'], ['Content-Type','X-Requested-With']);
+}
 
 // Gestion preflight CORS
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {

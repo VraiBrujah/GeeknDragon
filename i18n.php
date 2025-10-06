@@ -41,7 +41,21 @@ $lang = $_GET['lang'] ?? ($_COOKIE['lang'] ?? getBrowserLanguage($availableLangs
 if (!in_array($lang, $availableLangs, true)) {
     $lang = 'fr';
 }
-setcookie('lang', $lang, time() + 31536000, '/');
+// Cookie sécurisé avec SameSite
+$isHttps = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && strtolower((string) $_SERVER['HTTPS']) !== 'off')
+    || (isset($_SERVER['REQUEST_SCHEME']) && strtolower((string) $_SERVER['REQUEST_SCHEME']) === 'https')
+    || (isset($_SERVER['SERVER_PORT']) && (int)$_SERVER['SERVER_PORT'] === 443);
+if (PHP_VERSION_ID >= 70300) {
+    setcookie('lang', $lang, [
+        'expires' => time() + 31536000,
+        'path' => '/',
+        'secure' => $isHttps,
+        'httponly' => false,
+        'samesite' => 'Lax',
+    ]);
+} else {
+    setcookie('lang', $lang, time() + 31536000, '/; samesite=Lax', '', $isHttps, false);
+}
 
 /**
  * Ajoute la langue courante comme paramètre de requête à une URL

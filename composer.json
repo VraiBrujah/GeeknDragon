@@ -6,5 +6,8 @@
         "symfony/polyfill-mbstring": "^1.28",
         "symfony/polyfill-php80": "^1.28"
     },
-    "config": {}
+    "config": {},
+    "scripts": {
+        "lint": "find . -type f -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n1 -P4 php -l"
+    }
 }

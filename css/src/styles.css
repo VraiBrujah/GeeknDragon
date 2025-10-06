@@ -5,7 +5,7 @@
    ===================================================================== */
 
 /* --- Polices --- */
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Cinzel:wght@400;600;700&display=swap');
+/* Polices auto-hébergées chargées via /css/fonts-selfhosted.css (voir head-common.php) */
 
 /* --- Tailwind (si utilisé en CDN/build) --- */
 @tailwind base;

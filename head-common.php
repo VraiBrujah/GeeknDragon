@@ -34,23 +34,50 @@ $debugMode = ($_ENV['DEBUG_MODE'] ?? 'false') === 'true';
   ?>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="Content-Security-Policy" content="frame-src 'self' https://checkout.stripe.com https://js.stripe.com https://hooks.stripe.com https://m.stripe.com https://api.stripe.com https://checkout.snipcart.com https://app.snipcart.com https://payment.snipcart.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.snipcart.com https://js.stripe.com https://www.googletagmanager.com https://cdn.consentmanager.net https://c.delivery.consentmanager.net; connect-src 'self' https://api.stripe.com https://api.snipcart.com https://app.snipcart.com https://checkout.stripe.com https://cdn.snipcart.com https://payment.snipcart.com https://js.stripe.com https://hooks.stripe.com https://m.stripe.com;"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; 
+    base-uri 'self';
+    frame-ancestors 'self';
+    img-src 'self' data: https:; 
+    style-src 'self' 'unsafe-inline'; 
+    font-src 'self' data:; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.snipcart.com https://js.stripe.com https://www.googletagmanager.com https://cdn.consentmanager.net https://c.delivery.consentmanager.net; 
+    connect-src 'self' https://api.stripe.com https://api.snipcart.com https://app.snipcart.com https://checkout.stripe.com https://cdn.snipcart.com https://payment.snipcart.com https://js.stripe.com https://hooks.stripe.com https://m.stripe.com https://www.google-analytics.com https://www.googletagmanager.com; 
+    frame-src 'self' https://checkout.stripe.com https://js.stripe.com https://hooks.stripe.com https://m.stripe.com https://api.stripe.com https://checkout.snipcart.com https://app.snipcart.com https://payment.snipcart.com; 
+    form-action 'self' https://payment.snipcart.com https://api.stripe.com;"/>
   <meta http-equiv="Permissions-Policy" content="payment=(self), payment-handler=(self)"/>
   <title><?= htmlspecialchars($title ?? 'Geek & Dragon') ?></title>
   <meta name="description" content="<?= htmlspecialchars($metaDescription ?? '') ?>" />
   <meta property="og:title" content="<?= htmlspecialchars($title ?? 'Geek & Dragon') ?>" />
   <meta property="og:description" content="<?= htmlspecialchars($metaDescription ?? '') ?>" />
   <meta property="og:image" content="<?= htmlspecialchars($ogImage ?? '/media/branding/logos/logo.webp') ?>" />
-  <meta property="og:url" content="<?= htmlspecialchars($metaUrl ?? ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? '') . ($_SERVER['REQUEST_URI'] ?? ''))) ?>" />
+  <?php
+    // URL canonique/OG par défaut si non fournie
+    $__currentPath = $_SERVER['REQUEST_URI'] ?? '';
+    if (!isset($metaUrl) || !$metaUrl) {
+        if (function_exists('gd_build_absolute_url')) {
+            $metaUrl = gd_build_absolute_url($__currentPath);
+        } else {
+            $isHttps = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && strtolower((string) $_SERVER['HTTPS']) !== 'off')
+                || (isset($_SERVER['REQUEST_SCHEME']) && strtolower((string) $_SERVER['REQUEST_SCHEME']) === 'https')
+                || (isset($_SERVER['SERVER_PORT']) && (int)$_SERVER['SERVER_PORT'] === 443);
+            $metaUrl = ($isHttps ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? '') . $__currentPath;
+        }
+    }
+  ?>
+  <meta property="og:url" content="<?= htmlspecialchars($metaUrl) ?>" />
   <meta property="og:type" content="website" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="<?= htmlspecialchars($title ?? 'Geek & Dragon') ?>" />
   <meta name="twitter:description" content="<?= htmlspecialchars($metaDescription ?? '') ?>" />
   <meta name="twitter:image" content="<?= htmlspecialchars($ogImage ?? '/media/branding/logos/logo.webp') ?>" />
-  <link rel="canonical" href="<?= htmlspecialchars($metaUrl ?? '') ?>">
+  <link rel="canonical" href="<?= htmlspecialchars($metaUrl) ?>">
 
   <link rel="stylesheet" href="/css/vendor.bundle.min.css?v=<?= filemtime(__DIR__.'/css/vendor.bundle.min.css') ?>" />
+  <!-- Polices auto-hébergées (à compléter si migration complète) -->
+  <?php if (file_exists(__DIR__.'/css/fonts-selfhosted.css')): ?>
+    <link rel="stylesheet" href="/css/fonts-selfhosted.css?v=<?= filemtime(__DIR__.'/css/fonts-selfhosted.css') ?>">
+  <?php endif; ?>
   <link rel="stylesheet" href="/css/styles.css?v=<?= filemtime(__DIR__.'/css/styles.css') ?>">
   <link rel="stylesheet" href="/css/shop-grid.css?v=<?= filemtime(__DIR__.'/css/shop-grid.css') ?>">
   <?php if (!empty($gaMeasurementId)): ?>
@@ -90,4 +117,3 @@ $debugMode = ($_ENV['DEBUG_MODE'] ?? 'false') === 'true';
 
   <?php if (!empty($extraHead)) echo $extraHead; ?>
 </head>
-

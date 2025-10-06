@@ -21,6 +21,21 @@
         \.(?:exe|t?gz|zip|bz2|sit|rar)$ no-gzip dont-vary
 </IfModule>
 
+# Canonicalisation de l'hôte et HTTPS
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Rediriger www -> apex en HTTPS (une seule redirection)
+    RewriteCond %{HTTP_HOST} ^www\.geekndragon\.com$ [NC]
+    RewriteRule ^ https://geekndragon.com%{REQUEST_URI} [L,R=301]
+
+    # Forcer HTTPS sur l'apex si appel en HTTP (sans proxy HTTPS)
+    RewriteCond %{HTTP_HOST} ^geekndragon\.com$ [NC]
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteRule ^ https://geekndragon.com%{REQUEST_URI} [L,R=301]
+</IfModule>
+
 # Mise en cache des assets statiques
 <IfModule mod_expires.c>
     ExpiresActive On
@@ -47,6 +62,9 @@
     ExpiresByType text/html "access plus 1 week"
     ExpiresByType application/json "access plus 1 week"
 </IfModule>
+
+# Désactiver l'exécution PHP dans certains répertoires publics via règles locales
+# (voir .htaccess spécifiques dans /media, /data, /logs, /cache, /scripts)
 
 # Optimisation des en-têtes de cache
 <IfModule mod_headers.c>
@@ -98,6 +116,19 @@
     # Politique de référent restrictive
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
+
+# Strict Transport Security (HTTPS seulement)
+<IfModule mod_headers.c>
+    Header always set Strict-Transport-Security "max-age=31536000"
+</IfModule>
+
+# Protéger fichiers sensibles
+<FilesMatch "^(\.env(\..*)?|composer\.(json|lock)|config\.php|\.cpanel\.yml)$">
+    Require all denied
+    <IfModule mod_headers.c>
+        Header always set X-Content-Type-Options nosniff
+    </IfModule>
+</FilesMatch>
 # Cache Performance Optimisé - Geek & Dragon
 <IfModule mod_expires.c>
     ExpiresActive on

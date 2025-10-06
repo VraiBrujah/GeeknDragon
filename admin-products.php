@@ -6,7 +6,26 @@
  */
 
 require __DIR__ . '/bootstrap.php';
+// Sécuriser les cookies de session (avant session_start)
+$https = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && strtolower((string) $_SERVER['HTTPS']) !== 'off')
+    || (isset($_SERVER['REQUEST_SCHEME']) && strtolower((string) $_SERVER['REQUEST_SCHEME']) === 'https')
+    || (isset($_SERVER['SERVER_PORT']) && (int)$_SERVER['SERVER_PORT'] === 443);
+if (PHP_VERSION_ID >= 70300) {
+    session_set_cookie_params([
+        'secure' => $https,
+        'httponly' => true,
+        'samesite' => 'Lax',
+        'path' => '/',
+    ]);
+} else {
+    ini_set('session.cookie_secure', $https ? '1' : '0');
+    ini_set('session.cookie_httponly', '1');
+    ini_set('session.cookie_samesite', 'Lax');
+}
 session_start();
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 
 // Récupération du mot de passe administrateur haché depuis l'environnement
 $adminPasswordHash = $_ENV['ADMIN_PASSWORD_HASH'] ?? $_SERVER['ADMIN_PASSWORD_HASH'] ?? null;
@@ -21,7 +40,9 @@ if (!is_string($adminPasswordHash) || $adminPasswordHash === '') {
 // Vérification de l'authentification
 if (!isset($_SESSION['admin_authenticated'])) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['password'])) {
-        if (password_verify($_POST['password'], $adminPasswordHash)) {
+        if (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'] ?? '', (string)$_POST['csrf_token'])) {
+            $loginError = 'Requête invalide (CSRF).';
+        } elseif (password_verify($_POST['password'], $adminPasswordHash)) {
             session_regenerate_id(true);
             $_SESSION['admin_authenticated'] = true;
             header('Location: ' . $_SERVER['PHP_SELF']);
@@ -53,6 +74,7 @@ if (!isset($_SESSION['admin_authenticated'])) {
                 <?php endif; ?>
                 
                 <form method="POST" class="space-y-4">
+                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '') ?>">
                     <div>
                         <label for="password" class="block text-sm font-medium mb-2">Mot de passe :</label>
                         <input type="password" id="password" name="password" required
@@ -86,14 +108,32 @@ $messageType = '';
 
 // Traitement des actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
-    if (isset($_POST['action'])) {
+    // Protection CSRF pour toutes les actions
+    if (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'] ?? '', (string)$_POST['csrf_token'])) {
+        $message = 'Requête invalide (CSRF).';
+        $messageType = 'error';
+    } elseif (isset($_POST['action'])) {
         
         switch ($_POST['action']) {
             case 'upload_csv':
                 if (isset($_FILES['csv_file']) && $_FILES['csv_file']['error'] === UPLOAD_ERR_OK) {
                     $uploadPath = __DIR__ . '/data/products_upload.csv';
                     
+                    // Validation taille (<= 5 Mo) et type MIME
+                    if (($_FILES['csv_file']['size'] ?? 0) > 5 * 1024 * 1024) {
+                        $message = 'Fichier trop volumineux (max 5 Mo).';
+                        $messageType = 'error';
+                        break;
+                    }
+                    $finfo = new finfo(FILEINFO_MIME_TYPE);
+                    $mime = $finfo->file($_FILES['csv_file']['tmp_name']);
+                    $allowed = ['text/plain','text/csv','application/vnd.ms-excel','application/csv'];
+                    if (!in_array($mime, $allowed, true)) {
+                        $message = 'Type de fichier invalide (' . htmlspecialchars((string)$mime) . ').';
+                        $messageType = 'error';
+                        break;
+                    }
+
                     if (move_uploaded_file($_FILES['csv_file']['tmp_name'], $uploadPath)) {
                         // Validation du CSV
                         $validation = $manager->validateCsv($uploadPath);
@@ -134,6 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($result['success']) {
                     header('Content-Type: text/csv');
                     header('Content-Disposition: attachment; filename="geekndragon_products_' . date('Y-m-d_H-i-s') . '.csv"');
+                    header('X-Content-Type-Options: nosniff');
                     header('Content-Length: ' . filesize($csvPath));
                     readfile($csvPath);
                     unlink($csvPath); // Supprimer le fichier temporaire
@@ -250,6 +291,7 @@ $stats = [
                 
                 <form method="POST" enctype="multipart/form-data" id="uploadForm">
                     <input type="hidden" name="action" value="upload_csv">
+                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '') ?>">
                     
                     <div class="file-drop-zone mb-4" id="dropZone">
                         <div class="mb-4">
@@ -279,6 +321,7 @@ $stats = [
                 
                 <form method="POST">
                     <input type="hidden" name="action" value="download_csv">
+                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '') ?>">
                     <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded transition-colors">
                         💾 Télécharger le CSV
                     </button>
