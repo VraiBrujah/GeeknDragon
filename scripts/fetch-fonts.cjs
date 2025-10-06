@@ -7,7 +7,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-const FONTS_CSS_URL = 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Cinzel:wght@400;600;700&display=swap';
+const FONTS_CSS_URL = 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Cinzel:wght@400;600;700&display=swap';
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122 Safari/537.36';
 
 function fetch(url, headers = {}) {
@@ -37,9 +37,9 @@ async function main() {
   // Extraire les blocs @font-face
   const blocks = css.split('@font-face').slice(1).map(b => '@font-face' + b);
 
-  // Filtrer Open Sans (400, 600) et Cinzel (400, 600, 700) en latin (unicode-range U+0000-00FF)
+  // Filtrer Open Sans (300, 400, 600) et Cinzel (400, 600, 700) en latin (unicode-range U+0000-00FF)
   const wanted = {
-    'Open Sans': new Set([400, 600]),
+    'Open Sans': new Set([300, 400, 600]),
     'Cinzel': new Set([400, 600, 700])
   };
   const picked = [];
@@ -60,7 +60,7 @@ async function main() {
     // Si déjà tous pris pour fam, on pourrait arrêter
   }
 
-  if (picked.length < 5) {
+  if (picked.length < 6) {
     console.warn('Avertissement: moins de variantes détectées que prévu:', picked);
   }
 

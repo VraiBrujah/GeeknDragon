@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Polices Auto-Hébergées - Geek & Dragon</title>
+
+  <!-- Polices Auto-Hébergées -->
+  <link rel="stylesheet" href="/css/fonts-selfhosted.css">
+
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      padding: 40px;
+      background: #1f2937;
+      color: #f3f4f6;
+    }
+
+    .test-section {
+      margin: 40px 0;
+      padding: 20px;
+      background: #374151;
+      border-radius: 8px;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cinzel', serif;
+    }
+
+    .font-300 { font-weight: 300; }
+    .font-400 { font-weight: 400; }
+    .font-600 { font-weight: 600; }
+    .font-700 { font-weight: 700; }
+
+    .status {
+      padding: 10px;
+      border-radius: 4px;
+      margin: 10px 0;
+    }
+
+    .success { background: #10b981; color: white; }
+    .error { background: #ef4444; color: white; }
+  </style>
+</head>
+<body>
+  <h1>Test des Polices Auto-Hébergées</h1>
+
+  <div id="status"></div>
+
+  <div class="test-section">
+    <h2>Open Sans</h2>
+    <p class="font-300">Open Sans 300 : Texte léger pour Snipcart</p>
+    <p class="font-400">Open Sans 400 : Texte normal standard</p>
+    <p class="font-600">Open Sans 600 : Texte semi-gras pour emphase</p>
+  </div>
+
+  <div class="test-section">
+    <h2>Cinzel</h2>
+    <h3 class="font-400">Cinzel 400 : Titre normal</h3>
+    <h3 class="font-600">Cinzel 600 : Titre semi-gras</h3>
+    <h3 class="font-700">Cinzel 700 : Titre gras</h3>
+  </div>
+
+  <div class="test-section">
+    <h2>Test de Chargement</h2>
+    <div id="font-check"></div>
+  </div>
+
+  <script>
+    // Vérifier que les polices sont bien chargées
+    document.fonts.ready.then(() => {
+      const fontsToCheck = [
+        { family: 'Open Sans', weight: '300' },
+        { family: 'Open Sans', weight: '400' },
+        { family: 'Open Sans', weight: '600' },
+        { family: 'Cinzel', weight: '400' },
+        { family: 'Cinzel', weight: '600' },
+        { family: 'Cinzel', weight: '700' }
+      ];
+
+      let allLoaded = true;
+      let results = '<ul>';
+
+      fontsToCheck.forEach(font => {
+        const loaded = document.fonts.check(`${font.weight} 1em "${font.family}"`);
+        results += `<li>${font.family} ${font.weight}: ${loaded ? '✅ Chargée' : '❌ Manquante'}</li>`;
+        if (!loaded) allLoaded = false;
+      });
+
+      results += '</ul>';
+      document.getElementById('font-check').innerHTML = results;
+
+      const statusDiv = document.getElementById('status');
+      if (allLoaded) {
+        statusDiv.innerHTML = '<div class="status success">✅ Toutes les polices sont chargées correctement depuis le serveur local</div>';
+      } else {
+        statusDiv.innerHTML = '<div class="status error">❌ Certaines polices ne sont pas chargées. Vérifier que les fichiers .woff2 existent dans media/fonts/</div>';
+      }
+
+      // Vérifier qu'aucune requête Google Fonts n'est faite
+      const perfEntries = performance.getEntriesByType('resource');
+      const googleFontsRequests = perfEntries.filter(entry => entry.name.includes('fonts.googleapis.com'));
+
+      if (googleFontsRequests.length > 0) {
+        statusDiv.innerHTML += '<div class="status error">⚠️ Requêtes Google Fonts détectées ! Le CSP devrait bloquer cela.</div>';
+      } else {
+        statusDiv.innerHTML += '<div class="status success">✅ Aucune requête externe vers Google Fonts</div>';
+      }
+    });
+  </script>
+</body>
+</html>
