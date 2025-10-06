@@ -154,7 +154,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
     </a>
 
     <!-- Bouton hamburger mobile -->
-    <button id="menu-btn" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded p-2" aria-controls="mobile-menu" aria-expanded="false" aria-label="<?= __('nav.menu', 'Menu') ?>">
+    <button id="menu-btn" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded p-2" aria-controls="mobile-menu" aria-expanded="false" aria-label="<?= __('nav.menu', 'Menu') ?>" data-i18n-aria-label="nav.menu">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
       </svg>
@@ -175,12 +175,12 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       <?php if ($snipcartKey): ?>
       <!-- Compte + Panier : icônes uniquement, taille augmentée -->
       <div class="flex items-center gap-4">
-        <button class="snipcart-customer-signin hover:scale-110 transition-transform duration-200" aria-label="<?= __('nav.account', 'Compte') ?>" title="<?= __('nav.account', 'Compte') ?>">
+        <button class="snipcart-customer-signin hover:scale-110 transition-transform duration-200" aria-label="<?= __('nav.account', 'Compte') ?>" title="<?= __('nav.account', 'Compte') ?>" data-i18n-aria-label="nav.account" data-i18n-title="nav.account">
           <img src="/media/branding/icons/compte_non_connecter.webp" alt="" class="w-10 h-10 account-icon-disconnected" width="40" height="40">
           <img src="/media/branding/icons/compte_connecter.webp" alt="" class="w-10 h-10 account-icon-connected hidden" width="40" height="40">
         </button>
 
-        <button class="snipcart-checkout hover:scale-110 transition-transform duration-200 relative" aria-label="<?= __('nav.cart', 'Panier') ?>" title="<?= __('nav.cart', 'Panier') ?>">
+        <button class="snipcart-checkout hover:scale-110 transition-transform duration-200 relative" aria-label="<?= __('nav.cart', 'Panier') ?>" title="<?= __('nav.cart', 'Panier') ?>" data-i18n-aria-label="nav.cart" data-i18n-title="nav.cart">
           <img src="/media/branding/icons/panier.webp" alt="" class="w-10 h-10" width="40" height="40">
           <span class="snipcart-items-count absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold"></span>
         </button>
@@ -197,14 +197,17 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
           <a href="<?= langUrl($href) ?>"
              class="header-nav-icon-btn flex-shrink-0 aspect-square w-16 md:w-20 lg:w-24 overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/50"
              title="<?= __($item['i18n'], $item['label']) ?>"
-             aria-label="<?= __($item['i18n'], $item['label']) ?>">
+             aria-label="<?= __($item['i18n'], $item['label']) ?>"
+             data-i18n-title="<?= $item['i18n'] ?>"
+             data-i18n-aria-label="<?= $item['i18n'] ?>">
             <img src="<?= $item['image'] ?>"
                  alt="<?= __($item['i18n'], $item['label']) ?>"
+                 data-i18n-alt="<?= $item['i18n'] ?>"
                  class="w-full h-full object-cover rounded-xl"
                  loading="lazy">
             <span class="btn-text-overlay">
-              <span class="hidden md:inline"><?= __('btnOverlay.' . $item['overlay'] . '.desktop', $item['label']) ?></span>
-              <span class="md:hidden"><?= __('btnOverlay.' . $item['overlay'] . '.mobile', $item['label']) ?></span>
+              <span class="hidden md:inline" data-i18n="btnOverlay.<?= $item['overlay'] ?>.desktop"><?= __('btnOverlay.' . $item['overlay'] . '.desktop', $item['label']) ?></span>
+              <span class="md:hidden" data-i18n="btnOverlay.<?= $item['overlay'] ?>.mobile"><?= __('btnOverlay.' . $item['overlay'] . '.mobile', $item['label']) ?></span>
             </span>
           </a>
         <?php endforeach; ?>
@@ -231,19 +234,19 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 
       <?php if ($snipcartKey): ?>
       <div class="flex items-center justify-center w-full gap-8 pt-2">
-        <button class="snipcart-customer-signin hover:scale-110 transition-transform duration-200" aria-label="<?= __('nav.account', 'Compte') ?>" title="<?= __('nav.account', 'Compte') ?>">
+        <button class="snipcart-customer-signin hover:scale-110 transition-transform duration-200" aria-label="<?= __('nav.account', 'Compte') ?>" title="<?= __('nav.account', 'Compte') ?>" data-i18n-aria-label="nav.account" data-i18n-title="nav.account">
           <img src="/media/branding/icons/compte_non_connecter.webp" alt="" class="w-12 h-12 account-icon-disconnected" width="48" height="48">
           <img src="/media/branding/icons/compte_connecter.webp" alt="" class="w-12 h-12 account-icon-connected hidden" width="48" height="48">
         </button>
 
-        <button class="snipcart-checkout hover:scale-110 transition-transform duration-200 relative" aria-label="<?= __('nav.cart', 'Panier') ?>" title="<?= __('nav.cart', 'Panier') ?>">
+        <button class="snipcart-checkout hover:scale-110 transition-transform duration-200 relative" aria-label="<?= __('nav.cart', 'Panier') ?>" title="<?= __('nav.cart', 'Panier') ?>" data-i18n-aria-label="nav.cart" data-i18n-title="nav.cart">
           <img src="/media/branding/icons/panier.webp" alt="" class="w-12 h-12" width="48" height="48">
           <span class="snipcart-items-count absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold"></span>
         </button>
       </div>
       <?php endif; ?>
 
-      <button id="menu-close" aria-label="<?= __('nav.closeMenu', 'Fermer le menu') ?>" class="mt-8 text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded transition-colors duration-200">
+      <button id="menu-close" aria-label="<?= __('nav.closeMenu', 'Fermer le menu') ?>" class="mt-8 text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded transition-colors duration-200" data-i18n-aria-label="nav.closeMenu">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>

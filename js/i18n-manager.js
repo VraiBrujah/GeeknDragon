@@ -326,14 +326,17 @@ class I18nManager {
    *
    * Parcourt le DOM et traduit automatiquement tous les éléments
    * ayant l'attribut data-i18n="cle.de.traduction".
+   * Supporte aussi les attributs data-i18n-{attr}="cle" pour traduire
+   * les attributs HTML (title, aria-label, alt, placeholder, etc.)
    *
    * @param {HTMLElement} root Élément racine (document par défaut)
    * @returns {number} Nombre d'éléments traduits
    */
   updateDOM(root = document) {
-    const elements = root.querySelectorAll('[data-i18n]');
     let count = 0;
 
+    // 1. Traduire textContent avec data-i18n
+    const elements = root.querySelectorAll('[data-i18n]');
     elements.forEach(element => {
       const key = element.getAttribute('data-i18n');
       const fallback = element.textContent || '';
@@ -345,8 +348,52 @@ class I18nManager {
       }
     });
 
+    // 2. Traduire attributs HTML avec data-i18n-{attr}
+    const attributeElements = root.querySelectorAll('[data-i18n-title], [data-i18n-aria-label], [data-i18n-alt], [data-i18n-placeholder]');
+    attributeElements.forEach(element => {
+      // title
+      if (element.hasAttribute('data-i18n-title')) {
+        const key = element.getAttribute('data-i18n-title');
+        const translated = this.t(key, '');
+        if (translated) {
+          element.setAttribute('title', translated);
+          count++;
+        }
+      }
+
+      // aria-label
+      if (element.hasAttribute('data-i18n-aria-label')) {
+        const key = element.getAttribute('data-i18n-aria-label');
+        const translated = this.t(key, '');
+        if (translated) {
+          element.setAttribute('aria-label', translated);
+          count++;
+        }
+      }
+
+      // alt
+      if (element.hasAttribute('data-i18n-alt')) {
+        const key = element.getAttribute('data-i18n-alt');
+        const translated = this.t(key, '');
+        if (translated) {
+          element.setAttribute('alt', translated);
+          count++;
+        }
+      }
+
+      // placeholder
+      if (element.hasAttribute('data-i18n-placeholder')) {
+        const key = element.getAttribute('data-i18n-placeholder');
+        const translated = this.t(key, '');
+        if (translated) {
+          element.setAttribute('placeholder', translated);
+          count++;
+        }
+      }
+    });
+
     if (this.debug && count > 0) {
-      console.log(`[I18n] ${count} éléments traduits dans le DOM`);
+      console.log(`[I18n] ${count} éléments/attributs traduits dans le DOM`);
     }
 
     return count;
