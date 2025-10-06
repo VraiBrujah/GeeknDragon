@@ -130,6 +130,10 @@ $debugMode = ($_ENV['DEBUG_MODE'] ?? 'false') === 'true';
     // Langue définie par PHP (synchronisation PHP ↔ JS)
     const phpLang = '<?= $lang ?? 'fr' ?>';
 
+    // Debug: afficher la langue détectée
+    console.log('[I18n] Langue PHP détectée:', phpLang);
+    console.log('[I18n] Cookie actuel:', document.cookie);
+
     // Initialisation globale du gestionnaire I18N
     window.i18nManager = new I18nManager({
       defaultLang: phpLang, // Utiliser la langue PHP pour synchronisation
@@ -144,8 +148,16 @@ $debugMode = ($_ENV['DEBUG_MODE'] ?? 'false') === 'true';
       try {
         await window.i18nManager.loadTranslations(phpLang);
 
-        // Mettre à jour le DOM avec les traductions
+        // Mettre à jour le DOM avec les traductions IMMÉDIATEMENT
         window.i18nManager.updateDOM();
+
+        // Si le DOM n'est pas encore complètement chargé, réappliquer après DOMContentLoaded
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', () => {
+            window.i18nManager.updateDOM();
+            console.log('[I18n] DOM mis à jour après DOMContentLoaded pour langue:', phpLang);
+          });
+        }
 
         // Exposer la fonction t() globalement pour compatibilité
         window.__ = window.i18nManager.t.bind(window.i18nManager);
