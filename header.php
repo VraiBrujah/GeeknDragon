@@ -140,7 +140,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
   }
 }
 ?>
-<a href="#main" class="sr-only focus:not-sr-only">Passer au contenu</a>
+<a href="#main" class="sr-only focus:not-sr-only"><?= __('nav.skipToContent', 'Passer au contenu') ?></a>
 
 <header class="header-modern backdrop-blur bg-gradient-to-r from-gray-900/80 to-gray-800/60 shadow-lg fixed top-0 w-full z-[1200] transition-all duration-300">
   <!-- LIGNE 1 : Logo + Titre | Langue + Compte + Panier -->
@@ -154,7 +154,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
     </a>
 
     <!-- Bouton hamburger mobile -->
-    <button id="menu-btn" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded p-2" aria-controls="mobile-menu" aria-expanded="false" aria-label="Menu">
+    <button id="menu-btn" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded p-2" aria-controls="mobile-menu" aria-expanded="false" aria-label="<?= __('nav.menu', 'Menu') ?>">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
       </svg>
@@ -175,12 +175,12 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       <?php if ($snipcartKey): ?>
       <!-- Compte + Panier : icônes uniquement, taille augmentée -->
       <div class="flex items-center gap-4">
-        <button class="snipcart-customer-signin hover:scale-110 transition-transform duration-200" aria-label="Compte" title="Compte">
+        <button class="snipcart-customer-signin hover:scale-110 transition-transform duration-200" aria-label="<?= __('nav.account', 'Compte') ?>" title="<?= __('nav.account', 'Compte') ?>">
           <img src="/media/branding/icons/compte_non_connecter.webp" alt="" class="w-10 h-10 account-icon-disconnected" width="40" height="40">
           <img src="/media/branding/icons/compte_connecter.webp" alt="" class="w-10 h-10 account-icon-connected hidden" width="40" height="40">
         </button>
 
-        <button class="snipcart-checkout hover:scale-110 transition-transform duration-200 relative" aria-label="Panier" title="Panier">
+        <button class="snipcart-checkout hover:scale-110 transition-transform duration-200 relative" aria-label="<?= __('nav.cart', 'Panier') ?>" title="<?= __('nav.cart', 'Panier') ?>">
           <img src="/media/branding/icons/panier.webp" alt="" class="w-10 h-10" width="40" height="40">
           <span class="snipcart-items-count absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold"></span>
         </button>
@@ -192,7 +192,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
   <!-- LIGNE 2 : Navigation icônes -->
   <div class="header-icon-nav border-t border-white/10 transition-all duration-300 overflow-x-auto scrollbar-thin" id="icon-nav">
     <div class="max-w-7xl mx-auto px-4 md:px-6 py-2">
-      <nav class="flex items-center justify-start md:justify-center gap-2 md:gap-3 flex-nowrap" aria-label="Navigation principale">
+      <nav class="flex items-center justify-start md:justify-center gap-2 md:gap-3 flex-nowrap" aria-label="<?= __('nav.mainNavigation', 'Navigation principale') ?>">
         <?php foreach ($headerNavLinks as $href => $item): ?>
           <a href="<?= langUrl($href) ?>"
              class="header-nav-icon-btn flex-shrink-0 aspect-square w-16 md:w-20 lg:w-24 overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/50"
@@ -214,7 +214,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 
   <!-- Menu mobile (TOUT est ensemble) -->
   <div id="menu-overlay" class="fixed inset-0 bg-black/60 hidden md:hidden z-10 opacity-0 transition-opacity duration-200"></div>
-  <nav id="mobile-menu" class="fixed inset-0 z-20 bg-gray-900/95 flex flex-col items-center justify-start p-8 text-white hidden md:hidden uppercase tracking-wide transform transition-transform duration-200 translate-x-full overflow-y-auto" aria-hidden="true" aria-label="Navigation mobile">
+  <nav id="mobile-menu" class="fixed inset-0 z-20 bg-gray-900/95 flex flex-col items-center justify-start p-8 text-white hidden md:hidden uppercase tracking-wide transform transition-transform duration-200 translate-x-full overflow-y-auto" aria-hidden="true" aria-label="<?= __('nav.mobileNavigation', 'Navigation mobile') ?>">
 
     <!-- Langues + actions -->
     <div class="flex flex-col items-center w-full max-w-xs gap-8">
@@ -231,19 +231,19 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 
       <?php if ($snipcartKey): ?>
       <div class="flex items-center justify-center w-full gap-8 pt-2">
-        <button class="snipcart-customer-signin hover:scale-110 transition-transform duration-200" aria-label="Compte" title="Compte">
+        <button class="snipcart-customer-signin hover:scale-110 transition-transform duration-200" aria-label="<?= __('nav.account', 'Compte') ?>" title="<?= __('nav.account', 'Compte') ?>">
           <img src="/media/branding/icons/compte_non_connecter.webp" alt="" class="w-12 h-12 account-icon-disconnected" width="48" height="48">
           <img src="/media/branding/icons/compte_connecter.webp" alt="" class="w-12 h-12 account-icon-connected hidden" width="48" height="48">
         </button>
 
-        <button class="snipcart-checkout hover:scale-110 transition-transform duration-200 relative" aria-label="Panier" title="Panier">
+        <button class="snipcart-checkout hover:scale-110 transition-transform duration-200 relative" aria-label="<?= __('nav.cart', 'Panier') ?>" title="<?= __('nav.cart', 'Panier') ?>">
           <img src="/media/branding/icons/panier.webp" alt="" class="w-12 h-12" width="48" height="48">
           <span class="snipcart-items-count absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold"></span>
         </button>
       </div>
       <?php endif; ?>
 
-      <button id="menu-close" aria-label="Fermer le menu" class="mt-8 text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded transition-colors duration-200">
+      <button id="menu-close" aria-label="<?= __('nav.closeMenu', 'Fermer le menu') ?>" class="mt-8 text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded transition-colors duration-200">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>

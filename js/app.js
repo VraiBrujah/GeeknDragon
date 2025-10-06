@@ -254,145 +254,181 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ========================================================================
-   I18N — Drapeaux + chargement JSON + mise à jour dynamique
+   I18N — Intégration avec I18nManager unifié
    ===================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
   const switcher = document.getElementById('lang-switcher');
   const defaultLang = 'fr';
   const available = ['fr', 'en'];
 
-  let lang = window.GD.getLang();
-  if (!available.includes(lang)) lang = defaultLang;
-  lang = window.GD.setLang(lang);
+  // Attendre que le gestionnaire I18N soit prêt
+  const initI18n = () => {
+    if (!window.i18nManager) {
+      setTimeout(initI18n, 50); // Retry si pas encore chargé
+      return;
+    }
 
-  const setCurrent = (cur) => {
-    document.querySelectorAll('.flag-btn[data-lang]').forEach((btn) => {
-      if (btn.dataset.lang === cur) btn.setAttribute('aria-current', 'true');
-      else btn.removeAttribute('aria-current');
-    });
-  };
-  setCurrent(lang);
-  whenSnipcart(() => window.Snipcart.api.session.setLanguage(lang));
+    const currentLang = window.i18nManager.getCurrentLanguage();
 
-  document.querySelectorAll('.flag-btn[data-lang]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const picked = btn.dataset.lang;
-      // Sauvegarder la langue choisie
-      window.GD.setLang(picked);
-      
-      // Construire la nouvelle URL avec la bonne langue
-      let newUrl = window.location.pathname;
-      if (picked !== 'fr') {
-        // Ajouter le paramètre lang pour les langues autres que français
-        const params = new URLSearchParams(window.location.search);
-        params.set('lang', picked);
-        newUrl += '?' + params.toString();
-      }
-      // Ajouter le fragment s'il existe
-      if (window.location.hash) {
-        newUrl += window.location.hash;
-      }
-      
-      // Naviguer vers la nouvelle URL
-      window.location.href = newUrl;
-    });
-  });
-
-  function loadTranslations(current) {
-    fetch(`/lang/${current}.json`)
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data) => {
-        if (!data) return;
-        window.i18n = data;
-
-        document.querySelectorAll('[data-i18n]').forEach((el) => {
-          const keys = el.dataset.i18n.split('.');
-          let text = data; keys.forEach((k) => { if (text) text = text[k]; });
-          if (text != null) el.innerHTML = text;
-        });
-
-        // Champs produits (nom/desc/alt)
-        document.querySelectorAll('[data-name-fr]').forEach((el) => {
-          const target = current === 'en' ? el.dataset.nameEn : el.dataset.nameFr;
-          if (target) el.innerHTML = target;
-        });
-        document.querySelectorAll('[data-desc-fr]').forEach((el) => {
-          // On garde le HTML déjà converti, pas besoin de traduction côté JS
-          // Le PHP gère déjà la traduction avec le bon format HTML
-        });
-        document.querySelectorAll('[data-alt-fr]').forEach((el) => {
-          const target = current === 'en' ? el.dataset.altEn : el.dataset.altFr;
-          if (target) el.setAttribute('alt', target);
-        });
-
-        // Boutons Snipcart (nom/description + libellé custom)
-        const multiplierLabelPattern = /(multiplicat(eur|or)|multiplier)/i;
-        const customFieldHelpers = window.GD?.customFields || {};
-        const findCustomIndexByRole =
-          typeof customFieldHelpers.findIndexOnButton === 'function'
-            ? customFieldHelpers.findIndexOnButton
-            : (() => null);
-
-        document.querySelectorAll('.snipcart-add-item').forEach((btn) => {
-          if (current === 'en') {
-            if (btn.dataset.itemNameEn) btn.setAttribute('data-item-name', btn.dataset.itemNameEn);
-            if (btn.dataset.itemDescriptionEn) {
-              btn.dataset.itemDescription = btn.dataset.itemDescriptionEn;
-              btn.setAttribute('data-item-description', btn.dataset.itemDescriptionEn);
-            }
-          } else {
-            if (btn.dataset.itemNameFr) btn.setAttribute('data-item-name', btn.dataset.itemNameFr);
-            if (btn.dataset.itemDescriptionFr) {
-              btn.dataset.itemDescription = btn.dataset.itemDescriptionFr;
-              btn.setAttribute('data-item-description', btn.dataset.itemDescriptionFr);
-            }
-          }
-          const rawMultiplierIndex = findCustomIndexByRole(btn, 'multiplier');
-          const multiplierIndex = (() => {
-            const parsed = Number.parseInt(rawMultiplierIndex, 10);
-            return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
-          })();
-          const hasCustom =
-            multiplierIndex !== null
-            && btn.hasAttribute(`data-item-custom${multiplierIndex}-name`)
-            && data?.product?.multiplier;
-          if (hasCustom) {
-            const currentLabel = btn.getAttribute(`data-item-custom${multiplierIndex}-name`) || '';
-            const datasetRole = btn.dataset[`itemCustom${multiplierIndex}Role`] || '';
-            const explicitMultiplierFlag =
-              (datasetRole && datasetRole.toLowerCase() === 'multiplier')
-              || btn.hasAttribute('data-multiplier-label')
-              || (btn.dataset.multiplierLabel
-                && ['1', 'true', 'yes', 'oui'].includes(btn.dataset.multiplierLabel.toLowerCase()));
-            const labelLooksLikeMultiplier = multiplierLabelPattern.test(currentLabel);
-
-            // On ne remplace le libellé que s'il est explicitement identifié comme un multiplicateur
-            // afin d'éviter d'écraser d'autres champs personnalisés (ex. sélecteur de langue).
-            if (explicitMultiplierFlag || labelLooksLikeMultiplier) {
-              btn.setAttribute(`data-item-custom${multiplierIndex}-name`, data.product.multiplier);
-            }
-          }
-        });
-
-        // affiche uniquement le sélecteur FR/EN correspondant (si tu en as deux)
-        document.querySelectorAll('[data-role^="multiplier-"]').forEach((sel) => {
-          const { role } = sel.dataset; // multiplier-fr / multiplier-en
-          const isFor = role?.split('-')[1];
-          if (!isFor) return;
-          sel.closest('.multiplier-wrapper')?.classList.toggle('hidden', isFor !== current);
-        });
-
-        if (typeof window.updatePlus === 'function') {
-          document.querySelectorAll('.btn-shop[data-item-id]').forEach((btn) => {
-            window.updatePlus(btn.dataset.itemId);
-          });
+    // Marquer le drapeau courant comme actif
+    const setCurrent = (lang) => {
+      document.querySelectorAll('.flag-btn[data-lang]').forEach((btn) => {
+        if (btn.dataset.lang === lang) {
+          btn.setAttribute('aria-current', 'true');
+        } else {
+          btn.removeAttribute('aria-current');
         }
-      })
-      .catch(() => {
-        if (switcher) switcher.classList.add('hidden');
       });
+    };
+    setCurrent(currentLang);
+
+    // Synchroniser avec Snipcart
+    whenSnipcart(() => {
+      if (window.Snipcart?.api?.session) {
+        window.Snipcart.api.session.setLanguage(currentLang);
+      }
+    });
+
+    // Gestion du changement de langue via drapeaux
+    document.querySelectorAll('.flag-btn[data-lang]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const picked = btn.dataset.lang;
+        if (!available.includes(picked)) return;
+
+        try {
+          // Charger les nouvelles traductions
+          await window.i18nManager.changeLanguage(picked);
+
+          // Mettre à jour le DOM avec les nouvelles traductions
+          await updateTranslations(picked);
+
+          // Synchroniser avec Snipcart
+          if (window.Snipcart?.api?.session) {
+            window.Snipcart.api.session.setLanguage(picked);
+          }
+
+          // Construire la nouvelle URL avec le paramètre langue
+          let newUrl = window.location.pathname;
+          if (picked !== 'fr') {
+            const params = new URLSearchParams(window.location.search);
+            params.set('lang', picked);
+            newUrl += '?' + params.toString();
+          }
+          if (window.location.hash) {
+            newUrl += window.location.hash;
+          }
+
+          // Naviguer vers la nouvelle URL (recharge la page avec la bonne langue)
+          window.location.href = newUrl;
+        } catch (error) {
+          console.error('[I18n] Erreur changement langue:', error);
+        }
+      });
+    });
+
+    // Charger les traductions initiales
+    updateTranslations(currentLang);
+  };
+
+  /**
+   * Met à jour les traductions dans le DOM
+   *
+   * @param {string} lang Code langue cible
+   * @returns {Promise<void>}
+   */
+  async function updateTranslations(lang) {
+    if (!window.i18nManager) {
+      console.warn('[I18n] Gestionnaire I18N non disponible');
+      return;
+    }
+
+    try {
+      const translations = window.i18nManager.getTranslations(lang);
+      if (!translations) {
+        await window.i18nManager.loadTranslations(lang);
+      }
+
+      // 1. Éléments avec data-i18n (géré automatiquement par I18nManager.updateDOM)
+      window.i18nManager.updateDOM();
+
+      // 2. Champs produits multilingues (nom/desc/alt)
+      document.querySelectorAll('[data-name-fr]').forEach((el) => {
+        const target = lang === 'en' ? el.dataset.nameEn : el.dataset.nameFr;
+        if (target) el.innerHTML = target;
+      });
+
+      document.querySelectorAll('[data-alt-fr]').forEach((el) => {
+        const target = lang === 'en' ? el.dataset.altEn : el.dataset.altFr;
+        if (target) el.setAttribute('alt', target);
+      });
+
+      // 3. Boutons Snipcart (nom/description + libellé custom)
+      const multiplierLabel = window.i18nManager.t('product.multiplier', 'Multiplicateur');
+      const customFieldHelpers = window.GD?.customFields || {};
+      const findCustomIndexByRole =
+        typeof customFieldHelpers.findIndexOnButton === 'function'
+          ? customFieldHelpers.findIndexOnButton
+          : (() => null);
+
+      document.querySelectorAll('.snipcart-add-item').forEach((btn) => {
+        // Traduire nom et description du produit
+        if (lang === 'en') {
+          if (btn.dataset.itemNameEn) btn.setAttribute('data-item-name', btn.dataset.itemNameEn);
+          if (btn.dataset.itemDescriptionEn) {
+            btn.dataset.itemDescription = btn.dataset.itemDescriptionEn;
+            btn.setAttribute('data-item-description', btn.dataset.itemDescriptionEn);
+          }
+        } else {
+          if (btn.dataset.itemNameFr) btn.setAttribute('data-item-name', btn.dataset.itemNameFr);
+          if (btn.dataset.itemDescriptionFr) {
+            btn.dataset.itemDescription = btn.dataset.itemDescriptionFr;
+            btn.setAttribute('data-item-description', btn.dataset.itemDescriptionFr);
+          }
+        }
+
+        // Traduire le label "Multiplicateur" des champs custom
+        const rawMultiplierIndex = findCustomIndexByRole(btn, 'multiplier');
+        const multiplierIndex = Number.parseInt(rawMultiplierIndex, 10);
+        if (Number.isFinite(multiplierIndex) && multiplierIndex > 0) {
+          const hasMultiplierField = btn.hasAttribute(`data-item-custom${multiplierIndex}-name`);
+          if (hasMultiplierField) {
+            btn.setAttribute(`data-item-custom${multiplierIndex}-name`, multiplierLabel);
+          }
+        }
+      });
+
+      // 4. Sélecteurs de multiplicateurs multilingues
+      document.querySelectorAll('[data-role^="multiplier-"]').forEach((sel) => {
+        const role = sel.dataset.role; // multiplier-fr / multiplier-en
+        const isFor = role?.split('-')[1];
+        if (!isFor) return;
+        sel.closest('.multiplier-wrapper')?.classList.toggle('hidden', isFor !== lang);
+      });
+
+      // 5. Mettre à jour les boutons d'achat si fonction disponible
+      if (typeof window.updatePlus === 'function') {
+        document.querySelectorAll('.btn-shop[data-item-id]').forEach((btn) => {
+          window.updatePlus(btn.dataset.itemId);
+        });
+      }
+
+      // Exposer les traductions globalement pour compatibilité legacy
+      window.i18n = translations;
+    } catch (error) {
+      console.error('[I18n] Erreur mise à jour traductions:', error);
+      if (switcher) switcher.classList.add('hidden');
+    }
   }
-  loadTranslations(lang);
+
+  // Démarrer l'initialisation
+  initI18n();
+
+  // Écouter l'événement i18nReady si pas encore chargé
+  document.addEventListener('i18nReady', (event) => {
+    if (window.DEBUG_MODE) {
+      console.log('[I18n] Traductions prêtes pour langue:', event.detail.lang);
+    }
+  });
 });
 
 /* ========================================================================

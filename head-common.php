@@ -123,6 +123,41 @@ $debugMode = ($_ENV['DEBUG_MODE'] ?? 'false') === 'true';
   <link rel="stylesheet" href="/css/snipcart.css?v=<?= filemtime(__DIR__.'/css/snipcart.css') ?>">
   <link rel="stylesheet" href="/css/snipcart-custom.css?v=<?= filemtime(__DIR__.'/css/snipcart-custom.css') ?>">
 
+  <!-- Module I18N - Chargement précoce pour traductions immédiates -->
+  <script type="module">
+    import I18nManager from '/js/i18n-manager.js?v=<?= filemtime(__DIR__.'/js/i18n-manager.js') ?>';
+
+    // Initialisation globale du gestionnaire I18N
+    window.i18nManager = new I18nManager({
+      defaultLang: 'fr',
+      availableLangs: ['fr', 'en', 'es', 'de'],
+      translationsPath: '/lang/',
+      debug: <?php echo $debugMode ? 'true' : 'false'; ?>,
+      cacheExpiry: 24 * 60 * 60 * 1000 // 24 heures
+    });
+
+    // Charger les traductions de la langue courante immédiatement
+    (async () => {
+      try {
+        await window.i18nManager.loadTranslations(window.i18nManager.currentLang);
+
+        // Mettre à jour le DOM avec les traductions
+        window.i18nManager.updateDOM();
+
+        // Exposer la fonction t() globalement pour compatibilité
+        window.__ = window.i18nManager.t.bind(window.i18nManager);
+        window.t = window.i18nManager.t.bind(window.i18nManager);
+
+        // Dispatcher un événement pour notifier que les traductions sont prêtes
+        document.dispatchEvent(new CustomEvent('i18nReady', {
+          detail: { lang: window.i18nManager.currentLang }
+        }));
+      } catch (error) {
+        console.error('[I18n] Erreur chargement traductions initiales:', error);
+      }
+    })();
+  </script>
+
   <!-- Schema.org structured data -->
   <script type="application/ld+json">
   {

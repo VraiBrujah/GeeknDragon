@@ -173,7 +173,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
             .catch(() => {
-                featuredGrid.innerHTML = '<p class="text-center text-gray-400">Erreur de chargement des produits</p>';
+                const errorMsg = window.i18nManager ? window.i18nManager.t('ui.errorLoadingProducts', 'Erreur de chargement des produits') : 'Erreur de chargement des produits';
+                featuredGrid.innerHTML = '<p class="text-center text-gray-400">' + errorMsg + '</p>';
             });
     }
 });

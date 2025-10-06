@@ -40,9 +40,22 @@
         "pieces": "Pièces",
         "cards": "Cartes",
         "triptychs": "Triptyques",
-        "home": "Accueil"
+        "home": "Accueil",
+        "skipToContent": "Passer au contenu",
+        "menu": "Menu",
+        "closeMenu": "Fermer le menu",
+        "mainNavigation": "Navigation principale",
+        "mobileNavigation": "Navigation mobile"
     },
     "btnOverlay": {
+        "discover": {
+            "desktop": "Découvrir",
+            "mobile": "Voir"
+        },
+        "collection": {
+            "desktop": "Toute la collection",
+            "mobile": "Tout voir"
+        },
         "shop": {
             "desktop": "L'Échoppe",
             "mobile": "Échoppe"
@@ -90,32 +103,6 @@
         "subtitle2": "Fabriqué au Québec • Utilisable 10+ ans • Livraison rapide",
         "discoverCreations": "Découvrir nos créations",
         "shopNow": "Voir toute la collection"
-    },
-    "btnOverlay": {
-        "discover": {
-            "desktop": "Découvrir",
-            "mobile": "Voir"
-        },
-        "collection": {
-            "desktop": "Toute la collection",
-            "mobile": "Tout voir"
-        },
-        "shop": {
-            "desktop": "L'Échoppe",
-            "mobile": "Échoppe"
-        },
-        "gameHelp": {
-            "desktop": "Grimoire",
-            "mobile": "Grimoire"
-        },
-        "contact": {
-            "desktop": "Message",
-            "mobile": "Contact"
-        },
-        "news": {
-            "desktop": "Chroniques",
-            "mobile": "Actus"
-        }
     },
     "home": {
         "featured": {
@@ -170,7 +157,10 @@
     "product": {
         "back": "Retour à la boutique",
         "multiplier": "Multiplicateur",
+        "metal": "Métal",
         "language": "Langue",
+        "decreaseQuantity": "Diminuer la quantité",
+        "increaseQuantity": "Augmenter la quantité",
         "languageOptions": {
             "FR": "Français",
             "EN": "Anglais"
@@ -365,7 +355,29 @@
         "nextImage": "Image suivante",
         "loading": "Chargement...",
         "error": "Erreur",
+        "errorLoadingProducts": "Erreur de chargement des produits",
         "close": "Fermer",
+        "add": "Ajouter",
+        "remove": "Retirer",
+        "cancel": "Annuler",
+        "confirm": "Confirmer",
+        "save": "Enregistrer",
+        "delete": "Supprimer",
+        "edit": "Modifier",
+        "search": "Rechercher",
+        "filter": "Filtrer",
+        "sort": "Trier",
+        "show": "Afficher",
+        "hide": "Masquer",
+        "more": "Plus",
+        "less": "Moins",
+        "all": "Tout",
+        "none": "Aucun",
+        "yes": "Oui",
+        "no": "Non",
+        "ok": "OK",
+        "apply": "Appliquer",
+        "reset": "Réinitialiser",
         "musicPlayer": {
             "previous": "Précédent",
             "playPause": "Lecture / Pause",
@@ -407,9 +419,13 @@
             "subtitle": "Maîtrisez tous vos accessoires Geek & Dragon : triptyques, cartes et monnaie"
         },
         "navigation": {
-            "triptychsGuide": "Forger vos Héros",
-            "cardsGuide": "Équiper vos Aventures",
-            "coinGuide": "Compter vos Trésors"
+            "quickNav": "Navigation Rapide",
+            "triptychsGuide": "Guide des Triptyques",
+            "cardsGuide": "Guide des Cartes",
+            "coinGuide": "Guide de la Monnaie",
+            "triptychsSubtitle": "Espèce, Classe, Historique - D&D 2024",
+            "cardsSubtitle": "Armes, Équipements, Sorts",
+            "coinSubtitle": "Système monétaire + Convertisseur"
         },
         "triptychGuide": {
             "title": "Les 3 Triptyques de votre Personnage",
@@ -441,15 +457,6 @@
             "clickToFlip": "Cliquez pour retourner la fiche",
             "classTriptych": "Triptyque de Classe",
             "backgroundTriptych": "Triptyque d'Historique"
-        },
-        "navigation": {
-            "quickNav": "Navigation Rapide",
-            "triptychsGuide": "Guide des Triptyques",
-            "cardsGuide": "Guide des Cartes",
-            "coinGuide": "Guide de la Monnaie",
-            "triptychsSubtitle": "Espèce, Classe, Historique - D&D 2024",
-            "cardsSubtitle": "Armes, Équipements, Sorts",
-            "coinSubtitle": "Système monétaire + Convertisseur"
         },
         "triptychsSection": {
             "whatIs": "Qu'est-ce qu'un triptyque Geek & Dragon ?",
@@ -738,107 +745,107 @@
             },
             "recommended": "Crayon recommandé : Staedtler HB ou 2H pour un tracé précis et effaçable."
         },
-        "backToMain": "🔝 Retour au menu principal"
-    },
-    "cards": {
-        "mainTitle": "Guide des Cartes à Jouer Geek & Dragon",
-        "intro": "<strong class=\"text-indigo-300\">560 cartes d'équipement illustrées</strong> couvrant armes, armures et équipements. Chaque carte présente <strong class=\"text-purple-300\">visuellement</strong> toutes les statistiques nécessaires. <strong class=\"text-green-400\">Fini la lecture fastidieuse</strong> des manuels pendant les parties ! <span class=\"text-amber-300 text-sm italic block mt-2\">Les cartes de sorts de classe complètes arrivent bientôt, nos gobelins travaillent avec ardeur dans nos monastères enchantés...</span>",
-        "faqSubtitle": "FAQ Cartes",
-        "mainDescription": "Complétez vos triptyques avec nos cartes détaillées : Armes, Armures, Équipements, Sorts, Monstres et bien plus ! Chaque carte contient toutes les informations nécessaires pour accélérer vos parties.",
-        "title": "Cartes d'Équipement",
-        "types": {
-            "equipment": {
-                "title": "Cartes d'Équipement",
-                "weapons": "<strong>Armes :</strong> Statistiques complètes, propriétés spéciales",
-                "armor": "<strong>Armures :</strong> CA, poids, restrictions de classe",
-                "equipment": "<strong>Équipement :</strong> Objets d'aventure et outils",
-                "magicItems": "<strong>Objets magiques :</strong> Pouvoirs et malédictions <span class=\"text-amber-300 text-xs italic\">(en cours de création par nos gobelins dans nos forges...)</span>"
+        "backToMain": "🔝 Retour au menu principal",
+        "cards": {
+            "mainTitle": "Guide des Cartes à Jouer Geek & Dragon",
+            "intro": "<strong class=\"text-indigo-300\">560 cartes d'équipement illustrées</strong> couvrant armes, armures et équipements. Chaque carte présente <strong class=\"text-purple-300\">visuellement</strong> toutes les statistiques nécessaires. <strong class=\"text-green-400\">Fini la lecture fastidieuse</strong> des manuels pendant les parties ! <span class=\"text-amber-300 text-sm italic block mt-2\">Les cartes de sorts de classe complètes arrivent bientôt, nos gobelins travaillent avec ardeur dans nos monastères enchantés...</span>",
+            "faqSubtitle": "FAQ Cartes",
+            "mainDescription": "Complétez vos triptyques avec nos cartes détaillées : Armes, Armures, Équipements, Sorts, Monstres et bien plus ! Chaque carte contient toutes les informations nécessaires pour accélérer vos parties.",
+            "title": "Cartes d'Équipement",
+            "types": {
+                "equipment": {
+                    "title": "Cartes d'Équipement",
+                    "weapons": "<strong>Armes :</strong> Statistiques complètes, propriétés spéciales",
+                    "armor": "<strong>Armures :</strong> CA, poids, restrictions de classe",
+                    "equipment": "<strong>Équipement :</strong> Objets d'aventure et outils",
+                    "magicItems": "<strong>Objets magiques :</strong> Pouvoirs et malédictions <span class=\"text-amber-300 text-xs italic\">(en cours de création par nos gobelins dans nos forges...)</span>"
+                },
+                "rules": {
+                    "title": "Cartes de Règles",
+                    "special": "<strong>Règles spéciales :</strong> Maladies, création d'objets",
+                    "services": "<strong>Services :</strong> Marchands, artisans, guides",
+                    "vehicles": "<strong>Véhicules :</strong> Montres, navires, véhicules",
+                    "poisons": "<strong>Poisons :</strong> Effets et antidotes"
+                },
+                "gameplay": {
+                    "title": "Cartes de Gameplay",
+                    "spells": "<strong>Sorts :</strong> Descriptions complètes, composantes",
+                    "monsters": "<strong>Monstres :</strong> Statistiques, tactiques, butin",
+                    "packages": "<strong>Paquetages :</strong> Kits d'équipement thématiques",
+                    "goods": "<strong>Marchandises :</strong> Commerce et économie"
+                }
             },
-            "rules": {
-                "title": "Cartes de Règles",
-                "special": "<strong>Règles spéciales :</strong> Maladies, création d'objets",
-                "services": "<strong>Services :</strong> Marchands, artisans, guides",
-                "vehicles": "<strong>Véhicules :</strong> Montres, navires, véhicules",
-                "poisons": "<strong>Poisons :</strong> Effets et antidotes"
+            "availability": {
+                "title": "Disponibilité des Cartes",
+                "available": "<strong>Toutes les cartes d'objets sont disponibles</strong> dans notre boutique ! Personnalisez vos decks selon vos besoins et votre personnage.",
+                "comingSoon": "Les cartes d'objets magiques arrivent bientôt, nos gobelins travaillent dur dans nos forges pour vous créer des merveilles !"
             },
-            "gameplay": {
-                "title": "Cartes de Gameplay",
-                "spells": "<strong>Sorts :</strong> Descriptions complètes, composantes",
-                "monsters": "<strong>Monstres :</strong> Statistiques, tactiques, butin",
-                "packages": "<strong>Paquetages :</strong> Kits d'équipement thématiques",
-                "goods": "<strong>Marchandises :</strong> Commerce et économie"
-            }
-        },
-        "availability": {
-            "title": "Disponibilité des Cartes",
-            "available": "<strong>Toutes les cartes d'objets sont disponibles</strong> dans notre boutique ! Personnalisez vos decks selon vos besoins et votre personnage.",
-            "comingSoon": "Les cartes d'objets magiques arrivent bientôt, nos gobelins travaillent dur dans nos forges pour vous créer des merveilles !"
-        },
-        "examples": {
-            "title": "Exemples de Cartes",
-            "weapon": {
-                "title": "Carte d'Arme : Pistolet à Silex",
-                "front": "<strong>Recto :</strong> Illustration, prix, poids, bonus d'attaque",
-                "back": "<strong>Verso :</strong> Règles détaillées, propriétés spéciales"
+            "examples": {
+                "title": "Exemples de Cartes",
+                "weapon": {
+                    "title": "Carte d'Arme : Pistolet à Silex",
+                    "front": "<strong>Recto :</strong> Illustration, prix, poids, bonus d'attaque",
+                    "back": "<strong>Verso :</strong> Règles détaillées, propriétés spéciales"
+                },
+                "armor": {
+                    "title": "Carte d'Armure : Armure de Cuir",
+                    "front": "<strong>Recto :</strong> Illustration, prix, poids, CA de base",
+                    "back": "<strong>Verso :</strong> Modificateurs, restrictions, descriptions"
+                },
+                "tip": "<strong>Astuce :</strong> Cliquez sur les cartes pour voir le recto et le verso !"
             },
-            "armor": {
-                "title": "Carte d'Armure : Armure de Cuir",
-                "front": "<strong>Recto :</strong> Illustration, prix, poids, CA de base",
-                "back": "<strong>Verso :</strong> Modificateurs, restrictions, descriptions"
-            },
-            "tip": "<strong>Astuce :</strong> Cliquez sur les cartes pour voir le recto et le verso !"
-        },
-        "usage": {
-            "title": "Comment Utiliser vos Cartes",
-            "inGame": {
-                "title": "🎮 Pendant le Jeu",
-                "quickAccess": {
-                    "title": "1. Accès Rapide",
-                    "list": {
-                        "item1": "• Gardez vos cartes d'équipement à portée de main",
-                        "item2": "• Consultez les propriétés spéciales sans ralentir le jeu",
-                        "item3": "• Plus besoin d'ouvrir les manuels pendant l'action"
+            "usage": {
+                "title": "Comment Utiliser vos Cartes",
+                "inGame": {
+                    "title": "🎮 Pendant le Jeu",
+                    "quickAccess": {
+                        "title": "1. Accès Rapide",
+                        "list": {
+                            "item1": "• Gardez vos cartes d'équipement à portée de main",
+                            "item2": "• Consultez les propriétés spéciales sans ralentir le jeu",
+                            "item3": "• Plus besoin d'ouvrir les manuels pendant l'action"
+                        }
+                    },
+                    "dmShare": {
+                        "title": "2. Partage avec le MJ",
+                        "list": {
+                            "item1": "• Montrez directement vos cartes au MJ",
+                            "item2": "• Validation immédiate des règles et effets",
+                            "item3": "• Clarification rapide en cas de doute"
+                        }
                     }
                 },
-                "dmShare": {
-                    "title": "2. Partage avec le MJ",
-                    "list": {
-                        "item1": "• Montrez directement vos cartes au MJ",
-                        "item2": "• Validation immédiate des règles et effets",
-                        "item3": "• Clarification rapide en cas de doute"
-                    }
-                }
-            },
-            "organization": {
-                "title": "Organisation",
-                "categorySort": {
-                    "title": "1. Tri par Catégorie",
-                    "list": {
-                        "item1": "• Séparez : Armes, Armures, Équipement, Sorts",
-                        "item2": "• Utilisez des intercalaires ou pochettes",
-                        "item3": "• Gardez les cartes actuelles sur le dessus"
+                "organization": {
+                    "title": "Organisation",
+                    "categorySort": {
+                        "title": "1. Tri par Catégorie",
+                        "list": {
+                            "item1": "• Séparez : Armes, Armures, Équipement, Sorts",
+                            "item2": "• Utilisez des intercalaires ou pochettes",
+                            "item3": "• Gardez les cartes actuelles sur le dessus"
+                        }
+                    },
+                    "visualInventory": {
+                        "title": "2. Inventaire Visuel",
+                        "list": {
+                            "item1": "• Étalez vos cartes d'équipement actuel",
+                            "item2": "• Ajoutez/retirez selon vos acquisitions",
+                            "item3": "• Inventaire physique = inventaire de personnage"
+                        }
                     }
                 },
-                "visualInventory": {
-                    "title": "2. Inventaire Visuel",
-                    "list": {
-                        "item1": "• Étalez vos cartes d'équipement actuel",
-                        "item2": "• Ajoutez/retirez selon vos acquisitions",
-                        "item3": "• Inventaire physique = inventaire de personnage"
+                "proTips": {
+                    "title": "Conseils de Pro",
+                    "rotation": "<strong>Rotation :</strong> Changez vos cartes selon vos aventures",
+                    "protection": "<strong>Protection :</strong> Utilisez des protège-cartes transparents",
+                    "notes": {
+                        "main": "<strong>Notes :</strong> Annotez au crayon les modifications temporaires",
+                        "tip": "Conseil pro : Utilisez des crayons Staedtler 8B ou 9B pour un marquage optimal"
                     }
                 }
             },
-            "proTips": {
-                "title": "Conseils de Pro",
-                "rotation": "<strong>Rotation :</strong> Changez vos cartes selon vos aventures",
-                "protection": "<strong>Protection :</strong> Utilisez des protège-cartes transparents",
-                "notes": {
-                    "main": "<strong>Notes :</strong> Annotez au crayon les modifications temporaires",
-                    "tip": "Conseil pro : Utilisez des crayons Staedtler 8B ou 9B pour un marquage optimal"
-                }
-            }
-        },
-        "backToMain": "🔝 Retour au menu principal"
+            "backToMain": "🔝 Retour au menu principal"
+        }
     },
     "money": {
         "title": "Guide de la Monnaie D&D",
@@ -927,7 +934,6 @@
                 "gold": "Or",
                 "platinum": "Platine"
             },
-            "lotsRecommendedTitle": "Collections Tableau Multiplicateur",
             "productSummary": "Lot de pièces D&D",
             "coinDescription": {
                 "faithfulReproduction": "Nos pièces métalliques reproduisent fidèlement le système monétaire de D&D. Chaque type de pièce a son propre design et sa finition unique."

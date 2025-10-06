@@ -40,9 +40,22 @@
         "pieces": "Coins",
         "cards": "Cards",
         "triptychs": "Triptychs",
-        "home": "Home"
+        "home": "Home",
+        "skipToContent": "Skip to content",
+        "menu": "Menu",
+        "closeMenu": "Close menu",
+        "mainNavigation": "Main navigation",
+        "mobileNavigation": "Mobile navigation"
     },
     "btnOverlay": {
+        "discover": {
+            "desktop": "Discover",
+            "mobile": "See"
+        },
+        "collection": {
+            "desktop": "Full collection",
+            "mobile": "See all"
+        },
         "shop": {
             "desktop": "The Shop",
             "mobile": "Shop"
@@ -90,32 +103,6 @@
         "subtitle2": "Crafted in Quebec • 10+ years lifespan • Fast delivery",
         "discoverCreations": "Discover our creations",
         "shopNow": "See the full collection"
-    },
-    "btnOverlay": {
-        "discover": {
-            "desktop": "Discover",
-            "mobile": "See"
-        },
-        "collection": {
-            "desktop": "Full collection",
-            "mobile": "See all"
-        },
-        "shop": {
-            "desktop": "The Shop",
-            "mobile": "Shop"
-        },
-        "gameHelp": {
-            "desktop": "Grimoire",
-            "mobile": "Grimoire"
-        },
-        "contact": {
-            "desktop": "Message",
-            "mobile": "Contact"
-        },
-        "news": {
-            "desktop": "Chronicles",
-            "mobile": "News"
-        }
     },
     "home": {
         "featured": {
@@ -170,7 +157,10 @@
     "product": {
         "back": "Back to shop",
         "multiplier": "Multiplier",
+        "metal": "Metal",
         "language": "Language",
+        "decreaseQuantity": "Decrease quantity",
+        "increaseQuantity": "Increase quantity",
         "languageOptions": {
             "FR": "French",
             "EN": "English"
@@ -365,7 +355,29 @@
         "nextImage": "Next image",
         "loading": "Loading...",
         "error": "Error",
+        "errorLoadingProducts": "Error loading products",
         "close": "Close",
+        "add": "Add",
+        "remove": "Remove",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "save": "Save",
+        "delete": "Delete",
+        "edit": "Edit",
+        "search": "Search",
+        "filter": "Filter",
+        "sort": "Sort",
+        "show": "Show",
+        "hide": "Hide",
+        "more": "More",
+        "less": "Less",
+        "all": "All",
+        "none": "None",
+        "yes": "Yes",
+        "no": "No",
+        "ok": "OK",
+        "apply": "Apply",
+        "reset": "Reset",
         "musicPlayer": {
             "previous": "Previous",
             "playPause": "Play / Pause",

@@ -300,7 +300,7 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
                   data-item-custom<?= (int) $triptychFieldIndex ?>-value="<?= htmlspecialchars($defaultTriptychOption) ?>"
                 <?php endif; ?>
                 <?php if ($metalFieldIndex !== null) : ?>
-                  data-item-custom<?= (int) $metalFieldIndex ?>-name="Metal"
+                  data-item-custom<?= (int) $metalFieldIndex ?>-name="<?= htmlspecialchars($translations['product']['metal'] ?? 'Métal') ?>"
                   data-item-custom<?= (int) $metalFieldIndex ?>-type="dropdown"
                   data-item-custom<?= (int) $metalFieldIndex ?>-options="<?= htmlspecialchars(implode('|', $metalsDisplay)) ?>"
                   data-item-custom<?= (int) $metalFieldIndex ?>-value="<?= htmlspecialchars($defaultMetal) ?>"
@@ -331,14 +331,14 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
 
         <!-- Indicateur de chargement stock -->
         <div class="stock-loading-indicator text-center p-2" style="display: none;">
-          <img src="/media/branding/icons/roue.webp" alt="Chargement" class="loading-gear loading-gear-sm mx-auto">
+          <img src="/media/branding/icons/roue.webp" alt="<?= __('ui.loading', 'Chargement...') ?>" class="loading-gear loading-gear-sm mx-auto">
         </div>
 
         <!-- État rupture de stock (masqué par défaut) -->
         <div class="stock-unavailable-overlay absolute inset-0 bg-gray-900/80 flex items-center justify-center rounded-xl" style="display: none;">
           <div class="text-center text-red-400">
             <div class="mb-2">
-              <img src="/media/branding/icons/rupture.webp" alt="Rupture de stock" class="w-16 h-16 mx-auto" loading="lazy">
+              <img src="/media/branding/icons/rupture.webp" alt="<?= __('product.outOfStock.title', 'Trésor Épuisé') ?>" class="w-16 h-16 mx-auto" loading="lazy">
             </div>
             <div class="text-base font-bold mb-1" data-i18n="product.outOfStock.title">Trésor Épuisé</div>
             <div class="text-xs opacity-80" data-i18n="product.outOfStock.subtitle">Malheureusement, cet artefact n'est plus disponible pour le moment</div>
