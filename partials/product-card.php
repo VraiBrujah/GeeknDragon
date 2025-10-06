@@ -15,19 +15,19 @@ $descriptionEn = (string) ($product['description_en'] ?? $descriptionFr);
 $description = $lang === 'en' ? $descriptionEn : $descriptionFr;
 
 // Markdown optimisé avec cache
-require_once __DIR__ . '/../includes/markdown-cache.php';
+// Utilise la classe MarkdownCache via autoload (PSR-4)
 
 // Génération de clés de cache uniques basées sur l'ID produit
 $cacheKeyFr = $id . '_desc_fr';
 $cacheKeyEn = $id . '_desc_en';
 
-$descriptionHtmlFr = MarkdownCache::convertToHtml($descriptionFr, $cacheKeyFr);
-$descriptionHtmlEn = MarkdownCache::convertToHtml($descriptionEn, $cacheKeyEn);
+$descriptionHtmlFr = \GeeknDragon\Includes\MarkdownCache::convertToHtml($descriptionFr, $cacheKeyFr);
+$descriptionHtmlEn = \GeeknDragon\Includes\MarkdownCache::convertToHtml($descriptionEn, $cacheKeyEn);
 $descriptionHtml = $lang === 'en' ? $descriptionHtmlEn : $descriptionHtmlFr;
 
 // Alt text optimisé
-$altFr = MarkdownCache::convertToPlainText($descriptionFr, $id . '_alt_fr');
-$altEn = MarkdownCache::convertToPlainText($descriptionEn, $id . '_alt_en');
+$altFr = \GeeknDragon\Includes\MarkdownCache::convertToPlainText($descriptionFr, $id . '_alt_fr');
+$altEn = \GeeknDragon\Includes\MarkdownCache::convertToPlainText($descriptionEn, $id . '_alt_en');
 $alt = $lang === 'en' ? $altEn : $altFr;
 
 // Gestion d'un résumé multilingue avec repli sur la description nettoyée

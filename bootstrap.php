@@ -35,6 +35,20 @@ require_once __DIR__ . '/vendor/autoload.php';
 // Chargement sécurisé des variables d'environnement
 Dotenv\Dotenv::createImmutable(__DIR__)->safeLoad();
 
+// En cas d'autoload Composer non mis à jour, fournir un autoloader PSR-4 minimal
+spl_autoload_register(static function ($class) {
+    $prefix = 'GeeknDragon\\';
+    $len = strlen($prefix);
+    if (strncmp($class, $prefix, $len) !== 0) {
+        return;
+    }
+    $relative = substr($class, $len);
+    $file = __DIR__ . '/src/' . str_replace('\\', DIRECTORY_SEPARATOR, $relative) . '.php';
+    if (is_file($file)) {
+        require $file;
+    }
+});
+
 /**
  * Configuration des métriques de performance pour monitoring
  * Initialise les constantes de temps et mémoire au début de la requête

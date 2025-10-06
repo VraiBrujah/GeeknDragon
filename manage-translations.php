@@ -6,7 +6,8 @@
  * et l'extension du système à de nouvelles langues
  */
 
-require 'includes/csv-products-manager.php';
+require __DIR__ . '/vendor/autoload.php';
+use GeeknDragon\Includes\CsvProductsManager;
 
 echo "🌍 Gestionnaire de Traductions - GeeknDragon" . PHP_EOL;
 echo "=============================================" . PHP_EOL;

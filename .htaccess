@@ -160,3 +160,7 @@
     AddOutputFilterByType DEFLATE text/xml
     AddOutputFilterByType DEFLATE image/svg+xml
 </IfModule>
+# Content Security Policy (served via header to include frame-ancestors)
+<IfModule mod_headers.c>
+    Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; frame-ancestors 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.snipcart.com https://js.stripe.com https://www.googletagmanager.com https://cdn.consentmanager.net https://c.delivery.consentmanager.net; connect-src 'self' https://api.stripe.com https://api.snipcart.com https://app.snipcart.com https://checkout.stripe.com https://cdn.snipcart.com https://payment.snipcart.com https://js.stripe.com https://hooks.stripe.com https://m.stripe.com https://www.google-analytics.com https://www.googletagmanager.com; frame-src 'self' https://checkout.stripe.com https://js.stripe.com https://hooks.stripe.com https://m.stripe.com https://api.stripe.com https://checkout.snipcart.com https://app.snipcart.com https://payment.snipcart.com; form-action 'self' https://payment.snipcart.com https://api.stripe.com"
+</IfModule>

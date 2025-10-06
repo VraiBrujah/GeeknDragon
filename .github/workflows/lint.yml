@@ -31,4 +31,5 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
+      - run: npm run fonts:fetch
       - run: npm test -- --ci

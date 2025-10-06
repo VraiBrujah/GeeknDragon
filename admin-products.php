@@ -14,13 +14,13 @@ if (PHP_VERSION_ID >= 70300) {
     session_set_cookie_params([
         'secure' => $https,
         'httponly' => true,
-        'samesite' => 'Lax',
+        'samesite' => 'Strict',
         'path' => '/',
     ]);
 } else {
     ini_set('session.cookie_secure', $https ? '1' : '0');
     ini_set('session.cookie_httponly', '1');
-    ini_set('session.cookie_samesite', 'Lax');
+    ini_set('session.cookie_samesite', 'Strict');
 }
 session_start();
 if (empty($_SESSION['csrf_token'])) {
@@ -100,7 +100,7 @@ if (isset($_GET['logout'])) {
     exit;
 }
 
-require_once __DIR__ . '/includes/csv-products-manager.php';
+use GeeknDragon\Includes\CsvProductsManager;
 
 $manager = new CsvProductsManager();
 $message = '';

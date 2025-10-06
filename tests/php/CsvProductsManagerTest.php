@@ -1,8 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-
-require_once __DIR__ . '/../../includes/csv-products-manager.php';
+use GeeknDragon\Includes\CsvProductsManager;
 
 final class CsvProductsManagerTest extends TestCase
 {
@@ -46,4 +45,3 @@ final class CsvProductsManagerTest extends TestCase
         $this->assertSame(12.5, (float)($data['test-1']['price'] ?? 0));
     }
 }
-

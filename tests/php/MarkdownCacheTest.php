@@ -1,8 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-
-require_once __DIR__ . '/../../includes/markdown-cache.php';
+use GeeknDragon\Includes\MarkdownCache;
 
 final class MarkdownCacheTest extends TestCase
 {
@@ -21,4 +20,3 @@ final class MarkdownCacheTest extends TestCase
         $this->assertStringNotContainsString('**', $text);
     }
 }
-

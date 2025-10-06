@@ -24,6 +24,12 @@ $debugMode = ($_ENV['DEBUG_MODE'] ?? 'false') === 'true';
 
 ?>
 <head>
+  <!-- Performance hints: preconnect to critical third-parties -->
+  <link rel="preconnect" href="https://cdn.snipcart.com" crossorigin>
+  <link rel="preconnect" href="https://js.stripe.com" crossorigin>
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.consentmanager.net" crossorigin>
+  <link rel="preconnect" href="https://c.delivery.consentmanager.net" crossorigin>
   <script>
     // Mode debug global - contrôle tous les logs de débogage
     window.DEBUG_MODE = <?php echo $debugMode ? 'true' : 'false'; ?>;
@@ -34,16 +40,7 @@ $debugMode = ($_ENV['DEBUG_MODE'] ?? 'false') === 'true';
   ?>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; 
-    base-uri 'self';
-    frame-ancestors 'self';
-    img-src 'self' data: https:; 
-    style-src 'self' 'unsafe-inline'; 
-    font-src 'self' data:; 
-    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.snipcart.com https://js.stripe.com https://www.googletagmanager.com https://cdn.consentmanager.net https://c.delivery.consentmanager.net; 
-    connect-src 'self' https://api.stripe.com https://api.snipcart.com https://app.snipcart.com https://checkout.stripe.com https://cdn.snipcart.com https://payment.snipcart.com https://js.stripe.com https://hooks.stripe.com https://m.stripe.com https://www.google-analytics.com https://www.googletagmanager.com; 
-    frame-src 'self' https://checkout.stripe.com https://js.stripe.com https://hooks.stripe.com https://m.stripe.com https://api.stripe.com https://checkout.snipcart.com https://app.snipcart.com https://payment.snipcart.com; 
-    form-action 'self' https://payment.snipcart.com https://api.stripe.com;"/>
+  <!-- CSP est servie via en-têtes Apache (voir .htaccess) pour supporter frame-ancestors -->
   <meta http-equiv="Permissions-Policy" content="payment=(self), payment-handler=(self)"/>
   <title><?= htmlspecialchars($title ?? 'Geek & Dragon') ?></title>
   <meta name="description" content="<?= htmlspecialchars($metaDescription ?? '') ?>" />
@@ -77,6 +74,12 @@ $debugMode = ($_ENV['DEBUG_MODE'] ?? 'false') === 'true';
   <!-- Polices auto-hébergées (à compléter si migration complète) -->
   <?php if (file_exists(__DIR__.'/css/fonts-selfhosted.css')): ?>
     <link rel="stylesheet" href="/css/fonts-selfhosted.css?v=<?= filemtime(__DIR__.'/css/fonts-selfhosted.css') ?>">
+    <?php if (file_exists(__DIR__.'/media/fonts/OpenSans-400.woff2')): ?>
+      <link rel="preload" as="font" type="font/woff2" href="/media/fonts/OpenSans-400.woff2" crossorigin>
+    <?php endif; ?>
+    <?php if (file_exists(__DIR__.'/media/fonts/Cinzel-600.woff2')): ?>
+      <link rel="preload" as="font" type="font/woff2" href="/media/fonts/Cinzel-600.woff2" crossorigin>
+    <?php endif; ?>
   <?php endif; ?>
   <link rel="stylesheet" href="/css/styles.css?v=<?= filemtime(__DIR__.'/css/styles.css') ?>">
   <link rel="stylesheet" href="/css/shop-grid.css?v=<?= filemtime(__DIR__.'/css/shop-grid.css') ?>">

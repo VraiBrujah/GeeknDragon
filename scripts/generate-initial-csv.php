@@ -5,7 +5,8 @@
  * Usage: php scripts/generate-initial-csv.php
  */
 
-require_once __DIR__ . '/../includes/csv-products-manager.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+use GeeknDragon\Includes\CsvProductsManager;
 
 $jsonPath = __DIR__ . '/../data/products.json';
 $csvPath = __DIR__ . '/../data/products.csv';

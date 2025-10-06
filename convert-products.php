@@ -1,5 +1,6 @@
 <?php
-require 'includes/csv-products-manager.php';
+require __DIR__ . '/vendor/autoload.php';
+use GeeknDragon\Includes\CsvProductsManager;
 
 // Nettoyage automatique du CSV si nécessaire
 $csvContent = file_get_contents('data/products.csv');

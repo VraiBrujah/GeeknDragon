@@ -42,8 +42,29 @@ $lang = $_GET['lang'] ?? 'fr';
 $active = 'boutique';
 require __DIR__ . '/../i18n.php';
 
-// Include du système de rendu optimisé
-require_once __DIR__ . '/../includes/product-card-renderer.php';
+/**
+ * Rendu de cartes produits via le partial product-card.php
+ *
+ * @param array $products Liste de produits
+ * @param string $lang Langue courante
+ * @param array $translations Traductions i18n
+ * @return string HTML concaténé des cartes produits
+ */
+function renderProductCards(array $products, string $lang, array $translations): string
+{
+    if (empty($products)) {
+        return '';
+    }
+
+    $html = '';
+    foreach ($products as $product) {
+        ob_start();
+        include __DIR__ . '/../partials/product-card.php';
+        $html .= ob_get_clean();
+    }
+
+    return $html;
+}
 
 // Catégorie demandée
 $category = $_GET['category'] ?? 'all';
@@ -127,7 +148,7 @@ try {
         
         // Pour featured, on retourne directement le HTML des produits
         $response = [
-            'html' => ProductCardRenderer::renderMultiple($featuredProducts, $lang, $translations),
+            'html' => renderProductCards($featuredProducts, $lang, $translations),
             'count' => count($featuredProducts)
         ];
     } else {
@@ -135,15 +156,15 @@ try {
         $response = [];
 
     if ($category === 'all' || $category === 'pieces') {
-        $response['pieces'] = ProductCardRenderer::renderMultiple($pieces, $lang, $translations);
+        $response['pieces'] = renderProductCards($pieces, $lang, $translations);
     }
 
     if ($category === 'all' || $category === 'cards') {
-        $response['cards'] = ProductCardRenderer::renderMultiple($cards, $lang, $translations);
+        $response['cards'] = renderProductCards($cards, $lang, $translations);
     }
 
     if ($category === 'all' || $category === 'triptychs') {
-        $response['triptychs'] = ProductCardRenderer::renderMultiple($triptychs, $lang, $translations);
+        $response['triptychs'] = renderProductCards($triptychs, $lang, $translations);
     }
 
         // Ajouter les compteurs et métriques pour les catégories normales
@@ -168,3 +189,4 @@ try {
     echo json_encode(['error' => 'Erreur serveur: ' . $e->getMessage()]);
 }
 ?>
+
