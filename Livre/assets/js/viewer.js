@@ -113,12 +113,18 @@ class ManuscritsViewer {
           return;
         } else {
           console.warn(`[DEBUG] Livre "${position.bookSlug}" introuvable dans la liste`);
+          console.warn(`[DEBUG] 🗑️ Effacement position obsolète`);
+          // Effacer la position sauvegardée obsolète
+          localStorage.removeItem('manuscrits_reading_position');
         }
       }
 
       // Fallback : charger le premier livre
       if (this.books.length > 0) {
         console.log(`[DEBUG] Fallback : chargement premier livre "${this.books[0].name}"`);
+        // 🔓 Désactiver mode restauration avant fallback (pas de restauration à faire)
+        this.isRestoring = false;
+        console.log('[DEBUG] 🔓 Mode restauration DÉSACTIVÉ (pas de position à restaurer)');
         await this.switchBook(this.books[0].slug);
       }
 
@@ -126,11 +132,13 @@ class ManuscritsViewer {
 
     } catch (error) {
       console.error('❌ [ERREUR] Chargement livre initial:', error);
+      // 🔓 Désactiver mode restauration en cas d'erreur
+      this.isRestoring = false;
+      console.log('[DEBUG] 🔓 Mode restauration DÉSACTIVÉ (erreur)');
       if (this.books.length > 0) {
         await this.switchBook(this.books[0].slug);
       }
     }
-    // Note: isRestoring sera désactivé dans restoreScrollPosition()
   }
 
   /**
