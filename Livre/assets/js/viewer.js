@@ -11,7 +11,7 @@
  * - Optimisation performance avec cache intelligent
  *
  * @author Brujah - Geek & Dragon
- * @version 1.3.0
+ * @version 1.3.2
  */
 
 class ManuscritsViewer {
@@ -24,6 +24,7 @@ class ManuscritsViewer {
     this.currentChapter = null;
     this.scrollTimeout = null;
     this.lastSavedScrollY = 0; // Cache pour éviter écritures localStorage inutiles
+    this.isRestoring = false; // Flag pour bloquer sauvegarde pendant restauration
 
     // Éléments DOM
     this.tabsContainer = document.getElementById('bookTabs');
@@ -90,6 +91,11 @@ class ManuscritsViewer {
    */
   async loadInitialBook() {
     console.log('[DEBUG] ========== CHARGEMENT LIVRE INITIAL ==========');
+
+    // 🛡️ ACTIVER mode restauration pour bloquer sauvegardes
+    this.isRestoring = true;
+    console.log('[DEBUG] 🛡️ Mode restauration ACTIVÉ (sauvegardes bloquées)');
+
     try {
       const saved = localStorage.getItem('manuscrits_reading_position');
       console.log('[DEBUG] Position sauvegardée trouvée:', saved ? 'Oui' : 'Non');
@@ -124,6 +130,7 @@ class ManuscritsViewer {
         await this.switchBook(this.books[0].slug);
       }
     }
+    // Note: isRestoring sera désactivé dans restoreScrollPosition()
   }
 
   /**
@@ -359,6 +366,12 @@ class ManuscritsViewer {
   saveReadingPosition() {
     console.log('[DEBUG] saveReadingPosition() appelée');
 
+    // 🛡️ BLOQUÉ pendant restauration pour éviter écrasement
+    if (this.isRestoring) {
+      console.warn('[DEBUG] 🛡️ Sauvegarde BLOQUÉE : Restauration en cours');
+      return;
+    }
+
     if (!this.currentBook) {
       console.warn('[DEBUG] Sauvegarde annulée : currentBook est null');
       return;
@@ -442,6 +455,9 @@ class ManuscritsViewer {
 
       if (!saved) {
         console.warn('[DEBUG] Aucune position sauvegardée trouvée');
+        // 🔓 DÉSACTIVER mode restauration
+        this.isRestoring = false;
+        console.log('[DEBUG] 🔓 Mode restauration DÉSACTIVÉ (sauvegardes réactivées)');
         return;
       }
 
@@ -452,6 +468,9 @@ class ManuscritsViewer {
       // Vérifier que c'est bien le même livre
       if (position.bookSlug !== this.currentBook?.slug) {
         console.warn(`[DEBUG] Livres différents : actuel="${this.currentBook?.slug}" vs sauvegardé="${position.bookSlug}"`);
+        // 🔓 DÉSACTIVER mode restauration
+        this.isRestoring = false;
+        console.log('[DEBUG] 🔓 Mode restauration DÉSACTIVÉ (sauvegardes réactivées)');
         return;
       }
 
@@ -475,7 +494,11 @@ class ManuscritsViewer {
           if (Math.abs(actualScrollY - position.scrollY) > 5) {
             console.error(`⚠️ ÉCART DÉTECTÉ: ${Math.abs(actualScrollY - position.scrollY)}px de différence!`);
           }
-        }, 100);
+
+          // 🔓 DÉSACTIVER mode restauration APRÈS vérification
+          this.isRestoring = false;
+          console.log('[DEBUG] 🔓 Mode restauration DÉSACTIVÉ (sauvegardes réactivées)');
+        }, 150); // Délai pour garantir que le scroll est terminé
 
         // Mettre à jour le chapitre actif visuellement
         if (position.chapterSlug) {
@@ -496,12 +519,19 @@ class ManuscritsViewer {
         } else {
           console.error(`[DEBUG] Élément chapitre "${position.chapterSlug}" introuvable!`);
         }
+
+        // 🔓 DÉSACTIVER mode restauration
+        this.isRestoring = false;
+        console.log('[DEBUG] 🔓 Mode restauration DÉSACTIVÉ (sauvegardes réactivées)');
       }
 
       console.log('[DEBUG] ========== FIN RESTAURATION ==========');
 
     } catch (error) {
       console.error('❌ [ERREUR] Restauration scroll:', error);
+      // 🔓 DÉSACTIVER mode restauration même en cas d'erreur
+      this.isRestoring = false;
+      console.log('[DEBUG] 🔓 Mode restauration DÉSACTIVÉ (sauvegardes réactivées)');
     }
   }
 
