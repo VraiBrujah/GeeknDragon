@@ -172,8 +172,9 @@ Le visualiseur affichera :
 |----------|----------|
 | Livre n'apparaît pas | Vérifiez qu'il contient au moins un `.md` valide |
 | Ordre chapitres incorrect | Nommez avec 2 chiffres : `01_` pas `1_` |
-| Markdown pas affiché | CDN marked.js bloqué, téléchargez version locale |
+| Markdown pas affiché | Vérifiez `assets/js/marked.min.js` existe (35 KB) |
 | Page blanche | Vérifiez console navigateur (F12) pour erreurs |
+| Erreur CSP | ✅ Résolu : marked.js est maintenant local |
 
 ---
 

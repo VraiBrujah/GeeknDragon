@@ -13,14 +13,8 @@
   <!-- Styles autonomes -->
   <link rel="stylesheet" href="assets/css/viewer.css?v=<?= time() ?>">
 
-  <!-- Parser Markdown (CDN avec fallback local) -->
-  <script>
-    // Tentative de chargement depuis CDN
-    window.markedLoaded = false;
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/marked@11.0.0/marked.min.js"
-          onload="window.markedLoaded = true"
-          onerror="console.warn('CDN marked.js échoué, chargement fallback...')"></script>
+  <!-- Parser Markdown (version locale pour compatibilité CSP) -->
+  <script src="assets/js/marked.min.js?v=<?= filemtime(__DIR__.'/assets/js/marked.min.js') ?>"></script>
 </head>
 <body>
   <div class="manuscrits-viewer">
@@ -72,21 +66,5 @@
 
   <!-- Script principal -->
   <script src="assets/js/viewer.js?v=<?= time() ?>"></script>
-
-  <!-- Fallback si marked.js CDN échoue -->
-  <script>
-    setTimeout(() => {
-      if (!window.markedLoaded && typeof marked === 'undefined') {
-        console.error('Marked.js non chargé. Le parsing markdown peut échouer.');
-        // Affichage d'un avertissement à l'utilisateur
-        const warning = document.createElement('div');
-        warning.style.cssText = 'position:fixed;top:10px;left:50%;transform:translateX(-50%);background:#8B0000;color:#fff;padding:1rem 2rem;border-radius:8px;z-index:9999;';
-        warning.textContent = '⚠️ Erreur chargement parser markdown (CDN inaccessible)';
-        document.body.appendChild(warning);
-
-        setTimeout(() => warning.remove(), 5000);
-      }
-    }, 3000);
-  </script>
 </body>
 </html>

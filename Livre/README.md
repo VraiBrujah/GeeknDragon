@@ -200,14 +200,13 @@ Le design s'adapte automatiquement :
 
 **Symptôme** : Texte brut affiché au lieu du formatage
 
-**Solution** : Le CDN marked.js est inaccessible. Téléchargez une copie locale :
+**Solution** : ✅ **Déjà résolu !** Le système utilise marked.js en version **locale** (`assets/js/marked.min.js`) pour garantir la compatibilité avec la Content Security Policy (CSP) stricte d'Hostpapa.
+
+Si le fichier `marked.min.js` est manquant, téléchargez-le :
 
 ```bash
-# Télécharger marked.js localement
-curl https://cdn.jsdelivr.net/npm/marked@11.0.0/marked.min.js -o assets/js/marked.min.js
+curl -L https://cdn.jsdelivr.net/npm/marked@11.0.0/marked.min.js -o assets/js/marked.min.js
 ```
-
-Puis modifiez `index.php` pour pointer vers la version locale.
 
 ### Les chapitres ne s'affichent pas dans l'ordre
 

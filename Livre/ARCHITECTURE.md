@@ -61,8 +61,8 @@ Le visualiseur de manuscrits est une **application web autonome** construite sel
 
 **Technologies** :
 - HTML5 sémantique
-- PHP pour cache-busting (`?v=<?= time() ?>`)
-- Chargement CDN marked.js avec fallback
+- PHP pour cache-busting (`?v=<?= filemtime() ?>`)
+- Marked.js en version locale (compatibilité CSP stricte)
 
 ---
 
@@ -430,10 +430,11 @@ curl "http://localhost/GeeknDragon/Livre/api.php?action=chapter&book=Eveil&file=
 |--------|-------------|
 | **Frontend** | HTML5, CSS3 (Variables, Grid, Flexbox), JavaScript ES6+ |
 | **Backend** | PHP 8.1+ (strict types, typed properties) |
-| **Parser** | marked.js 11.0.0 |
+| **Parser** | marked.js 11.0.0 (local, CSP-compliant) |
 | **Serveur** | Apache 2.4+ (mod_rewrite, mod_deflate, mod_headers) |
 | **Storage** | localStorage (Web Storage API) |
 | **HTTP** | REST API (JSON) |
+| **Sécurité** | CSP stricte (script-src 'self') |
 
 ---
 
