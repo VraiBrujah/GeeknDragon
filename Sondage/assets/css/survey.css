@@ -992,7 +992,8 @@ body {
 .btn-select-user,
 .btn-create-user,
 .btn-compare,
-.btn-export {
+.btn-export,
+.btn-select-this-user {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
@@ -1011,7 +1012,8 @@ body {
 .btn-select-user:hover,
 .btn-create-user:hover,
 .btn-compare:hover,
-.btn-export:hover {
+.btn-export:hover,
+.btn-select-this-user:hover {
   background: white;
   color: var(--color-primary);
   transform: translateY(-2px);

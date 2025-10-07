@@ -404,22 +404,13 @@ class SurveyViewer {
    * Attache les événements aux cases à cocher et champs de notes
    */
   attachCheckboxListeners() {
-    console.log('=== [DEBUG] attachCheckboxListeners ===');
-    console.log('[DEBUG] Mode lecture seule:', this.isReadOnly);
-    console.log('[DEBUG] Utilisateur actuel:', this.currentUser);
-    console.log('[DEBUG] Réponses chargées:', Object.keys(this.responses).length, 'requis');
-
     // Gérer les checkboxes
     const checkboxes = this.contentContainer.querySelectorAll('input[type="checkbox"]');
-    console.log('[DEBUG] Checkboxes trouvées:', checkboxes.length);
 
     checkboxes.forEach(checkbox => {
       checkbox.addEventListener('change', (e) => {
-        console.log('>>> [EVENT] Checkbox changée:', e.target.id);
-
         // Ne rien faire en mode lecture seule
         if (this.isReadOnly) {
-          console.warn('[BLOQUÉ] Mode lecture seule actif');
           e.preventDefault();
           return;
         }
@@ -428,34 +419,25 @@ class SurveyViewer {
         const field = e.target.dataset.field;
         const checked = e.target.checked;
 
-        console.log('[DATA]', { reqID, field, checked });
-
         // Mettre à jour les réponses
         if (!this.responses[reqID]) {
           this.responses[reqID] = {};
         }
 
         this.responses[reqID][field] = checked;
-        console.log('[SAVED] Réponse enregistrée:', this.responses[reqID]);
 
         // Marquer comme non sauvegardé
         this.unsavedChanges = true;
         this.updateSaveButton();
-
-        console.log('[STATE] unsavedChanges =', this.unsavedChanges);
       });
     });
 
     // Gérer les champs de priorité (input number)
     const priorityFields = this.contentContainer.querySelectorAll('input.priority-field');
-    console.log('[DEBUG] Champs priorité trouvés:', priorityFields.length);
 
     priorityFields.forEach(field => {
       field.addEventListener('input', (e) => {
-        console.log('>>> [EVENT] Priorité modifiée:', e.target.id);
-
         if (this.isReadOnly) {
-          console.warn('[BLOQUÉ] Mode lecture seule actif');
           e.preventDefault();
           return;
         }
@@ -474,34 +456,25 @@ class SurveyViewer {
           e.target.value = value;
         }
 
-        console.log('[DATA]', { reqID, fieldName, value });
-
         // Mettre à jour les réponses
         if (!this.responses[reqID]) {
           this.responses[reqID] = {};
         }
 
         this.responses[reqID][fieldName] = value;
-        console.log('[SAVED] Réponse enregistrée:', this.responses[reqID]);
 
         // Marquer comme non sauvegardé
         this.unsavedChanges = true;
         this.updateSaveButton();
-
-        console.log('[STATE] unsavedChanges =', this.unsavedChanges);
       });
     });
 
     // Gérer les champs de notes (textarea)
     const notesFields = this.contentContainer.querySelectorAll('textarea.notes-field');
-    console.log('[DEBUG] Champs notes trouvés:', notesFields.length);
 
     notesFields.forEach(field => {
       field.addEventListener('input', (e) => {
-        console.log('>>> [EVENT] Notes modifiées:', e.target.id);
-
         if (this.isReadOnly) {
-          console.warn('[BLOQUÉ] Mode lecture seule actif');
           e.preventDefault();
           return;
         }
@@ -510,25 +483,18 @@ class SurveyViewer {
         const fieldName = e.target.dataset.field;
         const value = e.target.value;
 
-        console.log('[DATA]', { reqID, fieldName, valueLength: value.length });
-
         // Mettre à jour les réponses
         if (!this.responses[reqID]) {
           this.responses[reqID] = {};
         }
 
         this.responses[reqID][fieldName] = value;
-        console.log('[SAVED] Réponse enregistrée');
 
         // Marquer comme non sauvegardé
         this.unsavedChanges = true;
         this.updateSaveButton();
-
-        console.log('[STATE] unsavedChanges =', this.unsavedChanges);
       });
     });
-
-    console.log('=== [DEBUG] Écouteurs attachés ===');
   }
 
   /**
@@ -677,16 +643,11 @@ class SurveyViewer {
 
       const userData = data.data;
 
-      console.log('[SELECT] userData reçu:', userData);
-      console.log('[SELECT] userData.responses type:', typeof userData.responses);
-      console.log('[SELECT] userData.responses is Array?:', Array.isArray(userData.responses));
-
       // Mettre à jour l'état
       this.currentUser = userData.username;
 
       // Forcer la conversion en objet (car PHP peut retourner un array)
       if (Array.isArray(userData.responses)) {
-        console.warn('[SELECT] Responses est un array, conversion en objet');
         this.responses = {};
         Object.keys(userData.responses).forEach(key => {
           this.responses[key] = userData.responses[key];
@@ -727,12 +688,6 @@ class SurveyViewer {
    * Applique les réponses chargées à l'interface
    */
   applyResponsesToUI() {
-    console.log('=== [LOAD] Application des réponses à l\'UI ===');
-    console.log('[LOAD] Nombre de requis avec réponses:', Object.keys(this.responses).length);
-
-    let appliedCount = 0;
-    let notFoundCount = 0;
-
     Object.keys(this.responses).forEach(reqID => {
       const reqResponses = this.responses[reqID];
 
@@ -745,26 +700,16 @@ class SurveyViewer {
           if (element.type === 'checkbox') {
             element.checked = value;
             element.disabled = false;
-            console.log(`[LOAD] ✓ Checkbox ${elementId} = ${value}`);
           } else if (element.type === 'number' || element.tagName === 'INPUT') {
             element.value = value;
             element.disabled = false;
-            console.log(`[LOAD] ✓ Input ${elementId} = ${value}`);
           } else if (element.tagName === 'TEXTAREA') {
             element.value = value;
             element.disabled = false;
-            console.log(`[LOAD] ✓ Textarea ${elementId} = ${value.substring(0, 30)}...`);
           }
-          appliedCount++;
-        } else {
-          console.warn(`[LOAD] ✗ Élément introuvable: ${elementId}`);
-          notFoundCount++;
         }
       });
     });
-
-    console.log(`[LOAD] Résultat: ${appliedCount} champs restaurés, ${notFoundCount} introuvables`);
-    console.log('=== [LOAD] Fin application ===');
   }
 
   /**
@@ -954,9 +899,6 @@ class SurveyViewer {
         responsesClean[key] = {...this.responses[key]};
       });
 
-      console.log('[SAVE] Responses clean:', responsesClean);
-      console.log('[SAVE] Responses clean stringified:', JSON.stringify(responsesClean));
-
       const payload = {
         survey: this.currentSurvey.name,
         user: this.currentUser,
@@ -964,18 +906,13 @@ class SurveyViewer {
         custom_requirements: this.customRequirements
       };
 
-      console.log('[SAVE] Payload à envoyer:', JSON.stringify(payload, null, 2));
-
       const response = await fetch('api.php?action=save-user-data', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
 
-      console.log('[SAVE] Réponse HTTP status:', response.status);
-
       const data = await response.json();
-      console.log('[SAVE] Réponse serveur:', data);
 
       if (!data.success) {
         throw new Error(data.error || 'Erreur sauvegarde');
@@ -984,11 +921,10 @@ class SurveyViewer {
       this.unsavedChanges = false;
       this.updateSaveButton();
 
-      console.log('[SAVE] ✓ Sauvegarde réussie');
       alert('✓ Données sauvegardées');
 
     } catch (error) {
-      console.error('[SAVE] ✗ Erreur sauvegarde:', error);
+      console.error('Erreur sauvegarde:', error);
       alert('❌ Erreur : ' + error.message);
     }
   }

@@ -18,7 +18,7 @@ Au sommet d'un éperon rocheux, cette lame de pierre qui défie le vide béant, 
 
 Sous ses bottes de cuir sanguin, la pierre millénaire, gravée de glyphes que nul cartographe n'oserait consigner, gardait l'entrée d'un sanctuaire dont le nom même avait été effacé par la terreur des siècles. Là où s'élevait jadis l'un des plus redoutables bastions du Savoir Interdit d'Etheria, ne demeuraient que ruines et silence sépulcral. Les colonnes titanesques gisaient fracassées, entassées en charnier de géants pétrifiés.
 
-La femme esquissa un sourire d'une beauté venimeuse, cruel. Ses lèvres exsangues révélèrent l'éclat d'ivoire de dents sculptées par les siècles de vampirisme. L'amertume glaciale qu'elles exhalaient suffit à faire naître des cristaux de givre sur la pierre.
+La femme esquissa un sourire d'une beauté venimeuse. Ses lèvres exsangues révélèrent l'éclat d'ivoire de dents sculptées par les siècles de vampirisme. L'amertume glaciale qu'elles exhalaient suffit à faire naître des cristaux de givre sur la pierre.
 
 Combien de siècles depuis qu'elle avait foulé ces terres maudites ? Des éons d'errance sanglante, d'attente lancinante dans les marges pourries du monde des vivants. À travers les hivers cosmiques qui transperçaient rivières et cœurs palpitants, elle avait attendu avec la patience des damnés éternels. Toujours attendu, accumulant sa rancœur en nectar vénéneux qui fermente dans les caves obscures de son âme corrompue.
 
@@ -38,7 +38,7 @@ La nuit choisie fut sans lune, sans étoiles, le ciel lui-même détournant le r
 
 Elle murmura les mots de pouvoir gravés dans sa mémoire. Sa voix tremblait mais ne faiblissait pas. Les syllabes d'Etherin roulaient sur sa langue, coupant, saignant, exigeant. Le cercle répondait. Les runes brûlaient. L'air lui-même frémissait de puissance contenue.
 
-Puis vint le moment du sacrifice ultime. La fiole de sang Éthérien, noire, qu'elle avait payée de tout ce qu'elle possédait. Le marchand avait murmuré des avertissements. « Sang d'un mort-vivant oublié. Sang d'un dieu déchu. Sang d'une abomination qui n'aurait jamais dû marcher sur terre. » Elle l'avait ignoré. Elle n'avait plus le choix.
+Puis vint le moment du sacrifice ultime. La fiole de sang Éthérien, noire, qu'elle avait payée de tout ce qu'elle possédait. Le marchand avait murmuré des avertissements. « Sang d'un mort-vivant ancestral. Sang d'un dieu déchu. Sang d'une abomination qui n'aurait jamais dû marcher sur terre. » Elle l'avait ignoré. Elle n'avait plus le choix.
 
 Elle versa trois gouttes sur sa langue.
 
@@ -100,7 +100,7 @@ Jamais.
 
 Ces souvenirs étaient sa malédiction la plus cruelle, plus douloureuse que la soif de sang, plus amère que l'immortalité elle-même.
 
-Dans les entrailles du sanctuaire oublié, la nuit retenait son souffle. Elle se tenait au seuil de son destin, immobile, et pour la première fois depuis des siècles, un frisson qui n'était pas celui de la faim la traversa.
+La nuit retenait son souffle autour d'elle. Elle se tenait au seuil de son destin, immobile, et pour la première fois depuis des siècles, un frisson qui n'était pas celui de la faim la traversa.
 
 Elle releva à peine la tête vers le ciel désert, l'esprit baigné d'un silence sacré. Les mots lui vinrent aux lèvres, vestige d'une foi qu'elle croyait morte.
 
@@ -108,13 +108,13 @@ Elle releva à peine la tête vers le ciel désert, l'esprit baigné d'un silenc
 
 Un souffle d'*Etherin* glissa entre ses lèvres, fragment d'une liturgie séculaire : *« Leth arën, Nyxeth »* (Protège-moi, Nyx)
 
-Ses doigts pâles et glacés se tendirent sous son manteau, effleurant une amulette dissimulée contre sa gorge. Un bijou oublié, orné d'une étoile à six branches gravée dans un métal noir qu'aucun artisan moderne ne savait plus travailler. Ses détails fins étaient presque effacés par le passage des siècles, mais la magie résiduelle pulsait encore. Elle sentit l'améthyste tiède contre sa chair froide, rappelant des serments prononcés dans le sang et scellés par la mort.
+Ses doigts pâles et glacés se tendirent sous son manteau, effleurant une amulette dissimulée contre sa gorge. Un bijou ancestral, orné d'une étoile à six branches gravée dans un métal noir qu'aucun artisan moderne ne savait plus travailler. Ses détails fins étaient presque effacés par le passage des siècles, mais la magie résiduelle pulsait encore. Elle sentit l'améthyste tiède contre sa chair froide, rappelant des serments prononcés dans le sang et scellés par la mort.
 
 Machinalement, elle fit rouler la pierre entre ses doigts. Ce geste simple, presque enfantin, l'apaisait d'une manière qu'elle n'arrivait pas à expliquer. Un réflexe de réconfort qui avait traversé la mort et la transformation, témoin obstiné de l'humanité qu'elle s'efforçait pourtant d'oublier.
 
 ### L'Entrée du Sanctuaire Oublié
 
-Ses pas la menèrent jusqu'à l'entrée béante du sanctuaire, une bouche de gouffre oublié qui s'ouvrait dans la montagne. L'ouverture était encadrée de blocs de pierre effondrés, certains massifs, d'autres réduits en gravats par l'érosion magique et les sortilèges de protection retournés contre leurs créateurs.
+Ses pas la menèrent jusqu'à l'entrée béante du sanctuaire, une bouche de gouffre perdu qui s'ouvrait dans la montagne. L'ouverture était encadrée de blocs de pierre effondrés, certains massifs, d'autres réduits en gravats par l'érosion magique et les sortilèges de protection retournés contre leurs créateurs.
 
 Les glyphes millénaires murmuraient leur avertissement aux rares initiés. Les runes brisées serpentaient autour de l'entrée, malédictions gravées pour l'éternité.
 
@@ -168,7 +168,7 @@ Mais la vue n'était qu'un sens parmi d'autres. Dans ces ténèbres séculaires,
 
 ### Les Sens de la Prédatrice
 
-L'air saturé d'humidité lui parlait avec l'éloquence d'un livre ouvert. Pierre humide et moisissure formaient les notes de surface, mais en-dessous : le sang séché depuis des siècles, l'encens sacrificiel oublié, les résidus huileux des rituels imprégnant la roche.
+L'air saturé d'humidité lui parlait avec l'éloquence d'un livre ouvert. Pierre humide et moisissure formaient les notes de surface, mais en-dessous : le sang séché depuis des siècles, l'encens sacrificiel ancien, les résidus huileux des rituels imprégnant la roche.
 
 Elle distinguait ces couches. Les notes métalliques du fer rouillé mélangé au sang coagulé, la morsure âcre du soufre qui avait servi aux invocations démoniaques, le sucré rance des sacrifices fanés dans les alcôves secrètes.
 
@@ -306,9 +306,9 @@ Son héritage n'était pas oublié, même après tous ces siècles d'exil et d'h
 
 Elle redressa la tête, ses prunelles écarlates brillant d'une lueur carnassière qui n'avait rien d'humain, reflétant une faim accumulée pendant des siècles de frustration et de colère rentrée.
 
-Elle était venue réclamer son dû, reprendre ce qui lui appartenait de droit divin, restaurer l'ordre oublié que des lâches et des ignorants avaient détruit par peur de sa beauté terrible.
+Elle était venue réclamer son dû, reprendre ce qui lui appartenait de droit divin, restaurer l'ordre ancien que des lâches et des ignorants avaient détruit par peur de sa beauté terrible.
 
-Ce sanctuaire, oublié des vivants et abandonné par les dieux, allait devenir le berceau de son ascension finale, le creuset de sa renaissance en tant que puissance cosmique. Ici, dans ces ruines imprégnées de la sueur et du sang de ses prédécesseurs, elle accomplirait ce qu'ils n'avaient pas eu le courage ou la vision de mener à son terme.
+Ce sanctuaire, délaissé des vivants et abandonné par les dieux, allait devenir le berceau de son ascension finale, le creuset de sa renaissance en tant que puissance cosmique. Ici, dans ces ruines imprégnées de la sueur et du sang de ses prédécesseurs, elle accomplirait ce qu'ils n'avaient pas eu le courage ou la vision de mener à son terme.
 
 Son heure approchait enfin, portée par les vents du changement et annoncée par les présages que seuls les initiés savaient lire. Et avec elle, l'enfant qu'elle cherchait depuis si longtemps, la clé vivante qui ouvrirait les dernières portes, le sacrifice ultime qui permettrait sa résurrection totale.
 
@@ -350,7 +350,7 @@ La horde recula, se fondant à nouveau dans l'obscurité. Kael et Myreth disparu
 
 Elle n'était pas seule, cependant.
 
-Une présence immémorialeémergea lentement des profondeurs du sanctuaire. Pas humaine. Pas tout à fait vivante non plus. Quelque chose entre les deux, suspendu dans un équilibre précaire entre la vie et la pétrification éternelle.
+Une présence immémoriale émergea lentement des profondeurs du sanctuaire. Pas humaine. Pas tout à fait vivante non plus. Quelque chose entre les deux, suspendu dans un équilibre précaire entre la vie et la pétrification éternelle.
 
 La gorgone avançait avec une grâce millénaire, chaque pas mesuré par des siècles d'habitude. Ses serpents capillaires ondulaient doucement, langues fourchues goûtant l'air glacé, écailles noires luisant sous la lueur fantomatique de l'aube naissante. Derrière les lunettes aux montures épaisses qui protégeaient le monde de son regard mortel, ses yeux clairs observaient la vampire avec une attention qui n'était ni révérence ni défi, mais quelque chose de plus complexe, tissé de millénaires de survie.
 
@@ -406,7 +406,7 @@ Aucun reproche dans sa voix. Aucune surprise. Juste l'acceptation de celle qui n
 
 ### L'Éveil de la Vengeance
 
-Ensemble, la vampire et la gorgone franchirent le seuil du sanctuaire oublié, avalées par les ténèbres qui attendaient depuis mille ans qu'on les réveille.
+Ensemble, la vampire et la gorgone franchirent le seuil du sanctuaire, avalées par les ténèbres qui attendaient depuis mille ans qu'on les réveille.
 
 À l'intérieur, l'air était différent. Plus épais. Chargé d'une présence palpable qui faisait vibrer la pierre elle-même, le sanctuaire respirant avec lenteur, pouls endormi d'une créature titanesque.
 
@@ -422,7 +422,7 @@ La lueur du cercle rituel pulsait en rythme avec un battement lent et profond. P
 
 « Les fioles. » L'ordre tomba, sec.
 
-saatha s'avança, portant le coffret qu'elle avait préparé avec soin. Ses mains tremblaient légèrement, imperceptiblement, alors qu'elle l'ouvrait et révélait son contenu. Sept fioles de verre noir, scellées par des cachets de cire pourpre marqués de symboles interdits. À l'intérieur, des liquides de couleurs impossibles. Sang éthérien oublié. Essences distillées de créatures mortes depuis des éons. Composants dont même les noms avaient été effacés des grimoires modernes.
+saatha s'avança, portant le coffret qu'elle avait préparé avec soin. Ses mains tremblaient légèrement, imperceptiblement, alors qu'elle l'ouvrait et révélait son contenu. Sept fioles de verre noir, scellées par des cachets de cire pourpre marqués de symboles interdits. À l'intérieur, des liquides de couleurs impossibles. Sang éthérien ancestral. Essences distillées de créatures mortes depuis des éons. Composants dont même les noms avaient été effacés des grimoires modernes.
 
 *Sept. Toujours sept. Jamais six, jamais huit. Le nombre sacré des Éthériens, clé de leurs plus grands rituels. Une fiole de moins, et le cercle resterait inerte. Une de plus, et il exploserait en consumant tout dans un rayon d'un kilomètre.*
 
@@ -440,7 +440,7 @@ L'encre bougeait sur le parchemin, symboles se réarrangeant, formant et reforma
 
 La vampire traça les runes d'activation avec son propre sang, entaillant son poignet pâle. Le sang vampirique, noir et épais, coula dans les rainures du sol. *Sang d'immortelle uniquement. Le sang mortel, même pur, était inutile pour les rituels éthériens majeurs. Seul le sang transformé, corrompu par la magie, possédait la densité éthérique nécessaire pour réveiller ces symboles millénaires.* Les symboles s'illuminèrent un par un, chaîne de lumière pourpre qui encerclait le rituel. La pierre but le sang avidement, canaux s'emplissant, réseau complexe se dessinant.
 
-L'air devint plus lourd encore, presque solide, saturé de maîtrise. Une odeur étrange emplissait le sanctuaire, mélange d'encens éthérien oublié, de cuivre oxydé, et de quelque chose d'indéfinissable, quelque chose qui sentait l'immémorial et l'interdit. L'ozone d'une magie trop puissante, trop concentrée, qui faisait dresser les cheveux sur la nuque et serrer les dents involontairement.
+L'air devint plus lourd encore, presque solide, saturé de maîtrise. Une odeur étrange emplissait le sanctuaire, mélange d'encens éthérien séculaire, de cuivre oxydé, et de quelque chose d'indéfinissable, quelque chose qui sentait l'immémorial et l'interdit. L'ozone d'une magie trop puissante, trop concentrée, qui faisait dresser les cheveux sur la nuque et serrer les dents involontairement.
 
 Les serpents de saatha sifflèrent en unisson, inquiets, percevant le danger que leur maîtresse gorgone ressentait instinctivement. Le rituel n'était pas encore complet, juste préparé, mais déjà l'Éther répondait, se courbant, se tordant autour du sanctuaire.
 
