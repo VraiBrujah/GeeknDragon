@@ -2,7 +2,13 @@
   "permissions": {
     "allow": [
       "Bash(php:*)",
-      "Bash(npm run build:complete:*)"
+      "Bash(npm run build:complete:*)",
+      "Bash(node:*)",
+      "Bash(tree:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npm run build:js:*)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []

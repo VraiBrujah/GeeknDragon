@@ -47,23 +47,34 @@ class I18nManager {
   }
 
   /**
-   * Initialise la langue courante depuis le HTML, localStorage ou cookies
+   * Initialise la langue courante depuis le cookie PHP (source de vérité)
+   *
+   * IMPORTANT: Le cookie PHP a la priorité ABSOLUE. Si localStorage contient
+   * une valeur différente, elle est ÉCRASÉE pour maintenir la synchronisation.
+   * Cela évite les problèmes de cache où l'utilisateur reste bloqué dans une langue.
    *
    * @private
    * @returns {string} Code langue détecté
    */
   _initializeLanguage() {
-    // 1. Essayer localStorage
-    const storedLang = localStorage.getItem('lang');
-    if (storedLang && this.availableLangs.includes(storedLang)) {
-      this.currentLang = storedLang;
-      return this.currentLang;
-    }
-
-    // 2. Essayer cookie
+    // 1. Cookie PHP = source de vérité ABSOLUE (priorité 1)
     const cookieLang = this._getCookie('lang');
     if (cookieLang && this.availableLangs.includes(cookieLang)) {
       this.currentLang = cookieLang;
+
+      // Synchroniser localStorage avec le cookie pour cohérence
+      const storedLang = localStorage.getItem('lang');
+      if (storedLang !== cookieLang) {
+        localStorage.setItem('lang', cookieLang);
+      }
+
+      return this.currentLang;
+    }
+
+    // 2. Essayer localStorage (si pas de cookie)
+    const storedLang = localStorage.getItem('lang');
+    if (storedLang && this.availableLangs.includes(storedLang)) {
+      this.currentLang = storedLang;
       return this.currentLang;
     }
 
@@ -221,12 +232,20 @@ class I18nManager {
     }
 
     try {
+      // Charger les nouvelles traductions
       await this.loadTranslations(lang);
       this.currentLang = lang;
 
-      // Persister le choix
+      // Persister le choix dans localStorage et cookie
       localStorage.setItem('lang', lang);
       localStorage.setItem('snipcartLanguage', lang);
+
+      // Mettre à jour le cookie PHP pour synchronisation
+      const expires = new Date();
+      expires.setFullYear(expires.getFullYear() + 1);
+      document.cookie = `lang=${lang}; path=/; expires=${expires.toUTCString()}; SameSite=Lax`;
+
+      // Mettre à jour l'attribut HTML
       document.documentElement.lang = lang;
 
       if (this.debug) console.log(`[I18n] Langue changée vers "${lang}"`);
@@ -338,21 +357,10 @@ class I18nManager {
     // 1. Traduire textContent avec data-i18n
     const elements = root.querySelectorAll('[data-i18n]');
 
-    if (this.debug) {
-      console.log(`[I18n] updateDOM() trouvé ${elements.length} éléments avec data-i18n`);
-      console.log(`[I18n] Langue courante: ${this.currentLang}`);
-      console.log('[I18n] Traductions chargées:', Object.keys(this.translations));
-    }
-
     elements.forEach(element => {
       const key = element.getAttribute('data-i18n');
       const fallback = element.textContent || '';
-
       const translated = this.t(key, fallback);
-
-      if (this.debug && key.startsWith('btnOverlay')) {
-        console.log(`[I18n] Clé: ${key}, Fallback: "${fallback}", Traduit: "${translated}"`);
-      }
 
       if (translated && translated !== fallback) {
         element.textContent = translated;
@@ -403,10 +411,6 @@ class I18nManager {
         }
       }
     });
-
-    if (this.debug && count > 0) {
-      console.log(`[I18n] ${count} éléments/attributs traduits dans le DOM`);
-    }
 
     return count;
   }
