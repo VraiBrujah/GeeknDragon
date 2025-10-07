@@ -25,7 +25,9 @@
       "Read(//i/Backup/GitHub-C/backup/Oriav2/**)",
       "Read(//i/Backup/GitHub-C/**)",
       "Bash(test:*)",
-      "Read(//i/Backup/GitHub-E/Projet/Projet OrIA/**)"
+      "Read(//i/Backup/GitHub-E/Projet/Projet OrIA/**)",
+      "Read(//i/Backup/GitHub-E/**)",
+      "Read(//i/Backup/**)"
     ],
     "deny": [],
     "ask": []
