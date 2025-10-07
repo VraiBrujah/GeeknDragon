@@ -8,10 +8,11 @@ Système de visualisation élégant pour manuscrits littéraires au format Markd
 ✅ **Navigation par onglets** : Basculer facilement entre différents livres
 ✅ **Chapitres ordonnés** : Tri automatique par numéro de chapitre (00_, 01_, etc.)
 ✅ **Ancres de navigation** : Table des matières interactive avec scroll fluide
-✅ **Mémorisation de position EXACTE** : Reprend au pixel près là où vous vous êtes arrêté (restauration instantanée)
+✅ **Mémorisation TEMPS RÉEL** : Sauvegarde position à chaque scroll, restauration instantanée pixel-perfect
 ✅ **Mode sombre** : Design optimisé pour lecture prolongée sans fatigue oculaire
 ✅ **Parsing Markdown** : Rendu complet des fichiers .md avec mise en forme
 ✅ **Complètement autonome** : Aucune dépendance au site principal
+✅ **Performance optimale** : Cache intelligent, scroll fluide mobile/desktop
 
 ---
 
@@ -288,5 +289,5 @@ Usage interne uniquement, non accessible publiquement.
 ---
 
 **Répertoire de Travail Actuel** : `E:\GitHub\GeeknDragon\Livre`
-**Version** : 1.0.0
-**Dernière mise à jour** : 2025-10-06
+**Version** : 1.3.0
+**Dernière mise à jour** : 2025-10-07

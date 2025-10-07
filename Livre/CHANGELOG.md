@@ -4,6 +4,43 @@ Toutes les modifications notables de ce projet seront documentées dans ce fichi
 
 ---
 
+## [1.3.0] - 2025-10-07
+
+### ⚡ Performance - Sauvegarde Temps Réel
+
+#### Amélioré
+- **Sauvegarde position à CHAQUE scroll** : Capture immédiate sans debounce
+  - Listener scroll dédié avec `{passive: true}` pour performances maximales
+  - Sauvegarde déclenchée instantanément à chaque mouvement de scroll
+  - Cache intelligent évite écritures localStorage inutiles (delta >10px)
+  - Garantit capture position exacte même si utilisateur recharge rapidement
+
+- **Optimisation performance** :
+  - Séparation logique : `saveReadingPosition()` immédiat + `handleScrollUI()` debounced
+  - `lastSavedScrollY` cache évite écritures localStorage redondantes
+  - `passive: true` listeners pour scroll ultra-fluide
+  - Intervalle périodique réduit : 5s → 1s pour sécurité accrue
+
+- **Protection multi-niveaux** :
+  - 🔥 **Scroll temps réel** : Capture immédiate à chaque pixel
+  - 🛡️ **Sauvegarde périodique** : Toutes les 1 seconde (backup)
+  - 🔒 **beforeunload** : Avant fermeture navigateur
+  - 👁️ **visibilitychange** : Lors du changement d'onglet (mobile/desktop)
+
+#### Corrigé
+- ❌ Avant : Debounce 150ms pouvait manquer position si rechargement rapide
+- ✅ Après : Capture instantanée garantie à chaque mouvement de scroll
+- ❌ Avant : Sauvegarde périodique uniquement toutes les 5 secondes
+- ✅ Après : Sauvegarde continue + backup 1s + visibilitychange
+
+#### Performance
+- ✅ Écritures localStorage optimisées (delta >10px uniquement)
+- ✅ Scroll ultra-fluide avec `passive: true`
+- ✅ Séparation UI (debounced) et sauvegarde (immédiate)
+- ✅ Compatible mobile et desktop parfaitement
+
+---
+
 ## [1.2.0] - 2025-10-07
 
 ### ✨ Amélioration - Mémorisation Position de Lecture

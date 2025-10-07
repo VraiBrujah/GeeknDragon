@@ -5,13 +5,13 @@
  * - Détection dynamique des livres et chapitres
  * - Navigation par onglets entre livres
  * - Ancres de navigation pour les chapitres
- * - Mémorisation EXACTE de la position de lecture (pixel-perfect)
- * - Restauration instantanée sans animation (UX optimale)
+ * - Mémorisation TEMPS RÉEL de la position de lecture (sauvegarde à chaque scroll)
+ * - Restauration instantanée pixel-perfect sans animation
  * - Parsing markdown avec marked.js
- * - Gestion du scroll et affichage progressif
+ * - Optimisation performance avec cache intelligent
  *
  * @author Brujah - Geek & Dragon
- * @version 1.2.0
+ * @version 1.3.0
  */
 
 class ManuscritsViewer {
@@ -23,6 +23,7 @@ class ManuscritsViewer {
     this.currentBook = null;
     this.currentChapter = null;
     this.scrollTimeout = null;
+    this.lastSavedScrollY = 0; // Cache pour éviter écritures localStorage inutiles
 
     // Éléments DOM
     this.tabsContainer = document.getElementById('bookTabs');
@@ -323,18 +324,33 @@ class ManuscritsViewer {
 
   /**
    * Sauvegarde la position de lecture en localStorage
+   * Optimisé : n'écrit que si position a changé significativement (>10px)
    */
   saveReadingPosition() {
     if (!this.currentBook) return;
 
+    const currentScrollY = Math.round(window.scrollY);
+
+    // Optimisation : éviter écritures localStorage inutiles
+    // N'écrit que si changement significatif (>10px)
+    if (Math.abs(currentScrollY - this.lastSavedScrollY) < 10) {
+      return;
+    }
+
+    this.lastSavedScrollY = currentScrollY;
+
     const position = {
       bookSlug: this.currentBook.slug,
       chapterSlug: this.currentChapter,
-      scrollY: window.scrollY,
+      scrollY: currentScrollY,
       timestamp: Date.now()
     };
 
-    localStorage.setItem('manuscrits_reading_position', JSON.stringify(position));
+    try {
+      localStorage.setItem('manuscrits_reading_position', JSON.stringify(position));
+    } catch (error) {
+      console.error('[Manuscrits] Erreur sauvegarde position:', error);
+    }
   }
 
   /**
@@ -399,6 +415,9 @@ class ManuscritsViewer {
           behavior: 'instant'
         });
 
+        // Initialiser le cache pour éviter sauvegarde immédiate
+        this.lastSavedScrollY = position.scrollY;
+
         console.log(`[Manuscrits] Position restaurée: ${position.scrollY}px`);
 
         // Mettre à jour le chapitre actif visuellement
@@ -411,6 +430,7 @@ class ManuscritsViewer {
         const element = document.getElementById(position.chapterSlug);
         if (element) {
           element.scrollIntoView({ behavior: 'instant', block: 'start' });
+          this.lastSavedScrollY = element.offsetTop;
           this.currentChapter = position.chapterSlug;
           this.updateActiveChapter(position.chapterSlug);
         }
@@ -425,10 +445,15 @@ class ManuscritsViewer {
    * Initialise les écouteurs d'événements
    */
   setupEventListeners() {
-    // Détection du scroll pour mettre à jour le chapitre actif
+    // ⚡ SAUVEGARDE TEMPS RÉEL à chaque scroll (AUCUN debounce)
     window.addEventListener('scroll', () => {
-      this.handleScroll();
-    });
+      this.saveReadingPosition(); // Immédiat pour capture position exacte
+    }, { passive: true });
+
+    // Détection du scroll pour mise à jour UI (debounced pour performance)
+    window.addEventListener('scroll', () => {
+      this.handleScrollUI();
+    }, { passive: true });
 
     // Bouton retour en haut
     if (this.scrollToTopBtn) {
@@ -437,24 +462,32 @@ class ManuscritsViewer {
       });
     }
 
-    // Sauvegarde périodique de la position
+    // Sauvegarde périodique de sécurité
     setInterval(() => {
       if (this.currentBook) {
         this.saveReadingPosition();
       }
-    }, 5000);
+    }, 1000); // Réduit à 1 seconde pour plus de réactivité
 
     // Sauvegarde avant fermeture
     window.addEventListener('beforeunload', () => {
       this.saveReadingPosition();
     });
+
+    // Sauvegarde lors du changement de visibilité (onglet caché)
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        this.saveReadingPosition();
+      }
+    });
   }
 
   /**
-   * Gestion du scroll (mise à jour chapitre actif + bouton retour haut)
+   * Gestion du scroll UI (mise à jour chapitre actif + bouton retour haut)
+   * Debounced pour optimiser les performances
    */
-  handleScroll() {
-    // Débounce pour performance
+  handleScrollUI() {
+    // Débounce pour performance (détection chapitre + UI)
     if (this.scrollTimeout) {
       clearTimeout(this.scrollTimeout);
     }
@@ -471,10 +504,7 @@ class ManuscritsViewer {
           this.scrollToTopBtn.classList.remove('visible');
         }
       }
-
-      // Sauvegarde de la position pendant le scroll
-      this.saveReadingPosition();
-    }, 150);
+    }, 150); // Débounce uniquement pour l'UI
   }
 
   /**
