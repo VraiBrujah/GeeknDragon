@@ -46,6 +46,18 @@ plus que réaliste.</Blake>
 
 **Organisation des fichiers** : Tous les éléments (chapitres, personnages, monde, magie) doivent être organisés dans des fichiers dédiés et maintenus à jour.
 
+**Gestion des versions de chapitres** :
+- **Dossier de travail** : `Livre/` contient toutes les versions successives des chapitres avec suffixe de version (ex: `00_prologue_V1.md`, `00_prologue_V2.md`, etc.)
+- **Fichier de référence** : Le répertoire racine contient la version publiée de chaque chapitre sans suffixe (ex: `00_prologue.md`)
+- **Synchronisation obligatoire** : À chaque modification d'un fichier versionné dans `Livre/`, le fichier de référence dans le répertoire racine DOIT être mis à jour avec le contenu de la version la plus récente
+- **Règle de synchronisation** :
+  - Identifier la version la plus élevée par numéro (ex: V6 > V5 > V4)
+  - Copier le contenu de `Livre/NN_nom_chapitre_VX.md` (version la plus élevée) vers `NN_nom_chapitre.md` (racine)
+  - Conserver le nom du fichier de référence sans suffixe de version
+  - Exemple : Si `Livre/00_prologue_V6.md` est la dernière version, son contenu remplace celui de `00_prologue.md`
+- **Conservation historique** : Toutes les versions dans `Livre/` sont conservées pour traçabilité éditoriale
+- **Application** : Cette règle s'applique à TOUS les chapitres du livre
+
 **Conventions typographiques** :
 - Esclaves : noms entièrement en minuscules (violette, saatha)
 - Maîtres : Titre + nom avec majuscule initiale (Maître Brujah, Maîtresse Drakkarys)
