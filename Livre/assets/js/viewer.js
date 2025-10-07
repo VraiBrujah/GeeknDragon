@@ -39,8 +39,15 @@ class ManuscritsViewer {
    * Initialisation du visualiseur
    */
   async init() {
+    console.log('');
+    console.log('═══════════════════════════════════════════════════════');
+    console.log('🚀 DÉMARRAGE VISUALISEUR MANUSCRITS v1.3.0');
+    console.log('═══════════════════════════════════════════════════════');
+    console.log('');
+
     try {
       // Configuration de marked.js pour un rendu optimal
+      console.log('[DEBUG] Configuration marked.js...');
       if (typeof marked !== 'undefined') {
         marked.setOptions({
           breaks: true,
@@ -48,19 +55,32 @@ class ManuscritsViewer {
           headerIds: true,
           mangle: false
         });
+        console.log('[DEBUG] ✅ marked.js configuré');
+      } else {
+        console.warn('[DEBUG] ⚠️ marked.js non disponible');
       }
 
       // Chargement des livres disponibles
+      console.log('[DEBUG] Chargement liste des livres...');
       await this.loadBooks();
+      console.log(`[DEBUG] ✅ ${this.books.length} livre(s) chargé(s)`);
 
       // Déterminer quel livre charger (dernière lecture ou premier)
+      console.log('[DEBUG] Détermination livre à charger...');
       await this.loadInitialBook();
 
       // Initialisation des écouteurs d'événements
+      console.log('[DEBUG] Initialisation listeners...');
       this.setupEventListeners();
 
+      console.log('');
+      console.log('═══════════════════════════════════════════════════════');
+      console.log('✅ VISUALISEUR PRÊT');
+      console.log('═══════════════════════════════════════════════════════');
+      console.log('');
+
     } catch (error) {
-      console.error('Erreur initialisation:', error);
+      console.error('❌ [ERREUR CRITIQUE] Initialisation:', error);
       this.showError('Impossible de charger les manuscrits');
     }
   }
@@ -69,27 +89,37 @@ class ManuscritsViewer {
    * Charge le livre initial (dernière lecture ou premier disponible)
    */
   async loadInitialBook() {
+    console.log('[DEBUG] ========== CHARGEMENT LIVRE INITIAL ==========');
     try {
       const saved = localStorage.getItem('manuscrits_reading_position');
+      console.log('[DEBUG] Position sauvegardée trouvée:', saved ? 'Oui' : 'Non');
 
       if (saved) {
         const position = JSON.parse(saved);
+        console.log('[DEBUG] Recherche livre:', position.bookSlug);
         const book = this.books.find(b => b.slug === position.bookSlug);
 
         if (book) {
+          console.log(`[DEBUG] Livre trouvé: "${book.name}", chargement...`);
           // Charger le livre sauvegardé
           await this.switchBook(book.slug);
+          console.log('[DEBUG] Livre chargé avec succès');
           return;
+        } else {
+          console.warn(`[DEBUG] Livre "${position.bookSlug}" introuvable dans la liste`);
         }
       }
 
       // Fallback : charger le premier livre
       if (this.books.length > 0) {
+        console.log(`[DEBUG] Fallback : chargement premier livre "${this.books[0].name}"`);
         await this.switchBook(this.books[0].slug);
       }
 
+      console.log('[DEBUG] ========== FIN CHARGEMENT LIVRE ==========');
+
     } catch (error) {
-      console.error('Erreur chargement livre initial:', error);
+      console.error('❌ [ERREUR] Chargement livre initial:', error);
       if (this.books.length > 0) {
         await this.switchBook(this.books[0].slug);
       }
@@ -327,13 +357,21 @@ class ManuscritsViewer {
    * Optimisé : n'écrit que si position a changé significativement (>10px)
    */
   saveReadingPosition() {
-    if (!this.currentBook) return;
+    console.log('[DEBUG] saveReadingPosition() appelée');
+
+    if (!this.currentBook) {
+      console.warn('[DEBUG] Sauvegarde annulée : currentBook est null');
+      return;
+    }
 
     const currentScrollY = Math.round(window.scrollY);
+    console.log(`[DEBUG] Position actuelle: ${currentScrollY}px, Dernière sauvegardée: ${this.lastSavedScrollY}px`);
 
     // Optimisation : éviter écritures localStorage inutiles
     // N'écrit que si changement significatif (>10px)
-    if (Math.abs(currentScrollY - this.lastSavedScrollY) < 10) {
+    const delta = Math.abs(currentScrollY - this.lastSavedScrollY);
+    if (delta < 10) {
+      console.log(`[DEBUG] Sauvegarde annulée : delta ${delta}px < 10px`);
       return;
     }
 
@@ -348,6 +386,8 @@ class ManuscritsViewer {
 
     try {
       localStorage.setItem('manuscrits_reading_position', JSON.stringify(position));
+      console.log(`✅ [SAUVEGARDE] Position ${currentScrollY}px sauvegardée pour livre "${this.currentBook.slug}"`);
+      console.log('[DEBUG] Contenu localStorage:', JSON.parse(localStorage.getItem('manuscrits_reading_position')));
     } catch (error) {
       console.error('[Manuscrits] Erreur sauvegarde position:', error);
     }
@@ -395,20 +435,30 @@ class ManuscritsViewer {
    * Restaure la position de scroll exacte
    */
   restoreScrollPosition() {
+    console.log('[DEBUG] ========== RESTAURATION POSITION ==========');
     try {
       const saved = localStorage.getItem('manuscrits_reading_position');
+      console.log('[DEBUG] Contenu localStorage brut:', saved);
 
-      if (!saved) return;
+      if (!saved) {
+        console.warn('[DEBUG] Aucune position sauvegardée trouvée');
+        return;
+      }
 
       const position = JSON.parse(saved);
+      console.log('[DEBUG] Position parsée:', position);
+      console.log(`[DEBUG] Livre actuel: "${this.currentBook?.slug}", Livre sauvegardé: "${position.bookSlug}"`);
 
       // Vérifier que c'est bien le même livre
       if (position.bookSlug !== this.currentBook?.slug) {
+        console.warn(`[DEBUG] Livres différents : actuel="${this.currentBook?.slug}" vs sauvegardé="${position.bookSlug}"`);
         return;
       }
 
       // Restaurer la position de scroll EXACTE sans animation
       if (position.scrollY && position.scrollY > 0) {
+        console.log(`[DEBUG] Tentative scroll vers ${position.scrollY}px...`);
+
         // Scroll instantané vers la position sauvegardée
         window.scrollTo({
           top: position.scrollY,
@@ -418,14 +468,23 @@ class ManuscritsViewer {
         // Initialiser le cache pour éviter sauvegarde immédiate
         this.lastSavedScrollY = position.scrollY;
 
-        console.log(`[Manuscrits] Position restaurée: ${position.scrollY}px`);
+        // Vérifier position après scroll
+        setTimeout(() => {
+          const actualScrollY = window.scrollY;
+          console.log(`✅ [RESTAURATION] Position cible: ${position.scrollY}px, Position réelle: ${actualScrollY}px`);
+          if (Math.abs(actualScrollY - position.scrollY) > 5) {
+            console.error(`⚠️ ÉCART DÉTECTÉ: ${Math.abs(actualScrollY - position.scrollY)}px de différence!`);
+          }
+        }, 100);
 
         // Mettre à jour le chapitre actif visuellement
         if (position.chapterSlug) {
           this.currentChapter = position.chapterSlug;
           this.updateActiveChapter(position.chapterSlug);
+          console.log(`[DEBUG] Chapitre actif mis à jour: "${position.chapterSlug}"`);
         }
       } else if (position.chapterSlug) {
+        console.log(`[DEBUG] Scroll vers chapitre "${position.chapterSlug}" (fallback)`);
         // Fallback: scroll vers le chapitre (sans animation)
         const element = document.getElementById(position.chapterSlug);
         if (element) {
@@ -433,11 +492,16 @@ class ManuscritsViewer {
           this.lastSavedScrollY = element.offsetTop;
           this.currentChapter = position.chapterSlug;
           this.updateActiveChapter(position.chapterSlug);
+          console.log(`✅ [RESTAURATION] Chapitre "${position.chapterSlug}" à ${element.offsetTop}px`);
+        } else {
+          console.error(`[DEBUG] Élément chapitre "${position.chapterSlug}" introuvable!`);
         }
       }
 
+      console.log('[DEBUG] ========== FIN RESTAURATION ==========');
+
     } catch (error) {
-      console.error('Erreur restauration scroll:', error);
+      console.error('❌ [ERREUR] Restauration scroll:', error);
     }
   }
 
@@ -445,41 +509,54 @@ class ManuscritsViewer {
    * Initialise les écouteurs d'événements
    */
   setupEventListeners() {
+    console.log('[DEBUG] ========== INITIALISATION LISTENERS ==========');
+
     // ⚡ SAUVEGARDE TEMPS RÉEL à chaque scroll (AUCUN debounce)
     window.addEventListener('scroll', () => {
       this.saveReadingPosition(); // Immédiat pour capture position exacte
     }, { passive: true });
+    console.log('[DEBUG] ✅ Listener scroll TEMPS RÉEL activé');
 
     // Détection du scroll pour mise à jour UI (debounced pour performance)
     window.addEventListener('scroll', () => {
       this.handleScrollUI();
     }, { passive: true });
+    console.log('[DEBUG] ✅ Listener scroll UI (debounced) activé');
 
     // Bouton retour en haut
     if (this.scrollToTopBtn) {
       this.scrollToTopBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
+      console.log('[DEBUG] ✅ Bouton retour haut configuré');
     }
 
     // Sauvegarde périodique de sécurité
     setInterval(() => {
       if (this.currentBook) {
+        console.log('[DEBUG] 🔄 Sauvegarde périodique (1s)');
         this.saveReadingPosition();
       }
     }, 1000); // Réduit à 1 seconde pour plus de réactivité
+    console.log('[DEBUG] ✅ Intervalle périodique 1s activé');
 
     // Sauvegarde avant fermeture
     window.addEventListener('beforeunload', () => {
+      console.log('[DEBUG] 🔒 beforeunload détecté, sauvegarde...');
       this.saveReadingPosition();
     });
+    console.log('[DEBUG] ✅ Listener beforeunload activé');
 
     // Sauvegarde lors du changement de visibilité (onglet caché)
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
+        console.log('[DEBUG] 👁️ Onglet caché détecté, sauvegarde...');
         this.saveReadingPosition();
       }
     });
+    console.log('[DEBUG] ✅ Listener visibilitychange activé');
+
+    console.log('[DEBUG] ========== LISTENERS PRÊTS ==========');
   }
 
   /**
