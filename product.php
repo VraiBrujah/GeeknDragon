@@ -284,22 +284,22 @@ echo $snipcartInit;
         <!-- Section Image (Gauche) -->
         <div class="bg-gray-900/50 p-3 flex items-center justify-center min-h-[400px]">
           <?php if (!empty($images)) : ?>
-          <div class="swiper w-full max-w-lg relative">
+          <div class="swiper swiper-product w-full h-full relative group">
             <div class="swiper-wrapper">
               <?php foreach ($images as $img) : ?>
-              <div class="swiper-slide">
-                <a href="<?= htmlspecialchars($img) ?>" data-fancybox="<?= htmlspecialchars($id) ?>">
+              <div class="swiper-slide h-full">
+                <a href="<?= htmlspecialchars($img) ?>" data-fancybox="<?= htmlspecialchars($id) ?>" class="block w-full h-full">
                   <img loading="lazy" src="<?= htmlspecialchars($img) ?>"
                        alt="<?= htmlspecialchars($product['description']) ?>"
                        data-alt-fr="<?= htmlspecialchars($product['description']) ?>"
                        data-alt-en="<?= htmlspecialchars($descriptionEn) ?>"
-                       class="rounded-lg w-full object-contain h-80">
+                       class="rounded-lg w-full h-full object-contain">
                 </a>
               </div>
               <?php endforeach; ?>
             </div>
-            <div class="swiper-button-prev" role="button" aria-label="<?= __('ui.previousImage', 'Image précédente') ?>"></div>
-            <div class="swiper-button-next" role="button" aria-label="<?= __('ui.nextImage', 'Image suivante') ?>"></div>
+            <div class="swiper-button-prev swiper-btn-hidden" role="button" aria-label="<?= __('ui.previousImage', 'Image précédente') ?>"></div>
+            <div class="swiper-button-next swiper-btn-hidden" role="button" aria-label="<?= __('ui.nextImage', 'Image suivante') ?>"></div>
           </div>
           <?php else : ?>
           <div class="w-full max-w-lg h-96 bg-gray-700 rounded-lg flex items-center justify-center">

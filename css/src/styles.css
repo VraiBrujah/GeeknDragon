@@ -944,6 +944,23 @@ a[aria-current="page"]{
 .swiper { width:100%; position:relative; }
 .swiper-slide img { width:100%; height:auto; max-height:20rem; object-fit:contain; }
 
+/* Swiper produit - images pleine hauteur */
+.swiper-product {
+  min-height: 500px;
+}
+
+.swiper-product .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper-product .swiper-slide img {
+  max-height: none;
+  height: 100%;
+  object-fit: contain;
+}
+
 /* Boutons navigation Swiper avec icônes personnalisées (flèches) */
 .swiper-button-prev, .swiper-button-next {
   width: 3rem;
@@ -957,6 +974,24 @@ a[aria-current="page"]{
   cursor: pointer;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
   opacity: 0.85; /* Semi-transparent par défaut */
+}
+
+/* Boutons cachés par défaut sur pages produit */
+.swiper-btn-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Boutons visibles au hover du conteneur Swiper */
+.swiper-product:hover .swiper-btn-hidden {
+  opacity: 0.85;
+  pointer-events: all;
+}
+
+/* Boutons encore plus visibles au hover direct */
+.swiper-product:hover .swiper-btn-hidden:hover {
+  opacity: 1;
 }
 
 /* Masquer les icônes par défaut de Swiper */
