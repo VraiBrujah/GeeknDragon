@@ -325,8 +325,8 @@ echo $snipcartInit;
           </div>
 
           <?php if (inStock($id)) : ?>
-          <div class="space-y-6">
-            <div>
+          <div class="space-y-6 flex flex-col items-center">
+            <div class="w-full flex flex-col items-center">
               <label class="block mb-3 text-lg font-medium text-white" data-i18n="product.quantity">Quantité</label>
               <div class="quantity-selector" data-id="<?= htmlspecialchars($id) ?>">
                 <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>" aria-label="<?= __('product.decreaseQuantity', 'Diminuer la quantité') ?>">
@@ -341,14 +341,14 @@ echo $snipcartInit;
 
 
             <?php if ($metalFieldIndex !== null) : ?>
-            <div class="metal-wrapper">
+            <div class="metal-wrapper w-full flex flex-col items-center">
               <label for="metal-<?= htmlspecialchars($id) ?>"
                      class="block mb-3 text-lg font-medium text-white"
                      data-i18n="product.metal">
                 <?= htmlspecialchars($translations['product']['metal'] ?? 'Métal') ?>
               </label>
               <select id="metal-<?= htmlspecialchars($id) ?>"
-                      class="metal-select w-full md:w-64 px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      class="metal-select w-64 px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       data-target="<?= htmlspecialchars($id) ?>"
                       data-custom-index="<?= (int) $metalFieldIndex ?>"
                       data-item-custom-role="metal">
@@ -360,14 +360,14 @@ echo $snipcartInit;
             <?php endif; ?>
 
             <?php if (!empty($multipliers)) : ?>
-            <div class="multiplier-wrapper">
+            <div class="multiplier-wrapper w-full flex flex-col items-center">
               <label for="multiplier-<?= htmlspecialchars($id) ?>"
                      class="block mb-3 text-lg font-medium text-white"
                      data-i18n="product.multiplier">
                 <?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>
               </label>
               <select id="multiplier-<?= htmlspecialchars($id) ?>"
-                      class="multiplier-select w-full md:w-64 px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      class="multiplier-select w-64 px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       data-target="<?= htmlspecialchars($id) ?>"
                       data-custom-index="<?= (int) $multiplierFieldIndex ?>"
                       data-item-custom-role="multiplier">
@@ -379,7 +379,7 @@ echo $snipcartInit;
             <?php endif; ?>
 
             <?php if ($triptychFieldIndex !== null) : ?>
-            <div>
+            <div class="w-full flex flex-col items-center">
               <label for="triptych-<?= htmlspecialchars($id) ?>" class="block mb-3 text-lg font-medium text-white">
                 <?php
                 $triptychLabel = match($triptychType) {
@@ -392,7 +392,7 @@ echo $snipcartInit;
                 ?>
               </label>
               <select id="triptych-<?= htmlspecialchars($id) ?>"
-                      class="triptych-select w-full md:w-64 px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      class="triptych-select w-64 px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       data-target="<?= htmlspecialchars($id) ?>"
                       data-custom-index="<?= (int) $triptychFieldIndex ?>"
                       data-item-custom-role="triptych">
@@ -404,10 +404,10 @@ echo $snipcartInit;
             <?php endif; ?>
 
             <?php if ($languageFieldIndex !== null) : ?>
-            <div>
+            <div class="w-full flex flex-col items-center">
               <label for="language-<?= htmlspecialchars($id) ?>" class="block mb-3 text-lg font-medium text-white" data-i18n="product.language">Langue</label>
               <select id="language-<?= htmlspecialchars($id) ?>"
-                      class="language-select w-full md:w-64 px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      class="language-select w-64 px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       data-target="<?= htmlspecialchars($id) ?>"
                       data-custom-index="<?= (int) $languageFieldIndex ?>"
                       data-item-custom-role="language">
