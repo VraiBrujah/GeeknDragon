@@ -61,8 +61,8 @@ function sanitizeName(string $name): ?string
         return null;
     }
 
-    // Suppression caractères dangereux
-    $clean = preg_replace('/[^a-zA-Z0-9_\-\s.éèêëàâäôöùûüçÉÈÊËÀÂÄÔÖÙÛÜÇ]/u', '', $name);
+    // Suppression caractères dangereux (garde apostrophes et caractères accentués)
+    $clean = preg_replace('/[^a-zA-Z0-9_\-\s.\'éèêëàâäôöùûüçÉÈÊËÀÂÄÔÖÙÛÜÇ]/u', '', $name);
 
     if (empty($clean)) {
         return null;
