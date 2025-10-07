@@ -485,7 +485,12 @@
     "cards-random-discovery-10": {
         "price": 10,
         "images": [
-            "/media/products/cards/alexandrite-recto.webp"
+            "/media/products/cards/alexandrite-recto.webp",
+            "/media/products/cards/alexandrite-verso.webp",
+            "/media/products/cards/biaere-chope-recto.webp",
+            "/media/products/cards/biaere-chope-verso.webp",
+            "/media/products/cards/sac-aa-dos-recto.webp",
+            "/media/products/cards/sac-aa-dos-verso.webp"
         ],
         "multipliers": [],
         "coin_lots": "",
@@ -546,7 +551,11 @@
         "price": 25,
         "images": [
             "/media/products/cards/sac-aa-dos-recto.webp",
-            "/media/products/cards/sac-aa-dos-verso.webp"
+            "/media/products/cards/sac-aa-dos-verso.webp",
+            "/media/products/cards/chaevre-recto.webp",
+            "/media/products/cards/chaevre-verso.webp",
+            "/media/products/cards/biaere-chope-recto.webp",
+            "/media/products/cards/biaere-chope-verso.webp"
         ],
         "multipliers": [],
         "coin_lots": "",
@@ -577,7 +586,9 @@
             "/media/products/cards/bombe-recto.webp",
             "/media/products/cards/bombe-verso.webp",
             "/media/products/cards/mataerield-alchimiste-recto.webp",
-            "/media/products/cards/mataerield-alchimiste-verso.webp"
+            "/media/products/cards/mataerield-alchimiste-verso.webp",
+            "/media/products/cards/sang-d-assassin-recto.webp",
+            "/media/products/cards/sang-d-assassin-verso.webp"
         ],
         "multipliers": [],
         "coin_lots": "",
