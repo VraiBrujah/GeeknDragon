@@ -10,29 +10,58 @@
 
 Ce sondage permet de sélectionner les requis fonctionnels pour le MVP ORIA en 4 modules principaux, inspirés de Zoho, et de définir les permissions par rôle.
 
-### Légende des actions
+### Utilisation du système
 
-- **C** = Créer
-- **L** = Lire
-- **E** = Éditer
-- **S** = Supprimer
-- **X** = eXporter
-- **V** = Valider
+1. **Sélectionner un utilisateur** : Cliquez sur "Sélectionner un utilisateur" ou créez-en un nouveau
+2. **Répondre au sondage** : Cochez les cases pour les fonctionnalités souhaitées et les permissions par rôle
+3. **Personnaliser les priorités** : Modifiez les priorités (1-10) selon vos besoins
+4. **Ajouter des notes** : Utilisez le champ Notes pour vos commentaires personnels
+5. **Sauvegarder** : Cliquez sur "Sauvegarder" régulièrement (le système conserve votre session lors du rafraîchissement F5)
+6. **Exporter** : Exportez vos réponses en JSON ou CSV
+7. **Comparer** : Comparez les réponses de plusieurs utilisateurs côte à côte
+8. **Déconnexion** : Utilisez le bouton "Déconnexion" pour changer d'utilisateur
+
+### Légende des colonnes
+
+| Colonne | Description |
+|---------|-------------|
+| **MVP** | ☐ Inclure dans le MVP / ☑ Sélectionné |
+| **Rôles (Admin, Gestionnaire, etc.)** | Actions autorisées : **C**(réer) **L**(ire) **E**(diter) **S**(upprimer) e**X**(porter) **V**(alider) |
+| **Priorité (1-10)** | Niveau de priorité éditable (1=faible, 10=critique) - Personnalisez selon vos besoins |
+| **Complexité (1-10)** | Estimation de la difficulté technique (1=simple, 10=très complexe) |
+| **Estimation** | Temps de développement estimé pour un développeur seul, incluant conception, développement, tests et intégration |
+| **Notes** | Champ libre pour vos commentaires et observations personnels |
 
 ### Rôles définis
 
-1. **Admin** - Administrateur système
-2. **Gestionnaire** - Gestionnaire d'équipe/département
-3. **Superviseur** - Superviseur terrain
-4. **Employé** - Personnel terrain
-5. **Patient** - Usager (CHSLD)
-6. **Famille** - Proche/Visiteur
+1. **Admin** - Administrateur système (accréditation 80-98)
+2. **Gestionnaire** - Gestionnaire d'équipe/département (accréditation 50-79)
+3. **Superviseur** - Superviseur terrain (accréditation 30-49)
+4. **Employé** - Personnel terrain (accréditation 10-29)
+5. **Patient** - Usager (CHSLD) (accréditation 2-9)
+6. **Famille** - Proche/Visiteur (accréditation 0-1)
 
-### Priorités MVP
+### Échelles de référence
 
-- **Obligatoire** - Requis pour MVP v1
-- **Optionnel** - Requis pour MVP v2
-- **Avancé** - Post-MVP
+**Priorité (1-10)** :
+- 10 : Critique - Bloquant pour MVP
+- 7-9 : Haute - Important pour MVP
+- 4-6 : Moyenne - Utile mais non bloquant
+- 1-3 : Basse - Post-MVP
+
+**Complexité (1-10)** :
+- 1-3 : Simple - Fonctionnalité basique CRUD
+- 4-6 : Moyenne - Logique métier modérée
+- 7-9 : Complexe - Algorithmes avancés, intégrations
+- 10 : Très complexe - IA, optimisation, sécurité avancée
+
+**Estimations** :
+- Simple (1-3) : 8-16h (1-2 jours)
+- Moyen (4-6) : 24-40h (3-5 jours)
+- Complexe (7-9) : 80-120h (2-3 semaines)
+- Très complexe (10) : 120-200h (3-5 semaines)
+
+*Note : Les estimations incluent conception, développement, tests, intégration et documentation pour un développeur travaillant seul.*
 
 ---
 

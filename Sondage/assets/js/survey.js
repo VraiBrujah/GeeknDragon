@@ -79,6 +79,9 @@ class SurveyViewer {
         await this.switchSurvey(this.surveys[0].slug);
       }
 
+      // Restaurer la session utilisateur si elle existe
+      this.restoreUserSession();
+
       // Initialisation des écouteurs d'événements
       this.setupEventListeners();
 
@@ -252,29 +255,8 @@ class SurveyViewer {
    * Affiche une bannière indiquant le mode lecture seule
    */
   showReadOnlyBanner() {
-    const banner = document.createElement('div');
-    banner.className = 'readonly-banner';
-    banner.innerHTML = `
-      <div class="readonly-banner-content">
-        <span class="readonly-icon">🔒</span>
-        <div class="readonly-text">
-          <strong>Mode Lecture Seule</strong>
-          <p>Veuillez sélectionner ou créer un utilisateur pour commencer à répondre au sondage</p>
-        </div>
-        <button class="btn-select-user-inline" id="btnSelectUserInline">
-          Sélectionner un utilisateur
-        </button>
-        <button class="btn-create-user-inline" id="btnCreateUserInline">
-          Créer un utilisateur
-        </button>
-      </div>
-    `;
-
-    this.contentContainer.insertBefore(banner, this.contentContainer.firstChild);
-
-    // Attacher événements
-    document.getElementById('btnSelectUserInline')?.addEventListener('click', () => this.openSelectUserModal());
-    document.getElementById('btnCreateUserInline')?.addEventListener('click', () => this.openCreateUserModal());
+    // Ne plus afficher la bannière redondante
+    // Les boutons sont déjà dans le header
   }
 
   /**
@@ -422,13 +404,22 @@ class SurveyViewer {
    * Attache les événements aux cases à cocher et champs de notes
    */
   attachCheckboxListeners() {
+    console.log('=== [DEBUG] attachCheckboxListeners ===');
+    console.log('[DEBUG] Mode lecture seule:', this.isReadOnly);
+    console.log('[DEBUG] Utilisateur actuel:', this.currentUser);
+    console.log('[DEBUG] Réponses chargées:', Object.keys(this.responses).length, 'requis');
+
     // Gérer les checkboxes
     const checkboxes = this.contentContainer.querySelectorAll('input[type="checkbox"]');
+    console.log('[DEBUG] Checkboxes trouvées:', checkboxes.length);
 
     checkboxes.forEach(checkbox => {
       checkbox.addEventListener('change', (e) => {
+        console.log('>>> [EVENT] Checkbox changée:', e.target.id);
+
         // Ne rien faire en mode lecture seule
         if (this.isReadOnly) {
+          console.warn('[BLOQUÉ] Mode lecture seule actif');
           e.preventDefault();
           return;
         }
@@ -437,25 +428,34 @@ class SurveyViewer {
         const field = e.target.dataset.field;
         const checked = e.target.checked;
 
+        console.log('[DATA]', { reqID, field, checked });
+
         // Mettre à jour les réponses
         if (!this.responses[reqID]) {
           this.responses[reqID] = {};
         }
 
         this.responses[reqID][field] = checked;
+        console.log('[SAVED] Réponse enregistrée:', this.responses[reqID]);
 
         // Marquer comme non sauvegardé
         this.unsavedChanges = true;
         this.updateSaveButton();
+
+        console.log('[STATE] unsavedChanges =', this.unsavedChanges);
       });
     });
 
     // Gérer les champs de priorité (input number)
     const priorityFields = this.contentContainer.querySelectorAll('input.priority-field');
+    console.log('[DEBUG] Champs priorité trouvés:', priorityFields.length);
 
     priorityFields.forEach(field => {
       field.addEventListener('input', (e) => {
+        console.log('>>> [EVENT] Priorité modifiée:', e.target.id);
+
         if (this.isReadOnly) {
+          console.warn('[BLOQUÉ] Mode lecture seule actif');
           e.preventDefault();
           return;
         }
@@ -474,25 +474,34 @@ class SurveyViewer {
           e.target.value = value;
         }
 
+        console.log('[DATA]', { reqID, fieldName, value });
+
         // Mettre à jour les réponses
         if (!this.responses[reqID]) {
           this.responses[reqID] = {};
         }
 
         this.responses[reqID][fieldName] = value;
+        console.log('[SAVED] Réponse enregistrée:', this.responses[reqID]);
 
         // Marquer comme non sauvegardé
         this.unsavedChanges = true;
         this.updateSaveButton();
+
+        console.log('[STATE] unsavedChanges =', this.unsavedChanges);
       });
     });
 
     // Gérer les champs de notes (textarea)
     const notesFields = this.contentContainer.querySelectorAll('textarea.notes-field');
+    console.log('[DEBUG] Champs notes trouvés:', notesFields.length);
 
     notesFields.forEach(field => {
       field.addEventListener('input', (e) => {
+        console.log('>>> [EVENT] Notes modifiées:', e.target.id);
+
         if (this.isReadOnly) {
+          console.warn('[BLOQUÉ] Mode lecture seule actif');
           e.preventDefault();
           return;
         }
@@ -501,18 +510,25 @@ class SurveyViewer {
         const fieldName = e.target.dataset.field;
         const value = e.target.value;
 
+        console.log('[DATA]', { reqID, fieldName, valueLength: value.length });
+
         // Mettre à jour les réponses
         if (!this.responses[reqID]) {
           this.responses[reqID] = {};
         }
 
         this.responses[reqID][fieldName] = value;
+        console.log('[SAVED] Réponse enregistrée');
 
         // Marquer comme non sauvegardé
         this.unsavedChanges = true;
         this.updateSaveButton();
+
+        console.log('[STATE] unsavedChanges =', this.unsavedChanges);
       });
     });
+
+    console.log('=== [DEBUG] Écouteurs attachés ===');
   }
 
   /**
@@ -661,12 +677,30 @@ class SurveyViewer {
 
       const userData = data.data;
 
+      console.log('[SELECT] userData reçu:', userData);
+      console.log('[SELECT] userData.responses type:', typeof userData.responses);
+      console.log('[SELECT] userData.responses is Array?:', Array.isArray(userData.responses));
+
       // Mettre à jour l'état
       this.currentUser = userData.username;
-      this.responses = userData.responses || {};
+
+      // Forcer la conversion en objet (car PHP peut retourner un array)
+      if (Array.isArray(userData.responses)) {
+        console.warn('[SELECT] Responses est un array, conversion en objet');
+        this.responses = {};
+        Object.keys(userData.responses).forEach(key => {
+          this.responses[key] = userData.responses[key];
+        });
+      } else {
+        this.responses = userData.responses || {};
+      }
+
       this.customRequirements = userData.custom_requirements || [];
       this.unsavedChanges = false;
       this.isReadOnly = false; // Passer en mode édition
+
+      // Sauvegarder la session utilisateur
+      this.saveUserSession();
 
       // Recharger le sondage avec les réponses
       await this.loadSurveyContent(this.currentSurvey);
@@ -693,19 +727,104 @@ class SurveyViewer {
    * Applique les réponses chargées à l'interface
    */
   applyResponsesToUI() {
+    console.log('=== [LOAD] Application des réponses à l\'UI ===');
+    console.log('[LOAD] Nombre de requis avec réponses:', Object.keys(this.responses).length);
+
+    let appliedCount = 0;
+    let notFoundCount = 0;
+
     Object.keys(this.responses).forEach(reqID => {
       const reqResponses = this.responses[reqID];
 
       Object.keys(reqResponses).forEach(field => {
-        const checked = reqResponses[field];
-        const checkbox = document.getElementById(`${reqID}_${field}`);
+        const value = reqResponses[field];
+        const elementId = `${reqID}_${field}`;
+        const element = document.getElementById(elementId);
 
-        if (checkbox) {
-          checkbox.checked = checked;
-          checkbox.disabled = false; // Activer la checkbox
+        if (element) {
+          if (element.type === 'checkbox') {
+            element.checked = value;
+            element.disabled = false;
+            console.log(`[LOAD] ✓ Checkbox ${elementId} = ${value}`);
+          } else if (element.type === 'number' || element.tagName === 'INPUT') {
+            element.value = value;
+            element.disabled = false;
+            console.log(`[LOAD] ✓ Input ${elementId} = ${value}`);
+          } else if (element.tagName === 'TEXTAREA') {
+            element.value = value;
+            element.disabled = false;
+            console.log(`[LOAD] ✓ Textarea ${elementId} = ${value.substring(0, 30)}...`);
+          }
+          appliedCount++;
+        } else {
+          console.warn(`[LOAD] ✗ Élément introuvable: ${elementId}`);
+          notFoundCount++;
         }
       });
     });
+
+    console.log(`[LOAD] Résultat: ${appliedCount} champs restaurés, ${notFoundCount} introuvables`);
+    console.log('=== [LOAD] Fin application ===');
+  }
+
+  /**
+   * Sauvegarde la session utilisateur dans sessionStorage
+   */
+  saveUserSession() {
+    if (this.currentUser && this.currentSurvey) {
+      sessionStorage.setItem('oria_current_survey', this.currentSurvey.name);
+      sessionStorage.setItem('oria_current_user', this.currentUser);
+    }
+  }
+
+  /**
+   * Restaure la session utilisateur depuis sessionStorage
+   */
+  async restoreUserSession() {
+    const savedSurvey = sessionStorage.getItem('oria_current_survey');
+    const savedUser = sessionStorage.getItem('oria_current_user');
+
+    if (savedSurvey && savedUser && this.currentSurvey && this.currentSurvey.name === savedSurvey) {
+      try {
+        await this.selectUser(savedUser);
+      } catch (error) {
+        console.error('Erreur restauration session:', error);
+        this.clearUserSession();
+      }
+    }
+  }
+
+  /**
+   * Efface la session utilisateur
+   */
+  clearUserSession() {
+    sessionStorage.removeItem('oria_current_survey');
+    sessionStorage.removeItem('oria_current_user');
+  }
+
+  /**
+   * Déconnecte l'utilisateur actuel
+   */
+  logoutUser() {
+    if (this.unsavedChanges) {
+      const confirm = window.confirm('Vous avez des modifications non sauvegardées. Voulez-vous vraiment vous déconnecter ?');
+      if (!confirm) return;
+    }
+
+    this.currentUser = null;
+    this.responses = {};
+    this.customRequirements = [];
+    this.unsavedChanges = false;
+    this.isReadOnly = true;
+
+    this.clearUserSession();
+
+    // Recharger le sondage en mode lecture seule
+    this.loadSurveyContent(this.currentSurvey);
+    this.updateUserDisplay();
+    this.updateUIState();
+
+    alert('✓ Déconnexion réussie');
   }
 
   /**
@@ -811,24 +930,52 @@ class SurveyViewer {
    * Sauvegarde les données de l'utilisateur actuel
    */
   async saveUserData() {
+    console.log('=== [SAVE] Début sauvegarde ===');
+    console.log('[SAVE] Utilisateur:', this.currentUser);
+    console.log('[SAVE] Sondage:', this.currentSurvey?.name);
+    console.log('[SAVE] Nombre de réponses:', Object.keys(this.responses).length);
+    console.log('[SAVE] Contenu réponses:', this.responses);
+    console.log('[SAVE] Type de this.responses:', typeof this.responses);
+    console.log('[SAVE] Is Array?:', Array.isArray(this.responses));
+    console.log('[SAVE] Constructor:', this.responses?.constructor?.name);
+    console.log('[SAVE] Keys:', Object.keys(this.responses));
+    console.log('[SAVE] JSON stringified direct:', JSON.stringify(this.responses));
+
     if (!this.currentUser || !this.currentSurvey) {
+      console.error('[SAVE] Aucun utilisateur ou sondage sélectionné');
       alert('Aucun utilisateur sélectionné');
       return;
     }
 
     try {
+      // Forcer la conversion en objet simple
+      const responsesClean = {};
+      Object.keys(this.responses).forEach(key => {
+        responsesClean[key] = {...this.responses[key]};
+      });
+
+      console.log('[SAVE] Responses clean:', responsesClean);
+      console.log('[SAVE] Responses clean stringified:', JSON.stringify(responsesClean));
+
+      const payload = {
+        survey: this.currentSurvey.name,
+        user: this.currentUser,
+        responses: responsesClean,
+        custom_requirements: this.customRequirements
+      };
+
+      console.log('[SAVE] Payload à envoyer:', JSON.stringify(payload, null, 2));
+
       const response = await fetch('api.php?action=save-user-data', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          survey: this.currentSurvey.name,
-          user: this.currentUser,
-          responses: this.responses,
-          custom_requirements: this.customRequirements
-        })
+        body: JSON.stringify(payload)
       });
 
+      console.log('[SAVE] Réponse HTTP status:', response.status);
+
       const data = await response.json();
+      console.log('[SAVE] Réponse serveur:', data);
 
       if (!data.success) {
         throw new Error(data.error || 'Erreur sauvegarde');
@@ -837,10 +984,11 @@ class SurveyViewer {
       this.unsavedChanges = false;
       this.updateSaveButton();
 
+      console.log('[SAVE] ✓ Sauvegarde réussie');
       alert('✓ Données sauvegardées');
 
     } catch (error) {
-      console.error('Erreur sauvegarde:', error);
+      console.error('[SAVE] ✗ Erreur sauvegarde:', error);
       alert('❌ Erreur : ' + error.message);
     }
   }
@@ -854,8 +1002,19 @@ class SurveyViewer {
         <span class="current-user-icon">👤</span>
         <span class="current-user-name">${this.escapeHtml(this.currentUser)}</span>
         <span class="current-user-status">✓ Actif</span>
+        <button class="btn-logout" id="btnLogout" title="Déconnexion">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+          Déconnexion
+        </button>
       `;
       this.currentUserDisplay.classList.add('active');
+
+      // Attacher événement déconnexion
+      document.getElementById('btnLogout')?.addEventListener('click', () => this.logoutUser());
     } else {
       this.currentUserDisplay.innerHTML = `
         <span class="current-user-icon">🔒</span>

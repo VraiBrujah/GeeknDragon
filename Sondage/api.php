@@ -20,8 +20,12 @@
 
 declare(strict_types=1);
 
-// Headers sécurisés
-header('Content-Type: application/json; charset=utf-8');
+// Headers sécurisés (seront overridés pour export)
+$action = $_GET['action'] ?? '';
+
+if ($action !== 'export') {
+    header('Content-Type: application/json; charset=utf-8');
+}
 header('X-Content-Type-Options: nosniff');
 header('X-Frame-Options: DENY');
 header('Cache-Control: no-cache, must-revalidate');
@@ -523,31 +527,49 @@ try {
 
         case 'save-user-data':
             // Sauvegarde les données d'un utilisateur
+            error_log('=== [DEBUG-PHP] save-user-data ===');
+
             if ($method !== 'POST') {
+                error_log('[DEBUG-PHP] Méthode non POST: ' . $method);
                 jsonResponse(false, null, 'Méthode non autorisée', 405);
             }
 
             $input = file_get_contents('php://input');
+            error_log('[DEBUG-PHP] Input brut reçu: ' . substr($input, 0, 200) . '...');
+
             $data = json_decode($input, true, 512, JSON_THROW_ON_ERROR);
+            error_log('[DEBUG-PHP] Données décodées: ' . json_encode($data));
 
             $surveyName = $data['survey'] ?? '';
             $username = $data['user'] ?? '';
             $responses = $data['responses'] ?? [];
             $customRequirements = $data['custom_requirements'] ?? [];
 
+            error_log('[DEBUG-PHP] Survey: ' . $surveyName);
+            error_log('[DEBUG-PHP] User: ' . $username);
+            error_log('[DEBUG-PHP] Nombre de réponses: ' . count($responses));
+
             $surveySlug = generateSlug($surveyName);
             $userSlug = generateSlug($username);
 
+            error_log('[DEBUG-PHP] Survey slug: ' . $surveySlug);
+            error_log('[DEBUG-PHP] User slug: ' . $userSlug);
+
             if (!$surveySlug || !$userSlug) {
+                error_log('[DEBUG-PHP] Paramètres invalides');
                 jsonResponse(false, null, 'Paramètres invalides', 400);
             }
 
             $result = saveUserData($usersDir, $surveySlug, $userSlug, $responses, $customRequirements);
 
+            error_log('[DEBUG-PHP] Résultat sauvegarde: ' . json_encode($result));
+
             if (!$result['success']) {
+                error_log('[DEBUG-PHP] Échec sauvegarde: ' . $result['error']);
                 jsonResponse(false, null, $result['error'], 500);
             }
 
+            error_log('[DEBUG-PHP] Sauvegarde réussie');
             jsonResponse(true, $result);
             break;
 

@@ -139,12 +139,38 @@ body {
   font-weight: 500;
 }
 
-.current-user.logged-in {
+.current-user.active {
   background: rgba(16, 185, 129, 0.2);
 }
 
 .user-icon {
   font-size: 1.25rem;
+}
+
+.btn-logout {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-logout:hover {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: rgba(239, 68, 68, 0.5);
+  transform: translateY(-1px);
+}
+
+.btn-logout svg {
+  width: 14px;
+  height: 14px;
 }
 
 .btn-save,
