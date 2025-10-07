@@ -3,7 +3,8 @@
     "allow": [
       "Bash(rm:*)",
       "Bash(mkdir:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Read(//i/Backup/GitHub-C/backup/OrIAV1 - Copie/**)"
     ],
     "deny": [],
     "ask": []
