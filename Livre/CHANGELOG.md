@@ -4,6 +4,37 @@ Toutes les modifications notables de ce projet seront documentées dans ce fichi
 
 ---
 
+## [1.2.0] - 2025-10-07
+
+### ✨ Amélioration - Mémorisation Position de Lecture
+
+#### Amélioré
+- **Restauration position scroll** : Maintenant **instantanée et précise**
+  - Position exacte restaurée (au pixel près)
+  - Scroll sans animation (`behavior: 'instant'`) pour retour immédiat
+  - Double `requestAnimationFrame` pour garantir rendu DOM complet
+  - Vérification du livre actif avant restauration
+  - Log console pour débogage : `[Manuscrits] Position restaurée: XXXpx`
+
+- **Sauvegarde position améliorée** :
+  - Sauvegarde pendant le scroll (debounce 150ms)
+  - Sauvegarde périodique toutes les 5s (conservation)
+  - Sauvegarde avant fermeture page (beforeunload)
+  - Triple protection contre perte de position
+
+#### Corrigé
+- ❌ Avant : Restauration avec scroll fluide → position approximative
+- ✅ Après : Restauration instantanée → position exacte au pixel près
+- ❌ Avant : Timeout 300ms fixe → parfois trop court
+- ✅ Après : `requestAnimationFrame` × 2 → attend rendu complet
+
+#### Performance
+- ✅ Débounce scroll augmenté : 100ms → 150ms (meilleure performance)
+- ✅ Moins de saccades pendant restauration
+- ✅ Expérience utilisateur fluide
+
+---
+
 ## [1.1.0] - 2025-10-07
 
 ### 🔒 Sécurité - FIX CSP Hostpapa

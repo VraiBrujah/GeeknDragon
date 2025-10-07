@@ -4,19 +4,19 @@
 
 ### L'Éveil des Ombres Anciennes
 
-La nuit s'épandait sur les Monts de l'Éther tel un linceul de velours noir imprégné de sang séché, plus dense et plus affamée que toute ténèbre qu'eût connue Etheria depuis l'antédiluvienne Purge. Un vent de lame sifflait entre les crêtes déchiquetées—ces titans osseux qui percent le ventre du ciel comme des côtes brisées d'un dieu oublié. Il portait l'haleine âcre du givre et l'exhalaison métallique des pierres gorgées de magie antique.
+La nuit s'épandait sur les Monts de l'Éther tel un linceul de velours noir imprégné de sang séché, plus dense et plus affamée que toute ténèbre qu'eût connue Etheria depuis l'antédiluvienne Purge. Un vent de lame sifflait entre les crêtes déchiquetées, ces titans osseux qui percent le ventre du ciel comme des côtes brisées d'un dieu oublié. Il portait l'haleine âcre du givre et l'exhalaison métallique des pierres gorgées de magie antique.
 
 Les sommets acérés buvaient la lumière elle-même, créant des abysses d'ombre où même la lune n'osait effleurer de ses doigts nacrés. Nulle étoile ne perçait l'épaisse carapace noire qui oppressait le monde, comme si le firmament retenait son souffle devant l'imminence de quelque apocalypse cosmique.
 
 Cette obscurité n'était point naturelle, mais tissée de volontés primordiales, de pactes scellés dans le sang tiède et le désespoir figé. L'air frémissait d'une tension électrique qui caressait la chair des rares créatures assez téméraires pour s'aventurer près de ces ruines vouées aux malédictions.
 
-Les corbeaux eux-mêmes évitaient cette région comme si leurs instincts ancestraux leur hurlaient de fuir ce qui s'éveillait dans les entrailles caverneuses de la montagne—quelque chose d'assez antique et d'assez affamé pour que les charognards frissonnent de terreur sacrée.
+Les corbeaux eux-mêmes évitaient cette région comme si leurs instincts ancestraux leur hurlaient de fuir ce qui s'éveillait dans les entrailles caverneuses de la montagne : quelque chose d'assez antique et d'assez affamé pour que les charognards frissonnent de terreur sacrée.
 
 Dans les cités lointaines, les plus sensibles à l'Éther commençaient à ressentir un malaise inexplicable. Les mages de cour d'Eldoria notaient des fluctuations étranges dans leurs instruments thaumaturgiques. À Valgaris, les forges éternelles crachaient des flammes d'un rouge plus sombre, presque noir, qui inquiétaient les maîtres-forgerons. Dans les forêts de Sylvelune, les elfes les plus anciens se dressaient soudain de leur méditation séculaire, leurs yeux dorés s'élargissant d'une terreur qu'ils n'avaient plus éprouvée depuis l'âge des ténèbres.
 
-Au sommet d'un éperon rocheux—cette lame de pierre qui défie le vide béant comme un doigt accusateur—, une silhouette se dressait contre l'immensité. Une femme d'une beauté vénéneuse, drapée d'un manteau de nuit vivante qui buvait la lumière comme une bouche affamée boit le sang. Sa peau d'albâtre translucide révélait un réseau de veines sombres qui pulsaient d'un rythme non-humain, charriant un ichor plus ancien que la vie elle-même.
+Au sommet d'un éperon rocheux, cette lame de pierre qui défie le vide béant comme un doigt accusateur, une silhouette se dressait contre l'immensité. Une femme d'une beauté vénéneuse, drapée d'un manteau de nuit vivante qui buvait la lumière comme une bouche affamée boit le sang. Sa peau d'albâtre translucide révélait un réseau de veines sombres qui pulsaient d'un rythme non-humain, charriant un ichor plus ancien que la vie elle-même.
 
-Sous ses bottes de cuir sanguin, la pierre ancestrale—gravée de glyphes que nul cartographe n'oserait consigner—gardait l'entrée d'un sanctuaire dont le nom même avait été effacé par la terreur des siècles. Là où s'élevait jadis l'un des plus redoutables bastions du Savoir Interdit d'Etheria, ne demeuraient que ruines et silence sépulcral. Les colonnes titanesques gisaient fracassées, entassées tel un charnier de géants pétrifiés.
+Sous ses bottes de cuir sanguin, la pierre ancestrale, gravée de glyphes que nul cartographe n'oserait consigner, gardait l'entrée d'un sanctuaire dont le nom même avait été effacé par la terreur des siècles. Là où s'élevait jadis l'un des plus redoutables bastions du Savoir Interdit d'Etheria, ne demeuraient que ruines et silence sépulcral. Les colonnes titanesques gisaient fracassées, entassées tel un charnier de géants pétrifiés.
 
 La femme esquissa un sourire d'une beauté venimeuse, cruel comme une lame effilée. Ses lèvres exsangues révélèrent l'éclat d'ivoire de dents sculptées par les siècles de vampirisme raffiné. L'amertume glaciale qu'elles exhalaient suffit à faire naître des cristaux de givre sur la pierre.
 
@@ -40,7 +40,7 @@ Plus loin, par-delà les crêtes déchiquetées, les cités d'Etheria poursuivai
 
 Tous ces royaumes, aveuglés par leur quête égoïste de confort, oublieux des fondations mêmes sur lesquelles leur monde fragile reposait, ignorants des forces primordiales qui dormaient sous leurs pieds comme des volcans prêts à exploser.
 
-Mais elle, elle n'oubliait rien. Elle ne pouvait oublier, car l'oubli n'était pas dans sa nature transformée—ces instants où, jeune mortelle, elle s'était endormie au soleil dans les jardins de son enfance, le visage caressé par une brise tiède qui sentait la lavande et les promesses, la sensation de ses doigts d'alors, chauds et vivants, feuilletant un livre d'histoires près de la cheminée familiale.
+Mais elle, elle n'oubliait rien. Elle ne pouvait oublier, car l'oubli n'était pas dans sa nature transformée. Ces instants où, jeune mortelle, elle s'était endormie au soleil dans les jardins de son enfance, le visage caressé par une brise tiède qui sentait la lavande et les promesses, la sensation de ses doigts d'alors, chauds et vivants, feuilletant un livre d'histoires près de la cheminée familiale.
 
 Jamais.
 
@@ -66,7 +66,7 @@ Elle s'accroupit avec une grâce féline qui trahissait sa nature non-humaine, s
 
 Un rire bref et transi s'échappa de ses lèvres, un son qui n'avait rien d'humain et qui sembla faire frissonner la pierre elle-même.
 
-— Des protections dérisoires, siffla-t-elle. Sa voix gelée glissa sur la pierre comme du sang. Des griffures sur un cercueil fendu, voilà leur « sceau éternel ».
+- Des protections dérisoires, siffla-t-elle. Sa voix gelée glissa sur la pierre comme du sang. Des griffures sur un cercueil fendu, voilà leur « sceau éternel ».
 
 Fragiles, ternies, crevassées par le temps. Murailles, lois, pactes : tout cède sous les siècles. Le temps, ennemi des mortels, était pour elle un complice patient qui rongeait les défenses et ouvrait les portes qu'on croyait scellées.
 
@@ -210,7 +210,7 @@ Son heure approchait enfin, portée par les vents du changement et annoncée par
 
 ### L'Ombre et la Gardienne
 
-Dans les entrailles du sanctuaire oublié, une autre présence veillait dans l'ombre, immobile comme une statue de guerre antique mais vibrante d'une vie ancestrale. Saatha avait toujours été là, fidèle gardienne depuis des éons innombrables, témoin silencieux de la grandeur passée et de la déchéance présente. Où allait sa maîtresse, allait la gorgone—pactes antiques gravés dans sa chair, scellés dans son sang par des rituels que seuls les plus fous osaient encore tenter.
+Dans les entrailles du sanctuaire oublié, une autre présence veillait dans l'ombre, immobile comme une statue de guerre antique mais vibrante d'une vie ancestrale. Saatha avait toujours été là, fidèle gardienne depuis des éons innombrables, témoin silencieux de la grandeur passée et de la déchéance présente. Où allait sa maîtresse, allait la gorgone : pactes antiques gravés dans sa chair, scellés dans son sang par des rituels que seuls les plus fous osaient encore tenter.
 
 Dans l'obscurité, elle perçut le léger frémissement des serpents de Saatha, ce tremblement presque imperceptible qui trahissait l'inquiétude de sa gardienne. Sans réfléchir, d'un geste aussi naturel qu'inattendu, elle tendit la main et effleura délicatement l'une des créatures ophidiennes. Le serpent se figea sous cette caresse, apaisé par une tendresse qu'elle croyait avoir oubliée depuis des siècles.
 
@@ -220,13 +220,13 @@ Sa main s'immobilisa. Qu'était-elle en train de faire ?
 
 L'agacement monta en elle, rapide et froid. Elle retira sa main comme si les serpents l'avaient brûlée, et avant même que la pensée ne se forme complètement, sa paume frappa la joue de Saatha. Le claquement résonna dans le silence du sanctuaire.
 
-— Tes serpents sifflent trop fort, cracha-t-elle d'une voix coupante. Contrôle-les, ou je les arracherai un par un.
+- Tes serpents sifflent trop fort, cracha-t-elle d'une voix coupante. Contrôle-les, ou je les arracherai un par un.
 
 Un mensonge transparent, et elles le savaient toutes les deux. Mais la hiérarchie était rétablie. La faiblesse, chassée. Le souvenir, enterré.
 
 Saatha s'inclina plus profondément, une main sur sa joue marquée.
 
-— Pardonnez-moi, Ma Dame. Je veillerai à ce qu'ils se taisent.
+- Pardonnez-moi, Ma Dame. Je veillerai à ce qu'ils se taisent.
 
 Aucun reproche dans sa voix. Aucune surprise. Juste l'acceptation de celle qui n'avait jamais connu autre chose.
 
@@ -236,9 +236,9 @@ Enfant, elle avait été arrachée à sa famille lors d'un raid d'esclavagistes.
 
 Des décennies s'étaient écoulées, passant de maître en maître, chacun plus cruel que le précédent, jusqu'à ce jour où elle avait été vendue à cette vampire aux yeux de rubis.
 
-Cette maîtresse n'était ni pire ni meilleure que les autres. Elle utilisait Saatha comme on utilise un outil—sans malveillance particulière, mais sans tendresse non plus. L'esclavage était l'ordre naturel du monde, et Saatha n'était qu'une possession parmi d'autres. Fonctionnelle. Utile. Agaçante, parfois, avec sa lenteur et ses précautions excessives, mais assez compétente pour qu'on ne la brise pas inutilement.
+Cette maîtresse n'était ni pire ni meilleure que les autres. Elle utilisait Saatha comme on utilise un outil : sans malveillance particulière, mais sans tendresse non plus. L'esclavage était l'ordre naturel du monde, et Saatha n'était qu'une possession parmi d'autres. Fonctionnelle. Utile. Agaçante, parfois, avec sa lenteur et ses précautions excessives, mais assez compétente pour qu'on ne la brise pas inutilement.
 
-Des siècles avaient passé. Saatha n'avait jamais connu d'autre existence que la servitude. Ses rares souvenirs d'enfance libre s'étaient estompés comme des rêves au réveil. Elle ne connaissait que les chaînes, et dans ce monde où l'esclavage était la norme, sa loyauté n'était pas un choix—c'était tout ce qu'elle avait jamais su être.
+Des siècles avaient passé. Saatha n'avait jamais connu d'autre existence que la servitude. Ses rares souvenirs d'enfance libre s'étaient estompés comme des rêves au réveil. Elle ne connaissait que les chaînes, et dans ce monde où l'esclavage était la norme, sa loyauté n'était pas un choix : c'était tout ce qu'elle avait jamais su être.
 
 Elle suivait sa maîtresse à travers les âges, exécutant ses ordres sans question. Parfois, elle ajustait d'un geste machinal les plis de la robe de sa maîtresse, écartait une poussière invisible de son manteau. Ces gestes n'étaient pas de l'affection, mais le réflexe d'une esclave bien dressée qui sait que la valeur d'un outil se mesure à son entretien.
 
@@ -246,27 +246,27 @@ Elle suivait sa maîtresse à travers les âges, exécutant ses ordres sans ques
 
 Dans l'obscurité du sanctuaire, les deux femmes se faisaient face. La vampire millénaire aux yeux de rubis et aux dents d'ivoire, héritière d'un pouvoir que le monde avait cru enterré à jamais. Et Saatha, la gorgone esclave, gardienne silencieuse et exécutrice des volontés de sa maîtresse.
 
-— Ma Dame, murmura Saatha en s'inclinant respectueusement, sa voix grave et métallique résonnant dans l'écho de la salle. Le temps est venu ? Les pièges sont encore actifs. Je peux ouvrir le chemin.
+- Ma Dame, murmura Saatha en s'inclinant respectueusement, sa voix grave et métallique résonnant dans l'écho de la salle. Le temps est venu ? Les pièges sont encore actifs. Je peux ouvrir le chemin.
 
 Elle ne répondit pas immédiatement, trop occupée à ouvrir le grimoire qu'elle tenait dans sa main droite. Un volume ancien, relié d'une peau dont l'origine ne pouvait être nommée sans blasphème et fermé par des agrafes d'argent noir. Le Codex Purpureus, le livre maudit qui contenait tous les secrets des Éthériens, toutes leurs découvertes, toutes leurs expériences, tous leurs échecs et tous leurs triomphes.
 
-— Oui, répondit-elle enfin d'une voix qui semblait venir des profondeurs de la terre elle-même, sans lever les yeux vers Saatha. L'heure de la moisson a sonné. L'enfant nous attend, quelque part dans ce monde ignorant et fragile. Il est temps de la ramener à la maison.
+- Oui, répondit-elle enfin d'une voix qui semblait venir des profondeurs de la terre elle-même, sans lever les yeux vers Saatha. L'heure de la moisson a sonné. L'enfant nous attend, quelque part dans ce monde ignorant et fragile. Il est temps de la ramener à la maison.
 
 Les pages du grimoire, noircies d'une encre qui n'était pas tout à fait de l'encre, luisaient d'une phosphorescence maladive. Les mots, tracés dans la langue interdite des anciens maîtres, semblaient ramper sur le parchemin comme des serpents vivants.
 
-— Violette, souffla-t-elle en caressant l'une des pages du bout de son index glacé. Ma petite étoile pourpre. Tu vas enfin rentrer à la maison. Tu vas enfin comprendre qui tu es vraiment et pourquoi tu es née.
+- Violette, souffla-t-elle en caressant l'une des pages du bout de son index glacé. Ma petite étoile pourpre. Tu vas enfin rentrer à la maison. Tu vas enfin comprendre qui tu es vraiment et pourquoi tu es née.
 
-Sur la page qu'elle caressait, une enluminure ancienne représentait une constellation en forme d'étoile à six branches. Mais ce n'était pas une étoile ordinaire — chaque branche pulsait d'une lueur pourpre, et au centre, l'esquisse d'un visage d'enfant aux yeux violets qui semblaient la regarder à travers les siècles.
+Sur la page qu'elle caressait, une enluminure ancienne représentait une constellation en forme d'étoile à six branches. Mais ce n'était pas une étoile ordinaire : chaque branche pulsait d'une lueur pourpre, et au centre, l'esquisse d'un visage d'enfant aux yeux violets qui semblaient la regarder à travers les siècles.
 
-En prononçant ce nom, quelque chose d'ancien et d'oublié remua dans sa poitrine immobile. Violette. L'enfant qu'elle n'avait jamais eue, la famille qu'elle avait perdue, l'innocence qu'elle-même avait sacrifiée sur l'autel du pouvoir. Pour un instant fragile comme un souffle de vent, elle se demanda si l'enfant aimerait les histoires qu'on lui racontait le soir, si ses yeux s'illumineraient de joie devant un simple bouquet de fleurs des champs. Des pensées dangereusement humaines qu'elle chassa aussitôt, mais qui laissèrent dans leur sillage un goût de miel et de larmes.
+En prononçant ce nom, quelque chose d'ancien et d'oublié remua dans sa poitrine immobile. Violette. L'enfant qu'elle n'avait jamais eu, la famille qu'elle avait perdue, l'innocence qu'elle-même avait sacrifiée sur l'autel du pouvoir. Pour un instant fragile comme un souffle de vent, elle se demanda si l'enfant aimerait les histoires qu'on lui racontait le soir, si ses yeux s'illumineraient de joie devant un simple bouquet de fleurs des champs. Des pensées dangereusement humaines qu'elle chassa aussitôt, mais qui laissèrent dans leur sillage un goût de miel et de larmes.
 
 Dans les coins les plus sombres de la salle, des ombres commençaient à s'agiter. Créatures de cauchemar et serviteurs de l'au-delà, ils répondaient à l'appel silencieux de leur maîtresse, se matérialisant lentement dans la réalité comme des taches d'encre qui s'étendent sur un parchemin blanc.
 
-— Allez, ordonna-t-elle sans lever les yeux de son grimoire. Trouvez-la. Ramenez-la-moi. Vivante et intacte. Et si quelqu'un tente de s'interposer...
+- Allez, ordonna-t-elle sans lever les yeux de son grimoire. Trouvez-la. Ramenez-la-moi. Vivante et intacte. Et si quelqu'un tente de s'interposer...
 
 Elle releva enfin la tête, et ses yeux brillèrent d'une lueur qui promettait mille morts atroces.
 
-— Dévorez-les.
+- Dévorez-les.
 
 Les ombres s'inclinèrent comme un seul être, puis se dispersèrent dans les couloirs du sanctuaire, filant vers la surface comme des flèches noires tirées par un archer fantôme. Bientôt, elles émergèrent dans la nuit glacée des Monts de l'Éther, se répandant dans le monde comme une maladie, portant avec elles l'odeur de la mort et la promesse de la vengeance.
 

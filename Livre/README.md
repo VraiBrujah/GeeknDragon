@@ -8,7 +8,7 @@ Système de visualisation élégant pour manuscrits littéraires au format Markd
 ✅ **Navigation par onglets** : Basculer facilement entre différents livres
 ✅ **Chapitres ordonnés** : Tri automatique par numéro de chapitre (00_, 01_, etc.)
 ✅ **Ancres de navigation** : Table des matières interactive avec scroll fluide
-✅ **Mémorisation de position** : Reprend automatiquement là où vous vous êtes arrêté
+✅ **Mémorisation de position EXACTE** : Reprend au pixel près là où vous vous êtes arrêté (restauration instantanée)
 ✅ **Mode sombre** : Design optimisé pour lecture prolongée sans fatigue oculaire
 ✅ **Parsing Markdown** : Rendu complet des fichiers .md avec mise en forme
 ✅ **Complètement autonome** : Aucune dépendance au site principal

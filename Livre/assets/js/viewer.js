@@ -5,12 +5,13 @@
  * - Détection dynamique des livres et chapitres
  * - Navigation par onglets entre livres
  * - Ancres de navigation pour les chapitres
- * - Mémorisation de la position de lecture en localStorage
+ * - Mémorisation EXACTE de la position de lecture (pixel-perfect)
+ * - Restauration instantanée sans animation (UX optimale)
  * - Parsing markdown avec marked.js
  * - Gestion du scroll et affichage progressif
  *
  * @author Brujah - Geek & Dragon
- * @version 1.0.0
+ * @version 1.2.0
  */
 
 class ManuscritsViewer {
@@ -51,8 +52,8 @@ class ManuscritsViewer {
       // Chargement des livres disponibles
       await this.loadBooks();
 
-      // Restauration de la dernière lecture ou livre par défaut
-      this.restoreReadingPosition();
+      // Déterminer quel livre charger (dernière lecture ou premier)
+      await this.loadInitialBook();
 
       // Initialisation des écouteurs d'événements
       this.setupEventListeners();
@@ -60,6 +61,37 @@ class ManuscritsViewer {
     } catch (error) {
       console.error('Erreur initialisation:', error);
       this.showError('Impossible de charger les manuscrits');
+    }
+  }
+
+  /**
+   * Charge le livre initial (dernière lecture ou premier disponible)
+   */
+  async loadInitialBook() {
+    try {
+      const saved = localStorage.getItem('manuscrits_reading_position');
+
+      if (saved) {
+        const position = JSON.parse(saved);
+        const book = this.books.find(b => b.slug === position.bookSlug);
+
+        if (book) {
+          // Charger le livre sauvegardé
+          await this.switchBook(book.slug);
+          return;
+        }
+      }
+
+      // Fallback : charger le premier livre
+      if (this.books.length > 0) {
+        await this.switchBook(this.books[0].slug);
+      }
+
+    } catch (error) {
+      console.error('Erreur chargement livre initial:', error);
+      if (this.books.length > 0) {
+        await this.switchBook(this.books[0].slug);
+      }
     }
   }
 
@@ -163,8 +195,13 @@ class ManuscritsViewer {
       // Chargement du contenu de tous les chapitres
       await this.loadAllChapters(book.name, chapters);
 
-      // Restauration de la position de scroll si applicable
-      this.restoreScrollPosition();
+      // Restauration de la position de scroll après chargement complet
+      // Utiliser requestAnimationFrame pour s'assurer que le DOM est rendu
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          this.restoreScrollPosition();
+        });
+      });
 
     } catch (error) {
       console.error('Erreur chargement chapitres:', error);
@@ -349,14 +386,35 @@ class ManuscritsViewer {
 
       const position = JSON.parse(saved);
 
-      // Attendre que le DOM soit complètement rendu
-      setTimeout(() => {
+      // Vérifier que c'est bien le même livre
+      if (position.bookSlug !== this.currentBook?.slug) {
+        return;
+      }
+
+      // Restaurer la position de scroll EXACTE sans animation
+      if (position.scrollY && position.scrollY > 0) {
+        // Scroll instantané vers la position sauvegardée
+        window.scrollTo({
+          top: position.scrollY,
+          behavior: 'instant'
+        });
+
+        console.log(`[Manuscrits] Position restaurée: ${position.scrollY}px`);
+
+        // Mettre à jour le chapitre actif visuellement
         if (position.chapterSlug) {
-          this.scrollToChapter(position.chapterSlug);
-        } else if (position.scrollY) {
-          window.scrollTo({ top: position.scrollY, behavior: 'smooth' });
+          this.currentChapter = position.chapterSlug;
+          this.updateActiveChapter(position.chapterSlug);
         }
-      }, 300);
+      } else if (position.chapterSlug) {
+        // Fallback: scroll vers le chapitre (sans animation)
+        const element = document.getElementById(position.chapterSlug);
+        if (element) {
+          element.scrollIntoView({ behavior: 'instant', block: 'start' });
+          this.currentChapter = position.chapterSlug;
+          this.updateActiveChapter(position.chapterSlug);
+        }
+      }
 
     } catch (error) {
       console.error('Erreur restauration scroll:', error);
@@ -413,7 +471,10 @@ class ManuscritsViewer {
           this.scrollToTopBtn.classList.remove('visible');
         }
       }
-    }, 100);
+
+      // Sauvegarde de la position pendant le scroll
+      this.saveReadingPosition();
+    }, 150);
   }
 
   /**
