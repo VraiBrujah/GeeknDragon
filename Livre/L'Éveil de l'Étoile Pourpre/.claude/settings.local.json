@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Read(//e/GitHub/GeeknDragon/Livre/**)"
+    ],
+    "deny": [],
+    "ask": [],
+    "additionalDirectories": [
+      "C:\\c\\Users\\Brujah\\Documents\\GitHub\\L-veil-de-l-toile-Pourpre"
+    ]
+  }
+}
