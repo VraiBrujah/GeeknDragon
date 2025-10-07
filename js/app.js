@@ -307,13 +307,11 @@ document.addEventListener('DOMContentLoaded', () => {
             window.Snipcart.api.session.setLanguage(picked);
           }
 
-          // Construire la nouvelle URL avec le paramètre langue
-          let newUrl = window.location.pathname;
-          if (picked !== 'fr') {
-            const params = new URLSearchParams(window.location.search);
-            params.set('lang', picked);
-            newUrl += '?' + params.toString();
-          }
+          // Construire la nouvelle URL en préservant TOUS les paramètres
+          const params = new URLSearchParams(window.location.search);
+          params.set('lang', picked); // Toujours ajouter lang (fr, en, etc.)
+
+          let newUrl = window.location.pathname + '?' + params.toString();
           if (window.location.hash) {
             newUrl += window.location.hash;
           }
@@ -818,16 +816,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Fancybox
-  if (window.Fancybox) {
-    Fancybox.bind('[data-fancybox]', {
-      backdrop: 'blur',
-      dragToClose: true,
-      closeButton: 'top',
-      placeFocusBack: true,
-      on: { close: () => window.history.back() },
+  // Désactivation Fancybox - Clic sur image arrête seulement l'autoplay
+  document.querySelectorAll('.swiper-slide a[data-fancybox]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault(); // Empêcher le zoom Fancybox
+
+      // Trouver le Swiper parent et arrêter l'autoplay
+      const swiperEl = link.closest('.swiper');
+      if (swiperEl && swiperEl.swiper) {
+        if (swiperEl.swiper.autoplay.running) {
+          swiperEl.swiper.autoplay.stop();
+        } else {
+          swiperEl.swiper.autoplay.start();
+        }
+      }
     });
-  }
+  });
 });
 
 /* ========================================================================

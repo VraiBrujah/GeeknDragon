@@ -14,15 +14,15 @@ $availableLangs = ['fr', 'en', 'es', 'de'];
 
 /**
  * Détecte la langue préférée du navigateur basée sur Accept-Language
- * 
+ *
  * @param array $availableLangs Liste des langues supportées par l'application
- * @return string Code langue préférée ou 'fr' par défaut
+ * @return string Code langue préférée ou 'en' par défaut
  */
 function getBrowserLanguage(array $availableLangs): string {
     if (!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-        return 'fr'; // Défaut si pas d'en-tête
+        return 'en'; // Défaut anglais si pas d'en-tête
     }
-    
+
     $browserLangs = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
     foreach ($browserLangs as $browserLang) {
         $lang = strtolower(trim(explode(';', $browserLang)[0]));
@@ -33,14 +33,14 @@ function getBrowserLanguage(array $availableLangs): string {
             }
         }
     }
-    return 'fr'; // Défaut français si aucune langue supportée
+    return 'en'; // Défaut anglais si aucune langue supportée
 }
 
-// Résolution langue : URL > Cookie > Défaut FR (pas de détection navigateur automatique)
-// La détection navigateur causait des incohérences FR/EN - on force FR par défaut
-$lang = $_GET['lang'] ?? ($_COOKIE['lang'] ?? 'fr');
+// Résolution langue : URL > Cookie > Langue du navigateur
+// Si français dans navigateur → fr, si anglais → en, sinon → en
+$lang = $_GET['lang'] ?? ($_COOKIE['lang'] ?? getBrowserLanguage($availableLangs));
 if (!in_array($lang, $availableLangs, true)) {
-    $lang = 'fr';
+    $lang = getBrowserLanguage($availableLangs);
 }
 // Cookie sécurisé avec SameSite
 $isHttps = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && strtolower((string) $_SERVER['HTTPS']) !== 'off')
