@@ -21,7 +21,10 @@
       "Bash(dir:*)",
       "Bash(findstr:*)",
       "Bash(cut:*)",
-      "Read(//i/Backup/GitHub-C/backup/OrIAV1 - Copie/**)"
+      "Read(//i/Backup/GitHub-C/backup/OrIAV1 - Copie/**)",
+      "Read(//i/Backup/GitHub-C/backup/Oriav2/**)",
+      "Read(//i/Backup/GitHub-C/**)",
+      "Bash(test:*)"
     ],
     "deny": [],
     "ask": []
