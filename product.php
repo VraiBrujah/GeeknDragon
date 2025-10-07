@@ -278,28 +278,6 @@ echo $snipcartInit;
 ?>
 <main id="main" class="py-10 pt-[var(--header-height)] main-product">
   <section class="max-w-6xl mx-auto px-6">
-    <div class="flex justify-center mb-6">
-      <?php
-      $href = 'boutique.php#' . htmlspecialchars($from);
-      ?>
-      <a href="<?= $href ?>"
-         class="header-nav-icon-btn flex-shrink-0 aspect-square w-20 lg:w-24 overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/50"
-         aria-label="<?= __('nav.shop', 'Boutique') ?>"
-         title="<?= __('nav.shop', 'Boutique') ?>"
-         data-i18n-aria-label="nav.shop"
-         data-i18n-title="nav.shop">
-        <img src="/media/ui/button/boutique.webp"
-             alt="<?= __('nav.shop', 'Boutique') ?>"
-             data-i18n-alt="nav.shop"
-             class="w-full h-full object-cover rounded-xl"
-             loading="eager">
-        <span class="btn-text-overlay">
-          <span class="hidden md:inline" data-i18n="btnOverlay.shop.desktop"><?= __('btnOverlay.shop.desktop', 'L\'Échoppe') ?></span>
-          <span class="md:hidden" data-i18n="btnOverlay.shop.mobile"><?= __('btnOverlay.shop.mobile', 'Échoppe') ?></span>
-        </span>
-      </a>
-    </div>
-
     <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
         

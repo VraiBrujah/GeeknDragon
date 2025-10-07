@@ -943,11 +943,69 @@ a[aria-current="page"]{
 /* Slider styles (Swiper) */
 .swiper { width:100%; position:relative; }
 .swiper-slide img { width:100%; height:auto; max-height:20rem; object-fit:contain; }
+
+/* Boutons navigation Swiper avec icônes personnalisées (flèches) */
 .swiper-button-prev, .swiper-button-next {
-  color:#fff; background-image:linear-gradient(to right,#4f46e5,#7c3aed);
-  border-radius:9999px; width:2.5rem; height:2.5rem; display:flex; align-items:center; justify-content:center;
+  width: 3rem;
+  height: 3rem;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
 }
-.swiper-button-prev::after, .swiper-button-next::after { font-size:1rem; }
+
+/* Masquer les icônes par défaut de Swiper */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  content: '';
+  display: none;
+}
+
+/* Image de fond pour les boutons */
+.swiper-button-prev {
+  background-image: url('/media/branding/icons/←.webp');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.swiper-button-next {
+  background-image: url('/media/branding/icons/→.webp');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Effet hover */
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  transform: scale(1.15) translateY(-2px);
+  filter: drop-shadow(0 4px 12px rgba(217,119,6,0.6)) brightness(1.2);
+}
+
+/* Effet active */
+.swiper-button-prev:active,
+.swiper-button-next:active {
+  transform: scale(0.95);
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.4));
+}
+
+/* État désactivé */
+.swiper-button-disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  filter: grayscale(1);
+}
+
+.swiper-button-disabled:hover {
+  transform: none;
+  filter: grayscale(1) opacity(0.3);
+}
+
 .swiper-pagination-bullet { background:#4f46e5; opacity:1; }
 .swiper-pagination-bullet-active { background:#7c3aed; }
 
