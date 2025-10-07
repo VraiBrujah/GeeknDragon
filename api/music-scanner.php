@@ -14,9 +14,10 @@ if (function_exists('gd_send_cors_headers')) {
 function scanMusicDirectory($baseDir) {
     $musicFiles = [];
     $heroIntroPath = null;
+    $initFolderFiles = [];
     
     // Fonction récursive pour scanner les dossiers
-    function scanRecursive($dir, &$files, &$heroPath) {
+    function scanRecursive($dir, &$files, &$heroPath, &$initFiles) {
         if (!is_dir($dir)) return;
         
         try {
@@ -35,17 +36,28 @@ function scanMusicDirectory($baseDir) {
                     
                     $relativePath = str_replace($projectRoot . '/', '', $fullPath);
                     
-                    // Identifier le fichier hero-intro.mp3 (priorité absolue)
+                    // Identifier les fichiers dans le dossier init
+                    $isInInitFolder = strpos($relativePath, 'media/musique/init/') !== false;
+                    
+                    // Identifier le fichier hero-intro.mp3 (maintenant dans init/)
                     if (strtolower($file->getBasename()) === 'hero-intro.mp3') {
                         $heroPath = $relativePath;
                     }
                     
-                    $files[] = [
+                    $fileData = [
                         'path' => $relativePath,
                         'name' => $file->getBasename('.mp3'),
                         'size' => $file->getSize(),
-                        'modified' => $file->getMTime()
+                        'modified' => $file->getMTime(),
+                        'isInit' => $isInInitFolder
                     ];
+                    
+                    $files[] = $fileData;
+                    
+                    // Ajouter séparément les fichiers du dossier init
+                    if ($isInInitFolder) {
+                        $initFiles[] = $fileData;
+                    }
                 }
             }
         } catch (Exception $e) {
@@ -54,17 +66,23 @@ function scanMusicDirectory($baseDir) {
     }
     
     $musicDir = dirname(__DIR__) . '/media/musique';
-    scanRecursive($musicDir, $musicFiles, $heroIntroPath);
+    scanRecursive($musicDir, $musicFiles, $heroIntroPath, $initFolderFiles);
     
     // Trier par nom pour cohérence
     usort($musicFiles, function($a, $b) {
         return strcmp($a['name'], $b['name']);
     });
     
+    usort($initFolderFiles, function($a, $b) {
+        return strcmp($a['name'], $b['name']);
+    });
+    
     return [
         'files' => $musicFiles,
+        'initFiles' => $initFolderFiles,
         'heroIntro' => $heroIntroPath,
         'count' => count($musicFiles),
+        'initCount' => count($initFolderFiles),
         'scannedAt' => date('Y-m-d H:i:s')
     ];
 }

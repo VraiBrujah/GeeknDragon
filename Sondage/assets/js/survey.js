@@ -1,0 +1,1159 @@
+/**
+ * Système de sondages interactifs multi-utilisateur avec QCM
+ *
+ * Version 2.0.0 - Multi-utilisateur complet
+ *
+ * Fonctionnalités :
+ * - Gestion multi-utilisateur complète
+ * - Mode lecture seule sans utilisateur sélectionné
+ * - Mode édition avec utilisateur actif
+ * - Sauvegarde automatique par utilisateur
+ * - Comparaison côte à côte de plusieurs utilisateurs
+ * - Exportation JSON/CSV
+ * - Ajout de critères personnalisés
+ *
+ * @author Brujah - Geek & Dragon
+ * @version 2.0.0
+ */
+
+class SurveyViewer {
+  /**
+   * Constructeur du visualiseur de sondages multi-utilisateur
+   */
+  constructor() {
+    this.surveys = [];
+    this.currentSurvey = null;
+    this.currentUser = null; // null = mode lecture seule
+    this.users = []; // Liste des utilisateurs du sondage actuel
+    this.responses = {}; // Réponses de l'utilisateur actuel
+    this.customRequirements = []; // Critères ajoutés par l'utilisateur
+    this.unsavedChanges = false;
+    this.isReadOnly = true; // true tant qu'aucun utilisateur n'est sélectionné
+
+    // Éléments DOM
+    this.tabsContainer = document.getElementById('surveyTabs');
+    this.sectionsNav = document.getElementById('sectionsNav');
+    this.sectionsList = document.getElementById('sectionsList');
+    this.contentContainer = document.getElementById('surveyContent');
+    this.scrollToTopBtn = document.getElementById('scrollToTop');
+
+    // Éléments gestion utilisateurs
+    this.userManagerEl = document.getElementById('userManager');
+    this.currentUserDisplay = document.getElementById('currentUserDisplay');
+    this.btnSelectUser = document.getElementById('btnSelectUser');
+    this.btnCreateUser = document.getElementById('btnCreateUser');
+    this.btnSave = document.getElementById('btnSave');
+    this.btnCompare = document.getElementById('btnCompare');
+    this.btnExport = document.getElementById('btnExport');
+
+    // Modals
+    this.modalSelectUser = document.getElementById('modalSelectUser');
+    this.modalCreateUser = document.getElementById('modalCreateUser');
+    this.modalCompare = document.getElementById('modalCompare');
+    this.modalExport = document.getElementById('modalExport');
+
+    this.init();
+  }
+
+  /**
+   * Initialisation du système
+   */
+  async init() {
+    try {
+      // Configuration de marked.js
+      if (typeof marked !== 'undefined') {
+        marked.setOptions({
+          breaks: true,
+          gfm: true,
+          headerIds: true,
+          mangle: false,
+          tables: true
+        });
+      }
+
+      // Chargement des sondages disponibles
+      await this.loadSurveys();
+
+      // Charger le premier sondage
+      if (this.surveys.length > 0) {
+        await this.switchSurvey(this.surveys[0].slug);
+      }
+
+      // Initialisation des écouteurs d'événements
+      this.setupEventListeners();
+
+    } catch (error) {
+      console.error('Erreur initialisation:', error);
+      this.showError('Impossible de charger les sondages');
+    }
+  }
+
+  /**
+   * Charge la liste des sondages disponibles
+   */
+  async loadSurveys() {
+    try {
+      const response = await fetch('api.php?action=list');
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.error || 'Erreur chargement sondages');
+      }
+
+      this.surveys = data.data;
+
+      if (this.surveys.length === 0) {
+        this.showError('Aucun sondage disponible');
+        return;
+      }
+
+      this.renderSurveyTabs();
+
+    } catch (error) {
+      console.error('Erreur chargement sondages:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Génère les onglets de navigation entre sondages
+   */
+  renderSurveyTabs() {
+    this.tabsContainer.innerHTML = '';
+
+    this.surveys.forEach(survey => {
+      const button = document.createElement('button');
+      button.className = 'tab-button';
+      button.textContent = survey.name;
+      button.dataset.surveySlug = survey.slug;
+      button.setAttribute('role', 'tab');
+      button.setAttribute('aria-selected', 'false');
+
+      button.addEventListener('click', () => this.switchSurvey(survey.slug));
+
+      this.tabsContainer.appendChild(button);
+    });
+  }
+
+  /**
+   * Change le sondage affiché
+   */
+  async switchSurvey(surveySlug) {
+    const survey = this.surveys.find(s => s.slug === surveySlug);
+
+    if (!survey) {
+      console.error('Sondage introuvable:', surveySlug);
+      return;
+    }
+
+    // Vérifier changements non sauvegardés
+    if (this.unsavedChanges && this.currentUser) {
+      const confirm = window.confirm('Vous avez des modifications non sauvegardées. Continuer ?');
+      if (!confirm) return;
+    }
+
+    this.currentSurvey = survey;
+    this.currentUser = null; // Réinitialiser utilisateur
+    this.users = [];
+    this.responses = {};
+    this.customRequirements = [];
+    this.unsavedChanges = false;
+    this.isReadOnly = true; // Retour en mode lecture seule
+
+    // Mise à jour des onglets
+    document.querySelectorAll('.tab-button').forEach(btn => {
+      const isActive = btn.dataset.surveySlug === surveySlug;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-selected', isActive.toString());
+    });
+
+    // Charger les utilisateurs du sondage
+    await this.loadSurveyUsers();
+
+    // Chargement du contenu du sondage (vierge)
+    await this.loadSurveyContent(survey);
+
+    // Mettre à jour l'affichage utilisateur
+    this.updateUserDisplay();
+    this.updateUIState();
+  }
+
+  /**
+   * Charge la liste des utilisateurs du sondage actuel
+   */
+  async loadSurveyUsers() {
+    if (!this.currentSurvey) return;
+
+    try {
+      const response = await fetch(`api.php?action=list-users&survey=${encodeURIComponent(this.currentSurvey.name)}`);
+      const data = await response.json();
+
+      if (data.success) {
+        this.users = data.data;
+      } else {
+        this.users = [];
+      }
+    } catch (error) {
+      console.error('Erreur chargement utilisateurs:', error);
+      this.users = [];
+    }
+  }
+
+  /**
+   * Charge le contenu d'un sondage vierge
+   */
+  async loadSurveyContent(survey) {
+    try {
+      this.showLoading();
+
+      const response = await fetch(`api.php?action=survey&name=${encodeURIComponent(survey.name)}`);
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.error || 'Erreur chargement sondage');
+      }
+
+      const content = data.data.content;
+
+      // Parser et afficher le contenu
+      this.renderSurvey(content);
+
+      // Générer navigation sections
+      this.generateSectionsNav();
+
+    } catch (error) {
+      console.error('Erreur chargement sondage:', error);
+      this.showError('Impossible de charger le sondage');
+    }
+  }
+
+  /**
+   * Affiche le contenu du sondage avec parsing Markdown
+   */
+  renderSurvey(markdownContent) {
+    // Parser markdown
+    let html = marked.parse(markdownContent);
+
+    // Convertir les tableaux en QCM interactifs
+    html = this.convertTablesToQCM(html);
+
+    this.contentContainer.innerHTML = html;
+
+    // Attacher les événements aux cases à cocher
+    this.attachCheckboxListeners();
+
+    // Afficher message si mode lecture seule
+    if (this.isReadOnly) {
+      this.showReadOnlyBanner();
+    }
+  }
+
+  /**
+   * Affiche une bannière indiquant le mode lecture seule
+   */
+  showReadOnlyBanner() {
+    const banner = document.createElement('div');
+    banner.className = 'readonly-banner';
+    banner.innerHTML = `
+      <div class="readonly-banner-content">
+        <span class="readonly-icon">🔒</span>
+        <div class="readonly-text">
+          <strong>Mode Lecture Seule</strong>
+          <p>Veuillez sélectionner ou créer un utilisateur pour commencer à répondre au sondage</p>
+        </div>
+        <button class="btn-select-user-inline" id="btnSelectUserInline">
+          Sélectionner un utilisateur
+        </button>
+        <button class="btn-create-user-inline" id="btnCreateUserInline">
+          Créer un utilisateur
+        </button>
+      </div>
+    `;
+
+    this.contentContainer.insertBefore(banner, this.contentContainer.firstChild);
+
+    // Attacher événements
+    document.getElementById('btnSelectUserInline')?.addEventListener('click', () => this.openSelectUserModal());
+    document.getElementById('btnCreateUserInline')?.addEventListener('click', () => this.openCreateUserModal());
+  }
+
+  /**
+   * Convertit les tableaux Markdown en QCM interactifs
+   */
+  convertTablesToQCM(html) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const tables = doc.querySelectorAll('table');
+
+    tables.forEach(table => {
+      const firstRow = table.querySelector('tbody tr');
+      if (!firstRow) return;
+
+      const hasMVPColumn = Array.from(table.querySelectorAll('thead th')).some(th =>
+        th.textContent.includes('MVP')
+      );
+
+      if (!hasMVPColumn) return;
+
+      const rows = table.querySelectorAll('tbody tr');
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length < 3) return;
+
+        const reqID = cells[0].textContent.trim();
+
+        // Cellule MVP
+        if (cells[2]) {
+          cells[2].innerHTML = this.createCheckbox(reqID, 'mvp');
+        }
+
+        // Cellules rôles (3 à 8)
+        for (let i = 3; i <= 8 && i < cells.length - 3; i++) {
+          const roleCell = cells[i];
+          const roleIndex = i - 3;
+          const roleName = this.getRoleName(roleIndex);
+
+          const actions = ['C', 'L', 'E', 'S', 'X', 'V'];
+          let checkboxesHTML = '';
+
+          actions.forEach(action => {
+            checkboxesHTML += this.createCheckbox(reqID, `role_${roleName}_${action}`, action);
+          });
+
+          roleCell.innerHTML = checkboxesHTML;
+        }
+
+        // Cellule Priorité (9)
+        const priorityCell = cells[9];
+        if (priorityCell) {
+          priorityCell.innerHTML = this.createPriorityField(reqID);
+        }
+
+        // Cellule Notes (dernière)
+        const notesCell = cells[cells.length - 1];
+        if (notesCell) {
+          notesCell.innerHTML = this.createNotesField(reqID);
+        }
+      });
+
+      table.classList.add('requirements-table');
+    });
+
+    return doc.body.innerHTML;
+  }
+
+  /**
+   * Crée une case à cocher interactive
+   */
+  createCheckbox(reqID, field, label = '') {
+    const id = `${reqID}_${field}`;
+    const checked = this.responses[reqID]?.[field] ? 'checked' : '';
+    const disabled = this.isReadOnly ? 'disabled' : '';
+
+    return `
+      <label class="qcm-checkbox ${this.isReadOnly ? 'readonly' : ''}">
+        <input
+          type="checkbox"
+          id="${id}"
+          data-req="${reqID}"
+          data-field="${field}"
+          ${checked}
+          ${disabled}
+        >
+        <span class="checkbox-label">${label}</span>
+      </label>
+    `;
+  }
+
+  /**
+   * Crée un champ de priorité (input number)
+   */
+  createPriorityField(reqID) {
+    const id = `${reqID}_priority`;
+    const value = this.responses[reqID]?.priority || '';
+    const disabled = this.isReadOnly ? 'disabled' : '';
+
+    return `
+      <input
+        type="number"
+        id="${id}"
+        class="priority-field ${this.isReadOnly ? 'readonly' : ''}"
+        data-req="${reqID}"
+        data-field="priority"
+        min="1"
+        max="10"
+        placeholder="1-10"
+        value="${this.escapeHtml(value)}"
+        ${disabled}
+      >
+    `;
+  }
+
+  /**
+   * Crée un champ de notes (textarea)
+   */
+  createNotesField(reqID) {
+    const id = `${reqID}_notes`;
+    const value = this.responses[reqID]?.notes || '';
+    const disabled = this.isReadOnly ? 'disabled' : '';
+
+    return `
+      <textarea
+        id="${id}"
+        class="notes-field ${this.isReadOnly ? 'readonly' : ''}"
+        data-req="${reqID}"
+        data-field="notes"
+        placeholder="Notes personnelles..."
+        rows="2"
+        ${disabled}
+      >${this.escapeHtml(value)}</textarea>
+    `;
+  }
+
+  /**
+   * Récupère le nom du rôle par index
+   */
+  getRoleName(index) {
+    const roles = ['Admin', 'Gestionnaire', 'Superviseur', 'Employe', 'Patient', 'Famille'];
+    return roles[index] || 'Unknown';
+  }
+
+  /**
+   * Attache les événements aux cases à cocher et champs de notes
+   */
+  attachCheckboxListeners() {
+    // Gérer les checkboxes
+    const checkboxes = this.contentContainer.querySelectorAll('input[type="checkbox"]');
+
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', (e) => {
+        // Ne rien faire en mode lecture seule
+        if (this.isReadOnly) {
+          e.preventDefault();
+          return;
+        }
+
+        const reqID = e.target.dataset.req;
+        const field = e.target.dataset.field;
+        const checked = e.target.checked;
+
+        // Mettre à jour les réponses
+        if (!this.responses[reqID]) {
+          this.responses[reqID] = {};
+        }
+
+        this.responses[reqID][field] = checked;
+
+        // Marquer comme non sauvegardé
+        this.unsavedChanges = true;
+        this.updateSaveButton();
+      });
+    });
+
+    // Gérer les champs de priorité (input number)
+    const priorityFields = this.contentContainer.querySelectorAll('input.priority-field');
+
+    priorityFields.forEach(field => {
+      field.addEventListener('input', (e) => {
+        if (this.isReadOnly) {
+          e.preventDefault();
+          return;
+        }
+
+        const reqID = e.target.dataset.req;
+        const fieldName = e.target.dataset.field;
+        let value = parseInt(e.target.value, 10);
+
+        // Valider la plage 1-10
+        if (value < 1) value = 1;
+        if (value > 10) value = 10;
+        if (isNaN(value)) value = '';
+
+        // Mettre à jour le champ si nécessaire
+        if (value !== '' && e.target.value !== value.toString()) {
+          e.target.value = value;
+        }
+
+        // Mettre à jour les réponses
+        if (!this.responses[reqID]) {
+          this.responses[reqID] = {};
+        }
+
+        this.responses[reqID][fieldName] = value;
+
+        // Marquer comme non sauvegardé
+        this.unsavedChanges = true;
+        this.updateSaveButton();
+      });
+    });
+
+    // Gérer les champs de notes (textarea)
+    const notesFields = this.contentContainer.querySelectorAll('textarea.notes-field');
+
+    notesFields.forEach(field => {
+      field.addEventListener('input', (e) => {
+        if (this.isReadOnly) {
+          e.preventDefault();
+          return;
+        }
+
+        const reqID = e.target.dataset.req;
+        const fieldName = e.target.dataset.field;
+        const value = e.target.value;
+
+        // Mettre à jour les réponses
+        if (!this.responses[reqID]) {
+          this.responses[reqID] = {};
+        }
+
+        this.responses[reqID][fieldName] = value;
+
+        // Marquer comme non sauvegardé
+        this.unsavedChanges = true;
+        this.updateSaveButton();
+      });
+    });
+  }
+
+  /**
+   * Génère la navigation des sections
+   */
+  generateSectionsNav() {
+    const headers = this.contentContainer.querySelectorAll('h2, h3');
+    this.sectionsList.innerHTML = '';
+
+    headers.forEach((header, index) => {
+      if (!header.id) {
+        header.id = `section-${index}`;
+      }
+
+      const li = document.createElement('li');
+      const link = document.createElement('a');
+
+      link.href = `#${header.id}`;
+      link.className = 'section-link';
+      link.dataset.sectionId = header.id;
+
+      if (header.tagName === 'H3') {
+        link.classList.add('subsection');
+      }
+
+      link.textContent = header.textContent;
+
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      li.appendChild(link);
+      this.sectionsList.appendChild(li);
+    });
+  }
+
+  /**
+   * Ouvre le modal de sélection d'utilisateur
+   */
+  async openSelectUserModal() {
+    if (!this.currentSurvey) {
+      alert('Aucun sondage sélectionné');
+      return;
+    }
+
+    // Recharger la liste des utilisateurs
+    await this.loadSurveyUsers();
+
+    // Afficher le modal
+    this.modalSelectUser.classList.add('active');
+
+    // Remplir la liste
+    const listContainer = document.getElementById('usersList');
+    listContainer.innerHTML = '';
+
+    if (this.users.length === 0) {
+      listContainer.innerHTML = '<p class="no-data">Aucun utilisateur pour ce sondage. Créez-en un !</p>';
+      return;
+    }
+
+    const ul = document.createElement('ul');
+    ul.className = 'users-list-items';
+
+    this.users.forEach(user => {
+      const li = document.createElement('li');
+      li.className = 'user-list-item';
+
+      const date = new Date(user.modified_at * 1000);
+      const dateStr = date.toLocaleString('fr-CA', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+
+      li.innerHTML = `
+        <div class="user-info">
+          <strong class="user-name">👤 ${this.escapeHtml(user.username)}</strong>
+          <span class="user-stats">📊 ${user.response_count} réponses</span>
+          <span class="user-date">🕐 ${dateStr}</span>
+        </div>
+        <div class="user-actions">
+          <button class="btn-select-this-user" data-username="${this.escapeHtml(user.username)}">
+            ✓ Sélectionner
+          </button>
+          <button class="btn-delete-user" data-username="${this.escapeHtml(user.username)}">
+            🗑️
+          </button>
+        </div>
+      `;
+
+      ul.appendChild(li);
+    });
+
+    listContainer.appendChild(ul);
+
+    // Attacher événements
+    this.attachUserListListeners();
+  }
+
+  /**
+   * Attache les événements de la liste d'utilisateurs
+   */
+  attachUserListListeners() {
+    // Boutons Sélectionner
+    document.querySelectorAll('.btn-select-this-user').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const username = btn.dataset.username;
+        await this.selectUser(username);
+      });
+    });
+
+    // Boutons Supprimer
+    document.querySelectorAll('.btn-delete-user').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const username = btn.dataset.username;
+        if (confirm(`Supprimer l'utilisateur "${username}" et toutes ses réponses ?`)) {
+          await this.deleteUser(username);
+        }
+      });
+    });
+  }
+
+  /**
+   * Ferme le modal de sélection d'utilisateur
+   */
+  closeSelectUserModal() {
+    this.modalSelectUser.classList.remove('active');
+  }
+
+  /**
+   * Sélectionne un utilisateur et charge ses données
+   */
+  async selectUser(username) {
+    if (!this.currentSurvey) return;
+
+    try {
+      const response = await fetch(`api.php?action=user-data&survey=${encodeURIComponent(this.currentSurvey.name)}&user=${encodeURIComponent(username)}`);
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.error || 'Erreur chargement utilisateur');
+      }
+
+      const userData = data.data;
+
+      // Mettre à jour l'état
+      this.currentUser = userData.username;
+      this.responses = userData.responses || {};
+      this.customRequirements = userData.custom_requirements || [];
+      this.unsavedChanges = false;
+      this.isReadOnly = false; // Passer en mode édition
+
+      // Recharger le sondage avec les réponses
+      await this.loadSurveyContent(this.currentSurvey);
+
+      // Appliquer les réponses à l'interface
+      this.applyResponsesToUI();
+
+      // Mettre à jour l'affichage
+      this.updateUserDisplay();
+      this.updateUIState();
+
+      // Fermer le modal
+      this.closeSelectUserModal();
+
+      alert(`✓ Utilisateur "${username}" sélectionné`);
+
+    } catch (error) {
+      console.error('Erreur sélection utilisateur:', error);
+      alert('❌ Erreur : ' + error.message);
+    }
+  }
+
+  /**
+   * Applique les réponses chargées à l'interface
+   */
+  applyResponsesToUI() {
+    Object.keys(this.responses).forEach(reqID => {
+      const reqResponses = this.responses[reqID];
+
+      Object.keys(reqResponses).forEach(field => {
+        const checked = reqResponses[field];
+        const checkbox = document.getElementById(`${reqID}_${field}`);
+
+        if (checkbox) {
+          checkbox.checked = checked;
+          checkbox.disabled = false; // Activer la checkbox
+        }
+      });
+    });
+  }
+
+  /**
+   * Ouvre le modal de création d'utilisateur
+   */
+  openCreateUserModal() {
+    if (!this.currentSurvey) {
+      alert('Aucun sondage sélectionné');
+      return;
+    }
+
+    this.modalCreateUser.classList.add('active');
+    document.getElementById('newUsername').value = '';
+    document.getElementById('newUsername').focus();
+  }
+
+  /**
+   * Ferme le modal de création d'utilisateur
+   */
+  closeCreateUserModal() {
+    this.modalCreateUser.classList.remove('active');
+  }
+
+  /**
+   * Crée un nouvel utilisateur
+   */
+  async createUser() {
+    const username = document.getElementById('newUsername').value.trim();
+
+    if (!username) {
+      alert('Veuillez entrer un nom d\'utilisateur');
+      return;
+    }
+
+    if (!this.currentSurvey) {
+      alert('Aucun sondage sélectionné');
+      return;
+    }
+
+    try {
+      const response = await fetch('api.php?action=create-user', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          survey: this.currentSurvey.name,
+          username: username
+        })
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.error || 'Erreur création utilisateur');
+      }
+
+      // Fermer le modal
+      this.closeCreateUserModal();
+
+      // Sélectionner automatiquement le nouvel utilisateur
+      await this.selectUser(username);
+
+    } catch (error) {
+      console.error('Erreur création utilisateur:', error);
+      alert('❌ Erreur : ' + error.message);
+    }
+  }
+
+  /**
+   * Supprime un utilisateur
+   */
+  async deleteUser(username) {
+    if (!this.currentSurvey) return;
+
+    try {
+      const response = await fetch(`api.php?action=delete-user&survey=${encodeURIComponent(this.currentSurvey.name)}&user=${encodeURIComponent(username)}`, {
+        method: 'POST'
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.error || 'Erreur suppression');
+      }
+
+      alert('✓ Utilisateur supprimé');
+
+      // Si l'utilisateur supprimé est l'utilisateur actuel, recharger la page
+      if (this.currentUser === username) {
+        location.reload();
+      } else {
+        // Sinon, juste recharger la liste
+        await this.loadSurveyUsers();
+        await this.openSelectUserModal();
+      }
+
+    } catch (error) {
+      console.error('Erreur suppression utilisateur:', error);
+      alert('❌ Erreur : ' + error.message);
+    }
+  }
+
+  /**
+   * Sauvegarde les données de l'utilisateur actuel
+   */
+  async saveUserData() {
+    if (!this.currentUser || !this.currentSurvey) {
+      alert('Aucun utilisateur sélectionné');
+      return;
+    }
+
+    try {
+      const response = await fetch('api.php?action=save-user-data', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          survey: this.currentSurvey.name,
+          user: this.currentUser,
+          responses: this.responses,
+          custom_requirements: this.customRequirements
+        })
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.error || 'Erreur sauvegarde');
+      }
+
+      this.unsavedChanges = false;
+      this.updateSaveButton();
+
+      alert('✓ Données sauvegardées');
+
+    } catch (error) {
+      console.error('Erreur sauvegarde:', error);
+      alert('❌ Erreur : ' + error.message);
+    }
+  }
+
+  /**
+   * Met à jour l'affichage de l'utilisateur actuel
+   */
+  updateUserDisplay() {
+    if (this.currentUser) {
+      this.currentUserDisplay.innerHTML = `
+        <span class="current-user-icon">👤</span>
+        <span class="current-user-name">${this.escapeHtml(this.currentUser)}</span>
+        <span class="current-user-status">✓ Actif</span>
+      `;
+      this.currentUserDisplay.classList.add('active');
+    } else {
+      this.currentUserDisplay.innerHTML = `
+        <span class="current-user-icon">🔒</span>
+        <span class="current-user-name">Aucun utilisateur</span>
+        <span class="current-user-status">Lecture seule</span>
+      `;
+      this.currentUserDisplay.classList.remove('active');
+    }
+  }
+
+  /**
+   * Met à jour l'état de l'interface selon le mode
+   */
+  updateUIState() {
+    // Activer/désactiver les boutons
+    this.btnSave.disabled = this.isReadOnly || !this.unsavedChanges;
+    this.btnCompare.disabled = this.users.length < 2;
+    this.btnExport.disabled = this.isReadOnly;
+
+    // Ajouter/retirer classe au conteneur
+    if (this.isReadOnly) {
+      this.contentContainer.classList.add('readonly-mode');
+    } else {
+      this.contentContainer.classList.remove('readonly-mode');
+    }
+  }
+
+  /**
+   * Met à jour l'état du bouton Sauvegarder
+   */
+  updateSaveButton() {
+    this.btnSave.disabled = !this.unsavedChanges || this.isReadOnly;
+    if (this.unsavedChanges && !this.isReadOnly) {
+      this.btnSave.classList.add('has-changes');
+    } else {
+      this.btnSave.classList.remove('has-changes');
+    }
+  }
+
+  /**
+   * Ouvre le modal de comparaison
+   */
+  async openCompareModal() {
+    if (!this.currentSurvey || this.users.length < 2) {
+      alert('Il faut au moins 2 utilisateurs pour comparer');
+      return;
+    }
+
+    this.modalCompare.classList.add('active');
+
+    // Afficher liste de sélection
+    const listContainer = document.getElementById('compareUsersList');
+    listContainer.innerHTML = '';
+
+    const form = document.createElement('form');
+    form.id = 'compareUsersForm';
+
+    this.users.forEach(user => {
+      const label = document.createElement('label');
+      label.className = 'compare-user-item';
+      label.innerHTML = `
+        <input type="checkbox" name="compareUsers" value="${this.escapeHtml(user.username)}">
+        <span>${this.escapeHtml(user.username)} (${user.response_count} réponses)</span>
+      `;
+      form.appendChild(label);
+    });
+
+    listContainer.appendChild(form);
+  }
+
+  /**
+   * Ferme le modal de comparaison
+   */
+  closeCompareModal() {
+    this.modalCompare.classList.remove('active');
+  }
+
+  /**
+   * Lance la comparaison des utilisateurs sélectionnés
+   */
+  async performComparison() {
+    const form = document.getElementById('compareUsersForm');
+    const selected = Array.from(form.querySelectorAll('input[name="compareUsers"]:checked')).map(cb => cb.value);
+
+    if (selected.length < 2) {
+      alert('Sélectionnez au moins 2 utilisateurs');
+      return;
+    }
+
+    try {
+      const params = new URLSearchParams({
+        survey: this.currentSurvey.name
+      });
+      selected.forEach(u => params.append('users[]', u));
+
+      const response = await fetch(`api.php?action=compare&${params.toString()}`);
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.error || 'Erreur comparaison');
+      }
+
+      // Afficher les résultats
+      this.displayComparisonResults(data.data);
+
+    } catch (error) {
+      console.error('Erreur comparaison:', error);
+      alert('❌ Erreur : ' + error.message);
+    }
+  }
+
+  /**
+   * Affiche les résultats de comparaison
+   */
+  displayComparisonResults(comparison) {
+    const resultsContainer = document.getElementById('compareResults');
+    resultsContainer.innerHTML = '';
+
+    // Construire tableau de comparaison
+    let html = '<div class="comparison-table-wrapper"><table class="comparison-table"><thead><tr>';
+    html += '<th>ID Requis</th>';
+    comparison.forEach(user => {
+      html += `<th>${this.escapeHtml(user.username)}</th>`;
+    });
+    html += '</tr></thead><tbody>';
+
+    // Collecter tous les requis
+    const allReqIds = new Set();
+    comparison.forEach(user => {
+      Object.keys(user.responses).forEach(reqId => allReqIds.add(reqId));
+    });
+
+    // Pour chaque requis
+    Array.from(allReqIds).sort().forEach(reqId => {
+      html += `<tr><td class="req-id">${reqId}</td>`;
+
+      comparison.forEach(user => {
+        const response = user.responses[reqId];
+        const mvp = response?.mvp ? '✓ MVP' : '';
+        const responseCount = response ? Object.values(response).filter(v => v === true).length : 0;
+
+        html += `<td class="comparison-cell ${response?.mvp ? 'has-mvp' : ''}">`;
+        if (response) {
+          html += `<span class="response-count">${responseCount} coches</span>`;
+          if (mvp) html += `<span class="mvp-badge">${mvp}</span>`;
+        } else {
+          html += '<span class="no-response">-</span>';
+        }
+        html += '</td>';
+      });
+
+      html += '</tr>';
+    });
+
+    html += '</tbody></table></div>';
+
+    resultsContainer.innerHTML = html;
+  }
+
+  /**
+   * Ouvre le modal d'exportation
+   */
+  openExportModal() {
+    if (!this.currentUser || !this.currentSurvey) {
+      alert('Aucun utilisateur sélectionné');
+      return;
+    }
+
+    this.modalExport.classList.add('active');
+  }
+
+  /**
+   * Ferme le modal d'exportation
+   */
+  closeExportModal() {
+    this.modalExport.classList.remove('active');
+  }
+
+  /**
+   * Exporte les données au format sélectionné
+   */
+  exportData(format) {
+    if (!this.currentUser || !this.currentSurvey) {
+      alert('Aucun utilisateur sélectionné');
+      return;
+    }
+
+    const url = `api.php?action=export&survey=${encodeURIComponent(this.currentSurvey.name)}&user=${encodeURIComponent(this.currentUser)}&format=${format}`;
+    window.location.href = url;
+
+    this.closeExportModal();
+  }
+
+  /**
+   * Initialise les écouteurs d'événements
+   */
+  setupEventListeners() {
+    // Boutons principaux
+    this.btnSelectUser?.addEventListener('click', () => this.openSelectUserModal());
+    this.btnCreateUser?.addEventListener('click', () => this.openCreateUserModal());
+    this.btnSave?.addEventListener('click', () => this.saveUserData());
+    this.btnCompare?.addEventListener('click', () => this.openCompareModal());
+    this.btnExport?.addEventListener('click', () => this.openExportModal());
+
+    // Modal Sélection Utilisateur
+    document.getElementById('modalSelectUserClose')?.addEventListener('click', () => this.closeSelectUserModal());
+    document.getElementById('modalSelectUserOverlay')?.addEventListener('click', () => this.closeSelectUserModal());
+    document.getElementById('btnCancelSelectUser')?.addEventListener('click', () => this.closeSelectUserModal());
+
+    // Modal Création Utilisateur
+    document.getElementById('modalCreateUserClose')?.addEventListener('click', () => this.closeCreateUserModal());
+    document.getElementById('modalCreateUserOverlay')?.addEventListener('click', () => this.closeCreateUserModal());
+    document.getElementById('btnCancelCreateUser')?.addEventListener('click', () => this.closeCreateUserModal());
+    document.getElementById('btnConfirmCreateUser')?.addEventListener('click', () => this.createUser());
+
+    // Enter dans input nouveau nom
+    document.getElementById('newUsername')?.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        this.createUser();
+      }
+    });
+
+    // Modal Comparaison
+    document.getElementById('modalCompareClose')?.addEventListener('click', () => this.closeCompareModal());
+    document.getElementById('modalCompareOverlay')?.addEventListener('click', () => this.closeCompareModal());
+    document.getElementById('btnCancelCompare')?.addEventListener('click', () => this.closeCompareModal());
+    document.getElementById('btnConfirmCompare')?.addEventListener('click', () => this.performComparison());
+
+    // Modal Exportation
+    document.getElementById('modalExportClose')?.addEventListener('click', () => this.closeExportModal());
+    document.getElementById('modalExportOverlay')?.addEventListener('click', () => this.closeExportModal());
+    document.getElementById('btnCancelExport')?.addEventListener('click', () => this.closeExportModal());
+    document.getElementById('btnExportJSON')?.addEventListener('click', () => this.exportData('json'));
+    document.getElementById('btnExportCSV')?.addEventListener('click', () => this.exportData('csv'));
+
+    // Bouton retour en haut
+    if (this.scrollToTopBtn) {
+      this.scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    // Gestion du scroll
+    window.addEventListener('scroll', () => {
+      if (this.scrollToTopBtn) {
+        if (window.scrollY > 300) {
+          this.scrollToTopBtn.classList.add('visible');
+        } else {
+          this.scrollToTopBtn.classList.remove('visible');
+        }
+      }
+    }, { passive: true });
+
+    // Sauvegarde avant fermeture
+    window.addEventListener('beforeunload', (e) => {
+      if (this.unsavedChanges && this.currentUser) {
+        e.preventDefault();
+        e.returnValue = '';
+        return '';
+      }
+    });
+  }
+
+  /**
+   * Affiche un état de chargement
+   */
+  showLoading() {
+    this.contentContainer.innerHTML = `
+      <div class="loading-state">
+        <div class="loading-spinner"></div>
+        <p>Chargement du sondage...</p>
+      </div>
+    `;
+  }
+
+  /**
+   * Affiche un message d'erreur
+   */
+  showError(message) {
+    this.contentContainer.innerHTML = `
+      <div class="error-state">
+        <h2>⚠️ Erreur</h2>
+        <p>${this.escapeHtml(message)}</p>
+      </div>
+    `;
+  }
+
+  /**
+   * Échappe les caractères HTML
+   */
+  escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+}
+
+// Initialisation au chargement du DOM
+document.addEventListener('DOMContentLoaded', () => {
+  window.surveyViewer = new SurveyViewer();
+});

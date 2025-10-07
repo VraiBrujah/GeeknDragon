@@ -12,7 +12,15 @@
       "Bash(jq:*)",
       "Bash(npm run build:css:*)",
       "Bash(npx tailwindcss:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Read(//i/Backup/GitHub-C/oria-v3/**)",
+      "Read(//i/Backup/GitHub-C/OrIA1.0/**)",
+      "Read(//i/Backup/GitHub-C/oria-v2/**)",
+      "Read(//i/Backup/GitHub-E/OrIAV4/**)",
+      "WebSearch",
+      "Bash(dir:*)",
+      "Bash(findstr:*)",
+      "Bash(cut:*)"
     ],
     "deny": [],
     "ask": []

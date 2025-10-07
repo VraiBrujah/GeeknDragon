@@ -28,7 +28,7 @@ Et enfin, l'heure de ténèbres était venue. L'heure de la moisson sanglante. L
 
 Un écho lointain traversa l'air glacé. Des pas. Multiples, cadencés, qui se rapprochaient par le sentier escarpé. La femme ne se retourna pas, mais un sourire plus large étira ses lèvres. Ses serviteurs arrivaient, ponctuels comme la mort elle-même.
 
-Sous sa capuche relevée, ses yeux luisaient d'un rouge profond et surnaturel, intense comme des rubis chauffés au cœur d'une forge infernale. Deux braises vivantes dans l'obscurité, qui scrutaient l'entrée béante du sanctuaire avec une acuité qui dépassait celle des mortels. Elle n'avait plus besoin de lumière depuis bien longtemps, depuis que la transformation l'avait changée en quelque chose qui n'était plus tout à fait de ce monde.
+Sous sa capuche relevée, ses yeux luisaient d'un rouge profond et surnaturel, intense comme des rubis chauffés au cœur d'une forge infernale. Deux braises vivantes dans l'obscurité, qui scrutaient l'entrée béante du sanctuaire avec une acuité qui dépassait celle des mortels. Elle n'avait plus besoin de lumière depuis des siècles, depuis que la transformation l'avait changée en quelque chose qui n'était plus tout à fait de ce monde.
 
 Là, sous la roche déchiquetée et les éboulis séculaires, sommeillaient encore les restes corrompus du savoir perdu. Les échos d'une ère révolue où l'Éther ne façonnait pas seulement les sorts modestes des mages de cour, mais modelait les destins d'empires entiers, transformait les hommes en dieux et les dieux en monstres.
 
@@ -46,10 +46,12 @@ Jamais.
 
 Ces souvenirs étaient sa malédiction la plus cruelle, plus douloureuse que la soif de sang, plus amère que l'immortalité elle-même.
 
-Dans les entrailles du sanctuaire oublié, la nuit retenait son souffle.
+Dans les entrailles du sanctuaire oublié, la nuit retenait son souffle. Elle se tenait au seuil de son destin, immobile, et pour la première fois depuis des siècles, un frisson qui n'était pas celui de la faim la traversa.
 
-Elle releva à peine la tête vers le ciel désert, l'esprit baigné d'un silence sacré.
+Elle releva à peine la tête vers le ciel désert, l'esprit baigné d'un silence sacré. Les mots lui vinrent aux lèvres comme une incantation oubliée, vestige d'une foi qu'elle croyait morte.
+
 *Nyx, mère nocturne, voile mon chemin*, implora-t-elle en secret.
+
 Un souffle d'*Etherin* glissa entre ses lèvres, fragment d'une liturgie séculaire : *« Leth arën, Nyxeth »* (Protège-moi, Nyx)
 
 Ses doigts pâles et glacés se tendirent sous son manteau, effleurant une amulette dissimulée contre sa gorge. Un bijou ancestral, orné d'une étoile à six branches gravée dans un métal noir qu'aucun artisan moderne ne savait plus travailler. Ses détails fins étaient presque effacés par le passage des siècles, mais la magie résiduelle pulsait encore comme un cœur mourant. Elle sentit l'améthyste tiède contre sa chair froide, rappelant des serments prononcés dans le sang et scellés par la mort.
@@ -84,13 +86,15 @@ Seul le vent glacial, gardien des secrets ancestraux, connaissait la vérité de
 
 ### Les Couloirs de l'Oubli
 
+Elle franchit le seuil. La pierre avala ses pas.
+
 Le passage s'enfonçait dans les entrailles de la montagne tel le gosier d'une créature ancestrale, béante et affamée de secrets interdits. Le sol était inégal, fissuré par les mouvements tectoniques et les explosions d'énergie magique, tapissé d'une poussière si fine qu'elle semblait avoir été déposée par le souffle même des siècles. Cette poussière scintillait faiblement d'une lueur maladive, chargée des échos spectraux de rituels oubliés.
 
 Aux parois rugueuses, taillées dans la roche vive par des techniques que les architectes modernes ne maîtrisaient plus, des coulures d'humidité serpentaient entre les failles comme des veines de sang noir. Les murs portaient les cicatrices de sorts qui avaient mal tourné, de protections retournées contre leurs créateurs. Ici et là, des cristaux d'Éther corrompus émergeaient de la pierre comme des tumeurs luisantes, pulsant d'une lumière violette et malsaine.
 
 La femme avançait, lente et souveraine, chaque pas calculé et silencieux. Son manteau effleurait la roche dans un bruissement feutré, comme si le tissu lui-même était imprégné de sortilèges de discrétion. Plus elle progressait vers le cœur du sanctuaire, plus l'obscurité se refermait sur elle, dense et presque tangible, comme une brume d'encre vivante.
 
-Mais les ténèbres n'étaient plus un obstacle pour elle depuis bien longtemps. Elles étaient devenues sa seconde nature, son élément naturel, son refuge et son arme. Depuis sa transformation, l'obscurité était son domaine et sa servante fidèle.
+Mais les ténèbres avaient cessé d'être un obstacle depuis sa transformation. Elles étaient devenues sa seconde nature, son élément naturel, son refuge et son arme. L'obscurité était désormais son domaine et sa servante fidèle.
 
 Ses yeux, d'un rouge profond comme des gemmes taillées dans l'essence même de la violence, perçaient le noir avec la netteté d'une lame affûtée par des siècles de haine. Sa vision transcendait le monde matériel, effilochant la nuit comme on déchire un voile, dévoilant les couches cachées de la réalité que seuls les morts-vivants pouvaient percevoir.
 
@@ -105,6 +109,8 @@ Les rats tapis dans les interstices vibraient à ses yeux comme des lanternes de
 Sa vision surnaturelle n'était pas limitée à la chaleur du vivant. L'ultra-luminescence, cette lueur spectrale qui révélait la radiance invisible de la magie imprégnant la pierre, était elle aussi accessible à ses yeux transformés. Les fresques thaumaturgiques écorchées du sanctuaire se révélaient sous cette lumière interdite comme des manuscrits illuminés par une flamme invisible. Les symboles anciens luisaient d'une pâle phosphorescence, sculptés dans des encres oubliées mélangées au sang des sacrifiés.
 
 Les glyphes brisés irradiaient faiblement d'une lueur maladive, comme si l'ombre elle-même se souvenait des pactes inscrits dans la pierre. Les sortilèges fanés, éteints depuis des générations mais pas complètement morts, traînaient encore dans l'air raréfié, dessinant des arabesques spectrales que son regard suivait comme des filaments de soie pourpre dans le vent.
+
+Mais la vue n'était qu'un sens parmi d'autres. Dans ces ténèbres ancestrales, chaque perception s'aiguisait, se superposait, formant une symphonie sensorielle que seuls les prédateurs immortels pouvaient entendre.
 
 ### Les Sens de la Prédatrice
 
@@ -123,6 +129,8 @@ Les galeries tortueuses n'avaient plus de secrets pour elle, même les yeux ferm
 Dans cette obscurité totale qui aurait rendu fou n'importe quel mortel, elle régnait en souveraine absolue. Dans les entrailles pourries d'Etheria, tout parlait encore aux damnés, aux héritiers des anciens pactes. Dans la pénombre suintante qui baignait ce lieu maudit, elle se savait la prédatrice ultime, l'apex d'une chaîne alimentaire qui transcendait la vie et la mort.
 
 La nuit était si terrifiante pour les autres créatures. Pour elle, elle n'était qu'une carte détaillée, un territoire familier qu'elle connaissait comme sa propre demeure. Un terrain de chasse parfaitement balisé où chaque ombre était une alliée et chaque silence une promesse.
+
+Mais elle n'était pas venue pour chasser. Pas ce soir. Elle était venue pour lire.
 
 ### Les Fresques du Passé Oublié
 
@@ -182,9 +190,11 @@ Ses pas la menèrent enfin jusqu'à une vaste salle circulaire, creusée à mêm
 
 Elle s'immobilisa au seuil de cette salle, laissant son regard embrasser l'étendue de la désolation qui l'attendait, savourant ce moment de triomphe silencieux après tant de siècles d'attente et de préparation. Instinctivement, elle resserra son manteau autour de ses épaules, répétant ce geste protecteur qu'elle avait eu mille fois durant les nuits froides de son enfance mortelle. Certaines habitudes, sembla-t-il, survivaient même à l'éternité.
 
-Ici, jadis, les Éthériens défiaient les lois de la nature avec l'arrogance tranquille de ceux qui se croient les égaux des dieux. Ici, ils chantaient à l'Éther des mélodies qui faisaient plier la réalité comme un roseau sous la tempête, modelaient la vie et la mort comme d'autres modèlent l'argile humide, tissaient les destinées comme d'autres tissent des toiles d'araignées. L'arrogance. Son sourire s'étira, mince et pâle, aussi tranchant qu'un fil de rasoir. Ils croyaient le temps clément ; il guette, se souvient, se venge.
+Ici, jadis, les Éthériens défiaient les lois de la nature avec l'arrogance tranquille de ceux qui se croient les égaux des dieux. Ici, ils chantaient à l'Éther des mélodies qui faisaient plier la réalité comme un roseau sous la tempête, modelaient la vie et la mort comme d'autres modèlent l'argile humide, tissaient les destinées comme d'autres tissent des toiles d'araignées.
 
-Mais une arrogance qui avait porté ses fruits, du moins pendant un temps, avant que l'hubris ne se retourne contre ses architectes et ne les dévore comme un feu qu'on a laissé grandir trop longtemps sans surveillance.
+L'orgueil. Son sourire s'étira, mince et pâle, aussi tranchant qu'un fil de rasoir. Ils croyaient le temps clément ; il guette, se souvient, se venge.
+
+Mais cet orgueil avait porté ses fruits, du moins pendant un temps, avant que l'hubris ne se retourne contre ses architectes et ne les dévore comme un feu qu'on a laissé grandir trop longtemps sans surveillance.
 
 Au centre de la salle s'étendait un cercle runique gigantesque, gravé dans la pierre avec une précision mathématique qui frisait la perfection divine. Le cercle était si grand qu'elle ne pouvait en voir les bords opposés dans l'obscurité, et si complexe que le simple fait de le regarder donnait le vertige. Les entrelacs formaient un labyrinthe de pouvoir, une carte ésotérique d'interdits et de tentations, un mandala de transformation qui avait coûté des décennies à concevoir et des vies à réaliser.
 
@@ -207,6 +217,8 @@ Elle était venue réclamer son dû, reprendre ce qui lui appartenait de droit d
 Ce sanctuaire, oublié des vivants et abandonné par les dieux, allait devenir le berceau de son ascension finale, le creuset de sa renaissance en tant que puissance cosmique. Ici, dans ces ruines imprégnées de la sueur et du sang de ses prédécesseurs, elle accomplirait ce qu'ils n'avaient pas eu le courage ou la vision de mener à son terme.
 
 Son heure approchait enfin, portée par les vents du changement et annoncée par les présages que seuls les initiés savaient lire. Et avec elle, l'enfant qu'elle cherchait depuis si longtemps, la clé vivante qui ouvrirait les dernières portes, le sacrifice ultime qui permettrait sa résurrection totale.
+
+Elle n'était pas seule.
 
 ### L'Ombre et la Gardienne
 

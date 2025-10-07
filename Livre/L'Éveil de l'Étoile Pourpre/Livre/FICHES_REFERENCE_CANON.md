@@ -446,6 +446,196 @@ Cette structure complexe montre comment différentes formes d’amour coexistent
 
 ---
 
+## VI. ADDENDUM PROLOGUE V10 - CANON ÉLARGI
+
+### **MORWEN - DÉTAILS ORIGINE ET TRANSFORMATION** (Expansion 1)
+
+**Origine mortelle et lignée éthérienne :**
+- Descendante directe des Éthériens survivants de la Grande Purge
+- Famille mortelle perdue pendant sa transformation (mère, frères, sœurs morts de la peste)
+- Portait le fardeau d'une lignée maudite sans en comprendre le poids
+- Son sang contenait mémoire ancestrale des Éthériens et de leur hubris
+
+**Transformation rituelle auto-infligée :**
+- Méthode : Rituel de l'Étoile Pourpre avec Codex Purpureus + sang Éthérien antique
+- Motivation initiale : Cherchait pouvoir absolu pour sauver sa famille de la maladie
+- Durée du rituel : Une semaine entière d'agonie et de métamorphose
+- Localisation : Temple oublié des ruines éthériennes sous Valgaris
+- Coût physique : Douleur indicible, transformation cellulaire totale, mort et renaissance
+- Coût émotionnel : Perte de son humanité pendant le processus
+
+**Tragédie fondatrice :**
+- Arrivée trop tard : Famille morte de la peste pendant la semaine du rituel
+- Découverte macabre : Corps en décomposition, personne à sauver
+- Serment éternel prononcé (EXACT) : *"Je réparerai ceci. Je trouverai un moyen. Je ramènerai ce que j'ai perdu. Peu importe le prix. Peu importe le temps. Peu importe qui je devrai sacrifier."*
+- Quête millénaire : Cherche depuis 1000 ans à restaurer/ressusciter sa famille via magie éthérienne
+- Obsession croissante : Rationalisations progressives justifiant sacrifices d'innocents
+
+**Relation avec Brujah (NON RÉVÉLÉ PROLOGUE - SUSPENSE CLIMAX) :**
+- Lien familial : Sœur aînée de Brujah (révélé uniquement à la fin du livre)
+- Transformation de Brujah : Elle l'a transformé des décennies après sa propre transformation
+- Motivation transformation : Égoïsme et solitude (cherchait compagnie immortelle)
+- Résultat inattendu : Transformation a produit "forme de vrai Brujah" (lignée vampirique différente de la sienne)
+- Séparation : Brujah a rejeté sa voie et quitté Valgaris il y a plusieurs siècles
+- Regrets profonds : Cherche rédemption et réparation, veut reconnecter avec son frère
+- Non-dit prologue : Aucune mention de cette relation dans le prologue pour préserver suspense
+
+**Fragments de mémoire rituels (italiques utilisés) :**
+- Vision du Codex Purpureus ouvert respirant comme poitrine vivante
+- Encre mouvante formant symboles de transformation
+- Cercle rituel tracé avec son propre sang
+- Fiole de sang Éthérien antique noir-violet
+- Sept bougies d'os représentant sept lignées perdues
+- Douleur de transformation : os se reconfigurant, cœur s'arrêtant puis redémarrant
+- Premier réveil vampirique : soif dévorante, sens hyper-aiguisés, découverte horreur familiale
+
+**Évolution psychologique post-transformation :**
+- Phases initiales : Deuil, folie, rage, désespoir cycliques
+- Rationalisation progressive : "Ils ne sont pas vraiment morts si je peux les ramener"
+- Corruption morale graduelle : Justification de sacrifices "nécessaires"
+- État actuel (prologue) : Déterminée, calculatrice, mais fragments d'humanité subsistent
+- Conflit interne : Désir ardent rédemption vs méthodes de plus en plus sombres
+
+### **MORWEN - SERVITEURS DÉTAILLÉS** (Expansion 3)
+
+**Kael - Lieutenant Goule :**
+- Statut : Goule (serviteur vampirique lié par le sang) depuis trois siècles
+- Apparence : Grand, émacié, peau grise tendue sur os trop longs
+- Yeux : Lueur rouge pâle (reflet affaibli de ceux de Morwen)
+- Marques distinctives : Cicatrices en forme d'Étoiles Pourpres sur la peau
+- Personnalité : Loyal absolu, voix rauque comme pierre frottée
+- Dialogue type : *"Nous avons échoué, Maîtresse. La cible... elle est protégée. Nous ne pouvons l'approcher."*
+- Rôle : Commandant terrain des opérations, rapports de missions
+- Relation à Morwen : Respect mêlé de terreur viscérale
+
+**Myreth - Spectre Enchaîné :**
+- Nature : Créature morte-vivante, spectre lié par chaînes éthériques
+- Apparence : Petite silhouette voûtée, haillons flottant sans vent
+- Visage : Orbites vides (pas d'yeux), bouche cousue de fil d'argent
+- Communication : Incapable de parler (bouche cousue), émet gémissements étouffés
+- Fonction : Traqueur mystique, détecteur de magie
+- Origine : Âme torturée liée contre sa volonté par rituel de Morwen
+- Symbolisme : Représente les coûts humains des obsessions de Morwen
+
+**Horde Sans Visage :**
+- Nature : Créatures difformes tissées d'Éther corrompu et chair morte
+- Nombre : Plusieurs dizaines, masse grouillante et rampante
+- Apparence : Formes indistinctes, membres tordus, visages absents ou fondus
+- Comportement : Obéissance collective, aucune volonté individuelle
+- Son : Grattements, respirations sifflantes, gémissements sourds
+- Distance : Restent toujours à distance respectueuse de Morwen (peur instinctive)
+- Fonction : Chair à canon, sentinelles, intimidation par le nombre
+- Origine : Victimes de corruption éthérienne, âmes perdues recyclées
+
+**Dynamique de commandement :**
+- Hiérarchie : Morwen → Kael (lieutenant) → Myreth (traqueur) → Horde (masse)
+- Communication : Ordres verbaux à Kael, ordres psychiques à Myreth, ordres collectifs à la horde
+- Ton général : Formel médiéval avec terreur sous-jacente constante
+- Citation Morwen aux serviteurs : *"Ramenez-la-moi. Intacte. Ou ne revenez pas du tout."*
+- Échec mission : Incapacité inexplicable à localiser/approcher Violette avec précision
+
+**Pouvoirs de manipulation chair (Morwen sur serviteurs) :**
+- Capacité : Manipulation chair à distance (inspiration Tzimisce)
+- Manifestation : Peau ondulant comme eau, os craquant sous pression invisible
+- Usage : Punition, correction, rappel de domination absolue
+- Effet psychologique : Terreur paralysante chez les serviteurs
+- Limitation : Nécessite contact visuel direct ou lien sanguin (goules)
+
+### **ÉTHÉRIENS - CIVILISATION ANTIQUE DÉTAILLÉE** (Expansion 2)
+
+**Apogée de la civilisation éthérienne :**
+- Époque : 1000+ ans avant le présent (chronologie exacte perdue)
+- Splendeur : Tours cristallines touchant les nuages, jardins suspendus défiant gravité
+- Magie : Tissage direct de la réalité, manipulation matière/énergie/temps
+- Société : Méritocratie magique, castes basées sur puissance éthérique
+- Art : Fresques vivantes racontant histoires en temps réel, sculptures auto-réparatrices
+- Sciences : Fusion magie-technologie (cristaux de mémoire, portails dimensionnels)
+
+**Hubris et déclin :**
+- Ambition fatale : Tentative de transcendance collective vers forme divine
+- Projet Ultime : "Rituel de l'Ascension Stellaire" impliquant toute la race
+- Arrogance : Croyance qu'ils pouvaient égaler/surpasser les dieux anciens
+- Signes ignorés : Avertissements mystiques, prophéties, anomalies magiques croissantes
+
+**La Grande Purge (cataclysme) :**
+- Événement : Implosion catastrophique du Rituel de l'Ascension
+- Manifestations : Déchirures réalité, tempêtes éther, effondrements dimensionnels
+- Résultat immédiat : 99%+ Éthériens annihilés instantanément
+- Effets durables : Zones corrompues (Valgaris), cicatrices magiques permanentes
+- Témoins : Quelques autres races observèrent de loin, terrifiées
+- Héritage : Ruines maudites, artefacts dangereux, interdictions magiques modernes
+
+**Survivants éthériens :**
+- Nombre : Poignée d'individus absents lors du Rituel ou protégés miraculeusement
+- Destin : Parias traqués, se cachèrent/se mélangèrent aux autres races
+- Descendants : Lignées diluées (comme celle de Morwen), portant mémoire génétique
+- Malédiction : Sang éthérien = prédisposition à hubris magique, obsessions dangereuses
+- Connaissance perdue : Fragments rituels, grimoires épars (dont Codex Purpureus)
+
+**Fresques et ruines (sous Valgaris) :**
+- Localisation : Temples souterrains préservés sous montagnes actuelles de Valgaris
+- Contenu fresques : Chronologie visuelle apogée → hubris → purge
+- Style artistique : Hyper-détaillé, couleurs surnaturellement vives après 1000 ans
+- Atmosphère : Solennelle, oppressante, avertissement silencieux hurlant aux visiteurs
+- État préservation : Variable - certaines sections intactes, autres érodées/corrompues
+- Magie résiduelle : Fresques émettent légère lueur éthérée, réagissent à présence magique
+
+**Parallèle tragique (ironie non perçue par Morwen) :**
+- Situation : Morwen étudie ruines éthériennes pour maîtriser leur magie
+- Ironie : Elle se tient exactement où les Éthériens se tenaient avant leur chute
+- Répétition : S'apprête à accomplir exactement ce qu'ils ont tenté (manipuler vie/mort)
+- Cécité : Ne voit pas qu'elle reproduit leur hubris exactement
+- Vision lecteur : Le lecteur voit le parallèle et frissonne d'anticipation tragique
+- Avertissement ignoré : Les fresques hurlent leçon qu'elle refuse d'entendre
+
+**Artefacts éthériens survivants :**
+- Codex Purpureus : Grimoire suprême (possession de Morwen), pages vivantes
+- Fioles sang antique : Sang préservé magiquement d'Éthériens purs
+- Cristaux de mémoire : Enregistrements psychiques d'événements passés
+- Fragments architecture : Pierres/colonnes conservant enchantements originaux
+- Danger : Tous ces artefacts corrompent progressivement leurs utilisateurs
+
+**Impact sur monde moderne :**
+- Lois magiques : Restrictions sévères sur magie de transformation/transcendance
+- Tabous culturels : Peur collective de "jouer aux dieux"
+- Zones interdites : Ruines éthériennes officiellement scellées/surveillées
+- Mythologie : Éthériens devenus contes moralisateurs sur dangers de l'orgueil
+- Discrimination : Suspicion envers toute magie trop ambitieuse/ancienne
+
+### **SYSTÈME MAGIQUE ÉTOILE POURPRE - PRÉCISIONS**
+
+**Nature de l'Étoile Pourpre :**
+- Origine : Pouvoir éthérien antique lié à manipulation de la vie elle-même
+- Manifestation : Lueur pourpre/violette caractéristique lors d'utilisation
+- Spécialisation : Transformation, manipulation chair, résurrection (théorique)
+- Coût : Proportionnel à l'ampleur - rituel mineur (fatigue) vs majeur (années de vie)
+- Corruption : Usage prolongé altère psyché et corps de l'utilisateur
+
+**Codex Purpureus :**
+- Apparence : Grimoire ancien à couverture noir-violet, reliure os/métal
+- Pages vivantes : Encre bouge, symboles se réarrangent, réagit aux lecteurs
+- Contenu : Rituels éthériens de transformation ultime, diagrammes anatomiques impossibles
+- Sentience : Possède forme de conscience/volonté propre (ambiguë)
+- Danger : Lecture prolongée influence pensées, implante obsessions
+- Gardien : Morwen seule possède version complète connue
+
+**Violette et l'Étoile Pourpre :**
+- Lien inné : Violette possède affinité naturelle exceptionnelle (non entraînée)
+- Raison intérêt Morwen : Voit en Violette clé/catalyseur pour rituel résurrection ultime
+- Potentiel : Capable théoriquement de magie éthérienne niveau civilisation antique
+- Mystère : Raison exacte de cette affinité non révélée (prologue)
+- Protection : Quelque chose/quelqu'un empêche serviteurs de Morwen de la localiser précisément
+
+**Limitations et règles magiques :**
+- Coût énergétique : Magie puissante exige sacrifice (sang, vie, essence)
+- Concentration : Rituels complexes nécessitent préparation minutieuse
+- Matériaux : Composants rares/spécifiques pour sorts majeurs
+- Connaissances : Grimoires/enseignement nécessaires, improvisation dangereuse
+- Conséquences : Échec rituel = effets imprévisibles/catastrophiques
+
+---
+
 **Fin des Fiches de Référence Canon**
-*Document de référence pour L’Éveil de l’Étoile Pourpre*
+*Document de référence pour L'Éveil de l'Étoile Pourpre*
+*Dernière mise à jour : Prologue V10 - Expansions 1-3 intégrées*
 *Dernière mise à jour  : Analyse complète du manuscrit*

@@ -1,0 +1,20 @@
+# Fichiers de réponses sauvegardées (données utilisateurs - ancien système)
+reponses/*.json
+
+# Données utilisateurs multi-utilisateur (nouveau système v2.0)
+utilisateurs/*/*.json
+
+# Garder les dossiers mais pas les fichiers
+!reponses/.gitkeep
+!utilisateurs/.gitkeep
+
+# Fichiers temporaires système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Cache navigateur
+*.cache

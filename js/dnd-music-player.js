@@ -8,6 +8,7 @@ class DnDMusicPlayer {
     constructor() {
         this.audio = new Audio();
         this.playlist = [];
+        this.initPlaylist = [];
         this.weightedPlaylist = [];
         this.currentIndex = 0;
         this.isPlaying = false;
@@ -16,8 +17,7 @@ class DnDMusicPlayer {
         this.isInitialized = false;
         this.firstInteraction = true;
         this.heroIntroPath = null;
-        this.heroIntroWeight = 2.5; // Pondération pour hero-intro.mp3
-        this.heroIntroPlayed = false; // Track si hero-intro a déjà été joué
+        this.firstPlayCompleted = false; // Track si la première lecture depuis init/ a été faite
         
         // Cache pour éviter les recharges inutiles
         this.lastPlaylistUpdate = 0;
@@ -68,11 +68,13 @@ class DnDMusicPlayer {
 
             const data = await response.json();
             const newPlaylist = data.files || [];
+            const newInitPlaylist = data.initFiles || [];
             
             // Vérifier si la playlist a changé
             const playlistChanged = JSON.stringify(this.playlist) !== JSON.stringify(newPlaylist);
             
             this.playlist = newPlaylist;
+            this.initPlaylist = newInitPlaylist;
             this.heroIntroPath = data.heroIntro;
             this.lastPlaylistUpdate = now;
 
@@ -83,7 +85,7 @@ class DnDMusicPlayer {
 
             // Log pour debug
             if (playlistChanged) {
-                console.log(`Playlist mise à jour: ${this.playlist.length} pistes trouvées`);
+                console.log(`Playlist mise à jour: ${this.playlist.length} pistes trouvées (dont ${this.initPlaylist.length} dans init/)`);
             }
 
         } catch (error) {
@@ -92,15 +94,16 @@ class DnDMusicPlayer {
             
             // Fallback dynamique : scanner les fichiers connus + découverte
             this.playlist = await this.createFallbackPlaylist();
-            this.heroIntroPath = 'media/musique/hero-intro.mp3';
+            this.initPlaylist = [];
+            this.heroIntroPath = 'media/musique/init/hero-intro.mp3';
             this.createWeightedPlaylist();
         }
     }
 
     async createFallbackPlaylist() {
-        // Liste des fichiers audio connus
+        // Liste des fichiers audio connus (màj avec nouveau chemin init)
         const knownFiles = [
-            'media/musique/hero-intro.mp3',
+            'media/musique/init/hero-intro.mp3',
             'media/musique/Adgon.mp3', 
             'media/musique/La saga de Diancastraa.mp3'
         ];
@@ -113,7 +116,8 @@ class DnDMusicPlayer {
                 const response = await fetch(`/${path}`, { method: 'HEAD' });
                 if (response.ok) {
                     const name = path.split('/').pop().replace('.mp3', '');
-                    playlist.push({ path, name });
+                    const isInit = path.includes('/init/');
+                    playlist.push({ path, name, isInit });
                 }
             } catch (e) {
                 // Fichier non accessible, ignorer silencieusement
@@ -126,15 +130,17 @@ class DnDMusicPlayer {
     createWeightedPlaylist() {
         this.weightedPlaylist = [];
 
-        this.playlist.forEach((track) => {
-            // hero-intro.mp3 a une pondération plus élevée seulement s'il n'a pas encore été joué
-            const weight = (track.path === this.heroIntroPath && !this.heroIntroPlayed) ? this.heroIntroWeight : 1;
-            const weightedCount = Math.ceil(weight);
-
-            for (let i = 0; i < weightedCount; i++) {
+        // Si première lecture pas encore effectuée, utiliser seulement la playlist init
+        if (!this.firstPlayCompleted && this.initPlaylist.length > 0) {
+            this.initPlaylist.forEach((track) => {
                 this.weightedPlaylist.push(track);
-            }
-        });
+            });
+        } else {
+            // Sinon, utiliser toute la playlist (incluant init)
+            this.playlist.forEach((track) => {
+                this.weightedPlaylist.push(track);
+            });
+        }
 
         // Mélanger la playlist pondérée
         this.shuffleArray(this.weightedPlaylist);
@@ -145,10 +151,9 @@ class DnDMusicPlayer {
         this.audio.preload = 'none';
 
         this.audio.addEventListener('ended', () => {
-            // Si c'était hero-intro.mp3, marquer comme joué et recréer la playlist pondérée
-            if (this.playlist[this.currentIndex] && 
-                this.playlist[this.currentIndex].path === this.heroIntroPath) {
-                this.heroIntroPlayed = true;
+            // Si c'était la première lecture (depuis init/), marquer comme effectuée
+            if (!this.firstPlayCompleted) {
+                this.firstPlayCompleted = true;
                 this.createWeightedPlaylist();
             }
             this.playNext();
@@ -295,21 +300,20 @@ class DnDMusicPlayer {
     async startPlayback() {
         if (!this.playlist.length) return;
 
-        // Commencer par hero-intro.mp3 si disponible et pas encore joué
-        if (this.heroIntroPath && !this.heroIntroPlayed) {
-            const heroTrack = this.playlist.find((track) => track.path === this.heroIntroPath);
-            if (heroTrack) {
-                this.currentIndex = this.playlist.indexOf(heroTrack);
-                this.heroIntroPlayed = true;
-            }
+        // Pour la première lecture, sélectionner aléatoirement depuis init/
+        if (!this.firstPlayCompleted && this.initPlaylist.length > 0) {
+            const randomInitIndex = Math.floor(Math.random() * this.initPlaylist.length);
+            const selectedInitTrack = this.initPlaylist[randomInitIndex];
+            
+            // Trouver l'index de cette piste dans la playlist complète
+            this.currentIndex = this.playlist.findIndex((track) => track.path === selectedInitTrack.path);
+            
+            await this.loadCurrentTrack();
+            this.play();
         } else {
-            // Si hero-intro déjà joué ou non disponible, commencer avec lecture aléatoire
+            // Sinon, commencer avec lecture aléatoire normale
             await this.playNext();
-            return;
         }
-
-        await this.loadCurrentTrack();
-        this.play();
     }
 
     async loadCurrentTrack() {
@@ -364,21 +368,10 @@ class DnDMusicPlayer {
 
     async playNext() {
         if (this.shuffle) {
-            // Mode aléatoire pondéré - exclure hero-intro si déjà joué
-            let attempts = 0;
-            do {
-                this.currentIndex = Math.floor(Math.random() * this.weightedPlaylist.length);
-                const selectedTrack = this.weightedPlaylist[this.currentIndex];
-                this.currentIndex = this.playlist.findIndex((track) => track.path === selectedTrack.path);
-                attempts++;
-                
-                // Si hero-intro pas encore joué ou on a épuisé les tentatives, accepter la sélection
-                if (!this.heroIntroPlayed || 
-                    this.playlist[this.currentIndex].path !== this.heroIntroPath ||
-                    attempts > 10) {
-                    break;
-                }
-            } while (this.heroIntroPlayed && this.playlist[this.currentIndex].path === this.heroIntroPath);
+            // Mode aléatoire depuis la playlist appropriée
+            const randomIndex = Math.floor(Math.random() * this.weightedPlaylist.length);
+            const selectedTrack = this.weightedPlaylist[randomIndex];
+            this.currentIndex = this.playlist.findIndex((track) => track.path === selectedTrack.path);
         } else {
             this.currentIndex = (this.currentIndex + 1) % this.playlist.length;
         }

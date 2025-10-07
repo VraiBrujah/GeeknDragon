@@ -1,43 +1,50 @@
-# L-veil-de-l-toile-Pourpre
+# L'Éveil de l'Étoile Pourpre — Dépôt éditorial
 
 ## Présentation
 
-Ce dépôt héberge le roman *L'Éveil de l'Étoile Pourpre* ainsi que les
-scripts permettant de rassembler les chapitres et de produire des
-versions prêtes à la diffusion (HTML, PDF, Markdown, etc.).
+Ce dépôt contient le manuscrit et la documentation éditoriale du roman « L'Éveil de l'Étoile Pourpre ».
 
-## Organisation du dépôt
+Il ne contient pas (à ce jour) de pipeline de build/exports (HTML/PDF). Le dépôt sert principalement à organiser :
+- le texte canonique (répertoire `Livre/`),
+- les chapitres/drafts d’inspiration (`Inspiration/`),
+- les brouillons (`Brouillon/`),
+- la documentation éditoriale structurée (`docs/`).
 
-- `Livre/` : chapitres sources au format Markdown.
-- `exports/` : fichiers générés après compilation.
-- `templates/` : gabarits et ressources de mise en page.
-- Scripts Python : `generer_livre_professionnel.py`,
-  `generer_pdf_final.py`, `generer_pdf_simple.py`.
+## Arborescence (état actuel)
 
-## Dépendances
+- `Livre/` : contenu canonique (prologue et documents d’univers)
+- `Inspiration/` : chapitres 01→31 (versions d’inspiration)
+- `Brouillon/` : brouillons (V1, V2, etc.)
+- `docs/` : documentation éditoriale regroupée
+  - `docs/audits/` : audits et rapports d’audit
+  - `docs/guides/` : guides, conventions, exemples et matrices
+  - `docs/projet/` : documents de pilotage (plan, stats, synopsis, canevas)
+- `update_symbols.py` : script utilitaire (voir ci‑dessous)
 
-- Python 3.8 ou supérieur.
-- [Pandoc](https://pandoc.org) pour la conversion des formats.
-- [WeasyPrint](https://weasyprint.org) (optionnel) pour la génération
-  automatique de PDF.
-- Un environnement LaTeX (ex. MiKTeX) peut être nécessaire pour les
-  exports PDF avancés.
+## Scripts
 
-## Génération
+- `update_symbols.py` : met à jour les symboles de dialogue dans `Livre/FICHES_REFERENCE_CANON.md` et `Livre/personnages.md`.
+  - Usage (exemple) : `python update_symbols.py`
 
-Les principales commandes de génération sont résumées ci‑dessous ;
-consultez [README_GENERATION.md](README_GENERATION.md) pour des
-instructions détaillées.
+## Ce qui n’est pas inclus (actuellement)
 
-- **Windows** : `build.bat`
-- **Linux/Mac** : `chmod +x build.sh` puis `./build.sh`
-- **Python** : `python build_livre.py` ou `python build_livre.py --format <format>`
+- Pas de scripts de compilation/export (`build.sh`, `build.bat`, Pandoc/WeasyPrint, etc.)
+- Pas de répertoire `exports/` ni `templates/`.
 
-## Tests
+Si un pipeline de génération est souhaité plus tard, il pourra être ajouté dans `scripts/` avec une documentation dédiée.
 
-Des tests `pytest` vérifient la génération des fichiers HTML, PDF et du fichier de statistiques à partir d'un jeu de chapitres minimal. Pour les exécuter :
+## Processus éditorial (suggestion)
 
-```bash
-pytest
-```
+1) Rédaction et révisions dans `Inspiration/` → validation → passage en canon dans `Livre/`.
+2) Documentation, décisions et audits centralisés dans `docs/`.
+3) Script(s) utilitaires optionnels dans `scripts/` (à créer si besoin).
+
+## Conventions
+
+- Encodage UTF‑8, typographie française.
+- Nom des fichiers lisible, accents autorisés (peuvent être normalisés si besoin multi‑plateforme).
+
+## Licence / Contributions
+
+Merci de vérifier avec l’auteur avant toute diffusion publique. Les contributions se font via PR en respectant les guides dans `docs/`.
 
