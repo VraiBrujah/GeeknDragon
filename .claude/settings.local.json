@@ -20,7 +20,8 @@
       "WebSearch",
       "Bash(dir:*)",
       "Bash(findstr:*)",
-      "Bash(cut:*)"
+      "Bash(cut:*)",
+      "Read(//i/Backup/GitHub-C/backup/OrIAV1 - Copie/**)"
     ],
     "deny": [],
     "ask": []
