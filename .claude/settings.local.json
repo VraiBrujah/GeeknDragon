@@ -10,7 +10,8 @@
       "Bash(npm run build:js:*)",
       "Bash(cat:*)",
       "Bash(jq:*)",
-      "Bash(npm run build:css:*)"
+      "Bash(npm run build:css:*)",
+      "Bash(npx tailwindcss:*)"
     ],
     "deny": [],
     "ask": []

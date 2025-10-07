@@ -282,7 +282,7 @@ echo $snipcartInit;
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
         
         <!-- Section Image (Gauche) -->
-        <div class="bg-gray-900/50 p-6 flex items-center justify-center min-h-[400px]">
+        <div class="bg-gray-900/50 p-3 flex items-center justify-center min-h-[400px]">
           <?php if (!empty($images)) : ?>
           <div class="swiper w-full max-w-lg relative">
             <div class="swiper-wrapper">
