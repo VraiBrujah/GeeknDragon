@@ -1,0 +1,28 @@
+# Gitignore pour le dossier Livre/
+
+# Fichiers temporaires d'édition
+*.tmp
+*.bak
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Brouillons (si vous voulez des dossiers privés)
+brouillons/
+drafts/
+_private/
+.drafts/
+
+# Fichiers de sauvegarde éditeurs
+*.autosave
+*.backup
+
+# Logs et débug
+*.log
+debug.log
+error.log
+
+# Cache éventuel
+cache/
+.cache/
