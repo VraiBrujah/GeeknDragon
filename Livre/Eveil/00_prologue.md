@@ -6,7 +6,7 @@
 
 La nuit s'épandait sur les Monts de l'Éther tel un linceul de velours noir imprégné de sang séché, plus dense et plus affamée que toute ténèbre qu'eût connue Etheria depuis l'antédiluvienne Purge. Un vent de lame sifflait entre les crêtes déchiquetées, ces titans osseux qui percent le ventre du ciel comme des côtes brisées d'un dieu oublié. Il portait l'haleine âcre du givre et l'exhalaison métallique des pierres gorgées de magie antique.
 
-Les sommets acérés buvaient la lumière elle-même, créant des abysses d'ombre où même la lune n'osait effleurer de ses doigts nacrés. Nulle étoile ne perçait l'épaisse carapace noire qui oppressait le monde, comme si le firmament retenait son souffle devant l'imminence de quelque apocalypse cosmique.
+Les sommets acérés buvaient la lumière elle-même, créant des abysses d'ombre que même la lune n'osait effleurer de ses doigts nacrés. Nulle étoile ne perçait l'épaisse carapace noire qui oppressait le monde, comme si le firmament retenait son souffle devant l'imminence de quelque apocalypse cosmique.
 
 Cette obscurité n'était point naturelle, mais tissée de volontés primordiales, de pactes scellés dans le sang tiède et le désespoir figé. L'air frémissait d'une tension électrique qui caressait la chair des rares créatures assez téméraires pour s'aventurer près de ces ruines vouées aux malédictions.
 
