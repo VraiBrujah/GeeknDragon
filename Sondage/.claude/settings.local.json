@@ -18,7 +18,8 @@
       "WebFetch(domain:www.shiftboard.com)",
       "WebFetch(domain:www.schedule360.us)",
       "WebFetch(domain:www.qgenda.com)",
-      "WebFetch(domain:www.zoho.com)"
+      "WebFetch(domain:www.zoho.com)",
+      "Bash(cut:*)"
     ],
     "deny": [],
     "ask": []

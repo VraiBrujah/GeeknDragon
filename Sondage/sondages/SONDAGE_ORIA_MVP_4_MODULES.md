@@ -702,6 +702,26 @@ Ce module couvre la configuration globale, la sécurité, les règles métier et
 | BET-018 | Générer insights automatiques IA à partir sondages pulse avec thèmes récurrents, sentiment global et recommandations actions | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 9 | 120-160h | Culture Amp AI Insights - Analyse NLP feedback qualitatif |
 | BET-019 | Comparer métriques engagement avec benchmarks industrie santé anonymisés pour évaluation position concurrentielle | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 40-60h | Culture Amp Benchmarks - Contexte comparatif santé Québec |
 
+### 4.7.0 Génération et Gestion Questions IA
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| BET-062 | Générer automatiquement par lots (20 questions) des questions bien-être variées et sémantiquement différentes avec double version (générique et personnalisée selon profil employé) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 9 | 80-120h | OrIAV2 - Génération batch questions IA avec diversité sémantique |
+| BET-063 | Permettre aux gestionnaires de valider ou rejeter les questions générées par IA avec audit complet (identité, date, décision) et mémoire des rejets pour éviter régénération | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | OrIAV2 - Workflow validation administrative questions |
+| BET-064 | Adapter automatiquement la formulation des questions validées au profil spécifique de chaque employé (département, poste, ancienneté) en conservant le sens original | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 8 | 60-80h | OrIAV2 - Reformulation contextuelle NLP |
+| BET-065 | Distribuer automatiquement 5 nouvelles questions par semaine à chaque employé depuis la pile globale validée, sans jamais poser deux fois la même question au même employé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 24-40h | OrIAV2 - Orchestration distribution hebdomadaire automatisée |
+| BET-066 | Afficher automatiquement une pop-up avec la question bien-être en attente lors de chaque connexion employé, bloquant l'accès tant que non répondue | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 5 | 16-24h | OrIAV2 - Modal bloquant garantit taux réponse élevé |
+| BET-067 | Gérer une file d'attente personnalisée de questions pour chaque employé avec système de priorités, dates de présentation et mécanisme de report (skip_until) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 7 | 40-60h | OrIAV1 EmployeeQuestionQueue - Gestion pile individuelle sophistiquée |
+| BET-068 | Analyser automatiquement le sentiment (polarité -1 à +1) des réponses textuelles avec TextBlob et calcul de score personnalisé pour chaque type de question | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | OrIAV1 sentiment_score - Analyse sentiment avancée NLP |
+| BET-069 | Regrouper automatiquement les réponses similaires par clusters avec TF-IDF et KMeans pour identifier tendances communes et patterns de bien-être | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 8 | 60-80h | OrIAV1 cluster_texts - Machine Learning clustering réponses |
+| BET-070 | Générer automatiquement jusqu'à 3 suggestions d'amélioration organisationnelle à partir des feedbacks employés anonymisés via LLM avec format JSON structuré | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 9 | 80-120h | OrIAV1 _suggestions_from_llm - Recommandations IA actionnables |
+| BET-071 | Déclencher automatiquement une alerte RH (email + notification admin + log audit) lorsque le score personnel bien-être d'un employé descend sous le seuil configurable (défaut 0.8) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 6 | 24-40h | OrIAV1 Alerting System - Intervention proactive dégradation bien-être |
+| BET-072 | Archiver automatiquement chaque semaine les pourcentages de réponses positives/négatives/neutres par question pour historique et analyses longitudinales | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 5 | 16-24h | OrIAV1 Archive hebdomadaire - Traçabilité évolution sentiments |
+| BET-073 | Calculer un score bien-être personnel agrégé combinant scores de réponses questionnaires, analyse messages et auto-évaluation hebdomadaire avec pondération configurable | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | OrIAV1 WellnessScore - Score composite multi-sources |
+| BET-074 | Éviter la distribution de questions sémantiquement similaires au même employé dans un délai configurable (défaut 90 jours) avec seuil de similarité ajustable (défaut 0.8) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 8 | 60-80h | OrIAV1 Anti-redondance - Rotation intelligente questions |
+| BET-075 | Tracer chaque lot de génération IA avec batch_id, nombre cible/réel généré, prompt utilisé, modèle IA, paramètres, durée exécution, succès/erreur et facteurs d'adaptation | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 4 | 5 | 16-24h | OrIAV1 GenerationLog - Auditabilité complète génération IA |
+| BET-076 | Afficher automatiquement une interface bien-être dynamique avec onglets contextuels selon rôle utilisateur (question pour employé, validation pour admin, génération IA pour super-admin) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 8 | 60-80h | OrIAV1 Dart UnifiedScreen - Interface adaptative multi-rôles |
+
 ### 4.7 Analyse Passive (IA)
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
@@ -718,6 +738,190 @@ Ce module couvre la configuration globale, la sécurité, les règles métier et
 | BET-110 | Déployer assistant RH IA local (Llama 3) pour répondre questions employés sans transmission données externes | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 10 | 160-240h | oria-v3 FEAT-019 - Chatbot RH 100% local avec apprentissage continu |
 | BET-111 | Fournir réponses contextuelles personnalisées selon profil employé avec liens vers ressources internes | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 9 | 80-120h | oria-v3 FEAT-019 - Personnalisation réponses assistant IA |
 | BET-112 | Améliorer continuellement modèle IA RH via feedback utilisateurs sans compromis confidentialité | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 9 | 80-120h | oria-v3 FEAT-019 - Apprentissage local continu |
+
+### 4.7.1 Programmes Santé Physique et Mentale
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| BET-020 | Offrir programmes exercice physique guidés avec bibliothèque vidéos (yoga, étirements, exercices bureau) accessibles pendant pauses pour réduire fatigue musculosquelettique personnel soignant | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 5 | 16-24h | Virgin Pulse - Prévention TMS secteur santé |
+| BET-021 | Intégrer trackers activité (Fitbit, Apple Watch, Garmin) pour suivi automatique pas quotidiens, fréquence cardiaque et qualité sommeil avec synchronisation données bien-être | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 4 | 9 | 80-120h | Wellable/Limeade - Intégrations API wearables complexes |
+| BET-022 | Proposer programmes santé mentale structurés (méditation guidée, gestion stress, techniques respiration) avec sessions 5-15 minutes adaptées horaires CHSLD | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 5 | 16-24h | Virgin Pulse Journeys - Prévention burnout secteur santé critique |
+| BET-023 | Assigner coaching santé personnalisé virtuel avec objectifs mesurables (réduction IMC, amélioration sommeil, gestion anxiété) et suivi progrès mensuel | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 8 | 60-80h | Limeade Coaching - Accompagnement personnalisé |
+| BET-024 | Permettre configuration objectifs santé personnalisables par employé (perte poids, arrêt tabac, activité physique quotidienne) avec rappels intelligents adaptatifs | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 7 | 24-40h | Virgin Pulse Goals - Engagement autonomie employé |
+| BET-025 | Afficher tableau de bord santé holistique consolidant activité physique, nutrition, sommeil, stress avec score global bien-être et tendances 90 jours | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | Wellable Dashboard - Vue 360 santé employé |
+
+### 4.7.2 Prévention et Intervention
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| BET-026 | Intégrer hotline Programme Aide Employés (PAE) 24/7 avec bouton accès rapide urgence psychologique et transfert automatique vers professionnels certifiés | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 7 | 40-60h | Standard industrie santé - Prévention crises suicidaires secteur CHSLD |
+| BET-027 | Fournir répertoire ressources santé mentale géolocalisées (psychologues, CLSC, organismes communautaires Québec) avec disponibilités temps réel et téléconsultation | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 6 | 24-40h | Limeade Resources - Accès facilité soins santé mentale |
+| BET-028 | Générer plans action bien-être personnalisés automatiquement selon résultats évaluations (sondages, analyses passives IA) avec recommandations priorisées et échéanciers | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 9 | 80-120h | Culture Amp Action Plans - Intervention personnalisée basée données |
+| BET-029 | Gérer programme retour au travail progressif post-absence maladie longue (dépression, épuisement) avec suivi médical, ajustements horaires et évaluations bimensuelles | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 8 | 60-80h | LSST Québec - Obligation légale retour travail sécuritaire |
+| BET-030 | Suivre accommodements santé (restrictions physiques, horaires adaptés troubles mentaux) avec alertes expiration certificats médicaux et renouvellements automatiques | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 7 | 40-60h | Workday Accommodations - Conformité LSST et droits personne |
+| BET-031 | Détecter employés à haut risque burnout via analyse prédictive multicritères (absentéisme, baisse performance, sentiment négatif) et déclencher intervention gestionnaire | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 10 | 120-160h | BET-105 enrichi - Prévention proactive burnout secteur santé critique |
+| BET-032 | Offrir séances thérapie en ligne confidentielles subventionnées (3-8 séances annuelles) avec plateforme sécurisée vidéoconférence HIPAA/Loi 25 conforme | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 9 | 80-120h | BetterHelp/Talkspace modèle - Accès thérapie accessible financièrement |
+
+### 4.7.3 Équilibre Travail-Vie et Flexibilité
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| BET-033 | Calculer charge travail hebdomadaire par employé (heures planifiées + imprévus + temps supplémentaire) avec seuils alertes configurables (45h, 50h, 60h) et escalade gestionnaire | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 7 | 40-60h | BET-012 enrichi - Prévention surcharge récurrente secteur CHSLD |
+| BET-034 | Détecter déséquilibre travail-vie automatiquement via patterns récurrents (heures excessives 3+ semaines consécutives, annulations congés répétées, pauses manquées chroniques) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 9 | 80-120h | Microsoft Viva Insights - Détection épuisement précoce |
+| BET-035 | Suggérer ajustements horaires intelligents pour améliorer bien-être (redistribution quarts, ajout journées repos, réduction heures sup) avec simulations impact charge équipe | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 10 | 120-160h | BET-013 enrichi - Optimisation horaires IA complexe |
+| BET-036 | Gérer jours santé mentale (mental health days) dédiés distincts congés maladie avec quota annuel configurable (2-5 jours), approbation simplifiée sans justification médicale | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 5 | 16-24h | Trend 2025 - Normalisation santé mentale workplaces progressifs |
+| BET-037 | Autoriser flexibilité horaires automatique pour rendez-vous médicaux avec réservation créneaux 2-4h sans pénalité, intégration calendriers personnels et rappels | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 24-40h | Officevibe Flexibility - Réduction absentéisme non planifié |
+| BET-038 | Mesurer indice équilibre travail-vie par employé via sondages qualitatifs + métriques quantitatives (ratio heures travail/repos, fréquence congés utilisés) avec benchmarks secteur santé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 8 | 60-80h | Culture Amp Work-Life Balance Index - Mesure impact initiatives |
+
+### 4.7.4 Culture Organisationnelle et Engagement
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| BET-039 | Calculer indice climat organisationnel via sondages engagement périodiques (eNPS, satisfaction, sentiment appartenance) avec segmentation par département et corrélations absentéisme | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 8 | 60-80h | Culture Amp Engagement - Mesure santé organisationnelle |
+| BET-040 | Administrer sondages anonymes culture et valeurs organisationnelles avec échelles Likert standardisées et analyses thématiques NLP feedback qualitatif ouvert | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 7 | 40-60h | Officevibe Culture Surveys - Alignement valeurs employés/organisation |
+| BET-041 | Implémenter rétroaction 360 degrés bien-être incluant auto-évaluation, pairs, superviseur et subordonnés avec consolidation anonymisée et rapports développement personnel | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 9 | 80-120h | Culture Amp 360 Reviews - Feedback holistique bien-être |
+| BET-042 | Faciliter création groupes soutien par pairs thématiques (nouveaux parents, aidants naturels, deuil, santé mentale) avec forums discussion modérés et confidentialité renforcée | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 6 | 24-40h | Limeade Peer Support - Soutien social employés secteur santé |
+| BET-043 | Jumeler automatiquement nouveaux employés avec mentors bien-être seniors selon profils compatibles (âge, intérêts, défis similaires) avec suivi engagements trimestriels | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 7 | 40-60h | Chronus Mentoring - Onboarding bien-être nouveaux CHSLD |
+
+### 4.7.5 Gamification et Récompenses Bien-être
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| BET-044 | Attribuer points bien-être automatiquement pour activités santé complétées (exercices, méditation, sondages pulse, objectifs atteints) avec système accumulation et historique | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 40-60h | BET-008 enrichi - Virgin Pulse Points - Motivation extrinsèque engagement |
+| BET-045 | Afficher classements équipes (leaderboards) défis santé hebdomadaires/mensuels avec anonymisation optionnelle, filtres département et règles anti-tricherie | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 4 | 6 | 24-40h | Wellable Challenges - Compétition saine entre équipes |
+| BET-046 | Décerner badges virtuels accomplissements bien-être (séries consécutives, jalons santé, participation événements) avec affichage profil public et notifications célébration | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 4 | 5 | 16-24h | Virgin Pulse Badges - Reconnaissance visuelle accomplissements |
+| BET-047 | Organiser défis inter-départements bien-être (marche collective, hydratation, sommeil) avec objectifs équipe, suivi progrès temps réel et prix symboliques gagnants | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 40-60h | Limeade Challenges - Cohésion équipes via compétition ludique |
+| BET-048 | Échanger points bien-être contre récompenses tangibles configurables (cartes-cadeaux, congés supplémentaires, stationnement privilégié) avec catalogue administrable et inventaire | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 4 | 8 | 60-80h | Virgin Pulse Rewards - Incentives financiers engagement bien-être |
+| BET-049 | Planifier événements bien-être virtuels synchrones (sessions yoga groupe, méditation guidée, conférences santé mentale) avec inscriptions, rappels et enregistrements | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 7 | 40-60h | Limeade Virtual Events - Engagement collectif travail hybride/quarts |
+
+### 4.7.6 Analytics et ROI Bien-être
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| BET-050 | Calculer ROI initiatives bien-être via corrélations statistiques entre participation programmes et KPI business (absentéisme, roulement, productivité, incidents sécurité) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 10 | 120-160h | Limeade Analytics - Justification investissements bien-être direction |
+| BET-051 | Analyser corrélations bien-être employé avec performance individuelle (évaluations, objectifs atteints) et rétention (années service, intention départ) avec modèles prédictifs | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 10 | 120-160h | Workday People Analytics - Lien bien-être/performance/rétention |
+| BET-052 | Prédire impact initiatives bien-être futures via simulations scénarios (participation 30%/50%/70%, investissement budgétaire variable) avec modèles économétriques validés | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 4 | 10 | 160-240h | Virgin Pulse Predictive Analytics - Planification stratégique |
+| BET-053 | Générer rapports conformité normes secteur santé (Agrément Canada, certifications Entreprise en Santé) avec indicateurs standardisés et preuves documentation automatique | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 8 | 60-80h | Standards Entreprise en Santé Québec - Certification bien-être |
+| BET-054 | Produire analyses coût-bénéfice programmes bien-être (coût programme vs économies absentéisme/roulement/CNESST) avec projections 1-3-5 ans et seuils rentabilité | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 9 | 80-120h | Wellable Cost-Benefit - Business case programmes bien-être |
+| BET-055 | Afficher tableau de bord exécutif bien-être consolidé avec métriques stratégiques (eNPS, absentéisme, participation programmes, ROI) et comparaisons temporelles trimestrielles | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 8 | 60-80h | Culture Amp Executive Dashboard - Vue stratégique direction |
+
+### 4.7.7 Accessibilité et Inclusion
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| BET-056 | Support multilingue complet module bien-être (français, anglais, espagnol, arabe, créole haïtien) avec traductions professionnelles et adaptation culturelle contenus santé mentale | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 40-60h | Diversité linguistique CHSLD Québec - Inclusion immigrants |
+| BET-057 | Conformité WCAG 2.1 AA complète (navigation clavier, lecteurs écran NVDA/JAWS, textes alternatifs, contraste couleurs) avec audits automatisés accessibilité | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 8 | 60-80h | Obligation légale Loi accessibilité Canada - Employés handicapés |
+| BET-058 | Proposer mode contraste élevé et grossissement texte adaptatif (100%-200%) pour employés déficience visuelle avec persistance préférences utilisateur | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 24-40h | WCAG AAA partiel - Personnel vieillissant secteur santé 50+ |
+| BET-059 | Offrir interface simplifiée mode senior avec navigation réduite, boutons larges, instructions explicites pour employés 50+ moins familiers technologies | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 7 | 40-60h | Démographie CHSLD - Majorité préposés 45-65 ans |
+| BET-060 | Gérer accommodements religieux santé (jeûne Ramadan, Carême) avec ajustements horaires automatiques, rappels personnalisés et respect confidentialité croyances | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 24-40h | Diversité culturelle CHSLD - Inclusion minorités visibles |
+| BET-061 | Adapter contenus bien-être sensibilité culturelle (méditation laïque vs religieuse, alimentation halal/casher/végétarienne) avec personnalisation préférences culturelles | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 7 | 40-60h | Wellable Cultural Adaptation - Respect diversité employés |
+
+### 4.7.8 Plateformes Modernes et IA Avancée
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| BET-113 | Mesurer bien-être employé via questionnaire 26 items couvrant 7 sous-domaines (Calme, Connexion, Adaptation, Bonheur, Santé, Accomplissement, Sommeil) avec feedback personnalisé et recommandations contenu ciblé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 8 | 60-80h | Unmind Index PMC8804960 - Mesure scientifique validée bien-être workplace |
+| BET-114 | Déployer assistant IA conversationnel analysant parcours santé mentale individuel pour suggérer sessions mindfulness auto-guidées ou actions concrètes amélioration bien-être avec suivi contextuel | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 10 | 160-240h | Unmind Nova AI Coach - Personnalisation IA deep learning |
+| BET-115 | Bloquer automatiquement créneaux calendrier quotidiens 2-4h pour travail concentré sans interruption avec mode silencieux notifications et suggestions envoi différé courriels | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 7 | 40-60h | Microsoft Viva Insights Focus Time - Prévention fragmentation attention |
+| BET-116 | Analyser heures supplémentaires récurrentes, surcharge réunions, manque temps concentration pour identifier tendances menant au burnout avec visibilité granulaire gestionnaires | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 9 | 80-120h | Microsoft Viva Insights Burnout Detection - Analytics 48% employés rapportent burnout 2025 |
+| BET-117 | Configurer heures travail personnalisées avec suppression automatique notifications Teams/Outlook après horaires et suggestions envoi différé lorsque courriel composé hors plage horaire destinataire | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 6 | 24-40h | Microsoft Viva Quiet Time - Respect frontières travail-vie |
+| BET-118 | Proposer rituel transition 10-15 min début/fin quart avec activités guidées (méditation, révision objectifs, synthèse journée) pour séparer mentalement travail et vie personnelle en télétravail | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 5 | 16-24h | Microsoft Viva Virtual Commute - Frontières psychologiques travail hybride |
+| BET-119 | Fournir catalogue multimédia expert 40+ thématiques santé mentale (anxiété, dépression, résilience, gestion conflits, épuisement compassion) avec méditations guidées, exercices respiration et ateliers structurés | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 6 | 24-40h | Tendances 2025 plateformes wellbeing - Contenu expert-led accessible 24/7 |
+| BET-120 | Monitorer métriques santé (activité physique, sommeil, nutrition, stress physiologique) via intégrations wearables avec corrélations santé mentale et alertes anomalies biométriques | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 9 | 80-120h | Standards 2025 corporate wellness - Approche holistique santé physique/mentale |
+| BET-121 | Créer défis motivants participation programmes bien-être avec système points, classements équipes et récompenses tangibles pour maintenir engagement long terme | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 40-60h | Fonctionnalité standard 9/10 plateformes 2025 - Gamification engagement |
+| BET-122 | Suivre en continu indicateurs bien-être collectif avec rapports temps réel dirigeants pour insights opportuns santé physique/mentale workforce et prise décision proactive | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 8 | 60-80h | Core feature plateformes 2025 - Real-time monitoring health metrics |
+| BET-123 | Permettre définition objectifs bien-être individuels avec collecte données biométriques, évaluations santé approfondies et solutions wellness sur mesure générées par IA | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 9 | 80-120h | Personalization trend 2025 - AI-driven tailored wellness solutions |
+| BET-124 | Intégrer plateforme thérapie moderne combinant scalabilité EAP traditionnel avec personnalisation counseling interne via réseau global thérapeutes/coaches accessible + contenu auto-servi santé mentale | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 10 | 160-240h | Unmind/Modern EAP 2025 - Thérapie workplace scalable personnalisée |
+
+### 4.7.9 Dashboards et Visualisations Temps Réel
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| BET-130 | Afficher graphiques évolution tendances bien-être sur 90 jours avec courbes multiples (score global, stress, satisfaction, humeur) et détection automatique pics/creux pour employé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 40-60h | OrIAV1 intelligent_generator.py - WellnessInsightAnalyzer tendances |
+| BET-131 | Visualiser carte thermique (heatmap) distribution bien-être par département/équipe avec gradients couleur vert-jaune-rouge et drill-down interactif pour gestionnaire | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 8 | 60-80h | OrIAV1 realtime_dashboard.py - Heatmap widget drill-down |
+| BET-132 | Présenter tableau de bord temps réel avec métriques actualisées automatiquement toutes les 5 secondes via WebSocket (réponses aujourd'hui, engagement moyen, préoccupation majeure) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 9 | 80-120h | OrIAV1 realtime_dashboard.py - WebSocket dashboard complet |
+| BET-133 | Afficher widget jauge satisfaction employés avec seuils configurables (60%, 80%) et codes couleur vert/jaune/rouge pour vue rapide gestionnaire | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 5 | 16-24h | OrIAV1 realtime_dashboard.py - Gauge widget seuils |
+| BET-134 | Générer graphiques à barres comparant scores bien-être entre périodes (semaine actuelle vs précédente, mois vs mois) avec pourcentages variation | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 24-40h | OrIAV1 realtime_dashboard.py - Chart comparaison périodes |
+| BET-135 | Créer fil d'activité temps réel (feed) affichant 20 dernières notifications bien-être avec auto-scroll et filtrage par gravité pour gestionnaire | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 6 | 24-40h | OrIAV1 realtime_dashboard.py - Realtime notifications feed |
+
+### 4.7.10 Recommandations et Conseils IA Personnalisés
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| BET-136 | Générer automatiquement 3 recommandations actions prioritaires personnalisées pour employé basées sur analyse IA réponses récentes avec explications contextuelles | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 9 | 80-120h | OrIAV1 llama_assistant.py - LLaMA optimization_suggestions |
+| BET-137 | Fournir suggestions résolution conflits bien-être avec solutions immédiates, alternatives possibles et risques à considérer expliqués en langage empathique par IA | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 10 | 120-160h | OrIAV1 llama_assistant.py - conflict_resolution prompt LLaMA |
+| BET-138 | Proposer plans action bien-être personnalisés avec gains attendus estimés, étapes concrètes numérotées et KPIs suivi selon profil employé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 9 | 80-120h | OrIAV1 llama_assistant.py - Plan d'action structuré généré IA |
+| BET-139 | Afficher conseils contextuels adaptés au moment (matin: énergie, midi: pause, soir: déconnexion) selon heure réponse employé avec contenu ciblé 200 mots maximum | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | OrIAV1 llama_assistant.py - employee_support prompt contextuel |
+| BET-140 | Fournir explications pédagogiques claires pourquoi planning/décisions bien-être sont optimales avec compromis effectués et suggestions amélioration prochaine fois | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 8 | 60-80h | OrIAV1 llama_assistant.py - schedule_explanation prompt |
+
+### 4.7.11 Analyses Avancées et Détection Patterns
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| BET-141 | Calculer distribution influence réponses (négative/neutre/positive) sur 60 jours par employé avec comptage occurrences et identification patterns récurrents | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 40-60h | OrIAV1 intelligent_generator.py - get_employee_patterns influence_distribution |
+| BET-142 | Détecter tendances bien-être employé (amélioration/stable/déclin) en comparant scores 2 dernières semaines vs 2 semaines précédentes avec seuil changement ±0.1 | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 6 | 24-40h | OrIAV1 intelligent_generator.py - Trend detection logic comparaison temporelle |
+| BET-143 | Évaluer niveau engagement employé (faible/moyen/élevé) basé sur nombre réponses (< 3 = faible, > 10 = élevé) et temps réponse moyen (< 30s = bon) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 5 | 16-24h | OrIAV1 intelligent_generator.py - _assess_engagement_level métriques |
+| BET-144 | Identifier zones préoccupation (stress, charge travail) et zones positives (équipe, motivation) selon seuil influence moyenne -0.3 / +0.3 sur 30 jours avec minimum 3 réponses | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 7 | 40-60h | OrIAV1 intelligent_generator.py - concerns et positive_areas detection |
+| BET-145 | Analyser causes probables anomalies bien-être détectées avec évaluation gravité, actions correctives recommandées et mesures prévention future factuelles | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 9 | 80-120h | OrIAV1 llama_assistant.py - anomaly_explanation prompt analytique |
+| BET-146 | Calculer score bien-être 0-1 normalisé à partir influence réponses (négatif=0.0, neutre=0.5, positif=1.0) avec moyenne glissante pour tendance | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 24-40h | OrIAV1 intelligent_generator.py - _calculate_wellbeing_score normalisé |
+| BET-147 | Mesurer temps réponse moyen questions bien-être par employé et détecter réponses précipitées (< 10s) ou très longues (> 120s) comme indicateurs engagement | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 5 | 16-24h | OrIAV1 intelligent_generator.py - avg_response_time analysis seuils |
+
+### 4.7.12 Gestion Pile Questions Intelligente
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| BET-148 | Prioriser automatiquement questions selon historique réponses employé: nouveau type=priorité 10, réponses négatives récentes=priorité 20, positives=priorité -5 | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 8 | 60-80h | OrIAV1 queue_manager.py - Prioritization adaptive logic historique |
+| BET-149 | Ajuster fréquence présentation questions selon usage: questions peu utilisées = priorité augmentée, fréquence diminuée selon poids configuré | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | OrIAV1 queue_manager.py - _calculate_frequency_modifier usage |
+| BET-150 | Éviter questions trop similaires en calculant intersection/union mots clés et rejeter nouvelles questions si similarité > 80% avec questions récentes 90 jours | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 40-60h | OrIAV1 intelligent_generator.py - similarity calculation + rejection |
+| BET-151 | Permettre report question jusqu'à date ultérieure (skip_until) si employé indique mauvais moment sans pénaliser engagement global | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 5 | 16-24h | OrIAV1 wellness_v2.py - skip_until field EmployeeQuestionQueue |
+| BET-152 | Suivre compteur présentations question par employé et augmenter priorité si présentée mais non répondue 3 fois (possiblement mal formulée) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 24-40h | OrIAV1 wellness_v2.py - presentation_count field tracking non-réponses |
+
+### 4.7.13 Rapports, Exports et Alertes Intelligentes
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| BET-153 | Exporter rapport bien-être hebdomadaire PDF/CSV avec synthèse agrégée scores, graphiques tendances, top 3 préoccupations et suggestions IA pour gestionnaire | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 8 | 60-80h | OrIAV1 realtime_dashboard.py - _generate_report formats multiples |
+| BET-154 | Générer rapport comparatif périodes (semaine/mois/trimestre/année/depuis début) avec métriques standardisées et évolution pourcentage pour direction | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | OrIAV1 router.py - wellness_report_period avec périodes multiples |
+| BET-155 | Produire rapport global analytics bien-être consolidé toutes sources données (questionnaires, messages, auto-évaluations) avec agrégations multi-niveaux | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 8 | 60-80h | OrIAV1 router.py - generate_global_report consolidé multi-sources |
+| BET-156 | Configurer règles alertes personnalisables avec opérateurs comparaison (>, <, >=, <=, ==, !=), seuils multiples et actions automatiques déclenchées | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 8 | 60-80h | OrIAV1 realtime_dashboard.py - Alert rules evaluation engine |
+| BET-157 | Déclencher alertes temps réel avec niveaux gravité (info/warning/error/critical) et diffusion WebSocket tous clients connectés pour réactivité maximale | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 8 | 60-80h | OrIAV1 realtime_dashboard.py - _trigger_alert avec AlertSeverity WebSocket |
+| BET-158 | Enregistrer historique alertes avec timestamp, métrique concernée, seuil dépassé, valeur réelle et statut résolution pour audit | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 24-40h | OrIAV1 realtime_dashboard.py - Alert dataclass complet audit trail |
+| BET-159 | Permettre acquittement manuel alertes par gestionnaire via endpoint API POST avec changement statut resolved=true | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 5 | 16-24h | OrIAV1 realtime_dashboard.py - acknowledge_alert endpoint |
+
+### 4.7.14 Widgets UI et Composants Visuels
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| BET-160 | Afficher carte progression bien-être employé avec barre linéaire colorée selon tendance (vert=amélioration, rouge=déclin, bleu=stable) et texte explicatif | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 24-40h | OrIAV1 wellness_unified_widgets.dart - WellnessProgressCard visuel |
+| BET-161 | Présenter carte conseils réponse avec icône ampoule et 4 points clés (spontanéité, honnêteté, confidentialité, possibilité reporter) sur fond bleu pâle | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 4 | 8-16h | OrIAV1 wellness_unified_widgets.dart - WellnessTipsCard guidage |
+| BET-162 | Créer widget état vide (empty state) configurable avec icône grande taille, titre, sous-titre et boutons action optionnels centré verticalement | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 5 | 16-24h | OrIAV1 wellness_unified_widgets.dart - WellnessEmptyStateWidget |
+| BET-163 | Implémenter carte question employé avec animations entrée (scale + options staggered), sélection réponse, section commentaire optionnel et bouton reporter | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 8 | 60-80h | OrIAV1 wellness_unified_widgets.dart - EmployeeQuestionCard animated |
+
+### 4.7.15 Métriques Système et Monitoring Performance
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| BET-164 | Collecter métriques système (CPU %, mémoire %, disque %) toutes les 5 secondes avec rétention 24h configurable et agrégations min/max/avg/p50/p95/p99 | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | OrIAV1 realtime_dashboard.py - MetricsCollector complet percentiles |
+| BET-165 | Calculer automatiquement agrégations statistiques (min, max, moyenne, médiane, écart-type, percentiles 50/95/99) pour toutes métriques collectées | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 24-40h | OrIAV1 realtime_dashboard.py - _update_aggregations stats avancées |
+| BET-166 | Stocker historique métriques avec nettoyage automatique données anciennes dépassant fenêtre rétention (24h par défaut) pour optimiser mémoire | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 6 | 24-40h | OrIAV1 realtime_dashboard.py - _cleanup_old_data automatique |
+| BET-167 | Exposer API REST GET métriques actuelles, historique métrique spécifique, alertes actives et configuration widgets pour intégrations externes | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 40-60h | OrIAV1 realtime_dashboard.py - API endpoints multiples REST |
+
+### 4.7.16 Génération Questions IA Avancée
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| BET-168 | Construire prompt adaptatif IA incluant zones préoccupation détectées, domaines positifs et types questions récents à éviter pour génération contextuelle | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 8 | 60-80h | OrIAV1 intelligent_generator.py - _build_adaptive_prompt contextualisé |
+| BET-169 | Valider unicité questions générées via hash SHA256 prompt JSON pour éviter duplication exacte même si texte légèrement différent | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 24-40h | OrIAV1 intelligent_generator.py - ai_prompt_hash déduplication SHA256 |
+| BET-170 | Enregistrer log génération automatique avec batch ID, cible, résultat, durée, prompt complet, modèle IA utilisé, facteurs adaptation et succès/erreur | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 40-60h | OrIAV1 intelligent_generator.py - WellnessGenerationLog complet audit |
+| BET-171 | Implémenter fallback questions prédéfinies (humeur, stress, satisfaction) si échec génération IA pour garantir continuité service | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 5 | 16-24h | OrIAV1 intelligent_generator.py - _get_fallback_questions secours |
+| BET-172 | Vérifier conditions génération (< 5 questions en attente validation, intervalle minimum 24h depuis dernière) avant déclencher génération automatique | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 24-40h | OrIAV1 intelligent_generator.py - should_generate_questions garde-fous |
+
+### 4.7.17 Vues Consolidées et Données Agrégées
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| BET-173 | Fournir vue overview bien-être adaptée rôle (employé/admin) consolidant infos utilisateur, questions pending/répondues, stats équipe et alertes actives | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 40-60h | OrIAV1 wellness_unified_models.dart - WellnessOverview multi-rôles |
+| BET-174 | Calculer propriétés commodité accessibles directement (pendingQuestions, answeredThisWeek, totalEmployees) depuis objet overview pour simplifier UI | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 4 | 8-16h | OrIAV1 wellness_unified_models.dart - Convenience properties calculées |
 
 ### 4.8 Sauvegarde et Archivage
 
@@ -773,9 +977,10 @@ Ce module couvre la configuration globale, la sécurité, les règles métier et
 
 ## 📊 STATISTIQUES DU SONDAGE
 
-**Total requis identifiés** : 387 (+47 nouveaux requis critiques)
+**Total requis identifiés** : 560 (+131 nouveaux requis - incluant 74 requis bien-être enrichis depuis archives OrIA et plateformes concurrentes 2025)
+**Requis bien-être totaux** : 145 (BET-001 à BET-174) - Module le plus complet
 **Modules couverts** : 4 (Communication, Horaires, Gestionnaire, Administration+Bien-être)
-**Nouvelles sections ajoutées** : 10 (1.8 Collaboration d'Équipe, 2.9 Pointage et Présence, 2.10 Gestion Heures Supplémentaires, 3.7 Gestion des Remplacements, 3.8 Prévisions et Budgétisation, 3.9 Formation et Développement, 4.8 Sauvegarde et Archivage, 4.9 Conformité et Juridique, 4.10 Gestion de la Paie, 4.11 Documents et Attestations)
+**Nouvelles sections ajoutées** : 28 (1.8 Collaboration d'Équipe, 2.9 Pointage et Présence, 2.10 Gestion Heures Supplémentaires, 3.7 Gestion des Remplacements, 3.8 Prévisions et Budgétisation, 3.9 Formation et Développement, 4.7.0 Génération et Gestion Questions IA, 4.7.1 Programmes Santé Physique et Mentale, 4.7.2 Prévention et Intervention, 4.7.3 Équilibre Travail-Vie et Flexibilité, 4.7.4 Culture Organisationnelle et Engagement, 4.7.5 Gamification et Récompenses Bien-être, 4.7.6 Analytics et ROI Bien-être, 4.7.7 Accessibilité et Inclusion, 4.7.8 Plateformes Modernes et IA Avancée, 4.7.9 Dashboards et Visualisations Temps Réel, 4.7.10 Recommandations et Conseils IA Personnalisés, 4.7.11 Analyses Avancées et Détection Patterns, 4.7.12 Gestion Pile Questions Intelligente, 4.7.13 Rapports Exports et Alertes Intelligentes, 4.7.14 Widgets UI et Composants Visuels, 4.7.15 Métriques Système et Monitoring Performance, 4.7.16 Génération Questions IA Avancée, 4.7.17 Vues Consolidées et Données Agrégées, 4.8 Sauvegarde et Archivage, 4.9 Conformité et Juridique, 4.10 Gestion de la Paie, 4.11 Documents et Attestations)
 **Rôles définis** : 6 (Admin, Gestionnaire, Superviseur, Employé, Patient, Famille)
 **Actions par rôle** : 6 (Créer, Lire, Éditer, Supprimer, eXporter, Valider)
 
@@ -783,7 +988,7 @@ Ce module couvre la configuration globale, la sécurité, les règles métier et
 - **MODULE 1 - Communication** : 83 requis (incluant 19 ajouts critiques)
 - **MODULE 2 - Gestion des Horaires** : 105 requis (+12 nouveaux : HOR-011 à HOR-014, HOR-806 à HOR-809, HOR-906 à HOR-909)
 - **MODULE 3 - Gestionnaire** : 110 requis (+17 nouveaux : GES-015 à GES-022, GES-509 à GES-513, GES-801 à GES-804 + nouvelle section 3.9 Formation)
-- **MODULE 4 - Administration et Bien-être** : 89 requis (+18 nouveaux : ADM-409 à ADM-411, PAY-001 à PAY-013, DOC-001 à DOC-002 + nouvelles sections 4.10 Paie et 4.11 Documents)
+- **MODULE 4 - Administration et Bien-être** : 131 requis (+60 nouveaux : ADM-409 à ADM-411, BET-020 à BET-061, PAY-001 à PAY-013, DOC-001 à DOC-002 + 7 nouvelles sous-sections bien-être + sections 4.10 Paie et 4.11 Documents)
 
 ## 🎯 NOUVEAUX REQUIS IDENTIFIÉS (Analyse Concurrentielle 2025)
 
@@ -801,6 +1006,8 @@ Ce module couvre la configuration globale, la sécurité, les règles métier et
 - GES-503 : Sondages de rétroaction des employés
 
 ### MODULE 4 : BIEN-ÊTRE INTELLIGENCE ARTIFICIELLE
+
+#### 4.7 Bien-être avec IA et Analyse Passive (BET-001 à BET-019, BET-101 à BET-112)
 - BET-010 : Surveillance continue du bien-être par analyses passives plutôt que sondages annuels uniquement
 - BET-011 : Analyse des habitudes de travail pour détecter heures excessives et pauses manquées
 - BET-012 : Suivi de l'intensité de la charge de travail avec alertes en cas de surcharge prolongée
@@ -808,10 +1015,66 @@ Ce module couvre la configuration globale, la sécurité, les règles métier et
 - BET-108 : Analyse des données provenant de multiples sources de communication (courriels, messagerie interne, outils externes)
 - BET-109 : Intégration avec plateformes d'analyse du bien-être Microsoft Viva Insights ou Workday People Analytics
 
-**Sources documentées** : Agendrix, Deputy, Homebase, Evolia, Workday, Shiftboard, StaffReady, Microsoft Viva Insights, Workday People Analytics (2025)
+#### 4.7.1 Programmes Santé Physique et Mentale (BET-020 à BET-025) - NOUVEAU
+- BET-020 : Programmes exercice physique guidés (yoga, étirements bureau) réduire TMS personnel soignant
+- BET-021 : Intégration wearables (Fitbit, Apple Watch, Garmin) suivi activité, fréquence cardiaque, sommeil
+- BET-022 : Programmes santé mentale structurés (méditation, gestion stress, techniques respiration) sessions 5-15min
+- BET-023 : Coaching santé personnalisé virtuel avec objectifs mesurables (IMC, sommeil, anxiété)
+- BET-024 : Objectifs santé personnalisables (perte poids, arrêt tabac, activité quotidienne) avec rappels adaptatifs
+- BET-025 : Tableau de bord santé holistique consolidant activité, nutrition, sommeil, stress avec score global
+
+#### 4.7.2 Prévention et Intervention (BET-026 à BET-032) - NOUVEAU
+- BET-026 : Hotline PAE 24/7 bouton urgence psychologique transfert professionnels certifiés
+- BET-027 : Répertoire ressources santé mentale géolocalisées (psychologues, CLSC, organismes Québec) temps réel
+- BET-028 : Plans action bien-être personnalisés automatiques selon évaluations avec recommandations priorisées
+- BET-029 : Programme retour travail progressif post-absence maladie longue avec suivi médical et ajustements
+- BET-030 : Suivi accommodements santé avec alertes expiration certificats et renouvellements automatiques
+- BET-031 : Détection employés haut risque burnout via analyse prédictive multicritères déclenchant intervention
+- BET-032 : Séances thérapie en ligne confidentielles subventionnées (3-8/an) plateforme HIPAA/Loi 25 conforme
+
+#### 4.7.3 Équilibre Travail-Vie et Flexibilité (BET-033 à BET-038) - NOUVEAU
+- BET-033 : Calcul charge travail hebdomadaire avec seuils alertes configurables (45h, 50h, 60h) escalade gestionnaire
+- BET-034 : Détection déséquilibre travail-vie via patterns récurrents (heures excessives 3+ semaines, pauses manquées)
+- BET-035 : Suggestions ajustements horaires intelligents avec simulations impact charge équipe
+- BET-036 : Jours santé mentale (mental health days) dédiés quota annuel 2-5 jours sans justification médicale
+- BET-037 : Flexibilité horaires rendez-vous médicaux créneaux 2-4h sans pénalité intégration calendriers
+- BET-038 : Indice équilibre travail-vie via sondages + métriques quantitatives avec benchmarks secteur santé
+
+#### 4.7.4 Culture Organisationnelle et Engagement (BET-039 à BET-043) - NOUVEAU
+- BET-039 : Indice climat organisationnel via sondages engagement (eNPS, satisfaction) segmentation département
+- BET-040 : Sondages anonymes culture et valeurs avec échelles Likert et analyses NLP feedback qualitatif
+- BET-041 : Rétroaction 360 degrés bien-être (auto, pairs, superviseur, subordonnés) rapports développement
+- BET-042 : Groupes soutien par pairs thématiques (parents, aidants, deuil) forums modérés confidentiels
+- BET-043 : Jumelage automatique nouveaux employés avec mentors bien-être selon profils compatibles
+
+#### 4.7.5 Gamification et Récompenses Bien-être (BET-044 à BET-049) - NOUVEAU
+- BET-044 : Points bien-être automatiques activités santé (exercices, méditation, sondages) avec accumulation
+- BET-045 : Classements équipes défis santé avec anonymisation optionnelle et règles anti-tricherie
+- BET-046 : Badges virtuels accomplissements bien-être (séries, jalons) affichage profil public
+- BET-047 : Défis inter-départements (marche, hydratation, sommeil) objectifs équipe et prix symboliques
+- BET-048 : Échange points contre récompenses tangibles (cartes-cadeaux, congés, stationnement) catalogue administrable
+- BET-049 : Événements bien-être virtuels synchrones (yoga groupe, méditation) inscriptions et enregistrements
+
+#### 4.7.6 Analytics et ROI Bien-être (BET-050 à BET-055) - NOUVEAU
+- BET-050 : ROI initiatives bien-être via corrélations participation programmes et KPI business (absentéisme, roulement)
+- BET-051 : Corrélations bien-être avec performance individuelle et rétention avec modèles prédictifs
+- BET-052 : Prédiction impact initiatives futures via simulations scénarios avec modèles économétriques
+- BET-053 : Rapports conformité normes santé (Agrément Canada, Entreprise en Santé) indicateurs standardisés
+- BET-054 : Analyses coût-bénéfice programmes (coût vs économies absentéisme/roulement) projections 1-3-5 ans
+- BET-055 : Tableau de bord exécutif consolidé métriques stratégiques (eNPS, absentéisme, ROI) comparaisons trimestrielles
+
+#### 4.7.7 Accessibilité et Inclusion (BET-056 à BET-061) - NOUVEAU
+- BET-056 : Support multilingue complet (français, anglais, espagnol, arabe, créole) adaptation culturelle santé mentale
+- BET-057 : Conformité WCAG 2.1 AA complète (navigation clavier, lecteurs écran, contraste) audits automatisés
+- BET-058 : Mode contraste élevé et grossissement texte 100-200% déficience visuelle persistance préférences
+- BET-059 : Interface simplifiée mode senior navigation réduite boutons larges employés 50+ moins techno
+- BET-060 : Accommodements religieux santé (jeûne Ramadan, Carême) ajustements horaires confidentialité croyances
+- BET-061 : Adaptation contenus sensibilité culturelle (méditation laïque, alimentation halal/casher/végétarienne)
+
+**Sources documentées** : Agendrix, Deputy, Homebase, Evolia, Workday, Shiftboard, StaffReady, Microsoft Viva Insights, Workday People Analytics, Virgin Pulse, Wellable, Limeade, Culture Amp, Officevibe, BetterHelp, Talkspace, Chronus, Agrément Canada, Entreprise en Santé Québec, LSST Québec (2025)
 
 ---
 
 **Fin du sondage - Version 4 modules - Prêt pour sélection MVP**
 
-Total requis identifi�s : 365
+Total requis identifiés : 560 (incluant 145 requis bien-être BET-001 à BET-174, dont 74 nouveaux depuis archives OrIA V1/V2/V3/V4 et concurrence 2025)
