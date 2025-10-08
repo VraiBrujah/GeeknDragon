@@ -219,7 +219,8 @@ class SurveyViewer {
    */
   async loadSurveyContent(survey) {
     try {
-      this.showLoading();
+      // NE PAS afficher overlay - rend le rendu LENT
+      // this.showLoading(); ← SUPPRIMÉ
 
       const response = await fetch(`api.php?action=survey&name=${encodeURIComponent(survey.name)}`);
       const data = await response.json();
@@ -995,8 +996,10 @@ class SurveyViewer {
   async selectUser(username) {
     if (!this.currentSurvey) return;
 
-    // Afficher indicateur de chargement
-    this.showLoadingOverlay('Chargement de l\'utilisateur...');
+    // NE PAS afficher overlay - bloque UI inutilement
+    // this.showLoadingOverlay('Chargement de l\'utilisateur...'); ← SUPPRIMÉ
+
+    const startTime = performance.now();
 
     try {
       const response = await fetch(`api.php?action=user-data&survey=${encodeURIComponent(this.currentSurvey.name)}&user=${encodeURIComponent(username)}`);
@@ -1041,17 +1044,11 @@ class SurveyViewer {
       // Fermer le modal
       this.closeSelectUserModal();
 
-      // Masquer le chargement
-      this.hideLoadingOverlay();
-
-      console.log(`✓ Utilisateur "${username}" sélectionné - ${Object.keys(this.responses).length} requis chargés`);
+      const totalTime = (performance.now() - startTime).toFixed(0);
+      console.log(`⚡ Utilisateur "${username}" sélectionné en ${totalTime}ms - ${Object.keys(this.responses).length} requis chargés`);
 
     } catch (error) {
       console.error('Erreur sélection utilisateur:', error);
-
-      // Masquer le chargement
-      this.hideLoadingOverlay();
-
       alert('❌ Erreur : ' + error.message);
     }
   }
