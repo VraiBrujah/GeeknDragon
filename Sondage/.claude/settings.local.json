@@ -5,7 +5,20 @@
       "Bash(mkdir:*)",
       "Bash(mv:*)",
       "Read(//i/Backup/GitHub-C/backup/OrIAV1 - Copie/**)",
-      "Read(//i/Backup/GitHub-E/OrIAV4/**)"
+      "Read(//i/Backup/GitHub-E/OrIAV4/**)",
+      "Read(//i/Backup/GitHub-C/backup/Oriav2/**)",
+      "Read(//i/Backup/GitHub-C/backup/OrIAV1/**)",
+      "Read(//i/Backup/GitHub-C/oria-v3/**)",
+      "Read(//i/Backup/GitHub-C/OrIA1.0/**)",
+      "Read(//i/Backup/GitHub-C/oria-v2/**)",
+      "Read(//i/Backup/GitHub-E/OriaOld/**)",
+      "Read(//i/Backup/GitHub-E/oria-v2/**)",
+      "Read(//i/Backup/GitHub-E/OrIAV3/**)",
+      "WebSearch",
+      "WebFetch(domain:www.shiftboard.com)",
+      "WebFetch(domain:www.schedule360.us)",
+      "WebFetch(domain:www.qgenda.com)",
+      "WebFetch(domain:www.zoho.com)"
     ],
     "deny": [],
     "ask": []

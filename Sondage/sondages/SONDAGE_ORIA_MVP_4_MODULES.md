@@ -204,6 +204,61 @@ Ce module gère toutes les interactions : demandes (congés, échanges), message
 | COM-920 | Facturer le patient directement pour services non couverts par RAMQ avec génération reçus officiels | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 40-60h | OrIAV1 TASK-007.5 - Facturation privée |
 | COM-921 | Créer dashboard statistiques téléconsultations avec revenus, volumes, durée moyenne et taux satisfaction | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 40-60h | OrIAV1 TASK-007.5 - Analytics télémédecine |
 
+### 1.11 Système d'accueil et intégration PAB
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| COM-1001 | Créer programme d'accueil structuré pour nouveaux préposés aux bénéficiaires avec parcours personnalisé selon expérience | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 40-60h | Cadre référence MSSS 2019 - Intégration PAB |
+| COM-1002 | Gérer mentorat et jumelage nouveaux employés avec suivi progression et évaluation mentor-mentoré bidirectionnelle | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 40-60h | Programme soutien nouveaux PAB - CHSLD |
+| COM-1003 | Automatiser checklist d'intégration avec tâches assignées par rôle et rappels automatiques des échéances | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 5 | 16-24h | Automatisation processus accueil |
+| COM-1004 | Créer portail d'apprentissage intégré avec modules de formation obligatoires et suivi de complétion | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 8 | 60-80h | Formation continue PAB - modules certifiants |
+| COM-1005 | Générer rapports de rétention et analyse des causes de départ des PAB avec recommandations automatisées | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 40-60h | Pérennisation 10000 PAB - Analytique rétention |
+
+### 1.12 Contrôles de bien-être avant prise de poste
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| COM-1101 | Implémenter questionnaire de santé pré-quart avec détection symptômes et blocage automatique si risque identifié | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 5 | 16-24h | Deputy - Contrôle sanitaire COVID/grippes |
+| COM-1102 | Créer système d'auto-évaluation fatigue et charge mentale avec alertes gestionnaire si seuils dépassés | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 40-60h | Prévention épuisement professionnel |
+| COM-1103 | Suivre indicateurs bien-être par équipe avec tableau de bord temps réel et tendances historiques | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | Analytics bien-être collectif |
+| COM-1104 | Générer alertes automatiques pour pauses manquées avec rappels progressifs et escalade si récurrence | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 5 | 16-24h | Deputy - Gestion pauses obligatoires |
+| COM-1105 | Créer programme de soutien par les pairs avec matching automatique selon profils et disponibilités | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 8 | 60-80h | Entraide employés - Santé mentale |
+
+### 1.13 Coaching et développement professionnel
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| COM-1201 | Implémenter système de coaching personnalisé avec assignation coach, objectifs et suivi progression | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 40-60h | Simundia - Coaching continu employés |
+| COM-1202 | Créer plans de développement individualisés avec compétences cibles et parcours formation recommandés | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | Gestion carrières - Plans individualisés |
+| COM-1203 | Gérer demandes de formation en self-service avec workflow approbation et suivi budgétaire intégré | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 5 | 16-24h | SIRH moderne - Self-service formation |
+| COM-1204 | Suivre certifications professionnelles avec alertes expiration et rappels renouvellement automatiques | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 5 | 16-24h | Conformité certifications obligatoires |
+| COM-1205 | Créer bibliothèque de micro-apprentissages avec capsules vidéo courtes accessibles sur mobile | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 40-60h | Formation continue - Micro-learning mobile |
+
+### 1.14 Gestion des formations obligatoires par poste
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| COM-1301 | Définir matrice des formations obligatoires par poste avec prérequis, récurrence et validité temporelle | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 40-60h | CRITIQUE - Conformité réglementaire CNESST/MSSS |
+| COM-1302 | Générer rappels automatiques progressifs avant expiration certification (90j, 60j, 30j, 7j, expirée) avec escalade hiérarchique | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 5 | 16-24h | Prévention non-conformités - Multi-canal (email, SMS, app) |
+| COM-1303 | Bloquer automatiquement assignation quart si formation obligatoire expirée avec notification gestionnaire immédiate | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 40-60h | Sécurité patient - Blocage préventif automatique |
+| COM-1304 | Créer workflow validation gestionnaire post-formation avec téléversement attestation, validation RH et mise à jour dossier employé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 7 | 40-60h | Processus complet validation multi-niveaux |
+| COM-1305 | Gérer renouvellements périodiques formations avec calcul automatique prochaine échéance selon règles métier (annuel, biennal, triennal) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 5 | 16-24h | Gestion cycles formation (RCR annuel, PDSB 3 ans, etc.) |
+| COM-1306 | Générer rapport conformité formations par unité/département avec taux couverture et employés non conformes | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 5 | 16-24h | Dashboard conformité temps réel - Audit CNESST |
+| COM-1307 | Implémenter validation conditionnelle permettant affectation temporaire avec engagement formation dans délai défini | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | Flexibilité opérationnelle avec traçabilité engagements |
+| COM-1308 | Créer parcours de formation automatisé par poste avec prérequis, ordre séquentiel et validation progressive des compétences | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 8 | 60-80h | Parcours certifiant complet - Montée en compétences structurée |
+| COM-1309 | Intégrer avec systèmes externes de formation (Moodle, LMS) pour synchronisation automatique des complétions et résultats | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 8 | 60-80h | API LMS - Import automatique attestations |
+| COM-1310 | Gérer équivalences et reconnaissances acquis avec workflow validation RH pour formations externes ou expérience antérieure | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 40-60h | RAC - Reconnaissance acquis et compétences |
+
+### 1.15 Notifications et alertes de non-conformité formation
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| COM-1401 | Envoyer notifications push mobile pour rappels formation avec lien direct inscription et calendrier disponibilités | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 5 | 16-24h | Facilitation inscription - Réduction no-shows |
+| COM-1402 | Créer tableau de bord gestionnaire formations à risque avec employés bientôt non-conformes et impact opérationnel | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 7 | 40-60h | Prévention ruptures service - Vue 30-60-90 jours |
+| COM-1403 | Générer alertes automatiques direction/RH si taux conformité formation descend sous seuils critiques par unité | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 5 | 16-24h | Gestion risques organisationnels - Seuils paramétrables |
+| COM-1404 | Implémenter escalade automatique si formation critique non complétée après échéance (employé→superviseur→gestionnaire→RH) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 7 | 40-60h | Chain of command - Responsabilisation progressive |
+| COM-1405 | Créer rapport mensuel automatique conformité formations pour comité de direction avec tendances et recommandations | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 5 | 16-24h | Gouvernance formation - KPIs stratégiques |
+
 ---
 
 ## MODULE 2 : GESTION DES HORAIRES
@@ -253,6 +308,8 @@ Ce module couvre la planification, assignation, visualisation et gestion complè
 | HOR-205 | Enregistrer horodatages de toutes les actions sur les quarts pour assurer équité et traçabilité complète des opérations | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h | |
 | HOR-206 | Publier des quarts en temps supplémentaire avec majoration salariale configurée selon politique organisationnelle | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h | |
 | HOR-207 | Gérer une liste d'attente pour quarts populaires avec ordre d'attribution équitable basé sur ancienneté et historique | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h | |
+| HOR-208 | Diffuser quarts urgents non comblés par notification massive (email, SMS, app) à tous employés qualifiés disponibles avec réponse en un clic | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 7 | 40-60h | Schedule360 Hot Shift - CRITIQUE couverture urgences CHSLD |
+| HOR-209 | Confirmer automatiquement premier employé acceptant quart urgent et annuler notifications pour autres candidats instantanément | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 7 | 40-60h | Schedule360 - Workflow temps réel pour urgences staffing |
 
 ### 2.4 Disponibilités et Préférences
 
@@ -264,6 +321,13 @@ Ce module couvre la planification, assignation, visualisation et gestion complè
 | HOR-304 | Alerte assignation hors disponibilité | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | |
 | HOR-305 | Gérer les indisponibilités récurrentes (cours universitaires, engagements personnels) avec répétition automatique | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 5 | 8-16h | |
 | HOR-306 | Définir des préférences de collègues préférés pour travail d'équipe et cohésion optimale | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 5 | 8-16h | |
+| HOR-307 | Indiquer préférence volontariat heures supplémentaires (wants_overtime) pour priorisation lors publication quarts bonus | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 3 | 4-8h | OrIAV1 - Filtrage candidats volontaires temps supplémentaire |
+| HOR-308 | Personnaliser mode compensation heures supplémentaires par employé (temps double, congé compensatoire, autre) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 5 | 8-16h | OrIAV1 overtime_compensation_override - Flexibilité conventions individuelles |
+| HOR-309 | Suivre automatiquement historique lieux travail habituels et collègues réguliers pour améliorer stabilité assignations | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h | OrIAV1 lieux_historique_travail + collegues_habituels - Input IA stabilité |
+| HOR-310 | Appliquer règles de stabilité IA (location_stability, coworker_stability) pour pénaliser assignations hors contexte habituel | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 9 | 80-120h | OrIAV1 moteur règles - Favorise horaires stables et équipes connues |
+| HOR-311 | Définir cibles de travail hebdomadaires ou mensuelles par employé selon contrat avec suivi automatique conformité écarts | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 40-60h | Schedule360 Work Targets - Assure respect heures contractuelles |
+| HOR-312 | Afficher rapport codé couleurs conformité cibles travail avec variance positive/négative pour chaque employé temps réel | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 5 | 16-24h | Schedule360 - Dashboard visuel gestion proactive écarts |
+| HOR-313 | Alerter gestionnaire automatiquement si employé atteint moins de 90% ou plus de 110% de sa cible travail hebdomadaire | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 40-60h | Schedule360 - Détection précoce sous/sur-utilisation personnel |
 
 ### 2.5 Visualisation Calendrier
 
@@ -285,6 +349,8 @@ Ce module couvre la planification, assignation, visualisation et gestion complè
 | HOR-504 | Détecter employé non qualifié (compétences) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h | |
 | HOR-505 | Alerter automatiquement lorsqu'un employé approche ou dépasse le seuil d'heures supplémentaires excessives défini | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | |
 | HOR-506 | Contrôler et valider le ratio minimal de personnel par quart selon le type de poste (exemple: minimum 2 infirmiers par quart de nuit) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h | |
+| HOR-507 | Alerter gestionnaires automatiquement par email et SMS lors détection lacunes couverture horaire avec impact opérationnel critique | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 40-60h | QGenda Coverage Gaps - CRITIQUE prévention ruptures service CHSLD |
+| HOR-508 | Visualiser en temps réel vue globale lacunes couverture par unité et département avec indicateur gravité urgence | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 7 | 40-60h | Shiftboard Real-time Gaps - Dashboard opérationnel centralisé |
 
 ### 2.7 Exportation Horaires
 
@@ -328,6 +394,19 @@ Ce module couvre la planification, assignation, visualisation et gestion complè
 | HOR-907 | Appliquer automatiquement les taux majorés selon niveau de dépassement (1.5x premier seuil, 2x seuils supérieurs, jours fériés) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h | Conformité LNT - Calculs critiques paie - OrIAV4 TPS-002 |
 | HOR-908 | Calculer les heures supplémentaires basées sur les pointages réels plutôt que sur les horaires planifiés avec écarts documentés | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h | Justesse paie - Évite litiges employeur/employé |
 | HOR-909 | Permettre la configuration du seuil maximum d'heures supplémentaires hebdomadaires (50h standard) avec alertes de conformité | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 5 | 8-16h | Prévention surcharge travail - Santé sécurité |
+| HOR-910 | Optimiser automatiquement assignation quarts pour minimiser coût salarial total en priorisant employés au taux horaire le plus bas qualifiés | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 9 | 80-120h | Shiftboard - Réduction coûts main-oeuvre avec respect compétences |
+
+### 2.11 Gestion des Gardes et Astreintes (On-Call)
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| HOR-1001 | Créer calendrier de gardes (on-call) avec rotation équitable entre employés qualifiés selon règles configurables | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 8 | 60-80h | QGenda - CRITIQUE CHSLD pour gardes médicales et infirmières |
+| HOR-1002 | Distribuer automatiquement les gardes de nuit et fins de semaine de manière équitable avec suivi historique par employé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 40-60h | QGenda - Équité distribution charges on-call |
+| HOR-1003 | Permettre échanges de gardes entre employés avec approbation gestionnaire et vérification qualifications requises | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | QGenda - Flexibilité employés avec traçabilité complète |
+| HOR-1004 | Alerter automatiquement par email et SMS les employés de garde avec lacunes de couverture nécessitant intervention immédiate | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 7 | 40-60h | QGenda - Notification multi-canal pour urgences médicales |
+| HOR-1005 | Visualiser en temps réel l'annuaire complet des employés de garde avec contact direct (téléphone, SMS, app) par spécialité | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 5 | 16-24h | QGenda - Accès rapide professionnels de garde en urgence |
+| HOR-1006 | Appliquer compensation financière automatique pour heures de garde selon conventions collectives avec taux différenciés | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 40-60h | Calcul paie gardes - Conformité conventions santé Québec |
+| HOR-1007 | Générer rapport conformité EMTALA avec couverture médicale par spécialité et alertes lacunes réglementaires critiques | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | QGenda - Conformité loi urgences médicales (adapté Québec MSSS) |
 
 ---
 
@@ -344,7 +423,7 @@ Ce module regroupe la gestion du personnel, des lieux, équipes, tâches et pati
 | GES-003 | Modifier profil employé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 5 | 8-16h | |
 | GES-004 | Désactiver/archiver employé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 5 | 8-16h | |
 | GES-005 | Importer employés en masse (CSV) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h | |
-| GES-005b | Exporter liste employés en masse (CSV/Excel) avec filtres personnalisables pour rapports et analyses externes | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 5 | 8-16h | Complémentaire à GES-005 pour import/export bidirectionnel |
+| GES-023 | Exporter liste employés en masse (CSV/Excel) avec filtres personnalisables pour rapports et analyses externes | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 5 | 8-16h | Complémentaire à GES-005 pour import/export bidirectionnel |
 | GES-006 | Gérer les compétences et certifications des employés avec dates d'obtention et d'expiration | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | |
 | GES-007 | Suivre la formation obligatoire et envoyer des rappels automatiques avant expiration des certifications | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | |
 | GES-008 | Gérer le processus d'intégration des nouveaux employés avec liste de vérification et tâches automatisées | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | |
@@ -362,6 +441,7 @@ Ce module regroupe la gestion du personnel, des lieux, équipes, tâches et pati
 | GES-020 | Générer automatiquement un organigramme visuel interactif reflétant la structure hiérarchique réelle de l'organisation | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h | Visualisation structure - Onboarding nouveaux employés |
 | GES-021 | Créer une matrice croisant compétences certifiées vs postes disponibles pour identifier lacunes et opportunités de formation | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 24-40h | Planification stratégique RH - OrIAV3 REQ-EMP-005 |
 | GES-022 | Générer automatiquement un planning de formation basé sur les dates d'expiration imminentes des certifications obligatoires | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 9 | 80-120h | Conformité certifications médicales - Prévention expirations |
+| GES-024 | Enregistrer le volontariat de chaque employé pour heures supplémentaires avec préférences jours/quarts spécifiques pour optimisation planification | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 5 | 8-16h | Oriav2 EMP-012 - Facilite couverture besoins urgents IA |
 
 ### 3.2 Gestion Lieux
 
@@ -479,6 +559,14 @@ Ce module regroupe la gestion du personnel, des lieux, équipes, tâches et pati
 | GES-802 | Inscrire les employés aux sessions de formation avec suivi des présences, résultats et certifications obtenues | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 24-40h | Traçabilité complète parcours formation |
 | GES-803 | Budgétiser les dépenses de formation par département avec suivi consommation vs budget alloué et alertes dépassement | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h | Contrôle budgétaire formation continue |
 | GES-804 | Mesurer l'efficacité des formations avec évaluations avant/après, sondages de satisfaction et impact sur performance | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 9 | 80-120h | ROI formation - Amélioration continue |
+| GES-805 | Signer électroniquement documents RH (contrats, certifications, évaluations) avec validité légale et archivage sécurisé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 9 | 80-120h | OrIA1.0 - Dématérialisation complète processus RH |
+| GES-806 | Créer notes personnelles privées liées aux patients, collègues ou lieux pour mémorisation contexte relationnel | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 5 | 8-16h | OrIA1.0 - Amélioration continuité soins et relations |
+| GES-807 | Scorer compatibilité employé/collègue ou employé/patient pour optimiser assignations et satisfaction travail | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h | OrIA1.0 - ML scoring préférences relationnelles |
+| GES-808 | Mesurer eNPS (Employee Net Promoter Score) avec sondage unique question probabilité recommandation employeur échelle 0-10 | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 5 | 16-24h | Zoho People - Métrique critique satisfaction globale employés |
+| GES-809 | Calculer score eNPS automatiquement avec catégorisation promoteurs (9-10), passifs (7-8), détracteurs (0-6) et tendance temporelle | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 5 | 16-24h | Zoho People - Formule eNPS = % promoteurs - % détracteurs |
+| GES-810 | Intégrer reconnaissance faciale avec détection anti-usurpation (spoof detection) pour pointage mobile sécurisé sans fraude | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 9 | 120-160h | Zoho People - Prévention buddy punching et fraude identité |
+| GES-811 | Créer portail self-service employé regroupant toutes fonctions autonomes : congés, horaires, documents, paie, formation, profil | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 40-60h | Zoho People - Hub central autonomie employé réduit charge RH |
+| GES-812 | Générer automatiquement organigrammes interactifs avec drill-down hiérarchique, photos, contacts directs et affectations multiples | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 7 | 40-60h | Zoho People - Visualisation structure organisationnelle complète |
 
 ---
 
@@ -497,6 +585,7 @@ Ce module couvre la configuration globale, la sécurité, les règles métier et
 | ADM-005 | Configurer les fuseaux horaires multiples pour organisations opérant dans différentes régions géographiques | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h | |
 | ADM-006 | Gérer les langues disponibles dans l'interface (français, anglais, multilingue) avec traductions complètes | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h | |
 | ADM-007 | Personnaliser les étiquettes et terminologie selon secteur d'activité (santé, commerce, industrie, etc.) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 5 | 8-16h | |
+| ADM-008 | Personnaliser interface utilisateur avec widgets modulaires repositionnables drag-and-drop selon rôle et préférences | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h | OrIA1.0 - Dashboard adaptatif personnalisable par utilisateur |
 
 ### 4.2 Types et Référentiels
 
@@ -516,12 +605,12 @@ Ce module couvre la configuration globale, la sécurité, les règles métier et
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
 | ADM-201 | Gérer comptes utilisateurs | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 5 | 8-16h | |
 | ADM-202 | Attribuer rôles (Admin/Gestionnaire/etc) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 5 | 8-16h | |
-| ADM-203 | Activer MFA (authentification 2 facteurs) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h | |
+| ADM-203 | Activer authentification multi-facteurs optionnelle (2FA) avec support TOTP apps, SMS et Email vérifiés par utilisateur | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h | Oriav2 AUTH-005 - Sécurité renforcée accès sensibles |
 | ADM-204 | Politique mot de passe (complexité, expiration) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 5 | 8-16h | |
 | ADM-205 | Journal audit complet (logs) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | |
 | ADM-206 | Gérer les sessions actives de tous utilisateurs et forcer déconnexion à distance en cas de compromission | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h | |
 | ADM-207 | Configurer les restrictions d'accès par plage d'adresses IP ou géolocalisation pour sécurité renforcée | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h | |
-| ADM-208 | Consulter l'historique complet des connexions avec détection automatique d'activités suspectes et alertes | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h | |
+| ADM-208 | Consulter historique complet connexions avec détection automatique activités suspectes par machine learning (anomalies IP, horaires, fréquence) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 9 | 80-120h | Oriav2 SEC-003 - Détection comportements anormaux ML |
 
 ### 4.4 Règles Métier (Moteur)
 
@@ -572,7 +661,24 @@ Ce module couvre la configuration globale, la sécurité, les règles métier et
 | ADM-431 | Exporter données comptables vers formats standards (CSV, OFX, QuickBooks, Sage) pour intégration logiciels externes | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 40-60h | OrIAV1 TASK-009.4 - Interopérabilité comptable |
 | ADM-432 | Maintenir audit trail complet de toutes transactions financières avec traçabilité utilisateur et horodatage | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 40-60h | OrIAV1 TASK-009.4 - CRITIQUE - Auditabilité complète |
 
-### 4.6 Bien-être avec IA
+### 4.6 Intelligence Artificielle Prédictive (100% Local)
+
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| ADM-606 | Analyser 15+ facteurs de risque de départ employé (satisfaction, performance, absences, charge travail) par modèle IA local | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 10 | 160-240h | Oriav2 AI-001 - Prédiction turnover XGBoost local |
+| ADM-607 | Calculer score de risque de départ 0-100% pour chaque employé avec explications transparentes des facteurs contributifs | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 10 | 160-240h | Oriav2 AI-002 - Explainability SHAP values |
+| ADM-608 | Générer automatiquement des recommandations d'actions préventives personnalisées pour rétention employés à risque | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 9 | 120-160h | Oriav2 AI-003 - Recommandations actionnables |
+| ADM-609 | Mettre à jour modèle IA de turnover en continu avec nouvelles données sans intervention manuelle (apprentissage incrémental) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 9 | 120-160h | Oriav2 AI-004 - ML ops automatisé |
+| ADM-610 | Prévoir besoins en personnel futurs par département avec analyse tendances historiques et saisonnalité sur 12 mois | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 9 | 120-160h | Oriav2 AI-013 - Prédiction demande staffing |
+| ADM-611 | Optimiser budgets RH annuels avec recommandations d'embauches basées sur prévisions de charge de travail validées | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 9 | 120-160h | Oriav2 AI-014 - Planification budgétaire stratégique |
+| ADM-612 | Alerter gestionnaires automatiquement en cas de sureffectif ou sous-effectif prévu avec impact financier calculé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 40-60h | Oriav2 AI-015 - Alertes proactives staffing |
+| ADM-613 | Planifier embauches stratégiques sur 12 mois avec recommandations de profils, timing optimal et coûts anticipés | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 9 | 120-160h | Oriav2 AI-016 - Planification recrutement stratégique |
+| ADM-614 | Installateur autonome multilingue (FR/EN) pour modèles ML avec détection GPU automatique et prompts interactifs | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 7 | 40-60h | OrIAV1 install_models.sh/.ps1 - Déploiement simplifié IA |
+| ADM-615 | Fusionner automatiquement fragments safetensors multi-fichiers modèles ML (Llama, SDXL) lors installation | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 7 | 40-60h | OrIAV1 - Gestion grands modèles fragmentés automatisée |
+| ADM-616 | Générer images personnalisées avec modèle Stable Diffusion XL (SDXL) local pour visualisations et badges employés | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 1 | 10 | 160-240h | OrIAV1 SDXL - R&D expérimental, post-MVP |
+| ADM-617 | Créer portraits photo-réalistes employés avec InstantID et AntelopeV2 pour génération badges automatique | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 1 | 10 | 160-240h | OrIAV1 InstantID+SDXL - R&D très expérimental, TRÈS post-MVP |
+
+### 4.7 Bien-être avec IA
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -589,6 +695,12 @@ Ce module couvre la configuration globale, la sécurité, les règles métier et
 | BET-011 | Analyser les habitudes de travail pour détecter heures excessives, pauses manquées et comportements à risque d'épuisement | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 9 | 80-120h | |
 | BET-012 | Suivre l'intensité de la charge de travail de chaque employé avec alertes en cas de surcharge prolongée | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 9 | 80-120h | |
 | BET-013 | Proposer automatiquement des interventions personnalisées comme ajustement de charge de travail ou rappels de pause | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 9 | 80-120h | |
+| BET-014 | Créer sondages pulse ultra-courts (2-3 questions) distribuables quotidiennement ou hebdomadairement avec taux réponse optimisé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 5 | 16-24h | Culture Amp / Officevibe - Mesure engagement temps quasi-réel |
+| BET-015 | Afficher baromètre moral quotidien employé avec historique tendances 30/60/90 jours et alertes changements brusques | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 40-60h | Officevibe Mood Tracking - Détection précoce détérioration bien-être |
+| BET-016 | Envoyer cartes reconnaissance numériques personnalisables entre collègues avec collections thématiques alignées valeurs organisation | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 5 | 16-24h | Officevibe Good Vibes - Renforcement culture reconnaissance |
+| BET-017 | Afficher mur reconnaissance publique affichant célébrations équipe avec filtres par département et période temporelle | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 5 | 16-24h | Officevibe - Visibilité publique reconnaissances augmente impact |
+| BET-018 | Générer insights automatiques IA à partir sondages pulse avec thèmes récurrents, sentiment global et recommandations actions | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 9 | 120-160h | Culture Amp AI Insights - Analyse NLP feedback qualitatif |
+| BET-019 | Comparer métriques engagement avec benchmarks industrie santé anonymisés pour évaluation position concurrentielle | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 40-60h | Culture Amp Benchmarks - Contexte comparatif santé Québec |
 
 ### 4.7 Analyse Passive (IA)
 
@@ -603,6 +715,9 @@ Ce module couvre la configuration globale, la sécurité, les règles métier et
 | BET-107 | Anonymiser complètement toutes les données sensibles conformément au RGPD européen et à la Loi 25 québécoise | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | |
 | BET-108 | Analyser les données de communication provenant de multiples sources (courriels, messagerie interne, outils externes) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 9 | 80-120h | |
 | BET-109 | Intégrer avec les plateformes d'analyse du bien-être Microsoft Viva Insights ou Workday People Analytics | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 9 | 80-120h | |
+| BET-110 | Déployer assistant RH IA local (Llama 3) pour répondre questions employés sans transmission données externes | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 10 | 160-240h | oria-v3 FEAT-019 - Chatbot RH 100% local avec apprentissage continu |
+| BET-111 | Fournir réponses contextuelles personnalisées selon profil employé avec liens vers ressources internes | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 9 | 80-120h | oria-v3 FEAT-019 - Personnalisation réponses assistant IA |
+| BET-112 | Améliorer continuellement modèle IA RH via feedback utilisateurs sans compromis confidentialité | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 9 | 80-120h | oria-v3 FEAT-019 - Apprentissage local continu |
 
 ### 4.8 Sauvegarde et Archivage
 
@@ -641,6 +756,11 @@ Ce module couvre la configuration globale, la sécurité, les règles métier et
 | PAY-011 | Générer automatiquement les feuillets T4 et T4A fédéraux en formats XML et PDF conformes aux spécifications de l'ARC | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h | CRITIQUE LÉGAL - OrIAV3 REQ-PAY-003 - Obligation annuelle |
 | PAY-012 | Générer automatiquement les Relevés 1 du Québec en format requis par Revenu Québec avec validation des données obligatoires | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h | CRITIQUE LÉGAL - Obligation annuelle Québec |
 | PAY-013 | Produire les déclarations mensuelles ou trimestrielles obligatoires (DAS, cotisations CNESST) avec preuves de transmission | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h | CRITIQUE - Conformité CNESST secteur santé |
+
+| PAY-014 | Clôturer une période de paie avec verrouillage des données (heures, primes) et journal d'audit; possibilité de réouverture contrôlée | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | Concurrents: pay period close/reopen |
+| PAY-015 | Verrouiller l'édition des heures approuvées après clôture; corrections via ajustements avec justification et double validation | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | Contrôle post-approbation |
+| PAY-016 | Rapprocher automatiquement paie et heures approuvées avec détection d'écarts, tolérances configurables et rapport d'anomalies | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | Concurrents: payroll reconciliation |
+| PAY-017 | Autoriser l'export paie uniquement pour les périodes verrouillées avec contrôles pré‑export (cohérence, doublons, champs obligatoires) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | Gatekeeping export |
 
 ### 4.11 Documents et Attestations
 
@@ -693,3 +813,5 @@ Ce module couvre la configuration globale, la sécurité, les règles métier et
 ---
 
 **Fin du sondage - Version 4 modules - Prêt pour sélection MVP**
+
+Total requis identifi�s : 365
