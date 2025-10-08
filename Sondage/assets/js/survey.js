@@ -1141,12 +1141,16 @@ class SurveyViewer {
       // Restaurer la position de scroll et focus sur dernier élément édité
       this.restoreScrollPosition(userData);
 
+      // Masquer overlay de restauration (F5)
+      this.hideUserRestorationLoading();
+
       const totalTime = (performance.now() - startTime).toFixed(0);
       console.log(`⚡ Utilisateur "${username}" sélectionné en ${totalTime}ms - ${Object.keys(this.responses).length} requis chargés`);
 
     } catch (error) {
       console.error('Erreur sélection utilisateur:', error);
       this.hideUserLoadingInModal();
+      this.hideUserRestorationLoading();
       alert('❌ Erreur : ' + error.message);
     }
   }
@@ -1330,6 +1334,10 @@ class SurveyViewer {
 
       if (survey) {
         await this.switchSurvey(survey.slug);
+
+        // Afficher animation de chargement pendant restauration utilisateur
+        this.showUserRestorationLoading(savedUser);
+
         try {
           await this.selectUser(savedUser);
         } catch (error) {
@@ -1376,6 +1384,58 @@ class SurveyViewer {
         </p>
       </div>
     `;
+  }
+
+  /**
+   * Affiche animation de chargement pendant restauration utilisateur (F5)
+   */
+  showUserRestorationLoading(username) {
+    // Créer overlay temporaire par-dessus le contenu existant
+    let overlay = document.getElementById('user-restoration-overlay');
+
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'user-restoration-overlay';
+      overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        animation: fadeIn 0.2s ease;
+      `;
+
+      overlay.innerHTML = `
+        <div style="background: var(--color-bg); border-radius: 1rem; padding: 2.5rem 3rem; box-shadow: 0 20px 60px rgba(0,0,0,0.3); text-align: center; max-width: 400px;">
+          <div style="display: inline-block; width: 56px; height: 56px; border: 4px solid #e5e7eb; border-top-color: var(--color-primary); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 1.5rem;"></div>
+          <h3 style="font-size: 1.25rem; color: var(--color-text); margin: 0 0 0.75rem 0; font-weight: 600;">
+            Restauration de la session
+          </h3>
+          <p style="font-size: 1rem; color: var(--color-text-light); margin: 0;">
+            Chargement de <strong style="color: var(--color-primary);">${username}</strong>...
+          </p>
+        </div>
+      `;
+
+      document.body.appendChild(overlay);
+    }
+  }
+
+  /**
+   * Masque animation de restauration utilisateur
+   */
+  hideUserRestorationLoading() {
+    const overlay = document.getElementById('user-restoration-overlay');
+    if (overlay) {
+      overlay.style.animation = 'fadeOut 0.2s ease';
+      setTimeout(() => overlay.remove(), 200);
+    }
   }
 
   /**
