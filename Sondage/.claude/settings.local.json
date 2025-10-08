@@ -19,7 +19,9 @@
       "WebFetch(domain:www.schedule360.us)",
       "WebFetch(domain:www.qgenda.com)",
       "WebFetch(domain:www.zoho.com)",
-      "Bash(cut:*)"
+      "Bash(cut:*)",
+      "Bash(python:*)",
+      "Bash(copy:*)"
     ],
     "deny": [],
     "ask": []
