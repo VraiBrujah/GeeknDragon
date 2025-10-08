@@ -1131,6 +1131,7 @@ class SurveyViewer {
     const checkboxes = this.contentContainer.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(cb => {
       cb.disabled = false;
+      cb.classList.remove('readonly');
       const label = cb.closest('label');
       if (label) {
         label.classList.remove('readonly');
@@ -1139,11 +1140,17 @@ class SurveyViewer {
 
     // Activer tous les champs priorité
     const priorityFields = this.contentContainer.querySelectorAll('input.priority-field');
-    priorityFields.forEach(field => field.disabled = false);
+    priorityFields.forEach(field => {
+      field.disabled = false;
+      field.classList.remove('readonly');
+    });
 
     // Activer tous les champs notes
     const notesFields = this.contentContainer.querySelectorAll('textarea.notes-field');
-    notesFields.forEach(field => field.disabled = false);
+    notesFields.forEach(field => {
+      field.disabled = false;
+      field.classList.remove('readonly');
+    });
 
     console.log(`✅ ${checkboxes.length + priorityFields.length + notesFields.length} champs activés`);
   }
