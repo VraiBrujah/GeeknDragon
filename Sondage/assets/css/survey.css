@@ -1773,6 +1773,15 @@ body {
   display: none;
 }
 
+.mvp-stats-panel.collapsed {
+  min-width: auto;
+  max-width: auto;
+}
+
+.mvp-stats-panel.collapsed .mvp-stats-header {
+  cursor: pointer;
+}
+
 .mvp-stats-panel.collapsed .icon-collapse {
   display: none;
 }

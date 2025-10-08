@@ -1969,10 +1969,10 @@ class SurveyViewer {
     let panel = document.getElementById('mvp-stats-panel');
 
     if (!panel) {
-      // Créer le panneau
+      // Créer le panneau (réduit par défaut)
       panel = document.createElement('div');
       panel.id = 'mvp-stats-panel';
-      panel.className = 'mvp-stats-panel';
+      panel.className = 'mvp-stats-panel collapsed';
       document.body.appendChild(panel);
     }
 
