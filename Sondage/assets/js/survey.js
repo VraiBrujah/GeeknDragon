@@ -708,22 +708,47 @@ class SurveyViewer {
   }
 
   /**
-   * Affiche indicateur auto-save temporaire
+   * Affiche indicateur auto-save temporaire (masqué par défaut)
    */
   showAutoSaveIndicator(message, isError = false) {
-    const indicator = document.createElement('div');
-    indicator.className = 'auto-save-indicator' + (isError ? ' error' : '');
-    indicator.textContent = message;
-    document.body.appendChild(indicator);
+    // Ne rien faire - indicateurs désactivés
+    return;
+  }
 
-    setTimeout(() => {
-      indicator.classList.add('visible');
-    }, 10);
+  /**
+   * Affiche overlay de chargement plein écran
+   */
+  showLoadingOverlay(message = 'Chargement...') {
+    // Créer overlay s'il n'existe pas
+    let overlay = document.getElementById('loadingOverlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'loadingOverlay';
+      overlay.className = 'loading-overlay';
+      overlay.innerHTML = `
+        <div class="loading-content">
+          <div class="loading-spinner"></div>
+          <p class="loading-message">${message}</p>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+    } else {
+      overlay.querySelector('.loading-message').textContent = message;
+    }
 
-    setTimeout(() => {
-      indicator.classList.remove('visible');
-      setTimeout(() => indicator.remove(), 300);
-    }, 2000);
+    // Afficher avec animation
+    setTimeout(() => overlay.classList.add('visible'), 10);
+  }
+
+  /**
+   * Masque overlay de chargement
+   */
+  hideLoadingOverlay() {
+    const overlay = document.getElementById('loadingOverlay');
+    if (overlay) {
+      overlay.classList.remove('visible');
+      setTimeout(() => overlay.remove(), 300);
+    }
   }
 
   /**
@@ -792,7 +817,14 @@ class SurveyViewer {
       const li = document.createElement('li');
       li.className = 'user-list-item';
 
-      const date = new Date(user.modified_at * 1000);
+      // Gérer les deux formats possibles: timestamp ou date ISO
+      let date;
+      if (typeof user.modified_at === 'number') {
+        date = new Date(user.modified_at * 1000);
+      } else {
+        date = new Date(user.modified_at);
+      }
+
       const dateStr = date.toLocaleString('fr-CA', {
         year: 'numeric',
         month: '2-digit',
@@ -862,6 +894,9 @@ class SurveyViewer {
   async selectUser(username) {
     if (!this.currentSurvey) return;
 
+    // Afficher indicateur de chargement
+    this.showLoadingOverlay('Chargement de l\'utilisateur...');
+
     try {
       const response = await fetch(`api.php?action=user-data&survey=${encodeURIComponent(this.currentSurvey.name)}&user=${encodeURIComponent(username)}`);
       const data = await response.json();
@@ -905,10 +940,17 @@ class SurveyViewer {
       // Fermer le modal
       this.closeSelectUserModal();
 
+      // Masquer le chargement
+      this.hideLoadingOverlay();
+
       alert(`✓ Utilisateur "${username}" sélectionné`);
 
     } catch (error) {
       console.error('Erreur sélection utilisateur:', error);
+
+      // Masquer le chargement
+      this.hideLoadingOverlay();
+
       alert('❌ Erreur : ' + error.message);
     }
   }

@@ -1581,6 +1581,72 @@ body {
   background: var(--color-danger);
 }
 
+/* === OVERLAY DE CHARGEMENT === */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  pointer-events: none;
+}
+
+.loading-overlay.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.loading-content {
+  background: white;
+  padding: 40px 60px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-xl);
+  text-align: center;
+  animation: slideIn 0.3s ease-out;
+}
+
+.loading-content .loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(139, 0, 0, 0.1);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+.loading-content .loading-message {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* === LAZY LOADING TABLES === */
 .lazy-table {
   opacity: 0.3;
