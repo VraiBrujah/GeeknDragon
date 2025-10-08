@@ -2035,12 +2035,8 @@ class SurveyViewer {
     const maxWeeks = (maxHours / 40).toFixed(1);
 
     panel.innerHTML = `
-      <div class="mvp-stats-header">
+      <div class="mvp-stats-header" onclick="document.getElementById('mvp-stats-panel').classList.toggle('collapsed')">
         <h3>📊 Statistiques MVP</h3>
-        <button class="mvp-stats-close" onclick="document.getElementById('mvp-stats-panel').classList.toggle('collapsed')">
-          <span class="icon-collapse">▼</span>
-          <span class="icon-expand">▲</span>
-        </button>
       </div>
       <div class="mvp-stats-content">
         <div class="mvp-stat-item">

@@ -946,6 +946,21 @@ body {
     left: var(--spacing-md);
   }
 
+  /* Mobile: panneau MVP à gauche pour éviter conflit avec bouton retour haut */
+  .mvp-stats-panel {
+    bottom: 80px;
+    right: var(--spacing-md);
+  }
+
+  .mvp-stats-panel.collapsed {
+    width: 48px;
+    height: 48px;
+  }
+
+  .mvp-stats-panel.collapsed .mvp-stats-header::before {
+    font-size: 1.5rem;
+  }
+
   .survey-content {
     padding: var(--spacing-md);
   }
@@ -1766,7 +1781,7 @@ body {
   border: 2px solid var(--color-primary);
   min-width: 320px;
   max-width: 400px;
-  z-index: 9999;
+  z-index: 100;
   opacity: 0;
   transform: translateY(20px);
   transition: all var(--transition-normal);
@@ -1779,25 +1794,50 @@ body {
   pointer-events: all;
 }
 
+/* Mode réduit: juste un petit carré avec emoji */
+.mvp-stats-panel.collapsed {
+  min-width: auto;
+  max-width: auto;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  border: 3px solid white;
+}
+
+.mvp-stats-panel.collapsed:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+}
+
 .mvp-stats-panel.collapsed .mvp-stats-content {
   display: none;
 }
 
-.mvp-stats-panel.collapsed {
-  min-width: auto;
-  max-width: auto;
-}
-
 .mvp-stats-panel.collapsed .mvp-stats-header {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
   cursor: pointer;
 }
 
-.mvp-stats-panel.collapsed .icon-collapse {
+.mvp-stats-panel.collapsed .mvp-stats-header h3 {
   display: none;
 }
 
-.mvp-stats-panel:not(.collapsed) .icon-expand {
+.mvp-stats-panel.collapsed .mvp-stats-close {
   display: none;
+}
+
+/* Emoji visible en mode collapsed */
+.mvp-stats-panel.collapsed .mvp-stats-header::before {
+  content: '📊';
+  font-size: 2rem;
+  display: block;
 }
 
 .mvp-stats-header {
