@@ -223,7 +223,19 @@ class SurveyViewer {
       // NE PAS afficher overlay - rend le rendu LENT
       // this.showLoading(); ← SUPPRIMÉ
 
-      const response = await fetch(`api.php?action=survey&name=${encodeURIComponent(survey.name)}`);
+      const fetchStart = performance.now();
+
+      // Utiliser cache navigateur (ETag + 304)
+      const response = await fetch(`api.php?action=survey&name=${encodeURIComponent(survey.name)}`, {
+        cache: 'default', // Utilise cache HTTP (ETag)
+        headers: {
+          'Cache-Control': 'max-age=3600' // 1h cache
+        }
+      });
+
+      const fetchTime = (performance.now() - fetchStart).toFixed(0);
+      console.log(`📡 Fetch sondage: ${fetchTime}ms (${response.status === 304 ? 'Cache HTTP' : response.status})`);
+
       const data = await response.json();
 
       if (!data.success) {
