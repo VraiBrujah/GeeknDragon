@@ -37,7 +37,9 @@
       "Bash(dir:*)",
       "Bash(del compare_requirements.py)",
       "Bash(awk:*)",
-      "Bash(tac:*)"
+      "Bash(tac:*)",
+      "Bash(del:*)",
+      "Bash(echo:*)"
     ],
     "deny": [],
     "ask": []
