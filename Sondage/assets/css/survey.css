@@ -861,7 +861,7 @@ body {
 .scroll-to-top {
   position: fixed;
   bottom: var(--spacing-xl);
-  left: var(--spacing-xl); /* Déplacé à gauche pour éviter conflit avec panneau MVP */
+  left: calc(280px + var(--spacing-xl)); /* Largeur sidebar (280px) + marge */
   width: 3rem;
   height: 3rem;
   background: var(--color-primary);
@@ -891,6 +891,11 @@ body {
 @media (max-width: 1024px) {
   .survey-sections-nav {
     width: 240px;
+  }
+
+  /* Ajuster bouton retour haut pour sidebar réduite */
+  .scroll-to-top {
+    left: calc(240px + var(--spacing-xl));
   }
 
   .requirements-table {
@@ -934,6 +939,11 @@ body {
     position: static;
     width: 100%;
     max-height: none;
+  }
+
+  /* Mobile: sidebar en haut, bouton retour à gauche normale */
+  .scroll-to-top {
+    left: var(--spacing-md);
   }
 
   .survey-content {
