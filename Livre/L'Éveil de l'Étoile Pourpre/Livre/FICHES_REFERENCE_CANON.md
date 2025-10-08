@@ -1,4 +1,22 @@
-# FICHES DE RÉFÉRENCE CANON - L’ÉVEIL DE L’ÉTOILE POURPRE
+# FICHES DE RÉFÉRENCE CANON - L'ÉVEIL DE L'ÉTOILE POURPRE
+
+## SYMBOLES DIALOGUES
+
+**Convention narrative** : Chaque personnage majeur possède un symbole précédant ses dialogues directs.
+
+- **❖** Morwen (antagoniste vampire, sœur de Brujah)
+- **◈** saatha (gorgone millénaire, servante loyale)
+- **●** Kael (goule lieutenant, serviteur de Morwen)
+- **Pas de symbole** : Personnages secondaires (Myreth, horde, etc.)
+
+**Exemple d'usage** :
+```
+❖ Ramène-la-moi. Intacte, ordonna Morwen.
+● À vos ordres, Maîtresse, répondit Kael.
+◈ Pardonnez-moi, Ma Dame, siffla saatha.
+```
+
+---
 
 ## I. PERSONNAGES PRINCIPAUX
 
@@ -137,34 +155,61 @@
 
 ---
 
+
 ### **Morwen** (antagoniste principale, sœur aînée de Brujah)
 
-**Description physique  :**
-- Vampire de lignée éthérienne, plus ancienne que Brujah
+**Description physique :**
+- Vampire de lignée éthérienne, plus ancienne que Brujah (1082 ans)
 - Beauté glaciale, manteau noir, yeux rouges intenses
 - Présence terrifiante et fascinante simultanément
 - Port altier, élégance mortelle
+- Porte amulette d'Elara (sa mère) cachée sous son manteau
 
-**Personnalité et traits distinctifs  :**
-- Voix hypnotique, traînante, «  poison liquide  »
-- Maîtrise psychologique extraordinaire
-- Obsession  : restauration de la lignée des Éthériens
-- Patience de siècles d’attente pour le moment propice
-- Nom complet  : Morwen Nyx’andra
+**Personnalité et traits distinctifs :**
+- Voix hypnotique, traînante, « poison liquide » (quand contrôlée)
+- Voix lasse, brisée, désespérée (quand le masque craque)
+- Maîtrise psychologique extraordinaire mais fragile après 1000 ans
+- **Obsession** : Résurrection de sa famille mortelle (Elara, frères, sœurs morts de la peste)
+- Froide/calculatrice en surface, désespérée en profondeur
+- Fatiguée par mille ans d'échecs répétés (347 rituels, 346 échecs)
+- Nom complet : Morwen Nyx'andra
 
-**Pouvoirs spéciaux  :**
+**Pouvoirs spéciaux :**
 - Héritage éthérien (magies interdites anciennes)
-- Corruption et transformation forcée d’autres créatures
+- **Rituel de Connexion** (divination, portée limitée ~centaines km)
+- Corruption et transformation forcée d'autres créatures
 - Nécromancie supérieure aux vampires ordinaires
-- Lien symbolique avec l’Étoile Pourpre
+- Lien symbolique avec l'Étoile Pourpre
 - Manipulation mentale de masse
+- Manipulation de la chair (inspiration Tzimisce)
 
-**Rôle narratif  :**
+**Quête millénaire - Détails critiques :**
+- **Objectif** : Trouver phylactère de l'Étoile Pourpre pour ressusciter sa famille
+- **Incertitude** : Ne sait PAS si un tel phylactère existe encore
+- **Méthode** : Rituel de Connexion répété dans chaque sanctuaire éthérien
+- **Limitation** : Portée divination limitée (quelques centaines km maximum)
+- **Historique** : 347 rituels effectués, 346 échecs avant le prologue
+- **Lieux explorés** : Monts de l'Éther, cryptes Valgaris, temples Sylvelune, etc.
+- **État mental** : Ne croit même plus trouver quelque chose, mais ne peut s'arrêter
+
+**Rôle narratif - Prologue :**
+- **AUCUNE interaction directe avec violette** : Vision par divination uniquement
+- **Relation à violette** : Objet/matériau/ingrédient/sacrifice (pronoms neutres « le »)
+- **347e rituel** : Découvre phylactère vivant, choc massif et hystérique
+- **Révélation impossible** : Lignée éthérienne éteinte depuis 1000 ans, comment existe-t-elle ?
+- **Conflit interne** : « C'est impossible » vs « La magie ne ment jamais »
+- **Découverte laboratoire** : Quelqu'un a CRÉÉ un porteur vivant (possède le savoir qu'elle cherche)
+- **Réaction physique** : Effondrement, déni, rire hystérique, acceptation forcée
+- **Ordre de capture** : Après récupération (3 nuits), envoie Kael/saatha/horde
+
+**Rôle narratif - Global :**
 - Antagoniste principal, sœur aînée secrète de Brujah (révélé à la fin)
-- Échecs répétés pour récupérer violette par ses sbires
+- Échecs répétés pour capturer violette par ses sbires
 - Blesse saatha et la laisse pour morte
-- Combat final où elle était en train de gagner jusqu’à l’intervention de saatha
-- Représente l’ancien ordre éthérien corrompu
+- Combat final où elle était en train de gagner jusqu'à l'intervention de saatha
+- Représente l'ancien ordre éthérien corrompu et l'hubris mortelle
+
+---
 
 ---
 

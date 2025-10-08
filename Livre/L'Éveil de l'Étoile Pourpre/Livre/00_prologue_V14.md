@@ -267,7 +267,7 @@ Et cette nuit, debout face au sanctuaire où tout allait enfin s'accomplir, elle
 
 *Son âme percuta son corps avec une violence qui aurait brisé des os si elle était encore mortelle. Ses yeux s'ouvrirent d'un coup, rouges maintenant, brûlants comme des braises. Rouge profond et surnaturel, la couleur du sang frais et de la damnation. Son dos s'arque, sa colonne vertébrale se courbant en un arc impossible, son corps se soulevant du sol comme tiré par des fils invisibles.*
 
-*Sa bouche s'ouvrit en un cri silencieux, révélant les crocs nouveaux, longs, acérés, affamés. Des crocs de prédateur. Des crocs de vampire.*
+*Sa bouche s'ouvrit en un cri silencieux, révélant les crocs nouveaux, longs, acérés, affamés. Des crocs de prédateur. Des crocs façonnés pour percer la chair et boire.*
 
 *Elle inspira. Un réflexe inutile. Ses poumons ne bougeaient plus vraiment. Ils n'avaient plus besoin de bouger. Mais le geste était automatique, un réflexe mort qui persistait malgré la transformation.*
 
@@ -383,7 +383,7 @@ Et cette nuit, debout face au sanctuaire où tout allait enfin s'accomplir, elle
 
 *Elle devrait pleurer. Elle le savait. C'est ce qu'une fille, ce qu'une sœur devrait faire devant les corps de sa famille. C'est ce qu'une personne normale ferait.*
 
-*Mais ses yeux étaient secs. Les vampires ne pleurent pas. Pas avec des larmes d'eau. Pas comme les vivants. Les larmes qui coulèrent sur ses joues étaient rouges. Sang volé d'un innocent, s'échappant de conduits lacrymaux qui ne fonctionnaient plus correctement. Larmes de sang qui tachèrent sa robe.*
+*Mais ses yeux étaient secs. Les morts-vivants ne pleurent pas. Pas avec des larmes d'eau. Pas comme les vivants. Les larmes qui coulèrent sur ses joues étaient rouges. Sang volé d'un innocent, s'échappant de conduits lacrymaux qui ne fonctionnaient plus correctement. Larmes de sang qui tachèrent sa robe.*
 
 *Elle s'agenouilla près du lit de sa mère avec une lenteur révérencieuse. Prit la main froide et raide entre les siennes, tout aussi froides maintenant. La pressa contre sa joue glacée. Sentit le froid de la mort toucher le froid de sa non-vie.*
 
@@ -409,13 +409,29 @@ Un millénaire s'était écoulé depuis cette nuit maudite. Mille ans d'errance 
 
 Elle avait tout essayé. La nécromancie brute, qui ne ranimait que des marionnettes sans âme. Les pactes démoniaques, qui exigeaient des prix qu'elle n'était pas prête à payer. Les rituels de résurrection mineurs, qui échouaient toujours, toujours, laissant ses mains vides et son cœur mort plus glacé encore.
 
+Mais le Codex murmurait une autre voie. Un phylactère de l'Étoile Pourpre. Si un tel artefact existait encore - si un seul avait survécu à la Purge, caché quelque part dans les ruines du monde - alors elle pourrait accomplir le rituel ultime. Ramener les morts. Vraiment les ramener.
+
+*Si un tel artefact existe.*
+
+Mille ans à chercher quelque chose qui n'existe peut-être plus. Peut-être n'a jamais existé. Mais c'était sa seule chance. Son unique espoir dans l'éternité glacée.
+
+Alors elle cherchait. Sanctuaire après sanctuaire. Ruine après ruine. Le Rituel de Connexion, encore et encore. Des centaines de fois. Dans les Monts de l'Éther, dans les cryptes de Valgaris, dans les temples engloutis sous Sylvelune. Partout où les Éthériens avaient laissé leur marque.
+
+À chaque fois, le même rituel. À chaque fois, le même espoir ténu. À chaque fois, le même vide. Rien. Le fil pourpre s'étendait, cherchait, sondait... et ne trouvait que néant. La portée de la divination était limitée - quelques centaines de kilomètres tout au plus, moins si les protections étaient fortes. Alors elle voyageait. Encore. Toujours.
+
+Des centaines de rituels. Des centaines d'échecs.
+
 Mais cette nuit était différente.
 
-Debout dans les ruines d'un autre sanctuaire Éthérien, elle cherchait encore. Et cette nuit, enfin, elle avait trouvé la clé. Une enfant aux yeux violets. Une étoile pourpre faite chair. La dernière pièce du rituel inscrit dans le Codex Purpureus, ce grimoire maudit qui lui avait déjà tant coûté. Le rituel qui lui rendrait tout. Ou qui achèverait de la damner pour l'éternité.
+Non. Cette nuit serait probablement comme toutes les autres. Un autre échec. Un autre sanctuaire vide. Un autre espoir brisé.
 
-Et enfin, l'heure de ténèbres était venue. L'heure de la moisson sanglante. L'heure de la revanche cosmique qui ferait trembler les fondements mêmes d'Etheria.
+Debout dans les ruines de ce sanctuaire Éthérien, le trois-cent-quarante-septième de sa quête, elle se préparait à recommencer. Le Codex Purpureus. Les composants rituels assemblés méticuleusement. Le cercle tracé avec son sang. Encore.
 
-Un écho lointain traversa l'air glacé. Des pas. Multiples, cadencés, qui se rapprochaient par le sentier escarpé. La vampire ne se retourna pas, mais ses lèvres s'étirèrent davantage. Ses serviteurs arrivaient, ponctuels comme toujours.
+Elle ne croyait même plus trouver quelque chose. Mais elle ne pouvait pas s'arrêter. Que ferait-elle d'autre avec l'éternité qui s'étendait devant elle, vide et glacée ?
+
+Alors elle essaierait. Encore. Toujours. Jusqu'à avoir fouillé chaque sanctuaire, chaque ruine, chaque centimètre de terre où les Éthériens avaient marché.
+
+Un écho lointain traversa l'air glacé. Des pas. Multiples, cadencés, qui se rapprochaient par le sentier escarpé. Elle ne se retourna pas, mais ses lèvres s'étirèrent davantage. Ses serviteurs arrivaient, ponctuels comme toujours.
 
 Sous sa capuche relevée, ses yeux luisaient d'un rouge profond et surnaturel, intense comme braises dans l'obscurité. Deux flammes vivantes qui scrutaient l'entrée béante du sanctuaire avec une acuité qui dépassait celle des mortels. Elle n'avait plus besoin de lumière depuis des siècles, depuis que la transformation l'avait changée en quelque chose qui n'était plus tout à fait de ce monde.
 
@@ -429,7 +445,7 @@ Plus loin, par-delà les crêtes déchiquetées, les cités d'Etheria poursuivai
 
 Tous ces royaumes, aveuglés par leur quête égoïste de confort, oublieux des fondations mêmes sur lesquelles leur monde fragile reposait, ignorants des forces primordiales qui dormaient sous leurs pieds.
 
-Mais elle, la vampire immortelle, elle n'oubliait rien. Elle ne pouvait oublier, car l'oubli n'était pas dans sa nature transformée. Ces instants où, jeune mortelle, elle s'était endormie au soleil dans les jardins de son enfance, le visage caressé par une brise tiède qui sentait la lavande et les promesses. La sensation de ses doigts d'alors, chauds et vivants, feuilletant un livre d'histoires près de la cheminée familiale pendant que sa mère cuisinait.
+Mais elle, l'immortelle, elle n'oubliait rien. Elle ne pouvait oublier, car l'oubli n'était pas dans sa nature transformée. Ces instants où, jeune mortelle, elle s'était endormie au soleil dans les jardins de son enfance, le visage caressé par une brise tiède qui sentait la lavande et les promesses. La sensation de ses doigts d'alors, chauds et vivants, feuilletant un livre d'histoires près de la cheminée familiale pendant que sa mère cuisinait.
 
 Jamais. Elle ne les oublierait jamais.
 
@@ -481,7 +497,7 @@ Le passage s'enfonçait dans les entrailles de la montagne, béant et affamé de
 
 Aux parois rugueuses, taillées dans la roche vive par des techniques que les architectes modernes ne maîtrisaient plus, des coulures d'humidité serpentaient entre les failles. Les murs portaient les cicatrices de sorts qui avaient mal tourné, de protections retournées contre leurs créateurs. Ici et là, des cristaux d'Éther corrompus émergeaient de la pierre, pulsant d'une lumière violette et malsaine.
 
-La vampire avançait, lente et souveraine, chaque pas calculé et silencieux. Son manteau effleurait la roche dans un bruissement feutré. Plus elle progressait vers le cœur du sanctuaire, plus l'obscurité se refermait sur elle, dense et presque tangible.
+Elle avançait, lente et souveraine, chaque pas calculé et silencieux. Son manteau effleurait la roche dans un bruissement feutré. Plus elle progressait vers le cœur du sanctuaire, plus l'obscurité se refermait sur elle, dense et presque tangible.
 
 Mais les ténèbres avaient cessé d'être un obstacle depuis sa transformation. Elles étaient devenues sa seconde nature, son élément naturel, son refuge et son arme. L'obscurité était désormais son domaine et sa servante fidèle.
 
@@ -527,7 +543,7 @@ Les fresques écorchées qui survivaient encore sur les murs ruinés murmuraient
 
 Ils dansaient là, pétrifiés dans la pierre pour l'éternité, leurs mains tendues vers l'Éther invisible, manipulant les forces primordiales. Leurs doigts, figés par la sculpture mais encore vibrants d'un pouvoir résiduel, modelaient la chair vivante, tordaient la magie brute, déformaient la réalité elle-même. Et leurs regards éteints, rongés par l'érosion mais toujours chargés d'une arrogance froide, fixaient encore le visiteur imprudent avec cette vanité glacée qui était la marque distinctive des dieux tombés.
 
-La vampire sourit, un rictus pâle et cruel, à peine esquissé mais lourd de toute la malice accumulée au cours des siècles.
+Elle sourit, un rictus pâle et cruel, à peine esquissé mais lourd de toute la malice accumulée au cours des siècles.
 
 Les Éthériens. Les premiers alchimistes de l'âme et du sang, les pionniers de la transmutation spirituelle. Les maîtres absolus des runes, des chants de pouvoir et des glyphes de transformation. Les architectes fous de l'impossible, ceux qui avaient osé défier les dieux eux-mêmes et leur arracher leurs secrets les plus jalousement gardés.
 
@@ -595,7 +611,7 @@ Elle s'arrêta devant une inscription particulièrement bien préservée, caress
 
 Une incantation majeure. En *Etherin*, la langue des pactes de sang et des transformations interdites, le dialecte sacré des Éthériens qui avaient façonné le monde avant que ses locuteurs soient effacés de l'histoire par leurs successeurs timorés et jaloux.
 
-« Ils ont maquillé ces murs, » souffla-t-elle à peine, déposant ses mots contre la pierre humide. « Mais les secrets suintent toujours… »
+❖ Ils ont maquillé ces murs, souffla-t-elle à peine, déposant ses mots contre la pierre humide. Mais les secrets suintent toujours…
 
 Un filet d'amusement transi traversa son regard rubescent, illuminant brièvement ses traits cadavériques d'une beauté terrible et fascinante.
 
@@ -637,7 +653,7 @@ Partout, reproduite avec une fidélité maniaque, la même étoile gravée dans 
 
 Pourpre. Menaçante. Hypnotique. Promesse d'une domination sans limite et d'une damnation éternelle.
 
-La vampire effleura l'un des symboles du bout de ses doigts glacés. Une lueur sombre y répondit immédiatement, rampante et presque organique, se propageant le long des veines de la pierre. L'Éther endormi la reconnaissait, saluait le retour de l'une des siennes, d'une héritière légitime des pactes oubliés.
+Elle effleura l'un des symboles du bout de ses doigts glacés. Une lueur sombre y répondit immédiatement, rampante et presque organique, se propageant le long des veines de la pierre. L'Éther endormi la reconnaissait, saluait le retour de l'une des siennes, d'une héritière légitime des pactes oubliés.
 
 Son héritage n'était pas oublié, même après tous ces siècles d'exil et d'humiliation. La pierre se souvenait. La magie se souvenait. Et bientôt, le monde entier se souviendrait.
 
@@ -647,7 +663,7 @@ Elle était venue réclamer son dû, reprendre ce qui lui appartenait de droit d
 
 Ce sanctuaire, délaissé des vivants et abandonné par les dieux, allait devenir le berceau de son ascension finale, le creuset de sa renaissance en tant que puissance cosmique. Ici, dans ces ruines imprégnées de la sueur et du sang de ses prédécesseurs, elle accomplirait ce qu'ils n'avaient pas eu le courage ou la vision de mener à son terme.
 
-Son heure approchait enfin, portée par les vents du changement et annoncée par les présages que seuls les initiés savaient lire. Et avec elle, l'enfant qu'elle cherchait depuis si longtemps, la clé vivante qui ouvrirait les dernières portes, le sacrifice ultime qui permettrait sa résurrection totale.
+Son heure approchait enfin, portée par les vents du changement et annoncée par les présages que seuls les initiés savaient lire. Cette nuit, elle localiserait enfin le phylactère qu'elle cherchait depuis si longtemps, l'artefact qui ouvrirait les dernières portes, le catalyseur ultime qui permettrait sa résurrection totale.
 
 Elle n'était pas seule.
 
@@ -665,33 +681,51 @@ La seconde était plus petite, silhouette voûtée enveloppée de haillons qui f
 
 Kael s'avança le premier, s'agenouillant avec raideur. Sa voix était rauque.
 
-« Maîtresse. » Le mot tomba. « Nous avons échoué. »
+● Maîtresse, annonça-t-il d'une voix rauque. Le sanctuaire est prêt. Tous les composants sont assemblés selon vos instructions.
 
-Le silence qui suivit était plus lourd que la montagne elle-même. La horde cessa de respirer. Myreth se recroquevilla davantage, tremblante.
+Elle ne répondit pas immédiatement, son regard rubescent fixé sur l'horizon ténébreux. Le silence s'étira, lourd et oppressant. La horde cessa de respirer.
 
-« Échoué. » La voix de La vampire était douce, presque caressante. *Cela rendait la menace mille fois pire.* « Explique. »
+*Encore un rituel. Le trois-cent-quarante-septième. Comme si cette fois serait différente.*
 
-« La cible... » Kael déglutit, gorge morte produisant un son sec. « Elle est protégée. Nous ne pouvons l'approcher. Chaque fois que nous nous rapprochons de la région, quelque chose... dévie nos sens. Nous tournons en cercles. Les pistes disparaissent. Les témoins oublient. » Il hésita. « Même saatha a échoué lors de ses trois tentatives d'enlèvement. Son regard pétrifiant n'a rien changé. Les protections qui entourent l'enfant sont... inédites. C'est comme si... »
+❖ Prêt, répéta-t-elle d'une voix lasse qui portait malgré tout une menace sourde. Sa tête pivota lentement vers Kael. Le sanctuaire numéro trois-cent-quarante-sept. Le Rituel de Connexion. Encore.
 
-« Comme si quelqu'un ne voulait pas qu'elle soit trouvée. » La vampire acheva la phrase, voix plus glaciale encore. Son regard rubescent se posa sur Kael, et l'homme-chose frissonna violemment. *Il savait ce qu'elle pouvait faire. Il avait vu sa chair ondulée sous sa volonté, ses os craqués sous une pression invisible.*
+Un silence amer.
 
-« La région nord d'Eldoria, Maîtresse, » murmura-t-il précipitamment. « Nous savons qu'elle est là. Mais préciser davantage... impossible. Le monde lui-même refuse de nous la révéler. »
+❖ Combien de fois ai-je fait ceci, Kael ? murmura-t-elle, presque pour elle-même. Combien de sanctuaires ? Combien de nuits à espérer, pour ne trouver que vide ?
 
-*Intéressant. Très intéressant.* Un sourire effleura les lèvres exsangues de La vampire. Quelqu'un ou quelque chose protégeait activement l'enfant. Ce qui ne faisait que confirmer son importance. Si elle était assez précieuse pour être gardée par des sortilèges aussi puissants, alors elle était exactement ce que La vampire cherchait.
+Elle secoua la tête, chassant la lassitude.
 
-« Retournez. » L'ordre claqua. « Cherchez encore. Soyez plus subtils. Observez de loin. Trouvez un fil, n'importe lequel, et tirez jusqu'à ce qu'il se déroule. » Elle se pencha légèrement vers Kael, et sa voix devint un murmure venimeux qui portait pourtant jusqu'à chaque créature présente. « Ramenez-la-moi. Intacte. Ou ne revenez pas du tout. »
+❖ Mais si cette fois est la bonne, siffla-t-elle, voix redevenant tranchante. Si par miracle le phylactère se trouve dans la portée de ce sanctuaire, et que le rituel échoue à cause d'une erreur dans tes préparatifs...
 
-Kael inclina la tête si bas que son front toucha la pierre. « À vos ordres, Maîtresse. »
+L'air autour de Kael sembla se solidifier. Il sentit une pression invisible sur sa gorge morte.
 
-La horde recula, se fondant à nouveau dans l'obscurité. Kael et Myreth disparurent les derniers, ombres avalées par les ombres.
+❖ Trois cent quarante-six échecs, je peux supporter, continua-t-elle avec un calme glacial. Un échec dû à ta négligence... non.
 
-Elle n'était pas seule, cependant.
+Kael inclina la tête si bas que son front toucha la pierre, tremblant.
 
-Une présence immémoriale émergea lentement des profondeurs du sanctuaire. Pas humaine. Pas tout à fait vivante non plus. Quelque chose entre les deux, suspendu dans un équilibre précaire entre la vie et la pétrification éternelle.
+● Tout... tout a été vérifié trois fois, Maîtresse. Selon le Codex. À la lettre. Comme les trois cent quarante-six fois précédentes.
 
-La gorgone avançait avec une grâce millénaire, chaque pas mesuré par des siècles d'habitude. Ses serpents capillaires ondulaient doucement, langues fourchues goûtant l'air glacé, écailles noires luisant sous la lueur fantomatique de l'aube naissante. Derrière les lunettes aux montures épaisses qui protégeaient le monde de son regard mortel, ses yeux clairs observaient La vampire avec une attention qui n'était ni révérence ni défi, mais quelque chose de plus complexe, tissé de millénaires de survie.
+Un long silence. Morwen le regarda, et pour un instant, il vit dans ses yeux rouges quelque chose qui ressemblait à du désespoir.
 
-saatha la Gorgone. Plus vieille que La vampire elle-même. Plus vieille que les ruines éthériennes. Assez vieille pour avoir vu des empires naître, prospérer, et s'effondrer en poussière pendant qu'elle passait de chaîne en chaîne, de maître en maître, éternelle captive d'une condition qu'elle n'avait jamais choisie.
+❖ Je sais, dit-elle plus doucement. Je sais que tu as fait de ton mieux. Mais comprends... c'est peut-être la dernière chance. Peut-être qu'il n'existe pas. Peut-être que tout ceci... mille ans... pour rien.
+
+Elle se redressa brutalement, masque froid se reformant.
+
+❖ Alors il FAUT que tout soit parfait. Tu comprends ?
+
+Elle fit volte-face, manteau tourbillonnant, et marcha vers l'entrée du sanctuaire.
+
+❖ Restez en dehors, ordonna-t-elle sans se retourner. Le rituel ne tolère aucune interférence. Si j'entends le moindre bruit, le moindre souffle, je vous pétrifie tous. Attendez mon signal.
+
+● À vos ordres, Maîtresse, murmura Kael, toujours prostré.
+
+La horde recula, se fondant à nouveau dans l'obscurité. Kael et Myreth restèrent un instant, silhouettes figées dans l'attente, avant de disparaître à leur tour, ombres avalées par les ombres.
+
+Seule une présence demeura. Pas humaine. Pas tout à fait vivante non plus. Quelque chose entre les deux, suspendu dans un équilibre précaire entre la vie et la pétrification éternelle.
+
+La gorgone se tenait légèrement en retrait, présence immémoriale qui avait attendu en silence pendant tout l'échange. Ses serpents capillaires ondulaient doucement, langues fourchues goûtant l'air glacé, écailles noires luisant sous la lueur fantomatique de l'aube naissante. Derrière les lunettes aux montures épaisses qui protégeaient le monde de son regard mortel, ses yeux clairs observaient sa maîtresse avec une attention qui n'était ni révérence ni défi, mais quelque chose de plus complexe, tissé de millénaires de survie.
+
+saatha la Gorgone. Plus vieille que sa maîtresse actuelle. Plus vieille que les ruines éthériennes. Assez vieille pour avoir vu des empires naître, prospérer, et s'effondrer en poussière pendant qu'elle passait de chaîne en chaîne, de maître en maître, éternelle captive d'une condition qu'elle n'avait jamais choisie.
 
 *Une enfant, autrefois. Si loin dans le passé que même sa mémoire millénaire peinait à en saisir les contours. Des mains humaines l'arrachant à sa grotte natale, terrorisées mais cupides. « Une gorgone vivante ! Pense à la fortune ! » Le premier collier. Le premier maître. Le premier coup.*
 
@@ -703,27 +737,27 @@ Les maîtres mortels se succédaient. Certains cruels, fouettant leur possession
 
 *Elle n'avait pas été surprise par la Purge. Les immortels reconnaissent l'hubris quand ils la voient.*
 
-Puis, il y a trois siècles, un nouveau maître. Pas mortel cette fois. Vampire. Celle qui l'avait trouvée dans les ruines d'un château effondré, collier rouillé toujours autour du cou, attendant patiemment qu'un nouveau propriétaire vienne réclamer sa possession abandonnée.
+Puis, il y a trois siècles, un nouveau maître. Pas mortel cette fois. Immortelle. Celle qui l'avait trouvée dans les ruines d'un château effondré, collier rouillé toujours autour du cou, attendant patiemment qu'un nouveau propriétaire vienne réclamer sa possession abandonnée.
 
-La vampire n'était pas meilleure que les autres. Peut-être pire, d'une certaine manière. Sa cruauté était plus froide, plus calculée, dénuée de la passion impulsive des mortels. Mais elle offrait quelque chose que les autres n'avaient jamais pu donner : la stabilité.
+Cette maîtresse n'était pas meilleure que les autres. Peut-être pire, d'une certaine manière. Sa cruauté était plus froide, plus calculée, dénuée de la passion impulsive des mortels. Mais elle offrait quelque chose que les autres n'avaient jamais pu donner : la stabilité.
 
 Les maîtres mortels mouraient. Vingt ans, cinquante ans, un siècle si chanceux. Et à chaque mort, saatha était abandonnée, vendue, volée, réclamée par des héritiers, jetée dans des donjons oubliés. Un cycle sans fin de transitions violentes, d'incertitudes, de nouveaux caprices à apprendre, de nouvelles violences à endurer.
 
-La vampire ne mourrait pas. L'immortalité vampirique garantissait une continuité que saatha n'avait jamais connue. Trois siècles avec le même maître. Trois siècles sans être vendue, abandonnée, ou oubliée dans une cave. C'était, à sa manière tordue, un réconfort.
+Cette maîtresse ne mourrait pas. L'immortalité garantissait une continuité que saatha n'avait jamais connue. Trois siècles avec le même maître. Trois siècles sans être vendue, abandonnée, ou oubliée dans une cave. C'était, à sa manière tordue, un réconfort.
 
-*Mais quelque chose avait changé récemment. Une fissure minuscule dans l'acceptation millénaire. Elle avait vu sa maîtresse ordonner des atrocités, certes. Elle y avait participé, obéissante. Mais cette obsession pour l'enfant inconnue, cette quête qui rappelait trop celle des Éthériens...*
+*Mais quelque chose avait changé récemment. Une fissure minuscule dans l'acceptation millénaire. Elle avait vu sa maîtresse ordonner des atrocités, certes. Elle y avait participé, obéissante. Mais cette obsession pour le phylactère, cette quête qui rappelait trop celle des Éthériens...*
 
 *La peur la maintenait en place. Sa maîtresse pouvait broyer ses os d'un geste, faire onduler sa chair. Mais sous la peur, timide et nouvelle, quelque chose d'autre germait. Une question qu'elle n'avait jamais osé formuler auparavant.*
 
 *« Est-ce que cela doit être ainsi ? »*
 
-Elle s'inclina légèrement devant La vampire, geste automatique gravé par des millénaires de servitude. « Maîtresse. Les préparatifs sont achevés. Le sanctuaire vous attend. »
+Elle s'inclina légèrement, geste automatique gravé par des millénaires de servitude. « Maîtresse. Les préparatifs sont achevés. Le sanctuaire vous attend. »
 
 Sa voix était douce, sifflante par moments quand les serpents ajoutaient leurs murmures aux siens. Une voix de sagesse oubliée et de résignation plus vieille encore. Une voix qui savait obéir, parce qu'elle n'avait jamais appris autre chose.
 
 Mais dans le secret de son esprit millénaire, la fissure s'élargissait. Insidieusement. Dangereusement.
 
-Dans l'obscurité, La vampire perçut le léger frémissement des serpents de saatha, ce tremblement presque imperceptible qui trahissait l'inquiétude de sa gardienne. Sans réfléchir, d'un geste aussi naturel qu'inattendu, elle tendit la main et effleura délicatement l'une des créatures ophidiennes. Le serpent se figea sous cette caresse, apaisé par une tendresse qu'elle croyait avoir oubliée depuis des siècles.
+Dans l'obscurité, elle perçut le léger frémissement des serpents de saatha, ce tremblement presque imperceptible qui trahissait l'inquiétude de sa gardienne. Sans réfléchir, d'un geste aussi naturel qu'inattendu, elle tendit la main et effleura délicatement l'une des créatures ophidiennes. Le serpent se figea sous cette caresse, apaisé par une tendresse qu'elle croyait avoir oubliée depuis des siècles.
 
 Un instant, elle se souvint d'un autre temps, d'une autre vie, quand elle chassait les peurs nocturnes d'un être cher d'une simple caresse.
 
@@ -743,13 +777,13 @@ Aucun reproche dans sa voix. Aucune surprise. Juste l'acceptation de celle qui n
 
 ### L'Éveil de la Vengeance
 
-Ensemble, La vampire et saatha franchirent le seuil du sanctuaire, avalées par les ténèbres qui attendaient depuis mille ans qu'on les réveille.
+Ensemble, les deux immortelles franchirent le seuil du sanctuaire, avalées par les ténèbres qui attendaient depuis mille ans qu'on les réveille.
 
 À l'intérieur, l'air était différent. Plus épais. Chargé d'une présence palpable qui faisait vibrer la pierre elle-même, le sanctuaire respirant avec lenteur, pouls endormi d'une créature titanesque.
 
 La chambre rituelle s'ouvrait devant elles, vaste cathédrale souterraine dont les voûtes se perdaient dans l'obscurité absolue. Les colonnes massives, gravées de glyphes qui pulsaient faiblement d'une lueur pourpre malade, encerclaient un espace central où le cercle dormait, attendant d'être réveillé. Le sol de pierre noire était creusé de rainures profondes qui convergeaient vers le centre en spirales complexes, canaux asséchés depuis des siècles, prêts à accueillir à nouveau le sang et la maîtrise.
 
-La vampire leva une main pâle. Les brasiers disposés en cercle parfait autour de la chambre s'enflammèrent simultanément, flammes violettes et glacées qui ne produisaient aucune chaleur mais baignaient tout d'une lumière spectrale. Les ombres dansaient sur les murs, projetant des formes impossibles qui semblaient ramper et se tordre.
+Elle leva une main pâle. Les brasiers disposés en cercle parfait autour de la chambre s'enflammèrent simultanément, flammes violettes et glacées qui ne produisaient aucune chaleur mais baignaient tout d'une lumière spectrale. Les ombres dansaient sur les murs, projetant des formes impossibles qui semblaient ramper et se tordre.
 
 Les flammes pourpres des brasiers ne brûlaient pas normalement. Elles ne vacillaient pas, ne crépitaient pas, mais ondulaient avec lenteur hypnotique, vagues de lumière glacée qui léchaient l'air sans le réchauffer. Leur éclat projetait des ombres impossibles sur les murs du sanctuaire, silhouettes qui semblaient posséder plus de substance que les objets qui les créaient.
 
@@ -757,17 +791,17 @@ Certaines ombres bougeaient indépendamment, rampant sur la pierre, se tordant e
 
 La lueur du cercle rituel pulsait en rythme avec un battement lent et profond. Pourpre foncé, presque noir, puis s'illuminant jusqu'à un violet aveuglant, puis s'assombrissant à nouveau. Expansion et contraction. Respiration de pierre et de magie entrelacées.
 
-« Les fioles. » L'ordre tomba, sec.
+❖ Les fioles, ordonna-t-elle d'une voix sèche.
 
 saatha s'avança, portant le coffret qu'elle avait préparé avec soin. Ses mains tremblaient légèrement, imperceptiblement, alors qu'elle l'ouvrait et révélait son contenu. Sept fioles de verre noir, scellées par des cachets de cire pourpre marqués de symboles interdits. À l'intérieur, des liquides de couleurs impossibles. Sang éthérien ancestral. Essences distillées de créatures mortes depuis des éons. Composants dont même les noms avaient été effacés des grimoires modernes.
 
 *Sept. Toujours sept. Jamais six, jamais huit. Le nombre sacré des Éthériens, clé de leurs plus grands rituels. Une fiole de moins, et le cercle resterait inerte. Une de plus, et il exploserait en consumant tout dans un rayon d'un kilomètre.*
 
-La vampire les prit une par une, les disposant avec précision aux points cardinaux du cercle. Nord, sud, est, ouest, puis les trois points intermédiaires selon une géométrie millénaire. Chaque fiole posée produisait une résonance sourde, note grave qui vibrait dans la pierre et dans les os.
+Elle les prit une par une, les disposant avec précision aux points cardinaux du cercle. Nord, sud, est, ouest, puis les trois points intermédiaires selon une géométrie millénaire. Chaque fiole posée produisait une résonance sourde, note grave qui vibrait dans la pierre et dans les os.
 
 Puis vint le Codex Purpureus.
 
-saatha le sortit avec révérence mêlée de dégoût, le grimoire enveloppé de soie noire pour contenir sa présence. Même emballé, il pulsait d'une vie propre, pages respirant sous la couverture. La vampire le déposa au centre exact du cercle, sur un socle de pierre gravé qui semblait fait spécifiquement pour lui. Le Codex exhala un soupir satisfait quand il toucha sa place.
+saatha le sortit avec révérence mêlée de dégoût, le grimoire enveloppé de soie noire pour contenir sa présence. Même emballé, il pulsait d'une vie propre, pages respirant sous la couverture. Sa maîtresse le déposa au centre exact du cercle, sur un socle de pierre gravé qui semblait fait spécifiquement pour lui. Le Codex exhala un soupir satisfait quand il toucha sa place.
 
 Les pages s'ouvrirent toutes seules.
 
@@ -775,39 +809,35 @@ L'encre bougeait sur le parchemin, symboles se réarrangeant, formant et reforma
 
 *saatha recula d'un pas. Elle avait vu ce grimoire auparavant. Elle savait ce qu'il faisait à ceux qui le lisaient trop longtemps. Il plantait des graines dans l'esprit, des obsessions qui poussaient, étouffant la raison, ne laissant que la faim de maîtrise.*
 
-La vampire traça les runes d'activation avec son propre sang, entaillant son poignet pâle. Le sang vampirique, noir et épais, coula dans les rainures du sol. *Sang d'immortelle uniquement. Le sang mortel, même pur, était inutile pour les rituels éthériens majeurs. Seul le sang transformé, corrompu par la magie, possédait la densité éthérique nécessaire pour réveiller ces symboles millénaires.* Les symboles s'illuminèrent un par un, chaîne de lumière pourpre qui encerclait le rituel. La pierre but le sang avidement, canaux s'emplissant, réseau complexe se dessinant.
+Elle traça les runes d'activation avec son propre sang, entaillant son poignet pâle. Le sang noir et épais coula dans les rainures du sol. *Sang d'immortelle uniquement. Le sang mortel, même pur, était inutile pour les rituels éthériens majeurs. Seul le sang transformé, corrompu par la magie, possédait la densité éthérique nécessaire pour réveiller ces symboles millénaires.* Les symboles s'illuminèrent un par un, chaîne de lumière pourpre qui encerclait le rituel. La pierre but le sang avidement, canaux s'emplissant, réseau complexe se dessinant.
 
 L'air devint plus lourd encore, presque solide, saturé de maîtrise. Une odeur étrange emplissait le sanctuaire, mélange d'encens éthérien séculaire, de cuivre oxydé, et de quelque chose d'indéfinissable, quelque chose qui sentait l'immémorial et l'interdit. L'ozone d'une magie trop puissante, trop concentrée, qui faisait dresser les cheveux sur la nuque et serrer les dents involontairement.
 
 Les serpents de saatha sifflèrent en unisson, inquiets, percevant le danger que leur maîtresse gorgone ressentait instinctivement. Le rituel n'était pas encore complet, juste préparé, mais déjà l'Éther répondait, se courbant, se tordant autour du sanctuaire.
 
-« C'est prêt. » La voix de La vampire vibrait d'une excitation contenue, dangereuse. « Maintenant, il ne manque plus qu'elle. »
+❖ C'est prêt, annonça-t-elle d'une voix neutre, clinique. Le rituel de localisation peut commencer.
 
-Elle se redressa, contemplant son œuvre. Le cercle pulsait doucement maintenant, vivant, affamé, attendant son sacrifice final.
+Elle se redressa, contemplant son œuvre. Le cercle pulsait doucement maintenant, vivant, affamé, attendant d'accomplir sa fonction.
 
-« Ils croyaient qu'ils échoueraient, tu sais. » La voix de La vampire brisa le silence oppressant, douce mais chargée d'une conviction qui frôlait la folie. Elle ne regardait pas saatha, yeux fixés sur le Codex ouvert. « Les Éthériens. À la fin, dans ces derniers instants avant l'implosion, ils ont compris. Senti leur erreur. Mais trop tard. »
+Elle fit le tour du cercle lentement, en silence, vérifiant chaque rune, chaque fiole, avec la précision méthodique d'un alchimiste préparant une expérience critique. Ses doigts effleuraient les symboles illuminés, testant leur résonance.
 
-*saatha ne répondit pas. Elle avait appris depuis longtemps que ces moments n'exigeaient pas de réponse. Juste une écoute silencieuse.*
+*Les Éthériens avaient échoué. Leur erreur n'était pas l'ambition, mais l'orgueil collectif. Des milliers fusionnant leurs forces, croyant que le nombre les rendrait invincibles. Mais la domination absolue ne se partage pas. Elle exige un seul canal. Une seule volonté. Un seul sacrifice.*
 
-« Leur erreur n'était pas l'ambition. » La vampire fit le tour du cercle lentement, doigts effleurant les runes illuminées. « Leur erreur était l'orgueil collectif. Ils croyaient que le nombre les rendrait invincibles. Des milliers d'entre eux, fusionnant leurs forces. Mais la domination absolue ne se partage pas. Elle exige un seul canal. Une seule volonté. Un seul sacrifice. »
+*Elle ne commettrait pas leur erreur. Elle avait tout sacrifié. Ma mortalité. Ma famille. Mon humanité. Mille ans de préparation. Le prix était payé. Le succès, garanti.*
 
-Elle s'arrêta devant une colonne gravée de visages éthériens figés en extase agonisante.
+Elle s'arrêta devant une colonne gravée de visages éthériens figés en extase agonisante. Pendant un instant fugace, sa main effleura inconsciemment l'amulette cachée sous son manteau, celle qu'Elara lui avait donnée le jour de ses seize ans. Le geste dura moins d'une seconde avant qu'elle ne reprenne le contrôle.
 
-« Moi, je ne commettrai pas leur erreur. » Un sourire cruel, mais teinté de quelque chose d'autre. De désespoir peut-être. Ou de regret. « J'ai tout sacrifié. Ma mortalité. Ma famille. Mon humanité. Mille ans de solitude et de chasse. J'ai payé le prix qu'ils refusaient de payer. Et pour cela... pour cela, je réussirai. »
+*Ils comprendraient. Une fois revenus, ils comprendraient. Ils devraient.*
 
-*Elle se mentait. saatha le voyait. La vampire croyait réellement que ramener les morts était un acte d'amour, de rédemption. Elle ne voyait pas que c'était la même hubris, juste déguisée en noble quête. Le même refus d'accepter les limites. La même certitude que les règles de la réalité ne s'appliquaient pas à elle.*
+*Les morts ne pardonnent pas, pensa saatha en observant sa maîtresse en silence. Les morts ne font rien. Parce qu'ils sont morts.*
 
-« Ils me jugeraient, s'ils étaient encore là. » La vampire rit, son froid et cassant. « Mère Elara. Mes frères. Mes sœurs. Ils me regarderaient, horrifiés par ce que je suis devenue. Le monstre qui boit le sang pour vivre. La créature qui massacre des innocents pour un rituel. » Sa voix se brisa légèrement, juste une fissure imperceptible. Elle porta inconsciemment sa main à l'amulette cachée sous son manteau, celle qu'Elara lui avait donnée le jour de ses seize ans, étoile à six branches gravée dans le métal noir. « Mais une fois qu'ils seront revenus... une fois qu'ils verront ce que j'ai accompli... ils comprendront. Ils me pardonneront. Ils devront. »
+*Mais elle ne dit rien. Elle avait appris depuis longtemps que ces moments n'exigeaient pas de réponse. Juste une présence silencieuse.*
 
-*Les morts ne pardonnent pas, pensa saatha. Les morts ne font rien. Parce qu'ils sont morts.*
+Morwen se redressa, expression redevenant neutre, froide, calculatrice.
 
-La vampire ferma les yeux un instant, respirant profondément bien qu'elle n'ait plus besoin d'air. Quand elle les rouvrit, la faille était colmatée. Seule restait la détermination glaciale, l'obsession millénaire qui la consumait de l'intérieur.
+❖ Attends ici, ordonna-t-elle simplement.
 
-« Tout est prêt. » Elle se tourna enfin vers saatha, et son regard était celui d'une déesse déchue, belle et terrible à la fois. « Maintenant, nous chassons. Et cette fois, nous ne rentrerons pas sans elle. »
-
-Mais avant de quitter le sanctuaire, La vampire fit une dernière chose.
-
-Elle retourna au cercle, se plaçant au centre exact, là où le Codex Purpureus pulsait de sa lumière malade. Elle posa ses mains pâles sur la couverture de cuir noir, sentit le grimoire frémir sous ses doigts. Les pages se tournèrent furieusement, s'arrêtant sur un passage qu'elle connaissait par cœur, qu'elle avait lu mille fois dans ses nuits d'obsession.
+Elle retourna au cercle, se plaçant au centre exact, là où le Codex Purpureus pulsait de sa lumière malade. Elle posa ses mains pâles sur la couverture de cuir noir, sentit le grimoire frémir sous ses doigts. Les pages se tournèrent, s'arrêtant sur le passage qu'elle cherchait.
 
 *Rituel de Connexion. Pour localiser ce qui est caché. Pour voir ce qui refuse d'être vu.*
 
@@ -823,31 +853,109 @@ Elle le suivit.
 
 Mais elle ne cherchait pas à percer ces protections. Pas encore. Elle cherchait juste à confirmer. À voir. À savoir.
 
-Et là, au bout du fil pourpre, elle la trouva.
+Et là, au bout du fil pourpre, elle le trouva.
 
-Une enfant. Petite silhouette endormie dans un lit simple, cheveux violets étalés sur l'oreiller blanc. Un visage innocent, paisible, ignorant complètement qu'elle était le centre d'une tempête cosmique qui se préparait. Ignorant que des forces millénaires convergeaient vers elle, que des rituels interdits avaient été préparés pour elle, que son existence même était la clé d'une maîtrise que le monde avait essayé d'enterrer.
+*Non.*
 
-*Elle brillait.*
+*Non, c'est impossible.*
 
-Même à travers la distance, même à travers les protections, La vampire la voyait. L'Étoile Pourpre vivait en elle. Pas en faculté acquise, mais en essence innée, tissée dans chaque cellule de son corps, pulsant en synchronie parfaite avec son cœur d'enfant. Un phylactère. Un réceptacle. Une clé vivante façonnée par des forces que même La vampire ne comprenait pas totalement.
+Pas un artefact. Pas un objet ancien préservé dans l'ambre du temps. Pas une relique éthérienne enfouie dans quelque crypte oubliée.
 
-*Parfaite. Elle était parfaite.*
+*Vivant.*
 
-La vision se brisa. La vampire vacilla, rattrapée par saatha dont les mains froides stabilisèrent la créature tremblante. Du sang noir coulait du nez de La vampire, *prix du rituel*. Chaque usage de magie éthérienne exigeait son tribut. Plus le sort était puissant, plus le prix était lourd. Une hémorragie mineure aujourd'hui, mais si elle abusait du Codex, elle pourrait finir consumée de l'intérieur. Elle l'essuya d'un geste impatient, yeux rouges brillant d'une intensité démente.
+Une silhouette endormie dans un lit simple, cheveux violets étalés sur l'oreiller blanc. Un corps respirant, un cœur battant, chaud de vie.
 
-« Je l'ai vue. » Sa voix vibrait de triomphe et de quelque chose qui ressemblait à de la terreur religieuse. « Elle existe. Elle est réelle. Et elle est exactement ce dont j'ai besoin. »
+*NON. C'EST IMPOSSIBLE.*
 
-saatha ne dit rien. Qu'aurait-elle pu dire ? Elle avait senti la puissance qui avait traversé le cercle pendant la vision. Elle avait vu l'expression sur le visage de sa maîtresse, mélange d'extase et de désespoir qui glaçait le sang même des immortels.
+*Trois cent quarante-six fois. Trois cent quarante-six rituels. Trois cent quarante-six sanctuaires fouillés. Trois cent quarante-six échecs. Mille ans à arpenter ce monde dans chaque direction, suivant les flux d'Éther, cherchant le moindre écho de magie éthérienne. Rien. Jamais rien.*
+
+*Elle avait couvert des milliers de kilomètres. Chaque ruine majeure. Chaque crypte scellée. Chaque bibliothèque interdite. Elle avait fouillé, interrogé, torturé, acheté des informations. Suivi chaque rumeur, chaque légende, chaque murmure d'espoir. À chaque fois, le vide. Le néant. L'absence totale.*
+
+*Les Éthériens étaient morts. TOUS. Les archives le confirmaient. Les témoignages le certifiaient. Les cadavres qu'elle avait elle-même exhumés des fosses communes le prouvaient. La lignée était éteinte. Éradiquée. Annihilée jusqu'au dernier.*
+
+*Et le rituel, trois cent quarante-six fois, avait confirmé ce qu'elle savait déjà. Plus rien. Plus personne. Plus aucune trace de l'Étoile Pourpre dans ce monde.*
+
+*Alors COMMENT--*
+
+*Et pourtant.*
+
+Même à travers la distance, même à travers les protections, elle la voyait. L'Étoile Pourpre vivait en elle. Pas en faculté acquise. Pas un artefact porté. Mais essence innée, tissée dans chaque cellule de son corps, pulsant en synchronie parfaite avec son cœur. Sang éthérien pur coulant dans ses veines. Un phylactère. Un réceptacle. Mais VIVANT.
+
+*C'est impossible. La magie doit mentir. Le rituel a dû échouer. C'est une illusion. Une erreur. Un piège.*
+
+*Mais la magie ne ment jamais.*
+
+*Le sang. C'est le sang qu'elle avait détecté. Récemment exposé. Les protections d'un laboratoire qui avaient cédé.*
+
+*Un laboratoire.*
+
+*Quelqu'un l'avait CRÉÉE. Quelqu'un possédait le savoir perdu. Quelqu'un avait réussi ce qu'elle-même cherchait depuis mille ans.*
+
+*Mille ans à chercher un artefact mort. Et la clé... la clé marchait, respirait, VIVAIT depuis le début.*
+
+La vision se brisa violemment.
+
+Elle s'effondra, genoux heurtant la pierre avec un bruit sourd. saatha se précipita, mains froides rattrapant sa maîtresse avant qu'elle ne s'écrase complètement. Du sang noir coulait abondamment de son nez, de ses oreilles. *Prix du rituel.* Plus que prévu. Bien plus.
+
+Ses mains tremblaient. Ses yeux rouges étaient écarquillés, fixant le vide, encore perdus dans la vision impossible.
+
+Elle inspira brutalement, un son rauque, presque un sanglot étouffé.
+
+*Non. Reprends-toi. REPRENDS-TOI.*
+
+❖ C'est... impossible, murmura-t-elle d'abord, voix brisée, incrédule. Impossible.
+
+Elle secoua la tête violemment, comme pour chasser une hallucination née de mille ans de désespoir. Ses doigts griffèrent la pierre, cherchant un ancrage dans la réalité.
+
+❖ Trois cent quarante-six fois, siffla-t-elle entre ses dents serrées, presque un rire hystérique. Trois cent quarante-six fois... RIEN. Et maintenant... maintenant au trois cent quarante-septième...
+
+Sa voix se brisa complètement.
+
+❖ Non. NON. C'est une erreur. Le rituel a mal tourné. Kael a fait une erreur. Les composants étaient corrompus. C'est une illusion. Une hallucination. Je... je deviens folle. Mille ans ont fini par...
+
+Elle s'arrêta net, tremblante. Ses yeux se fermèrent. Elle tenta de compter mentalement jusqu'à dix, mais perdit le fil à trois.
+
+*La magie ne ment jamais. Le rituel a fonctionné. C'est réel.*
+
+Quand elle rouvrit les yeux, ils étaient plus froids. Plus durs. Elle essuya le sang d'un geste tremblant mais délibéré.
+
+❖ Localisé, annonça-t-elle enfin d'une voix plus ferme, mais encore tendue. Sa voix portait une note d'incrédulité qu'elle ne parvenait pas complètement à masquer. Après trois cent quarante-six échecs... au trois cent quarante-septième essai... quelque chose.
+
+Elle rit, un son brisé, presque hystérique.
+
+❖ Phylactère... vivant. Lignée éthérienne. Impossible mais... la magie ne ment jamais. C'est réel.
+
+Elle inspira profondément, se forçant à analyser cliniquement, à traiter ceci comme n'importe quelle autre information et non comme le miracle qui brise mille ans de désespoir.
+
+❖ Cheveux mauves, environ vingt hivers. Région nord d'Eldoria. Créé... dans un laboratoire. Son sang récemment exposé. Les protections ont cédé.
+
+Elle se redressa avec l'aide de saatha, jambes encore instables.
+
+❖ Quelqu'un possède le savoir que je cherche depuis mille ans, dit-elle lentement, chaque mot mesuré. Quelqu'un a réussi. Quelqu'un a CRÉÉ un porteur vivant de l'Étoile Pourpre alors que j'ai passé mille ans à chercher des reliques mortes.
+
+Un long silence, puis un rire amer.
+
+❖ Ironie cosmique. Mais peu importe. Le créateur n'a plus d'importance. Le matériau existe. Après trois cent quarante-six échecs, enfin... enfin quelque chose.
+
+Sa voix se raffermit.
+
+❖ Et je ne le laisserai pas m'échapper.
+
+saatha ne dit rien. Qu'aurait-elle pu dire ? Elle avait senti la puissance qui avait traversé le cercle pendant la vision. Elle avait vu l'expression sur le visage de sa maîtresse - ce mélange de choc, d'incrédulité, de terreur presque, avant que le masque froid ne se reforme.
 
 *C'était vraiment en train de se produire. Exactement à l'image des Éthériens. Exactement selon le schéma de la Purge.*
 
-« Nous partons. Maintenant. » La vampire se redressa, recomposant sa dignité, effaçant toute trace de faiblesse. « Rassemble les serviteurs. Tous. Je ne prends aucun risque cette fois. Nous la trouverons. Nous la prendrons. Et nous achèverons ce qui a été commencé il y a mille ans. »
+❖ Rassemble les serviteurs, ordonna-t-elle en se redressant. Elle recomposa sa dignité, effaçant toute trace de faiblesse physique. Tous. Kael, Myreth, la horde. Nous partons dans trois nuits, quand j'aurai récupéré du coût rituel.
 
-Elle fit volte-face, manteau de nuit tourbillonnant autour d'elle, et marcha vers la sortie du sanctuaire avec la détermination absolue d'une prédatrice qui a enfin localisé sa proie.
+Elle fit une pause, calculant.
+
+❖ Cheveux mauves, environ vingt hivers, région nord d'Eldoria. Trouvez-le. Amenez-le intact. Aucun dommage. Le matériau doit être parfaitement préservé pour le rituel final.
+
+Elle fit volte-face, manteau de nuit tourbillonnant autour d'elle, et marcha vers la sortie du sanctuaire avec la détermination froide d'un prédateur qui a enfin localisé le composant manquant.
 
 saatha la suivit, silencieuse, la fissure dans son âme millénaire s'élargissant à chaque pas.
 
-*Quelque chose devait être fait. Elle ne savait pas quoi. Elle ne savait pas comment. Mais si elle ne faisait rien, cette enfant aux yeux violets serait sacrifiée, et le monde pourrait bien connaître une seconde Purge.*
+*Quelque chose devait être fait. Elle ne savait pas quoi. Elle ne savait pas comment. Mais si elle ne faisait rien, ce porteur de l'Étoile Pourpre serait sacrifié, et le monde pourrait bien connaître une seconde Purge.*
 
 *Et cette fois, il n'y aurait peut-être personne pour survivre.*
 
@@ -855,14 +963,12 @@ saatha la suivit, silencieuse, la fissure dans son âme millénaire s'élargissa
 
 Le sanctuaire vibrait derrière elles alors qu'elles remontaient vers la surface, cercle rituel laissé actif, pulsant dans les ténèbres, attendant patiemment qu'on lui apporte ce pour quoi il avait été éveillé.
 
-L'aube commençait véritablement à se lever sur les Monts de l'Éther, grise et froide, mais dans les ombres qui fuyaient la lumière montante, quelque chose de bien plus sombre s'éveillait. Une chasse. Une quête. Une obsession millénaire qui touchait enfin à son terme.
+L'aube commençait véritablement à se lever sur les Monts de l'Éther, grise et froide, mais dans les ombres qui fuyaient la lumière montante, quelque chose de bien plus sombre s'éveillait. Une chasse. Un rituel. Une obsession millénaire qui se mettait enfin en mouvement.
 
-Et au nord, dans un village ignorant du danger qui approchait, une enfant dormait paisiblement, rêvant de choses simples et innocentes, alors que son destin se refermait sur elle.
+Et au nord, dans un village ignorant du danger qui se préparait, le porteur de l'Étoile Pourpre dormait paisiblement, inconscient du regard qui l'avait trouvé à travers l'Éther. Inconscient que son sang exposé avait trahi sa présence après mille ans de silence. Inconscient que dans trois nuits, la chasse commencerait.
 
 Les corbeaux, qui avaient fui les montagnes pendant la nuit, commençaient timidement à revenir. Mais ils évitaient toujours le sanctuaire. Certaines ténèbres, même dissipées par l'aube, ne disparaissaient jamais vraiment.
 
 Elles attendaient juste. Patientes. Affamées. Inévitables.
 
 L'Éveil de l'Étoile Pourpre avait commencé.
-
-Et nulle force sur terre ou dans les cieux ne pourrait plus l'arrêter.
