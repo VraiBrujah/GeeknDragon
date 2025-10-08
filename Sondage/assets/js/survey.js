@@ -29,6 +29,7 @@ class SurveyViewer {
     this.customRequirements = []; // Critères ajoutés par l'utilisateur
     this.unsavedChanges = false;
     this.isReadOnly = true; // true tant qu'aucun utilisateur n'est sélectionné
+    this.autoSaveTimer = null; // Timer pour debounce auto-save
 
     // Variables pour la gestion du header au scroll
     this.lastScrollTop = 0;
@@ -48,7 +49,6 @@ class SurveyViewer {
     this.currentUserDisplay = document.getElementById('currentUserDisplay');
     this.btnSelectUser = document.getElementById('btnSelectUser');
     this.btnCreateUser = document.getElementById('btnCreateUser');
-    this.btnSave = document.getElementById('btnSave');
     this.btnCompare = document.getElementById('btnCompare');
     this.btnExport = document.getElementById('btnExport');
 
@@ -90,6 +90,12 @@ class SurveyViewer {
 
       // Initialisation des écouteurs d'événements
       this.setupEventListeners();
+
+      // Ajuster padding pour header sticky
+      this.adjustContentPaddingForHeader();
+
+      // Recalculer au resize
+      window.addEventListener('resize', () => this.adjustContentPaddingForHeader());
 
     } catch (error) {
       console.error('Erreur initialisation:', error);
@@ -229,6 +235,9 @@ class SurveyViewer {
 
       // Générer navigation sections
       this.generateSectionsNav();
+
+      // Activer lazy loading pour les tableaux
+      this.setupLazyLoadingSections();
 
     } catch (error) {
       console.error('Erreur chargement sondage:', error);
@@ -432,9 +441,9 @@ class SurveyViewer {
 
         this.responses[reqID][field] = checked;
 
-        // Marquer comme non sauvegardé
+        // Marquer comme non sauvegardé et déclencher auto-save
         this.unsavedChanges = true;
-        this.updateSaveButton();
+        this.debouncedAutoSave();
       });
     });
 
@@ -469,9 +478,9 @@ class SurveyViewer {
 
         this.responses[reqID][fieldName] = value;
 
-        // Marquer comme non sauvegardé
+        // Marquer comme non sauvegardé et déclencher auto-save
         this.unsavedChanges = true;
-        this.updateSaveButton();
+        this.debouncedAutoSave();
       });
     });
 
@@ -496,11 +505,80 @@ class SurveyViewer {
 
         this.responses[reqID][fieldName] = value;
 
-        // Marquer comme non sauvegardé
+        // Marquer comme non sauvegardé et déclencher auto-save
         this.unsavedChanges = true;
-        this.updateSaveButton();
+        this.debouncedAutoSave();
       });
     });
+  }
+
+  /**
+   * Auto-save avec debounce (2 secondes)
+   */
+  debouncedAutoSave() {
+    clearTimeout(this.autoSaveTimer);
+    this.autoSaveTimer = setTimeout(() => {
+      if (this.currentUser && this.unsavedChanges) {
+        this.autoSaveUserData();
+      }
+    }, 2000); // 2 secondes délai
+  }
+
+  /**
+   * Sauvegarde automatique silencieuse
+   */
+  async autoSaveUserData() {
+    if (!this.currentUser || !this.currentSurvey) return;
+
+    try {
+      // Forcer la conversion en objet simple
+      const responsesClean = {};
+      Object.keys(this.responses).forEach(key => {
+        responsesClean[key] = {...this.responses[key]};
+      });
+
+      const payload = {
+        survey: this.currentSurvey.name,
+        user: this.currentUser,
+        responses: responsesClean,
+        custom_requirements: this.customRequirements
+      };
+
+      const response = await fetch('api.php?action=save-user-data', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        this.unsavedChanges = false;
+        this.showAutoSaveIndicator('Sauvegardé automatiquement');
+      }
+    } catch (error) {
+      console.error('Erreur auto-save:', error);
+      this.showAutoSaveIndicator('Erreur sauvegarde', true);
+    }
+  }
+
+  /**
+   * Affiche indicateur auto-save temporaire
+   */
+  showAutoSaveIndicator(message, isError = false) {
+    const indicator = document.createElement('div');
+    indicator.className = 'auto-save-indicator' + (isError ? ' error' : '');
+    indicator.textContent = message;
+    document.body.appendChild(indicator);
+
+    setTimeout(() => {
+      indicator.classList.add('visible');
+    }, 10);
+
+    setTimeout(() => {
+      indicator.classList.remove('visible');
+      setTimeout(() => indicator.remove(), 300);
+    }, 2000);
   }
 
   /**
@@ -925,7 +1003,6 @@ class SurveyViewer {
       }
 
       this.unsavedChanges = false;
-      this.updateSaveButton();
 
       alert('✓ Données sauvegardées');
 
@@ -972,7 +1049,6 @@ class SurveyViewer {
    */
   updateUIState() {
     // Activer/désactiver les boutons
-    this.btnSave.disabled = this.isReadOnly || !this.unsavedChanges;
     if (this.btnCompare) {
       this.btnCompare.disabled = this.users.length < 2;
     }
@@ -983,18 +1059,6 @@ class SurveyViewer {
       this.contentContainer.classList.add('readonly-mode');
     } else {
       this.contentContainer.classList.remove('readonly-mode');
-    }
-  }
-
-  /**
-   * Met à jour l'état du bouton Sauvegarder
-   */
-  updateSaveButton() {
-    this.btnSave.disabled = !this.unsavedChanges || this.isReadOnly;
-    if (this.unsavedChanges && !this.isReadOnly) {
-      this.btnSave.classList.add('has-changes');
-    } else {
-      this.btnSave.classList.remove('has-changes');
     }
   }
 
@@ -1162,7 +1226,6 @@ class SurveyViewer {
     // Boutons principaux
     this.btnSelectUser?.addEventListener('click', () => this.openSelectUserModal());
     this.btnCreateUser?.addEventListener('click', () => this.openCreateUserModal());
-    this.btnSave?.addEventListener('click', () => this.saveUserData());
     this.btnCompare?.addEventListener('click', () => this.openCompareModal());
     this.btnExport?.addEventListener('click', () => this.openExportModal());
 
@@ -1308,6 +1371,51 @@ class SurveyViewer {
     }
 
     this.lastScrollTop = scrollTop;
+  }
+
+  /**
+   * Ajuste padding content pour header sticky
+   */
+  adjustContentPaddingForHeader() {
+    if (!this.header) return;
+
+    const headerHeight = this.header.offsetHeight;
+
+    // Appliquer padding aux onglets
+    const tabs = document.querySelector('.survey-tabs');
+    if (tabs) {
+      tabs.style.marginTop = `${headerHeight + 16}px`;
+    }
+
+    // Appliquer aussi à la navigation sections
+    if (this.sectionsNav) {
+      this.sectionsNav.style.top = `${headerHeight}px`;
+    }
+  }
+
+  /**
+   * Implémente lazy loading des sections de tableau
+   */
+  setupLazyLoadingSections() {
+    const tables = this.contentContainer.querySelectorAll('table.requirements-table');
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('loaded');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        rootMargin: '200px' // Charger 200px avant visible
+      });
+
+      tables.forEach(table => {
+        table.classList.add('lazy-table');
+        observer.observe(table);
+      });
+    }
   }
 
   /**

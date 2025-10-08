@@ -46,10 +46,6 @@
             <span class="icon">➕</span>
             Créer
           </button>
-          <button class="btn-save" id="btnSave" disabled>
-            <span class="icon">💾</span>
-            Sauvegarder
-          </button>
           <button class="btn-export" id="btnExport" disabled>
             <span class="icon">📥</span>
             Exporter

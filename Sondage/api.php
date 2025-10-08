@@ -28,7 +28,35 @@ if ($action !== 'export') {
 }
 header('X-Content-Type-Options: nosniff');
 header('X-Frame-Options: DENY');
-header('Cache-Control: no-cache, must-revalidate');
+
+// Cache intelligent pour les sondages (action=survey uniquement)
+if ($action === 'survey') {
+    $fileName = sanitizeName($_GET['name'] ?? '');
+    if ($fileName) {
+        $fileNameFull = str_ends_with($fileName, '.md') ? $fileName : $fileName . '.md';
+        $filePath = __DIR__ . '/sondages/' . $fileNameFull;
+
+        if (file_exists($filePath)) {
+            $etag = md5_file($filePath);
+            $lastModified = filemtime($filePath);
+
+            header('Cache-Control: public, max-age=3600'); // 1h
+            header('ETag: "' . $etag . '"');
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $lastModified) . ' GMT');
+
+            // Vérifier si client a version à jour
+            if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] === '"' . $etag . '"') {
+                http_response_code(304);
+                exit;
+            }
+        }
+    }
+}
+
+// Par défaut, pas de cache pour les autres actions
+if ($action !== 'survey') {
+    header('Cache-Control: no-cache, must-revalidate');
+}
 
 // Chemins
 $surveysDir = __DIR__ . '/sondages';
