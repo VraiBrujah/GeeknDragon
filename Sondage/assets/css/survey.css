@@ -1775,9 +1775,9 @@ body {
   position: fixed;
   bottom: 24px;
   right: 24px;
-  background: white;
+  background: var(--color-bg-alt);
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   border: 2px solid var(--color-primary);
   min-width: 320px;
   max-width: 400px;
@@ -1806,7 +1806,7 @@ body {
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-  border: 3px solid white;
+  border: 3px solid var(--color-bg);
 }
 
 .mvp-stats-panel.collapsed:hover {
