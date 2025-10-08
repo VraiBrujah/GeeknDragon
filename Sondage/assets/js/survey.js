@@ -278,10 +278,10 @@ class SurveyViewer {
     console.log(`🚀 Contenu visible en ${(performance.now() - startTime).toFixed(0)}ms`);
     console.timeEnd('⏱️ Total Rendering');
 
-    // ÉTAPE 3: Convertir tableaux de façon ASYNCHRONE (ne bloque pas)
-    requestAnimationFrame(() => {
-      this.convertTablesAsync();
-    });
+    // ÉTAPE 3: Convertir tableaux IMMÉDIATEMENT (pas de requestAnimationFrame qui lag)
+    // requestAnimationFrame(() => { ← SUPPRIMÉ (cause 4s lag avec extensions Chrome)
+    this.convertTablesAsync();
+    // });
 
     // Afficher message si mode lecture seule
     if (this.isReadOnly) {
