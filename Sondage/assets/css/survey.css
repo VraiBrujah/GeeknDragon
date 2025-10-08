@@ -861,7 +861,7 @@ body {
 .scroll-to-top {
   position: fixed;
   bottom: var(--spacing-xl);
-  right: var(--spacing-xl);
+  left: var(--spacing-xl); /* Déplacé à gauche pour éviter conflit avec panneau MVP */
   width: 3rem;
   height: 3rem;
   background: var(--color-primary);
