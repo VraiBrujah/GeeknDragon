@@ -50,10 +50,6 @@
             <span class="icon">💾</span>
             Sauvegarder
           </button>
-          <button class="btn-compare" id="btnCompare" disabled>
-            <span class="icon">🔄</span>
-            Comparer
-          </button>
           <button class="btn-export" id="btnExport" disabled>
             <span class="icon">📥</span>
             Exporter

@@ -30,12 +30,18 @@ class SurveyViewer {
     this.unsavedChanges = false;
     this.isReadOnly = true; // true tant qu'aucun utilisateur n'est sélectionné
 
+    // Variables pour la gestion du header au scroll
+    this.lastScrollTop = 0;
+    this.scrollThreshold = 5;
+    this.headerHeight = 0;
+
     // Éléments DOM
     this.tabsContainer = document.getElementById('surveyTabs');
     this.sectionsNav = document.getElementById('sectionsNav');
     this.sectionsList = document.getElementById('sectionsList');
     this.contentContainer = document.getElementById('surveyContent');
     this.scrollToTopBtn = document.getElementById('scrollToTop');
+    this.header = document.querySelector('.survey-header');
 
     // Éléments gestion utilisateurs
     this.userManagerEl = document.getElementById('userManager');
@@ -967,7 +973,9 @@ class SurveyViewer {
   updateUIState() {
     // Activer/désactiver les boutons
     this.btnSave.disabled = this.isReadOnly || !this.unsavedChanges;
-    this.btnCompare.disabled = this.users.length < 2;
+    if (this.btnCompare) {
+      this.btnCompare.disabled = this.users.length < 2;
+    }
     this.btnExport.disabled = this.isReadOnly;
 
     // Ajouter/retirer classe au conteneur
@@ -1148,6 +1156,9 @@ class SurveyViewer {
    * Initialise les écouteurs d'événements
    */
   setupEventListeners() {
+    // Initialiser le comportement du header au scroll
+    this.initHeaderScroll();
+
     // Boutons principaux
     this.btnSelectUser?.addEventListener('click', () => this.openSelectUserModal());
     this.btnCreateUser?.addEventListener('click', () => this.openCreateUserModal());
@@ -1236,6 +1247,67 @@ class SurveyViewer {
         <p>${this.escapeHtml(message)}</p>
       </div>
     `;
+  }
+
+  /**
+   * Initialise le comportement du header au scroll
+   */
+  initHeaderScroll() {
+    if (!this.header) return;
+
+    // Calculer la hauteur initiale du header
+    this.headerHeight = this.header.offsetHeight;
+
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          this.updateHeaderOnScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    // Écouter le scroll
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Gérer le redimensionnement
+    window.addEventListener('resize', () => {
+      this.headerHeight = this.header.offsetHeight;
+    });
+  }
+
+  /**
+   * Met à jour l'état du header basé sur le scroll
+   */
+  updateHeaderOnScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollDiff = scrollTop - this.lastScrollTop;
+
+    // Toujours ajouter la classe compact après 50px de scroll
+    if (scrollTop > 50) {
+      this.header.classList.add('header-compact');
+    } else {
+      this.header.classList.remove('header-compact');
+    }
+
+    // Ignorer les petits mouvements de scroll
+    if (Math.abs(scrollDiff) < this.scrollThreshold) {
+      return;
+    }
+
+    // Masquer/afficher le header basé sur la direction du scroll
+    if (scrollDiff > 0 && scrollTop > this.headerHeight) {
+      // Scroll vers le bas - masquer le header
+      this.header.classList.add('header-hidden');
+    } else {
+      // Scroll vers le haut - afficher le header
+      this.header.classList.remove('header-hidden');
+    }
+
+    this.lastScrollTop = scrollTop;
   }
 
   /**

@@ -93,30 +93,60 @@ body {
 .survey-header {
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   color: white;
-  padding: var(--spacing-md) var(--spacing-lg);
+  padding: var(--spacing-sm) var(--spacing-md);
   box-shadow: var(--shadow-lg);
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
+  transition: transform 0.3s ease-in-out, padding 0.3s ease;
+  will-change: transform;
+}
+
+/* Header masqué au scroll down */
+.survey-header.header-hidden {
+  transform: translateY(-100%);
+}
+
+/* Header compact au scroll */
+.survey-header.header-compact {
+  padding: var(--spacing-xs) var(--spacing-md);
+}
+
+.survey-header.header-compact .survey-title {
+  font-size: 1.125rem;
+  margin-bottom: 0;
+}
+
+.survey-header.header-compact .survey-subtitle {
+  display: none;
+}
+
+.survey-header.header-compact .user-manager {
+  padding-top: var(--spacing-xs);
 }
 
 .survey-title {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
   text-align: center;
-  margin-bottom: var(--spacing-xs);
+  margin-bottom: 0.125rem;
+  transition: font-size 0.3s ease;
 }
 
 .title-ornament {
-  font-size: 1.25rem;
+  font-size: 1rem;
   opacity: 0.8;
+  display: none; /* Masqué par défaut sur mobile */
 }
 
 .survey-subtitle {
   text-align: center;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   opacity: 0.9;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  transition: all 0.3s ease;
 }
 
 /* Contrôles utilisateur */
@@ -223,6 +253,13 @@ body {
   border-bottom: 2px solid var(--color-border);
   overflow-x: auto;
   scrollbar-width: thin;
+  margin-top: 80px; /* Espace pour le header fixe - ajusté dynamiquement */
+  transition: margin-top 0.3s ease;
+}
+
+/* Ajustement quand le header est compact */
+.header-compact ~ .survey-tabs {
+  margin-top: 60px;
 }
 
 .tab-button {
@@ -1366,10 +1403,71 @@ body {
   box-shadow: var(--shadow-md);
 }
 
-/* === RESPONSIVE - Multi-utilisateur === */
+/* === RESPONSIVE DESKTOP === */
+@media (min-width: 769px) {
+  .survey-header {
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+
+  .survey-header.header-compact {
+    padding: var(--spacing-sm) var(--spacing-lg);
+  }
+
+  .survey-title {
+    font-size: 1.75rem;
+  }
+
+  .survey-header.header-compact .survey-title {
+    font-size: 1.375rem;
+  }
+
+  .title-ornament {
+    display: inline; /* Visible sur PC */
+    font-size: 1.5rem;
+  }
+
+  .survey-subtitle {
+    font-size: 0.9375rem;
+  }
+
+  .survey-tabs {
+    margin-top: 120px; /* Plus d'espace sur PC */
+  }
+
+  .header-compact ~ .survey-tabs {
+    margin-top: 80px;
+  }
+}
+
+/* === RESPONSIVE MOBILE === */
 @media (max-width: 768px) {
+  /* Optimisation header mobile */
   .user-manager {
     padding: 0;
+    gap: var(--spacing-xs);
+  }
+
+  .user-manager .current-user-display {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.75rem;
+  }
+
+  .user-manager .user-actions {
+    gap: 4px;
+  }
+
+  .user-manager .user-actions button {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+
+  .user-manager .user-actions button .icon {
+    display: none; /* Masquer les icônes sur mobile pour gagner de l'espace */
+  }
+
+  /* Ajustement contenu pour le header fixe */
+  .survey-layout {
+    padding-top: 0;
   }
 
   .current-user-display {
