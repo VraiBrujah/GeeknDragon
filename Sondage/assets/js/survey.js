@@ -1053,11 +1053,17 @@ class SurveyViewer {
       // Sauvegarder la session utilisateur
       this.saveUserSession();
 
-      // NE PAS recharger le sondage - juste appliquer les réponses sur DOM existant
-      // await this.loadSurveyContent(this.currentSurvey); ← SUPPRIMÉ (cause 5s lag)
+      // Vérifier si le contenu du sondage est déjà chargé
+      const contentExists = this.contentContainer.querySelector('table.requirements-table') !== null;
 
-      // Appliquer les réponses à l'interface IMMÉDIATEMENT
-      this.applyResponsesToUI();
+      if (!contentExists) {
+        // Première fois ou pas de contenu - charger le sondage
+        console.log('🔄 Chargement initial du sondage pour nouvel utilisateur');
+        await this.loadSurveyContent(this.currentSurvey);
+      } else {
+        // Contenu déjà chargé - juste appliquer les réponses (rapide)
+        this.applyResponsesToUI();
+      }
 
       // Mettre à jour l'affichage
       this.updateUserDisplay();
