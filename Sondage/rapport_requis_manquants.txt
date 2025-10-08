@@ -1,0 +1,72 @@
+
+================================================================================
+=== RAPPORT COMPARAISON DES REQUIS ===
+================================================================================
+
+Fichier source (FINAL_VALIDE): E:\GitHub\GeeknDragon\Sondage\archives\SONDAGE_ORIA_MVP_FINAL_VALIDE.md
+Fichier cible (4_MODULES): E:\GitHub\GeeknDragon\Sondage\sondages\SONDAGE_ORIA_MVP_4_MODULES.md
+
+Total requis manquants trouves: 8
+================================================================================
+
+================================================================================
+MODULE: MODULE 4: BIEN-ÊTRE
+Requis manquants: 8
+================================================================================
+
+ID SOURCE: BET-016
+SECTION: 4.3 Sécurité et Permissions
+DESCRIPTION: Gérer comptes utilisateurs
+COMPLEXITE: 5
+ESTIMATION: 8-16h
+--------------------------------------------------------------------------------
+
+ID SOURCE: BET-017
+SECTION: 4.3 Sécurité et Permissions
+DESCRIPTION: Attribuer rôles (Admin/Gestionnaire/etc)
+COMPLEXITE: 5
+ESTIMATION: 8-16h
+--------------------------------------------------------------------------------
+
+ID SOURCE: BET-018
+SECTION: 4.3 Sécurité et Permissions
+DESCRIPTION: Activer authentification multi-facteurs optionnelle (2FA) avec support TOTP apps, SMS et Email vérifiés par utilisateur
+COMPLEXITE: 7
+ESTIMATION: 24-40h
+--------------------------------------------------------------------------------
+
+ID SOURCE: BET-019
+SECTION: 4.3 Sécurité et Permissions
+DESCRIPTION: Politique mot de passe (complexité, expiration)
+COMPLEXITE: 5
+ESTIMATION: 8-16h
+--------------------------------------------------------------------------------
+
+ID SOURCE: BET-020
+SECTION: 4.3 Sécurité et Permissions
+DESCRIPTION: Journal audit complet (logs)
+COMPLEXITE: 7
+ESTIMATION: 24-40h
+--------------------------------------------------------------------------------
+
+ID SOURCE: BET-021
+SECTION: 4.3 Sécurité et Permissions
+DESCRIPTION: Gérer les sessions actives de tous utilisateurs et forcer déconnexion à distance en cas de compromission
+COMPLEXITE: 7
+ESTIMATION: 24-40h
+--------------------------------------------------------------------------------
+
+ID SOURCE: BET-022
+SECTION: 4.3 Sécurité et Permissions
+DESCRIPTION: Configurer les restrictions d'accès par plage d'adresses IP ou géolocalisation pour sécurité renforcée
+COMPLEXITE: 7
+ESTIMATION: 24-40h
+--------------------------------------------------------------------------------
+
+ID SOURCE: BET-023
+SECTION: 4.3 Sécurité et Permissions
+DESCRIPTION: Consulter historique complet connexions avec détection automatique activités suspectes par machine learning (anomalies IP, horaires, fréquence)
+COMPLEXITE: 9
+ESTIMATION: 80-120h
+--------------------------------------------------------------------------------
+

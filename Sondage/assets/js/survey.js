@@ -246,37 +246,98 @@ class SurveyViewer {
   }
 
   /**
-   * Affiche le contenu du sondage avec parsing Markdown
+   * Affiche le contenu du sondage avec parsing Markdown (VERSION ULTRA-RAPIDE)
    */
-  renderSurvey(markdownContent) {
+  async renderSurvey(markdownContent) {
     console.time('⏱️ Total Rendering');
+    const startTime = performance.now();
 
-    console.time('⏱️ Parse Markdown');
-    let html = marked.parse(markdownContent);
-    console.timeEnd('⏱️ Parse Markdown');
+    // ÉTAPE 1: Vérifier cache d'abord
+    const cacheKey = `survey_${this.currentSurvey.slug}_${this.currentSurvey.modified}`;
+    const cached = await this.loadFromCache(cacheKey);
 
-    console.time('⏱️ Convert Tables (Progressive)');
-    html = this.convertTablesToQCM(html);
-    console.timeEnd('⏱️ Convert Tables (Progressive)');
+    let html;
+    if (cached) {
+      console.log('✅ Cache HIT - Chargement instantané');
+      html = cached;
+    } else {
+      console.time('⏱️ Parse Markdown');
+      html = marked.parse(markdownContent);
+      console.timeEnd('⏱️ Parse Markdown');
 
-    console.time('⏱️ Render DOM');
+      // Sauvegarder en cache pour prochaine fois
+      this.saveToCache(cacheKey, html);
+    }
+
+    // ÉTAPE 2: Afficher HTML brut IMMÉDIATEMENT (sans conversion)
+    console.time('⏱️ Render DOM Initial');
     this.contentContainer.innerHTML = html;
-    console.timeEnd('⏱️ Render DOM');
+    console.timeEnd('⏱️ Render DOM Initial');
 
-    console.time('⏱️ Attach Listeners');
-    this.attachCheckboxListeners();
-    console.timeEnd('⏱️ Attach Listeners');
-
-    console.time('⏱️ Setup Lazy Loading');
-    this.setupLazyTableConversion();
-    console.timeEnd('⏱️ Setup Lazy Loading');
-
+    console.log(`🚀 Contenu visible en ${(performance.now() - startTime).toFixed(0)}ms`);
     console.timeEnd('⏱️ Total Rendering');
+
+    // ÉTAPE 3: Convertir tableaux de façon ASYNCHRONE (ne bloque pas)
+    requestAnimationFrame(() => {
+      this.convertTablesAsync();
+    });
 
     // Afficher message si mode lecture seule
     if (this.isReadOnly) {
       this.showReadOnlyBanner();
     }
+  }
+
+  /**
+   * Conversion asynchrone des tableaux (non-bloquante)
+   */
+  async convertTablesAsync() {
+    console.log('🔄 Début conversion asynchrone...');
+    const tables = this.contentContainer.querySelectorAll('table');
+    const tablesArray = Array.from(tables);
+
+    // Filtrer tableaux avec colonne MVP
+    const requirementTables = tablesArray.filter(table => {
+      const firstRow = table.querySelector('tbody tr');
+      if (!firstRow) return false;
+
+      const hasMVPColumn = Array.from(table.querySelectorAll('thead th')).some(th =>
+        th.textContent.includes('MVP')
+      );
+
+      return hasMVPColumn;
+    });
+
+    console.log(`📊 ${requirementTables.length} tableaux de requis détectés`);
+
+    // Convertir SEULEMENT le premier tableau immédiatement
+    if (requirementTables.length > 0) {
+      console.time('⏱️ Conversion tableau #0');
+      requirementTables[0].classList.add('requirements-table');
+      this.convertSingleTable(requirementTables[0]);
+      console.timeEnd('⏱️ Conversion tableau #0');
+      console.log('✅ Premier tableau prêt');
+    }
+
+    // Tous les autres en lazy loading
+    for (let i = 1; i < requirementTables.length; i++) {
+      const table = requirementTables[i];
+      table.classList.add('requirements-table', 'lazy-table-pending');
+      table.dataset.lazyIndex = i;
+
+      // Placeholder
+      const placeholder = document.createElement('div');
+      placeholder.className = 'lazy-table-placeholder';
+      placeholder.innerHTML = `
+        <div class="lazy-spinner"></div>
+        <p>Tableau ${i + 1}/${requirementTables.length} - Chargement au scroll...</p>
+      `;
+      table.style.position = 'relative';
+      table.insertBefore(placeholder, table.firstChild);
+    }
+
+    // Setup IntersectionObserver
+    this.setupLazyTableConversion();
   }
 
   /**
@@ -288,55 +349,51 @@ class SurveyViewer {
   }
 
   /**
-   * Convertit les tableaux Markdown en QCM interactifs (Version optimisée avec lazy loading)
+   * Charge HTML depuis le cache (LocalStorage pour l'instant, IndexedDB plus tard)
    */
-  convertTablesToQCM(html) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-    const tables = doc.querySelectorAll('table');
-
-    // Convertir seulement les PREMIERS tableaux immédiatement (pour affichage rapide)
-    const IMMEDIATE_TABLES_COUNT = 3; // Charger seulement 3 tableaux initialement
-    const tablesArray = Array.from(tables);
-
-    console.log(`📊 Total tableaux détectés: ${tablesArray.length}`);
-    console.log(`⚡ Conversion immédiate: ${Math.min(IMMEDIATE_TABLES_COUNT, tablesArray.length)} tableaux`);
-    console.log(`⏳ Conversion lazy: ${Math.max(0, tablesArray.length - IMMEDIATE_TABLES_COUNT)} tableaux`);
-
-    tablesArray.forEach((table, index) => {
-      const firstRow = table.querySelector('tbody tr');
-      if (!firstRow) return;
-
-      const hasMVPColumn = Array.from(table.querySelectorAll('thead th')).some(th =>
-        th.textContent.includes('MVP')
-      );
-
-      if (!hasMVPColumn) return;
-
-      // Marquer comme tableau de requis
-      table.classList.add('requirements-table');
-
-      // Convertir immédiatement les premiers tableaux
-      if (index < IMMEDIATE_TABLES_COUNT) {
-        this.convertSingleTable(table);
-      } else {
-        // Marquer pour conversion lazy (sera converti au scroll)
-        table.classList.add('lazy-table-pending');
-        table.dataset.lazyIndex = index;
-
-        // Ajouter indicateur de chargement
-        const placeholder = document.createElement('div');
-        placeholder.className = 'lazy-table-placeholder';
-        placeholder.innerHTML = `
-          <div class="lazy-spinner"></div>
-          <p>Tableau ${index + 1} - Chargement au scroll...</p>
-        `;
-        table.style.position = 'relative';
-        table.insertBefore(placeholder, table.firstChild);
+  async loadFromCache(key) {
+    try {
+      const cached = localStorage.getItem(key);
+      if (cached) {
+        console.log(`💾 Cache hit: ${key}`);
+        return cached;
       }
-    });
+    } catch (e) {
+      console.warn('Cache read error:', e);
+    }
+    return null;
+  }
 
-    return doc.body.innerHTML;
+  /**
+   * Sauvegarde HTML en cache
+   */
+  async saveToCache(key, html) {
+    try {
+      localStorage.setItem(key, html);
+      console.log(`💾 Cache saved: ${key} (${(html.length / 1024).toFixed(1)}KB)`);
+    } catch (e) {
+      console.warn('Cache write error (quota exceeded?):', e);
+      // Si quota dépassé, nettoyer vieux caches
+      this.cleanOldCaches();
+    }
+  }
+
+  /**
+   * Nettoie les vieux caches pour libérer de l'espace
+   */
+  cleanOldCaches() {
+    try {
+      const keys = Object.keys(localStorage);
+      const surveyKeys = keys.filter(k => k.startsWith('survey_'));
+
+      // Garder seulement les 3 plus récents
+      if (surveyKeys.length > 3) {
+        surveyKeys.slice(0, -3).forEach(k => localStorage.removeItem(k));
+        console.log(`🗑️ Nettoyé ${surveyKeys.length - 3} anciens caches`);
+      }
+    } catch (e) {
+      console.warn('Cache cleanup error:', e);
+    }
   }
 
   /**
