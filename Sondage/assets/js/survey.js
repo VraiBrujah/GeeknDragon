@@ -220,8 +220,8 @@ class SurveyViewer {
    */
   async loadSurveyContent(survey) {
     try {
-      // NE PAS afficher overlay - rend le rendu LENT
-      // this.showLoading(); ← SUPPRIMÉ
+      // Afficher indicateur léger (non-bloquant)
+      this.showLightLoadingIndicator();
 
       const fetchStart = performance.now();
 
@@ -253,8 +253,12 @@ class SurveyViewer {
       // Activer lazy loading pour les tableaux
       this.setupLazyLoadingSections();
 
+      // Masquer indicateur
+      this.hideLightLoadingIndicator();
+
     } catch (error) {
       console.error('Erreur chargement sondage:', error);
+      this.hideLightLoadingIndicator();
       this.showError('Impossible de charger le sondage');
     }
   }
@@ -1157,6 +1161,27 @@ class SurveyViewer {
         </div>
       </div>
     `;
+  }
+
+  /**
+   * Affiche indicateur de chargement léger (non-bloquant)
+   */
+  showLightLoadingIndicator() {
+    this.contentContainer.innerHTML = `
+      <div style="text-align: center; padding: 3rem 2rem;">
+        <div style="display: inline-block; width: 48px; height: 48px; border: 4px solid #e5e7eb; border-top-color: var(--color-primary); border-radius: 50%; animation: spin 1s linear infinite;"></div>
+        <p style="margin-top: 1.5rem; font-size: 1.125rem; color: var(--color-text);">
+          Chargement du sondage...
+        </p>
+      </div>
+    `;
+  }
+
+  /**
+   * Masque indicateur de chargement léger
+   */
+  hideLightLoadingIndicator() {
+    // Ne rien faire - le contenu sera remplacé par renderSurvey()
   }
 
   /**
