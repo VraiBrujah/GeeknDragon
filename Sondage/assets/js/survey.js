@@ -230,10 +230,10 @@ class SurveyViewer {
 
       const content = data.data.content;
 
-      // Parser et afficher le contenu
-      this.renderSurvey(content);
+      // Parser et afficher le contenu (ATTENDRE car async)
+      await this.renderSurvey(content);
 
-      // Générer navigation sections
+      // Générer navigation sections APRÈS rendu complet
       this.generateSectionsNav();
 
       // Activer lazy loading pour les tableaux
@@ -454,6 +454,50 @@ class SurveyViewer {
 
     // Attacher les listeners pour CE tableau uniquement
     this.attachCheckboxListenersForTable(table);
+
+    // Si un utilisateur est chargé, appliquer ses réponses sur ce tableau
+    if (this.currentUser && Object.keys(this.responses).length > 0) {
+      this.applyResponsesToTable(table);
+    }
+  }
+
+  /**
+   * Applique les réponses sur un tableau spécifique (pour lazy loading)
+   */
+  applyResponsesToTable(table) {
+    let appliedInTable = 0;
+
+    const rows = table.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+      const cells = row.querySelectorAll('td');
+      if (cells.length < 3) return;
+
+      const reqID = cells[0].textContent.trim();
+      const reqResponses = this.responses[reqID];
+
+      if (!reqResponses) return;
+
+      Object.keys(reqResponses).forEach(field => {
+        const value = reqResponses[field];
+        const elementId = `${reqID}_${field}`;
+        const element = document.getElementById(elementId);
+
+        if (element) {
+          if (element.type === 'checkbox') {
+            element.checked = value;
+          } else if (element.type === 'number' || element.tagName === 'INPUT') {
+            element.value = value;
+          } else if (element.tagName === 'TEXTAREA') {
+            element.value = value;
+          }
+          appliedInTable++;
+        }
+      });
+    });
+
+    if (appliedInTable > 0) {
+      console.log(`📝 ${appliedInTable} réponses appliquées sur tableau lazy converti`);
+    }
   }
 
   /**
@@ -984,10 +1028,10 @@ class SurveyViewer {
       // Sauvegarder la session utilisateur
       this.saveUserSession();
 
-      // Recharger le sondage avec les réponses
-      await this.loadSurveyContent(this.currentSurvey);
+      // NE PAS recharger le sondage - juste appliquer les réponses sur DOM existant
+      // await this.loadSurveyContent(this.currentSurvey); ← SUPPRIMÉ (cause 5s lag)
 
-      // Appliquer les réponses à l'interface
+      // Appliquer les réponses à l'interface IMMÉDIATEMENT
       this.applyResponsesToUI();
 
       // Mettre à jour l'affichage
@@ -1000,7 +1044,7 @@ class SurveyViewer {
       // Masquer le chargement
       this.hideLoadingOverlay();
 
-      alert(`✓ Utilisateur "${username}" sélectionné`);
+      console.log(`✓ Utilisateur "${username}" sélectionné - ${Object.keys(this.responses).length} requis chargés`);
 
     } catch (error) {
       console.error('Erreur sélection utilisateur:', error);
@@ -1016,6 +1060,9 @@ class SurveyViewer {
    * Applique les réponses chargées à l'interface
    */
   applyResponsesToUI() {
+    let appliedCount = 0;
+    let notFoundCount = 0;
+
     Object.keys(this.responses).forEach(reqID => {
       const reqResponses = this.responses[reqID];
 
@@ -1035,9 +1082,14 @@ class SurveyViewer {
             element.value = value;
             element.disabled = false;
           }
+          appliedCount++;
+        } else {
+          notFoundCount++;
         }
       });
     });
+
+    console.log(`📝 Réponses appliquées: ${appliedCount} trouvés, ${notFoundCount} en attente (tableaux lazy)`);
   }
 
   /**
