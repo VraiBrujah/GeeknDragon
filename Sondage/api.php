@@ -330,7 +330,7 @@ function loadUserData(string $usersDir, string $surveySlug, string $userSlug): ?
 /**
  * Sauvegarde les données d'un utilisateur
  */
-function saveUserData(string $usersDir, string $surveySlug, string $userSlug, array $responses, array $customRequirements = []): array
+function saveUserData(string $usersDir, string $surveySlug, string $userSlug, array $responses, array $customRequirements = [], ?int $scrollPosition = null, ?string $lastEditedElement = null): array
 {
     $filePath = getUserFilePath($usersDir, $surveySlug, $userSlug);
 
@@ -349,6 +349,8 @@ function saveUserData(string $usersDir, string $surveySlug, string $userSlug, ar
     // Mettre à jour les données
     $userData['responses'] = $responses;
     $userData['custom_requirements'] = $customRequirements;
+    $userData['scroll_position'] = $scrollPosition;
+    $userData['last_edited_element'] = $lastEditedElement;
     $userData['modified_at'] = date('c');
 
     $json = json_encode($userData, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR);
@@ -566,6 +568,8 @@ try {
             $username = $data['user'] ?? '';
             $responses = $data['responses'] ?? [];
             $customRequirements = $data['custom_requirements'] ?? [];
+            $scrollPosition = $data['scroll_position'] ?? null;
+            $lastEditedElement = $data['last_edited_element'] ?? null;
 
             $surveySlug = generateSlug($surveyName);
             $userSlug = generateSlug($username);
@@ -574,7 +578,7 @@ try {
                 jsonResponse(false, null, 'Paramètres invalides', 400);
             }
 
-            $result = saveUserData($usersDir, $surveySlug, $userSlug, $responses, $customRequirements);
+            $result = saveUserData($usersDir, $surveySlug, $userSlug, $responses, $customRequirements, $scrollPosition, $lastEditedElement);
 
             if (!$result['success']) {
                 jsonResponse(false, null, $result['error'], 500);
