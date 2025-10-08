@@ -249,16 +249,29 @@ class SurveyViewer {
    * Affiche le contenu du sondage avec parsing Markdown
    */
   renderSurvey(markdownContent) {
-    // Parser markdown
+    console.time('⏱️ Total Rendering');
+
+    console.time('⏱️ Parse Markdown');
     let html = marked.parse(markdownContent);
+    console.timeEnd('⏱️ Parse Markdown');
 
-    // Convertir les tableaux en QCM interactifs
+    console.time('⏱️ Convert Tables (Progressive)');
     html = this.convertTablesToQCM(html);
+    console.timeEnd('⏱️ Convert Tables (Progressive)');
 
+    console.time('⏱️ Render DOM');
     this.contentContainer.innerHTML = html;
+    console.timeEnd('⏱️ Render DOM');
 
-    // Attacher les événements aux cases à cocher
+    console.time('⏱️ Attach Listeners');
     this.attachCheckboxListeners();
+    console.timeEnd('⏱️ Attach Listeners');
+
+    console.time('⏱️ Setup Lazy Loading');
+    this.setupLazyTableConversion();
+    console.timeEnd('⏱️ Setup Lazy Loading');
+
+    console.timeEnd('⏱️ Total Rendering');
 
     // Afficher message si mode lecture seule
     if (this.isReadOnly) {
@@ -275,14 +288,22 @@ class SurveyViewer {
   }
 
   /**
-   * Convertit les tableaux Markdown en QCM interactifs
+   * Convertit les tableaux Markdown en QCM interactifs (Version optimisée avec lazy loading)
    */
   convertTablesToQCM(html) {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
     const tables = doc.querySelectorAll('table');
 
-    tables.forEach(table => {
+    // Convertir seulement les PREMIERS tableaux immédiatement (pour affichage rapide)
+    const IMMEDIATE_TABLES_COUNT = 3; // Charger seulement 3 tableaux initialement
+    const tablesArray = Array.from(tables);
+
+    console.log(`📊 Total tableaux détectés: ${tablesArray.length}`);
+    console.log(`⚡ Conversion immédiate: ${Math.min(IMMEDIATE_TABLES_COUNT, tablesArray.length)} tableaux`);
+    console.log(`⏳ Conversion lazy: ${Math.max(0, tablesArray.length - IMMEDIATE_TABLES_COUNT)} tableaux`);
+
+    tablesArray.forEach((table, index) => {
       const firstRow = table.querySelector('tbody tr');
       if (!firstRow) return;
 
@@ -292,51 +313,175 @@ class SurveyViewer {
 
       if (!hasMVPColumn) return;
 
-      const rows = table.querySelectorAll('tbody tr');
-      rows.forEach(row => {
-        const cells = row.querySelectorAll('td');
-        if (cells.length < 3) return;
-
-        const reqID = cells[0].textContent.trim();
-
-        // Cellule MVP
-        if (cells[2]) {
-          cells[2].innerHTML = this.createCheckbox(reqID, 'mvp');
-        }
-
-        // Cellules rôles (3 à 8)
-        for (let i = 3; i <= 8 && i < cells.length - 3; i++) {
-          const roleCell = cells[i];
-          const roleIndex = i - 3;
-          const roleName = this.getRoleName(roleIndex);
-
-          const actions = ['C', 'L', 'E', 'S', 'X', 'V'];
-          let checkboxesHTML = '';
-
-          actions.forEach(action => {
-            checkboxesHTML += this.createCheckbox(reqID, `role_${roleName}_${action}`, action);
-          });
-
-          roleCell.innerHTML = checkboxesHTML;
-        }
-
-        // Cellule Priorité (9)
-        const priorityCell = cells[9];
-        if (priorityCell) {
-          priorityCell.innerHTML = this.createPriorityField(reqID);
-        }
-
-        // Cellule Notes (dernière)
-        const notesCell = cells[cells.length - 1];
-        if (notesCell) {
-          notesCell.innerHTML = this.createNotesField(reqID);
-        }
-      });
-
+      // Marquer comme tableau de requis
       table.classList.add('requirements-table');
+
+      // Convertir immédiatement les premiers tableaux
+      if (index < IMMEDIATE_TABLES_COUNT) {
+        this.convertSingleTable(table);
+      } else {
+        // Marquer pour conversion lazy (sera converti au scroll)
+        table.classList.add('lazy-table-pending');
+        table.dataset.lazyIndex = index;
+
+        // Ajouter indicateur de chargement
+        const placeholder = document.createElement('div');
+        placeholder.className = 'lazy-table-placeholder';
+        placeholder.innerHTML = `
+          <div class="lazy-spinner"></div>
+          <p>Tableau ${index + 1} - Chargement au scroll...</p>
+        `;
+        table.style.position = 'relative';
+        table.insertBefore(placeholder, table.firstChild);
+      }
     });
 
     return doc.body.innerHTML;
+  }
+
+  /**
+   * Convertit un seul tableau en QCM (appelé immédiatement ou en lazy)
+   */
+  convertSingleTable(table) {
+    const rows = table.querySelectorAll('tbody tr');
+
+    rows.forEach(row => {
+      const cells = row.querySelectorAll('td');
+      if (cells.length < 3) return;
+
+      const reqID = cells[0].textContent.trim();
+
+      // Cellule MVP
+      if (cells[2]) {
+        cells[2].innerHTML = this.createCheckbox(reqID, 'mvp');
+      }
+
+      // Cellules rôles (3 à 8)
+      for (let i = 3; i <= 8 && i < cells.length - 3; i++) {
+        const roleCell = cells[i];
+        const roleIndex = i - 3;
+        const roleName = this.getRoleName(roleIndex);
+
+        const actions = ['C', 'L', 'E', 'S', 'X', 'V'];
+        let checkboxesHTML = '';
+
+        actions.forEach(action => {
+          checkboxesHTML += this.createCheckbox(reqID, `role_${roleName}_${action}`, action);
+        });
+
+        roleCell.innerHTML = checkboxesHTML;
+      }
+
+      // Cellule Priorité (9)
+      const priorityCell = cells[9];
+      if (priorityCell) {
+        priorityCell.innerHTML = this.createPriorityField(reqID);
+      }
+
+      // Cellule Notes (dernière)
+      const notesCell = cells[cells.length - 1];
+      if (notesCell) {
+        notesCell.innerHTML = this.createNotesField(reqID);
+      }
+    });
+
+    // Marquer comme converti
+    table.classList.remove('lazy-table-pending');
+    table.classList.add('lazy-table-converted');
+
+    // Retirer le placeholder si présent
+    const placeholder = table.querySelector('.lazy-table-placeholder');
+    if (placeholder) {
+      placeholder.remove();
+    }
+
+    // Attacher les listeners pour CE tableau uniquement
+    this.attachCheckboxListenersForTable(table);
+  }
+
+  /**
+   * Attache les listeners pour un tableau spécifique (optimisation lazy)
+   */
+  attachCheckboxListenersForTable(table) {
+    // Gérer les checkboxes
+    const checkboxes = table.querySelectorAll('input[type="checkbox"]');
+
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', (e) => {
+        if (this.isReadOnly) {
+          e.preventDefault();
+          return;
+        }
+
+        const reqID = e.target.dataset.req;
+        const field = e.target.dataset.field;
+        const checked = e.target.checked;
+
+        if (!this.responses[reqID]) {
+          this.responses[reqID] = {};
+        }
+
+        this.responses[reqID][field] = checked;
+        this.unsavedChanges = true;
+        this.debouncedAutoSave();
+      });
+    });
+
+    // Gérer les champs de priorité
+    const priorityFields = table.querySelectorAll('input.priority-field');
+
+    priorityFields.forEach(field => {
+      field.addEventListener('input', (e) => {
+        if (this.isReadOnly) {
+          e.preventDefault();
+          return;
+        }
+
+        const reqID = e.target.dataset.req;
+        const fieldName = e.target.dataset.field;
+        let value = parseInt(e.target.value, 10);
+
+        if (value < 1) value = 1;
+        if (value > 10) value = 10;
+        if (isNaN(value)) value = '';
+
+        if (value !== '' && e.target.value !== value.toString()) {
+          e.target.value = value;
+        }
+
+        if (!this.responses[reqID]) {
+          this.responses[reqID] = {};
+        }
+
+        this.responses[reqID][fieldName] = value;
+        this.unsavedChanges = true;
+        this.debouncedAutoSave();
+      });
+    });
+
+    // Gérer les champs de notes
+    const notesFields = table.querySelectorAll('textarea.notes-field');
+
+    notesFields.forEach(field => {
+      field.addEventListener('input', (e) => {
+        if (this.isReadOnly) {
+          e.preventDefault();
+          return;
+        }
+
+        const reqID = e.target.dataset.req;
+        const fieldName = e.target.dataset.field;
+        const value = e.target.value;
+
+        if (!this.responses[reqID]) {
+          this.responses[reqID] = {};
+        }
+
+        this.responses[reqID][fieldName] = value;
+        this.unsavedChanges = true;
+        this.debouncedAutoSave();
+      });
+    });
   }
 
   /**
@@ -1394,7 +1539,48 @@ class SurveyViewer {
   }
 
   /**
-   * Implémente lazy loading des sections de tableau
+   * Implémente lazy loading des tableaux non convertis (IntersectionObserver)
+   */
+  setupLazyTableConversion() {
+    const pendingTables = this.contentContainer.querySelectorAll('table.lazy-table-pending');
+
+    console.log(`🔍 Tableaux en attente de conversion lazy: ${pendingTables.length}`);
+
+    if ('IntersectionObserver' in window && pendingTables.length > 0) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const table = entry.target;
+            const tableIndex = table.dataset.lazyIndex;
+
+            console.log(`⚡ Conversion lazy tableau #${tableIndex}`);
+            console.time(`⏱️ Tableau #${tableIndex}`);
+
+            // Convertir le tableau maintenant
+            this.convertSingleTable(table);
+
+            console.timeEnd(`⏱️ Tableau #${tableIndex}`);
+
+            // Arrêter d'observer ce tableau
+            observer.unobserve(table);
+          }
+        });
+      }, {
+        rootMargin: '500px' // Charger 500px AVANT que l'utilisateur n'y arrive
+      });
+
+      pendingTables.forEach(table => {
+        observer.observe(table);
+      });
+    } else if (!('IntersectionObserver' in window)) {
+      // Fallback pour vieux navigateurs - convertir tout immédiatement
+      console.warn('⚠️ IntersectionObserver non supporté - conversion complète');
+      pendingTables.forEach(table => this.convertSingleTable(table));
+    }
+  }
+
+  /**
+   * Implémente lazy loading des sections de tableau (ancienne méthode - pour CSS uniquement)
    */
   setupLazyLoadingSections() {
     const tables = this.contentContainer.querySelectorAll('table.requirements-table');
