@@ -214,7 +214,7 @@ Et cette nuit, debout face au sanctuaire où tout allait enfin s'accomplir, elle
 
 *Ses yeux. Quelque chose changea dans ses yeux.*
 
-*Le monde bascula autour d'elle, la réalité elle-même se déformant. Les couleurs s'inversèrent. Rouge devenait noir. Noir devenait pourpre. Pourpre devenait TOUT, dominant, écrasant, dévorant chaque autre teinte. Le cercle brillait maintenant, aveuglant, et elle voyait plus que de la simple lumière. Elle voyait les flux d'Éther invisibles, ces rivières d'énergie pure qui coulaient à travers la pierre millénaire, à travers l'air raréfié de la chambre, à travers sa propre chair mourante.*
+*Le monde bascula autour d'elle, la réalité elle-même se déformant. Les couleurs s'inversèrent. Rouge devenait noir. Noir devenait pourpre. Pourpre devenait TOUT, dominant, écrasant, dévorant chaque autre teinte. Le cercle brillait maintenant, aveuglant, et elle percevait plus que de la simple lumière. Les flux d'Éther invisibles se révélaient à elle, ces rivières d'énergie pure qui coulaient à travers la pierre millénaire, à travers l'air raréfié de la chambre, à travers sa propre chair mourante.*
 
 *Et dans ces flux d'éther, elle vit des visages.*
 
@@ -277,7 +277,7 @@ Et cette nuit, debout face au sanctuaire où tout allait enfin s'accomplir, elle
 
 *Le monde avait changé. Complètement. Irrémédiablement.*
 
-*Tout vibrait de couleurs qu'elle n'avait jamais vues avant, de spectres de lumière que les yeux mortels ne pouvaient pas percevoir. Les murs suintaient de chaleur fantôme, empreintes thermiques de toutes les mains qui les avaient touchés au fil des siècles, fantômes de chaleur qui persistaient. Chaque pierre pulsait avec une lueur intérieure qu'elle seule pouvait voir. L'air lui-même semblait visible, des courants de température différentes créant des rivières et des tourbillons qu'elle pouvait suivre du regard.*
+*Tout vibrait de couleurs qu'elle n'avait jamais vues avant, de spectres de lumière que les yeux mortels ne pouvaient pas percevoir. Les murs suintaient de chaleur fantôme, empreintes thermiques de toutes les mains qui les avaient touchés au fil des siècles, fantômes de chaleur qui persistaient. Chaque pierre pulsait avec une lueur intérieure désormais manifeste à ses sens transformés. L'air lui-même devenait visible, des courants de température différentes créant des rivières et des tourbillons qui dansaient sous son regard nouveau.*
 
 *Et le sang. Oh dieux, le sang.*
 
@@ -405,7 +405,7 @@ Et cette nuit, debout face au sanctuaire où tout allait enfin s'accomplir, elle
 
 ---
 
-Un millénaire s'était écoulé depuis cette nuit maudite. Mille ans d'errance à travers les ruines oubliées, mille ans à dévorer les vivants pour sustenter sa chair morte, mille ans à chercher dans chaque grimoire interdit, chaque sanctuaire éthérien, chaque fragment de savoir perdu. Mille ans de solitude absolue, car comment partager cette quête insensée sans révéler l'ampleur de sa folie ?
+Un millénaire s'était écoulé depuis cette nuit maudite. Dix siècles d'errance à travers les ruines oubliées, dix siècles à dévorer les vivants pour sustenter sa chair morte, dix siècles à chercher dans chaque grimoire interdit, chaque sanctuaire éthérien, chaque fragment de savoir perdu. Un millénaire de solitude absolue, car comment partager cette quête insensée sans révéler l'ampleur de sa folie ?
 
 Elle avait tout essayé. La nécromancie brute, qui ne ranimait que des marionnettes sans âme. Les pactes démoniaques, qui exigeaient des prix qu'elle n'était pas prête à payer. Les rituels de résurrection mineurs, qui échouaient toujours, toujours, laissant ses mains vides et son cœur mort plus glacé encore.
 
@@ -413,7 +413,7 @@ Mais le Codex murmurait une autre voie. Un phylactère de l'Étoile Pourpre. Si 
 
 *Si un tel artefact existe.*
 
-Mille ans à chercher quelque chose qui n'existe peut-être plus. Peut-être n'a jamais existé. Mais c'était sa seule chance. Son unique espoir dans l'éternité glacée.
+Dix siècles à chercher quelque chose qui n'existe peut-être plus. Peut-être n'a jamais existé. Mais c'était sa seule chance. Son unique espoir dans l'éternité glacée.
 
 Alors elle cherchait. Sanctuaire après sanctuaire. Ruine après ruine. Le Rituel de Connexion, encore et encore. Des centaines de fois. Dans les Monts de l'Éther, dans les cryptes de Valgaris, dans les temples engloutis sous Sylvelune. Partout où les Éthériens avaient laissé leur marque.
 
@@ -509,7 +509,7 @@ Elle lisait dans la pierre les empreintes effacées du temps, les souffles oubli
 
 Le sang était partout pour ses sens aiguisés. La chaleur résiduelle des corps qui avaient foulé ces dalles. Le mouvement fantomatique des processions d'autrefois. Et surtout, la peur cristallisée dans la pierre, accumulée au fil des siècles.
 
-Les rats tapis dans les interstices vibraient à ses yeux, leurs petits cœurs battant la chamade. Leurs veines rouges dessinaient des réseaux luminescents sous leur fourrure terne, chaque battement pulsant dans sa vision. Leur peur aussi, elle la voyait, la sentait, la goûtait presque.
+Les rats tapis dans les interstices vibraient à ses yeux, leurs petits cœurs battant la chamade. Leurs veines rouges dessinaient des réseaux luminescents sous leur fourrure terne, chaque battement pulsant dans sa vision. Leur peur aussi s'ouvrait à elle comme un livre, tangible, presque goûtable dans l'air épaissi.
 
 Sa vision surnaturelle n'était pas limitée à la chaleur du vivant. L'ultra-luminescence, cette lueur spectrale qui révélait la radiance invisible de la magie imprégnant la pierre, était elle aussi accessible à ses yeux transformés. Les fresques thaumaturgiques écorchées du sanctuaire se révélaient sous cette lumière interdite. Les symboles luisaient d'une pâle phosphorescence, sculptés dans des encres oubliées mélangées au sang des sacrifiés.
 
@@ -561,7 +561,7 @@ Les fresques devenaient plus denses, plus tourmentées à mesure qu'elle s'enfon
 
 *Apogée. Gloire. Hubris.*
 
-Sur les murs les mieux préservés, elle voyait les Éthériens à leur zénith. Des silhouettes gracieuses drapées de lumière pure, manipulant l'Éther. Ils façonnaient la matière d'un geste, inversaient le cours des rivières d'une pensée, faisaient croître des cités entières en une nuit. Leurs tours cristallines touchaient les nuages, leurs jardins suspendus défiaient la gravité elle-même, leurs yeux brillaient d'une sagesse qui semblait divine.
+Sur les murs les mieux préservés s'offrait la vision des Éthériens à leur zénith. Des silhouettes gracieuses drapées de lumière pure, manipulant l'Éther. Ils façonnaient la matière d'un geste, inversaient le cours des rivières d'une pensée, faisaient croître des cités entières en une nuit. Leurs tours cristallines touchaient les nuages, leurs jardins suspendus défiaient la gravité elle-même, leurs yeux brillaient d'une sagesse qui semblait divine.
 
 Mortelle, elle avait parcouru ces fresques avec émerveillement, le cœur battant d'espoir. *Ils avaient transcendé. Ils avaient trouvé le secret. Si eux pouvaient le faire, pourquoi pas elle ?*
 
@@ -691,7 +691,7 @@ Elle ne répondit pas immédiatement, son regard rubescent fixé sur l'horizon t
 
 Un silence amer.
 
-❖ Combien de fois ai-je fait ceci, Kael ? murmura-t-elle, presque pour elle-même. Combien de sanctuaires ? Combien de nuits à espérer, pour ne trouver que vide ?
+❖ Combien de fois ai-je fait ceci, Kael ? murmura-t-elle, presque pour elle-même. Combien de sanctuaires ? Combien de nuits à espérer, pour ne rencontrer que le vide ?
 
 Elle secoua la tête, chassant la lassitude.
 
@@ -707,7 +707,7 @@ Kael inclina la tête si bas que son front toucha la pierre, tremblant.
 
 Un long silence. Morwen le regarda, et pour un instant, il vit dans ses yeux rouges quelque chose qui ressemblait à du désespoir.
 
-❖ Je sais, dit-elle plus doucement. Je sais que tu as fait de ton mieux. Mais comprends... c'est peut-être la dernière chance. Peut-être qu'il n'existe pas. Peut-être que tout ceci... mille ans... pour rien.
+❖ Je sais, dit-elle plus doucement. Je sais que tu as fait de ton mieux. Mais comprends... c'est peut-être la dernière chance. Peut-être qu'il n'existe pas. Peut-être que tout ceci... dix siècles d'errance... pour rien.
 
 Elle se redressa brutalement, masque froid se reformant.
 
@@ -865,9 +865,9 @@ Pas un artefact. Pas un objet ancien préservé dans l'ambre du temps. Pas une r
 
 Une silhouette endormie dans un lit simple, cheveux violets étalés sur l'oreiller blanc. Un corps respirant, un cœur battant, chaud de vie.
 
-*NON. C'EST IMPOSSIBLE.*
+*NON. CELA NE PEUT ÊTRE.*
 
-*Trois cent quarante-six fois. Trois cent quarante-six rituels. Trois cent quarante-six sanctuaires fouillés. Trois cent quarante-six échecs. Mille ans à arpenter ce monde dans chaque direction, suivant les flux d'Éther, cherchant le moindre écho de magie éthérienne. Rien. Jamais rien.*
+*Trois cent quarante-six fois. Trois cent quarante-six rituels. Trois cent quarante-six sanctuaires fouillés. Trois cent quarante-six échecs. Dix siècles à arpenter ce monde dans chaque direction, suivant les flux d'Éther, cherchant le moindre écho de magie éthérienne. Rien. Jamais rien.*
 
 *Elle avait couvert des milliers de kilomètres. Chaque ruine majeure. Chaque crypte scellée. Chaque bibliothèque interdite. Elle avait fouillé, interrogé, torturé, acheté des informations. Suivi chaque rumeur, chaque légende, chaque murmure d'espoir. À chaque fois, le vide. Le néant. L'absence totale.*
 
@@ -875,13 +875,13 @@ Une silhouette endormie dans un lit simple, cheveux violets étalés sur l'oreil
 
 *Et le rituel, trois cent quarante-six fois, avait confirmé ce qu'elle savait déjà. Plus rien. Plus personne. Plus aucune trace de l'Étoile Pourpre dans ce monde.*
 
-*Alors COMMENT--*
+*Alors COMMENT CECI PEUT-IL ÊTRE RÉEL--*
 
 *Et pourtant.*
 
-Même à travers la distance, même à travers les protections, elle la voyait. L'Étoile Pourpre vivait en elle. Pas en faculté acquise. Pas un artefact porté. Mais essence innée, tissée dans chaque cellule de son corps, pulsant en synchronie parfaite avec son cœur. Sang éthérien pur coulant dans ses veines. Un phylactère. Un réceptacle. Mais VIVANT.
+Même à travers la distance, même à travers les protections, elle la contemplait. L'Étoile Pourpre vivait en elle. Pas en faculté acquise. Pas un artefact porté. Mais essence innée, tissée dans chaque cellule de son corps, pulsant en synchronie parfaite avec son cœur. Sang éthérien pur coulant dans ses veines. Un phylactère. Un réceptacle. Mais VIVANT.
 
-*C'est impossible. La magie doit mentir. Le rituel a dû échouer. C'est une illusion. Une erreur. Un piège.*
+*Ceci ne peut être vrai. La magie doit mentir. Le rituel a dû échouer. C'est une illusion. Une erreur. Un piège.*
 
 *Mais la magie ne ment jamais.*
 
@@ -889,9 +889,9 @@ Même à travers la distance, même à travers les protections, elle la voyait. 
 
 *Un laboratoire.*
 
-*Quelqu'un l'avait CRÉÉE. Quelqu'un possédait le savoir perdu. Quelqu'un avait réussi ce qu'elle-même cherchait depuis mille ans.*
+*Quelqu'un l'avait CRÉÉE. Quelqu'un possédait le savoir perdu. Quelqu'un avait réussi ce qu'elle-même cherchait depuis dix siècles.*
 
-*Mille ans à chercher un artefact mort. Et la clé... la clé marchait, respirait, VIVAIT depuis le début.*
+*Dix siècles à chercher un artefact mort. Et la clé... la clé marchait, respirait, VIVAIT depuis le début.*
 
 La vision se brisa violemment.
 
@@ -903,15 +903,15 @@ Elle inspira brutalement, un son rauque, presque un sanglot étouffé.
 
 *Non. Reprends-toi. REPRENDS-TOI.*
 
-❖ C'est... impossible, murmura-t-elle d'abord, voix brisée, incrédule. Impossible.
+❖ C'est... une aberration, murmura-t-elle d'abord, voix brisée, incrédule. Cela ne peut être.
 
-Elle secoua la tête violemment, comme pour chasser une hallucination née de mille ans de désespoir. Ses doigts griffèrent la pierre, cherchant un ancrage dans la réalité.
+Elle secoua la tête violemment, comme pour chasser une hallucination née de dix siècles de désespoir. Ses doigts griffèrent la pierre, cherchant un ancrage dans la réalité.
 
 ❖ Trois cent quarante-six fois, siffla-t-elle entre ses dents serrées, presque un rire hystérique. Trois cent quarante-six fois... RIEN. Et maintenant... maintenant au trois cent quarante-septième...
 
 Sa voix se brisa complètement.
 
-❖ Non. NON. C'est une erreur. Le rituel a mal tourné. Kael a fait une erreur. Les composants étaient corrompus. C'est une illusion. Une hallucination. Je... je deviens folle. Mille ans ont fini par...
+❖ Non. NON. C'est une erreur. Le rituel a mal tourné. Kael a fait une erreur. Les composants étaient corrompus. C'est une illusion. Une hallucination. Je... je deviens folle. Dix siècles ont fini par...
 
 Elle s'arrêta net, tremblante. Ses yeux se fermèrent. Elle tenta de compter mentalement jusqu'à dix, mais perdit le fil à trois.
 
@@ -923,15 +923,15 @@ Quand elle rouvrit les yeux, ils étaient plus froids. Plus durs. Elle essuya le
 
 Elle rit, un son brisé, presque hystérique.
 
-❖ Phylactère... vivant. Lignée éthérienne. Impossible mais... la magie ne ment jamais. C'est réel.
+❖ Phylactère... vivant. Lignée éthérienne. Aberration réelle mais... la magie ne ment jamais. C'est véridique.
 
-Elle inspira profondément, se forçant à analyser cliniquement, à traiter ceci comme n'importe quelle autre information et non comme le miracle qui brise mille ans de désespoir.
+Elle inspira profondément, se forçant à analyser cliniquement, à traiter ceci comme n'importe quelle autre information et non comme le miracle qui brise dix siècles de désespoir.
 
 ❖ Cheveux mauves, environ vingt hivers. Région nord d'Eldoria. Créé... dans un laboratoire. Son sang récemment exposé. Les protections ont cédé.
 
 Elle se redressa avec l'aide de saatha, jambes encore instables.
 
-❖ Quelqu'un possède le savoir que je cherche depuis mille ans, dit-elle lentement, chaque mot mesuré. Quelqu'un a réussi. Quelqu'un a CRÉÉ un porteur vivant de l'Étoile Pourpre alors que j'ai passé mille ans à chercher des reliques mortes.
+❖ Quelqu'un possède le savoir que je cherche depuis un millénaire, dit-elle lentement, chaque mot mesuré. Quelqu'un a réussi. Quelqu'un a CRÉÉ un porteur vivant de l'Étoile Pourpre alors que j'ai passé dix siècles à chercher des reliques mortes.
 
 Un long silence, puis un rire amer.
 
