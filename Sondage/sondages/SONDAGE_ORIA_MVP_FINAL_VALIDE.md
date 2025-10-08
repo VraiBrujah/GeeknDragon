@@ -685,8 +685,20 @@ Ce module gère le bien-être des employés, la prévention, l'engagement et l'i
 | BET-014 | Gérer la hiérarchie complète des postes et titres d'emploi avec responsabilités et niveaux de rémunération | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h |  |
 | BET-015 | Configurer les types d'événements et incidents avec niveau de gravité et procédures de traitement | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h |  |
 
+### 4.3 Sécurité et Permissions
 
-### 4.3 Intelligence Artificielle Prédictive (100% Local)
+| Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| BET-016 | Gérer comptes utilisateurs | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 5 | 8-16h |  |
+| BET-017 | Attribuer rôles (Admin/Gestionnaire/etc) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 5 | 8-16h |  |
+| BET-018 | Activer authentification multi-facteurs optionnelle (2FA) avec support TOTP apps, SMS et Email vérifiés par utilisateur | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h | Sécurité renforcée accès sensibles |
+| BET-019 | Politique mot de passe (complexité, expiration) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 5 | 8-16h |  |
+| BET-020 | Journal audit complet (logs) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h |  |
+| BET-021 | Gérer les sessions actives de tous utilisateurs et forcer déconnexion à distance en cas de compromission | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h |  |
+| BET-022 | Configurer les restrictions d'accès par plage d'adresses IP ou géolocalisation pour sécurité renforcée | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h |  |
+| BET-023 | Consulter historique complet connexions avec détection automatique activités suspectes par machine learning (anomalies IP, horaires, fréquence) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 9 | 80-120h | Détection comportements anormaux ML |
+
+### 4.4 Intelligence Artificielle Prédictive (100% Local)
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -703,7 +715,7 @@ Ce module gère le bien-être des employés, la prévention, l'engagement et l'i
 | BET-073 | Générer images personnalisées avec modèle Stable Diffusion XL (SDXL) local pour visualisations et badges employés | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 1 | 10 | 160-240h |  |
 | BET-074 | Créer portraits photo-réalistes employés avec InstantID et AntelopeV2 pour génération badges automatique | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 1 | 10 | 160-240h | InstantID+SDXL R&D très expérimental, TRÈS post-MVP |
 
-### 4.4 Bien-être avec IA
+### 4.5 Bien-être avec IA
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -727,7 +739,7 @@ Ce module gère le bien-être des employés, la prévention, l'engagement et l'i
 | BET-092 | Générer insights automatiques IA à partir sondages pulse avec thèmes récurrents, sentiment global et recommandations actions | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 9 | 120-160h | Analyse NLP feedback qualitatif |
 | BET-093 | Comparer métriques engagement avec benchmarks industrie santé anonymisés pour évaluation position concurrentielle | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 40-60h | Contexte comparatif santé Québec |
 
-### 4.5 Génération et Gestion Questions IA
+### 4.6 Génération et Gestion Questions IA
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -747,7 +759,7 @@ Ce module gère le bien-être des employés, la prévention, l'engagement et l'i
 | BET-107 | Tracer chaque lot de génération IA avec batch_id, nombre cible/réel généré, prompt utilisé, modèle IA, paramètres, durée exécution, succès/erreur et facteurs d'adaptation | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 4 | 5 | 16-24h |  |
 | BET-108 | Afficher automatiquement une interface bien-être dynamique avec onglets contextuels selon rôle utilisateur (question pour employé, validation pour admin, génération IA pour super-admin) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 8 | 60-80h | Dart UnifiedScreen Interface adaptative multi-rôles |
 
-### 4.6 Analyse Passive (IA)
+### 4.7 Analyse Passive (IA)
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -764,7 +776,7 @@ Ce module gère le bien-être des employés, la prévention, l'engagement et l'i
 | BET-119 | Fournir réponses contextuelles personnalisées selon profil employé avec liens vers ressources internes | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 9 | 80-120h | Personnalisation réponses assistant IA |
 | BET-120 | Améliorer continuellement modèle IA RH via feedback utilisateurs sans compromis confidentialité | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 9 | 80-120h | Apprentissage local continu |
 
-### 4.7 Programmes Santé Physique et Mentale
+### 4.8 Programmes Santé Physique et Mentale
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -775,7 +787,7 @@ Ce module gère le bien-être des employés, la prévention, l'engagement et l'i
 | BET-125 | Permettre configuration objectifs santé personnalisables par employé (perte poids, arrêt tabac, activité physique quotidienne) avec rappels intelligents adaptatifs | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 7 | 24-40h | Virgin Pulse Goals Engagement autonomie employé |
 | BET-126 | Afficher tableau de bord santé holistique consolidant activité physique, nutrition, sommeil, stress avec score global bien-être et tendances 90 jours | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | Wellable Dashboard Vue 360 santé employé |
 
-### 4.8 Prévention et Intervention
+### 4.9 Prévention et Intervention
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -786,7 +798,7 @@ Ce module gère le bien-être des employés, la prévention, l'engagement et l'i
 | BET-131 | Suivre accommodements santé (restrictions physiques, horaires adaptés troubles mentaux) avec alertes expiration certificats médicaux et renouvellements automatiques | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 7 | 40-60h | Workday Accommodations Conformité LSST et droits personne |
 | BET-133 | Offrir séances thérapie en ligne confidentielles subventionnées (3-8 séances annuelles) avec plateforme sécurisée vidéoconférence HIPAA/Loi 25 conforme | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 9 | 80-120h | BetterHelp/Talkspace modèle Accès thérapie accessible financièrement |
 
-### 4.9 Équilibre Travail-Vie et Flexibilité
+### 4.10 Équilibre Travail-Vie et Flexibilité
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -795,7 +807,7 @@ Ce module gère le bien-être des employés, la prévention, l'engagement et l'i
 | BET-138 | Autoriser flexibilité horaires automatique pour rendez-vous médicaux avec réservation créneaux 2-4h sans pénalité, intégration calendriers personnels et rappels | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 24-40h | Réduction absentéisme non planifié |
 | BET-139 | Mesurer indice équilibre travail-vie par employé via sondages qualitatifs + métriques quantitatives (ratio heures travail/repos, fréquence congés utilisés) avec benchmarks secteur santé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 8 | 60-80h | Life Balance Index Mesure impact initiatives |
 
-### 4.10 Culture Organisationnelle et Engagement
+### 4.11 Culture Organisationnelle et Engagement
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -805,7 +817,7 @@ Ce module gère le bien-être des employés, la prévention, l'engagement et l'i
 | BET-143 | Faciliter création groupes soutien par pairs thématiques avec forums discussion modérés et confidentialité renforcée | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 6 | 24-40h | Limeade Peer Support Soutien social employés secteur santé |
 | BET-144 | Jumeler automatiquement nouveaux employés avec mentors bien-être seniors selon profils compatibles (âge, intérêts, défis similaires) avec suivi engagements trimestriels | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 7 | 40-60h | Chronus Mentoring Onboarding bien-être nouveaux CHSLD |
 
-### 4.11 Gamification et Récompenses Bien-être
+### 4.12 Gamification et Récompenses Bien-être
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -815,7 +827,7 @@ Ce module gère le bien-être des employés, la prévention, l'engagement et l'i
 | BET-149 | Échanger points bien-être contre récompenses tangibles configurables (cartes-cadeaux, congés supplémentaires, stationnement privilégié) avec catalogue administrable et inventaire | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 4 | 8 | 60-80h | Virgin Pulse Rewards Incentives financiers engagement bien-être |
 | BET-150 | Planifier événements bien-être virtuels synchrones (sessions yoga groupe, méditation guidée, conférences santé mentale) avec inscriptions, rappels et enregistrements | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 7 | 40-60h | Limeade Virtual Events Engagement collectif travail hybride/quarts |
 
-### 4.12 Analytics et ROI Bien-être
+### 4.13 Analytics et ROI Bien-être
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -826,7 +838,7 @@ Ce module gère le bien-être des employés, la prévention, l'engagement et l'i
 | BET-155 | Produire analyses coût-bénéfice programmes bien-être (coût programme vs économies absentéisme/roulement/CNESST) avec projections 1-3-5 ans et seuils rentabilité | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 9 | 80-120h | Wellable Cost-Benefit Business case programmes bien-être |
 | BET-156 | Afficher tableau de bord exécutif bien-être consolidé avec métriques stratégiques (eNPS, absentéisme, participation programmes, ROI) et comparaisons temporelles trimestrielles | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 8 | 60-80h | Vue stratégique direction |
 
-### 4.13 Accessibilité et Inclusion
+### 4.14 Accessibilité et Inclusion
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -837,7 +849,7 @@ Ce module gère le bien-être des employés, la prévention, l'engagement et l'i
 | BET-161 | Gérer accommodements religieux santé (jeûne Ramadan, Carême) avec ajustements horaires automatiques, rappels personnalisés et respect confidentialité croyances | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 24-40h | Diversité culturelle CHSLD Inclusion minorités visibles |
 | BET-162 | Adapter contenus bien-être sensibilité culturelle (méditation laïque vs religieuse, alimentation halal/casher/végétarienne) avec personnalisation préférences culturelles | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 7 | 40-60h | Wellable Cultural Adaptation Respect diversité employés |
 
-### 4.14 Plateformes Modernes et IA Avancée
+### 4.15 Plateformes Modernes et IA Avancée
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -854,7 +866,7 @@ Ce module gère le bien-être des employés, la prévention, l'engagement et l'i
 | BET-173 | Permettre définition objectifs bien-être individuels avec collecte données biométriques, évaluations santé approfondies et solutions wellness sur mesure générées par IA | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 9 | 80-120h | Personalization trend 2025 AI-driven tailored wellness solutions |
 | BET-174 | Intégrer plateforme thérapie moderne combinant scalabilité EAP traditionnel avec personnalisation counseling interne via réseau global thérapeutes/coaches accessible + contenu auto-servi santé mentale | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 10 | 160-240h | Unmind/Modern EAP 2025 Thérapie workplace scalable personnalisée |
 
-### 4.15 Tableaux de Bord et Visualisations Temps Réel
+### 4.16 Tableaux de Bord et Visualisations Temps Réel
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -865,7 +877,7 @@ Ce module gère le bien-être des employés, la prévention, l'engagement et l'i
 | BET-179 | Générer graphiques à barres comparant scores bien-être entre périodes (semaine actuelle vs précédente, mois vs mois) avec pourcentages variation | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 24-40h | realtime_dashboard.py Chart comparaison périodes |
 | BET-180 | Créer fil d'activité temps réel (feed) affichant 20 dernières notifications bien-être avec auto-scroll et filtrage par gravité pour gestionnaire | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 6 | 24-40h | realtime_dashboard.py Realtime notifications feed |
 
-### 4.16 Recommandations et Conseils IA Personnalisés
+### 4.17 Recommandations et Conseils IA Personnalisés
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -875,7 +887,7 @@ Ce module gère le bien-être des employés, la prévention, l'engagement et l'i
 | BET-184 | Afficher conseils contextuels adaptés au moment (matin: énergie, midi: pause, soir: déconnexion) selon heure réponse employé avec contenu ciblé 200 mots maximum | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | llama_assistant.py employee_support prompt contextuel |
 | BET-185 | Fournir explications pédagogiques claires pourquoi planning/décisions bien-être sont optimales avec compromis effectués et suggestions amélioration prochaine fois | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 8 | 60-80h | llama_assistant.py schedule_explanation prompt |
 
-### 4.17 Analyses Avancées et Détection Patterns
+### 4.18 Analyses Avancées et Détection Patterns
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -887,7 +899,7 @@ Ce module gère le bien-être des employés, la prévention, l'engagement et l'i
 | BET-191 | Calculer score bien-être 0-1 normalisé à partir influence réponses (négatif=0.0, neutre=0.5, positif=1.0) avec moyenne glissante pour tendance | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 24-40h | intelligent_generator.py _calculate_wellbeing_score normalisé |
 | BET-192 | Mesurer temps réponse moyen questions bien-être par employé et détecter réponses précipitées (< 10s) ou très longues (> 120s) comme indicateurs engagement | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 5 | 16-24h | intelligent_generator.py avg_response_time analysis seuils |
 
-### 4.18 Gestion Pile Questions Intelligente
+### 4.19 Gestion Pile Questions Intelligente
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -897,7 +909,7 @@ Ce module gère le bien-être des employés, la prévention, l'engagement et l'i
 | BET-196 | Permettre report question jusqu'à date ultérieure (skip_until) si employé indique mauvais moment sans pénaliser engagement global | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 5 | 16-24h | wellness_v2.py skip_until field EmployeeQuestionQueue |
 | BET-197 | Suivre compteur présentations question par employé et augmenter priorité si présentée mais non répondue 3 fois (possiblement mal formulée) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 24-40h | wellness_v2.py presentation_count field tracking non-réponses |
 
-### 4.19 Rapports, Exports et Alertes Intelligentes
+### 4.20 Rapports, Exports et Alertes Intelligentes
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -909,7 +921,7 @@ Ce module gère le bien-être des employés, la prévention, l'engagement et l'i
 | BET-203 | Enregistrer historique alertes avec horodatage, métrique concernée, seuil dépassé, valeur réelle et statut résolution pour audit | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 24-40h | realtime_dashboard.py Alert dataclass complet audit trail |
 | BET-204 | Permettre acquittement manuel alertes par gestionnaire via endpoint API POST avec changement statut resolved=true | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 5 | 16-24h | realtime_dashboard.py acknowledge_alert endpoint |
 
-### 4.20 Composants UI et Visuels
+### 4.21 Composants UI et Visuels
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -918,7 +930,7 @@ Ce module gère le bien-être des employés, la prévention, l'engagement et l'i
 | BET-207 | Créer widget état vide (empty state) configurable avec icône grande taille, titre, sous-titre et boutons action optionnels centré verticalement | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 5 | 16-24h | wellness_unified_widgets.dart WellnessEmptyStateWidget |
 | BET-208 | Implémenter carte question employé avec animations entrée (scale + options staggered), sélection réponse, section commentaire optionnel et bouton reporter | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 8 | 60-80h | wellness_unified_widgets.dart EmployeeQuestionCard animated |
 
-### 4.21 Métriques Système et Monitoring Performance
+### 4.22 Métriques Système et Monitoring Performance
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -927,7 +939,7 @@ Ce module gère le bien-être des employés, la prévention, l'engagement et l'i
 | BET-211 | Stocker historique métriques avec nettoyage automatique données anciennes dépassant fenêtre rétention (24h par défaut) pour optimiser mémoire | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 6 | 24-40h | realtime_dashboard.py _cleanup_old_data automatique |
 | BET-212 | Exposer API REST GET métriques actuelles, historique métrique spécifique, alertes actives et configuration widgets pour intégrations externes | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 40-60h | realtime_dashboard.py API endpoints multiples REST |
 
-### 4.22 Génération Questions IA Avancée
+### 4.23 Génération Questions IA Avancée
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -937,7 +949,7 @@ Ce module gère le bien-être des employés, la prévention, l'engagement et l'i
 | BET-216 | Implémenter fallback questions prédéfinies (humeur, stress, satisfaction) si échec génération IA pour garantir continuité service | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 5 | 16-24h | intelligent_generator.py _get_fallback_questions secours |
 | BET-217 | Vérifier conditions génération (< 5 questions en attente validation, intervalle minimum 24h depuis dernière) avant déclencher génération automatique | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 24-40h | intelligent_generator.py should_generate_questions garde-fous |
 
-### 4.23 Vues Consolidées et Données Agrégées
+### 4.24 Vues Consolidées et Données Agrégées
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
@@ -953,130 +965,131 @@ Ce module gère les fonctions administratives, la conformité légale, la paie e
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
-| ADM-001 | Effectuer des sauvegardes automatiques quotidiennes de toutes les données avec rétention configurable | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h |  |
-| ADM-002 | Exporter toutes les données d'une organisation complète vers format archive standard pour conservation légale | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h |  |
-| ADM-003 | Restaurer les données depuis une sauvegarde spécifique avec sélection granulaire (employé, période, module) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h |  |
-| ADM-004 | Archiver automatiquement les données anciennes selon politique de rétention avec compression et indexation | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h |  |
-| ADM-005 | Purger définitivement les données au-delà de la période de rétention légale avec preuve de destruction | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h |  |
+| BET-220 | Effectuer des sauvegardes automatiques quotidiennes de toutes les données avec rétention configurable | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h |  |
+| BET-221 | Exporter toutes les données d'une organisation complète vers format archive standard pour conservation légale | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h |  |
+| BET-222 | Restaurer les données depuis une sauvegarde spécifique avec sélection granulaire (employé, période, module) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h |  |
+| BET-223 | Archiver automatiquement les données anciennes selon politique de rétention avec compression et indexation | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h |  |
+| BET-224 | Purger définitivement les données au-delà de la période de rétention légale avec preuve de destruction | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h |  |
 
 ### 5.2 Conformité et Juridique
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
-| ADM-006 | Générer automatiquement des rapports de conformité LNT Québec (heures travaillées, repos, congés, heures sup) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h |  |
-| ADM-007 | Générer des preuves électroniques horodatées et infalsifiables pour litiges juridiques ou audits réglementaires | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h |  |
-| ADM-008 | Gérer les demandes d'accès à l'information selon RGPD européen et Loi 25 québécoise avec workflow tracé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h |  |
-| ADM-009 | Assurer la traçabilité complète de toutes modifications avec identification de l'auteur, date, heure et contexte | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h |  |
-| ADM-010 | Recueillir le consentement explicite des employés pour collecte et traitement des données personnelles conformément à la loi | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h |  |
+| BET-225 | Générer automatiquement des rapports de conformité LNT Québec (heures travaillées, repos, congés, heures sup) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h |  |
+| BET-226 | Générer des preuves électroniques horodatées et infalsifiables pour litiges juridiques ou audits réglementaires | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h |  |
+| BET-227 | Gérer les demandes d'accès à l'information selon RGPD européen et Loi 25 québécoise avec workflow tracé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h |  |
+| BET-228 | Assurer la traçabilité complète de toutes modifications avec identification de l'auteur, date, heure et contexte | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h |  |
+| BET-229 | Recueillir le consentement explicite des employés pour collecte et traitement des données personnelles conformément à la loi | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h |  |
 
 
 ### 5.3 Intégrations Systèmes
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
-| ADM-011 | Export paie (Sage/Nethris/ADP) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 9 | 80-120h |  |
-| ADM-012 | Intégration SIRH/ERP | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 9 | 80-120h |  |
-| ADM-013 | SSO/LDAP (Active Directory) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 9 | 80-120h |  |
-| ADM-014 | Export calendrier (iCal) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h |  |
-| ADM-015 | Intégrer avec systèmes de gestion des temps (terminaux biométriques, badgeuse, NFC) pour pointage automatisé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 9 | 80-120h |  |
-| ADM-016 | Synchroniser bidirectionnellement avec Active Directory ou LDAP pour gestion centralisée des utilisateurs | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 9 | 80-120h |  |
-| ADM-017 | Configurer des webhooks pour envoyer notifications vers systèmes externes (Slack, Teams, systèmes internes) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 7 | 24-40h |  |
-| ADM-018 | Fournir une API REST complète et documentée pour intégrations tierces personnalisées avec authentification sécurisée | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 9 | 80-120h |  |
-| ADM-019 | Configurer le mapping personnalisé entre comptes de paie OrIA et plan comptable de l'organisation (Grand Livre) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 24-40h | REQ-PAY-004 Intégration comptable flexible |
-| ADM-020 | Effectuer une réconciliation automatique des écritures de paie exportées avec les entrées comptables pour détecter écarts | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 9 | 80-120h | Contrôle qualité Prévention erreurs comptables |
+|--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
+| BET-031 | Export paie (Sage/Nethris/ADP) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 9 | 80-120h |  |
+| BET-032 | Intégration SIRH/ERP | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 9 | 80-120h |  |
+| BET-033 | SSO/LDAP (Active Directory) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 9 | 80-120h |  |
+| BET-034 | Export calendrier (iCal) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h |  |
+| BET-035 | Intégrer avec systèmes de gestion des temps (terminaux biométriques, badgeuse, NFC) pour pointage automatisé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 9 | 80-120h |  |
+| BET-036 | Synchroniser bidirectionnellement avec Active Directory ou LDAP pour gestion centralisée des utilisateurs | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 9 | 80-120h |  |
+| BET-037 | Configurer des webhooks pour envoyer notifications vers systèmes externes (Slack, Teams, systèmes internes) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 7 | 24-40h |  |
+| BET-038 | Fournir une API REST complète et documentée pour intégrations tierces personnalisées avec authentification sécurisée | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 3 | 9 | 80-120h |  |
+| BET-039 | Configurer le mapping personnalisé entre comptes de paie OrIA et plan comptable de l'organisation (Grand Livre) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 24-40h | REQ-PAY-004 Intégration comptable flexible |
+| BET-040 | Effectuer une réconciliation automatique des écritures de paie exportées avec les entrées comptables pour détecter écarts | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 9 | 80-120h | Contrôle qualité Prévention erreurs comptables |
 
 ### 5.4 Facturation RAMQ
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
-| ADM-021 | Conserver un historique complet de tous les exports vers systèmes comptables avec possibilité de re-générer exports antérieurs | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 5 | 8-16h | Auditabilité Retraitement possible si erreur détectée |
-| ADM-022 | Maintenir une base de données complète des codes actes médicaux RAMQ avec tarification et mise à jour mensuelle automatique | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | 500+ codes actes RAMQ |
-| ADM-023 | Gérer les modificateurs et suppléments de facturation RAMQ avec application automatique selon contexte acte | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 8 | 60-80h | Facturation complexe RAMQ |
-| ADM-024 | Supporter les actes médicaux privés personnalisés avec tarification configurable par praticien ou organisation | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 5 | 16-24h | Facturation privée flexible |
-| ADM-025 | Générer automatiquement les fichiers de réclamation RAMQ conformes aux spécifications techniques avec validation pré-soumission | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 120-160h | Conformité format RAMQ stricte |
-| ADM-026 | Transmettre de façon sécurisée les réclamations RAMQ avec soumission automatique quotidienne ou manuelle | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 8 | 60-80h | Transmission chiffrée RAMQ |
-| ADM-027 | Suivre les statuts de réclamations RAMQ avec synchronisation automatique des réponses et notifications changements | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | Suivi temps réel réclamations |
-| ADM-028 | Gérer automatiquement les rejets et corrections de réclamations RAMQ avec workflow de correction guidé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 8 | 60-80h | Réduction taux rejet <5% |
-| ADM-029 | Générer des rapports de conciliation RAMQ avec comparaison montants réclamés vs reçus et identification écarts | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | Contrôle qualité facturation |
+| BET-041 | Conserver un historique complet de tous les exports vers systèmes comptables avec possibilité de re-générer exports antérieurs | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 5 | 8-16h | Auditabilité Retraitement possible si erreur détectée |
+| BET-042 | Maintenir une base de données complète des codes actes médicaux RAMQ avec tarification et mise à jour mensuelle automatique | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | 500+ codes actes RAMQ |
+| BET-043 | Gérer les modificateurs et suppléments de facturation RAMQ avec application automatique selon contexte acte | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 8 | 60-80h | Facturation complexe RAMQ |
+| BET-044 | Supporter les actes médicaux privés personnalisés avec tarification configurable par praticien ou organisation | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 5 | 16-24h | Facturation privée flexible |
+| BET-045 | Générer automatiquement les fichiers de réclamation RAMQ conformes aux spécifications techniques avec validation pré-soumission | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 120-160h | Conformité format RAMQ stricte |
+| BET-046 | Transmettre de façon sécurisée les réclamations RAMQ avec soumission automatique quotidienne ou manuelle | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 8 | 60-80h | Transmission chiffrée RAMQ |
+| BET-047 | Suivre les statuts de réclamations RAMQ avec synchronisation automatique des réponses et notifications changements | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | Suivi temps réel réclamations |
+| BET-048 | Gérer automatiquement les rejets et corrections de réclamations RAMQ avec workflow de correction guidé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 8 | 60-80h | Réduction taux rejet <5% |
+| BET-049 | Générer des rapports de conciliation RAMQ avec comparaison montants réclamés vs reçus et identification écarts | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | Contrôle qualité facturation |
 
 ### 5.5 Facturation Patients
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
-| ADM-030 | Créer dashboard revenus RAMQ temps réel avec KPI (taux acceptation, délais paiement, revenus par praticien) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | Analytics financiers RAMQ |
-| ADM-031 | Créer et gérer les factures patients pour services privés avec génération automatique PDF et envoi email | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | Facturation patient professionnelle |
-| ADM-032 | Intégrer processeur de paiement sécurisé (Stripe/Square) pour paiement en ligne patients conforme PCI-DSS | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 9 | 120-160h | CRITIQUE SÉCURITÉ Paiement en ligne |
-| ADM-033 | Gérer des plans de paiement échelonnés pour patients avec rappels automatiques et suivi soldes | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 40-60h | Amélioration recouvrement |
-| ADM-034 | Générer automatiquement des reçus officiels pour assurances privées conformes aux normes fiscales canadiennes | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 5 | 16-24h | Conformité fiscale reçus |
+| BET-050 | Créer dashboard revenus RAMQ temps réel avec KPI (taux acceptation, délais paiement, revenus par praticien) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | Analytics financiers RAMQ |
+| BET-051 | Créer et gérer les factures patients pour services privés avec génération automatique PDF et envoi email | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | Facturation patient professionnelle |
+| BET-052 | Intégrer processeur de paiement sécurisé (Stripe/Square) pour paiement en ligne patients conforme PCI-DSS | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 9 | 120-160h | CRITIQUE SÉCURITÉ Paiement en ligne |
+| BET-053 | Gérer des plans de paiement échelonnés pour patients avec rappels automatiques et suivi soldes | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 40-60h | Amélioration recouvrement |
+| BET-054 | Générer automatiquement des reçus officiels pour assurances privées conformes aux normes fiscales canadiennes | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 5 | 16-24h | Conformité fiscale reçus |
 
 ### 5.6 Système Comptable
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
-| ADM-035 | Envoyer des relances automatiques de paiement par email et SMS selon échéancier configurable avec escalade | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 5 | 16-24h | Automatisation recouvrement |
-| ADM-036 | Configurer plan comptable personnalisé avec codes de comptes, centres de coûts et départements | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 40-60h | Comptabilité générale flexible |
-| ADM-037 | Maintenir des journaux comptables automatiques pour toutes transactions financières avec écritures doubles | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 8 | 60-80h | Conformité comptable |
-| ADM-038 | Effectuer rapprochement bancaire semi-automatique avec import relevés et matching transactions | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 9 | 80-120h | Contrôle trésorerie |
-| ADM-039 | Générer états financiers standards (bilan, état résultats, flux trésorerie) avec comparatifs périodes | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | Reporting financier |
-| ADM-040 | Gérer automatiquement les taxes TPS/TVQ canadiennes avec calcul, collecte et déclarations trimestrielles | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 8 | 60-80h | Conformité fiscale taxes |
-| ADM-041 | Exporter données comptables vers formats standards (CSV, OFX, QuickBooks, Sage) pour intégration logiciels externes | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 40-60h | Interopérabilité comptable |
-| ADM-042 | Maintenir audit trail complet de toutes transactions financières avec traçabilité utilisateur et horodatage | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 40-60h | Auditabilité complète |
+| BET-055 | Envoyer des relances automatiques de paiement par email et SMS selon échéancier configurable avec escalade | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 5 | 16-24h | Automatisation recouvrement |
+| BET-056 | Configurer plan comptable personnalisé avec codes de comptes, centres de coûts et départements | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 40-60h | Comptabilité générale flexible |
+| BET-057 | Maintenir des journaux comptables automatiques pour toutes transactions financières avec écritures doubles | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 8 | 60-80h | Conformité comptable |
+| BET-058 | Effectuer rapprochement bancaire semi-automatique avec import relevés et matching transactions | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 9 | 80-120h | Contrôle trésorerie |
+| BET-059 | Générer états financiers standards (bilan, état résultats, flux trésorerie) avec comparatifs périodes | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-60h | Reporting financier |
+| BET-060 | Gérer automatiquement les taxes TPS/TVQ canadiennes avec calcul, collecte et déclarations trimestrielles | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 8 | 60-80h | Conformité fiscale taxes |
+| BET-061 | Exporter données comptables vers formats standards (CSV, OFX, QuickBooks, Sage) pour intégration logiciels externes | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 40-60h | Interopérabilité comptable |
+| BET-062 | Maintenir audit trail complet de toutes transactions financières avec traçabilité utilisateur et horodatage | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 40-60h | Auditabilité complète |
 
 ### 5.7 Gestion de la Paie
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
-| ADM-043 | Calculer automatiquement les salaires horaires basés sur heures travaillées réelles avec taux horaires configurables par employé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | REQ-PAY-001 Base calcul paie |
-| ADM-044 | Calculer les salaires forfaitaires (annuels, mensuels) avec proratisation automatique pour embauches ou départs en cours de période | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | Support employés salariés |
-| ADM-045 | Gérer les salaires mixtes combinant partie fixe et commissions variables avec calculs selon paliers de vente atteints | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 9 | 80-120h | Secteurs ventes/développement affaires |
-| ADM-046 | Calculer les primes d'ancienneté automatiques selon échelle définie et années de service cumulées pour chaque employé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 5 | 8-16h | Conventions collectives secteur santé |
-| ADM-047 | Calculer les primes de performance basées sur évaluations ou objectifs atteints avec pourcentages ou montants fixes configurables | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h | Motivation employés Rétention talents |
-| ADM-048 | Appliquer automatiquement les primes de quarts spéciaux (soir, nuit, weekend, jours fériés) selon taux majorés configurés | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | Conventions CHSLD Intégration HOR-906/907 |
-| ADM-049 | Calculer automatiquement toutes déductions fiscales fédérales canadiennes (Impôt, AE, RPC) selon barèmes officiels en vigueur | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h | CRITIQUE LÉGAL OrIAV3 REQ-PAY-002 Conformité ARC |
-| ADM-050 | Calculer automatiquement toutes déductions fiscales provinciales québécoises (Impôt QC, RRQ, RQAP, RAMQ) selon barèmes officiels | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h | CRITIQUE LÉGAL Conformité Revenu Québec |
-| ADM-051 | Permettre la mise à jour des barèmes fiscaux via fichiers de configuration sans nécessiter de redéploiement du système | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | Ajustements annuels janvier sans downtime |
-| ADM-052 | Gérer les exemptions et crédits d'impôt personnels par employé (TD1 fédéral et TP-1015.3 Québec) avec calculs optimisés | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h | Précision fiscale individuelle |
-| ADM-053 | Générer automatiquement les feuillets T4 et T4A fédéraux en formats XML et PDF conformes aux spécifications de l'ARC | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h | CRITIQUE LÉGAL OrIAV3 REQ-PAY-003 Obligation annuelle |
-| ADM-054 | Générer automatiquement les Relevés 1 du Québec en format requis par Revenu Québec avec validation des données obligatoires | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h | CRITIQUE LÉGAL Obligation annuelle Québec |
-| ADM-055 | Produire les déclarations mensuelles ou trimestrielles obligatoires (DAS, cotisations CNESST) avec preuves de transmission | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h | Conformité CNESST secteur santé |
-| ADM-056 | Clôturer une période de paie avec verrouillage des données (heures, primes) et journal d'audit; possibilité de réouverture contrôlée | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | Concurrents: pay period close/reopen |
-| ADM-057 | Verrouiller l'édition des heures approuvées après clôture; corrections via ajustements avec justification et double validation | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | Contrôle post-approbation |
-| ADM-058 | Rapprocher automatiquement paie et heures approuvées avec détection d'écarts, tolérances configurables et rapport d'anomalies | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | Concurrents: payroll reconciliation |
-| ADM-059 | Autoriser l'export paie uniquement pour les périodes verrouillées avec contrôles pré‑export (cohérence, doublons, champs obligatoires) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | Gatekeeping export |
+| BET-230 | Calculer automatiquement les salaires horaires basés sur heures travaillées réelles avec taux horaires configurables par employé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | REQ-PAY-001 Base calcul paie |
+| BET-231 | Calculer les salaires forfaitaires (annuels, mensuels) avec proratisation automatique pour embauches ou départs en cours de période | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | Support employés salariés |
+| BET-232 | Gérer les salaires mixtes combinant partie fixe et commissions variables avec calculs selon paliers de vente atteints | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 9 | 80-120h | Secteurs ventes/développement affaires |
+| BET-233 | Calculer les primes d'ancienneté automatiques selon échelle définie et années de service cumulées pour chaque employé | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 5 | 8-16h | Conventions collectives secteur santé |
+| BET-234 | Calculer les primes de performance basées sur évaluations ou objectifs atteints avec pourcentages ou montants fixes configurables | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 7 | 24-40h | Motivation employés Rétention talents |
+| BET-235 | Appliquer automatiquement les primes de quarts spéciaux (soir, nuit, weekend, jours fériés) selon taux majorés configurés | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | Conventions CHSLD Intégration HOR-906/907 |
+| BET-236 | Calculer automatiquement toutes déductions fiscales fédérales canadiennes (Impôt, AE, RPC) selon barèmes officiels en vigueur | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h | CRITIQUE LÉGAL OrIAV3 REQ-PAY-002 Conformité ARC |
+| BET-237 | Calculer automatiquement toutes déductions fiscales provinciales québécoises (Impôt QC, RRQ, RQAP, RAMQ) selon barèmes officiels | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h | CRITIQUE LÉGAL Conformité Revenu Québec |
+| BET-238 | Permettre la mise à jour des barèmes fiscaux via fichiers de configuration sans nécessiter de redéploiement du système | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | Ajustements annuels janvier sans downtime |
+| BET-239 | Gérer les exemptions et crédits d'impôt personnels par employé (TD1 fédéral et TP-1015.3 Québec) avec calculs optimisés | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h | Précision fiscale individuelle |
+| BET-240 | Générer automatiquement les feuillets T4 et T4A fédéraux en formats XML et PDF conformes aux spécifications de l'ARC | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h | CRITIQUE LÉGAL OrIAV3 REQ-PAY-003 Obligation annuelle |
+| BET-241 | Générer automatiquement les Relevés 1 du Québec en format requis par Revenu Québec avec validation des données obligatoires | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h | CRITIQUE LÉGAL Obligation annuelle Québec |
+| BET-242 | Produire les déclarations mensuelles ou trimestrielles obligatoires (DAS, cotisations CNESST) avec preuves de transmission | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 9 | 80-120h | Conformité CNESST secteur santé |
+| BET-243 | Clôturer une période de paie avec verrouillage des données (heures, primes) et journal d'audit; possibilité de réouverture contrôlée | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | Concurrents: pay period close/reopen |
+| BET-244 | Verrouiller l'édition des heures approuvées après clôture; corrections via ajustements avec justification et double validation | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | Contrôle post-approbation |
+| BET-245 | Rapprocher automatiquement paie et heures approuvées avec détection d'écarts, tolérances configurables et rapport d'anomalies | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | Concurrents: payroll reconciliation |
+| BET-246 | Autoriser l'export paie uniquement pour les périodes verrouillées avec contrôles pré‑export (cohérence, doublons, champs obligatoires) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | Gatekeeping export |
 
 ### 5.8 Documents et Attestations
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
-| ADM-060 | Générer automatiquement des attestations de revenus pour employés (relevés d'emploi, lettres de confirmation) à la demande | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 24-40h | OrIAV3 REQ-PAY-005 - Service employés (prêts, logement) |
-| ADM-061 | Produire des relevés de paie détaillés pour périodes personnalisées avec cumuls annuels et historique complet accessible | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 5 | 8-16h | Transparence salaire - Conformité Loi normes travail |
+| BET-247 | Générer automatiquement des attestations de revenus pour employés (relevés d'emploi, lettres de confirmation) à la demande | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 24-40h | OrIAV3 REQ-PAY-005 - Service employés (prêts, logement) |
+| BET-248 | Produire des relevés de paie détaillés pour périodes personnalisées avec cumuls annuels et historique complet accessible | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 5 | 8-16h | Transparence salaire - Conformité Loi normes travail |
 
 ### 5.9 Infrastructure Technique Administration
 
 | Requis | Description | MVP | Admin | Gestionnaire | Superviseur | Employé | Patient | Famille | Priorité (1-10) | Complexité (1-10) | Estimation | Notes |
 |--------|-------------|-----|-------|--------------|-------------|---------|---------|---------|------------------|-------------------|------------|-------|
-| ADM-062 | Implémenter chiffrement transparent données sensibles avec pgcrypto PostgreSQL (téléphone, adresse, contact urgence, justificatifs) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | EncryptedString/Binary - SQLAlchemy TypeDecorator - Sécurité |
-| ADM-063 | Créer base de données audit séparée avec isolation complète (ORIA_AUDIT_URI) et migration Alembic indépendante | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 8 | 40-80h | AuditRepository - Append-only - Anonymisation AUDIT_ANON_FIELDS |
-| ADM-064 | Développer système de configuration applicative runtime modifiable (table app_config) avec validation Pydantic | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 5 | 24-40h | Configs JSON - Hot reload - Fallback défaut - Historique |
-| ADM-065 | Implémenter gestionnaire de secrets et rotation clés chiffrement (rotate_enc_key.sh) avec support multi-clés | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 9 | 80-120h | Key rotation - Zero downtime - TEXT_PEPPER - Rechiffrement |
-| ADM-066 | Créer middleware de détection langue automatique (Accept-Language, query param, cookie) avec catalogues Babel | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 40-80h | I18n - Babel.cfg - Traductions FR/EN - request.state.lang |
-| ADM-067 | Développer système de widgets dashboard personnalisables avec drag-and-drop et configuration JSON par widget | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 7 | 80-120h | Dashboard widgets - Grid layout - 40+ écrans Flutter |
-| ADM-068 | Créer système de menu personnalisé par utilisateur avec réorganisation drag-and-drop et synchronisation Flutter | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 6 | 40-80h | User_menu_items - Navigation custom - Fallback service_level |
-| ADM-069 | Implémenter paramètres utilisateur avec auto-validation notifications et préférences (timezone, theme, langue) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 5 | 24-40h | User settings - Preferences JSON - Multi-device sync |
-| ADM-070 | Développer système de réinitialisation mot de passe sécurisé avec tokens UUID, expiration 24h et rate limiting | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 6 | 40-80h | Jetons de réinitialisation mot de passe - Email - Invalidation - Journaux d'audit |
-| ADM-071 | Créer intégration complète moteur règles métier JSONLogic avec 75+ règles prédéfinies (loi Québec, organisationnelles) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 10 | 120-200h | JSONLogic - RuleEngine - Sévérité 0-100 - Scoring |
-| ADM-072 | Implémenter système de modules activables par utilisateur avec règles guard et synchronisation frontend | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 8 | 80-120h | User_modules - @rule_guard - Feature flags - Unification |
-| ADM-073 | Développer scripts d'installation multiplateforme (Linux, Windows) avec détection OS et validation environnement | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 40-80h | Install.sh - Install_windows.ps1 - GPU detection - Logs |
-| ADM-074 | Créer pipeline CI/CD avec coverage minimum 90% obligatoire et tests automatisés multi-DB (PostgreSQL, SQLite) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 80-120h | GitHub Actions - Pytest - Codecov - Flake8 - Mypy |
-| ADM-075 | Développer documentation technique multilingue avec MkDocs (API reference, architecture, deployment, troubleshooting) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 5 | 80-120h | MkDocs - Docs EN/FR - Diagrammes - CHANGELOG - README |
-| ADM-076 | Implémenter architecture Repository Pattern avec BaseRepository abstraction CRUD et injection dépendances | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 80-120h | 13 repositories - Depends - Isolation logique - Tests mockables |
-| ADM-077 | Créer architecture Domain-Driven avec modules métier isolés (domains/ avec 6 domaines: shifts, leaves, wellness, etc.) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 8 | 120-200h | DDD - Bounded contexts - Service layer - Event-driven |
-| ADM-078 | Développer migration Alembic dual (base principale + audit) avec versioning et rollback réversible | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 7 | 40-80h | Alembic dual - Upgrade/downgrade - Validation schéma |
-| ADM-079 | Implémenter configuration TLS/SSL pour connexions PostgreSQL production avec validation certificats | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 6 | 40-80h | TLS config - Cert.pem/key.pem - DB_SSLMODE - HIPAA |
-| ADM-080 | Créer système de backup et restore automatisé multi-plateforme (backup.sh/.ps1) avec rotation et compression | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 8 | 80-120h | Backup auto - Rotation 7j/4sem/12mois - Checksums - AES-256 |
-| ADM-081 | Développer environnement développement Docker avec docker-compose orchestrant PostgreSQL, Redis, app | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-80h | Docker-compose - Multi-stage build - Hot-reload - Volumes |
-| ADM-082 | Implémenter logging structuré avec rotation fichiers journalière et niveaux (DEBUG, INFO, WARNING, ERROR, CRITICAL) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 5 | 24-40h | RotatingFileHandler - Format structuré - Monitoring Sentry |
-| ADM-083 | Créer validation environnement et prérequis au démarrage avec rapport HTML (test_visualization.html) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 6 | 40-80h | Validation startup - GPU detection - Report generation |
+| ADM-249 | Implémenter chiffrement transparent données sensibles avec pgcrypto PostgreSQL (téléphone, adresse, contact urgence, justificatifs) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 7 | 24-40h | EncryptedString/Binary - SQLAlchemy TypeDecorator - Sécurité |
+| ADM-250 | Créer base de données audit séparée avec isolation complète (ORIA_AUDIT_URI) et migration Alembic indépendante | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 8 | 40-80h | AuditRepository - Append-only - Anonymisation AUDIT_ANON_FIELDS |
+| ADM-251 | Développer système de configuration applicative runtime modifiable (table app_config) avec validation Pydantic | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 5 | 24-40h | Configs JSON - Hot reload - Fallback défaut - Historique |
+| ADM-252 | Implémenter gestionnaire de secrets et rotation clés chiffrement (rotate_enc_key.sh) avec support multi-clés | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 9 | 80-120h | Key rotation - Zero downtime - TEXT_PEPPER - Rechiffrement |
+| ADM-253 | Créer middleware de détection langue automatique (Accept-Language, query param, cookie) avec catalogues Babel | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 40-80h | I18n - Babel.cfg - Traductions FR/EN - request.state.lang |
+| ADM-254 | Développer système de widgets dashboard personnalisables avec drag-and-drop et configuration JSON par widget | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 7 | 80-120h | Dashboard widgets - Grid layout - 40+ écrans Flutter |
+| ADM-255 | Créer système de menu personnalisé par utilisateur avec réorganisation drag-and-drop et synchronisation Flutter | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 5 | 6 | 40-80h | User_menu_items - Navigation custom - Fallback service_level |
+| ADM-256 | Implémenter paramètres utilisateur avec auto-validation notifications et préférences (timezone, theme, langue) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 6 | 5 | 24-40h | User settings - Preferences JSON - Multi-device sync |
+| ADM-257 | Développer système de réinitialisation mot de passe sécurisé avec tokens UUID, expiration 24h et rate limiting | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 6 | 40-80h | Jetons de réinitialisation mot de passe - Email - Invalidation - Journaux d'audit |
+| ADM-258 | Créer intégration complète moteur règles métier JSONLogic avec 75+ règles prédéfinies (loi Québec, organisationnelles) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 10 | 120-200h | JSONLogic - RuleEngine - Sévérité 0-100 - Scoring |
+| ADM-259 | Implémenter système de modules activables par utilisateur avec règles guard et synchronisation frontend | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 8 | 80-120h | User_modules - @rule_guard - Feature flags - Unification |
+| ADM-260 | Développer scripts d'installation multiplateforme (Linux, Windows) avec détection OS et validation environnement | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 6 | 40-80h | Install.sh - Install_windows.ps1 - GPU detection - Logs |
+| ADM-261 | Créer pipeline CI/CD avec coverage minimum 90% obligatoire et tests automatisés multi-DB (PostgreSQL, SQLite) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 80-120h | GitHub Actions - Pytest - Codecov - Flake8 - Mypy |
+| ADM-262 | Développer documentation technique multilingue avec MkDocs (API reference, architecture, deployment, troubleshooting) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 5 | 80-120h | MkDocs - Docs EN/FR - Diagrammes - CHANGELOG - README |
+| ADM-263 | Implémenter architecture Repository Pattern avec BaseRepository abstraction CRUD et injection dépendances | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 7 | 80-120h | 13 repositories - Depends - Isolation logique - Tests mockables |
+| ADM-264 | Créer architecture Domain-Driven avec modules métier isolés (domains/ avec 6 domaines: shifts, leaves, wellness, etc.) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 8 | 120-200h | DDD - Bounded contexts - Service layer - Event-driven |
+| ADM-265 | Développer migration Alembic dual (base principale + audit) avec versioning et rollback réversible | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 7 | 40-80h | Alembic dual - Upgrade/downgrade - Validation schéma |
+| ADM-266 | Implémenter configuration TLS/SSL pour connexions PostgreSQL production avec validation certificats | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 9 | 6 | 40-80h | TLS config - Cert.pem/key.pem - DB_SSLMODE - HIPAA |
+| ADM-267 | Créer système de backup et restore automatisé multi-plateforme (backup.sh/.ps1) avec rotation et compression | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 10 | 8 | 80-120h | Backup auto - Rotation 7j/4sem/12mois - Checksums - AES-256 |
+| ADM-268 | Développer environnement développement Docker avec docker-compose orchestrant PostgreSQL, Redis, app | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 7 | 7 | 40-80h | Docker-compose - Multi-stage build - Hot-reload - Volumes |
+| ADM-269 | Implémenter logging structuré avec rotation fichiers journalière et niveaux (DEBUG, INFO, WARNING, ERROR, CRITICAL) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 5 | 24-40h | RotatingFileHandler - Format structuré - Monitoring Sentry |
+| ADM-270 | Créer validation environnement et prérequis au démarrage avec rapport HTML (test_visualization.html) | ☐ | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | ☐C ☐L ☐E ☐S ☐X ☐V | 8 | 6 | 40-80h | Validation startup - GPU detection - Report generation |
 
 ---
 
@@ -1577,6 +1590,21 @@ Ce module gère l'architecture technique avancée, les patterns de conception et
 | MODULE 11 - MULTI-TENANT ET FACTURATION | 12 |
 | MODULE 12 - ARCHITECTURE ENTERPRISE ET INFRASTRUCTURE | 16 |
 
+### Ajouts récents (session 2025-10-08)
+
+**Total ajouté** : 91 requis d'infrastructure technique
+
+- Module 1: +5 requis (COM-116 à COM-120) - Infrastructure Communication Temps Réel
+- Module 2: +16 requis (HOR-110 à HOR-125) - Infrastructure Technique Horaires
+- Module 3: +13 requis (GES-110 à GES-122) - Infrastructure Technique Gestionnaire
+- Module 4: +22 requis (ADM-249 à ADM-270) - Infrastructure Technique Administration
+- Module 5: +15 requis (SEC-051 à SEC-065) - Infrastructure Technique Sécurité
+- Module 6: +10 requis (REG-041 à REG-050) - Infrastructure Technique Moteur Règles
+- Module 9: +10 requis (AUD-041 à AUD-050) - Infrastructure Technique Audit
+
+**Note**: Le total final de 920 requis inclut tous les modules existants plus les 91 requis d'infrastructure ajoutés.
+
+---
 
 **Document préparé par** : Brujah
 **Version** : 13.0 - Ajout Infrastructure Technique Modules 1-6 et 9
