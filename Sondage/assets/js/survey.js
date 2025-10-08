@@ -1049,8 +1049,8 @@ class SurveyViewer {
   async selectUser(username) {
     if (!this.currentSurvey) return;
 
-    // NE PAS afficher overlay - bloque UI inutilement
-    // this.showLoadingOverlay('Chargement de l\'utilisateur...'); ← SUPPRIMÉ
+    // Afficher indicateur dans le modal
+    this.showUserLoadingInModal(username);
 
     const startTime = performance.now();
 
@@ -1117,8 +1117,36 @@ class SurveyViewer {
 
     } catch (error) {
       console.error('Erreur sélection utilisateur:', error);
+      this.hideUserLoadingInModal();
       alert('❌ Erreur : ' + error.message);
     }
+  }
+
+  /**
+   * Affiche indicateur de chargement dans le modal utilisateur
+   */
+  showUserLoadingInModal(username) {
+    const listContainer = document.getElementById('usersList');
+    if (!listContainer) return;
+
+    listContainer.innerHTML = `
+      <div style="text-align: center; padding: 3rem 2rem;">
+        <div style="display: inline-block; width: 48px; height: 48px; border: 4px solid #e5e7eb; border-top-color: var(--color-primary); border-radius: 50%; animation: spin 1s linear infinite;"></div>
+        <p style="margin-top: 1.5rem; font-size: 1.125rem; color: var(--color-text);">
+          Chargement de <strong>${this.escapeHtml(username)}</strong>...
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--color-text-light);">
+          Conversion des tableaux et application des réponses
+        </p>
+      </div>
+    `;
+  }
+
+  /**
+   * Masque indicateur de chargement dans le modal (modal se ferme après)
+   */
+  hideUserLoadingInModal() {
+    // Le modal va se fermer, pas besoin de restaurer la liste
   }
 
   /**
