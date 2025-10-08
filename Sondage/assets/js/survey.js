@@ -543,6 +543,11 @@ class SurveyViewer {
         this.responses[reqID][field] = checked;
         this.unsavedChanges = true;
         this.debouncedAutoSave();
+
+        // Mettre à jour stats MVP si c'est une checkbox MVP
+        if (field === 'mvp') {
+          this.updateMVPStats();
+        }
       });
     });
 
@@ -1057,6 +1062,9 @@ class SurveyViewer {
       // Mettre à jour l'affichage
       this.updateUserDisplay();
       this.updateUIState();
+
+      // Mettre à jour les statistiques MVP
+      this.updateMVPStats();
 
       // Fermer le modal
       this.closeSelectUserModal();
@@ -1817,6 +1825,127 @@ class SurveyViewer {
         table.classList.add('lazy-table');
         observer.observe(table);
       });
+    }
+  }
+
+  /**
+   * Met à jour les statistiques MVP en temps réel
+   */
+  updateMVPStats() {
+    // Vérifier si le sondage a des colonnes MVP et Estimation
+    const hasMVP = this.contentContainer.querySelector('[data-field="mvp"]');
+    if (!hasMVP) return;
+
+    // Compter les requis MVP cochés et calculer temps total
+    let mvpCount = 0;
+    let totalMinHours = 0;
+    let totalMaxHours = 0;
+
+    // Parcourir tous les tableaux de requis
+    const tables = this.contentContainer.querySelectorAll('table.requirements-table');
+
+    tables.forEach(table => {
+      const rows = table.querySelectorAll('tbody tr');
+
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length < 3) return;
+
+        const reqID = cells[0].textContent.trim();
+        const description = cells[1].textContent.trim();
+
+        // Trouver la checkbox MVP
+        const mvpCheckbox = row.querySelector('[data-field="mvp"]');
+        if (!mvpCheckbox || !mvpCheckbox.checked) return;
+
+        mvpCount++;
+
+        // Extraire l'estimation (format: "8-16h", "80-120h", etc.)
+        const estimationCell = Array.from(cells).find(cell => {
+          const text = cell.textContent.trim();
+          return /^\d+-\d+h$/.test(text);
+        });
+
+        if (estimationCell) {
+          const estimation = estimationCell.textContent.trim();
+          const match = estimation.match(/^(\d+)-(\d+)h$/);
+          if (match) {
+            totalMinHours += parseInt(match[1], 10);
+            totalMaxHours += parseInt(match[2], 10);
+          }
+        }
+      });
+    });
+
+    // Afficher ou masquer le panneau de stats
+    if (mvpCount === 0) {
+      this.hideMVPStatsPanel();
+    } else {
+      this.showMVPStatsPanel(mvpCount, totalMinHours, totalMaxHours);
+    }
+  }
+
+  /**
+   * Affiche le panneau de statistiques MVP
+   */
+  showMVPStatsPanel(count, minHours, maxHours) {
+    let panel = document.getElementById('mvp-stats-panel');
+
+    if (!panel) {
+      // Créer le panneau
+      panel = document.createElement('div');
+      panel.id = 'mvp-stats-panel';
+      panel.className = 'mvp-stats-panel';
+      document.body.appendChild(panel);
+    }
+
+    // Convertir en jours/semaines si nécessaire
+    const minDays = (minHours / 8).toFixed(1);
+    const maxDays = (maxHours / 8).toFixed(1);
+    const minWeeks = (minHours / 40).toFixed(1);
+    const maxWeeks = (maxHours / 40).toFixed(1);
+
+    panel.innerHTML = `
+      <div class="mvp-stats-header">
+        <h3>📊 Statistiques MVP</h3>
+        <button class="mvp-stats-close" onclick="document.getElementById('mvp-stats-panel').classList.toggle('collapsed')">
+          <span class="icon-collapse">▼</span>
+          <span class="icon-expand">▲</span>
+        </button>
+      </div>
+      <div class="mvp-stats-content">
+        <div class="mvp-stat-item">
+          <span class="mvp-stat-label">Requis sélectionnés :</span>
+          <span class="mvp-stat-value">${count}</span>
+        </div>
+        <div class="mvp-stat-item highlight">
+          <span class="mvp-stat-label">Estimation totale :</span>
+          <span class="mvp-stat-value">${minHours}-${maxHours}h</span>
+        </div>
+        <div class="mvp-stat-item">
+          <span class="mvp-stat-label">En jours (8h/jour) :</span>
+          <span class="mvp-stat-value">${minDays}-${maxDays} jours</span>
+        </div>
+        <div class="mvp-stat-item">
+          <span class="mvp-stat-label">En semaines (40h/sem) :</span>
+          <span class="mvp-stat-value">${minWeeks}-${maxWeeks} semaines</span>
+        </div>
+        <div class="mvp-stat-note">
+          💡 Estimation pour 1 développeur seul
+        </div>
+      </div>
+    `;
+
+    panel.classList.add('visible');
+  }
+
+  /**
+   * Masque le panneau de statistiques MVP
+   */
+  hideMVPStatsPanel() {
+    const panel = document.getElementById('mvp-stats-panel');
+    if (panel) {
+      panel.classList.remove('visible');
     }
   }
 

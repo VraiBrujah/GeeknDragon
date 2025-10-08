@@ -1744,3 +1744,134 @@ body {
     page-break-inside: avoid;
   }
 }
+
+/* === PANNEAU STATISTIQUES MVP === */
+.mvp-stats-panel {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border: 2px solid var(--color-primary);
+  min-width: 320px;
+  max-width: 400px;
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all var(--transition-normal);
+  pointer-events: none;
+}
+
+.mvp-stats-panel.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.mvp-stats-panel.collapsed .mvp-stats-content {
+  display: none;
+}
+
+.mvp-stats-panel.collapsed .icon-collapse {
+  display: none;
+}
+
+.mvp-stats-panel:not(.collapsed) .icon-expand {
+  display: none;
+}
+
+.mvp-stats-header {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  color: white;
+  padding: 16px 20px;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mvp-stats-header h3 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.mvp-stats-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  transition: background var(--transition-fast);
+}
+
+.mvp-stats-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.mvp-stats-content {
+  padding: 20px;
+}
+
+.mvp-stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.mvp-stat-item:last-of-type {
+  border-bottom: none;
+}
+
+.mvp-stat-item.highlight {
+  background: linear-gradient(90deg, rgba(139, 0, 0, 0.05) 0%, transparent 100%);
+  margin: 0 -20px;
+  padding: 12px 20px;
+  border-radius: 6px;
+}
+
+.mvp-stat-label {
+  font-size: 0.9375rem;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.mvp-stat-value {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.mvp-stat-item.highlight .mvp-stat-value {
+  font-size: 1.25rem;
+}
+
+.mvp-stat-note {
+  margin-top: 12px;
+  padding: 12px;
+  background: rgba(59, 130, 246, 0.05);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 6px;
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mvp-stats-panel {
+    bottom: 80px;
+    right: 16px;
+    left: 16px;
+    min-width: auto;
+    max-width: none;
+  }
+}
