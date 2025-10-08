@@ -1773,7 +1773,7 @@ body {
 /* === PANNEAU STATISTIQUES MVP === */
 .mvp-stats-panel {
   position: fixed;
-  bottom: 24px;
+  bottom: 100px; /* Plus haut pour éviter bouton retour haut */
   right: 24px;
   background: var(--color-bg-alt);
   border-radius: 12px;

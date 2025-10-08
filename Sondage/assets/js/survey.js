@@ -573,6 +573,10 @@ class SurveyViewer {
 
         this.responses[reqID][field] = checked;
         this.unsavedChanges = true;
+
+        // Sauvegarder l'ID du dernier élément édité
+        this.lastEditedElementId = e.target.id;
+
         this.debouncedAutoSave();
 
         // Mettre à jour stats MVP si c'est une checkbox MVP
@@ -610,6 +614,10 @@ class SurveyViewer {
 
         this.responses[reqID][fieldName] = value;
         this.unsavedChanges = true;
+
+        // Sauvegarder l'ID du dernier élément édité
+        this.lastEditedElementId = e.target.id;
+
         this.debouncedAutoSave();
       });
     });
@@ -631,6 +639,9 @@ class SurveyViewer {
         if (!this.responses[reqID]) {
           this.responses[reqID] = {};
         }
+
+        // Sauvegarder l'ID du dernier élément édité
+        this.lastEditedElementId = e.target.id;
 
         this.responses[reqID][fieldName] = value;
         this.unsavedChanges = true;
@@ -837,11 +848,17 @@ class SurveyViewer {
         responsesClean[key] = {...this.responses[key]};
       });
 
+      // Sauvegarder position de scroll et dernier élément édité
+      const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+      const lastEditedElement = document.activeElement?.id || this.lastEditedElementId || null;
+
       const payload = {
         survey: this.currentSurvey.name,
         user: this.currentUser,
         responses: responsesClean,
-        custom_requirements: this.customRequirements
+        custom_requirements: this.customRequirements,
+        scroll_position: scrollPosition,
+        last_edited_element: lastEditedElement
       };
 
       const response = await fetch('api.php?action=save-user-data', {
@@ -1121,6 +1138,9 @@ class SurveyViewer {
       // Fermer le modal
       this.closeSelectUserModal();
 
+      // Restaurer la position de scroll et focus sur dernier élément édité
+      this.restoreScrollPosition(userData);
+
       const totalTime = (performance.now() - startTime).toFixed(0);
       console.log(`⚡ Utilisateur "${username}" sélectionné en ${totalTime}ms - ${Object.keys(this.responses).length} requis chargés`);
 
@@ -1129,6 +1149,41 @@ class SurveyViewer {
       this.hideUserLoadingInModal();
       alert('❌ Erreur : ' + error.message);
     }
+  }
+
+  /**
+   * Restaure la position de scroll et focus sur dernier élément édité
+   */
+  restoreScrollPosition(userData) {
+    // Attendre que le DOM soit complètement rendu
+    setTimeout(() => {
+      // Restaurer scroll position
+      if (userData.scroll_position) {
+        window.scrollTo({
+          top: userData.scroll_position,
+          behavior: 'smooth'
+        });
+        console.log(`📍 Scroll restauré à ${userData.scroll_position}px`);
+      }
+
+      // Focus sur dernier élément édité
+      if (userData.last_edited_element) {
+        const element = document.getElementById(userData.last_edited_element);
+        if (element) {
+          // Scroll vers l'élément si pas déjà visible
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          });
+
+          // Focus sur l'élément après un court délai
+          setTimeout(() => {
+            element.focus();
+            console.log(`🎯 Focus restauré sur ${userData.last_edited_element}`);
+          }, 300);
+        }
+      }
+    }, 500); // Délai pour s'assurer que les tableaux lazy sont convertis
   }
 
   /**
