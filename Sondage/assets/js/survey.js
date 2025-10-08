@@ -80,12 +80,13 @@ class SurveyViewer {
       // Chargement des sondages disponibles
       await this.loadSurveys();
 
-      // Charger le premier sondage
-      if (this.surveys.length > 0) {
-        await this.switchSurvey(this.surveys[0].slug);
-      }
+      // NE PAS charger automatiquement - trop lent (395KB)
+      // L'utilisateur cliquera sur l'onglet pour charger
+      // if (this.surveys.length > 0) {
+      //   await this.switchSurvey(this.surveys[0].slug);
+      // }
 
-      // Restaurer la session utilisateur si elle existe
+      // Restaurer la session utilisateur si elle existe (chargera sondage si session)
       this.restoreUserSession();
 
       // Initialisation des écouteurs d'événements
@@ -1106,14 +1107,44 @@ class SurveyViewer {
     const savedSurvey = sessionStorage.getItem('oria_current_survey');
     const savedUser = sessionStorage.getItem('oria_current_user');
 
-    if (savedSurvey && savedUser && this.currentSurvey && this.currentSurvey.name === savedSurvey) {
-      try {
-        await this.selectUser(savedUser);
-      } catch (error) {
-        console.error('Erreur restauration session:', error);
-        this.clearUserSession();
+    if (savedSurvey && savedUser) {
+      // Session existe - charger le sondage automatiquement
+      const survey = this.surveys.find(s => s.name === savedSurvey);
+
+      if (survey) {
+        await this.switchSurvey(survey.slug);
+        try {
+          await this.selectUser(savedUser);
+        } catch (error) {
+          console.error('Erreur restauration session:', error);
+          this.clearUserSession();
+        }
       }
+    } else if (this.surveys.length > 0) {
+      // Pas de session - afficher message de bienvenue
+      this.showWelcomeMessage();
     }
+  }
+
+  /**
+   * Affiche message de bienvenue (pas de sondage chargé)
+   */
+  showWelcomeMessage() {
+    this.contentContainer.innerHTML = `
+      <div style="text-align: center; padding: 4rem 2rem; max-width: 600px; margin: 0 auto;">
+        <h2 style="font-size: 2rem; color: var(--color-primary); margin-bottom: 1.5rem;">
+          👋 Bienvenue
+        </h2>
+        <p style="font-size: 1.125rem; color: var(--color-text); margin-bottom: 2rem; line-height: 1.6;">
+          Cliquez sur un onglet ci-dessus pour charger un sondage
+        </p>
+        <div style="background: var(--color-bg-alt); border-radius: 0.75rem; padding: 1.5rem; border-left: 4px solid var(--color-primary);">
+          <p style="font-size: 0.9375rem; color: var(--color-text-light); margin: 0;">
+            💡 <strong>Astuce:</strong> Vos réponses sont sauvegardées automatiquement toutes les 2 secondes
+          </p>
+        </div>
+      </div>
+    `;
   }
 
   /**
