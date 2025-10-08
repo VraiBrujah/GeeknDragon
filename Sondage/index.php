@@ -65,10 +65,6 @@
       <nav class="survey-sections-nav" id="sectionsNav" aria-label="Navigation des sections">
         <div class="sections-nav-header">
           <h2 class="sections-nav-title">Sections</h2>
-          <button class="sections-nav-toggle" id="sectionsNavToggle" aria-label="Afficher/Masquer navigation" aria-expanded="true">
-            <span class="icon-collapse">◀</span>
-            <span class="icon-expand">▶</span>
-          </button>
         </div>
         <ul class="sections-list" id="sectionsList">
           <!-- Généré dynamiquement -->

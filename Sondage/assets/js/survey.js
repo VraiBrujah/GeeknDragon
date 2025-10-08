@@ -1029,7 +1029,16 @@ class SurveyViewer {
     document.querySelectorAll('.btn-delete-user').forEach(btn => {
       btn.addEventListener('click', async () => {
         const username = btn.dataset.username;
-        if (confirm(`Supprimer l'utilisateur "${username}" et toutes ses réponses ?`)) {
+
+        // Confirmation avec message explicite
+        const confirmMsg = `⚠️ ATTENTION: Supprimer l'utilisateur "${username}" ?\n\n` +
+                          `Cette action est IRRÉVERSIBLE et supprimera:\n` +
+                          `• Toutes les réponses de cet utilisateur\n` +
+                          `• Toutes les notes et priorités\n` +
+                          `• L'historique complet\n\n` +
+                          `Voulez-vous vraiment continuer ?`;
+
+        if (confirm(confirmMsg)) {
           await this.deleteUser(username);
         }
       });
