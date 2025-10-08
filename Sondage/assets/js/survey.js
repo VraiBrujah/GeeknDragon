@@ -1156,9 +1156,33 @@ class SurveyViewer {
   }
 
   /**
+   * Réinitialise tous les champs (vide pour nouvel utilisateur)
+   */
+  clearAllFields() {
+    console.log('🧹 Réinitialisation de tous les champs...');
+
+    // Décocher toutes les checkboxes
+    const checkboxes = this.contentContainer.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(cb => cb.checked = false);
+
+    // Vider tous les champs priorité
+    const priorityFields = this.contentContainer.querySelectorAll('input.priority-field');
+    priorityFields.forEach(field => field.value = '');
+
+    // Vider tous les champs notes
+    const notesFields = this.contentContainer.querySelectorAll('textarea.notes-field');
+    notesFields.forEach(field => field.value = '');
+
+    console.log(`✅ ${checkboxes.length + priorityFields.length + notesFields.length} champs réinitialisés`);
+  }
+
+  /**
    * Applique les réponses chargées à l'interface
    */
   applyResponsesToUI() {
+    // D'abord VIDER tous les champs (important pour changement utilisateur)
+    this.clearAllFields();
+
     let appliedCount = 0;
     let notFoundCount = 0;
 
