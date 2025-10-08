@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(python:*)",
-      "Bash(awk:*)"
+      "Bash(awk:*)",
+      "Bash(dir:*)",
+      "Read(//e/GitHub/GeeknDragon/Sondage/**)"
     ],
     "deny": [],
     "ask": []
