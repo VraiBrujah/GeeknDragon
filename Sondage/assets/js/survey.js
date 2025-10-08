@@ -359,6 +359,37 @@ class SurveyViewer {
   }
 
   /**
+   * Convertit immédiatement tous les tableaux lazy (pour sélection utilisateur)
+   */
+  convertAllLazyTablesNow() {
+    const lazyTables = this.contentContainer.querySelectorAll('table.lazy-table-pending');
+
+    if (lazyTables.length === 0) {
+      console.log('✅ Tous les tableaux déjà convertis');
+      return;
+    }
+
+    console.log(`🚀 Conversion forcée de ${lazyTables.length} tableaux lazy pour activation utilisateur...`);
+
+    lazyTables.forEach((table, index) => {
+      // Retirer placeholder
+      const placeholder = table.querySelector('.lazy-table-placeholder');
+      if (placeholder) {
+        placeholder.remove();
+      }
+
+      // Convertir le tableau
+      this.convertSingleTable(table);
+
+      // Retirer classes lazy
+      table.classList.remove('lazy-table-pending');
+      table.classList.add('lazy-table-converted');
+    });
+
+    console.log(`✅ ${lazyTables.length} tableaux convertis avec succès`);
+  }
+
+  /**
    * Affiche une bannière indiquant le mode lecture seule
    */
   showReadOnlyBanner() {
@@ -1061,7 +1092,10 @@ class SurveyViewer {
         console.log('🔄 Chargement initial du sondage pour nouvel utilisateur');
         await this.loadSurveyContent(this.currentSurvey);
       } else {
-        // Contenu déjà chargé - juste appliquer les réponses (rapide)
+        // Contenu existe - forcer conversion de TOUS les tableaux lazy
+        this.convertAllLazyTablesNow();
+
+        // Puis appliquer les réponses
         this.applyResponsesToUI();
       }
 
