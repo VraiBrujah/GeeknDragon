@@ -3,13 +3,26 @@
 ## Protagonistes
 
 ### Violette (Nom complet à établir)
-- **Âge** : ~20 ans
-- **Apparence** : Cheveux violets/mauves
+- **Âge** : ~16-17 ans
+- **Apparence** : Cheveux violets/mauves, yeux mauves
 - **Nature** : Phylactère vivant de l'Étoile Pourpre
-- **Origine** : Créée en laboratoire (circonstances exactes à développer)
+- **Origine - RÉVÉLÉE** :
+  - Créée en laboratoire par un mage obsédé (type Irenicus)
+  - Objectif : Tisser essence éthérienne dans être vivant (phylactère vivant)
+  - Résultat réussi après multiples expériences
+  - Laboratoire possédait enchantements anti-Divination puissants (invisible aux sorts de localisation pendant ~16-17 ans)
+- **Évasion déclencheuse** :
+  - Mort accidentelle du mage durant expérience
+  - Violette s'échappe pour la première fois
+  - En franchissant la porte, quitte zone protégée → sang éthérien exposé
+  - Pour la première fois en 1000 ans, phylactère émet signal détectable
+- **Détection par Morwen** :
+  - Après 1000 ans de quête infructueuse (cherchait artefact ancien)
+  - Détecte enfin phylactère grâce au sang exposé (rituel de Connexion 347e)
+  - Choc majeur : Découvre que ce n'est pas objet mais être vivant
 - **Caractéristique unique** : Sang éthérien pur coulant dans ses veines, essence innée tissée dans chaque cellule
-- **Statut** : Inconsciente de sa véritable nature au début
-- **Localisation initiale** : Région nord d'Eldoria
+- **Statut** : Inconsciente totale de sa véritable nature, son origine, et qu'elle est traquée
+- **Localisation initiale** : Région nord d'Eldoria (après évasion du laboratoire)
 
 ## Antagonistes
 
