@@ -2896,7 +2896,13 @@ function rollStat(statName) {
 
         if (animationCount > 10) {
             clearInterval(animationInterval);
-            resultElement.textContent = total;
+
+            // Calculer le modificateur selon les règles D&D
+            const modifier = Math.floor((total - 10) / 2);
+            const modifierText = modifier >= 0 ? `+${modifier}` : modifier;
+
+            // Afficher score et modificateur
+            resultElement.textContent = `${total} (${modifierText})`;
 
             // Colorer selon la qualité du résultat
             resultElement.classList.remove('text-red-500', 'text-yellow-500', 'text-green-500');

@@ -497,7 +497,41 @@
             "constitution": "Constitution",
             "intelligence": "Intelligence",
             "wisdom": "Wisdom",
-            "charisma": "Charisma"
+            "charisma": "Charisma",
+            "modifierExplanation": {
+                "title": "📊 Ability Score Modifiers Calculation",
+                "intro": "Each ability score generates a <strong>modifier</strong> that you must write on your <strong>Background</strong> triptych:",
+                "tableIntro": "Quick conversion table:",
+                "score810": "Score 8-9 → Modifier -1",
+                "score1011": "Score 10-11 → Modifier +0",
+                "score1213": "Score 12-13 → Modifier +1",
+                "score1415": "Score 14-15 → Modifier +2",
+                "score1617": "Score 16-17 → Modifier +3",
+                "score1819": "Score 18-19 → Modifier +4",
+                "score20": "Score 20 → Modifier +5",
+                "formula": "<strong>Quick formula:</strong> (Ability Score - 10) ÷ 2 (round down)",
+                "where": "📝 <strong>Where to write this modifier?</strong>",
+                "whereItem1": "In the <strong>Background</strong> triptych: next to each ability score",
+                "whereItem2": "In <strong>all skills</strong> associated with this ability"
+            },
+            "proficiencyBonus": {
+                "title": "⭐ Proficiency Bonus",
+                "intro": "The proficiency bonus is added to skills you are <strong>proficient</strong> or have <strong>expertise</strong> in. It's indicated on your Background triptych and increases with level:",
+                "level14": "Level 1-4 → +2",
+                "level58": "Level 5-8 → +3",
+                "level912": "Level 9-12 → +4",
+                "level1316": "Level 13-16 → +5",
+                "level1720": "Level 17-20 → +6",
+                "symbolsTitle": "🎯 Proficiency Symbols on Background Triptych",
+                "notProficient": "<strong>Not proficient:</strong> Empty box ⬜ → Use only the ability modifier",
+                "proficient": "<strong>Proficient:</strong> Checked box ✅ → Add proficiency bonus <strong>once</strong>",
+                "expert": "<strong>Expertise:</strong> Double checked box ✅✅ → Add proficiency bonus <strong>twice</strong>",
+                "exampleTitle": "💡 Concrete Example (Level 5)",
+                "exampleSetup": "Level 5 character with Dexterity 16 (+3):",
+                "exampleCase1": "<strong>Acrobatics (not proficient):</strong> +3 (modifier only)",
+                "exampleCase2": "<strong>Stealth (proficient):</strong> +3 (modifier) +3 (proficiency bonus) = <strong>+6</strong>",
+                "exampleCase3": "<strong>Sleight of Hand (expertise):</strong> +3 (modifier) +3 (proficiency bonus) +3 (proficiency bonus) = <strong>+9</strong>"
+            }
         },
         "examples": {
             "species": "🧝 Species",

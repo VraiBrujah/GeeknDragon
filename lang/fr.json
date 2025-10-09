@@ -492,7 +492,41 @@
             "constitution": "Constitution",
             "intelligence": "Intelligence",
             "wisdom": "Sagesse",
-            "charisma": "Charisme"
+            "charisma": "Charisme",
+            "modifierExplanation": {
+                "title": "📊 Calcul des Modificateurs de Caractéristiques",
+                "intro": "Chaque valeur de caractéristique génère un <strong>modificateur</strong> que vous devez reporter sur votre triptyque d'<strong>Historique</strong> :",
+                "tableIntro": "Table de conversion rapide :",
+                "score810": "Score 8-9 → Modificateur -1",
+                "score1011": "Score 10-11 → Modificateur +0",
+                "score1213": "Score 12-13 → Modificateur +1",
+                "score1415": "Score 14-15 → Modificateur +2",
+                "score1617": "Score 16-17 → Modificateur +3",
+                "score1819": "Score 18-19 → Modificateur +4",
+                "score20": "Score 20 → Modificateur +5",
+                "formula": "<strong>Formule rapide :</strong> (Caractéristique - 10) ÷ 2 (arrondi vers le bas)",
+                "where": "📝 <strong>Où reporter ce modificateur ?</strong>",
+                "whereItem1": "Dans le triptyque <strong>Historique</strong> : à côté de chaque caractéristique",
+                "whereItem2": "Dans <strong>toutes les compétences</strong> associées à cette caractéristique"
+            },
+            "proficiencyBonus": {
+                "title": "⭐ Bonus de Maîtrise",
+                "intro": "Le bonus de maîtrise s'ajoute aux compétences que vous <strong>maîtrisez</strong> ou <strong>expertisez</strong>. Il est indiqué sur votre triptyque d'Historique et augmente avec le niveau :",
+                "level14": "Niveau 1-4 → +2",
+                "level58": "Niveau 5-8 → +3",
+                "level912": "Niveau 9-12 → +4",
+                "level1316": "Niveau 13-16 → +5",
+                "level1720": "Niveau 17-20 → +6",
+                "symbolsTitle": "🎯 Symboles de Maîtrise sur le Triptyque d'Historique",
+                "notProficient": "<strong>Compétence non maîtrisée :</strong> Case vide ⬜ → Utilisez seulement le modificateur de caractéristique",
+                "proficient": "<strong>Compétence maîtrisée :</strong> Case cochée ✅ → Ajoutez le bonus de maîtrise <strong>une fois</strong>",
+                "expert": "<strong>Compétence expertisée :</strong> Case double cochée ✅✅ → Ajoutez le bonus de maîtrise <strong>deux fois</strong>",
+                "exampleTitle": "💡 Exemple concret (Niveau 5)",
+                "exampleSetup": "Personnage niveau 5 avec Dextérité 16 (+3) :",
+                "exampleCase1": "<strong>Acrobaties (non maîtrisée) :</strong> +3 (modificateur uniquement)",
+                "exampleCase2": "<strong>Discrétion (maîtrisée) :</strong> +3 (modificateur) +3 (bonus de maîtrise) = <strong>+6</strong>",
+                "exampleCase3": "<strong>Escamotage (expertisée) :</strong> +3 (modificateur) +3 (bonus de maîtrise) +3 (bonus de maîtrise) = <strong>+9</strong>"
+            }
         },
         "examples": {
             "species": "Espèce",
