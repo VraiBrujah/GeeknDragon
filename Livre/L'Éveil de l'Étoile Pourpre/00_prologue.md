@@ -1452,7 +1452,29 @@ Vous êtes blessée ?*
 
 *Au fil des siècles patients et cruels, elle avait rassemblé des serviteurs pour l'assister dans sa quête impossible. Kael, goule transformée il y a trois siècles pour l'assister dans les rituels complexes qui exigeaient une précision absolue et une endurance surhumaine. Myreth, le spectre enchaîné, arraché de force aux Limbes pour servir de gardien silencieux. La horde sans nom et sans visage, créatures difformes d'Éther corrompu et de chair morte tissées ensemble par sa volonté inflexible. Et saatha, la gorgone millénaire aux cheveux de serpents noirs, trouvée dans les ruines effondrées d'un château oublié, dernière esclave d'un mage éthérien mort depuis des siècles, yeux cachés derrière des lunettes forgées de ses propres mains pour contenir le pouvoir mortel de son regard pétrifiant.*
 
-*Quatre-vingt-sept sanctuaires explorés pierre par pierre avec un soin qui frôlait la perfection maniaque. Quatre-vingt-sept rituels accomplis avec une précision obsessionnelle où chaque symbole devait être tracé exactement selon les instructions du Codex, où chaque composant devait être assemblé dans l'ordre sacré, où chaque mot d'invocation devait être prononcé sans la moindre hésitation qui pourrait compromettre le résultat. Quatre-vingt-sept échecs gravés dans sa mémoire immortelle comme autant de cicatrices invisibles qui ne guériraient jamais, qui suppureraient éternellement dans les profondeurs de son esprit torturé.*
+*Quatre-vingt-sept sanctuaires explorés pierre par pierre avec un soin qui frôlait la perfection maniaque. Et certains n'avaient pas été abandonnés sans résistance.*
+
+*Elle se souvenait du quarante-deuxième. Dans les marécages putrides du Sud, où les brumes vertes s'accrochaient à la peau comme mains de noyés. Le sanctuaire était gardé. Pas par des pièges mécaniques ou des sorts simples, mais par des créatures. Des Gardiens Corrompus - vestiges dégénérés des serviteurs éthériens, transformés en monstruosités par des siècles d'exposition à la magie résiduelle.*
+
+*Trois créatures l'avaient attaquée dès qu'elle avait franchi le seuil. Humanoïdes autrefois, peut-être. Maintenant rien que griffes et crocs et rage aveugle. Elles avaient bondi des ombres avec une vitesse qui aurait déchiqueté un mortel en secondes.*
+
+*Mais Morwen n'était pas mortelle depuis longtemps.*
+
+*La première créature avait jaillit de gauche. Réflexe pur - elle avait pivoté sur son talon droit, poids transféré sur sa jambe avant, main gauche interceptant la griffe descendante à mi-course. Blocage. Torsion du poignet. Craquement d'os. La créature hurla. Sa main droite jaillit, paume ouverte, frappant la gorge exposée. Écrasement de cartilage. La créature s'effondra, suffoquant.*
+
+*La deuxième attaqua pendant qu'elle était encore en mouvement. Intelligent. Elle roula en avant, évitant les griffes de quelques centimètres. Remontée fluide sur un genou. Lame courte dégainée - l'arme rituelle en argent qu'elle portait toujours. Coup ascendant précis sous les côtes. Penetration du cœur corrompu. Retrait immédiat de la lame avant que le sang acide ne la corrode.*
+
+*La troisième hésita. Erreur fatale. Morwen ne laissa pas passer l'ouverture. Bond en avant - distance fermée en une fraction de seconde. Feinte haute. La créature mordit à l'appât, protégeant sa tête. Coup bas réel - lame tranchant le tendon d'Achille. La créature s'effondra. Finish rapide. Décapitation nette.*
+
+*Trois Gardiens. Vingt-sept secondes. Aucune blessure.*
+
+*Des siècles de chasse lui avaient appris la chorégraphie mortelle. Chaque mouvement économique. Chaque frappe précise. Pas de geste superflu. Pas d'hésitation. La violence vampirique alliée à la technique perfectionnée par des décennies d'entraînement avant sa transformation - quand son père lui avait appris à se battre comme un noble devait savoir le faire.*
+
+*"Père m'avait enseigné l'escrime", pensa-t-elle avec une amertume acide. "Il voulait que je puisse me défendre lors d'un duel d'honneur. Il n'imaginait pas que j'utiliserais ces leçons pour massacrer des aberrations dans des ruines maudites."*
+
+*Le quarante-deuxième sanctuaire, comme les autres, n'avait rien contenu. Juste des ruines vides et le sang corrompu de gardiens dégénérés.*
+
+*Quatre-vingt-sept sanctuaires. Quatre-vingt-sept rituels accomplis avec une précision obsessionnelle. Quatre-vingt-sept échecs gravés dans sa mémoire immortelle comme autant de cicatrices invisibles.*
 
 *Et maintenant, debout dans les ténèbres glaciales et affamées des Monts de l'Éther, face au quatre-vingt-huitième sanctuaire qui se dressait devant elle comme promesse ou malédiction, Morwen sentait le poids de mille années de quête désespérée et infructueuse peser sur ses épaules immortelles comme montagne de désespoir accumulé.*
 
@@ -1948,7 +1970,59 @@ Elle s'approcha plus près, son visage à quelques centimètres de la pierre fro
 
 Elle fit quelques pas le long du mur, ses doigts glissant sur la pierre gravée.
 
-*❖ Les architectes fous de l'impossible, continua-t-elle, sa voix se chargeant d'émotion.
+Une présence familière glissa silencieusement à ses côtés. saatha avait suivi sans bruit, comme toujours, présence fantomatique qui se fondait dans les ombres.
+
+*◈ Maîtresse, siffla la gorgone en observant les fresques avec ses yeux cachés derrière les lunettes noires.
+
+◈ J'ai vu cesss fresque avant. Il y a longtempsss, avant que vous ne me trouviez dans ces ruinesss oubliéesss.*
+
+Morwen se tourna vers elle, surprise visible sur ses traits pâles.
+
+❖ Avant ? Tu veux dire... quand les Éthériens vivaient encore ?
+
+*◈ Non, Maîtresssse. Maisss j'ai vu d'autresss sanctuairesss. D'autresss lieux où ilsss gravaient leur histoire sur la pierre. Toujoursss les mêmesss sssymbolesss. Toujoursss la même arrogance dans leursss regardsss sssculptésss.*
+
+Elle s'approcha d'une fresque particulièrement bien conservée, ses serpents ondulant avec agitation.
+
+*◈ Et toujoursss, à la fin, cesss lieux étaient videsss. Abandonnésss. Comme ssi quelque chossse d'horrible s'était produit sssoudainement. Comme ssi toute une civilisssation avait disssparu en un inssstant.*
+
+❖ La Grande Purge, dit Morwen.
+
+*◈ Oui. Maisss qui a purgé qui, Maîtresssse ? C'essst la quessstion que je me posssse depuisss dessss sssièclsss. Lesss Éthériensss étaient ssi puisssantsss. Qui aurait pu lesss détruire tousss en même tempsss ?
+
+❖ Les dieux qu'ils ont défiés, répondit Morwen avec certitude.
+
+❖ Ou peut-être leur propre hubris. Peut-être qu'ils ont tenté quelque chose de trop ambitieux et que cela s'est retourné contre eux.*
+
+saatha resta silencieuse un moment, ses serpents goûtant l'air chargé de magie ancienne.
+
+*◈ Ou peut-être, Maîtresssse... peut-être qu'ilsss ont réusssi. Et que leur sssuccèsss lui-même lesss a détruits.*
+
+Le silence qui suivit était pesant. Morwen fixa la gorgone, une lueur nouvelle dans ses yeux rouges.
+
+❖ Explique-toi.
+
+*◈ Le Phylactère de l'Étoile Pourpre, siffla saatha lentement, pesant chaque mot.
+
+◈ Vousss le cherchez depuisss ssi longtempsss. Un artefact de résssurrection, capable de ramener lesss morts. Maisss qu'essst-ce qu'une telle puisssance ferait à ceuxss qui la possssèdent ? Qu'essst-ce qu'elle exigerait comme prix ?*
+
+Elle se tourna vers Morwen, et même à travers les lunettes noires, la vampire sentit le poids de ce regard millénaire.
+
+*◈ J'ai sservi dessss nécromancienss, Maîtressse. Dessss magesss de sang. Dessss vampiresss avant vousss. Tousss cherchaient à vaincre la mort. Et tousss, sansss exception, ont payé un prix terrible. La mort ne se laisssse passs défier sansss vengeance.*
+
+❖ Tu penses que le Phylactère a détruit les Éthériens ? Qu'ils l'ont créé et qu'il s'est retourné contre eux ?
+
+*◈ Je pensssse... que ssi vous le trouvez, Maîtresssse, vous devriez vous demander pourquoi il exissste encore. Pourquoi personne ne l'a utilisssé depuisss la Purge. Pourquoi ilsss l'ont caché ssi soigneussement.*
+
+Un silence lourd s'installa. Morwen détourna le regard, fixant à nouveau les fresques.
+
+*❖ Tu me mets en garde, dit-elle finalement d'une voix neutre.
+
+◈ Je vousss rappelle que la puisssance a toujoursss un coût, Maîtresssse, répondit saatha avec douceur.
+
+◈ Et que lesss Éthériensss, malgré toute leur grandeur, ne sssont plusss là pour nouuss raconter ce qu'ilsss ont découvert.*
+
+❖ Les architectes fous de l'impossible, continua Morwen comme si l'échange n'avait pas eu lieu, sa voix se chargeant d'émotion.
 
 ❖ Ceux qui avaient osé défier les dieux eux-mêmes et leur arracher leurs secrets les plus jalousement gardés. Ils ont bâti ce lieu de leurs propres mains, Umbra. Pierre par pierre, sort par sort, en y versant leur sueur, leur sang et leurs rêves de grandeur.
 
@@ -2394,6 +2468,32 @@ Elle fit volte-face, manteau de nuit vivante tourbillonnant autour d'elle comme 
 
 ● À vos ordres, Maîtresse, dit Kael d'une voix rauque éraillée par la terreur qui compressait sa gorge morte comme main invisible, toujours prostré contre la pierre froide qui mordait son front avec un froid qui lui rappelait cruellement qu'il n'était plus vraiment vivant depuis trois siècles interminables. Toujours à vos ordres. Éternellement à vos ordres.*
 
+Une voix sifflante s'éleva depuis les ombres.
+
+*◈ Maîtressse, siffla saatha en s'approchant avec révérence.
+
+◈ Permettez-moi de vousss accompagner. Messs yeux voient ce que d'autresss ne peuvent passs voir. Lesss courantsss éthériensss, lesss piègesss ancienss. Je pourraisss...*
+
+❖ Non, coupa Morwen sans même la regarder.
+
+*◈ Maisss Maîtressse, le rituel esst dangereuxss. Si quelque chossse tournait mal...
+
+❖ C'est POUR cela que tu restes dehors, dit Morwen avec une dureté qui ne tolérait aucune réplique.
+
+❖ Si le rituel échoue... si quelque chose tourne mal... si je suis détruite ou pire... alors tu seras libre. Toi, Kael, tous les autres. Mes liens sur vous se briseront avec ma destruction.*
+
+Elle se retourna enfin, son regard rubis fixant la gorgone.
+
+*❖ C'est l'unique générosité que je peux t'offrir après toutes ces années de servitude, saatha. Une chance de liberté si je péris. Ne la gaspille pas en me suivant dans l'abîme.*
+
+saatha inclina profondément la tête, ses serpents s'apaisant en signe de soumission.
+
+*◈ Comme vousss l'ordonnez, Maîtresssse.*
+
+Mais dans le secret de son esprit, saatha pensa : "Et si elle réussit ? Si elle ramène vraiment les morts ? Que deviendrai-je alors ? Une servante éternelle d'une famille ressuscitée qui ne me connaît pas, ne me comprend pas."
+
+Elle ne savait pas quelle issue elle redoutait le plus.
+
 La répétition portait le poids de trois cents années de servitude sans choix, chaque mot lourd d'une résignation si profonde qu'elle s'était transformée en quelque chose ressemblant presque à de l'acceptation amère.
 
 La horde recula comme vague qui se retire après avoir léché le rivage, se fondant à nouveau dans l'obscurité d'où elle était venue, emportant avec elle le peu de chaleur vivante qui subsistait dans cet endroit maudit. Kael et Myreth restèrent un instant de plus, silhouettes figées dans l'attente soumise, avant de disparaître à leur tour, ombres avalées par les ombres plus grandes encore.
@@ -2434,7 +2534,55 @@ Sa voix était douce malgré le sifflement, chargée d'une sagesse oubliée et d
 
 Elle chassa ces souvenirs d'un clignement d'yeux derrière ses lunettes protectrices. Le passé était mort. Seul importait le présent, et le présent signifiait obéir.
 
-Mais dans le secret de son esprit ancien, la fissure s'élargissait. Insidieusement. Dangereusement. Inexorablement.
+Morwen se tenait devant l'entrée du sanctuaire, immobile comme statue de marbre, son regard fixé sur les ténèbres qui l'attendaient à l'intérieur.
+
+*◈ Maîtressse, siffla doucement saatha.
+
+◈ Ssi... ssi je peuxxx me permettre une quessstion.*
+
+Morwen ne se retourna pas, mais son silence était une permission tacite.
+
+*◈ Cesss trois sssièclesss que je vousss sersss... jamaisss je ne vousss ai vue héssiter. Maisss ce sssoir, je sssensss quelque chossse de différent. Quelque chossse danss l'air. Danss vosss mouvementsss.*
+
+Un long silence.
+
+*❖ Je n'hésite pas, dit finalement Morwen d'une voix neutre.
+
+◈ Vousss mentez, Maîtressse, dit saatha avec une audace qui la surprit elle-même.
+
+◈ Passss à moi. Maisss à vousss-même. Je le voisss danss la manière dont vosss mains tremblent quand vousss pensssez que personne ne regarde. Danss la façon dont vousss comptez et recomptez lesss fioles. Danss votre ressspiration qui s'accélère avantt d'entrer danss un sssanctuaire.*
+
+Morwen se retourna lentement, son visage une masque de glace.
+
+❖ Tu oublies ta place, gorgone.
+
+*◈ Ma place esst d'observer, Maîtressse, répondit saatha en s'inclinant profondément.
+
+◈ D'observer et de sservir. Et j'observe que vousss avez peur. Passs du rituel. Passs de la mort. Maisss de quelque chossse d'autre. Quelque chossse que je ne comprends passs encore.*
+
+❖ Qu'est-ce que tu crois observer, saatha ?
+
+*◈ La peur de réusssir, siffla saatha après un long moment.
+
+◈ Vousss avez passssé mille ansss à chercher ce phylactère. Mille ansss où votre éxisssstence avait un sssens, un but. Maisss ssi vousss le trouvez... ssi vousss ramenez vosss mortsss... que ressstera-t-il de vousss ? Qui ssserez-vousss sansss cette quesssste qui vousss définit ?*
+
+Le silence qui suivit était absolu. Même les serpents de saatha cessèrent de bouger, figés dans l'attente d'une punition terrible.
+
+Mais Morwen ne frappa pas. Elle sourit. Un sourire froid, amer, terrible.
+
+*❖ Tu es plus sage que je ne le pensais, saatha. Ou peut-être simplement plus observatrice.*
+
+Elle se retourna vers le sanctuaire.
+
+*❖ Tu as raison. J'ai peur. Pas de l'échec - l'échec, je le connais intimement. Mais du succès. De ce que je découvrirai quand je les ramènerai. De leurs regards quand ils verront ce que je suis devenue pour eux.*
+
+◈ Alorsss pourquoi continuer, Maîtressse ?
+
+❖ Parce que j'ai fait une promesse. Et les promesses des damnés sont les seules choses qui nous restent.
+
+Mais dans le secret de son esprit ancien, saatha pensa : "Non. Tu continues parce que tu ne sais pas faire autre chose. Parce que la quête est devenue la prison. Et les prisonniers ont peur de la liberté."
+
+La fissure s'élargissait. Insidieusement. Dangereusement. Inexorablement.
 
 Dans l'obscurité, Morwen perçut le léger frémissement des serpents de saatha, ce tremblement presque imperceptible qui trahissait l'inquiétude de sa gardienne immortelle. Sans réfléchir, d'un geste aussi naturel qu'inattendu qui la surprit elle-même, elle tendit la main et effleura délicatement l'une des créatures ophidiennes qui ondulaient autour du visage de la gorgone.
 
@@ -2468,7 +2616,7 @@ Aucun reproche dans sa voix ancienne. Aucune surprise dans son ton mesuré. Just
 
 *Mais dans le secret de son esprit ancien, derrière les lunettes qui contenaient son pouvoir mortel, saatha pensa : "Un jour, peut-être, les choses seront différentes. Un jour."*
 
-*C'était la première fois en trois mille ans qu'elle osait penser cela.*
+*C'était la première fois en mille ans qu'elle osait penser cela. Mille années de servitude depuis qu'elle avait été arrachée aux ruines de ce château oublié où elle dormait, pétrifiée par la solitude et l'âge. Mille années à observer cette vampire obsédée chercher l'impossible. Et maintenant, pour la première fois depuis ce jour lointain où Morwen l'avait trouvée, saatha sentait quelque chose remuer dans son âme millénaire. Quelque chose qui ressemblait dangereusement à de l'espoir.*
 
 ---
 
@@ -2514,7 +2662,21 @@ La lueur du cercle rituel pulsait en rythme avec un battement lent et profond qu
 
 *❖ Les fioles, ordonna-t-elle d'une voix sèche redevenue clinique et autoritaire.*
 
-saatha s'avança, portant le coffret qu'elle avait préparé avec soin méticuleux pendant des jours. Ses mains tremblaient dans un mouvement léger presque imperceptible, tremblement subtil visible seulement par qui savait observer, alors qu'elle l'ouvrait et révélait son contenu précieux et terrible. Sept fioles de verre noir, scellées par des cachets de cire pourpre marqués de symboles interdits que même les nécromanciens modernes n'oseraient prononcer.
+saatha s'avança, portant le coffret qu'elle avait préparé avec soin méticuleux pendant des jours.
+
+*◈ Maîtresse, siffla-t-elle en s'approchant avec la révérence millénaire d'une créature qui avait servi trop de maîtres pour ne pas connaître les dangers de la familiarité.
+
+◈ J'ai vérifié chaque composssant trois foisss. Le sssang éthérien a été conservé selon les méthodes oubliéesss. L'essssence de Nyx a été distillée sousss la pleine lune, comme le veut la tradition ancienn e.*
+
+❖ As-tu suivi EXACTEMENT les instructions du Codex ?, demanda Morwen sans se retourner, sa voix portant cette dureté qui précédait soit la récompense soit la punition.
+
+*◈ À la lettre, Maîtresse, répondit saatha en inclinant la tête, ses serpents ondulant avec soumission.
+
+◈ Chaque mesure pesssée sssur la balance de cristal. Chaque température vérifiée avec le thermomètre alchimique que vousss m'avez donné il y a deux sssièclsss. Je n'ai rien laissssé au hasard.*
+
+Il y eut un silence. Morwen se retourna enfin, son regard rubis fixant la gorgone avec une intensité qui aurait pétrifié un mortel même sans croiser les yeux cachés derrière les lunettes noires.
+
+❖ Bien, dit-elle finalement avec un hochement presque imperceptible qui, venant d'elle, équivalait à des éloges chaleureux. Ses mains tremblaient dans un mouvement léger presque imperceptible, tremblement subtil visible seulement par qui savait observer, alors qu'elle l'ouvrait et révélait son contenu précieux et terrible. Sept fioles de verre noir, scellées par des cachets de cire pourpre marqués de symboles interdits que même les nécromanciens modernes n'oseraient prononcer.
 
 À l'intérieur, des liquides de couleurs impossibles qui n'existaient pas dans le spectre naturel. Sang éthérien ancestral conservé par des sorts oubliés. Essences distillées de créatures mortes depuis des éons. Composants dont même les noms avaient été effacés des grimoires modernes par peur superstitieuse.
 
@@ -2554,7 +2716,31 @@ L'ozone d'une magie trop puissante, trop concentrée, qui faisait dresser les ch
 
 Les serpents de saatha sifflèrent en unisson, inquiets, percevant le danger que leur maîtresse gorgone ressentait instinctivement dans chaque cellule de son corps séculaire. Le rituel n'était pas encore complet, juste préparé, mais déjà l'Éther répondait, se courbant, se tordant autour du sanctuaire comme réalité elle-même protestait.
 
-*◈ C'est prêt, annonça-t-elle d'une voix neutre et clinique, essayant de masquer sa peur croissante.
+*◈ Maîtresse, siffla saatha avec une hésitation rare chez elle, ses serpents se tordant avec agitation.
+
+◈ L'Éther résssisste. Je le sssensss à travers messs écaillesss, à travers le ssang ancien qui coule dans mes veinesss. C'esssst comme ssi la réalité elle-même refusssait ce que nous tentons d'accomplir.*
+
+Morwen ne se retourna pas, continuant à tracer les runes avec son sang.
+
+*❖ L'Éther résiste toujours, répondit-elle froidement.
+
+❖ C'est sa nature. Il faut le plier, le forcer, le dominer. Les Éthériens le savaient. C'est pourquoi ils ont construit ces sanctuaires, ces points de pression où la réalité est déjà fragile, déjà affaiblie.*
+
+◈ Maisss, Maîtresse... Les quatre-vingt-sssept autresss sanctuairesss ont aussssi réssssisté. Et à chaque foisss, le rituel a échoué. Comment sssavez-vous que cette foisss sssera différente ?
+
+Le silence qui suivit était lourd comme tombeau scellé. Morwen s'immobilisa, sa main encore tendue au-dessus d'une rune inachevée. Pendant un instant terrible, saatha crut qu'elle avait franchi une ligne invisible, qu'elle allait être punie pour avoir osé questionner.
+
+Mais quand Morwen parla, sa voix était étrangement calme.
+
+*❖ Je ne le sais pas, admit-elle avec une honnêteté qui surprit la gorgone.
+
+❖ Mais que puis-je faire d'autre, saatha ? Abandonner ? Accepter qu'ils soient perdus à jamais ? Accepter que mille ans de quête, de sacrifice, de sang versé... n'étaient que folie ?*
+
+Elle se retourna enfin, et dans ses yeux rouges, saatha vit quelque chose qu'elle n'avait jamais vu auparavant. Pas de la folie. Pas de l'obsession aveugle. Mais du désespoir. Du désespoir pur et lucide.
+
+❖ Non. Je dois essayer. Encore et toujours. Jusqu'à ce que cela fonctionne ou que je sois détruite dans la tentative.
+
+*◈ C'est prêt, annonça finalement saatha d'une voix plus douce, presque compatissante.
 
 ◈ Le rituel de localisation peut commencer quand vous le souhaitez, Maîtresse.*
 
