@@ -23,9 +23,9 @@ Elle n'était pas seule, cependant.
 
 Une présence ancienne émergea lentement des profondeurs du sanctuaire. Pas humaine. Pas tout à fait vivante non plus. Quelque chose entre les deux, suspendu dans un équilibre précaire entre la vie et la pétrification éternelle.
 
-La gorgone avançait avec une grâce millénaire, chaque pas mesuré par des siècles d'habitude. Ses serpents capillaires ondulaient doucement, langue fourchues goûtant l'air glacé, écailles noires luisant sous la lueur fantomatique de l'aube naissante. Derrière les lunettes aux montures épaisses qui protégeaient le monde de son regard mortel, ses yeux clairs observaient la vampire avec une attention qui n'était ni révérence ni défi, mais quelque chose de plus complexe, tissé de millénaires de survie.
+La gorgone avançait avec une grâce millénaire, chaque pas mesuré par des siècles d'habitude. Ses serpents capillaires ondulaient doucement, langue fourchues goûtant l'air glacé, écailles noires luisant sous la lueur fantomatique de l'aube naissante. Derrière les lunettes forgées de ses propres mains, artéfact alchimique qui contenait son pouvoir létal et protégeait le monde de son regard mortel, ses yeux clairs observaient la vampire avec une attention qui n'était ni révérence ni défi, mais quelque chose de plus complexe, tissé de millénaires de survie.
 
-saatha la Gorgone. Plus ancienne que la vampire elle-même. Plus ancienne que les ruines éthériennes. Assez ancienne pour avoir vu des empires naître, prospérer, et s'effondrer en poussière pendant qu'elle passait de chaîne en chaîne, de maître en maître, éternelle captive d'une condition qu'elle n'avait jamais choisie.
+saatha la Gorgone. Plus ancienne que la vampire elle-même. Plus ancienne que les ruines éthériennes. Assez ancienne pour avoir vu des empires naître, prospérer, et s'effondrer en poussière pendant qu'elle passait de chaîne en chaîne, de maître en maître, éternelle captive d'une condition qu'elle n'avait jamais choisie. L'une des plus grandes alchimistes que le monde ait connues, experte en potions de dissimulation, d'invisibilité et de métamorphose. Grâce à ses créations minutieuses, elle pouvait se déplacer parmi les mortels sans éveiller leur peur ni subir leur rejet, se fondant dans leurs cités comme une ombre parmi les ombres.
 
 *Une enfant, autrefois. Si loin dans le passé que même sa mémoire millénaire peinait à en saisir les contours. Des mains humaines l'arrachant à sa grotte natale, terrorisées mais cupides. « Une gorgone vivante ! Pense à la fortune ! » Le premier collier. Le premier maître. Le premier coup.*
 
@@ -81,7 +81,8 @@ Morwen se retourna enfin, considérant la gorgone avec un regard indéchiffrable
 
 **Champ lexical gorgone respecté :**
 - Serpents capillaires, écailles, langue fourchue, venin (implicite)
-- Regard mortel, pétrification, lunettes protectrices
+- Regard mortel, pétrification, lunettes forgées (artéfact alchimique)
+- Expertise alchimique : potions de dissimulation, invisibilité, métamorphose
 - Aucune confusion avec vocabulaire vampirique de Morwen
 
 **Mots** : ~600
@@ -95,6 +96,10 @@ Morwen se retourna enfin, considérant la gorgone avec un regard indéchiffrable
 - **Âge** : Plus ancienne que Morwen (plusieurs millénaires vs ~1000 ans Morwen)
 - **Origine** : Capturée enfant, arrachée à grotte natale
 - **Parcours** : Succession maîtres mortels sadiques/indifférents/cruels
+- **Expertise** : L'une des plus grandes alchimistes du monde
+  - Potions de dissimulation, invisibilité, métamorphose
+  - Lunettes forgées de ses propres mains (artéfact alchimique contenant son pouvoir)
+  - Capacité de se déplacer parmi les mortels sans éveiller peur/rejet
 - **Rencontre Morwen** : Il y a 3 siècles, château effondré, collier rouillé
 - **Relation actuelle** : Servitude par habitude + stabilité de l'immortalité vampirique
 - **Témoignage historique** : A vu les Éthériens (esclave d'un mage 2 siècles), a vu la Purge

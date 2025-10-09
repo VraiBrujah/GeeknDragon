@@ -1,44 +1,77 @@
 # L'Éveil de l'Étoile Pourpre - Instructions Éditoriales
 
-## Style et Influences
+## Style et Influences - STANDARD ÉDITORIAL ÉTABLI
 
-**Mélange stylistique** :
-- S.A. Salvatore : (focalisation de prédatrice, profondeur souterraine, bestiaire et tension de « mission »)
-- Anne Rice : (gothique sensuel, imagerie du sang/corps, lenteur hypnotique)
-- Christopher Paolini : (souffle épico-lyrique, toponymie résonante, langue opératoire ancienne)
-- Brandon Sanderson :  (système de magie structuré : runes, coûts, rituel, règles implicites)
-- H.P. Lovecraft : (solenniété obscure, ruines antédiluviennes, lexique liturgique, angoisse cosmique)
-- J.R.R. Tolkien : (solenniété épique, ruines et mythes anciens, langue « archaïsante »)
-- J.K. Rowling :  (note de tendresse et de quotidien via les elfes, contraste empathique à Valgaris)
-- William Blake : <Blake>- Vision prophétique: ton oraculaire et apocalyptique, voix qui annonce un renversement cosmique, proche des
-“Prophéties” de Blake.
-- Mythopoïèse: création d’un panthéon et de noms propres (Morwen, Saatha, Codex Purpureus, Purge antédiluvienne)
-rappelant les livres mythiques de Blake (Urizen, Los, Enitharmon).
-- Contraires (Innocence/Expérience): tension entre l’innocence projetée sur “Violette” et l’expérience corrompue de
-Morwen; coexistence d’amour/dévouement et de cruauté.
-- Imagerie cosmo‑métallurgique: “forges éternelles” et fournaises sombres évoquent fortement les forges de Los et le
-martèlement cosmique (cf. Tyger/furnaces).
-- Ciel personnifié: “le firmament retient son souffle”, astres comme acteurs moraux — écho à l’agentivité cosmique et
-aux “étoiles” blakéennes.
-- Livre de Loi/Connaissance: le “Codex Purpureus” comme recueil totalisant de secrets et de destin, miroir du “Book of
-Urizen” (loi, ordre, pouvoir).
-- Symbolique chromatique: pourpre, rubis, argent noir — palette symbolique intense, proche de l’esthétique colorée et
-saturée des “illuminated books”.
+**NOUVEAU STANDARD STYLISTIQUE** (confirmé par audit prologue V15) :
 
-Indices dans le prologue
+### Influences Principales Établies
 
-- Cosmologie incarnée: la nuit “affamée”, sommets qui “boivent la lumière” — nature chargée de volonté, à la manière des
-paysages vivants chez Blake.
-- Apocalyptique imminente: signes mondiaux synchronisés (mages, forges, elfes) — vision totalisante et prophétique d’un
-basculement.
-- Poétique des contraires: Morwen oscille entre rictus cruel et réminiscences d’humanité; amour quasi maternel pour
-Violette vs ordre “Dévorez‑les”.
-- Smithy mythique: “forges éternelles de Valgaris” au rouge presque noir — parallèle direct à la figure du forgeron
-créateur/destructeur blakéen.
-- Appel/retour: “Tu vas rentrer à la maison” — motif du rappel à l’origine/identité (proche des appels à Jerusalem/
-Albion à “se réveiller/retourner”).
-- Noms et archétypes: bestiaire (corbeaux), ruines, grimoire, rituels — arsenal symbolique qui sert un récit visionnaire
-plus que réaliste.</Blake>
+**1. Anne Rice - 35%** (Dominante gothique)
+- Monologues intérieurs vampiriques, conscience millénaire obsessionnelle
+- Sensorium corporel riche (sang, peau, souffle mort)
+- Temporalité dilatée des immortels (siècles comme battements de cœur)
+- Prose baroque sensuelle, mélancolie gothique
+- **Application** : Voix narrative Morwen, descriptions atmosphère, rapport au temps
+
+**2. R.A. Salvatore - 25%** (Structure narrative)
+- Action chorégraphiée précise (combats, mouvements tactiques)
+- Dialogues vifs révélateurs de caractère
+- Rythme rapide dans scènes de tension
+- Développement psychologique via l'action
+- **Application** : Scènes de combat, dialogues directs, progression intrigue
+
+**3. William Blake - 15%** (Symbolisme cosmique)
+- Vision prophétique oraculaire, ton apocalyptique
+- Contraires fusionnés (innocence/expérience, création/destruction)
+- Imagerie cosmo-métallurgique (forges éternelles, fournaises cosmiques)
+- Symbolique chromatique saturée (pourpre, rubis, argent noir)
+- Mythopoïèse (panthéon propre, noms résonants)
+- Cosmologie incarnée (nature chargée de volonté morale)
+- **Application** : Rituels, invocations, descriptions Codex Purpureus, enjeux cosmiques
+
+**4. Mary Shelley - 10%** (Structure tragique)
+- Relation créateur/créature (Morwen/saatha, Éthériens/créations)
+- Hubris scientifique et conséquences (chute des Éthériens)
+- Questionnement éthique transformation (vampirisme, servitude)
+- Solitude de l'immortel, quête d'humanité perdue
+- **Application** : Arc Morwen, arc saatha, thématiques esclavage/liberté
+
+**5. H.P. Lovecraft - 8%** (Horreur cosmique)
+- Grimoire sentient comme entité (Codex Purpureus)
+- Architecture oppressante des ruines éthériennes
+- Horreur de l'échelle temporelle (civilisation disparue)
+- Lexique liturgique, angoisse face à l'ancien
+- **Application** : Sanctuaires, Monts de l'Éther, Codex, ruines antiques
+
+**6. J.R.R. Tolkien - 5%** (Toponymie uniquement)
+- Noms de lieux résonants (Eldoria, Valgaris, Sylvelune)
+- **ATTENTION** : Prose reste baroque Rice, PAS archaïque Tolkien
+- **Application** : Toponymie, noms propres géographiques
+
+**7. Brandon Sanderson - 3%** (Règles magiques)
+- Système magique avec règles implicites cohérentes
+- Rituel structuré (géométrie, ingrédients, coûts)
+- **ATTENTION** : Règles présentes mais NON didactiques (pas d'exposition)
+- **Application** : Rituels, magie éthérienne, système de pouvoir
+
+**8. Clive Barker - 2%** (Horreur corporelle)
+- Transformations viscérales, métamorphoses physiques
+- Horreur corporelle élégante
+- **Application** : Scènes de transformation, descriptions vampirisme
+
+**9. Style Propre - 12%** (Fusion unique)
+- "Gothique Épique Martial" : Fusion Rice + Salvatore + Blake sans équivalent direct
+- Pitch : "*Interview with the Vampire* rencontre *Legend of Drizzt* dans mythologie William Blake"
+
+### Influences Éventuelles (Inspiration Secondaire Uniquement)
+
+Les influences suivantes peuvent être utilisées ponctuellement pour enrichissement stylistique, SANS chercher à atteindre de pourcentage cible :
+
+- **Christopher Paolini** : Worldbuilding naturaliste, descriptions lyriques (utiliser avec modération)
+- **J.K. Rowling** : Ton accessible, découverte progressive (utiliser avec modération)
+- **Mark Twain** : Tournures simples vivantes, réalisme poétique (touches ponctuelles)
+
+**RÈGLE CRITIQUE** : Ces influences secondaires ne doivent JAMAIS diluer les 8 influences principales établies.
 
 ## Exigences Éditoriales
 
