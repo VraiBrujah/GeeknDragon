@@ -114,7 +114,7 @@ echo $snipcartInit;
     <div class="absolute inset-0 bg-black/60"></div>
       <div class="relative z-10 max-w-5xl p-6 hero-text">
         <h1 class="text-5xl font-extrabold mb-6" data-i18n="shop.hero.title">Boutique Geek & Dragon</h1>
-        <p class="text-xl mb-8 txt-court" data-i18n="shop.hero.description">Offrez à vos parties l'élégance et la durabilité de pièces et cartes d'équipement conçues au Québec, plus précieuses qu'une figurine de dragon à 300 $, laquelle ne sert qu'exceptionnellement, nos pièces sont présentes à chaque session pour des années d'aventures.</p>
+        <p class="text-xl mb-8 txt-court" data-i18n="shop.hero.description"><?= __('shop.hero.description', 'Une figurine de dragon à 300&nbsp;$&nbsp;? La plupart des campagnes n\'en verront jamais la couleur. Nos trésors québécois&nbsp;? Indispensables à chaque partie, pour toutes vos aventures.') ?></p>
 
         <!-- Navigation rapide vers les catégories -->
         <?php
