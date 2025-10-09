@@ -359,11 +359,11 @@ class I18nManager {
 
     elements.forEach(element => {
       const key = element.getAttribute('data-i18n');
-      const fallback = element.textContent || '';
+      const fallback = element.innerHTML || '';
       const translated = this.t(key, fallback);
 
       if (translated && translated !== fallback) {
-        element.textContent = translated;
+        element.innerHTML = translated;
         count++;
       }
     });
