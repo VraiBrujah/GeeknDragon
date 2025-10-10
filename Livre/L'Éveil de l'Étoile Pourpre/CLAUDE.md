@@ -264,11 +264,44 @@ Chaque personnage possède une voix UNIQUE immédiatement reconnaissable. Le lec
 - Langue : Français exclusivement
 
 ### Spécifiques au Projet Livre
-- **Dialogues** : [Convention à établir après audit - voir section Symboles de Dialogue]
-- **Pensées intérieures** : [À documenter]
-- **Rituels/Invocations** : [À documenter - possiblement italique ou guillemets spéciaux]
 
-**ACTION REQUISE** : Documenter ces conventions après analyse du prologue existant.
+#### Formatage Markdown - RÈGLES CRITIQUES
+**INTERDICTION ABSOLUE** de couper les balises Markdown par des retours chariot :
+
+- ❌ **INTERDIT** :
+  ```
+  *❖ Texte dialogue ligne 1
+
+  ❖ Texte dialogue ligne 2*
+  ```
+
+- ✅ **CORRECT** :
+  ```
+  *❖ Texte dialogue ligne 1❖ Texte dialogue ligne 2*
+  ```
+
+**Règle** : Les astérisques d'ouverture et de fermeture doivent être sur la même "portée" sans interruption par retour chariot, sinon ils s'affichent littéralement au lieu d'être interprétés.
+
+#### Conventions de Formatage Établies
+
+**Dialogues normaux (présent narratif)** :
+- Format brut sans formatage spécial
+- Exemple : `❖ Je sais, dit-elle.`
+
+**Pensées intérieures (présent narratif)** :
+- **Gras entre doubles astérisques**
+- Exemple : `**❖ Que dois-je faire maintenant ?**`
+
+**Flashbacks (scènes passées)** :
+- *Italique entre astérisques simples* pour TOUT le texte (narration + dialogues)
+- Exemple : `*Elle marchait lentement vers le sanctuaire.*`
+- Exemple dialogue flashback : `*❖ Mère tient encore debout, dit-elle.*`
+
+**Pensées dans flashback** :
+- ***Gras + Italique (triple astérisques)***
+- Exemple : `***❖ Dois-je vraiment faire cela ?***`
+
+**RÈGLE ABSOLUE** : Jamais de retour chariot entre balises ouvrantes/fermantes de même niveau.
 
 ---
 

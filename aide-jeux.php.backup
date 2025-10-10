@@ -1430,21 +1430,14 @@ echo $snipcartInit;
         </p>
       </div>
 
-      <!-- ===== LANCEUR DE CARACTÉRISTIQUES ===== -->
+      <!-- ===== LANCEUR DE DÉS POUR CARACTÉRISTIQUES ===== -->
       <div class="dice-roller">
         <h3 class="text-2xl font-bold mb-4 text-center text-yellow-400"><?= __('gameHelp.diceRoller.title', '🎲 Lanceur de Caractéristiques') ?></h3>
-
-        <!-- Explication résultat -->
-        <div class="bg-indigo-900/30 border border-indigo-700/50 rounded-lg p-4 mb-6">
-          <p class="text-gray-300 text-center">
-            <strong>D&D 2024 :</strong> Lancez 4d6, gardez les 3 meilleurs. Résultat : <strong class="text-yellow-300">Score (Modificateur)</strong>
-          </p>
-          <p class="text-sm text-gray-400 text-center mt-2" data-i18n="gameHelp.diceRoller.example">
-            Ex: <strong>16 (+3)</strong> → Inscrivez <strong>16</strong> dans la case valeur, <strong>+3</strong> dans la case modificateur ET dans toutes les compétences associées (triptyque Historique)
-          </p>
-        </div>
-
-        <!-- Grille de dés -->
+        <p class="text-gray-300 text-center mb-4">
+          <?= __('gameHelp.diceRoller.description', '<strong>D&D 2024 :</strong> Lancez 4d6 et gardez les 3 meilleurs résultats.') ?> 
+          <?= __('gameHelp.diceRoller.backgroundNote', 'Vous ajouterez ensuite les bonus d\'<strong>Historique</strong> (+2 et +1) dans le triptyque d\'Historique.') ?>
+        </p>
+        
         <div class="dice-grid">
           <div class="text-center">
             <h4 class="font-semibold text-red-400 mb-2"><?= __('gameHelp.diceRoller.strength', 'Force') ?></h4>
@@ -1467,7 +1460,7 @@ echo $snipcartInit;
             <button class="stat-dice" onclick="rollStat('con')"><?= __('gameHelp.diceRoller.rollButton', 'Lancer') ?></button>
             <div class="dice-result text-orange-300" id="con-result">--</div>
             <div class="stat-details hidden" id="con-details">
-              <div class="text-xs text-gray-500 mt-2" data-i18n="gameHelp.diceRoller.conDetails">❤️ Pas de compétences<br><strong>Affecte PV :</strong><br>Mod × Niveau</div>
+              <div class="text-xs text-gray-500 mt-2">(Affecte les PV)</div>
             </div>
           </div>
           <div class="text-center">
@@ -1495,71 +1488,202 @@ echo $snipcartInit;
             </div>
           </div>
         </div>
-
-        <div class="text-center mt-6">
+        
+        <div class="text-center mt-4">
           <button class="roll-all-btn" onclick="rollAllStats()"><?= __('gameHelp.diceRoller.rollAllButton', '🎲 Lancer toutes les caractéristiques') ?></button>
         </div>
+      </div>
 
-        <!-- Explications compactes intégrées -->
-        <div class="grid md:grid-cols-2 gap-6 mt-8">
-          <!-- Colonne gauche : Calcul compétences -->
+      <!-- ===== EXPLICATIONS MODIFICATEURS ET COMPÉTENCES ===== -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 rounded-xl p-8 border border-purple-700/50 mb-16">
+        <h3 class="text-2xl font-bold mb-6 text-center text-purple-400" data-i18n="gameHelp.diceRoller.modifierExplanation.title">
+          <?= __('gameHelp.diceRoller.modifierExplanation.title', '📊 Comprendre les Modificateurs de Caractéristiques') ?>
+        </h3>
+
+        <div class="space-y-6">
+          <!-- Explication des valeurs affichées -->
           <div class="bg-gray-800/50 rounded-lg p-6">
-            <h4 class="text-lg font-semibold mb-4 text-indigo-400">🧮 Calcul des compétences</h4>
-            <div class="bg-indigo-900/30 border border-indigo-600/50 rounded p-3 mb-4">
-              <p class="text-center text-yellow-300 font-bold">Bonus = Modificateur + Maîtrise</p>
-            </div>
+            <p class="text-gray-300 mb-4" data-i18n="gameHelp.diceRoller.modifierExplanation.intro">
+              <?= __('gameHelp.diceRoller.modifierExplanation.intro', 'Le lanceur affiche <strong>deux valeurs essentielles</strong> :') ?>
+            </p>
+            <ul class="space-y-2 text-gray-300">
+              <li data-i18n="gameHelp.diceRoller.modifierExplanation.scoreLabel">
+                <?= __('gameHelp.diceRoller.modifierExplanation.scoreLabel', '<strong>Score de caractéristique</strong> (ex: 16) → À reporter dans le triptyque d\'<strong>Historique</strong>') ?>
+              </li>
+              <li data-i18n="gameHelp.diceRoller.modifierExplanation.modifierLabel">
+                <?= __('gameHelp.diceRoller.modifierExplanation.modifierLabel', '<strong>Modificateur</strong> (ex: +3) → C\'est ce bonus que vous ajouterez à vos jets de dés') ?>
+              </li>
+            </ul>
+          </div>
 
-            <div class="space-y-3">
-              <div class="flex items-center gap-3">
-                <img src="/media/branding/icons/competence.webp" alt="Non maîtrisée" class="w-10 h-10">
-                <p class="text-sm text-gray-300"><strong>Non maîtrisée :</strong> Modificateur seul</p>
-              </div>
-              <div class="flex items-center gap-3">
-                <img src="/media/branding/icons/maitrise.webp" alt="Maîtrisée" class="w-10 h-10">
-                <p class="text-sm text-gray-300"><strong>Maîtrisée :</strong> Mod + Bonus</p>
-              </div>
-              <div class="flex items-center gap-3">
-                <img src="/media/branding/icons/expertise.webp" alt="Expertisée" class="w-10 h-10">
-                <p class="text-sm text-gray-300"><strong>Expertisée :</strong> Mod + (Bonus×2)</p>
-              </div>
+          <!-- Table de conversion -->
+          <div class="bg-gray-800/50 rounded-lg p-6">
+            <h4 class="text-xl font-semibold mb-4 text-yellow-400" data-i18n="gameHelp.diceRoller.modifierExplanation.tableIntro">
+              <?= __('gameHelp.diceRoller.modifierExplanation.tableIntro', '📋 Table de conversion rapide :') ?>
+            </h4>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-gray-300">
+              <div class="bg-gray-700/50 rounded p-2 text-center" data-i18n="gameHelp.diceRoller.modifierExplanation.score810"><?= __('gameHelp.diceRoller.modifierExplanation.score810', 'Score 8-9 → Modificateur -1') ?></div>
+              <div class="bg-gray-700/50 rounded p-2 text-center" data-i18n="gameHelp.diceRoller.modifierExplanation.score1011"><?= __('gameHelp.diceRoller.modifierExplanation.score1011', 'Score 10-11 → Modificateur +0') ?></div>
+              <div class="bg-gray-700/50 rounded p-2 text-center" data-i18n="gameHelp.diceRoller.modifierExplanation.score1213"><?= __('gameHelp.diceRoller.modifierExplanation.score1213', 'Score 12-13 → Modificateur +1') ?></div>
+              <div class="bg-gray-700/50 rounded p-2 text-center" data-i18n="gameHelp.diceRoller.modifierExplanation.score1415"><?= __('gameHelp.diceRoller.modifierExplanation.score1415', 'Score 14-15 → Modificateur +2') ?></div>
+              <div class="bg-gray-700/50 rounded p-2 text-center" data-i18n="gameHelp.diceRoller.modifierExplanation.score1617"><?= __('gameHelp.diceRoller.modifierExplanation.score1617', 'Score 16-17 → Modificateur +3') ?></div>
+              <div class="bg-gray-700/50 rounded p-2 text-center" data-i18n="gameHelp.diceRoller.modifierExplanation.score1819"><?= __('gameHelp.diceRoller.modifierExplanation.score1819', 'Score 18-19 → Modificateur +4') ?></div>
+              <div class="bg-gray-700/50 rounded p-2 text-center col-span-2 md:col-span-3" data-i18n="gameHelp.diceRoller.modifierExplanation.score20"><?= __('gameHelp.diceRoller.modifierExplanation.score20', 'Score 20 → Modificateur +5') ?></div>
             </div>
+            <p class="text-sm text-gray-400 mt-4 text-center" data-i18n="gameHelp.diceRoller.modifierExplanation.formula">
+              <?= __('gameHelp.diceRoller.modifierExplanation.formula', '<strong>Formule :</strong> (Caractéristique - 10) ÷ 2 (arrondi vers le bas)') ?>
+            </p>
+          </div>
 
-            <div class="mt-4 pt-4 border-t border-gray-700">
-              <p class="text-xs text-gray-400"><strong>Bonus maîtrise :</strong> Niv 1-4:+2 • 5-8:+3 • 9-12:+4 • 13-16:+5 • 17-20:+6</p>
+          <!-- Compétences par caractéristique -->
+          <div class="bg-gray-800/50 rounded-lg p-6">
+            <h4 class="text-xl font-semibold mb-4 text-green-400" data-i18n="gameHelp.diceRoller.modifierExplanation.skillsTitle">
+              <?= __('gameHelp.diceRoller.modifierExplanation.skillsTitle', '🎯 Compétences par Caractéristique') ?>
+            </h4>
+            <div class="grid md:grid-cols-2 gap-3 text-gray-300">
+              <div data-i18n="gameHelp.diceRoller.modifierExplanation.strSkills"><?= __('gameHelp.diceRoller.modifierExplanation.strSkills', '<strong>Force :</strong> Athlétisme') ?></div>
+              <div data-i18n="gameHelp.diceRoller.modifierExplanation.dexSkills"><?= __('gameHelp.diceRoller.modifierExplanation.dexSkills', '<strong>Dextérité :</strong> Acrobaties, Discrétion, Escamotage') ?></div>
+              <div data-i18n="gameHelp.diceRoller.modifierExplanation.conSkills"><?= __('gameHelp.diceRoller.modifierExplanation.conSkills', '<strong>Constitution :</strong> Aucune compétence (mais affecte vos Points de Vie !)') ?></div>
+              <div data-i18n="gameHelp.diceRoller.modifierExplanation.intSkills"><?= __('gameHelp.diceRoller.modifierExplanation.intSkills', '<strong>Intelligence :</strong> Arcanes, Histoire, Investigation, Nature, Religion') ?></div>
+              <div data-i18n="gameHelp.diceRoller.modifierExplanation.wisSkills"><?= __('gameHelp.diceRoller.modifierExplanation.wisSkills', '<strong>Sagesse :</strong> Dressage, Médecine, Perception, Perspicacité, Survie') ?></div>
+              <div data-i18n="gameHelp.diceRoller.modifierExplanation.chaSkills"><?= __('gameHelp.diceRoller.modifierExplanation.chaSkills', '<strong>Charisme :</strong> Intimidation, Persuasion, Représentation, Supercherie') ?></div>
             </div>
           </div>
 
-          <!-- Colonne droite : Exemple -->
+          <!-- Où reporter les valeurs -->
           <div class="bg-gray-800/50 rounded-lg p-6">
-            <h4 class="text-lg font-semibold mb-4 text-green-400">💡 Exemple (Dex 16, Niv 5)</h4>
-            <p class="text-sm text-gray-400 mb-4">Score <strong>16</strong> → Mod <strong>+3</strong> • Bonus maîtrise <strong>+3</strong></p>
-
-            <div class="space-y-2">
-              <div class="bg-gray-700/50 rounded p-3 flex items-center gap-2">
-                <img src="/media/branding/icons/competence.webp" alt="Non maîtrisée" class="w-6 h-6">
-                <p class="text-sm"><strong>Acrobaties</strong> : +3 = <strong class="text-yellow-300">+3</strong></p>
-              </div>
-              <div class="bg-gray-700/50 rounded p-3 flex items-center gap-2">
-                <img src="/media/branding/icons/maitrise.webp" alt="Maîtrisée" class="w-6 h-6">
-                <p class="text-sm"><strong>Discrétion</strong> : +3+3 = <strong class="text-yellow-300">+6</strong></p>
-              </div>
-              <div class="bg-gray-700/50 rounded p-3 flex items-center gap-2">
-                <img src="/media/branding/icons/expertise.webp" alt="Expertisée" class="w-6 h-6">
-                <p class="text-sm"><strong>Escamotage</strong> : +3+3+3 = <strong class="text-yellow-300">+9</strong></p>
-              </div>
-            </div>
-
-            <div class="mt-4 p-3 bg-amber-900/30 border border-amber-700/50 rounded">
-              <p class="text-xs text-amber-300">→ Ces bonus vont sur le triptyque d'Historique</p>
-            </div>
+            <h4 class="text-xl font-semibold mb-4 text-amber-400" data-i18n="gameHelp.diceRoller.modifierExplanation.where">
+              <?= __('gameHelp.diceRoller.modifierExplanation.where', '✍️ <strong>Que reporter sur le triptyque d\'Historique ?</strong>') ?>
+            </h4>
+            <ul class="space-y-2 text-gray-300">
+              <li data-i18n="gameHelp.diceRoller.modifierExplanation.whereItem1">
+                <?= __('gameHelp.diceRoller.modifierExplanation.whereItem1', '<strong>Score de caractéristique</strong> : À inscrire dans la grande case de la caractéristique') ?>
+              </li>
+              <li data-i18n="gameHelp.diceRoller.modifierExplanation.whereItem2">
+                <?= __('gameHelp.diceRoller.modifierExplanation.whereItem2', '<strong>Modificateur</strong> : À inscrire dans toutes les compétences qui dépendent de cette caractéristique') ?>
+              </li>
+              <li data-i18n="gameHelp.diceRoller.modifierExplanation.whereItem3">
+                <?= __('gameHelp.diceRoller.modifierExplanation.whereItem3', '<strong>Bonus additionnel d\'Historique</strong> : +2 sur une caractéristique, +1 sur une autre (selon votre choix d\'Historique)') ?>
+              </li>
+            </ul>
           </div>
         </div>
+      </div>
 
-        <!-- Note finale compacte -->
-        <div class="mt-6 p-4 bg-purple-900/30 border border-purple-700/50 rounded-lg">
-          <p class="text-sm text-gray-300 text-center">
-            <strong>Important :</strong> Ajoutez +2 et +1 (bonus Historique) aux caract.
-          </p>
+      <!-- ===== BONUS DE MAÎTRISE ET EXPERTISE ===== -->
+      <div class="bg-gradient-to-r from-indigo-900/30 to-purple-900/30 rounded-xl p-8 border border-indigo-700/50 mb-16">
+        <h3 class="text-2xl font-bold mb-6 text-center text-indigo-400" data-i18n="gameHelp.diceRoller.proficiencyBonus.title">
+          <?= __('gameHelp.diceRoller.proficiencyBonus.title', '⭐ Bonus de Maîtrise et d\'Expertise') ?>
+        </h3>
+
+        <div class="space-y-6">
+          <!-- Introduction -->
+          <div class="bg-gray-800/50 rounded-lg p-6">
+            <p class="text-gray-300 mb-4" data-i18n="gameHelp.diceRoller.proficiencyBonus.intro">
+              <?= __('gameHelp.diceRoller.proficiencyBonus.intro', 'Sur votre triptyque d\'<strong>Historique</strong>, certaines compétences ont des cases à cocher. Voici comment calculer le bonus final d\'une compétence :') ?>
+            </p>
+            <div class="bg-indigo-900/30 border border-indigo-700/50 rounded-lg p-4">
+              <h4 class="text-lg font-semibold mb-2 text-indigo-300" data-i18n="gameHelp.diceRoller.proficiencyBonus.calcTitle">
+                <?= __('gameHelp.diceRoller.proficiencyBonus.calcTitle', '🧮 <strong>Formule de calcul d\'une compétence :</strong>') ?>
+              </h4>
+              <p class="text-xl text-center text-yellow-300 font-bold" data-i18n="gameHelp.diceRoller.proficiencyBonus.calcBase">
+                <?= __('gameHelp.diceRoller.proficiencyBonus.calcBase', '<strong>Bonus de compétence = Modificateur de caractéristique + Bonus de maîtrise (si maîtrisée/expertisée)</strong>') ?>
+              </p>
+            </div>
+          </div>
+
+          <!-- Bonus de maîtrise par niveau -->
+          <div class="bg-gray-800/50 rounded-lg p-6">
+            <h4 class="text-xl font-semibold mb-4 text-yellow-400">Bonus de maîtrise par niveau :</h4>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3 text-gray-300">
+              <div class="bg-gray-700/50 rounded p-2 text-center" data-i18n="gameHelp.diceRoller.proficiencyBonus.level14"><?= __('gameHelp.diceRoller.proficiencyBonus.level14', 'Niveau 1-4 → Bonus de maîtrise +2') ?></div>
+              <div class="bg-gray-700/50 rounded p-2 text-center" data-i18n="gameHelp.diceRoller.proficiencyBonus.level58"><?= __('gameHelp.diceRoller.proficiencyBonus.level58', 'Niveau 5-8 → Bonus de maîtrise +3') ?></div>
+              <div class="bg-gray-700/50 rounded p-2 text-center" data-i18n="gameHelp.diceRoller.proficiencyBonus.level912"><?= __('gameHelp.diceRoller.proficiencyBonus.level912', 'Niveau 9-12 → Bonus de maîtrise +4') ?></div>
+              <div class="bg-gray-700/50 rounded p-2 text-center" data-i18n="gameHelp.diceRoller.proficiencyBonus.level1316"><?= __('gameHelp.diceRoller.proficiencyBonus.level1316', 'Niveau 13-16 → Bonus de maîtrise +5') ?></div>
+              <div class="bg-gray-700/50 rounded p-2 text-center" data-i18n="gameHelp.diceRoller.proficiencyBonus.level1720"><?= __('gameHelp.diceRoller.proficiencyBonus.level1720', 'Niveau 17-20 → Bonus de maîtrise +6') ?></div>
+            </div>
+          </div>
+
+          <!-- Symboles de maîtrise avec images -->
+          <div class="bg-gray-800/50 rounded-lg p-6">
+            <h4 class="text-xl font-semibold mb-6 text-green-400" data-i18n="gameHelp.diceRoller.proficiencyBonus.symbolsTitle">
+              <?= __('gameHelp.diceRoller.proficiencyBonus.symbolsTitle', '🎯 <strong>Symboles de Maîtrise (cases à cocher sur la fiche d\'Historique) :</strong>') ?>
+            </h4>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              <!-- Non maîtrisée -->
+              <div class="text-center">
+                <img src="/media/branding/icons/competence.webp" alt="Case vide - Non maîtrisée" class="w-16 h-16 mx-auto mb-3">
+                <p class="text-gray-300" data-i18n="gameHelp.diceRoller.proficiencyBonus.notProficient">
+                  <?= __('gameHelp.diceRoller.proficiencyBonus.notProficient', '⬜ <strong>Case vide (non maîtrisée) :</strong> Bonus = Modificateur de caractéristique uniquement') ?>
+                </p>
+              </div>
+
+              <!-- Maîtrisée -->
+              <div class="text-center">
+                <img src="/media/branding/icons/maitrise.webp" alt="Case cochée - Maîtrisée" class="w-16 h-16 mx-auto mb-3">
+                <p class="text-gray-300" data-i18n="gameHelp.diceRoller.proficiencyBonus.proficient">
+                  <?= __('gameHelp.diceRoller.proficiencyBonus.proficient', '✅ <strong>Case cochée une fois (maîtrisée) :</strong> Bonus = Modificateur + Bonus de maîtrise') ?>
+                </p>
+              </div>
+
+              <!-- Expertisée -->
+              <div class="text-center">
+                <img src="/media/branding/icons/expertise.webp" alt="Case double cochée - Expertisée" class="w-16 h-16 mx-auto mb-3">
+                <p class="text-gray-300" data-i18n="gameHelp.diceRoller.proficiencyBonus.expert">
+                  <?= __('gameHelp.diceRoller.proficiencyBonus.expert', '✅✅ <strong>Case cochée deux fois (expertisée) :</strong> Bonus = Modificateur + (Bonus de maîtrise × 2)') ?>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exemple concret -->
+          <div class="bg-gradient-to-r from-green-900/30 to-emerald-900/30 border border-green-700/50 rounded-lg p-6">
+            <h4 class="text-xl font-semibold mb-4 text-green-400" data-i18n="gameHelp.diceRoller.proficiencyBonus.exampleTitle">
+              <?= __('gameHelp.diceRoller.proficiencyBonus.exampleTitle', '💡 <strong>Exemple détaillé (Personnage niveau 5)</strong>') ?>
+            </h4>
+            <p class="text-gray-300 mb-4" data-i18n="gameHelp.diceRoller.proficiencyBonus.exampleSetup">
+              <?= __('gameHelp.diceRoller.proficiencyBonus.exampleSetup', 'Votre Dextérité est de 16, donc modificateur = +3. Votre bonus de maîtrise au niveau 5 = +3.') ?>
+            </p>
+            <div class="space-y-3">
+              <div class="bg-gray-700/50 rounded p-4" data-i18n="gameHelp.diceRoller.proficiencyBonus.exampleCase1">
+                <?= __('gameHelp.diceRoller.proficiencyBonus.exampleCase1', '<strong>Acrobaties (⬜ non maîtrisée) :</strong> +3 (modificateur seul) = <strong>Bonus final +3</strong>') ?>
+              </div>
+              <div class="bg-gray-700/50 rounded p-4" data-i18n="gameHelp.diceRoller.proficiencyBonus.exampleCase2">
+                <?= __('gameHelp.diceRoller.proficiencyBonus.exampleCase2', '<strong>Discrétion (✅ maîtrisée) :</strong> +3 (modificateur) + 3 (maîtrise) = <strong>Bonus final +6</strong>') ?>
+              </div>
+              <div class="bg-gray-700/50 rounded p-4" data-i18n="gameHelp.diceRoller.proficiencyBonus.exampleCase3">
+                <?= __('gameHelp.diceRoller.proficiencyBonus.exampleCase3', '<strong>Escamotage (✅✅ expertisée) :</strong> +3 (modificateur) + 3 (maîtrise) + 3 (maîtrise) = <strong>Bonus final +9</strong>') ?>
+              </div>
+            </div>
+            <div class="mt-4 p-4 bg-amber-900/30 border border-amber-700/50 rounded-lg">
+              <p class="text-amber-300" data-i18n="gameHelp.diceRoller.proficiencyBonus.finalNote">
+                <?= __('gameHelp.diceRoller.proficiencyBonus.finalNote', '💡 <strong>Important :</strong> Ces bonus finaux sont ce que vous inscrivez dans les cases de compétences sur votre triptyque d\'Historique !') ?>
+              </p>
+            </div>
+          </div>
+
+          <!-- Constitution et Points de Vie -->
+          <div class="bg-red-900/30 border border-red-700/50 rounded-lg p-6">
+            <h4 class="text-xl font-semibold mb-4 text-red-400">❤️ <strong>Constitution et Points de Vie</strong></h4>
+            <p class="text-gray-300 mb-4">
+              Le modificateur de Constitution affecte vos <strong>Points de Vie (PV)</strong> à chaque niveau :
+            </p>
+            <div class="bg-gray-700/50 rounded p-4">
+              <p class="text-lg text-center text-yellow-300 font-bold mb-4">
+                PV par niveau = Dé de Vie de votre classe + Modificateur de Constitution
+              </p>
+              <div class="space-y-2 text-gray-300">
+                <p><strong>Au niveau 1 :</strong> PV maximum de votre dé de vie + modificateur de Constitution</p>
+                <p><strong>Aux niveaux suivants :</strong> Lancez votre dé de vie (ou prenez la moyenne) + modificateur de Constitution</p>
+              </div>
+            </div>
+            <div class="mt-4 p-4 bg-red-800/30 rounded-lg">
+              <p class="text-red-300">
+                <strong>Exemple :</strong> Barbare niveau 1 avec Constitution 14 (+2) → PV = 12 (dé d12) + 2 = <strong>14 PV</strong>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 

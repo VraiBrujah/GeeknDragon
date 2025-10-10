@@ -2,8 +2,6 @@
 
 ## PROLOGUE : Les Murmures de l'Ombre
 
-**VERSION 15 - SECTIONS 1-9 TRANSFORMÉES (50/50 narration/dialogue)**
-
 ---
 
 ### L'Éveil des Ombres Anciennes

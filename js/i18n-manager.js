@@ -115,7 +115,7 @@ class I18nManager {
    * @returns {string} Clé de cache
    */
   _getCacheKey(lang) {
-    return `i18n_${lang}_v6`;
+    return `i18n_${lang}_v7`;
   }
 
   /**
