@@ -13,7 +13,7 @@
         },
         "contact": {
             "title": "Contact - Questions & Projets Personnalisés | Geek & Dragon",
-            "desc": "Besoin d'aide ou d'un projet sur mesure ? Contactez notre équipe québécoise pour des accessoires D&D personnalisés : pièces gravées, cartes triptyques. Réponse rapide garantie."
+            "desc": "Besoin d'aide ou d'un projet sur mesure ? Contactez notre équipe québécoise pour des accessoires D&D personnalisés : pièces gravées, cartes triptyques."
         },
         "thankyou": {
             "title": "Merci !!! | Geek & Dragon",
@@ -100,7 +100,7 @@
     "hero": {
         "title": "Vos trésors méritent d'exister",
         "subtitle1": "Pièces gravées, cartes illustrées, fiches robustes. Touchez votre aventure.",
-        "subtitle2": "Fabriqué au Québec • Utilisable 10+ ans • Livraison rapide",
+        "subtitle2": "Fabriqué au Québec • Qualité supérieure • Livraison rapide",
         "discoverCreations": "Découvrir nos créations",
         "shopNow": "Voir toute la collection"
     },
@@ -118,8 +118,8 @@
                 "desc": "Toucher vos trésors crée des émotions que les chiffres sur fiche ne peuvent jamais offrir"
             },
             "benefit2": {
-                "title": "Durabilité légendaire",
-                "desc": "10+ ans d'aventures garanties. Pas de mise à jour, pas d'abonnement, juste du solide"
+                "title": "Qualité supérieure",
+                "desc": "Conçu pour durer. Pas de mise à jour, pas d'abonnement, juste du solide"
             },
             "benefit3": {
                 "title": "Artisanat québécois",
@@ -1078,7 +1078,7 @@
             "instruction": "Cliquez sur l'image pour télécharger la fiche à imprimer",
             "printTip": "Conseil d'impression :",
             "description": "Téléchargez l'image de la fiche de monnaie pour l'imprimer chez vous",
-            "instructions": "Imprimez sur du papier cartonné (200-250g) pour une meilleure durabilité. Vous pouvez plastifier la fiche pour une utilisation répétée.",
+            "instructions": "Imprimez sur du papier cartonné (200-250g) pour un meilleur rendu. Vous pouvez plastifier la fiche pour une utilisation répétée.",
             "confirmButton": "📥 Télécharger",
             "cancelButton": "Annuler"
         },

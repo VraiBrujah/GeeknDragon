@@ -40,7 +40,7 @@ include 'head-common.php';
       <div class="relative z-10 max-w-3xl p-6 hero-text">
         <h1 class="text-5xl font-extrabold mb-6" data-i18n="hero.title">Vos trésors D&D méritent d'exister</h1>
           <p class="text-xl mb-4" data-i18n="hero.subtitle1">Pièces gravées, cartes illustrées, fiches robustes. Touchez votre aventure.</p>
-          <p class="text-lg mb-8 text-gray-300" data-i18n="hero.subtitle2">Fabriqué au Québec • Utilisable 10+ ans • Livraison rapide</p>
+          <p class="text-lg mb-8 text-gray-300" data-i18n="hero.subtitle2">Fabriqué au Québec • Qualité supérieure • Livraison rapide</p>
         <div class="flex flex-col md:flex-row gap-4 justify-center">
           <a href="#featured-products"
              class="btn btn-primary btn-boutique"
@@ -113,9 +113,9 @@ include 'head-common.php';
           <!-- Bénéfice 2 -->
           <div class="text-center p-6 bg-gray-900/50 rounded-xl">
             <div class="text-5xl mb-4">⚔️</div>
-            <h3 class="text-xl font-bold mb-3" data-i18n="home.why.benefit2.title">Durabilité légendaire</h3>
+            <h3 class="text-xl font-bold mb-3" data-i18n="home.why.benefit2.title">Qualité supérieure</h3>
             <p class="text-gray-300" data-i18n="home.why.benefit2.desc">
-              10+ ans d'aventures garanties. Pas de mise à jour, pas d'abonnement, juste du solide
+              Conçu pour durer. Pas de mise à jour, pas d'abonnement, juste du solide
             </p>
           </div>
 

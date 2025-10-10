@@ -3161,7 +3161,7 @@ function downloadMoneySheet() {
             <div class="bg-amber-900/20 p-4 rounded-lg border border-amber-600/30 mb-4">
                 <h4 class="font-bold text-amber-400 mb-2"><?= __('money.download.printTip', '💡 Conseil d\'impression :') ?></h4>
                 <p class="text-sm text-gray-300">
-                    <?= __('money.download.instructions', 'Imprimez sur du papier cartonné (200-250g) pour une meilleure durabilité. Vous pouvez plastifier la fiche pour une utilisation répétée.') ?>
+                    <?= __('money.download.instructions', 'Imprimez sur du papier cartonné (200-250g) pour un meilleur rendu. Vous pouvez plastifier la fiche pour une utilisation répétée.') ?>
                 </p>
             </div>
             

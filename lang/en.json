@@ -13,7 +13,7 @@
         },
         "contact": {
             "title": "Contact - Questions & Custom Projects | Geek & Dragon",
-            "desc": "Need help or a custom project? Contact our Quebec team for personalized D&D accessories: engraved coins, triptych cards. Fast response guaranteed."
+            "desc": "Need help or a custom project? Contact our Quebec team for personalized D&D accessories: engraved coins, triptych cards."
         },
         "thankyou": {
             "title": "Thank you!!! | Geek & Dragon",
@@ -100,7 +100,7 @@
     "hero": {
         "title": "Your D&D treasures deserve to exist",
         "subtitle1": "Engraved coins, illustrated cards, sturdy sheets. Touch your adventure.",
-        "subtitle2": "Crafted in Canada • 10+ years lifespan • Fast delivery",
+        "subtitle2": "Crafted in Canada • Premium quality • Fast delivery",
         "discoverCreations": "Discover our creations",
         "shopNow": "See the full collection"
     },
@@ -118,8 +118,8 @@
                 "desc": "Touching your treasures creates emotions that numbers on a sheet can never offer"
             },
             "benefit2": {
-                "title": "Legendary durability",
-                "desc": "10+ years of guaranteed adventures. No updates, no subscription, just solid quality"
+                "title": "Premium quality",
+                "desc": "Built to last. No updates, no subscription, just solid quality"
             },
             "benefit3": {
                 "title": "Quebec craftsmanship",
@@ -1119,7 +1119,7 @@
             "instruction": "Click on the image to download the printable sheet",
             "printTip": "💡 Printing tip:",
             "description": "Download the money sheet image to print it at home",
-            "instructions": "Print on cardstock paper (200-250g) for better durability. You can laminate the sheet for repeated use.",
+            "instructions": "Print on cardstock paper (200-250g) for better results. You can laminate the sheet for repeated use.",
             "confirmButton": "📥 Download",
             "cancelButton": "Cancel"
         },
