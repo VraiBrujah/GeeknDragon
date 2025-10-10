@@ -84,10 +84,7 @@ class DnDMusicPlayer {
                 this.createWeightedPlaylist();
             }
 
-            // Log pour debug
-            if (playlistChanged) {
-                console.log(`Playlist mise à jour: ${this.playlist.length} pistes trouvées (dont ${this.initPlaylist.length} dans init/)`);
-            }
+            // Playlist mise à jour silencieusement
 
         } catch (error) {
             // Erreur chargement playlist - utilisation fallback intelligent
@@ -161,13 +158,7 @@ class DnDMusicPlayer {
                 // Échanger la musique init trouvée avec la première position
                 [this.shuffledQueue[0], this.shuffledQueue[firstInitIndex]] =
                 [this.shuffledQueue[firstInitIndex], this.shuffledQueue[0]];
-
-                console.log(`🎵 Queue remise: ${this.shuffledQueue.length} musiques (première forcée: "${this.shuffledQueue[0].name}" depuis init/)`);
-            } else if (firstInitIndex === 0) {
-                console.log(`🎵 Queue remise: ${this.shuffledQueue.length} musiques (première déjà init: "${this.shuffledQueue[0].name}")`);
             }
-        } else {
-            console.log(`🎵 Queue remise: ${this.shuffledQueue.length} musiques (toutes)`);
         }
     }
 
@@ -345,8 +336,6 @@ class DnDMusicPlayer {
         // Trouver l'index de cette piste dans la playlist complète
         this.currentIndex = this.playlist.findIndex((track) => track.path === selectedTrack.path);
 
-        console.log(`🎵 Démarrage: "${selectedTrack.name}" (${this.shuffledQueue.length} restantes dans la queue)`);
-
         await this.loadCurrentTrack();
         await this.play();
     }
@@ -356,8 +345,6 @@ class DnDMusicPlayer {
 
         const currentTrack = this.playlist[this.currentIndex];
         this.audio.src = `/${currentTrack.path}`;
-
-        console.log(`🎧 Chargement: "${currentTrack.name}" depuis ${currentTrack.isInit ? 'init/' : 'racine'}`);
 
         try {
             this.audio.load();
@@ -412,7 +399,6 @@ class DnDMusicPlayer {
             const selectedTrack = this.getNextTrackFromQueue();
             if (selectedTrack) {
                 this.currentIndex = this.playlist.findIndex((track) => track.path === selectedTrack.path);
-                console.log(`🎵 Suivant: "${selectedTrack.name}" (${this.shuffledQueue.length} restantes dans la queue)`);
             }
         } else {
             // Mode séquentiel
