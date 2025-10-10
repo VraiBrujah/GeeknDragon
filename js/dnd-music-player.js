@@ -304,14 +304,16 @@ class DnDMusicPlayer {
         if (!this.firstPlayCompleted && this.initPlaylist.length > 0) {
             const randomInitIndex = Math.floor(Math.random() * this.initPlaylist.length);
             const selectedInitTrack = this.initPlaylist[randomInitIndex];
-            
+
             // Trouver l'index de cette piste dans la playlist complète
             this.currentIndex = this.playlist.findIndex((track) => track.path === selectedInitTrack.path);
-            
+
             await this.loadCurrentTrack();
-            this.play();
+            await this.play();
         } else {
-            // Sinon, commencer avec lecture aléatoire normale
+            // Marquer qu'on veut jouer pour que playNext() lance la musique
+            this.isPlaying = true;
+            // Commencer avec lecture aléatoire normale
             await this.playNext();
         }
     }
@@ -372,6 +374,9 @@ class DnDMusicPlayer {
             this.createWeightedPlaylist();
         }
 
+        // Mémoriser l'état de lecture actuel
+        const wasPlaying = this.isPlaying;
+
         if (this.shuffle) {
             // Mode aléatoire depuis la playlist appropriée
             const randomIndex = Math.floor(Math.random() * this.weightedPlaylist.length);
@@ -382,7 +387,7 @@ class DnDMusicPlayer {
         }
 
         await this.loadCurrentTrack();
-        if (this.isPlaying) this.play();
+        if (wasPlaying) await this.play();
     }
 
     async playPrevious() {
@@ -390,10 +395,13 @@ class DnDMusicPlayer {
             // Si on est à plus de 3s, recommencer la piste actuelle
             this.audio.currentTime = 0;
         } else {
+            // Mémoriser l'état de lecture actuel
+            const wasPlaying = this.isPlaying;
+
             // Sinon, aller à la piste précédente
             this.currentIndex = this.currentIndex > 0 ? this.currentIndex - 1 : this.playlist.length - 1;
             await this.loadCurrentTrack();
-            if (this.isPlaying) this.play();
+            if (wasPlaying) await this.play();
         }
     }
 
