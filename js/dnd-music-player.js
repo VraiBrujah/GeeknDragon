@@ -46,12 +46,16 @@ class DnDMusicPlayer {
     }
 
     async initializePlayer() {
+        console.log('[DEBUG] initializePlayer() démarré');
         try {
             await this.loadPlaylist();
+            console.log('[DEBUG] loadPlaylist() terminé - playlist.length:', this.playlist.length);
             this.setupAudioElement();
             this.createPlayerInterface();
             this.isInitialized = true;
+            console.log('[DEBUG] initializePlayer() terminé avec succès');
         } catch (error) {
+            console.error('[DEBUG] ERREUR dans initializePlayer():', error);
             // Erreur initialisation silencieuse en production
         }
     }
@@ -294,26 +298,38 @@ class DnDMusicPlayer {
     }
 
     setupEventListeners() {
-        // Interactions clavier et clic
-        document.addEventListener('click', this.startMusicHandler, true);
-        document.addEventListener('keydown', this.startMusicHandler, true);
-        document.addEventListener('touchstart', this.startMusicHandler, true);
+        // Détecter si la page vient d'être rechargée (navigation vs F5)
+        const isPageRefresh = performance.getEntriesByType('navigation')[0]?.type === 'reload';
 
-        // Interactions de scroll (molette souris et scroll tactile)
-        document.addEventListener('wheel', this.startMusicHandler, { passive: true, capture: true });
-        document.addEventListener('scroll', this.startMusicHandler, { passive: true, capture: true });
-        document.addEventListener('touchmove', this.startMusicHandler, { passive: true, capture: true });
+        if (isPageRefresh) {
+            // Si F5: SEULEMENT click/touch (pas de scroll)
+            // Car le navigateur bloque autoplay via scroll après F5
+            document.addEventListener('click', this.startMusicHandler, true);
+            document.addEventListener('touchstart', this.startMusicHandler, true);
+            document.addEventListener('keydown', this.startMusicHandler, true);
+        } else {
+            // Si navigation normale: tous les types d'interactions
+            document.addEventListener('click', this.startMusicHandler, true);
+            document.addEventListener('keydown', this.startMusicHandler, true);
+            document.addEventListener('touchstart', this.startMusicHandler, true);
+            document.addEventListener('wheel', this.startMusicHandler, { passive: true, capture: true });
+            document.addEventListener('scroll', this.startMusicHandler, { passive: true, capture: true });
+            document.addEventListener('touchmove', this.startMusicHandler, { passive: true, capture: true });
+        }
     }
 
     /**
      * Marque qu'une interaction utilisateur a eu lieu
      * Lance automatiquement la lecture si c'est la première interaction
      */
-    markUserInteraction() {
-        if (this.firstInteraction && this.isInitialized) {
+    async markUserInteraction() {
+        console.log('[DEBUG] markUserInteraction appelé - firstInteraction:', this.firstInteraction, 'isInitialized:', this.isInitialized);
+
+        if (this.firstInteraction) {
             this.firstInteraction = false;
 
             // Retirer tous les listeners après la première interaction
+            // (retirer à la fois ceux de navigation normale ET ceux de F5)
             document.removeEventListener('click', this.startMusicHandler, true);
             document.removeEventListener('keydown', this.startMusicHandler, true);
             document.removeEventListener('touchstart', this.startMusicHandler, true);
@@ -321,23 +337,60 @@ class DnDMusicPlayer {
             document.removeEventListener('scroll', this.startMusicHandler, true);
             document.removeEventListener('touchmove', this.startMusicHandler, true);
 
-            // Lancer automatiquement la lecture
-            this.startPlayback();
+            console.log('[DEBUG] Listeners retirés');
+
+            // Attendre que l'initialisation soit terminée si nécessaire
+            if (!this.isInitialized) {
+                console.log('[DEBUG] En attente de l\'initialisation...');
+                // Attendre maximum 5 secondes pour l'initialisation
+                const startTime = Date.now();
+                while (!this.isInitialized && (Date.now() - startTime) < 5000) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
+                console.log('[DEBUG] Fin attente - isInitialized:', this.isInitialized, 'durée:', Date.now() - startTime, 'ms');
+            } else {
+                console.log('[DEBUG] Déjà initialisé, pas d\'attente');
+            }
+
+            console.log('[DEBUG] Avant vérification isInitialized:', this.isInitialized);
+
+            // Lancer automatiquement la lecture si l'initialisation a réussi
+            if (this.isInitialized) {
+                console.log('[DEBUG] Lancement startPlayback() - playlist.length:', this.playlist.length);
+                await this.startPlayback();
+                console.log('[DEBUG] startPlayback() terminé');
+            } else {
+                console.log('[DEBUG] ÉCHEC - isInitialized est false');
+            }
         }
     }
 
     async startPlayback() {
-        if (!this.playlist.length) return;
+        console.log('[DEBUG] startPlayback() - début, playlist.length:', this.playlist.length);
+
+        if (!this.playlist.length) {
+            console.log('[DEBUG] startPlayback() - ÉCHEC: playlist vide');
+            return;
+        }
 
         // Pour la première lecture, sélectionner depuis la queue (qui contient seulement init au début)
         const selectedTrack = this.getNextTrackFromQueue();
-        if (!selectedTrack) return;
+        console.log('[DEBUG] startPlayback() - selectedTrack:', selectedTrack);
+
+        if (!selectedTrack) {
+            console.log('[DEBUG] startPlayback() - ÉCHEC: selectedTrack est null');
+            return;
+        }
 
         // Trouver l'index de cette piste dans la playlist complète
         this.currentIndex = this.playlist.findIndex((track) => track.path === selectedTrack.path);
+        console.log('[DEBUG] startPlayback() - currentIndex:', this.currentIndex);
 
         await this.loadCurrentTrack();
+        console.log('[DEBUG] startPlayback() - loadCurrentTrack() terminé');
+
         await this.play();
+        console.log('[DEBUG] startPlayback() - play() terminé');
     }
 
     async loadCurrentTrack() {
@@ -354,11 +407,14 @@ class DnDMusicPlayer {
     }
 
     async play() {
+        console.log('[DEBUG] play() - début, audio.src:', this.audio.src);
         try {
             await this.audio.play();
+            console.log('[DEBUG] play() - audio.play() réussi');
             this.isPlaying = true;
             this.updatePlayButton();
         } catch (error) {
+            console.error('[DEBUG] play() - ERREUR:', error);
             // Erreur lecture silencieuse en production
             this.playNext();
         }
