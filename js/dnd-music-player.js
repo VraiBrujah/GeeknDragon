@@ -367,6 +367,11 @@ class DnDMusicPlayer {
     }
 
     async playNext() {
+        // S'assurer que la weightedPlaylist est à jour après la première lecture
+        if (this.firstPlayCompleted && this.weightedPlaylist.length !== this.playlist.length) {
+            this.createWeightedPlaylist();
+        }
+
         if (this.shuffle) {
             // Mode aléatoire depuis la playlist appropriée
             const randomIndex = Math.floor(Math.random() * this.weightedPlaylist.length);
