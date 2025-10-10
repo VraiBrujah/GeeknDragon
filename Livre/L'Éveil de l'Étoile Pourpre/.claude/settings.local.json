@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(python:*)",
-      "Read(//e/GitHub/GeeknDragon/Livre/**)"
+      "Read(//e/GitHub/GeeknDragon/Livre/**)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": [],
