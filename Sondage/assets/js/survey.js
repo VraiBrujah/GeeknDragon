@@ -66,30 +66,24 @@ class SurveyViewer {
    */
   async init() {
     try {
-      // Configuration de marked.js
-      if (typeof marked !== 'undefined') {
-        marked.setOptions({
-          breaks: true,
-          gfm: true,
-          headerIds: true,
-          mangle: false,
-          tables: true
-        });
+      // Vérification critique: marked.js doit être chargé
+      if (typeof marked === 'undefined') {
+        throw new Error('Bibliothèque marked.js non chargée. Rechargez la page (F5).');
       }
 
-      // Chargement des sondages disponibles
+      // Configuration de marked.js
+      marked.setOptions({
+        breaks: true,
+        gfm: true,
+        headerIds: true,
+        mangle: false,
+        tables: true
+      });
+
+      // Chargement des sondages disponibles (ATTENDRE avant de continuer)
       await this.loadSurveys();
 
-      // NE PAS charger automatiquement - trop lent (395KB)
-      // L'utilisateur cliquera sur l'onglet pour charger
-      // if (this.surveys.length > 0) {
-      //   await this.switchSurvey(this.surveys[0].slug);
-      // }
-
-      // Restaurer la session utilisateur si elle existe (chargera sondage si session)
-      this.restoreUserSession();
-
-      // Initialisation des écouteurs d'événements
+      // Initialisation des écouteurs d'événements (AVANT restauration session)
       this.setupEventListeners();
 
       // Ajuster padding pour header sticky
@@ -98,9 +92,12 @@ class SurveyViewer {
       // Recalculer au resize
       window.addEventListener('resize', () => this.adjustContentPaddingForHeader());
 
+      // Restaurer session utilisateur APRÈS que tout soit prêt (ATTENDRE)
+      await this.restoreUserSession();
+
     } catch (error) {
       console.error('Erreur initialisation:', error);
-      this.showError('Impossible de charger les sondages');
+      this.showError(`Erreur initialisation: ${error.message}\n\nRechargez la page (F5) ou videz le cache (Ctrl+Shift+R)`);
     }
   }
 
@@ -198,15 +195,28 @@ class SurveyViewer {
    * Charge la liste des utilisateurs du sondage actuel
    */
   async loadSurveyUsers() {
-    if (!this.currentSurvey) return;
+    if (!this.currentSurvey) {
+      console.warn('⚠️ loadSurveyUsers appelé sans sondage actif');
+      return;
+    }
 
     try {
       const response = await fetch(`api.php?action=list-users&survey=${encodeURIComponent(this.currentSurvey.name)}`);
+
+      // Vérifier réponse HTTP
+      if (!response.ok) {
+        console.error(`Erreur HTTP ${response.status} lors chargement utilisateurs`);
+        this.users = [];
+        return;
+      }
+
       const data = await response.json();
 
       if (data.success) {
         this.users = data.data;
+        console.log(`✅ ${this.users.length} utilisateur(s) chargé(s)`);
       } else {
+        console.warn(`⚠️ API erreur: ${data.error || 'inconnue'}`);
         this.users = [];
       }
     } catch (error) {
@@ -404,11 +414,32 @@ class SurveyViewer {
     try {
       const cached = localStorage.getItem(key);
       if (cached) {
-        console.log(`💾 Cache hit: ${key}`);
+        // Validation: vérifier que le cache n'est pas corrompu
+        if (cached.length < 100) {
+          console.warn(`⚠️ Cache suspect (trop court): ${cached.length} caractères - ignoré`);
+          localStorage.removeItem(key);
+          return null;
+        }
+
+        // Vérifier que ça ressemble à du HTML
+        if (!cached.includes('<') || !cached.includes('>')) {
+          console.warn(`⚠️ Cache invalide (pas de HTML) - ignoré`);
+          localStorage.removeItem(key);
+          return null;
+        }
+
+        console.log(`💾 Cache hit: ${key} (${(cached.length / 1024).toFixed(1)}KB)`);
         return cached;
       }
     } catch (e) {
       console.warn('Cache read error:', e);
+
+      // Nettoyer le cache corrompu
+      try {
+        localStorage.removeItem(key);
+      } catch (cleanError) {
+        console.error('Impossible de nettoyer cache corrompu:', cleanError);
+      }
     }
     return null;
   }

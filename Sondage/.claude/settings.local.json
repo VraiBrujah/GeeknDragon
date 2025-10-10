@@ -39,7 +39,9 @@
       "Bash(awk:*)",
       "Bash(tac:*)",
       "Bash(del:*)",
-      "Bash(echo:*)"
+      "Bash(echo:*)",
+      "Bash(php:*)",
+      "Bash(test:*)"
     ],
     "deny": [],
     "ask": []
