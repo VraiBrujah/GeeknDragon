@@ -408,27 +408,27 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 *❖ Le cœur du rituel. La clé de la transformation.*
 
-*Plus que ça. Il s'était penché, révélant des dents trop pointues, trop nombreuses.
+*Plus que ça. Il s'était penché, révélant des dents trop pointues, trop nombreuses.*
 
-Sang d'un mort-vivant ancestral qui marcha sur terre avant la première aube.*
+*Sang d'un mort-vivant ancestral qui marcha sur terre avant la première aube.*
 
 *Elle avait dégluti, gorge serrée par l'appréhension.*
 
-*Sang d'un dieu déchu qui refusa d'accepter son exil, avait-il continué, ses yeux brillant d'une lueur malsaine.
+*Sang d'un dieu déchu qui refusa d'accepter son exil, avait-il continué, ses yeux brillant d'une lueur malsaine.*
 
-Sang d'un roi éthérien qui refusa de mourir lors de la Purge, qui s'accrocha à l'existence par pure volonté.*
+*Sang d'un roi éthérien qui refusa de mourir lors de la Purge, qui s'accrocha à l'existence par pure volonté.*
 
 *❖ Trois lignées, avait-elle murmuré.*
 
-*Trois damnations unies. Trois chemins vers le pouvoir. Son sourire s'était élargi.
+*Trois damnations unies. Trois chemins vers le pouvoir. Son sourire s'était élargi.*
 
-Il te transformera en quelque chose de plus qu'humain.*
+*Il te transformera en quelque chose de plus qu'humain.*
 
 *❖ Ou ?*
 
-*Ou il te consumera jusqu'à l'âme. Il avait tapé du doigt sur le Codex qu'elle tenait serré contre sa poitrine.
+*Ou il te consumera jusqu'à l'âme. Il avait tapé du doigt sur le Codex qu'elle tenait serré contre sa poitrine.*
 
-Le grimoire ne ment jamais sur ce point. Es-tu certaine de vouloir suivre cette voie ?*
+*Le grimoire ne ment jamais sur ce point. Es-tu certaine de vouloir suivre cette voie ?*
 
 *Elle avait posé sur la table les derniers biens de sa famille. Les bijoux de sa mère. L'argenterie. Les pièces d'or cachées pour les temps difficiles.*
 
@@ -838,9 +838,9 @@ Le grimoire ne ment jamais sur ce point. Es-tu certaine de vouloir suivre cette 
 
 *❖ Qui... qui êtes-vous ? demanda-t-elle aux apparitions.*
 
-*Nous sommes les Éthériens, répondirent-ils en chœur.
+*Nous sommes les Éthériens, répondirent-ils en chœur.*
 
-Ceux qui sont morts lors de la Purge. Ceux dont tu voles le pouvoir.*
+*Ceux qui sont morts lors de la Purge. Ceux dont tu voles le pouvoir.*
 
 *❖ Je ne vole rien ! Je veux juste sauver ma famille !*
 
@@ -1108,9 +1108,9 @@ Ceux qui sont morts lors de la Purge. Ceux dont tu voles le pouvoir.*
 
 *L'homme la vit. S'arrêta.*
 
-*Mademoiselle ? Sa voix était gentille.
+*Mademoiselle ? Sa voix était gentille.*
 
-Vous êtes blessée ?*
+*Vous êtes blessée ?*
 
 *❖ Partez ! cria-t-elle, luttant contre elle-même.*
 
@@ -2040,7 +2040,7 @@ Un silence lourd s'installa. Morwen détourna le regard, fixant à nouveau les f
 
 ❖ Je l'ai vécue dans ma chair transformée, dit-elle en touchant son propre bras pâle.
 
-❖ Le pouvoir ne disparaît jamais de manière véritable, jamais de façon complète. Il se terre dans l'ombre où nul ne peut l'atteindre, s'enfouit dans les profondeurs de la terre et de l'âme humaine où il se nourrit en secret. Il attend avec une patience égale à la mienne, guettant le moment propice pour resurgir à la surface, plus fort et plus affamé qu'avant sa disparition.*
+*❖ Le pouvoir ne disparaît jamais de manière véritable, jamais de façon complète. Il se terre dans l'ombre où nul ne peut l'atteindre, s'enfouit dans les profondeurs de la terre et de l'âme humaine où il se nourrit en secret. Il attend avec une patience égale à la mienne, guettant le moment propice pour resurgir à la surface, plus fort et plus affamé qu'avant sa disparition.*
 
 Elle reprit sa marche le long des fresques qui déroulaient l'histoire millénaire.
 
@@ -2134,7 +2134,7 @@ Elle toucha les corps gravés dans la pierre, se dissolvant en cendres pourpres.
 
 *❖ Seule une poignée survécut, continua-t-elle.*
 
-*❖ Ceux qui étaient absents ce jour-là. Ceux qui avaient refusé le rituel. Ceux que le destin ou la chance avait épargnés. Mes ancêtres à moi.
+*❖ Ceux qui étaient absents ce jour-là. Ceux qui avaient refusé le rituel. Ceux que le destin ou la chance avait épargnés. Mes ancêtres à moi.*
 
 *Et moi*, pensa saatha depuis sa position silencieuse, trop loin pour que sa maîtresse l'entende physiquement mais assez proche pour observer le rituel du souvenir. *J'ai vu les Éthériens à leur apogée glorieuse. Esclave d'un mage éthérien pendant deux siècles interminables, enchaînée dans sa tour cristalline qui dominait le monde, forcée de pétrifier ses ennemis politiques d'un regard commandé.*
 
@@ -2154,7 +2154,7 @@ Elle observait maintenant sa maîtresse actuelle avec le même détachement anci
 
 ◆ Pouvez-vous le faire de manière véritable, maîtresse ?, demanda Umbra avec la prudence d'une créature qui mesurait chaque mot.
 
-◆ Ou portez-vous la même malédiction qu'eux gravée dans votre sang ?*
+*◆ Ou portez-vous la même malédiction qu'eux gravée dans votre sang ?*
 
 Elle ne répondit pas de manière immédiate, continuant vers les dernières fresques qui montraient les survivants dans toute leur déchéance.
 
