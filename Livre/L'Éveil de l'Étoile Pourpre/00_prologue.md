@@ -1590,7 +1590,7 @@ Les mots portaient une douceur presque compassionnelle, trace d'une empathie que
 
 Les glyphes millénaires murmuraient leur avertissement aux rares initiés capables de déchiffrer leur langue oubliée. Les runes brisées serpentaient autour de l'entrée béante, malédictions gravées pour l'éternité dans une pierre refusant d'oublier les serments prononcés dans le sang et le désespoir.
 
-Elle s'accroupit avec une grâce féline trahissant sa nature non-humaine, ses doigts exsangues glissant sur les gravures érodées avec une délicatesse presque tendre. Malgré les siècles impitoyables qui avaient rongé la pierre telle une lèpre spirituelle dévorant la matière même, elle reconnaissait encore leur langue sacrée. Oubliée par les mortels. Puissante dans sa simplicité brutale. Interdite depuis si longtemps que même les mages les plus érudits d'Eldoria l'avaient rayée de leurs grimoires par peur superstitieuse.
+Elle s'accroupit avec une grâce féline trahissant sa nature non-humaine, ses doigts exsangues glissant sur les gravures érodées avec une délicatesse presque tendre. Malgré les siècles impitoyables ayant rongé la pierre telle une lèpre spirituelle dévorant la matière même, elle reconnaissait encore leur langue sacrée. Oubliée par les mortels. Puissante dans sa simplicité brutale. Interdite depuis si longtemps que même les mages les plus érudits d'Eldoria l'avaient rayée de leurs grimoires par peur superstitieuse.
 
 Un rire bref et transi s'échappa de ses lèvres exsangues, un son qui n'avait rien d'humain et qui sembla faire frissonner la pierre elle-même, réveillant des échos endormis dans les profondeurs.
 
@@ -1680,9 +1680,9 @@ Le vent glacial, gardien des secrets oubliés, hurla une dernière fois autour d
 
 Elle franchit le seuil. La pierre avala ses pas telle une créature dont affamée attendant sa proie depuis des siècles.
 
-Le passage s'enfonçait dans les entrailles de la montagne, béant et affamé de secrets interdits qui n'avaient pas été révélés depuis la chute des Éthériens. Le sol était inégal, fissuré par les mouvements tectoniques et les explosions d'énergie magique qui avaient secoué ce lieu maudit, tapissé d'une poussière si fine qu'elle semblait avoir été déposée par le souffle même des siècles qui s'étaient écoulés dans un silence sépulcral.
+Le passage s'enfonçait dans les entrailles de la montagne, béant et affamé de secrets interdits qui n'avaient pas été révélés depuis la chute des Éthériens. Le sol était inégal, fissuré par les mouvements tectoniques et les explosions d'énergie magique ayant secoué ce lieu maudit, tapissé d'une poussière si fine qu'elle semblait avoir été déposée par le souffle même des siècles qui s'étaient écoulés dans un silence sépulcral.
 
-Cette poussière scintillait avec une faible lueur maladive sous son regard transformé par le sang éthérien, chargée des échos spectraux de rituels oubliés qui avaient imprégné la pierre elle-même dans ses profondeurs moléculaires, résidus d'une magie si puissante qu'elle avait marqué la matière pour l'éternité.
+Cette poussière scintillait avec une faible lueur maladive sous son regard transformé par le sang éthérien, chargée des échos spectraux de rituels oubliés ayant imprégné la pierre elle-même dans ses profondeurs moléculaires, résidus d'une magie si puissante qu'elle avait marqué la matière pour l'éternité.
 
 *❖ Regarde, Umbra, dit-elle en s'arrêtant pour observer la poussière qui tourbillonnait sous ses pas telle une neige spectrale porteuse de secrets millénaires.*
 
@@ -2036,7 +2036,7 @@ Un silence lourd s'installa. Morwen détourna le regard, fixant à nouveau les f
 
 ❖ Les architectes fous de l'inconcevable même, continua Morwen tel si l'échange n'avait pas eu lieu, ainsi que le révélait, sa voix se chargeant d'émotion profonde.
 
-❖ Ceux qui avaient osé défier les dieux eux-mêmes et leur arracher leurs secrets les plus jalousement gardés. Ils ont bâti ce lieu de leurs propres mains, Umbra. Pierre par pierre, sort par sort, en y versant leur sueur, leur sang et leurs rêves de grandeur.
+❖ Ceux ayant osé défier les dieux eux-mêmes et leur arracher leurs secrets les plus jalousement gardés. Ils ont bâti ce lieu de leurs propres mains, Umbra. Pierre par pierre, sort par sort, en y versant leur sueur, leur sang et leurs rêves de grandeur.
 
 ◆ Un sanctuaire dédié à la connaissance interdite.
 
@@ -2142,7 +2142,7 @@ Elle toucha les corps gravés dans la pierre, se dissolvant en cendres pourpres.
 
 *❖ Des visages figés dans une extase qui devenait agonie, décrivit-elle.*
 
-❖ Des mains tendues vers un ciel s'effondrant sur eux. L'Éther lui-même se retournait contre ses maîtres, dévorant ceux qui avaient osé le commander avec trop d'arrogance. La Grande Purge. L'annihilation de toute une race en un seul instant cosmique.
+❖ Des mains tendues vers un ciel s'effondrant sur eux. L'Éther lui-même se retournait contre ses maîtres, dévorant ceux ayant osé le commander avec trop d'arrogance. La Grande Purge. L'annihilation de toute une race en un seul instant cosmique.
 
 ◆ Quatre-vingt-dix-neuf pour cent effacés de la réalité, récita Umbra.
 
@@ -2222,7 +2222,7 @@ Elle s'arrêta devant une inscription s'étant préservée de manière remarquab
 
 *❖ Une incantation majeure, dit-elle avec une révérence transcendant les siècles, tel si elle reconnaissait là une prière ancestrale, ainsi que le révélait.*
 
-❖ En Etherin, la langue des pactes de sang et des transformations interdites. Le dialecte sacré perdu des Éthériens qui avaient façonné le monde avant que ses locuteurs soient effacés de l'histoire par leurs successeurs timorés et jaloux de leur pouvoir.
+❖ En Etherin, la langue des pactes de sang et des transformations interdites. Le dialecte sacré perdu des Éthériens ayant façonné le monde avant que ses locuteurs soient effacés de l'histoire par leurs successeurs timorés et jaloux de leur pouvoir.
 
 ◆ Pouvez-vous la lire, maîtresse ?
 
@@ -2270,7 +2270,7 @@ Morwen écarta les gravats avec une force surhumaine, dévoilant la fresque comp
 
 *❖ Le cercle rituel ultime, chuchota-t-elle avec révérence.*
 
-❖ Au centre, l'Étoile Pourpre. L'emblème des hérétiques et des damnés. Le symbole de ceux qui avaient osé défier l'ordre naturel du monde et transcender les limites de la condition mortelle. La marque de ceux qui avaient choisi de franchir le seuil interdit, quel qu'en soit le prix.
+❖ Au centre, l'Étoile Pourpre. L'emblème des hérétiques et des damnés. Le symbole de ceux ayant osé défier l'ordre naturel du monde et transcender les limites de la condition mortelle. La marque de ceux ayant choisi de franchir le seuil interdit, quel qu'en soit le prix.
 
 ◆ Vous portez ce symbole en vous, observa Umbra avec douceur.
 
@@ -2820,7 +2820,7 @@ Elle se retourna enfin, et dans ses yeux rouges, saatha vit quelque chose qu'ell
 
 ❖ Non. Je dois essayer. Encore et toujours. Jusqu'à ce que cela fonctionne ou que je sois détruite dans la tentative.
 
-*◈ C'estau terme de cette attenteonça après des siècles d'attente qui avaient usé son âme saatha d'une voix plus douce, presque compatissante.*
+*◈ C'estau terme de cette attenteonça après des siècles d'attente ayant usé son âme saatha d'une voix plus douce, presque compatissante.*
 
 *◈ Le rituel de localisation peut commencer quand vous le souhaitez, Maîtresse.*
 
@@ -3034,7 +3034,7 @@ Tissée dans chaque cellule de son corps dès sa création, peut-être dès sa c
 
 Sang éthérien pur coulant dans ses veines comme rivière de pouvoir liquide. Morwen pouvait le voir, luminescent dans sa vision magique, traçant le réseau vasculaire complexe à travers le corps. Artères brillantes. Veines scintillantes. Capillaires fins comme fils d'or pourpre.
 
-*Concentratà l'instar de ce qu'elle était devenueable.* Pas diluée comme elle l'aurait été après des générations de métissage avec des lignées mortelles ordinaires. Pure. Aussi pure que le sang des premiers Éthériens qui avaient marché sur cette terre il y a des millénaires, avant la Purge, avant l'extinction.*
+*Concentratà l'instar de ce qu'elle était devenueable.* Pas diluée comme elle l'aurait été après des générations de métissage avec des lignées mortelles ordinaires. Pure. Aussi pure que le sang des premiers Éthériens ayant marché sur cette terre il y a des millénaires, avant la Purge, avant l'extinction.*
 
 Un phylactère. Un réceptacle vivant capable de contenir et préserver l'essence vitale. La théorie ultime des anciens mages éthériens, le rêve jamais réalisé selon toutes les archives qu'elle avait consultées.
 
@@ -3204,7 +3204,7 @@ L'aube commençait à se lever sur les Monts de l'Éther, grise et froide comme 
 
 Et au nord, dans un village ignorant du danger qui se préparait dans les ténèbres, le porteur de l'Étoile Pourpre dormait dans une quiétude innocente et fragile, inconscient du regard qui l'avait trouvé à travers l'Éther. Inconscient que son sang exposé avait trahi sa présence après mille ans de silence. Inconscient que dans trois nuits, la chasse commencerait.
 
-Les corbeaux noirs, qui avaient fui les montagnes désolées pendant la nuit rituelle chargée de magie corrompue, commençaient avec timidité et prudence instinctive à revenir avec les premières lueurs hésitantes du jour naissant. Mais ils évitaient toujours le sanctuaire avec cet instinct animal profond qui reconnaît le danger mortel. Certaines ténèbres anciennes, même apparemment dispersées par l'aube lumineuse, ne s'éteignent jamais, ancrées dans ce monde et dans l'autre pour l'éternité.
+Les corbeaux noirs, ayant fui les montagnes désolées pendant la nuit rituelle chargée de magie corrompue, commençaient avec timidité et prudence instinctive à revenir avec les premières lueurs hésitantes du jour naissant. Mais ils évitaient toujours le sanctuaire avec cet instinct animal profond qui reconnaît le danger mortel. Certaines ténèbres anciennes, même apparemment dispersées par l'aube lumineuse, ne s'éteignent jamais, ancrées dans ce monde et dans l'autre pour l'éternité.
 
 Elles attendaient juste. Patientes. Affamées. Inévitables.
 
