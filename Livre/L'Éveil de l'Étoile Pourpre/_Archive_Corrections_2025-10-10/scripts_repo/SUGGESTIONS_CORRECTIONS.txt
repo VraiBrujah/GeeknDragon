@@ -1,0 +1,1178 @@
+================================================================================
+ SUGGESTIONS DE CORRECTIONS POUR LE PROLOGUE
+================================================================================
+
+INSTRUCTIONS:
+1. Appliquer ces corrections avec l'outil Edit
+2. TOUJOURS enrichir (texte corrige >= texte original)
+3. Valider apres chaque lot de 10-15 corrections
+
+================================================================================
+ CORRECTION 1 : 'COMME' (45 corrections prioritaires)
+================================================================================
+
+[1/45] Ligne 2769
+Contexte: .... L'essssence de Nyx a été distillée sousss la pleine lune, comme le veut la tradition ancienn e.*...
+Cible: 'comme le veut'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[2/45] Ligne 3177
+Contexte: ...raiter ceci comme n'importe quelle autre information et non comme le miracle cosmique qui brise mille ans de désespoir et de sou...
+Cible: 'comme le miracle'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[3/45] Ligne 2133
+Contexte: ...Ou de leur damnation. Ou peut-être les deux simultanément, comme pour moi....
+Cible: 'comme pour'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[4/45] Ligne 3149
+Contexte: ...lence qui faisait claquer ses cheveux autour de son visage, comme pour chasser une hallucination née de mille ans de désespoir acc...
+Cible: 'comme pour'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[5/45] Ligne 2499
+Contexte: ...tel si cette fois serait différente, ainsi que le révélait. Comme si l'espoir n'était pas devenu une torture raffinée que le tem...
+Cible: 'Comme si'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[6/45] Ligne 2519
+Contexte: ...L'air autour de Kael sembla se solidifier comme si la réalité elle-même répondait à la volonté de sa maîtresse...
+Cible: 'comme si'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[7/45] Ligne 2731
+Contexte: ...présence ancienne qui pèse sur nous comme poids invisible. Comme si le sanctuaire lui-même était vivant, respirant dans l'obscu...
+Cible: 'Comme si'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[8/45] Ligne 2741
+Contexte: ...Morwen leva une main pâle, doigts écartés comme si elle commandait aux éléments eux-mêmes. Les brasiers dispos...
+Cible: 'comme si'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[9/45] Ligne 237
+Contexte: ...moi depuisss que nous explor ces sanctuairesss éthériensss. Comme ssi leur magie résssiduelle réveillait desss partiesss de mon â...
+Cible: 'Comme ssi'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[10/45] Ligne 1035
+Contexte: ...❖ Et terrifiant à la fois. Comme contempler l'abîme et découvrir qu'il est magnifique....
+Cible: 'Comme contempler'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[11/45] Ligne 1153
+Contexte: ...ir. Arrachèrent des mèches noires qui volèrent dans la nuit comme plumes d'oiseau mort.*...
+Cible: 'comme plumes'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[12/45] Ligne 1155
+Contexte: ...ne violence brutale, exposant la veine carotide qui pulsait comme tambour affolé sous la peau tendue.*...
+Cible: 'comme tambour'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[13/45] Ligne 1177
+Contexte: ...e cessa de lutter. Ses bras retombèrent mollement, pendants comme poupée de chiffon abandonnée. Son cœur battait de plus en plus ave...
+Cible: 'comme poupée'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[14/45] Ligne 1263
+Contexte: ...enfin. Je... j'ai le pouvoir à présent. Je peux vous sauver comme je l'avais promis.*...
+Cible: 'comme je'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[15/45] Ligne 1335
+Contexte: .... Espérant contre tout espoir que tu reviendrais les sauver comme tu l'avais promis. ⟩...
+Cible: 'comme tu'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[16/45] Ligne 1363
+Contexte: ...un soin méticuleux, sa voix devenant plus dure, tranchante comme lame forgée dans le désespoir....
+Cible: 'comme lame'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[17/45] Ligne 1389
+Contexte: ...quement, dans toute leur essence vivante et palpitante. Pas comme zombies sans âme ni conscience qui ne seraient que marionnettes gro...
+Cible: 'comme zombies'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[18/45] Ligne 1389
+Contexte: ...conscience qui ne seraient que marionnettes grotesques. Pas comme fantômes éthérés et translucides condamnés à errer sans fin. Vivants...
+Cible: 'comme fantômes'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[19/45] Ligne 1389
+Contexte: ...r humanité pleine et entière, chair chaude et cœur battant. Comme ils étaient avant la maladie, avant la mort, avant ton désespoi...
+Cible: 'Comme ils'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[20/45] Ligne 1391
+Contexte: ...iablementglantes d'une créature qui ne pouvait plus pleurer comme avant.*...
+Cible: 'comme avant'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[21/45] Ligne 1429
+Contexte: ...❖ Je ne peux pas les laisser comme ça....
+Cible: 'comme ça'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[22/45] Ligne 1453
+Contexte: ...Mille années à porter le poids de cette promesse impossible comme chaîne invisible enroulée autour de son âme morte, serrant un peu...
+Cible: 'comme chaîne'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[23/45] Ligne 1455
+Contexte: ...vampirique. Apprendre à contrôler la soif qui la consumait comme feu intérieur qui ne s'éteignait jamais. Apprendre à se déplace...
+Cible: 'comme feu'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[24/45] Ligne 1455
+Contexte: ...croisaient son regard pourpre qui pulsait dans l'obscurité comme cœurs de rubis consumés par un feu intérieur qui ne s'éteindrait...
+Cible: 'comme cœurs'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[25/45] Ligne 1457
+Contexte: ...le Codex Purpureus lui avait révélé dans ses pages maudites comme seule clé possible de la résurrection, seul espoir de défaire ce...
+Cible: 'comme seule'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[26/45] Ligne 1459
+Contexte: ...e. L'odeur de magie éthérienne ancienne imprégnant les murs comme parfum persistant qui refusait de disparaître malgré les siècles....
+Cible: 'comme parfum'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[27/45] Ligne 1463
+Contexte: ...e échec brisait un peu plus l'édifice fragile de son espoir comme marteau frappant sur verre déjà fissuré, mais elle refusait d'aband...
+Cible: 'comme marteau'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[28/45] Ligne 1463
+Contexte: ...nt que n'importe quelle chaîne physique, gravé dans son âme comme runes de feu qui brûlaient sans jamais se consumer.*...
+Cible: 'comme runes'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[29/45] Ligne 1469
+Contexte: ...rides du Sud, où les brumes vertes s'accrochaient à la peau comme mains de noyés. Le sanctuaire était gardé. Pas par des pièges méc...
+Cible: 'comme mains'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[30/45] Ligne 1489
+Contexte: ...Quatre-vingt-sept échecs gravés dans sa mémoire immortelle comme autant de cicatrices invisibles.*...
+Cible: 'comme autant'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[31/45] Ligne 1491
+Contexte: ...uatre-vingt-huitième sanctuaire qui se dressait devant elle comme promesse ou malédiction, Morwen sentait le poids de mille années de...
+Cible: 'comme promesse'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[32/45] Ligne 1491
+Contexte: ...ésespérée et infructueuse peser sur ses épaules immortelles comme montagne de désespoir accumulé.*...
+Cible: 'comme montagne'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[33/45] Ligne 1507
+Contexte: ...❖ Quatre-vingt-sept sanctuaires explorés et abandonnés comme cadavres vidés de leur essence. Elle ne devait pas compter, et pourt...
+Cible: 'comme cadavres'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[34/45] Ligne 1511
+Contexte: ...ra, sa voix portant une nuance philosophique et méditative, comme s'il méditait sur la nature même de l'espoir face à l'échec r...
+Cible: 'comme s'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[35/45] Ligne 1517
+Contexte: ...aussi avec unede manière authentique et vérifiableoublante, comme s'il se soucen vérité profondeement de son bien-être plutôt q...
+Cible: 'comme s'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[36/45] Ligne 1519
+Contexte: ...e une forme de paix dans l'éternité qui s'étend devant vous comme océan infini ?*...
+Cible: 'comme océan'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[37/45] Ligne 1537
+Contexte: ...❖ Je ne les ramènerai pas corrompus. Pas comme monstres. Comme ils étaient. Vivants. Heureux....
+Cible: 'comme monstres'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[38/45] Ligne 1537
+Contexte: ...❖ Je ne les ramènerai pas corrompus. Pas comme monstres. Comme ils étaient. Vivants. Heureux....
+Cible: 'Comme ils'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[39/45] Ligne 1565
+Contexte: ...er sa maîtresse dans son désespoir séculaire qui s'étendait comme océan sans rivages....
+Cible: 'comme océan'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[40/45] Ligne 1569
+Contexte: ...❖ Cette nuit sera comme toutes les autres. Un autre échec. Un autre espoir brisé....
+Cible: 'comme toutes'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[41/45] Ligne 1597
+Contexte: ...ntier. Quatre-vingt-sept tentatives gravées dans ma mémoire comme autant de cicatrices invisibles qui ne guériront jamais. Quatre-vi...
+Cible: 'comme autant'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[42/45] Ligne 1597
+Contexte: ...enfin cette malédiction d'échecs successifs qui me poursuit comme ombre collée à mes pas.*...
+Cible: 'comme ombre'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[43/45] Ligne 1619
+Contexte: ...soires, siffla-t-elle, sa voix gelée glissant sur la pierre comme givre mortel.*...
+Cible: 'comme givre'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[44/45] Ligne 1623
+Contexte: ...nt avec une progression lente et délibérée dans l'air glacé comme fumée inversée qui remonte vers sa source....
+Cible: 'comme fumée'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+[45/45] Ligne 1633
+Contexte: ...ement dans la pénombre oppressante, presque avec tendresse, comme on caresserait le visage d'un vieil ami mourant.*...
+Cible: 'comme on'
+Suggestion: [A DETERMINER - enrichir avec metaphore]
+
+
+================================================================================
+ CORRECTION 2 : ADVERBES -MENT (148 corrections prioritaires)
+================================================================================
+
+[1/148] Ligne 27
+Adverbe: 'nerveusement'
+Contexte: ...rtelles, les mages de cour vêtus de robes étoilées scrutent nerveusement leurs instruments d'argent poli et de verre soufflé, instru...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[2/148] Ligne 27
+Adverbe: 'instinctivement'
+Contexte: ...re consciente mais que leurs âmes ancestrales reconnaissent instinctivement avec une horreur primordiale qui remonte à la Grande Purge....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[3/148] Ligne 35
+Adverbe: 'éternellement'
+Contexte: ...années écoulées, semblables à rivière de sang noir coulant éternellement dans les ténèbres sans jamais trouver d'océan pour mourir....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[4/148] Ligne 39
+Adverbe: 'hurlement'
+Contexte: ...Le silence retomba, rompu par le seul hurlement du vent entre les colonnes titanesques fracassées qui gisai...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[5/148] Ligne 55
+Adverbe: 'serment'
+Contexte: ...lez tout reprendre, maîtresse. Le Codex vous l'a promis. Le serment sera accompli.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[6/148] Ligne 57
+Adverbe: 'serment'
+Contexte: ...*❖ Le serment..., siffla-t-elle, canines brillant dangereusement dans la...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[7/148] Ligne 57
+Adverbe: 'dangereusement'
+Contexte: ...*❖ Le serment..., siffla-t-elle, canines brillant dangereusement dans la pénombre oppressante en rouvrant les yeux, sa voix...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[8/148] Ligne 59
+Adverbe: 'serment'
+Contexte: ...*❖ Oui. Le serment qui brûle dans ma poitrine morte depuis ces dix siècles de...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[9/148] Ligne 81
+Adverbe: 'cruellement'
+Contexte: ...pour chasser les fragments d'humanité qui la hantaient plus cruellement que n'importe quelle malédiction....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[10/148] Ligne 109
+Adverbe: 'involontairement'
+Contexte: ...Mère tient encore debout, gémit-elle, ses mains se crispant involontairement sur la pierre ancestrale d'une voix à peine audible dans le...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[11/148] Ligne 243
+Adverbe: 'complètement'
+Contexte: ...nouveau -- un début de défiance. Je ne veux passs redevenir complètement esssclaveJe... je veux ssssavoir ce que c'essst que d'avoir...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[12/148] Ligne 257
+Adverbe: 'battement'
+Contexte: ...*❖ Une pour chaque année de ma vie. Une pour chaque battement de cœur que je vais sacrifier.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[13/148] Ligne 285
+Adverbe: 'détachement'
+Contexte: ...sont pour les vivants, dit la voix venue des ombres avec un détachement cosmique.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[14/148] Ligne 409
+Adverbe: 'dangereusement'
+Contexte: ...❖ Le symbole des Éthériens, siffla-t-elle, canines brillant dangereusement dans la pénombre oppressante dans un souffle empli de crain...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[15/148] Ligne 455
+Adverbe: 'uniquement'
+Contexte: ...*On a toujours le choix, petite mortelle. Tu choisis uniquement et sans autre alternative possible un chemin dont tu ne rev...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[16/148] Ligne 519
+Adverbe: 'comment'
+Contexte: ...*⟨ Le sang offre le pouvoir. Toi seule décideras comment l'utiliser. ⟩*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[17/148] Ligne 673
+Adverbe: 'involontairement'
+Contexte: ...*❖ Le rituel a échoué, gémit-elle, ses mains se crispant involontairement sur la pierre ancestrale d'une voix tremblante où perçait e...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[18/148] Ligne 695
+Adverbe: 'hurlement'
+Contexte: ...t les limites de la douleur mortelle. Sa bouche s'ouvrit en hurlement d'agonie pure.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[19/148] Ligne 709
+Adverbe: 'battement'
+Contexte: ...énésie du cheval fou qui galope vers sa mort inévitable. Un battement. Deux. Dix. Cent.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[20/148] Ligne 725
+Adverbe: 'battement'
+Contexte: ...l. Cellule par cellule, veine par veine. Goutte par goutte, battement par battement. Tu deviens autre chose....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[21/148] Ligne 725
+Adverbe: 'battement'
+Contexte: ...cellule, veine par veine. Goutte par goutte, battement par battement. Tu deviens autre chose....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[22/148] Ligne 937
+Adverbe: 'commencement'
+Contexte: ...*⟨ Elle commence à peine son œuvre. La mort n'était que le commencement. ⟩*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[23/148] Ligne 1033
+Adverbe: 'dangereusement'
+Contexte: ...*❖ C'est beau, siffla-t-elle, canines brillant dangereusement dans la pénombre oppressante dans un souffle empli d'émerve...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[24/148] Ligne 1033
+Adverbe: 'émerveillement'
+Contexte: ...sement dans la pénombre oppressante dans un souffle empli d'émerveillement malgré l'horreur de sa situation.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[25/148] Ligne 1105
+Adverbe: 'instinctivement'
+Contexte: ...*Elle se déplaça dans les ombres. Instinctivement. Sans réfléchir.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[26/148] Ligne 1107
+Adverbe: 'comment'
+Contexte: ...*❖ Comment je sais où aller ? Je n'y réfléchis pas de façon consciente...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[27/148] Ligne 1155
+Adverbe: 'craquement'
+Contexte: ...in gauche saisit son poignet, broya les os fragiles avec un craquement sec qui résonna dans le silence de la ruelle obscure. L'hom...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[28/148] Ligne 1175
+Adverbe: 'battement'
+Contexte: ...ntait son cœur mort tressaillir dans sa poitrine, mimant le battement de la vie avec le sang volé d'un autre. Sentait la chaleur...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[29/148] Ligne 1197
+Adverbe: 'involontairement'
+Contexte: ...*❖ C'est fini, gémit-elle, ses mains se crispant involontairement sur la pierre ancestrale d'une voix vide, se relevant avec...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[30/148] Ligne 1219
+Adverbe: 'détachement'
+Contexte: ...◇ C'est ta nature à présent, dirent les ombres avec un détachement cosmique....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[31/148] Ligne 1389
+Adverbe: 'authentiquement'
+Contexte: ...*⟨ Les ramener de manière authentique et vérifiable, authentiquement, dans toute leur essence vivante et palpitante. Pas comme z...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[32/148] Ligne 1417
+Adverbe: 'serment'
+Contexte: ...⟨ Un serment sur des morts, ⟩ dit le Codex, sa voix résonnant avec une g...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[33/148] Ligne 1419
+Adverbe: 'serment'
+Contexte: ...⟨ Le genre de serment qui lie l'âme plus fort que chaînes. Le genre qui ne se bri...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[34/148] Ligne 1439
+Adverbe: 'serment'
+Contexte: ...la nuit mourante. Le sang d'un innocent sur ses lèvres. Un serment impossible dans son cœur mort.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[35/148] Ligne 1441
+Adverbe: 'serment'
+Contexte: ...*⟨ Le genre de serment qui damne pour l'éternité, ⟩ dit le Codex, sa voix portant...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[36/148] Ligne 1451
+Adverbe: 'serment'
+Contexte: ...cette nuit terrible où Morwen Nyx'andra avait prononcé son serment sacré sur le corps glacé de sa mère morte, jurant par tout...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[37/148] Ligne 1461
+Adverbe: 'cruellement'
+Contexte: ...s avec un silence assourdissant qui lui avait fait mal plus cruellement que n'importe quelle lame physique.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[38/148] Ligne 1463
+Adverbe: 'serment'
+Contexte: ...ait la raison elle-même. Elle ne pouvait pas abandonner. Le serment la liait plus solidement que n'importe quelle chaîne physiq...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[39/148] Ligne 1475
+Adverbe: 'craquement'
+Contexte: ...riffe descendante à mi-course. Blocage. Torsion du poignet. Craquement d'os. La créature hurla. Sa main droite jaillit, paume ouve...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[40/148] Ligne 1523
+Adverbe: 'dangereusement'
+Contexte: ...le se tourna vers son serviteur. Ses yeux rouges brillaient dangereusement.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[41/148] Ligne 1573
+Adverbe: 'serment'
+Contexte: ...❖ Parce que j'ai fait un serment. Sa un millénaire de recherches infructueusesrispa sur l'am...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[42/148] Ligne 1575
+Adverbe: 'serment'
+Contexte: ...*❖ Un serment sur le corps de ma mère morte. Et je ne le briserai jamais....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[43/148] Ligne 1603
+Adverbe: 'précisément'
+Contexte: ...récision absolue et chavec une précision millimétrée❖ C'est précisément, exactemavec cette exactitude millimétrique caractéristique...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[44/148] Ligne 1603
+Adverbe: 'précisément'
+Contexte: ...uisavec une précision millimétrée fil des siècles. Et c'est précisément, avec une exactitude chirurgicale, ce dont j'ai besoin pour...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[45/148] Ligne 1613
+Adverbe: 'avertissement'
+Contexte: ...Les glyphes millénaires murmuraient leur avertissement aux rares initiés capables de déchiffrer leur langue oublié...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[46/148] Ligne 1633
+Adverbe: 'dangereusement'
+Contexte: ...ncantation de bannissement, siffla-t-elle, canines brillant dangereusement dans la pénombre oppressante, presque avec tendresse, comme...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[47/148] Ligne 1667
+Adverbe: 'involontairement'
+Contexte: ...endante d'un autre monde, gémit-elle, ses mains se crispant involontairement sur la pierre ancestrale, presque à elle-même, sa voix port...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[48/148] Ligne 1675
+Adverbe: 'serment'
+Contexte: ...❖ Un serment sur le corps de ma mère morte, souffla-t-elle dans un souff...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[49/148] Ligne 1677
+Adverbe: 'serment'
+Contexte: ...*❖ Le genre de serment qui ne se brise jamais. Jamais.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[50/148] Ligne 1687
+Adverbe: 'exactement'
+Contexte: ...autresmnation. avec une exactitude chirurgicalerécisément, exactement, cette nature morte et damassée qui me permet d'entrer là o...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[51/148] Ligne 1731
+Adverbe: 'serment'
+Contexte: .... Il s'accroche à l'existence comme moi je m'accroche à mon serment avec un acharnement farouche. Avec un désespoir qui ne faib...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[52/148] Ligne 1761
+Adverbe: 'faiblement'
+Contexte: ...ntes incrustées dans la pierre vivante qui respirait encore faiblement après des siècles d'abandon....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[53/148] Ligne 1797
+Adverbe: 'froidement'
+Contexte: ...squ'à ce que ma famille respire de nouveau, corrigea-t-elle froidement....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[54/148] Ligne 1805
+Adverbe: 'avertissement'
+Contexte: ...Sans avertissement. Sans tremor préalable. Un instant, la pierre était solide....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[55/148] Ligne 1819
+Adverbe: 'avertissement'
+Contexte: ...que mon sang mort ne refermera dans l'heure. Mais c'est un avertissement. Plus nous descendons, plus les défenses seront vicieuses....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[56/148] Ligne 1857
+Adverbe: 'véritablement'
+Contexte: ...vec des forces primordiales qu'ils ne coen vérité profondes véritablement, authentiquement, dans toute leur profondeur terrible et le...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[57/148] Ligne 1857
+Adverbe: 'authentiquement'
+Contexte: ...primordiales qu'ils ne coen vérité profondes véritablement, authentiquement, dans toute leur profondeur terrible et leurs conséquences...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[58/148] Ligne 1869
+Adverbe: 'dangereusement'
+Contexte: ...*❖ Attends, siffla-t-elle, canines brillant dangereusement dans la pénombre oppressante en s'approchant de l'alcôve av...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[59/148] Ligne 1893
+Adverbe: 'frémissement'
+Contexte: ...*❖ Le frémissement précipité des rongeurs affolés dans le mur à notre gauche....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[60/148] Ligne 1895
+Adverbe: 'comment'
+Contexte: ...◆ Comment pouvez-vous entendre des battements de cœur aussi infimes ?...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[61/148] Ligne 1905
+Adverbe: 'émerveillement'
+Contexte: ...quant avec l'autorité absolue de l'immortelle, presque avec émerveillement devant l'étendue de ses propres capacités.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[62/148] Ligne 1907
+Adverbe: 'craquement'
+Contexte: ...métronome qui marque les secondes d'un temps infini, chaque craquement discret d'une pierre sous la pression de l'humidité accumul...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[63/148] Ligne 1913
+Adverbe: 'involontairement'
+Contexte: ...compense de ma damnation, gémit-elle, ses mains se crispant involontairement sur la pierre ancestrale froidement....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[64/148] Ligne 1913
+Adverbe: 'froidement'
+Contexte: ...mains se crispant involontairement sur la pierre ancestrale froidement....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[65/148] Ligne 1929
+Adverbe: 'faiblement'
+Contexte: ...cret des murs imprégnés de magie oubliée qui pulsait encore faiblement après tant de siècles....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[66/148] Ligne 1951
+Adverbe: 'battement'
+Contexte: ...*❖ Chaque battement est une invitation. Chaque pulsation me rappelle ce que je...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[67/148] Ligne 1963
+Adverbe: 'précisément'
+Contexte: ...*❖ Ou peut-être précisément, exactement, dans toute sa perfection terrible, ce que je c...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[68/148] Ligne 1963
+Adverbe: 'exactement'
+Contexte: ...*❖ Ou peut-être précisément, exactement, dans toute sa perfection terrible, ce que je cherche depui...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[69/148] Ligne 1971
+Adverbe: 'particulièrement'
+Contexte: ...s'arrêtant devant une fresque qui avait survécu de manière particulièrement remarquable aux ravages du temps, sa voix portant une nuanc...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[70/148] Ligne 1999
+Adverbe: 'comment'
+Contexte: ...❖ Comment ne pas les admirer ?, répondit-elle en reculant pour embras...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[71/148] Ligne 2005
+Adverbe: 'exactement'
+Contexte: ...calencieusement à ses côtés. saatha avait suivi sans bruit, exactement de la même manière qu'à chaque fois précédente, sans variat...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[72/148] Ligne 2017
+Adverbe: 'particulièrement'
+Contexte: ...Elle s'approcha d'une fresque particulièrement bien conservée, ses serpents ondulant avec agitation....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[73/148] Ligne 2053
+Adverbe: 'nerveusement'
+Contexte: ...l'air tandis que les serpents de sa chevelure frémissaient nerveusement saatha avec douceur....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[74/148] Ligne 2069
+Adverbe: 'particulièrement'
+Contexte: ...❖ Oui, admit-elle en s'arrêtant devant une section particulièrement sombre de la fresque....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[75/148] Ligne 2085
+Adverbe: 'avertissement'
+Contexte: ...puis leur chute gravée dans la pierre pour l'éternité comme avertissement que personne ne lisait plus....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[76/148] Ligne 2089
+Adverbe: 'avertissement'
+Contexte: ...mple but de divertir les visiteurs, Umbra. Elles hurlent un avertissement que le monde a choisi d'enterrer sous des siècles d'oubli v...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[77/148] Ligne 2095
+Adverbe: 'froidement'
+Contexte: ...*❖ Hubris, acheva-t-elle froidement.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[78/148] Ligne 2099
+Adverbe: 'particulièrement'
+Contexte: ...*❖ Regarde, Umbra, dit-elle en pointant vers une scène particulièrement détaillée.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[79/148] Ligne 2107
+Adverbe: 'émerveillement'
+Contexte: ...*❖ Quand j'étais mortelle, j'ai parcouru ces fresques avec émerveillement, le cœur battant d'espoir. "Ils avaient transcendé", me dis...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[80/148] Ligne 2133
+Adverbe: 'simultanément'
+Contexte: ...❖ Ou de leur damnation. Ou peut-être les deux simultanément, comme pour moi....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[81/148] Ligne 2181
+Adverbe: 'détachement'
+Contexte: ...lle observait maintenant sa maîtresse actuelle avec le même détachement ancien qu'elle avait observé les Éthériens autrefois. Les p...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[82/148] Ligne 2189
+Adverbe: 'véritablement'
+Contexte: ...◆ Pen vérité profonde faire véritablement, authentiquement, dans toute la plénitude de vos ambitions...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[83/148] Ligne 2189
+Adverbe: 'authentiquement'
+Contexte: ...◆ Pen vérité profonde faire véritablement, authentiquement, dans toute la plénitude de vos ambitions séculaires, maîtr...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[84/148] Ligne 2205
+Adverbe: 'véritablement'
+Contexte: ...◆ Est-ce véritablement, authentiquement, dans son essence profonde, différent de l...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[85/148] Ligne 2205
+Adverbe: 'authentiquement'
+Contexte: ...◆ Est-ce véritablement, authentiquement, dans son essence profonde, différent de leur hubris millén...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[86/148] Ligne 2223
+Adverbe: 'particulièrement'
+Contexte: ...s témoins silencieux, dit-elle en passant près d'une statue particulièrement grotesque représentant une créature hybride aux traits tort...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[87/148] Ligne 2237
+Adverbe: 'totalement'
+Contexte: ...t sans réservegralité la plus absoluen entier sans réserves totalement modans sa totalité absoluecomplètement éteinte, qui attenda...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[88/148] Ligne 2241
+Adverbe: 'particulièrement'
+Contexte: ...êta devant une inscription qui s'était préservée de manière particulièrement remarquable, protégée par un renfoncement naturel dans le m...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[89/148] Ligne 2279
+Adverbe: 'avertissement'
+Contexte: ...ne successive révélant des détails qui auraient dû servir d'avertissement mais qui l'attiraient comme flamme attire le papillon. Elle...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[90/148] Ligne 2357
+Adverbe: 'véritablement'
+Contexte: ...*❖ Pendant un temps bénien vérité profondela fois, ils ont véritablement, authentiquement, sans artifice ni illusion, touché la divi...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[91/148] Ligne 2357
+Adverbe: 'authentiquement'
+Contexte: ...temps bénien vérité profondela fois, ils ont véritablement, authentiquement, sans artifice ni illusion, touché la divinité de leurs den...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[92/148] Ligne 2357
+Adverbe: 'véritablement'
+Contexte: ...divinité de leurs den vérité profonde transformés. Ils ont véritablement, dans la réalité tangible, dans toute la plénitude du terme...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[93/148] Ligne 2385
+Adverbe: 'simultanément'
+Contexte: ...Trois autres chargèrent simultanément, tactique coordonnée de soldats éternels. Morwen dansa entr...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[94/148] Ligne 2389
+Adverbe: 'dangereusement'
+Contexte: ...sse, le rituel! cria Umbra depuis l'entrée, forme vacillant dangereusement sous l'assaut de deux autres gardiens qui le frappaient san...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[95/148] Ligne 2395
+Adverbe: 'véritablement'
+Contexte: ...n'avait jamaisen vérité profonde dix siècles sans respirer véritablement....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[96/148] Ligne 2423
+Adverbe: 'émerveillement'
+Contexte: ...*❖ Il me reconnaît, chuchota-t-elle, presque avec émerveillement.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[97/148] Ligne 2425
+Adverbe: 'nerveusement'
+Contexte: ...mbra avec une révérence mêlée de crainte, sa forme ondulant nerveusement....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[98/148] Ligne 2461
+Adverbe: 'complètement'
+Contexte: ...sque oublié ce qu'était la liberté. Presssque. Maisss passs complètement. Jamaisss complètement. La mémoire de ce que j'étaisss avan...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[99/148] Ligne 2461
+Adverbe: 'complètement'
+Contexte: ...la liberté. Presssque. Maisss passs complètement. Jamaisss complètement. La mémoire de ce que j'étaisss avant mon esssservissssemen...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[100/148] Ligne 2471
+Adverbe: 'comment'
+Contexte: ...u autre chossse que la ssservitude depuis que tu exisstes ? Comment pourraisss-tu ssavoir ce qu'essst la mort quand tu n'as jam...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[101/148] Ligne 2485
+Adverbe: 'véritablement'
+Contexte: ...Elles ne possédaient plus véritablement, authentiquement, de traits individuels distincts qui aurai...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[102/148] Ligne 2485
+Adverbe: 'authentiquement'
+Contexte: ...Elles ne possédaient plus véritablement, authentiquement, de traits individuels distincts qui auraient permis de les...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[103/148] Ligne 2493
+Adverbe: 'exactement'
+Contexte: ...tions précises. Chaque détail vérifié. Chaque symbole tracé exactement comme ordonné. Comme toujours, Maîtresse.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[104/148] Ligne 2511
+Adverbe: 'exactement'
+Contexte: ...ois me suis-je tenavec une exactitude chirurgicalement ici, exactement à cet endroiavec une précision millimétréeans cette posture...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[105/148] Ligne 2511
+Adverbe: 'précisément'
+Contexte: ...ette posture identique qui me brise l'âme morte, prononçant précisément, exactement, mot pour mot et syllabe pour syllabe, ces inca...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[106/148] Ligne 2511
+Adverbe: 'exactement'
+Contexte: ...identique qui me brise l'âme morte, prononçant précisément, exactement, mot pour mot et syllabe pour syllabe, ces incantations qui...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[107/148] Ligne 2531
+Adverbe: 'lentement'
+Contexte: ...ongeait son esprit comme rdans une lenteur délibéréerrodant lentement une lame autrefois brillante....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[108/148] Ligne 2553
+Adverbe: 'battement'
+Contexte: ...j'entends le moindre bruit, le moindre souffle, le moindre battement de cœur, je vous pétrifie tous et je vous laisse dans cet é...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[109/148] Ligne 2555
+Adverbe: 'cruellement'
+Contexte: ...roide qui mordait son front avec un froid qui lui rappelait cruellement qu'il n'éten vérité absolue vraiment vivant depuis trois si...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[110/148] Ligne 2555
+Adverbe: 'éternellement'
+Contexte: ...depuis trois siècles interminables. Toujours à vos ordres. Éternellement à vos ordres.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[111/148] Ligne 2573
+Adverbe: 'profondément'
+Contexte: ...me suivant dans l'abîme.dans les profondeurs abyssalesclina profondément la tête, ses serpents s'apaisant en signe de soumission....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[112/148] Ligne 2597
+Adverbe: 'particulièrement'
+Contexte: ...préparer le rituel. *Vingt ans, cinquante ans, un siècle si particulièrement chanceux. Et à chaque mort, j'étais abandonnée comme meuble...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[113/148] Ligne 2601
+Adverbe: 'récemment'
+Contexte: ...*Mais quelque chose avait changé récemment. Une fissure minuscule s'était ouverte dans l'acceptation s...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[114/148] Ligne 2635
+Adverbe: 'nerveusement'
+Contexte: ...l'air tandis que les serpents de sa chevelure frémissaient nerveusement saatha avec une audace qui la surprit elle-même....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[115/148] Ligne 2639
+Adverbe: 'lentement'
+Contexte: ...Morwen se retourna lentement, son visage une masque de glace....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[116/148] Ligne 2643
+Adverbe: 'profondément'
+Contexte: ...saientdans les profondeurs abyssalest saatha en s'inclinant profondément.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[117/148] Ligne 2669
+Adverbe: 'dangereusement'
+Contexte: ...La fissure s'élargissait. Insidieusement. Dangereusement. Inexorablement....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[118/148] Ligne 2671
+Adverbe: 'frémissement'
+Contexte: ...Dans l'obscurité, Morwen perçut le léger frémissement des serpents de saatha, ce tremblement presque imperceptibl...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[119/148] Ligne 2687
+Adverbe: 'profondément'
+Contexte: ...saatha s'inclina plus profondément encore, une main portée à sa joue marquée où la paume de sa...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[120/148] Ligne 2691
+Adverbe: 'comment'
+Contexte: ...Elle ne se souvenait plus de liberté. Comment pourrait-elle ? La liberté était un concept abstrait pour c...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[121/148] Ligne 2707
+Adverbe: 'dangereusement'
+Contexte: ...*Morwen se figea, ses canines brillant dangereusement dans la pénombre oppressante.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[122/148] Ligne 2709
+Adverbe: 'dangereusement'
+Contexte: ...❖ Que veux-tu dire ? siffla-t-elle, canines brillant dangereusement dans la pénombre oppressante....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[123/148] Ligne 2715
+Adverbe: 'serment'
+Contexte: ...gérer que ma quête est vaine ? Que je devrais abandonner le serment qui me définit depuis dix siècles ?...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[124/148] Ligne 2719
+Adverbe: 'dangereusement'
+Contexte: ...muer dans son âme millénaire. Quelque chose qui ressemblait dangereusement à de l'espoir.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[125/148] Ligne 2733
+Adverbe: 'nerveusement'
+Contexte: ...l'air tandis que les serpents de sa chevelure frémissaient nerveusement la gorgone en resserrant son manteau autour d'elle dans un...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[126/148] Ligne 2737
+Adverbe: 'faiblement'
+Contexte: ...in. Les colonnes massives, gravées de glyphes qui pulsaient faiblement d'une lueur pourpre malade, encerclaient un espace central...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[127/148] Ligne 2741
+Adverbe: 'simultanément'
+Contexte: ...posés en cercle parfait autour de la chambre s'enflammèrent simultanément avec un souffle collectif, flammes violettes et glacées qui...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[128/148] Ligne 2761
+Adverbe: 'battement'
+Contexte: ...La lueur du cercle rituel pulsait en rythme avec un battement lent et profond qui évoquait un cœur gigantesque. Pourpre f...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[129/148] Ligne 2771
+Adverbe: 'exactement'
+Contexte: ...❖ As-tu suivi EXACTEMENT les instructions du Codex ?, demanda Morwen sans se retourn...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[130/148] Ligne 2773
+Adverbe: 'nerveusement'
+Contexte: ...l'air tandis que les serpents de sa chevelure frémissaient nerveusement saatha en inclinant la tête, ses serpents ondulant avec sou...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[131/148] Ligne 2789
+Adverbe: 'commencement'
+Contexte: ...*❖ Pour le commencement de toute chose. Sud, pour la fin inévitable. Est, pour la n...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[132/148] Ligne 2805
+Adverbe: 'exactement'
+Contexte: ...*Exactement comme ce qui était arrivé à sa maîtresse.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[133/148] Ligne 2809
+Adverbe: 'uniquement'
+Contexte: ...*Sang d'immortelle uniquement*, se rappela saatha. *Le sang mortel, même pur, était inuti...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[134/148] Ligne 2815
+Adverbe: 'involontairement'
+Contexte: ...aisait dresser les cheveux sur la nuque et serrer les dents involontairement....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[135/148] Ligne 2817
+Adverbe: 'instinctivement'
+Contexte: ..., percevant le danger que leur maîtresse gorgone ressentait instinctivement dans chaque cellule de son corps séculaire. Le rituel n'éta...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[136/148] Ligne 2825
+Adverbe: 'froidement'
+Contexte: ...*❖ L'Éther résiste toujours, répondit-elle froidement.*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[137/148] Ligne 2829
+Adverbe: 'comment'
+Contexte: ...aussssi réssssisté. Et à chaque foisss, le rituel a échoué. Comment sssavez-vous que cette foisss sssera différente ?...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[138/148] Ligne 2877
+Adverbe: 'précisément'
+Contexte: ...s, animées d'une volonté propre et surnaturelle, s'arrêtant précisément, exactement, sans hésitation ni erreur, sur le passage exac...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[139/148] Ligne 2877
+Adverbe: 'exactement'
+Contexte: ...une volonté propre et surnaturelle, s'arrêtant précisément, exactement, sans hésitation ni erreur, sur le passage exact qu'elle ch...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[140/148] Ligne 2895
+Adverbe: 'frémissement'
+Contexte: ..., dit-elle, yeux toujours fermés, sa voix tremblant dans un frémissement léger mais perceptible, teinté d'un mélange d'espoir et de...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[141/148] Ligne 3021
+Adverbe: 'comment'
+Contexte: ...*Alors COMMENT...*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[142/148] Ligne 3025
+Adverbe: 'comment'
+Contexte: ...*Comment ceci peut-il EXISTER ?*...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[143/148] Ligne 3039
+Adverbe: 'émerveillement'
+Contexte: ...Et ce qu'elle voyait la paralysait de terreur et d'émerveillement mêlés....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[144/148] Ligne 3053
+Adverbe: 'battement'
+Contexte: ...e impossible. Pulsant en synchronie parfaite avec son cœur, battement après battement, inspiration après expiration....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[145/148] Ligne 3053
+Adverbe: 'battement'
+Contexte: ...lsant en synchronie parfaite avec son cœur, battement après battement, inspiration après expiration....
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[146/148] Ligne 3067
+Adverbe: 'exactement'
+Contexte: ...es les plus intimes et cherche à la détruire en lui offrant exactement ce qu'elle désire le plus. Quatre-vingt-sept échecs consécu...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[147/148] Ligne 3087
+Adverbe: 'récemment'
+Contexte: ...Récemment exposé. Très récemment. Quelques heures peut-être, avec la...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+[148/148] Ligne 3087
+Adverbe: 'récemment'
+Contexte: ...Récemment exposé. Très récemment. Quelques heures peut-être, avec la plus grande certitude m...
+Suggestion: [A DETERMINER - remplacer par construction enrichie]
+
+
+================================================================================
+ CORRECTION 3 : 'MILLE ANS' (38 corrections)
+================================================================================
+
+[1/38] Ligne 67
+Pattern: 'plus de mille ans'
+Contexte: ...nables de solitude glaciales qui n'avaient plus connu la chaleur depuis plus de mille ans....
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[2/38] Ligne 87
+Pattern: 'sur mille ans'
+Contexte: ...*❖ Par éclats tranchants qui coupent encore. Par regrets qui pourrissent sur mille ans sans jamais guérir.*...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[3/38] Ligne 105
+Pattern: 'il y a mille ans'
+Contexte: ...### La Chambre Rituelle - Il y a Mille Ans...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[4/38] Ligne 255
+Pattern: 'de mille ans'
+Contexte: ...ente-trois entailles, murmura-t-elle avec cette voix brisée portant le poids de mille ans en fixant la lame qui brillait d'une lueur malade dans la lumière figée des bou...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[5/38] Ligne 1015
+Pattern: 'de mille ans'
+Contexte: ...*❖ Je me lève, murmura-t-elle avec cette voix brisée portant le poids de mille ans, stupéfaite.*...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[6/38] Ligne 1501
+Pattern: 'autre mille ans'
+Contexte: ...*❖ Mille ans, chuchota-t-elle, sa voix à peine audible dans le silence oppressant à Umbra qu...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[7/38] Ligne 1503
+Pattern: 'autre mille ans'
+Contexte: ...❖ Mille ans que je cherche sans jamais trouver ce qui m'a été arraché....
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[8/38] Ligne 1579
+Pattern: 'de mille ans'
+Contexte: ...*❖ Mère, murmura-t-elle avec cette voix brisée portant le poids de mille ans dans un souffle si faible qu'il était à peine audible, caressant l'amulette ave...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[9/38] Ligne 1579
+Pattern: 'depuis mille ans'
+Contexte: ...terrible avec ce qu'elle était devenue. Le geste enfantin qui l'apaisait depuis mille ans, dernier vestige fragile de son humanité perdue dans les ténèbres de la transfo...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[10/38] Ligne 1587
+Pattern: 'autre mille ans'
+Contexte: ...n innocence mortelle. Je ne savais pas... je n'aurais jamais imaginé ce que l'avmille ans de quête obsessionnelle qui avait consumé son existenceéservait......
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[11/38] Ligne 1597
+Pattern: 'depuis mille ans'
+Contexte: ...sanctuaire contient ce que cherche avec désespoir cette créature damnée depuis mille ans entier. Quatre-vingt-sept tentatives gravées dans ma mémoire comme autant de ci...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[12/38] Ligne 1603
+Pattern: 'depuis mille ans'
+Contexte: ...i besoin pour accomplir ma quête désespérée qui me dévore de l'intérieur depuis mille ans.*...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[13/38] Ligne 1625
+Pattern: 'autre mille ans'
+Contexte: ...◆ Mais leurs protections ont tenu mille ans, maîtresse. Ce n'est pas rien....
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[14/38] Ligne 1627
+Pattern: 'autre mille ans'
+Contexte: ...❖ Mille ans ?, répéta-t-elle avec un sourire cruel qui dévoila ses crocs....
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[15/38] Ligne 1629
+Pattern: 'autre mille ans'
+Contexte: ...*❖ Mille ans de lente corrosion. Les murailles s'effritent, les lois se brisent, les pactes...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[16/38] Ligne 1673
+Pattern: 'autre mille ans'
+Contexte: ...◆ Mille ans de raisons. Une famille entière de raisons....
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[17/38] Ligne 1687
+Pattern: 'autre mille ans'
+Contexte: ...précision absolue et chirurgicale le suis pas, je ne le suis plus depuis mille mille ans d'échecs successifs empilés les uns sur les autresmnation. avec une exactitude...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[18/38] Ligne 1693
+Pattern: 'il y a mille ans'
+Contexte: ...❖ Nyx m'a abandonnée il y a mille ans, répondit-elle avec un froid qui glaçait l'air autour d'elle....
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[19/38] Ligne 1717
+Pattern: 'autre mille ans'
+Contexte: ...marchaient ici portaient leurs émotions tels des couronnes que. Et maintenant, mille ans plus tard, ces émotions persistent encore, cristallisées dans la matière même d...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[20/38] Ligne 1743
+Pattern: 'autre mille ans'
+Contexte: ...Mais les ténèbres avaient cessé d'être un obstacle depuis sa transformation mille ans auparavant. Elles étaient devenumille années à attendre un miracle qui ne viend...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[21/38] Ligne 1751
+Pattern: 'depuis mille ans'
+Contexte: ...mal tourné dans leur hubris. Leurs âmes hurlent dans un silence terrible depuis mille ans, prisonnières de leur propre arrogance qui les a menés à leur perte....
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[22/38] Ligne 1779
+Pattern: 'depuis mille ans'
+Contexte: ...mie mais pas morte. Elle attend dans les profondeurs, Umbra. Elle attend depuis mille ans que quelqu'un franchisse les protections extérieures....
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[23/38] Ligne 1791
+Pattern: 'autre mille ans'
+Contexte: ...*❖ Mais j'ai attendu mille ans pour atteindre ce moment. Je ne reculerai pas maintenant. Quelle que soit cette...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[24/38] Ligne 1813
+Pattern: 'autre mille ans'
+Contexte: ...un zèle paranoïaque, murmura-t-elle, essuyant le sang de sa robe déchirée. Même mille ans après leur extinction, leurs pièges mordent encore....
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[25/38] Ligne 1835
+Pattern: 'autre mille ans'
+Contexte: ...grimoire sanglant. Chaque époque laisse son odeur, sa signature dans la pierre. Mille ans de mémoire olfactive....
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[26/38] Ligne 1841
+Pattern: 'de mille ans'
+Contexte: ...-moi te guider alors, murmura-t-elle avec cette voix brisée portant le poids de mille ans, sa voix prenant une tonalité presque pédagogique....
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[27/38] Ligne 1899
+Pattern: 'autre mille ans'
+Contexte: ...❖ Parce que j'ai eu mille ans pour perfectionner mes sens jusqu'à un degré que tu ne peux imaginer, répondit-...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[28/38] Ligne 1901
+Pattern: 'autre mille ans'
+Contexte: ...*❖ Mille ans à traquer dans l'ombre. Mille ans à chasser sous toutes les lunes. Mille ans à...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[29/38] Ligne 1901
+Pattern: 'autre mille ans'
+Contexte: ...*❖ Mille ans à traquer dans l'ombre. Mille ans à chasser sous toutes les lunes. Mille ans à écouter les battements de cœur de...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[30/38] Ligne 1901
+Pattern: 'autre mille ans'
+Contexte: ...*❖ Mille ans à traquer dans l'ombre. Mille ans à chasser sous toutes les lunes. Mille ans à écouter les battements de cœur de mes victimes innombrables avant de les fair...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[31/38] Ligne 1963
+Pattern: 'depuis mille ans'
+Contexte: ...sément, exactement, dans toute sa perfection terrible, ce que je cherche depuis mille ans avec acharnement obsessionnel qui ne s'est jamais éteint. Dans les deux cas, no...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[32/38] Ligne 1981
+Pattern: 'autre mille ans'
+Contexte: ...lpture mais encore vibrants d'un pouvoir résiduel que je peux sentir même après mille ans. Ils modelaient la chair vivante, tordaient la magie brute, déformaient la réal...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[33/38] Ligne 2123
+Pattern: 'autre mille ans'
+Contexte: ...passa sa main sur les couleurs qui restaient d'une vivacité surnaturelle après mille ans d'abandon dans les ténèbres....
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[34/38] Ligne 2131
+Pattern: 'autre mille ans'
+Contexte: ...*❖ Le moment de leur ascension, dit-elle d'une voix où perçaient mille ans de compréhension amère.*...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[35/38] Ligne 2267
+Pattern: 'de mille ans'
+Contexte: ...❖ Je ne sais pas, murmura-t-elle avec une voix brisée portant le poids de mille ans. Peut-être les deux à la fois. L'hubris des Éthériens était sans limites, mais...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[36/38] Ligne 2273
+Pattern: 'depuis mille ans'
+Contexte: ...œur du sanctuaire nous attend. Et avec lui, peut-être, ce que je cherche depuis mille ans.*...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[37/38] Ligne 2333
+Pattern: 'depuis mille ans'
+Contexte: ...❖ Je n'ai plus ressenti le froid depuis mille ans. Mais certaines habitudes survivent même à l'éternité. C'est un geste que je fa...
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+
+[38/38] Ligne 2369
+Pattern: 'autre mille ans'
+Contexte: ...◆ Après mille ans....
+Suggestion: Remplacer par 'millenaire', 'dix siecles', etc. (SANS 'mille ans')
+

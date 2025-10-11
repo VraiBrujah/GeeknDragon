@@ -20,6 +20,7 @@ class DnDMusicPlayer {
         this.heroIntroPath = null;
         this.firstPlayCompleted = false; // Track si la première lecture depuis init/ a été faite
         this.autoplayBlocked = false; // Track si l'autoplay a été bloqué (attendre un click)
+        this.trackSelected = false; // Track si une musique a déjà été sélectionnée
 
         // Cache pour éviter les recharges inutiles
         this.lastPlaylistUpdate = 0;
@@ -362,8 +363,8 @@ class DnDMusicPlayer {
             return false;
         }
 
-        // Si on n'a PAS encore de track chargé, en sélectionner un
-        if (this.currentIndex === 0 && !this.audio.src) {
+        // Si on n'a PAS encore sélectionné de musique, en sélectionner une
+        if (!this.trackSelected) {
             // Pour la première lecture, sélectionner depuis la queue
             const selectedTrack = this.getNextTrackFromQueue();
 
@@ -373,6 +374,7 @@ class DnDMusicPlayer {
 
             // Trouver l'index de cette piste dans la playlist complète
             this.currentIndex = this.playlist.findIndex((track) => track.path === selectedTrack.path);
+            this.trackSelected = true;
         }
 
         await this.loadCurrentTrack();
