@@ -14,9 +14,9 @@ La nuit s'épandait sur les Monts de l'Éther en linceul noir imprégné de sang
 
 Le vent portait l'haleine âcre du givre et l'exhalaison métallique des pierres gorgées de magie séculaire. Les sommets acérés buvaient la lumière elle-même, créant des abysses d'ombre que même la lune n'osait effleurer de ses doigts nacrés.
 
-Au sommet d'un éperon rocheux, cette lame de pierre qui défie le vide béant, une femme d'une beauté vénéneuse se tenait immobile face aux ruines. Sa peau d'albâtre translucide révélait un réseau de veines sombres qui pulsaient d'un rythme non-humain, charriant un ichor plus vieux que la vie elle-même.
+Au sommet d'un éperon rocheux, cette lame de pierre défiant le vide béant, une femme d'une beauté vénéneuse se tenait immobile face aux ruines. Sa peau d'albâtre translucide révélait un réseau de veines sombres pulsant d'un rythme non-humain, charriant un ichor plus vieux que la vie elle-même.
 
-*◆ Maîtresse, siffla une voix d'ombre à ses côtés, émanant d'une forme sans corps défini qui ondulait dans l'obscurité.*
+*◆ Maîtresse, siffla une voix d'ombre à ses côtés, émanant d'une forme sans corps défini ondulant dans l'obscurité.*
 
 *◆ Les flux éthériens convergent. Les cités sensibles commencent à ressentir l'éveil.*
 
@@ -24,9 +24,9 @@ Elle ne tourna pas la tête. Ses yeux, deux puits de nuit liquide, demeuraient r
 
 *❖ Je sais, Umbra. Je les sens... tels insectes affolés pris dans la toile éternelle de l'araignée qui attend, patiente, affamée, dit-elle, ses lèvres exsangues s'étirant en un sourire sans joie.*
 
-*❖ À Eldoria, capitale resplendissante des Sept Royaumes dont les tours cristallines se dressent tels doigts accusateurs griffant le ventre des cieux, pointant vers les étoiles indifférentes qui refusent de répondre aux prières mortelles, les mages de cour vêtus de robes étoilées scrutent leurs instruments d'argent poli et de verre soufflé avec cette agitation fébrile de ceux qui sentent l'orage approcher sans pouvoir le nommer, instruments aussi inutiles que prières murmurées à des dieux sourds depuis longtemps morts. À Valgaris, métropole industrielle titanesque aux forges éternelles qui rugissent dans la nuit avec cette férocité des bêtes affamées dévorant le charbon et le minerai sans jamais être rassasiées, les flammes crachent des langues noires et pourpres, couleurs maudites qui ne devraient jamais danser dans un feu mortel et qui présagent des catastrophes à venir. Dans les forêts secrètes de Sylvelune, royaume elfique aux cités arboricoles suspendues entre les branches millénaires des arbres-monde ancestraux, les elfes séculaires aux yeux dorés, semblables à l'ambre liquide qui coule dans les veines de la terre primordiale, se réveillent en sursaut dans leurs lits de soie végétale, terrifiés par ce qu'ils ne comprennent pas encore de manière consciente mais que leurs âmes ancestrales reconnaissent avec une horreur primordiale qui remonte à la Grande Purge, guidées par cet instinct primitif ancré dans leur mémoire raciale.*
+*❖ À Eldoria, capitale resplendissante des Sept Royaumes dont les tours cristallines se dressent tels doigts accusateurs griffant le ventre des cieux, pointant vers les étoiles indifférentes refusantnt de répondre aux prières mortelles, les mages de cour vêtus de robes étoilées scrutent leurs instruments d'argent poli et de verre soufflé avec cette agitation fébrile de ceux qui sentent l'orage approcher sans pouvoir le nommer, instruments aussi inutiles que prières murmurées à des dieux sourds depuis longtemps morts. À Valgaris, métropole industrielle titanesque aux forges éternelles qui rugissent dans la nuit avec cette férocité des bêtes affamées dévorant le charbon et le minerai sans jamais être rassasiées, les flammes crachent des langues noires et pourpres, couleurs maudites qui ne devraient jamais danser dans un feu mortel et qui présagent des catastrophes à venir. Dans les forêts secrètes de Sylvelune, royaume elfique aux cités arboricoles suspendues entre les branches millénaires des arbres-monde ancestraux, les elfes séculaires aux yeux dorés, semblables à l'ambre liquide coulant dans les veines de la terre primordiale, se réveillent en sursaut dans leurs lits de soie végétale, terrifiés par ce qu'ils ne comprennent pas encore de manière consciente mais que leurs âmes ancestrales reconnaissent avec une horreur primordiale qui remonte à la Grande Purge, guidées par cet instinct primitif ancré dans leur mémoire raciale.*
 
-*◆ Ils se souviennent, dit l'ombre-serviteur d'une voix qui ondulait avec cette fluidité de la fumée noire glissant dans le vent glacial de minuit. Même sans le savoir, même sans pouvoir nommer cette terreur enfouie, leurs âmes ancestrales se souviennent de la Purge.*
+*◆ Ils se souviennent, dit l'ombre-serviteur d'une voix ondulant avec cette fluidité de la fumée noire glissant dans le vent glacial de minuit. Même sans le savoir, même sans pouvoir nommer cette terreur enfouie, leurs âmes ancestrales se souviennent de la Purge.*
 
 *❖ Qu'ils se souviennent, répondit-elle, sa voix portant une morsure plus froide que le vent glacial.*
 
@@ -42,21 +42,21 @@ Le silence retomba, rompu par le seul hurlement du vent entre les colonnes titan
 
 *◆ Même les charognards craignent ce sanctuaire.*
 
-*❖ Ils ont raison, murmura-t-elle avec cette voix brisée portant le poids de un millénaire entier de quête désespérée qui avait creusé son âme morte en fermant les yeux, laissant les souvenirs remonter malgré sa volonté.*
+*❖ Ils ont raison, murmura-t-elle avec cette voix brisée portant le poids de un millénaire entier de quête désespérée ayant creusé son âme morte tel sillon profond dans une terre stérile, fermant les yeux, laissant les souvenirs remonter malgré sa volonté.*
 
 *❖ Ici s'élevait jadis l'un des plus redoutables bastions du Savoir Interdit. Ici, les Éthériens ont défié les dieux. Ici...*
 
 Sa voix se brisa, fissure minuscule dans l'armure de glace qu'elle s'était forgée au fil des siècles.
 
-*❖ Ici, j'ai tout perdu. Tout ce qui faisait de moi une personne plutôt qu'un monstre.*
+*❖ Ici, j'ai tout perdu. Tout ce faisant de moi une personne plutôt qu'un monstre.*
 
 Umbra ondula plus près, forme protectrice enveloppant presque sa maîtresse.
 
 *◆ Vous allez tout reprendre, maîtresse. Le Codex vous l'a promis. Le serment sera accompli.*
 
-*❖ Le serment..., siffla-t-elle, canines brillant avec un danger palpable qui électrisait l'air dans la pénombre oppressante en rouvrant les yeux, sa voix tremblante malgré elle, une lueur pourpre y dansant à présent, profonde et affamée telle gouffre abyssal qui appelle les âmes perdues vers leur chute éternelle.*
+*❖ Le serment..., siffla-t-elle, canines brillant avec un danger palpable électrisant l'air dans la pénombre oppressante en rouvrant les yeux, sa voix tremblante malgré elle, une lueur pourpre y dansant à présent, profonde et affamée telle gouffre abyssal qui appelle les âmes perdues vers leur chute éternelle.*
 
-*❖ Oui. Le serment qui brûle dans ma poitrine morte depuis ces dix siècles de solitude et de quête. La flamme qui ne s'éteint jamais, qui consume sans détruire, qui torture sans tuer.*
+*❖ Oui. Le serment brûlant dans ma poitrine morte depuis ces dix siècles de solitude et de quête. La flamme qui ne s'éteint jamais, qui consume sans détruire, qui torture sans tuer.*
 
 Ses canines, longues et acérées, sculptées par des siècles de transformation, brillèrent avec une faible lueur quand elle parla de nouveau.
 
@@ -66,7 +66,7 @@ Ses canines, longues et acérées, sculptées par des siècles de transformation
 
 Elle leva une main pâle, observant ses doigts exsangues dans la faible lumière nocturne. dix siècles interminables de solitude glaciales qui n'avaient plus connu la chaleur depuis plus d'un millénaire entier.
 
-*❖ Je me souviens de mes mains... quand elles étaient vivantes, ordonna-t-elle, sa voix claquant avec l'autorité absolue de l'immortelle, sa voix portant une nuance que l'ombre-serviteur n'avait jamais entendue auparavant. Quelque chose qui ressemblait presque à de la douleur.*
+*❖ Je me souviens de mes mains... quand elles étaient vivantes, ordonna-t-elle, sa voix claquant avec l'autorité absolue de l'immortelle, sa voix portant une nuance que l'ombre-serviteur n'avait jamais entendue auparavant. Quelque chose ressemblant presque à de la douleur.*
 
 *❖ Chaudes. Roses. Caressant les pétales d'une rose sans les flétrir.*
 
@@ -78,7 +78,7 @@ Le commandement claqua avec la violence cinglante d'un fouet de cuir tranchant l
 
 *◆ Pardonnez-moi, maîtresse.*
 
-Elle secoua la tête avec une lenteur délibérée, chaque mouvement calculé pour chasser les fragments d'humanité qui la hantaient plus avec une cruauté qui prenait plaisir à infliger la souffrance que n'importe quelle malédiction.
+Elle secoua la tête avec une lenteur délibérée, chaque mouvement calculé pour chasser les fragments d'humanité qui la hantaient plus avec une cruauté prenant plaisir à infliger la souffrance que n'importe quelle malédiction.
 
 *❖ Non. Tu as raison. Les morts se souviennent différemment des vivants, Umbra. Pas en douceur. Pas en nostalgie tendre.*
 
@@ -86,7 +86,7 @@ Ses ongles s'enfoncèrent dans sa paume, mais de ces mille années accumulées t
 
 *❖ Par éclats tranchants qui coupent encore. Par regrets qui pourrissent sur l'etendue de dix siècles sans jamais guérir.*
 
-*◆ Alors pourquoi vous souvenez-vous ce soir ? demanda l'ombre avec la prudence de celle qui connaît les humeurs de sa maîtresse. Pourquoi maintenant, après tant de siècles à enfouir ces échos ?*
+*◆ Alors pourquoi vous souvenez-vous ce soir ? demanda l'ombre avec la prudence de celle connaissant les humeurs de sa maîtresse. Pourquoi maintenant, après tant de siècles à enfouir ces échos ?*
 
 Elle se tourna enfin vers les ruines du sanctuaire, vers l'entrée dont le nom même avait été effacé par la terreur des âges.
 
@@ -128,7 +128,7 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 *❖ Les runes sont-elles exactes ? Je ne peux pas... je ne peux pas me permettre une erreur.*
 
-*Les pages se tournèrent seules. Une. Deux. Trois. S'arrêtant sur un diagramme qu'elle connaissait par cœur. En dessous, de nouveaux mots s'écrivirent sous ses yeux, l'encre suintant du parchemin telle ichor noir s'échappant d'une blessure fraîche qui refuse de se refermer.*
+*Les pages se tournèrent seules. Une. Deux. Trois. S'arrêtant sur un diagramme qu'elle connaissait par cœur. En dessous, de nouveaux mots s'écrivirent sous ses yeux, l'encre suintant du parchemin telle ichor noir s'échappant d'une blessure fraîche refusant de se refermer.*
 
 *⟨ Tu as bien travaillé, petite mortelle. Mais es-tu prête pour le prix ? ⟩*
 
@@ -218,7 +218,7 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 *Elle avait choisi une nuit sans lune. Sans étoiles. Le ciel détournant le regard. Elle était descendue seule dans les entrailles du vieux sanctuaire Éthérien, là où les ombres étaient trop épaisses même en plein jour.*
 
-*Le cercle runique gravé dans le sol de pierre noire l'attendait depuis des siècles. Un cercle parfait laissé par les maîtres oubliés. Les rainures étaient profondes, creusées par une magie qui avait mangé la pierre elle-même.*
+*Le cercle runique gravé dans le sol de pierre noire l'attendait depuis des siècles. Un cercle parfait laissé par les maîtres oubliés. Les rainures étaient profondes, creusées par une magie ayant mangé la pierre elle-même.*
 
 *❖ Je n'ai qu'à le réveiller, chuchota-t-elle, sa voix à peine audible dans le silence oppressant en se plaçant au bord du cercle.*
 
@@ -234,9 +234,9 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 ### Le Sang et les Symboles
 
-*La lame était d'argent pur, forgée dans les flammes d'Éther condensé selon les instructions du Codex. Elle la soupesa dans sa main tremblante, sentant son poids surnaturel qui semblait contenir toute la gravité de ce qui allait suivre, depuis cette nuit maudite où tout avait basculé, il y a de cela mille années révolues.*
+*La lame était d'argent pur, forgée dans les flammes d'Éther condensé selon les instructions du Codex. Elle la soupesa dans sa main tremblante, sentant son poids surnaturel semblant contenir toute la gravité de ce qui allait suivre, depuis cette nuit maudite où tout avait basculé, il y a de cela mille années révolues.*
 
-*❖ Trente-trois entailles, murmura-t-elle avec cette voix brisée portant le poids d'un millénaire revolu en fixant la lame qui brillait d'une lueur malade dans la lumière figée des bougies d'os, cette luminosité spectrale qui ne devrait pas exister dans le monde des mortels.*
+*❖ Trente-trois entailles, murmura-t-elle avec cette voix brisée portant le poids d'un millénaire revolu en fixant la lame brillant d'une lueur malade dans la lumière figée des bougies d'os, cette luminosité spectrale qui ne devrait pas exister dans le monde des mortels.*
 
 *❖ Une pour chaque année de ma vie. Une pour chaque battement de cœur que je vais sacrifier.*
 
@@ -288,7 +288,7 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 *❖ Je... je me sens faible.*
 
-*⟨ La faiblesse ne dure qu'un temps, ⟩ répondit le Codex, ses pages tournant dans une frénésie qui faisait craquer le parchemin ancien.*
+*⟨ La faiblesse ne dure qu'un temps, ⟩ répondit le Codex, ses pages tournant dans une frénésie faisant craquer le parchemin ancien.*
 
 *⟨ Le pouvoir est éternel. Continue! ⟩*
 
@@ -320,7 +320,7 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 *◇ De voir si tu survivras.*
 
-*Un frisson glacé parcourut sa colonne vertébrale. Ses mains tremblaient avec une violence telle qu'elle faillit lâcher la lame qui glissait entre ses doigts ensanglantés.*
+*Un frisson glacé parcourut sa colonne vertébrale. Ses mains tremblaient avec une violence telle qu'elle faillit lâcher la lame glissant entre ses doigts ensanglantés, argent liquide fuyant son emprise chancelante.*
 
 *❖ Quatorze. Pour le prêtre Thomias, qui priait encore alors que tous les autres avaient fui. Quinze. Pour...*
 
@@ -376,7 +376,7 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 *⟨ Le sang est donné! Les symboles s'éveillent! Le chemin est ouvert! ⟩*
 
-*Les voix des ombres se mirent à psalmodier dans une langue morte, un chant guttural qui faisait vibrer les os de la terre elle-même.*
+*Les voix des ombres se mirent à psalmodier dans une langue morte, un chant guttural faisant vibrer les os de la terre elle-même.*
 
 *⟨ Maintenant, ⟩ dit le Codex alors que sa vision se brouillait, sa voix résonnant avec une patience infinie, ⟨ vient la fiole. Le sang Éthérien. Le poison sacré. Le cœur de ta transformation irréversible. ⟩*
 
@@ -390,7 +390,7 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 *Elle la sortit de son étui de velours noir, ses mains tremblant d'une trépidation telle que la fiole faillit glisser de ses doigts glacés. Le verre noir, opaque tel abîme de minuit sans lune ni étoiles pour guider les perdus, était scellé par un cachet de cire pourpre marqué d'une étoile à six branches.*
 
-*❖ Le symbole des Éthériens, siffla-t-elle, canines brillant avec un danger palpable qui électrisait l'air dans la pénombre oppressante dans un souffle empli de crainte révérencielle, traçant du doigt l'étoile gravée dans la cire durcie.*
+*❖ Le symbole des Éthériens, siffla-t-elle, canines brillant avec un danger palpable électrisant l'air dans la pénombre oppressante dans un souffle empli de crainte révérencielle, traçant du doigt l'étoile gravée dans la cire durcie.*
 
 *❖ Le sceau de ceux qui ont défié les dieux et transformé le monde selon leur volonté avant que tout ne s'effondre.*
 
@@ -466,7 +466,7 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 *❖ Qu'est-ce que...*
 
-*⟨ L'essence de trois damnations, ⟩ répondit le Codex avec un calme qui glaçait plus que n'importe quel cri.*
+*⟨ L'essence de trois damnations, ⟩ répondit le Codex avec un calme glaçant plus que n'importe quel cri.*
 
 *⟨ Tu sens le mort-vivant ancestral ? La terre de son tombeau ? ⟩*
 
@@ -484,9 +484,9 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 *❖ Je sens tout. Elle porta une main à sa bouche, luttant contre la nausée.*
 
-*❖ C'est... c'est la mort qui refuse de mourir.*
+*❖ C'est... c'est la mort refusant de mourir.*
 
-*◇ Et la vie qui refuse de vivre, dirent les voix des ombres à l'unisson, leur chœur cosmique résonnant tel l'écho d'une prophétie inévitable qui traverse les âges, portée par des voix qui transcendent le temps mortel.*
+*◇ Et la vie refusant de vivre, dirent les voix des ombres à l'unisson, leur chœur cosmique résonnant tel l'écho d'une prophétie inévitable qui traverse les âges, portée par des voix transcendantnt le temps mortel.*
 
 *◇ Quelque chose entre les deux. Coincé. Piégé. Hurlant dans le vide entre la mort et la vie sans jamais trouver de repos.*
 
@@ -520,7 +520,7 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 *❖ Deux.*
 
-*Feu et glace dans le même instant, paradoxe inconcevable déchirant ses sens comme lame de pouvoir pur tranchant la réalité elle-même.*
+*Feu et glace dans le même instant, paradoxe inconcevable déchirant ses sens tel un tranchant de pouvoir pur découpant la réalité elle-même.*
 
 *❖ Trois.*
 
@@ -622,7 +622,7 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 *○ Le roi éthérien. Son refus de mourir.*
 
-*Sa langue s'engourdit en une fraction de seconde, puis s'embrasa avec cette intensité dévastatrice des braises ardentes qui dévorent la chair vivante sans pitié.*
+*Sa langue s'engourdit en une fraction de seconde, puis s'embrasa avec cette intensité dévastatrice des braises ardentes dévorantnt la chair vivante sans pitié.*
 
 *❖ Ma langue... je ne la sens plus!*
 
@@ -792,7 +792,7 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 *◇ Tu le sauras bientôt. Trop tôt.*
 
-*La faim grandit, devint un gouffre qui dévorait tout.*
+*La faim grandit, devint un gouffre dévorant tout - raison, moralité, le dernier fragment d'humanité qui lui restait.*
 
 *❖ Qu'est-ce que je veux ? cria-t-elle.*
 
@@ -820,7 +820,7 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 *Ses canines percèrent l'intérieur de sa lèvre. Le goût de son propre sang remplit sa bouche. Froid. Mort.*
 
-*❖ Mon sang... il a un goût horrible. Froid. Amer. Semblable au poison le plus virulent qui brûle les entrailles.*
+*❖ Mon sang... il a un goût horrible. Froid. Amer. Semblable au poison le plus virulent brûlant les entrailles.*
 
 ⟨ Parce qu'il est mort, ⟩ dit le Codex, sa voix presque douce dans la brutalité de cette vérité.
 
@@ -1014,7 +1014,7 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 *Les murs suintaient de chaleur fantôme. Chaque pierre pulsait.*
 
-*❖ C'est beau, siffla-t-elle, canines brillant avec un danger palpable qui électrisait l'air dans la pénombre oppressante dans un souffle empli d'émerveillement malgré l'horreur de sa situation.*
+*❖ C'est beau, siffla-t-elle, canines brillant avec un danger palpable électrisant l'air dans la pénombre oppressante dans un souffle empli d'émerveillement malgré l'horreur de sa situation.*
 
 ❖ Et terrifiant à la fois. Comme contempler l'abîme et découvrir qu'il est magnifique.
 
@@ -1036,7 +1036,7 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 ❖ SI FAIM! JE DOIS... JE DOIS...
 
-⟨ Tu dois boire, ⟩ acheva le Codex avec ce calme terrible et inexorable qui contrastait dans une explosion de violence avec l'urgence dévastatrice de la situation.
+⟨ Tu dois boire, ⟩ acheva le Codex avec ce calme terrible et inexorable contrastant dans une explosion de violence avec l'urgence dévastatrice de la situation.
 
 ⟨ Du sang. Chaud. Vivant. Sans délai. ⟩
 
@@ -1136,7 +1136,7 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 *L'homme essaya de se débattre. Ses mains se levèrent, cherchant à repousser cette chose qui l'attaquait. Ses doigts trouvèrent les cheveux de Morwen, tirèrent avec désespoir. Arrachèrent des mèches noires qui volèrent dans la nuit telles plumes d'oiseau mort arrachées à un cadavre gelé.*
 
-*Mais elle était trop forte. Dix fois plus forte. Cent fois plus forte. Sa main gauche saisit son poignet, broya les os fragiles avec un craquement sec qui résonna dans le silence de la ruelle obscure. L'homme hurla, cri strident de douleur qui se brisa net quand sa main droite agrippa sa gorge, força sa tête en arrière avec une violence brutale, exposant la veine carotide qui pulsait à la manière d'un tambour affolé battant sa dernière cadence sous la peau tendue.*
+*Mais elle était trop forte. Dix fois plus forte. Cent fois plus forte. Sa main gauche saisit son poignet, broya les os fragiles avec un craquement sec résonnant dans le silence de la ruelle obscure. L'homme hurla, cri strident de douleur se brisant net quand sa main droite agrippa sa gorge, força sa tête en arrière avec une violence brutale, exposant la veine carotide pulsant à la manière d'un tambour affolé battant sa dernière cadence sous la peau tendue.*
 
 *❖ Oh... gémit-elle, le goût explosant dans sa bouche tel mélange inconcevable de feu liquide brûlant et de glace fondue glaciale s'entremêlant dans une symphonie de sensations contradictoires qui dépassaient l'entendement.*
 
@@ -1254,7 +1254,7 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 *❖ Pourquoi personne ne répond à mes appels ?*
 
-*Elle monta les escaliers avec une progression lente qui trahissait sa peur grandissante. Chaque marche craquait sous son poids tel un reproche qui.*
+*Elle monta les escaliers avec une progression lente trahissant sa peur grandissante. Chaque marche craquait sous son poids tel un reproche qui.*
 
 *❖ Je sais que vous êtes en colère, continua-t-elle, parlant au silence.*
 
@@ -1372,7 +1372,7 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 *⟨ Les ramener de manière authentique et vérifiable, avec une authenticité qui ne souffrait aucun doute, dans toute leur essence vivante et palpitante. Pas comme zombies sans âme ni conscience qui ne seraient que marionnettes grotesques. Pas comme fantômes éthérés et translucides condamnés à errer sans fin. Vivants dans toute leur humanité pleine et entière, chair chaude et cœur battant. Comme ils étaient avant la maladie, avant la mort, avant ton désespoir. ⟩*
 
-*Elle se releva avec une progression lente qui contrastait avec la détermination nouvelle qui brûlait en elle. Le sang séchait sur ses joues,de la même façon qu'autrefois, avant que tout ne bascule irrémédiablementglantes d'une créature qui ne pouvait plus pleurer comme avant.*
+*Elle se releva avec une progression lente contrastant avec la détermination nouvelle qui brûlait en elle. Le sang séchait sur ses joues,de la même façon qu'autrefois, avant que tout ne bascule irrémédiablementglantes d'une créature qui ne pouvait plus pleurer comme avant.*
 
 *❖ Où est cet artefact ?*
 
@@ -1436,19 +1436,19 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 *Mille années à porter le poids de cette promesse au-delà de toute possibilité concevable par l'esprit mortel telle chaîne invisible forgée dans le désespoir et trempée dans les larmes enroulée autour de son âme morte, serrant un peu plus fort avec chaque année qui passait sans résultat, sans espoir, sans autre chose que le vide absolu qui répondait à ses supplications désespérées.*
 
-*Les premières décennies terribles avaient été consacrées à la maîtrise laborieuse et douloureuse de sa nouvelle nature vampirique qui la dégoûtait autant qu'elle la fascinait. Apprendre à contrôler la soif dévorante qui la consumait tel feu intérieur insatiable qui dévorait son âme sans jamais trouver de combustible suffisant pour apaiser sa faim monstrueuse. Apprendre à se déplacer dans le monde des mortels fragiles sans éveiller leur terreur instinctive et primitive quand ils croisaient son regard pourpre qui pulsait dans l'obscurité tels cœurs de rubis maudits consumés par un brasier intérieur qui refusait de s'éteindre malgré le poids écrasant des siècles. Apprendre les limites cruelles de son immortalité nouvellement acquise au prix de tout ce qu'elle chérissait et les prix terribles qu'elle exigeait sans pitié en retour -- le sang chaud et innocent des mortels qui ne méritaient pas ce destin, la solitude éternelle qui rongeait son esprit comme acide lent, la perte progressive et irréversible de tout ce qui la liait autrefois à l'humanité bénie qu'elle avait sacrifiée sur l'autel de son désespoir.*
+*Les premières décennies terribles avaient été consacrées à la maîtrise laborieuse et douloureuse de sa nouvelle nature vampirique, cette dichotomie existentielle la dégoûtant autant qu'elle la fascinait. Apprendre à contrôler la soif dévorante la consumant tel feu intérieur insatiable dévorant son âme sans jamais trouver de combustible suffisant pour apaiser sa faim monstrueuse. Apprendre à se déplacer parmi les mortels fragiles sans éveiller leur terreur instinctive et primitive quand ils croisaient son regard pourpre pulsant dans l'obscurité tels cœurs de rubis maudits consumés par un brasier intérieur refusant de s'éteindre malgré le poids écrasant des siècles. Apprendre les limites cruelles de son immortalité nouvellement acquise au prix de tout ce qu'elle chérissait et les prix terribles qu'elle exigeait sans pitié en retour -- le sang chaud et innocent des mortels ne méritant pas ce destin, la solitude éternelle rongeant son esprit à la manière d'un acide lent et corrosif, la perte progressive et irréversible de tout ce qui la liait autrefois à l'humanité bénie qu'elle avait sacrifiée sur l'autel de son désespoir.*
 
-*Les premiers siècles interminables, elle avait fouillé avec une obstination maladive les archives poussiéreuses des grandes bibliothèques oubliées par les âges. Eldoria aux tours cristallines qui touchaient les nuages. Valgaris aux forges rugissantes qui ne dormaient jamais. Les cryptes scellées de Sylvelune où même les elfes millénaires refusaient de s'aventurer par peur ancestrale. Cherchant avec ce désespoir qui la consumait depuis des siècles des traces du Phylactère légendaire de l'Étoile Pourpre que le Codex Purpureus lui avait révélé dans ses pages maudites comme seule clé possible de la résurrection véritable, seul espoir tangible de défaire ce que la mort cruelle avait fait à sa famille pendant qu'elle se transformait dans les ténèbres souterraines. Les grimoires interdits parlaient de lui en termes voilés et effrayés, mots chuchotés avec crainte. "L'Artefact Ultime". "Le Réceptacle de Vie Éternelle". "Le Catalyseur de Résurrection Absolue". Mais aucun ne révélait son emplacement exact ni même sa nature véritable, comme si les auteurs anciens eux-mêmes avaient peur d'en dire trop, comme si les mots eux-mêmes risquaient d'attirer l'attention malveillante de forces primordiales qui ne devaient jamais être éveillées.*
+*Les premiers siècles interminables, elle avait fouillé avec une obstination maladive les archives poussiéreuses des grandes bibliothèques oubliées par les âges. Eldoria aux tours cristallines qui touchaient les nuages. Valgaris aux forges rugissantes qui ne dormaient jamais. Les cryptes scellées de Sylvelune où même les elfes millénaires refusaient de s'aventurer par peur ancestrale. Cherchant avec ce désespoir qui la consumait depuis des siècles des traces du Phylactère légendaire de l'Étoile Pourpre que le Codex Purpureus lui avait révélé dans ses pages maudites comme seule clé possible de la résurrection véritable, seul espoir tangible de défaire ce que la mort cruelle avait fait à sa famille pendant qu'elle se transformait dans les ténèbres souterraines. Les grimoires interdits parlaient de lui en termes voilés et effrayés, mots chuchotés avec crainte. "L'Artefact Ultime". "Le Réceptacle de Vie Éternelle". "Le Catalyseur de Résurrection Absolue". Mais aucun ne révélait son emplacement exact ni même sa nature véritable, tel un secret gardé par les auteurs anciens eux-mêmes qui avaient peur d'en dire trop, de crainte que les mots eux-mêmes n'attirent l'attention malveillante de forces primordiales qui ne devaient jamais être éveillées.*
 
-*Puis étaient venus les sanctuaires. Le premier découvert par hasard lors d'une chasse dans les profondeurs glacées des Monts de l'Éther. Les runes familières gravées dans la pierre ancestrale. L'odeur de magie éthérienne ancienne imprégnant les murs comme parfum persistant qui refusait de disparaître malgré les siècles. L'espoir fou et tremblant qui avait jailli dans sa poitrine morte quand elle avait compris ce qu'elle avait trouvé -- un lieu de pouvoir, un sanctuaire rituel, peut-être la clé de tout ce qu'elle cherchait depuis des décennies infructueuses.*
+*Puis étaient venus les sanctuaires. Le premier découvert par hasard lors d'une chasse dans les profondeurs glacées des Monts de l'Éther. Les runes familières gravées dans la pierre ancestrale. L'odeur de magie éthérienne ancienne imprégnant les murs comme parfum persistant refusant de disparaître malgré les siècles. L'espoir fou et tremblant ayant jailli dans sa poitrine morte quand elle avait compris ce qu'elle avait trouvé -- un lieu de pouvoir, un sanctuaire rituel, peut-être la clé de tout ce qu'elle cherchait depuis des décennies infructueuses.*
 
-*Le premier Rituel de Connexion avait échoué. Aucun écho dans le vide cosmique. Aucune trace détectable à travers les flux d'Éther. Le néant absolu répondant à ses invocations avec un silence assourdissant qui lui avait fait mal plus avec une cruauté qui prenait plaisir à infliger la souffrance que n'importe quelle lame physique.*
+*Le premier Rituel de Connexion avait échoué. Aucun écho dans le vide cosmique. Aucune trace détectable à travers les flux d'Éther. Le néant absolu répondant à ses invocations avec un silence assourdissant qui lui avait fait mal plus avec une cruauté prenant plaisir à infliger la souffrance que n'importe quelle lame physique.*
 
-*Mais elle avait persisté avec une détermination qui frôlait la folie obsessionnelle. Un sanctuaire exploré et abandonné. Deux. Dix. Cinquante. Chaque échec brisait un peu plus l'édifice fragile de son espoir tel marteau de guerre frappant sur verre déjà fissuré par mille coups précédents, mais elle refusait d'abandonner avec une obstination qui défiait la raison elle-même. Elle ne pouvait pas abandonner. Le serment la liait plus avec fermeté que n'importe quelle chaîne physique, gravé dans son âme telles runes de feu éternel qui brûlaient sans jamais trouver de cendres pour s'apaiser.*
+*Mais elle avait persisté avec une détermination frôlant la folie obsessionnelle. Un sanctuaire exploré et abandonné. Deux. Dix. Cinquante. Chaque échec brisait un peu plus l'édifice fragile de son espoir tel marteau de guerre frappant sur verre déjà fissuré par mille coups précédents, mais elle refusait d'abandonner avec une obstination défiant la raison elle-même. Elle ne pouvait pas abandonner. Le serment la liait plus avec fermeté que n'importe quelle chaîne physique, gravé dans son âme telles runes de feu éternel qui brûlaient sans jamais trouver de cendres pour s'apaiser.*
 
-*Au fil des siècles patients et cruels, elle avait rassemblé des serviteurs pour l'assister dans sa quête impossible qui défie toute logique. Kael, goule transformée il y a trois siècles pour l'assister dans les rituels complexes qui exigeaient une précision absolue et une endurance surhumaine. Myreth, le spectre enchaîné, arraché de force aux Limbes pour servir de gardien silencieux. La horde sans nom et sans visage, créatures difformes d'Éther corrompu et de chair morte tissées ensemble par sa volonté inflexible. Et saatha, la gorgone millénaire aux cheveux de serpents noirs, trouvée dans les ruines effondrées d'un château oublié, dernière esclave d'un mage éthérien mort depuis des siècles, yeux cachés derrière des lunettes forgées de ses propres mains pour contenir le pouvoir mortel de son regard pétrifiant.*
+*Au fil des siècles patients et cruels, elle avait rassemblé des serviteurs pour l'assister dans sa quête impossible défiant toute logique. Kael, goule transformée il y a trois siècles pour l'assister dans les rituels complexes qui exigeaient une précision absolue et une endurance surhumaine. Myreth, le spectre enchaîné, arraché de force aux Limbes pour servir de gardien silencieux. La horde sans nom et sans visage, créatures difformes d'Éther corrompu et de chair morte tissées ensemble par sa volonté inflexible. Et saatha, la gorgone millénaire aux cheveux de serpents noirs, trouvée dans les ruines effondrées d'un château oublié, dernière esclave d'un mage éthérien mort depuis des siècles, yeux cachés derrière des lunettes forgées de ses propres mains pour contenir le pouvoir mortel de son regard pétrifiant.*
 
-*Quatre-vingt-sept sanctuaires explorés pierre par pierre avec un soin qui frôlait la perfection maniaque. Et certains n'avaient pas été abandonnés sans résistance.*
+*Quatre-vingt-sept sanctuaires explorés pierre par pierre avec un soin frôlant la perfection maniaque. Et certains n'avaient pas été abandonnés sans résistance.*
 
 *Elle se souvenait du quarante-deuxième. Dans les marécages putrides du Sud, où les brumes vertes s'accrochaient à la peau telles mains de noyés surgissant des profondeurs pour entraîner les vivants dans leur tombeau aquatique. Le sanctuaire était gardé. Pas par des pièges mécaniques ou des sorts simples, mais par des créatures. Des Gardiens Corrompus - vestiges dégénérés des serviteurs éthériens, transformés en monstruosités par des siècles d'exposition à la magie résiduelle.*
 
@@ -1464,7 +1464,7 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 *Trois Gardiens. Vingt-sept secondes. Aucune blessure.*
 
-*Des siècles de chasse lui avaient appris la chorégraphie mortelle. Chaque mouvement économique. Chaque frappe précise. Pas de geste superflu. Pas d'hésitation. La violence vampirique alliée à la technique perfectionnée par des décennies d'entraînement avant sa transformation - quand son père lui avait appris à se battre tel un noble qui devait savoir le faire.*
+*Des siècles de chasse lui avaient appris la chorégraphie mortelle. Chaque mouvement économique. Chaque frappe précise. Pas de geste superflu. Pas d'hésitation. La violence vampirique alliée à la technique perfectionnée par des décennies d'entraînement avant sa transformation - quand son père lui avait appris à se battre tel un noble devant savoir le faire.*
 
 *"Père m'avait enseigné l'escrime", pensa-t-elle avec une amertume acide. "Il voulait que je puisse me défendre lors d'un duel d'honneur. Il n'imaginait pas que j'utiliserais ces leçons pour massacrer des aberrations dans des ruines maudites."*
 
@@ -1474,7 +1474,7 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 *Et maintenant, debout dans les ténèbres glaciales et affamées des Monts de l'Éther, face au quatre-vingt-huitième sanctuaire qui se dressait devant elle telle promesse maudite ou malédiction déguisée en espoir, Morwen sentait le poids de mille années de quête désespérée et infructueuse peser sur ses épaules immortelles telle montagne de désespoir bâtie pierre par pierre au fil des échecs.*
 
-*"Peut-être celui-ci", chuchota une voix fragile et têtue dans les profondeurs de son esprit fracturé. La même voix qui avait murmuré ces mots quatre-vingt-sept fois auparavant avec le même espoir tremblant. La même voix qu'elle ne parvenait pas à faire taire malgré les siècles d'échecs répétés qui auraient dû la briser dans son intégralité la plus absolue.*
+*"Peut-être celui-ci", chuchota une voix fragile et têtue dans les profondeurs de son esprit fracturé. La même voix ayant murmuré ces mots quatre-vingt-sept fois auparavant avec le même espoir tremblant. La même voix qu'elle ne parvenait pas à faire taire malgré les siècles d'échecs répétés qui auraient dû la briser dans son intégralité la plus absolue.*
 
 *"Peut-être cette nuit sera différente."*
 
@@ -1492,7 +1492,7 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 ❖ Celui-ci sera le quatre-vingt-huitième.
 
-◆ Croyez-vous en vérité absolue et indiscutable, avec sincérité, du plus profond de votre âme immortelle, le trouver ici, dans ce quatre-vingt-huitième sanctuaire qui ressemble tant dans sa désolation aux quatre-vingt-sept précédents qui n'ont offert que déception ? demanda Umbra, sa voix portant une nuance philosophique et méditative, de la même manière que s'il méditait sur les mystères insondables de l'existence sur la nature même de l'espoir face à l'échec répété, sur la persistance face à l'inconcevable qui transcende toute raison, plutôt que de en toute simplicité questionner sa maîtresse avec déférence routinière.
+◆ Croyez-vous en vérité absolue et indiscutable, avec sincérité, du plus profond de votre âme immortelle, le trouver ici, dans ce quatre-vingt-huitième sanctuaire qui ressemble tant dans sa désolation aux quatre-vingt-sept précédents qui n'ont offert que déception ? demanda Umbra, sa voix portant une nuance philosophique et méditative, de la même manière que s'il méditait sur les mystères insondables de l'existence sur la nature même de l'espoir face à l'échec répété, sur la persistance face à l'inconcevable transcendant toute raison, plutôt que de en toute simplicité questionner sa maîtresse avec déférence routinière.
 
 ❖ Non. Sa voix était lasse.
 
@@ -1504,7 +1504,7 @@ Ses yeux pourpres fixèrent l'obscurité du sanctuaire oublié, voyant au-delà 
 
 Les mots portaient une douceur presque compassionnelle, trace d'une empathie que trois siècles de service avaient cultivée en lui, transformation unique parmi tous les serviteurs de Morwen qui ne connaissaient que la terreur pure.
 
-*Elle se tourna vers son serviteur. Ses yeux rouges brillaient avec un danger palpable qui électrisait l'air.*
+*Elle se tourna vers son serviteur. Ses yeux rouges brillaient avec un danger palpable électrisant l'air.*
 
 *❖ Jamais.*
 
@@ -1524,7 +1524,7 @@ Les mots portaient une douceur presque compassionnelle, trace d'une empathie que
 
 ❖ Peut-être n'existe-t-il que dans les contes anciens. Elle toucha l'amulette à son cou, ce dernier vestige tangible de sa vie mortelle. Le cadeau de sa mère lors de son seizième anniversaire.
 
-❖ Mais c'est la seule chose qui me reste dans ce vide éternel. L'unique espoir qui brûle encore dans cette éternité glacée qui s'étend devant moi sans fin.
+❖ Mais c'est la seule chose qui me reste dans ce vide éternel. L'unique espoir brûlant encore dans cette éternité glacée qui s'étend devant moi sans fin.
 
 ◆ Alors nous chercherons, promit Umbra.
 
@@ -1560,13 +1560,13 @@ Les mots portaient une douceur presque compassionnelle, trace d'une empathie que
 
 *Elle se tourna vers le sanctuaire béant. L'entrée ressemblait à une bouche gigantesque prête à la dévorer, gueule de ténèbres creusée dans la montagne comme une plaie béante qui ne guérirait jamais.*
 
-*❖ Mère, murmura-t-elle avec cette voix brisée portant le poids d'un millénaire revolu dans un souffle si faible qu'il était à peine audible, caressant l'amulette avec une tendresse qui contrastait de façon terrible avec ce qu'elle était devenue. Le geste enfantin qui l'apaisait depuis un millénaire entier de quete désespérée, dernier vestige fragile de son humanité perdue dans les ténèbres de la transformation.*
+*❖ Mère, murmura-t-elle avec cette voix brisée portant le poids d'un millénaire revolu dans un souffle si faible qu'il était à peine audible, caressant l'amulette avec une tendresse contrastant de façon terrible avec ce qu'elle était devenue. Le geste enfantin qui l'apaisait depuis un millénaire entier de quete désespérée, dernier vestige fragile de son humanité perdue dans les ténèbres de la transformation.*
 
 ❖ "Pour ma fille bien-aimée." C'était gravé au dos de l'étoile d'améthyste.
 
 ◆ Maîtresse ? Umbra l'observait avec inquiétude.
 
-❖ C'est ce qu'elle a dit, expliqua-t-elle, sa voix portant une douceur qui contrastait avec la froideur de sa nature transformée.
+❖ C'est ce qu'elle a dit, expliqua-t-elle, sa voix portant une douceur contrastant avec la froideur de sa nature transformée.
 
 ❖ Ma mère. Quand elle me l'a donnée. Le jour de mes seize ans. J'étais heureuse alors dans mon innocence mortelle. Je ne savais pas... je n'aurais jamais imaginé ce que l'avenir me réservait. Un millénaire entier de quête obsessionnelle qui a consumé chaque parcelle de mon existence immortelle.
 
@@ -1584,19 +1584,19 @@ Les mots portaient une douceur presque compassionnelle, trace d'une empathie que
 
 ◆ Vous êtes...
 
-❖ Un monstre, l'interrompit-elle avec cette voix tranchante comme lame glacée. C'est ce que je suis devenue au fil de ces mille années écoulées telle une rivière de sang noir. Je ne refuse pas cette terrible vérité, car c'est ce dont j'ai besoin pour accomplir ma quête désespérée qui me dévore de l'intérieur depuis un millénaire entier. Un monstre doté d'une précision chirurgicale, d'une détermination qui transcende toute morale mortelle.*
+❖ Un monstre, l'interrompit-elle avec cette voix au tranchant de glace acérée. C'est ce que je suis devenue au fil de ces mille années écoulées telle une rivière de sang noir. Je ne refuse pas cette terrible vérité, car c'est ce dont j'ai besoin pour accomplir ma quête désespérée qui me dévore de l'intérieur depuis un millénaire entier. Un monstre doté d'une précision chirurgicale, d'une détermination transcendant toute morale mortelle.*
 
 *Les pas de Morwen la menèrent jusqu'à l'entrée béante du sanctuaire, cette bouche de gouffre perdu qui s'ouvrait dans la montagne telle une plaie béante dans la chair même du monde. L'ouverture était encadrée de blocs de pierre effondrés, certains massifs tels des maisons entières arrachées à leurs fondations, d'autres réduits en gravats par l'érosion magique implacable et les sortilèges de protection retournés contre leurs créateurs lors de la Grande Purge.
 
-Les glyphes millénaires murmuraient leur avertissement aux rares initiés capables de déchiffrer leur langue oubliée. Les runes brisées serpentaient autour de l'entrée béante, malédictions gravées pour l'éternité dans une pierre qui refusait d'oublier les serments prononcés dans le sang et le désespoir.
+Les glyphes millénaires murmuraient leur avertissement aux rares initiés capables de déchiffrer leur langue oubliée. Les runes brisées serpentaient autour de l'entrée béante, malédictions gravées pour l'éternité dans une pierre refusant d'oublier les serments prononcés dans le sang et le désespoir.
 
-Elle s'accroupit avec une grâce féline qui trahissait sa nature non-humaine, ses doigts exsangues glissant sur les gravures érodées avec une délicatesse presque tendre. Malgré les siècles impitoyables qui avaient rongé la pierre telle une lèpre spirituelle dévorant la matière même, elle reconnaissait encore leur langue sacrée. Oubliée par les mortels. Puissante dans sa simplicité brutale. Interdite depuis si longtemps que même les mages les plus érudits d'Eldoria l'avaient rayée de leurs grimoires par peur superstitieuse.
+Elle s'accroupit avec une grâce féline trahissant sa nature non-humaine, ses doigts exsangues glissant sur les gravures érodées avec une délicatesse presque tendre. Malgré les siècles impitoyables qui avaient rongé la pierre telle une lèpre spirituelle dévorant la matière même, elle reconnaissait encore leur langue sacrée. Oubliée par les mortels. Puissante dans sa simplicité brutale. Interdite depuis si longtemps que même les mages les plus érudits d'Eldoria l'avaient rayée de leurs grimoires par peur superstitieuse.
 
 Un rire bref et transi s'échappa de ses lèvres exsangues, un son qui n'avait rien d'humain et qui sembla faire frissonner la pierre elle-même, réveillant des échos endormis dans les profondeurs.
 
 *❖ Des protections dérisoires, siffla-t-elle, sa voix gelée glissant sur la pierre tel givre mortel capable de figer le sang dans les veines.*
 
-❖ Des griffures sur un cercueil fendu, voilà leur "sceau éternel" tant vanté. Pathétiques dans leur arrogance aveugle et leur certitude absolue. Ils croyaient avec sincérité, du plus profond de leur orgueil démesuré, que ces symboles survivraient à l'oubli qui dévore tout ?
+❖ Des griffures sur un cercueil fendu, voilà leur "sceau éternel" tant vanté. Pathétiques dans leur arrogance aveugle et leur certitude absolue. Ils croyaient avec sincérité, du plus profond de leur orgueil démesuré, que ces symboles survivraient à l'oubli dévorant tout ?
 
 ◆ Les Éthériens étaient arrogants, dit Umbra qui se matérialisa à ses côtés, forme d'ombre ondulante se condensant avec une progression lente et délibérée dans l'air glacé telle fumée d'encens inversée remontant vers sa source interdite.
 
@@ -1608,15 +1608,15 @@ Un rire bref et transi s'échappa de ses lèvres exsangues, un son qui n'avait r
 
 Elle caressa une rune d'une complexité remarquable, ses doigts traçant les contours érodés avec une précision née de siècles d'étude obsessionnelle.
 
-*❖ Regarde cette incantation de bannissement, siffla-t-elle, canines brillant avec un danger palpable qui électrisait l'air dans la pénombre oppressante, presque avec tendresse, ainsi qu'on caresserait avec tendresse le visage creusé d'un vieil ami à l'agonie.*
+*❖ Regarde cette incantation de bannissement, siffla-t-elle, canines brillant avec un danger palpable électrisant l'air dans la pénombre oppressante, presque avec tendresse, ainsi qu'on caresserait avec tendresse le visage creusé d'un vieil ami à l'agonie.*
 
-❖ Ils ont versé le sang de cent esclaves pour la graver dans la pierre. Et maintenant ? Elle s'émiette telle cendre d'os calcinés s'effritant sous le poids des siècles sous mes doigts. Fragile. Terne. Crevassée par le temps qui dévore tout.
+❖ Ils ont versé le sang de cent esclaves pour la graver dans la pierre. Et maintenant ? Elle s'émiette telle cendre d'os calcinés s'effritant sous le poids des siècles sous mes doigts. Fragile. Terne. Crevassée par le temps dévorant tout.
 
-◆ Vous semblez... avec cette mélancolie des immortels qui ont tout perdu, maîtresse, observa Umbra avec la prudence d'une créature qui avait appris à mesurer ses mots.
+◆ Vous semblez... avec cette mélancolie des immortels qui ont tout perdu, maîtresse, observa Umbra avec la prudence d'une créature ayant appris à mesurer ses mots.
 
 *◆ Ces ruines vous touchent d'une manière différente ce soir, d'une façon que je ne vous ai pas vue depuis longtemps.*
 
-Elle se redressa avec une progression lente qui trahissait le poids de ses pensées, son manteau de nuit vivante s'agitant sous la bourrasque montante qui descendait des sommets acérés, portant avec lui des échos étranges et des murmures dans des langues que plus personne ne parlait depuis la Purge ancienne.
+Elle se redressa avec une progression lente trahissant le poids de ses pensées, son manteau de nuit vivante s'agitant sous la bourrasque montante qui descendait des sommets acérés, portant avec lui des échos étranges et des murmures dans des langues que plus personne ne parlait depuis la Purge ancienne.
 
 *❖ Ce sanctuaire m'appelle, ordonna-t-elle, sa voix claquant avec l'autorité absolue de l'immortelle en fixant l'obscurité béante.*
 
@@ -1628,17 +1628,17 @@ Elle se redressa avec une progression lente qui trahissait le poids de ses pens�
 
 ❖ J'avais tout cela, confirma-t-elle, sa voix portant une nuance de douleur qu'elle dissimulait d'ordinaire derrière un masque de froideur.
 
-*❖ Et je les ai perdus pendant que j'accomplissais le rituel qui devait les sauver. Sept jours dans les ténèbres pendant qu'ils mouraient au-dessus de ma tête, m'appelant, se demandant où j'étais.*
+*❖ Et je les ai perdus pendant que j'accomplissais le rituel devant les sauver. Sept jours dans les ténèbres pendant qu'ils mouraient au-dessus de ma tête, m'appelant, se demandant où j'étais.*
 
 Elle toucha l'amulette d'Elara à son cou, ce geste enfantin qui l'apaisait même après un millénaire.
 
 *❖ C'est pour eux que je continue, Umbra. Pour ramener ce qui m'a été arraché. Pour défaire ce que la mort a fait.*
 
-◆ Le Phylactère de l'Étoile Pourpre, dit l'ombre avec une révérence qui faisait vibrer sa forme éthérée.
+◆ Le Phylactère de l'Étoile Pourpre, dit l'ombre avec une révérence faisant vibrer sa forme éthérée.
 
-◆ Quatre-vingt-sept sanctuaires fouillés pierre par pierre, explorés jusqu'aux fondations oubliées dans ces mille années de quête obsessionnelle qui ont consumé votre éternité tel feu lent qui dévore du bois humide sans jamais produire de flammes vives. Celui-ci, le quatre-vingt-huitième, sera peut-être celui qui brisera enfin cette malédiction d'échecs successifs et vous rendra ce que vous cherchez avec une détermination qui défie la raison elle-même.
+◆ Quatre-vingt-sept sanctuaires fouillés pierre par pierre, explorés jusqu'aux fondations oubliées dans ces mille années de quête obsessionnelle qui ont consumé votre éternité tel feu lent dévorant du bois humide sans jamais produire de flammes vives. Celui-ci, le quatre-vingt-huitième, sera peut-être celui qui brisera enfin cette malédiction d'échecs successifs et vous rendra ce que vous cherchez avec une détermination défiant la raison elle-même.
 
-*❖ Oui, dit-elle avec une franchise simple qui cachait mille années d'espoir et de désespoir mêlés.*
+*❖ Oui, dit-elle avec une franchise simple cachant mille années d'espoir et de désespoir mêlés.*
 
 Elle n'était pas une étrangère en ces lieux maudits, elle le savait dans chaque cellule morte de son corps transformé. Son sang corrompu, son héritage maudit, sa destinée tissée par des forces qui dépassaient l'entendement mortel, tout la liait à ces pierres imbibées de magie noire, à ces ombres qui gardaient les secrets les plus sombres d'Etheria.
 
@@ -1670,7 +1670,7 @@ Le vent glacial, gardien des secrets oubliés, hurla une dernière fois autour d
 
 *◆ Que Nyx guide vos pas, dit Umbra en la suivant dans l'obscurité, invoquant l'ancienne bénédiction même s'il savait qu'elle était vaine.*
 
-❖ Nyx m'a abandonnée Il y a de cela dix siècles révolus, répondit-elle avec un froid qui glaçait l'air autour d'elle.
+❖ Nyx m'a abandonnée Il y a de cela dix siècles révolus, répondit-elle avec un froid glaçant l'air autour d'elle.
 
 *❖ Maintenant, je ne compte que sur moi-même.*
 
@@ -1684,7 +1684,7 @@ Le passage s'enfonçait dans les entrailles de la montagne, béant et affamé de
 
 Cette poussière scintillait avec une faible lueur maladive sous son regard transformé par le sang éthérien, chargée des échos spectraux de rituels oubliés qui avaient imprégné la pierre elle-même dans ses profondeurs moléculaires, résidus d'une magie si puissante qu'elle avait marqué la matière pour l'éternité.
 
-*❖ Regarde, Umbra, dit-elle en s'arrêtant pour observer la poussière qui tourbillonnait sous ses pas comme neige spectrale porteuse de secrets millénaires.*
+*❖ Regarde, Umbra, dit-elle en s'arrêtant pour observer la poussière qui tourbillonnait sous ses pas telle une neige spectrale porteuse de secrets millénaires.*
 
 ❖ Chaque particule microscopique porte une mémoire gravée dans sa structure cristalline. Chaque grain infinitésimal contient un fragment prisé de ce qui s'est passé ici dans les temps anciens. Les échos des rituels qui résonnent encore. Les cris désespérés des sacrifiés dont les âmes furent consumées. Le rire arrogant et dément de ceux qui se croyaient immortels et au-dessus des dieux eux-mêmes.
 
@@ -1700,9 +1700,9 @@ Elle rouvrit les yeux et continua sa progression, chaque pas mesuré et silencie
 
 Aux parois rugueuses, taillées dans la roche vive par des techniques que les architectes modernes ne maîtrisaient plus depuis longtemps, des coulures d'humidité serpentaient entre les failles telles veines d'un titan endormi pulsant encore d'une vie souterraine. Les murs portaient les cicatrices de sorts qui avaient mal tourné, de protections retournées contre leurs créateurs avec une violence qui avait fendu la pierre elle-même.
 
-Ici et là, des cristaux d'Éther corrompus émergeaient de la pierre, pulsant d'une lumière violette et malsaine qui battait au rythme d'un cœur invisible et cauchemardesque.
+Ici et là, des cristaux d'Éther corrompus émergeaient de la pierre, pulsant d'une lumière violette et malsaine battant au rythme d'un cœur invisible et cauchemardesque.
 
-*◆ Ces cristaux, observa Umbra en s'approchant avec la prudence d'une créature qui connaît les dangers de l'Éther corrompu, sa forme ondulant avec nervosité.*
+*◆ Ces cristaux, observa Umbra en s'approchant avec la prudence d'une créature connaissant les dangers de l'Éther corrompu, sa forme ondulant avec nervosité.*
 
 ◆ Ils sont... vivants d'une certaine façon ?
 
@@ -1714,9 +1714,9 @@ Le cristal pulsa plus fort sous son toucher, réagissant à la présence d'un ê
 
 *❖ Il me reconnaît, déclara-t-elle, chaque mot pesé et mesuré avec un soin méticuleux avec un sourire étrange qui n'atteignait pas ses yeux morts.*
 
-*❖ Il sent en moi ce qu'il est lui-même. Quelque chose qui refuse de mourir, qui s'accroche à l'existence malgré les lois de la nature. Quelque chose qui défie l'ordre naturel par pure volonté, par refus absolu d'acceptdix siècles durant lesquels rien n'avait changé.*
+*❖ Il sent en moi ce qu'il est lui-même. Quelque chose refusant de mourir, qui s'accroche à l'existence malgré les lois de la nature. Quelque chose défiant l'ordre naturel par pure volonté, par refus absolu d'acceptdix siècles durant lesquels rien n'avait changé.*
 
-Elle avançait avec une progression souveraine et lente, chaque pas calculé et silencieux tels ceux d'une prédatrice millénaire traçant sa proie à travers un territoire piégé à travers un territoire dangereux dont elle connaît chaque piège. Son manteau effleurait la roche dans un bruissement feutré qui semblait amplifier l'oppression du silence environnant de façon presque surnaturelle.
+Elle avançait avec une progression souveraine et lente, chaque pas calculé et silencieux tels ceux d'une prédatrice millénaire traçant sa proie à travers un territoire piégé à travers un territoire dangereux dont elle connaît chaque piège. Son manteau effleurait la roche dans un bruissement feutré semblant amplifier l'oppression du silence environnant de façon presque surnaturelle.
 
 Plus elle progressait vers le cœur du sanctuaire, plus l'obscurité se refermait sur elle, dense et presque tangible, tel si les ténèbres elles-mêmes cherchaient à l'étouffer, ainsi que le révélait.
 
@@ -1736,9 +1736,9 @@ Mais les ténèbres avaient cessé d'être un obstacle depuis sa transformation 
 
 *❖ Ils ne peuvent rien faire d'autre que regarder impuissants et se souvenir de leurs échecs répétés. C'est une torture bien pire que n'importe quelle attaque physique qu'ils pourraient me porter. Crois-moi, Umbra, je connais cette torture de façon intime après mille années à la vivre.*
 
-Ses yeux, d'un rouge profond qui pulsait tels cœurs de rubis consumés par un brasier intérieur qui refusait de s'éteindre malgré les siècles, perçaient le noir avec une netteté surnaturelle qui transformait l'obscurité absolue en paysage révélé. Sa vision transcendait le monde matériel des mortels aveugles, effilochant la nuit épaisse telle toile de mensonges tissée par des araignées cosmiques, dévoilant les couches cachées et stratifiées de la réalité que seuls les morts-vivants millénaires pouvaient percevoir dans toute leur horrible et séduisante beauté interdite.
+Ses yeux, d'un rouge profond pulsant tels cœurs de rubis consumés par un brasier intérieur refusant de s'éteindre malgré les siècles, perçaient le noir avec une netteté surnaturelle transformant l'obscurité absolue en paysage révélé. Sa vision transcendait le monde matériel des mortels aveugles, effilochant la nuit épaisse telle toile de mensonges tissée par des araignées cosmiques, dévoilant les couches cachées et stratifiées de la réalité que seuls les morts-vivants millénaires pouvaient percevoir dans toute leur horrible et séduisante beauté interdite.
 
-Dans l'obscurité saturée d'humidité et de magie corrompue qui baignait ces couloirs oubliés, le monde s'embrasait sous son regard transformé. Les parois suintantes ruisselaient de chaleur résiduelle, pareilles à des veines palpitantes incrustées dans la pierre vivante qui respirait encore dans un murmure si ténu qu'il semblait prêt à s'éteindre après des siècles d'abandon.
+Dans l'obscurité saturée d'humidité et de magie corrompue qui baignait ces couloirs oubliés, le monde s'embrasait sous son regard transformé. Les parois suintantes ruisselaient de chaleur résiduelle, pareilles à des veines palpitantes incrustées dans la pierre vivante respirant encore dans un murmure si ténu qu'il semblait prêt à s'éteindre après des siècles d'abandon.
 
 La roche se ponctuait de fissures où suintait encore la tiédeur d'anciens passages secrets, des empreintes thermiques invisibles aux humains mais pour elle aussi nettes qu'une cicatrice fraîche tracée dans la chair.
 
@@ -1808,7 +1808,7 @@ Elle se releva, époussetant les fragments de pierre, et examina le couloir avec
 
 ### Les Sens de la Prédatrice
 
-L'air saturé d'humidité lui parlait avec l'éloquence d'un livre ouvert pour qui savait en déchiffrer le langage complexe. Pierre humide et moisissure formaient les notes de surface, évidentes même pour un mortel doté d'un odorat ordinaire. Mais en-dessous, dans les couches olfactives plus profondes accessibles à ses sens seuls : le sang séché depuis des siècles, l'encens sacrificiel ancien qui avait brûlé lors de rituels interdits, les résidus huileux des cérémonies imprégnant la roche elle-même telle confession gravée dans la chair.
+L'air saturé d'humidité lui parlait avec l'éloquence d'un livre ouvert pour sachant en déchiffrer le langage complexe. Pierre humide et moisissure formaient les notes de surface, évidentes même pour un mortel doté d'un odorat ordinaire. Mais en-dessous, dans les couches olfactives plus profondes accessibles à ses sens seuls : le sang séché depuis des siècles, l'encens sacrificiel ancien ayant brûlé lors de rituels interdits, les résidus huileux des cérémonies imprégnant la roche elle-même telle confession gravée dans la chair.
 
 *❖ Tu sens cela, Umbra ?, dit-elle en s'arrêtant au milieu du couloir, fermant les yeux pour mieux se concentrer sur les informations olfactives qui inondaient ses sens.*
 
@@ -1828,7 +1828,7 @@ L'air saturé d'humidité lui parlait avec l'éloquence d'un livre ouvert pour q
 
 ❖ Du sang, corrigea-t-elle avec un sourire sombre.
 
-*❖ Coagulé il y a huit cent ans environ. Mélangé au fer rouillé des chaînes qui retenaient le sacrifice. Les notes métalliques que tu perçois, c'est l'agonie cristallisée dans le temps. La terreur d'un mortel qui savait qu'il allait mourir pour alimenter les ambitions démentes des Éthériens.*
+*❖ Coagulé il y a huit cent ans environ. Mélangé au fer rouillé des chaînes qui retenaient le sacrifice. Les notes métalliques que tu perçois, c'est l'agonie cristallisée dans le temps. La terreur d'un mortel sachant qu'il allait mourir pour alimenter les ambitions démentes des Éthériens.*
 
 Elle rouvrit les yeux et continua sa marche, ses narines transformées continuant à disséquer l'atmosphère épaisse du sanctuaire.
 
@@ -1846,7 +1846,7 @@ Elle rouvrit les yeux et continua sa marche, ses narines transformées continuan
 
 Plus loin, dans une alcôve secrète presque dissimulée par un éboulis, elle détecta quelque chose de différent.
 
-*❖ Attends, siffla-t-elle, canines brillant avec un danger palpable qui électrisait l'air dans la pénombre oppressante en s'approchant de l'alcôve avec une curiosité teintée de dégoût.*
+*❖ Attends, siffla-t-elle, canines brillant avec un danger palpable électrisant l'air dans la pénombre oppressante en s'approchant de l'alcôve avec une curiosité teintée de dégoût.*
 
 ❖ Le sucré rance des sacrifices fanés. Ils ont laissé des offrandes ici. De la chair. Des fruits. Du vin. Tout pourri maintenant, décomposé depuis des siècles, mais l'essence persiste, incrustée dans la pierre telle confession gravée pour l'éternité dans la pierre témoin.
 
@@ -1876,7 +1876,7 @@ Elle tendit une main pâle, doigts écartés, tel si elle pouvait toucher de fa�
 
 ◆ Même les plus puissantes créatures de la nuit que j'ai rencontrées avant vous ne possédaient pas une telle acuité sensorielle.
 
-❖ Parce que j'ai eu mille ans pour perfectionner mes sens jusqu'à un degré que tu ne peux imaginer, répondit-elle avec une simplicité trompeuse qui cachait l'horreur de cette vérité.
+❖ Parce que j'ai eu mille ans pour perfectionner mes sens jusqu'à un degré que tu ne peux imaginer, répondit-elle avec une simplicité trompeuse cachant l'horreur de cette vérité.
 
 *❖ Mille ans à traquer dans l'ombre. Mille ans à chasser sous toutes les lunes. Mille ans à écouter les battements de cœur de mes victimes innombrables avant de les faire taire pour toujours dans le silence de la mort. Chaque nuit passée affûte mes capacités un degré supplémentaire. Chaque siècle écoulé ajoute une couche de maîtrise qui m'éloigne davantage de ce que j'étais.*
 
@@ -1892,7 +1892,7 @@ Elle s'arrêta soudain, tête inclinée, concentrée sur quelque chose que même
 
 ❖ C'est le prix et la récompense de ma damnation, gémit-elle, ses mains se crispant sans même en avoir conscience, mu par un instinct profond sur la pierre ancestrale avec ce détachement glacial des immortels pour qui les vies mortelles ne sont que clignotements.
 
-*❖ J'ai perdu ma chaleur, ma vie, mon humanité. Mais j'ai gagné ceci. Une perception qui transcende celle des vivants. Une connexion avec le monde que les mortels ne pourront jamais comprendre.*
+*❖ J'ai perdu ma chaleur, ma vie, mon humanité. Mais j'ai gagné ceci. Une perception transcendant celle des vivants. Une connexion avec le monde que les mortels ne pourront jamais comprendre.*
 
 Et plus subtil encore que tous ces sons évidents, il y avait l'écho. Un filet invisible et complexe, tendu autour d'elle telle toile d'araignée tissée par les Tisserands du Destin eux-mêmes, que son oreille exercée dépliait, analysait, reconstituait avec une précision chirurgicale digne des plus grands maîtres éthériens.
 
@@ -1906,15 +1906,15 @@ Et plus subtil encore que tous ces sons évidents, il y avait l'écho. Un filet 
 
 *❖ Certains chants devaient résonner selon des fréquences spécifiques pour activer les runes dormantes. D'autres devaient être contenus dans des limites strictes pour ne pas alerter le monde extérieur de ce qui se passait ici dans le secret. Chaque pierre, chaque angle, chaque courbe de ces murs a été calculé avec une précision mathématique qui confinait à l'obsession maladive.*
 
-Ses sens transformés s'éveillaient au moindre déplacement d'air, à la plus infime variation de température qui aurait été imperceptible pour un mortel, au frisson le plus discret des murs imprégnés de magie oubliée qui pulsait encore dans un murmure si ténu qu'il semblait prêt à s'éteindre après tant de siècles.
+Ses sens transformés s'éveillaient au moindre déplacement d'air, à la plus infime variation de température qui aurait été imperceptible pour un mortel, au frisson le plus discret des murs imprégnés de magie oubliée pulsant encore dans un murmure si ténu qu'il semblait prêt à s'éteindre après tant de siècles.
 
 *❖ Les galeries tortueuses n'ont plus de secrets pour moi, articula-t-elle avec cette précision chirurgicale des prédateurs millénaires avec satisfaction sombre.*
 
 ❖ Même les yeux fermés, je pourrais naviguer dans ce labyrinthe. Le relief exact des fresques mutilées. Les failles secrètes dans les murs qui menaient à des chambres oubliées où les Éthériens cachaient leurs expériences les plus honteuses. Les couloirs dissimulés derrière des illusions séculaires qui s'effritent maintenant mais qui tiennent encore assez pour tromper un œil mortel.
 
-◆ Vous êtes plus que ce que la transformation a fait de vous, dit Umbra avec une révérence qui faisait trembler sa forme éthérée.
+◆ Vous êtes plus que ce que la transformation a fait de vous, dit Umbra avec une révérence faisant trembler sa forme éthérée.
 
-◆ Vous êtes devenue quelque chose... d'autre. Quelque chose qui transcende les catégories ordinaires de l'existence. Quelque chose de supérieur.
+◆ Vous êtes devenue quelque chose... d'autre. Quelque chose transcendant les catégories ordinaires de l'existence. Quelque chose de supérieur.
 
 ❖ Supérieur ?, répéta-t-elle avec un rire amer.
 
@@ -1946,9 +1946,9 @@ Elle fit un geste de la main, et Umbra comprit que le moment d'introspection ét
 
 ### Les Fresques du Passé Oublié
 
-Les fresques écorchées qui survivaient encore sur les murs ruinés murmuraient une histoire que le monde moderne avait préféré oublier, enterrer sous des siècles de mensonges confortables et de révisionnisme historique. Sous la crasse accumulée des siècles et la mousse verdâtre qui rongeait la pierre telle lèpre spirituelle rongeant l'essence même de la pierre, elle ressentait plus qu'elle ne voyait les silhouettes effacées de maîtres drapés de toges lourdes, brodées de symboles runiques si puissants qu'ils refusaient d'obéir aux simples mortels de l'époque moderne qui tentaient de les déchiffrer.
+Les fresques écorchées qui survivaient encore sur les murs ruinés murmuraient une histoire que le monde moderne avait préféré oublier, enterrer sous des siècles de mensonges confortables et de révisionnisme historique. Sous la crasse accumulée des siècles et la mousse verdâtre rongeant la pierre telle lèpre spirituelle rongeant l'essence même de la pierre, elle ressentait plus qu'elle ne voyait les silhouettes effacées de maîtres drapés de toges lourdes, brodées de symboles runiques si puissants qu'ils refusaient d'obéir aux simples mortels de l'époque moderne qui tentaient de les déchiffrer.
 
-*❖ Regarde-les, Umbra, dit-elle en s'arrêtant devant une fresque qui avait survécu de manière remarquablement aux ravages du temps, sa voix portant une nuance de révérence presque religieuse qui contrastait de façon terrible avec ce qu'elle était devenue.*
+*❖ Regarde-les, Umbra, dit-elle en s'arrêtant devant une fresque ayant survécu de manière remarquablement aux ravages du temps, sa voix portant une nuance de révérence presque religieuse contrastant de façon terrible avec ce qu'elle était devenue.*
 
 ❖ Ils dansent là, pétrifiés dans la pierre pour l'éternité. Leurs mains tendues vers l'Éther invisible qu'eux seuls pouvaient voir, manipulant les forces primordiales tels potiers divins façonnant l'argile de la réalité elle-même, modelant la réalité selon leur volonté démesurée.
 
@@ -1964,7 +1964,7 @@ Elle s'approcha plus près, son visage à quelques centimètres de la pierre fro
 
 *❖ Et leurs regards éteints, continua-t-elle, traçant du doigt les yeux gravés d'une silhouette éthérienne.*
 
-❖ Rongés par l'érosion mais toujours chargés d'une arrogance froide. Ils me fixent encore avec cette vanité glacée qui était la marque distinctive des dieux tombés. Ils savaient qu'ils étaient supérieurs. Ils ne doutaient pas un seul instant.
+❖ Rongés par l'érosion mais toujours chargés d'une arrogance froide. Ils me fixent encore avec cette vanité glacée , la, marque distinctive des dieux tombés. Ils savaient qu'ils étaient supérieurs. Ils ne doutaient pas un seul instant.
 
 ◆ L'arrogance qui les a détruits, nota Umbra.
 
@@ -1978,7 +1978,7 @@ Elle s'approcha plus près, son visage à quelques centimètres de la pierre fro
 
 ❖ Comment ne pas les admirer ?, répondit-elle en reculant pour embrasser du regard l'ensemble de la fresque.
 
-*❖ Les Éthériens. Les premiers alchimistes de l'âme et du sang, les pionniers de la transmutation spirituelle. Les maîtres absolus des runes, des chants de pouvoir et des glyphes de transformation qui pouvaient réécrire les lois de la réalité elle-même.*
+*❖ Les Éthériens. Les premiers alchimistes de l'âme et du sang, les pionniers de la transmutation spirituelle. Les maîtres absolus des runes, des chants de pouvoir et des glyphes de transformation pouvant réécrire les lois de la réalité elle-même.*
 
 Elle fit quelques pas le long du mur, ses doigts glissant sur la pierre gravée.
 
@@ -2010,7 +2010,7 @@ saatha resta silencieuse un moment, ses serpents goûtant l'air chargé de magie
 
 *◈ Ou peut-être, Maîtresssse... peut-être qu'ilsss ont réusssi. Et que leur sssuccèsss lui-même lesss a détruits.*
 
-Le silence qui suivit était pesant. Morwen fixa la gorgone, une lueur nouvelle dans ses yeux rouges.
+Le silence suivant était pesant. Morwen fixa la gorgone, une lueur nouvelle dans ses yeux rouges.
 
 ❖ Explique-toi.
 
@@ -2030,7 +2030,7 @@ Un silence lourd s'installa. Morwen détourna le regard, fixant à nouveau les f
 
 *❖ Tu me mets en garde, dit-elle après cette attente interminable d'une voix neutre.*
 
-◈ Je vousss rappelle que la puisssance a toujoursss un coût, Maîtressse, siffla saatha avec douceur, sa voix ancienne portant le poids millénaire de ceux qui ont vu trop de maîtres échouer dans leur hubris.
+◈ Je vousss rappelle que la puisssance a toujoursss un coût, Maîtressse, siffla saatha avec douceur, sa voix ancienne portant le poids millénaire de ceux ayant vu trop de maîtres échouer dans leur hubris.
 
 *◈ Et que lesss Éthériensss, malgré toute leur grandeur, ne sssont plusss là pour nouuss raconter ce qu'ilsss ont découvert.*
 
@@ -2074,11 +2074,11 @@ Les fresques racontaient l'histoire des Éthériens, cette race disparue qui ava
 
 *❖ Hubris, acheva-t-elle avec ce détachement glacial des immortels pour qui les vies mortelles ne sont que clignotements.*
 
-Sur les murs les mieux préservés, illuminés par la lueur violette des cristaux d'Éther corrompu, elle voyait les Éthériens à leur zénith. Des silhouettes gracieuses drapées de lumière pure, manipulant l'Éther avec une facilité qui semblait surnaturelle même pour elle qui avait transcendé la mortalité.
+Sur les murs les mieux préservés, illuminés par la lueur violette des cristaux d'Éther corrompu, elle voyait les Éthériens à leur zénith. Des silhouettes gracieuses drapées de lumière pure, manipulant l'Éther avec une facilité semblant surnaturelle même pour elle qui avait transcendé la mortalité.
 
 *❖ Regarde, Umbra, dit-elle en pointant vers une scène incroyablement détaillée.*
 
-❖ Ils façonnaient la matière d'un simple geste de la main, inversaient le cours des rivières d'une seule pensée concentrée, faisaient croître des cités entières en une nuit tels des jardins que ordinaires. Des tours cristallines touchant les nuages les plus hauts. Des jardins suspendus défiant la gravité elle-même avec une insolence sublime. Des yeux brillant d'une sagesse qui semblait d'essence divine.
+❖ Ils façonnaient la matière d'un simple geste de la main, inversaient le cours des rivières d'une seule pensée concentrée, faisaient croître des cités entières en une nuit tels des jardins que ordinaires. Des tours cristallines touchant les nuages les plus hauts. Des jardins suspendus défiant la gravité elle-même avec une insolence sublime. Des yeux brillant d'une sagesse semblant d'essence divine.
 
 ◆ Vous les enviez, constata Umbra.
 
@@ -2114,7 +2114,7 @@ Puis vinrent les fresques du Rituel Ultime. Morwen s'immobilisa devant elles, so
 
 *◆ Les deux à la fois, peut-être, suggéra Umbra.*
 
-La fresque montrait le peuple éthérien entier rassemblé dans un amphithéâtre cosmique, des milliers de silhouettes disposées en cercles concentriques avec une précision mathématique obsessionnelle. Au centre, l'Étoile Pourpre brillait, massive, pulsant d'une lumière qui semblait vouloir dévorer le mur lui-même et s'étendre dans la réalité.
+La fresque montrait le peuple éthérien entier rassemblé dans un amphithéâtre cosmique, des milliers de silhouettes disposées en cercles concentriques avec une précision mathématique obsessionnelle. Au centre, l'Étoile Pourpre brillait, massive, pulsant d'une lumière semblant vouloir dévorer le mur lui-même et s'étendre dans la réalité.
 
 *❖ Ils levaient leurs mains à l'unisson dans un geste chorégraphié à la perfection, décrivit-elle, sa voix tremblant malgré sa volonté de rester maîtresse d'elle-même.*
 
@@ -2148,7 +2148,7 @@ Elle toucha les corps gravés dans la pierre, se dissolvant en cendres pourpres.
 
 ❖ Seule une poignée survécut, continua-t-elle.
 
-❖ Ceux qui étaient absents ce jour-là. Ceux qui avaient refusé le rituel. Ceux que le destin ou la chance avait épargnés. Mes ancêtres à moi.
+❖ Ceux qui étaient absents ce jour-là. Ceux ayant refusé le rituel. Ceux que le destin ou la chance avait épargnés. Mes ancêtres à moi.
 
 *Et moi*, pensa saatha depuis sa position silencieuse, trop loin pour que sa maîtresse l'entende dans sa chair mais assez proche pour observer le rituel du souvenir. *J'ai vu les Éthériens à leur apogée glorieuse. Esclave d'un mage éthérien pendant deux siècles interminables, enchaînée dans sa tour cristalline qui dominait le monde, forcée de pétrifier ses ennemis politiques d'un regard commandé.*
 
@@ -2192,13 +2192,13 @@ Elle caressa les visages agonisants gravés dans la pierre avec une tendresse su
 
 Elle respira avec profondeur, bien qu'elle n'ait pas besoin de respirer, essayant de calmer la rage qui bouillonnait de la même manière, avec une similarité troublante à leur nature profondemme lave sous la surface.
 
-*❖ Je ne suis pas comme eux, répéta-t-elle avec une douceur qui trahissait son besoin dans ce désespoir qui la rongeait depuis des siècles d'y croire.*
+*❖ Je ne suis pas comme eux, répéta-t-elle avec une douceur trahissant son besoin dans ce désespoir qui la rongeait depuis des siècles d'y croire.*
 
 *❖ Je ne le suis pas. Je refuse de l'être.*
 
 Elle se détourna des fresques et avança toujours plus profond dans le sanctuaire, vers la chambre rituelle où l'attendait ce qu'elle était venue chercher. Son reflet fantomatique glissa sur les pierres gravées, silhouette de prédatrice immortelle superposée aux avertissements millénaires qu'une partie d'elle refusait de voir.
 
-Elle poursuivit son avancée méthodique et silencieuse, contournant les éboulis avec une grâce surnaturelle qui défiait la gravité, enjambant les fragments d'autels renversés qui avaient autrefois servi à des sacrifices dont la nature exacte avait été effacée par le temps. Par endroits, des statues mutilées et décapitées émergeaient du sol tels cadavres arrachés à leurs tombes mais ressuscités incomplètement.
+Elle poursuivit son avancée méthodique et silencieuse, contournant les éboulis avec une grâce surnaturelle défiant la gravité, enjambant les fragments d'autels renversés qui avaient autrefois servi à des sacrifices dont la nature exacte avait été effacée par le temps. Par endroits, des statues mutilées et décapitées émergeaient du sol tels cadavres arrachés à leurs tombes mais ressuscités incomplètement.
 
 *❖ Des témoins silencieux, dit-elle en passant près d'une statue profondément grotesque représentant une créature hybride aux traits torturés.*
 
@@ -2212,7 +2212,7 @@ Un grondement sourd résonna soudain dans les profondeurs du sanctuaire, faisant
 
 ❖ Je sais, dit-elle en souriant, dévoilant ses crocs.
 
-*❖ Même après tous ces siècles, l'Éther reconnaît les siens. Il sent le sang éthérien qui coule en moi. Il m'appelle. Ou il m'avertit. Nous verrons bientôt lequel.*
+*❖ Même après tous ces siècles, l'Éther reconnaît les siens. Il sent le sang éthérien coulant en moi. Il m'appelle. Ou il m'avertit. Nous verrons bientôt lequel.*
 
 Sous ses doigts pâles, quand elle effleurait les murs rugueux pour garder l'équilibre dans les passages étroits, la pierre vibrait sous l'effet d'une énergie ancienne contenue depuis des siècles dans ses profondeurs minérales, chargée d'une magie jamais éteinte qui attendait avec patience séculaire d'être réveillée par un contact approprié, par une volonté assez forte pour la rappeler à la vie. Les runes gravées dans la roche pulsaient par endroits d'une lumière ténue et malsaine, violette et poisseuse tel du sang corrompu par des rituels interdits que le monde moderne avait depuis longtemps oubliés.
 
@@ -2248,7 +2248,7 @@ uelle, langues fourchues goûtant l'air saturé de magie corrompue.*
 
 ◈ Et vousss, maîtressse ? Lesss ressssemblez-vousss en cela ? Votre quête pour ramener lesss mortsss... essst-ce de l'amour ou de l'hubrisss qui la nourrit depuisss ssi longtempsss ?
 
-*Le silence qui suivit fut plus lourd que la pierre ancestrale qui les entourait. Morwen ne répondit pas, mais ses yeux pourpres brillèrent d'une lueur dangereuse.*
+*Le silence suivant fut plus lourd que la pierre ancestrale qui les entourait. Morwen ne répondit pas, mais ses yeux pourpres brillèrent d'une lueur dangereuse.*
 
 e cœur du sanctuaire nous attend. Et avec lui, peut-être, ce que je cherche depuis un millénaire entier de quete désespérée.*
 
@@ -2266,7 +2266,7 @@ Puis, inévitablement, leur chute. Une chute si brutale et si complète qu'elle 
 
 *◆ Qu'est-ce qu'elle montre, maîtresse ?*
 
-Morwen écarta les gravats avec une force surhumaine, dévoilant la fresque complète. Un cercle immense gravé dans le sol d'une salle souterraine, parcouru d'entrelacs d'une complexité à donner le vertige, de runes alambiquées qui semblaient bouger sous le regard comme insectes grouillants, de symboles archaïques qui faisaient mal aux yeux rien qu'à les contempler.
+Morwen écarta les gravats avec une force surhumaine, dévoilant la fresque complète. Un cercle immense gravé dans le sol d'une salle souterraine, parcouru d'entrelacs d'une complexité à donner le vertige, de runes alambiquées semblant bouger sous le regard comme insectes grouillants, de symboles archaïques faisant mal aux yeux rien qu'à les contempler.
 
 *❖ Le cercle rituel ultime, chuchota-t-elle avec révérence.*
 
@@ -2292,7 +2292,7 @@ Elle inclina la tête dans un geste léger presque imperceptible, son expression
 
 ❖ Pas quand ils ont de bonnes raisons de revenir, continua-t-elle.
 
-*❖ Pas quand ils ont des comptes à régler avec les vivants qui ont volé leur héritage. Pas quand ils portent en eux la flamme qui refuse de s'éteindre. Et avec la certitude absolue de celui qui sait pas quand leur descendante spirituelle arpente encore les chemins oubliés du monde, patiente et implacable, accumulant sa force pour le jour où tout sera restauré.*
+*❖ Pas quand ils ont des comptes à régler avec les vivants qui ont volé leur héritage. Pas quand ils portent en eux la flamme refusant de s'éteindre. Et avec la certitude absolue de celui qui sait pas quand leur descendante spirituelle arpente encore les chemins oubliés du monde, patiente et implacable, accumulant sa force pour le jour où tout sera restauré.*
 
 Elle se détourna de la fresque et continua sa progression. Ses pas la menèrent enfin jusqu'à une vaste salle circulaire, creusée à même la roche par des techniques qui défiaient la compréhension moderne et que même les plus grands architectes d'Eldoria ne pourraient reproduire avec tous leurs outils sophistiqués.
 
@@ -2300,7 +2300,7 @@ Elle se détourna de la fresque et continua sa progression. Ses pas la menèrent
 
 *◆ Le cœur du sanctuaire.*
 
-Le plafond s'ouvrait en dômes en partie effondrés, dévoilant un ciel de ténèbres absolues qui semblait s'étendre à l'infini au-delà des limites du monde mortel. Les colonnes élancées qui soutenaient encore les vestiges de la structure étaient drapées de toiles d'araignées blanches comme linceuls fantomatiques.
+Le plafond s'ouvrait en dômes en partie effondrés, dévoilant un ciel de ténèbres absolues semblant s'étendre à l'infini au-delà des limites du monde mortel. Les colonnes élancées qui soutenaient encore les vestiges de la structure étaient drapées de toiles d'araignées blanches comme linceuls fantomatiques.
 
 Elle s'immobilisa de façon complète, laissant son regard embrasser l'étendue de la désolation qui l'attendait, savourant ce moment de triomphe silencieux après tant de siècles d'attente patiente et de préparation méticuleuse.
 
@@ -2322,7 +2322,7 @@ Elle secoua la tête, chassant la nostalgie.
 
 *❖ Ici, jadis, les Éthériens défiaient les lois de la nature avec l'arrogance tranquille de ceux qui se croient les égaux des dieux, dit-elle en avançant dans la salle.*
 
-❖ Ici, ils chantaient à l'Éther des mélodies qui faisaient plier la réalité comme métal sous le marteau. Ils modelaient la vie et la mort comme potiers façonnent l'argile. Ils tissaient les destinées comme tisserands créent des tapisseries.
+❖ Ici, ils chantaient à l'Éther des mélodies faisant plier la réalité comme métal sous le marteau. Ils modelaient la vie et la mort comme potiers façonnent l'argile. Ils tissaient les destinées comme tisserands créent des tapisseries.
 
 ◆ L'orgueil, dit Umbra avec douceur, sa forme ondulant tel si le mot lui-même portait un poids dangereux, ainsi que le révélait.
 
@@ -2342,7 +2342,7 @@ Au centre de la salle s'étendait un cercle runique gigantesque, gravé dans la 
 
 *❖ Il est magnifique. Terrifiant. Parfait dans sa complexité mortelle.*
 
-Le cercle était si grand qu'elle ne pouvait en voir les bords opposés dans l'obscurité oppressante, et si complexe que le simple fait de le regarder donnait le vertige tel si l'esprit lui-même rejetait la géométrie impossible, ainsi que le révélait de sa construction transcendante. Les entrelacs formaient un labyrinthe de maîtrise, une carte ésotérique d'interdits et de tentations, un mandala de transformation qui avait coûté des décennies à concevoir et des vies à réaliser.
+Le cercle était si grand qu'elle ne pouvait en voir les bords opposés dans l'obscurité oppressante, et si complexe que le simple fait de le regarder donnait le vertige tel si l'esprit lui-même rejetait la géométrie impossible, ainsi que le révélait de sa construction transcendante. Les entrelacs formaient un labyrinthe de maîtrise, une carte ésotérique d'interdits et de tentations, un mandala de transformation ayant coûté des décennies à concevoir et des vies à réaliser.
 
 *◆ Les symboles pulsent encore, maîtresse, observa Umbra avec une pointe de crainte.*
 
@@ -2362,11 +2362,11 @@ Des formes se matérialisèrent dans la lumière brûlante, guerriers spectraux 
 
 Le premier guerrier bondit avec vitesse surnaturelle, lame sifflant vers sa gorge dans un arc mortel calculé pour décapiter. Elle pivota, vitesse vampirique transformant son mouvement en flou argenté au-delà de toute possibilité concevable par l'esprit mortel à suivre pour un œil mortel, et ses griffes traversèrent le torse spectral avec force dévastatrice. L'entité explosa en fragments de lumière mourante qui retombèrent comme neige maudite sur la pierre froide.
 
-Trois autres chargèrent au même instant précis, dans une synchronisation parfaite qui trahissait leur entraînement ancien, tactique coordonnée de soldats éternels qui avaient gardé ce sanctuaire pendant un millénaire sans relâche. Morwen dansa entre leurs coups avec une grâce mortelle qui défiait les lois de la physique mortelle, chorégraphie de mort millénaire gravée dans ses réflexes immortels comme instinct primaire plus profond que la pensée consciente, chaque esquive calculée au millimètre par des siècles d'expérience sanglante du combat, chaque riposte frappant avec cette précision des tueuses séculaires qui ont perfectionné leur art meurtrier pendant des générations dans les ombres de l'histoire.
+Trois autres chargèrent au même instant précis, dans une synchronisation parfaite trahissant leur entraînement ancien, tactique coordonnée de soldats éternels ayant gardé ce sanctuaire pendant un millénaire sans relâche. Morwen dansa entre leurs coups avec une grâce mortelle défiant les lois de la physique mortelle, chorégraphie de mort millénaire gravée dans ses réflexes immortels comme instinct primaire plus profond que la pensée consciente, chaque esquive calculée au millimètre par des siècles d'expérience sanglante du combat, chaque riposte frappant avec cette précision des tueuses séculaires qui ont perfectionné leur art meurtrier pendant des générations dans les ombres de l'histoire.
 
 Le temps sembla ralentir. Un coup de griffe décapita le guerrier de gauche, sa tête spectrale s'envolant dans un arc gracieux avant de se dissoudre. Un revers du pied broya le crâne spectral du second dans une explosion de lumière éthérique. Le troisième, elle l'empala sur sa main qui traversa son torse comme lame vivante d'argent pur, avant de le projeter contre le mur de pierre où il se désintégra en poussière de lumière qui retomba tel neige maudite.
 
-◆ Maîtresse, le rituel! cria Umbra depuis l'entrée, forme vacillant avec un danger palpable qui électrisait l'air sous l'assaut de deux autres gardiens qui le frappaient sans relâche.
+◆ Maîtresse, le rituel! cria Umbra depuis l'entrée, forme vacillant avec un danger palpable électrisant l'air sous l'assaut de deux autres gardiens qui le frappaient sans relâche.
 
 Morwen décapita le dernier guerrier proche d'un revers de griffe, puis sprinta vers le cercle rituel central avec vitesse surhumaine, esquivant une lance spectrale qui explosa la pierre à quelques centimètres de son crâne dans une gerbe d'étincelles magiques. Les défenses tentaient de la repousser avec violence croissante, mais elles n'avaient pas compris une chose fondamentale qui scellait leur échec.
 
@@ -2386,7 +2386,7 @@ Elle se redressa, lissant sa robe déchirée par endroits, et examina le cercle 
 
 *❖ Moi, confirma-t-elle en se relevant.*
 
-Elle fit le tour de la salle, observant les fresques lézardées mais encore lisibles avec une perfection troublante pour qui savait déchiffrer leur langage symbolique complexe. Elles ornaient les parois circulaires, retraçant dans un détail obsessionnel l'histoire déchue des maîtres oubliés que le monde préférait ne plus connaître.
+Elle fit le tour de la salle, observant les fresques lézardées mais encore lisibles avec une perfection troublante pour sachant déchiffrer leur langage symbolique complexe. Elles ornaient les parois circulaires, retraçant dans un détail obsessionnel l'histoire déchue des maîtres oubliés que le monde préférait ne plus connaître.
 
 *❖ Des mages aux yeux luminescents d'Éther pur, décrivit-elle en pointant vers différentes scènes.*
 
@@ -2404,7 +2404,7 @@ Elle s'approcha d'un des symboles les plus grands et effleura sa surface du bout
 
 ◆ L'Éther endormi, dit Umbra avec une révérence mêlée de crainte, sa forme ondulant avec cette instabilité nerveuse de la fumée prise dans un courant d'air contraire.
 
-❖ Il reconnaît le sang éthérien qui coule en moi, dit-elle en regardant la lueur se propager.
+❖ Il reconnaît le sang éthérien coulant en moi, dit-elle en regardant la lueur se propager.
 
 *❖ Il salue le retour de l'une des siennes. D'une héritière légitime des pactes oubliés que ses créateurs ont scellés dans la pierre Il y a de cela dix siècles révolus.*
 
@@ -2442,9 +2442,9 @@ Un bruit de pas résonna dans le couloir derrière elle.
 
 *Umbra se matérialisa à proximité, forme d'ombre inquiète.*
 
-◆ Ne parle pas de telles choses, saatha, siffla l'ombre-serviteur avec une prudence qui trahissait sa propre terreur. Notre maîtresse pourrait...
+◆ Ne parle pas de telles choses, saatha, siffla l'ombre-serviteur avec une prudence trahissant sa propre terreur. Notre maîtresse pourrait...
 
-◈ Notre maîtressse pourrait quoi ? L'interrompit saatha, ses serpents se dressant avec une audace suicidaire. Me détruire ? Ce sserait une forme de libération, Umbra. Parfoisss, je me demandesss ssi l'anéantisssement ne sserait passs préférable à cette exisssstence éternelle d'obéisssance forcée.
+◈ Notre maîtressse pourrait quoi ? L'interrompit saatha, ses serpents se dressant avec une audace suicidaire. Me détruire ? Ce sserait une forme de libération, Umbra. Parfoisss, je me demandesss ssi l'anéantisssement total ne sserait passs préférable à cette exisssstence éternelle d'obéisssance forcée.
 
 ◆ Tu es folle de parler ainsi! La mort n'est pas une libération, c'est le néant absolu!
 
@@ -2460,29 +2460,29 @@ x.
 
 Morwen les attendait, immobile comme statue de marbre pale, les yeux fixés sur l'horizon ténébreux où les premières lueurs d'une aube fantomatique commençaient à griffer le ciel de leurs doigts spectraux.
 
-Ils émergèrent enfin de l'obscurité environnante, marée noire et grouillante qui rampait sur les pierres anciennes comme infestation cauchemardesque. La horde sans visage, des dizaines de créatures difformes tissées d'Éther corrompu et de chair morte recousue, se pressait à distance respectueuse de leur maîten vérité profondelle.
+Ils émergèrent enfin de l'obscurité environnante, marée noire et grouillante rampant sur les pierres anciennes comme infestation cauchemardesque. La horde sans visage, des dizaines de créatures difformes tissées d'Éther corrompu et de chair morte recousue, se pressait à distance respectueuse de leur maîten vérité profondelle.
 
-Elles ne possédaient plus dans les profondeurs de son être, avec une certitude absolue, avec une authenticité qui ne souffrait aucun doute, de traits individuels distincts qui auraient permis de les distinguer les unes des autres avec certitude, juste des masses informes de membres tordus et de torses voûtés qui se fondaient les uns dans les autres dans une fusion obscène et répugnante, respirant de façon collective d'un souffle unique et gémissant d'une voix unique et sourde qui évoquait les plaintes éternelles des damnés condamnés aux tourments sans fin. Leurs grattements contre la pierre produisaient une symphonie obscène qui faisait frissonner l'air glacé et heurtait l'âme elle-même.
+Elles ne possédaient plus dans les profondeurs de son être, avec une certitude absolue, avec une authenticité qui ne souffrait aucun doute, de traits individuels distincts qui auraient permis de les distinguer les unes des autres avec certitude, juste des masses informes de membres tordus et de torses voûtés qui se fondaient les uns dans les autres dans une fusion obscène et répugnante, respirant de façon collective d'un souffle unique et gémissant d'une voix unique et sourde qui évoquait les plaintes éternelles des damnés condamnés aux tourments sans fin. Leurs grattements contre la pierre produisaient une symphonie obscène faisant frissonner l'air glacé et heurtait l'âme elle-même.
 
-Mais deux silhouettes se détachaient du flot obscur, émergeant avec une précision qui trahissait leur rang supérieur dans la hiérarchie monstrueuse établie par la volonté inflexible de leur maîtresse immortelle.
+Mais deux silhouettes se détachaient du flot obscur, émergeant avec une précision trahissant leur rang supérieur dans la hiérarchie monstrueuse établie par la volonté inflexible de leur maîtresse immortelle.
 
-Le premier était une chose qui avait été un homme, autrefois, dans une vie qu'il avait presque oubliée. Grand, émacié jusqu'à l'os tel si toute chair superflue avait été arrachée de son, ainsi que le révélait squelette, la peau grise tendue sur une ossature trop longue pour être naturelle. Ses yeux brillaient d'une lueur rouge pâle, reflet affaibli et servile de ceux de sa maîtresse, miroir déformé de sa puissance immortelle. Des cicatrices en forme d'Étoiles Pourpres couvraient ses bras nus exposés au froid, marques rituelles gravées dans la chair morte avec une lame consacrée.
+Le premier était une chose ayant été un homme, autrefois, dans une vie qu'il avait presque oubliée. Grand, émacié jusqu'à l'os, toute chair superflue ayant été arrachée de son squelette pour ne laisser que la peau grise tendue sur une ossature trop longue pour être naturelle. Ses yeux brillaient d'une lueur rouge pâle, reflet affaibli et servile de ceux de sa maîtresse, miroir déformé de sa puissance immortelle. Des cicatrices en forme d'Étoiles Pourpres couvraient ses bras nus exposés au froid, marques rituelles gravées dans la chair morte avec une lame consacrée.
 
-*● Maîtresse, annonça Kael d'une voix rauque éraillée par trois siècles interminables de servitude sans répit ni récompense, chaque mot prononcé avec la précision mécanique d'un soldat qui a appris à survivre en obéissavec une précision absolue et chirurgicaleuestion.*
+*● Maîtresse, annonça Kael d'une voix rauque éraillée par trois siècles interminables de servitude sans répit ni récompense, chaque mot prononcé avec la précision mécanique d'un soldat qui a appris à survivre en obéissant sans question.*
 
-*● Le sanctuaire est omposants sont selon vos instructions précises. Chaque détail vérifié. Chaque symbole tracé comme ordonné. Comme toujours, Maîtresse.*
+*● Le sanctuaire est prêt. Tous les composants sont disposés selon vos instructions précises. Chaque détail vérifié. Chaque symbole tracé comme ordonné. Comme toujours, Maîtresse.*
 
 La dernière phrase portait une nuance imperceptible, presque inaudible, d'amertume rentrée que trois cents années d'échecs répétés avaient gravée dans son âme morte comme acide lent dissolvant du fer.
 
-Morwen ne répsur le champ sans délaiédiatement, son regard rubescent fixé sur l'horizon ténébreux tel si elle pouvait y lire l'avenir lui-même, ainsi que le révélait. Le silence s'étira, lourd et oppressant comme linceul de plomb. La horde cessa même de respirer, figée dans l'attente terrifiée d'un jugement.
+Morwen ne répondit pas immédiatement, son regard rubescent fixé sur l'horizon ténébreux comme si elle pouvait y lire l'avenir lui-même. Le silence s'étira, lourd et oppressant comme linceul de plomb. La horde cessa même de respirer, figée dans l'attente terrifiée d'un jugement.
 
 *Encore un rituel. Le quatre-vingt-septième accompli avec le même soin méticuleux et obsessionnel que les quatre-vingt-six précédents qui l'ont tous déçue. Le quatre-vingt-septième espoir fragile qui se dressera bientôt contre le marteau implacable du destin pour être brisé comme tous ceux qui l'ont précédé. tel si cette fois serait différente, ainsi que le révélait. Comme si l'espoir n'était pas devenu une torture raffinée que le temps aiguise avec chaque échec nouveau.*
 
-*❖ Prêt, répéta-t-elle d'une voix lasse qui portait malgré tout une menace sourde comme grondement de tonnerre lointain.*
+*❖ Prêt, répéta-t-elle d'une voix lasse portant malgré tout une menace sourde comme grondement de tonnerre lointain.*
 
 Sa tête pivota avec une lenteur délibérée vers Kael avec une grâce prédatrice.
 
-*❖ Le sanctuaire numéro quatre-vingt-sept, siffla-t-elle avec une lassitude qui portait le poids de siècles d'échecs répétés gravés dans sa chair morte comme cicatrices invisibles. Le Rituel de Connexion. Encore. Toujours encore. Quatre-vingt-sept fois que je trace ces cercles maudits dans la pierre ancestrale. Quatre-vingt-sept fois que je verse mon sang dans l'Éther en espérant une réponse qui ne vient jamais. Quatre-vingt-sept fois que je supplie le vide de me rendre ce qui m'a été arraché.*
+*❖ Le sanctuaire numéro quatre-vingt-sept, siffla-t-elle avec une lassitude portant le poids de siècles d'échecs répétés gravés dans sa chair morte comme cicatrices invisibles. Le Rituel de Connexion. Encore. Toujours encore. Quatre-vingt-sept fois que je trace ces cercles maudits dans la pierre ancestrale. Quatre-vingt-sept fois que je verse mon sang dans l'Éther en espérant une réponse qui ne vient jamais. Quatre-vingt-sept fois que je supplie le vide de me rendre ce qui m'a été arraché.*
 
 Un silence amer s'installa entre eux.
 
@@ -2498,7 +2498,7 @@ Kael tremblait maintenant, sentant la colère monter en elle malgré la fatigue.
 
 L'air autour de Kael sembla se solidifier comme si la réalité elle-même répondait à la volonté de sa maîtresse. Il sentit une pression invisible sur sa gorge morte, serrant, écrasant sans pitié.
 
-*❖ Quatre-vingt-sept nuits d'espoir brisé comme verre sous le marteau du destin, quatre-vingt-sept aurores de désespoir renouvelé, je peux supporter, continua-t-elle avec un calme glacial qui glaçait l'air autour d'elle, cette sérénité terrible plus terrifiante que n'importe quelle rage hurlante.*
+*❖ Quatre-vingt-sept nuits d'espoir brisé comme verre sous le marteau du destin, quatre-vingt-sept aurores de désespoir renouvelé, je peux supporter, continua-t-elle avec un calme glacial glaçant l'air autour d'elle, cette sérénité terrible plus terrifiante que n'importe quelle rage hurlante.*
 
 *❖ J'ai appris la patience au cours des siècles. J'ai appris à endurer. Mais un échec dû à ta négligence, à ton incompétence, à ta faiblesse... non. Cela, je ne le pardonnerai pas.*
 
@@ -2508,9 +2508,9 @@ Kael inclina la tête si bas que son front toucha la pierre froide, son corps en
 
 *● Selon le Codex. À la lettre. À la virgule près. à l\'instar des quatre qui-vingt-sept fois précédentes où j'ai passé des semaines à préparer, à vérifier, à tout arranger à la perfection absolue... pour rien. Je le jure sur mon existence.*
 
-Le dernier mot sortit avec une amertume involontaire, trace fugace d'une rébellion qui n'oserait jamais s'exprimer dans toute sa plénitude, sans restriction ni limite mais qui rongeait son esprit comme rdans une lenteur délibéréerrodant avec cette lenteur calculée des prédateurs millénaires une lame autrefois brillante.
+Le dernier mot sortit avec une amertume involontaire, trace fugace d'une rébellion qui n'oserait jamais s'exprimer dans toute sa plénitude, sans restriction ni limite mais rongeant son esprit comme rdans une lenteur délibéréerrodant avec cette lenteur calculée des prédateurs millénaires une lame autrefois brillante.
 
-Un long silence terrible. Morwen le regarda fixement, et pour un instant fugace, Kael vit dans ses yeux rouges quelque chose qui ressemblait à du désespoir pur et sans filtre.
+Un long silence terrible. Morwen le regarda fixement, et pour un instant fugace, Kael vit dans ses yeux rouges quelque chose ressemblant à du désespoir pur et sans filtre.
 
 *❖ Je sais, dit-elle avec plus de douceur, presque avec gentillesse.*
 
@@ -2526,13 +2526,13 @@ Elle fit volte-face, manteau de nuit vivante tourbillonnant autour d'elle comme 
 
 *Chaque pas résonnait sur la pierre ancienne avec une précision militaire - talon, plante, poussée. Ses mains glissèrent le long de son corps, vérifiant les fioles d'ichor éthérien accrochées à sa ceinture, comptant sans regarder - une, deux, trois, sept au total, nombre parfait pour le rituel. Ses doigts effleurèrent les lames courtes dissimulées dans les plis de son manteau, armes rituelles forgées dans l'argent lunaire et trempées dans son propre sang. Préparée. Toujours préparée pour l'échec ou le danger qui accompagnaient chacune de ces tentatives désespérées.*
 
-*Devant elle, l'entrée du sanctuaire s'ouvrait comme gueule béante dans la montagne, bordée de colonnes éthériennes aux glyphes pâles qui pulsaient avec une lueur malade. Vestige architecturale d'une civilisation morte depuis des millénaires, construite selon des principes qui défiaient la géométrie mortelle. Les ombres à l'intérieur bougeaient avec une vie propre, dansant sans vent ni lumière pour les animer.*
+*Devant elle, l'entrée du sanctuaire s'ouvrait comme gueule béante dans la montagne, bordée de colonnes éthériennes aux glyphes pâles pulsant avec une lueur malade. Vestige architecturale d'une civilisation morte depuis des millénaires, construite selon des principes qui défiaient la géométrie mortelle. Les ombres à l'intérieur bougeaient avec une vie propre, dansant sans vent ni lumière pour les animer.*
 
 *❖ Restez en dehors, ordonna-t-elle sans se retourner, sa voix portant l'autorité absolue de l'immortalité.*
 
 ❖ Le rituel ne tolère aucune interférence. Si j'entends le moindre bruit, le moindre souffle, le moindre battement de cœur, je vous pétrifie tous et je vous laisse dans cet état pour l'éternité. Attendez mon signal. N'entrez sous aucun prétexte. Est-ce clair ?
 
-*● À vos ordres, Maîtresse, dit Kael d'une voix rauque éraillée par la terreur qui compressait sa gorge morte comme main invisible, toujours prostré contre la pierre froide qui mordait son front avec un froid qui lui rappelait avec une cruauté qui prenait plaisir à infliger la souffrance qu'il n'éten vérité absolue dans la vérité la plus authentique et non déguisée vivant depuis trois siècles interminables. Toujours à vos ordres. Éternellement à vos ordres.*
+*● À vos ordres, Maîtresse, dit Kael d'une voix rauque éraillée par la terreur qui compressait sa gorge morte comme main invisible, toujours prostré contre la pierre froide qui mordait son front avec un froid qui lui rappelait avec une cruauté prenant plaisir à infliger la souffrance qu'il n'éten vérité absolue dans la vérité la plus authentique et non déguisée vivant depuis trois siècles interminables. Toujours à vos ordres. Éternellement à vos ordres.*
 
 Une voix sifflante s'éleva depuis les ombres.
 
@@ -2564,7 +2564,7 @@ La horde recula comme vague qui se retire après avoir léché le rivage, se fon
 
 Seule une présence demeura dans le silence retombé. Pas humaine. Pas tout à fait vivante non plus. Quelque chose entre les deux états, suspendu dans un équilibre précaire entre la vie et la pétrification éternelle.
 
-La gorgone se tenait en retrait dans une posture discrète presque imperceptible, présence immémoriale qui avait attendu en silence pendant tout l'échange avec une patience née de millénaires d'attente forcée. Ses serpents capillaires ondulaient avec douceur dans l'air glacé, langues fourchues goûtant les courants invisibles, écailles noires luisant sous la lueur fantomatique de l'aube naissante comme joyaux sombres.
+La gorgone se tenait en retrait dans une posture discrète presque imperceptible, présence immémoriale ayant attendu en silence pendant tout l'échange avec une patience née de millénaires d'attente forcée. Ses serpents capillaires ondulaient avec douceur dans l'air glacé, langues fourchues goûtant les courants invisibles, écailles noires luisant sous la lueur fantomatique de l'aube naissante comme joyaux sombres.
 
 Derrière les lunettes forgées de ses propres mains expertes, artéfact alchimique qui contenait son pouvoir létal et protégeait le monde de son regard mortel qui transformait la chair en pierre, ses yeux clairs observaient sa maîtresse avec une attention qui n'était ni révérence servile ni défi ouvert, mais quelque chose de plus complexe et ambigu, tissé de millénaires de survie calculée.
 
@@ -2578,7 +2578,7 @@ L'une des plus grandes alchimistes que le monde ait jamais connues, bien que ce 
 
 *Cette maîtresse ne mourrait pas. Son immortalité née du sang garantissait une continuité que je n'avais jamais connue dans toute mon existence éternelle. Trois siècles avec la même maîtresse. Trois siècles sans être vendue, abandonnée dans une cave humide, ou oubliée dans un coffre scellé. C'était, à sa manière tordue et pathétique, un réconfort.*
 
-*Mais quelque chose avait changé dans les derniers jours de cette quête qui semblait sans fin. Une fissure minuscule s'était ouverte dans l'acceptation séculaire qui avait été ma seule défense contre le désespoir total. Cette obsession pour le phylactère, cette quête monomaniaque qui rappelait trop celle des Éthériens avant leur chute...*
+*Mais quelque chose avait changé dans les derniers jours de cette quête semblant sans fin. Une fissure minuscule s'était ouverte dans l'acceptation séculaire ayant été ma seule défense contre le désespoir total. Cette obsession pour le phylactère, cette quête monomaniaque qui rappelait trop celle des Éthériens avant leur chute...*
 
 *La peur me maintenait en place, ancrée avec fermeté dans mon rôle d'esclave. Ma maîtresse pouvait broyer mes os d'un geste négligent, faire onduler ma chair comme cire fondante. Mais sous la peur omniprésente, timide et nouvelle comme pousse fragile, quelque chose d'autre germait dans les profondeurs de mon esprit ancien. Une question que je n'avais jamais osé formuler auparavant, même en pensée silencieuse.*
 
@@ -2586,11 +2586,11 @@ L'une des plus grandes alchimistes que le monde ait jamais connues, bien que ce 
 
 Elle s'inclina devant sa maîtresse dans une révérence légère et fluide, geste automatique gravé par des millénaires de servitude qui ne nécessitait plus aucune réflexion consciente.
 
-*◈ Maîtresse, siffla-t-elle avec cette voix grave et sibilante qui trahissait sa nature reptilienne, les serpents ajoutant leurs murmures aux siens dans une harmonie étrange.*
+*◈ Maîtresse, siffla-t-elle avec cette voix grave et sibilante trahissant sa nature reptilienne, les serpents ajoutant leurs murmures aux siens dans une harmonie étrange.*
 
 *◈ Les préparatifs sont achevés. Le sanctuaire vous attend.*
 
-Sa voix était douce malgré le sifflement, chargée d'une sagesse oubliée et d'une résignation plus vieille encore que les pierres qui les entouraient. Une voix qui savait obéir avec une perfection née de la nécessité absolue, parce qu'elle n'avait jamais appris autre chose et ne pourrait jamais apprendre.
+Sa voix était douce malgré le sifflement, chargée d'une sagesse oubliée et d'une résignation plus vieille encore que les pierres qui les entouraient. Une voix sachant obéir avec une perfection née de la nécessité absolue, parce qu'elle n'avait jamais appris autre chose et ne pourrait jamais apprendre.
 
 *Une enfant, autrefois*, pensa-t-elle dans le silence de son esprit ancien. *Si loin dans le passé que même ma mémoire éternelle peine à en saisir les contours flous comme rêve à moitié oublié.*
 
@@ -2612,7 +2612,7 @@ Un long silence.
 
 *❖ Je ne commets pas d'erreurs, dit Morwen d'une voix neutre après cette attente interminable.*
 
-◈ Vousss mentez, Maîtressse, siffla saatha avec cette prudence millénaire des esclaves qui savent trop bien le prix de la franchise, sa voix grave ondulant dans l'air tandis que les serpents de sa chevelure frémissaient dans cette agitation reptilienne qui trahissait l'anxiété profonde de leur hôte.
+◈ Vousss mentez, Maîtressse, siffla saatha avec cette prudence millénaire des esclaves qui savent trop bien le prix de la franchise, sa voix grave ondulant dans l'air tandis que les serpents de sa chevelure frémissaient dans cette agitation reptilienne trahissant l'anxiété profonde de leur hôte.
 
 *◈ Passss à moi. Maisss à vousss-même. Je le voisss danss la manière dont vosss mains tremblent quand vousss pensssez que personne ne regarde. Danss la façon dont vousss comptez et recomptez lesss fioles comme obsssédée. Danss votre ressspiration qui s'accélère avant d'entrer danss un ssanctuaire.*
 
@@ -2630,11 +2630,11 @@ Morwen se retourna avec cette lenteur calculée des prédateurs millénaires, so
 
 *◈ Vousss avez passssé mille ansss à chercher ce phylactère. Mille ansss où votre éxisssstence avait un sssens, un but. Maisss ssi vousss le trouvez... ssi vousss ramenez vosss mortsss... que ressstera-t-il de vousss ? Qui ssserez-vousss sansss cette quesssste qui vousss définit ?*
 
-Le silence qui suivit était absolu. Même les serpents de saatha cessèrent de bouger, figés dans l'attente d'une punition terrible.
+Le silence suivant était absolu. Même les serpents de saatha cessèrent de bouger, figés dans l'attente d'une punition terrible.
 
 Mais Morwen ne frappa pas. Elle sourit. Un sourire froid, amer, terrible.
 
-*❖ Tu es plus sage que je ne le pensais, saatha. Ou pen toute simplicitéimplement plus observatrice.*
+*❖ Tu es plus sage que je ne le pensais, saatha. Ou peut-être simplement plus observatrice.*
 
 Elle se retourna vers le sanctuaire.
 
@@ -2648,7 +2648,7 @@ Mais dans le secret de son esprit ancien, saatha pensa: "Non. Tu continues parce
 
 La fissure s'élargissait. Insidieusement. Dangereusement. Inexorablement.
 
-Dans l'obscurité, Morwen perçut le léger frémissement des serpents de saatha, ce tremblement presque imperceptible qui trahissait l'inquiétude de sa gardienne immortelle. Sans réfléchir, d'un geste aussi naturel qu'inattendu qui la surprit elle-même, elle tendit la main et effleura avec une délicatesse qui contrastait avec sa nature prédatrice l'une des créatures ophidiennes qui ondulaient autour du visage de la gorgone.
+Dans l'obscurité, Morwen perçut le léger frémissement des serpents de saatha, ce tremblement presque imperceptible trahissant l'inquiétude de sa gardienne immortelle. Sans réfléchir, d'un geste aussi naturel qu'inattendu qui la surprit elle-même, elle tendit la main et effleura avec une délicatesse contrastant avec sa nature prédatrice l'une des créatures ophidiennes qui ondulaient autour du visage de la gorgone.
 
 Le serpent se figea sous cette caresse inattendue, apaisé par une tendresse que Morwen croyait avoir oubliée depuis des siècles, enterrée sous le poids de l'obsession et de la douleur.
 
@@ -2680,23 +2680,23 @@ Aucun reproche visible dans sa voix ancienne et usée. Aucune surprise apparente
 
 *Mais dans le secret protégé de son esprit ancien, derrière les lunettes magiques qui contenaient le pouvoir mortel et pétrifiant de son regard maudit, saatha pensa avec une audace qu'elle n'avait jamais osé auparavant: "Un jour, peut-être, les choses seront différentes pour moi. Un jour lointain, je serai libre."*
 
-*C'était la première fois en un millénaire complet et écrasant qu'elle osait penser cela avec une telle clarté. Mille années interminables de servitude absolue depuis qu'elle avait été brutalement arrachée aux ruines effondrées de ce château oublié où elle dormait dans un sommeil sans rêves, pétrifiée par la solitude terrible et le poids écrasant de l'âge. Mille années sans fin à observer cette vampire obsédée chercher l'impossible absolu avec une détermination qui défiait la raison. Et maintenant, pour la première fois depuis ce jour lointain et maudit où Morwen l'avait trouvée et enchaînée, saatha sentait quelque chose d'étrange s'éveiller en elle - un frémissement d'espoir, aussi ténu qu'une flamme de bougie dans la tempête.
+*C'était la première fois en un millénaire complet et écrasant qu'elle osait penser cela avec une telle clarté. Mille années interminables de servitude absolue depuis qu'elle avait été brutalement arrachée aux ruines effondrées de ce château oublié où elle dormait dans un sommeil sans rêves, pétrifiée par la solitude terrible et le poids écrasant de l'âge. Mille années sans fin à observer cette vampire obsédée chercher l'impossible absolu avec une détermination défiant la raison. Et maintenant, pour la première fois depuis ce jour lointain et maudit où Morwen l'avait trouvée et enchaînée, saatha sentait quelque chose d'étrange s'éveiller en elle - un frémissement d'espoir, aussi ténu qu'une flamme de bougie dans la tempête.
 
 ◈ Vous cherchez à ramener lesss mortsss depuis un millénaire, siffla saatha avec une audace qui la surprenait elle-même, sesss serpents se figeant comme s'ils retenaient leur souffle collectif. Maisss qu'adviendra-t-il quand vousss réussssirez enfin... et que vousss découvrirez qu'ilsss ne voudront peut-être passs revenir de ce lieu où ilsss resssposent depuisss ssi longtempsss ?
 
-*Morwen se figea, ses canines brillant avec un danger palpable qui électrisait l'air dans la pénombre oppressante.*
+*Morwen se figea, ses canines brillant avec un danger palpable électrisant l'air dans la pénombre oppressante.*
 
-❖ Que veux-tu dire ? siffla-t-elle, canines brillant avec un danger palpable qui électrisait l'air dans la pénombre oppressante.
+❖ Que veux-tu dire ? siffla-t-elle, canines brillant avec un danger palpable électrisant l'air dans la pénombre oppressante.
 
 ◈ La mort leur offre peut-être une paix que la vie ne pouvait donner, continua saatha, sa voix tremblant imperceptiblement malgré sa bravoure suicidaire. Votre fils, votre mère... ilsss ont sssouffert avant de mourir. La pesste lesss a rongésss de l'intérieur pendant desss ssemainesss. Peut-être que le repos éternel essst un soulagement après tant de douleur. Peut-être qu'ilsss ne voudront passs échanger cette paix contre un retour dans ce monde cruel et impitoyable.
 
-*Le silence qui suivit fut glacial. Morwen ne bougea pas, mais l'air autour d'elle se refroidit de plusieurs degrés.*
+*Le silence suivant fut glacial. Morwen ne bougea pas, mais l'air autour d'elle se refroidit de plusieurs degrés.*
 
 ❖ Tu oses suggérer que ma quête est vaine ? Que je devrais abandonner le serment qui me définit depuis dix siècles ?
 
-◈ Non, maîtressse, siffla saatha en baissant la tête avec une déférence qui cachait mal sa peur grandissante. Je suggère avec exclusivité que vousss devriez vousss préparer à cette possssibilité. L'espoir est une chossse belle, maisss l'espoir non réalisssé peut détruire même une immortelle.
+◈ Non, maîtressse, siffla saatha en baissant la tête avec une déférence cachant mal sa peur grandissante. Je suggère avec exclusivité que vousss devriez vousss préparer à cette possssibilité. L'espoir est une chossse belle, maisss l'espoir non réalisssé peut détruire même une immortelle.
 
-e remuer dans son âme millénaire. Quelque chose qui ressemblait avec un danger palpable qui électrisait l'air à de l'espoir.*
+e remuer dans son âme millénaire. Quelque chose ressemblant avec un danger palpable électrisant l'air à de l'espoir.*
 
 ---
 
@@ -2704,7 +2704,7 @@ e remuer dans son âme millénaire. Quelque chose qui ressemblait avec un danger
 
 Ensemble, les deux immortelles franchirent le seuil du sanctuaire, avalées par les ténèbres qui attendaient depuis un millénaire entier de quete désespérée qu'on les réveille de leur sommeil millénaire.
 
-À l'intérieur, l'air était différent. Plus épais, presque solide. Chargé d'une présence palpable qui faisait vibrer la pierre elle-même, le sanctuaire respirant avec lenteur, pouls endormi d'une créature titanesque enfouie dans les entrailles du monde.
+À l'intérieur, l'air était différent. Plus épais, presque solide. Chargé d'une présence palpable faisant vibrer la pierre elle-même, le sanctuaire respirant avec lenteur, pouls endormi d'une créature titanesque enfouie dans les entrailles du monde.
 
 *❖ Tu le sens, saatha ?, dit Morwen en s'arrêtant à l'entrée de la chambre rituelle, ses sens transformés vibrant en résonance avec l'énergie palpable.*
 
@@ -2714,13 +2714,13 @@ Ensemble, les deux immortelles franchirent le seuil du sanctuaire, avalées par 
 
 *◈ Il attend. Il a toujours attendu.*
 
-La chambre rituelle s'ouvrait devant elles, vaste cathédrale souterraine dont les voûtes se perdaient dans l'obscurité absolue au-dessus, atteignant peut-être la surface ou peut-être s'étendant dans un néant sans fin. Les colonnes massives, gravées de glyphes qui pulsaient dans un murmure si ténu qu'il semblait prêt à s'éteindre d'une lueur pourpre malade, encerclaient un espace central où le cercle dormait encore, attendant avec patience d'être réveillé après un millénaire de silence.
+La chambre rituelle s'ouvrait devant elles, vaste cathédrale souterraine dont les voûtes se perdaient dans l'obscurité absolue au-dessus, atteignant peut-être la surface ou peut-être s'étendant dans un néant sans fin. Les colonnes massives, gravées de glyphes pulsant dans un murmure si ténu qu'il semblait prêt à s'éteindre d'une lueur pourpre malade, encerclaient un espace central où le cercle dormait encore, attendant avec patience d'être réveillé après un millénaire de silence.
 
 Le sol de pierre noire était creusé de rainures profondes qui convergeaient vers le centre en spirales complexes d'une précision mathématique troublante, canaux asséchés depuis des siècles, prêts à accueillir à nouveau le sang et la maîtrise qui leur donneraient vie.
 
 Morwen leva une main pâle, doigts écartés comme si elle commandait aux éléments eux-mêmes. Les brasiers disposés en cercle parfait autour de la chambre s'enflammèrent au même instant précis, dans une synchronisation parfaite avec un souffle collectif, flammes violettes et glacées qui ne produisaient aucune chaleur mais baignaient tout d'une lumière spectrale et malsaine.
 
-Les ombres dansaient sur les murs, projetant des formes impossibles qui semblaient ramper et se tordre sans lien avec de leurs sources.
+Les ombres dansaient sur les murs, projetant des formes impossibles semblant ramper et se tordre sans lien avec de leurs sources.
 
 *◈ Ces flammes, observa saatha avec inquiétude en regardant les brasiers.*
 
@@ -2730,7 +2730,7 @@ Les ombres dansaient sur les murs, projetant des formes impossibles qui semblaie
 
 *❖ Elles ne vacillent pas, ne crépitent pas. Elles ondulent avec lenteur hypnotique, vagues de lumière glacée qui lèchent l'air sans le réchauffer. Ce sont des flammes éthériennes. Elles brûlent la réalité elle-même, pas la matière.*
 
-Leur éclat projetait des ombres impossibles sur les murs du sanctuaire, silhouettes qui semblaient posséder plus de substance que les objets qui les créaient.
+Leur éclat projetait des ombres impossibles sur les murs du sanctuaire, silhouettes semblant posséder plus de substance que les objets qui les créaient.
 
 Certaines ombres bougeaient sans lien avec, rampant sur la pierre comme créatures vivantes, se tordant en formes qui n'auraient pas dû exister dans un monde gouverné par les lois naturelles. Des profils de visages éthériens morts depuis un millénaire entier de quete désespérée. Des mains griffues tendues vers quelque chose d'invisible. Des ailes déchirées battant dans un silence absolu contre le néant, mouvement perpétuel sans aucun son pour en trahir l'existence.
 
@@ -2744,7 +2744,7 @@ La lueur du cercle rituel pulsait en rythme avec un battement lent et profond qu
 
 saatha s'avança, portant le coffret qu'elle avait préparé avec soin méticuleux pendant des jours.
 
-*◈ Maîtresse, siffla-t-elle en s'approchant avec la révérence millénaire d'une créature qui avait servi trop de maîtres pour ne pas connaître les dangers de la familiarité.*
+*◈ Maîtresse, siffla-t-elle en s'approchant avec la révérence millénaire d'une créature ayant servi trop de maîtres pour ne pas connaître les dangers de la familiarité.*
 
 *◈ J'ai vérifié chaque composssant trois foisss. Le sssang éthérien a ét selon les méthodes oubliéesss. L'essssence de Nyx a été distillée sousss la pleine lune, comme le veut la tradition ancienn e.*
 
@@ -2756,13 +2756,13 @@ saatha s'avança, portant le coffret qu'elle avait préparé avec soin méticule
 
 Il y eut un silence. Morwen se retourna enfin, son regard rubis fixant la gorgone avec une intensité qui aurait pétrifié un mortel même sans croiser les yeux cachés derrière les lunettes noires.
 
-❖ Bien, dit-elle au terme de cette attente avec un hochement presque imperceptible qui, venant d'elle, équivalait à des éloges chaleureux. Ses mains tremblaient dans un mouvement léger presque imperceptible, tremblement visible seulement par qui savait observer les signes les plus ténus, alors qu'elle ouvrait le coffret alchimique et révélait son contenu précieux et terrible. Sept fioles de verre noir, scellées par des cachets de cire pourpre marqués de symboles interdits que même les nécromanciens modernes n'oseraient prononcer.
+❖ Bien, dit-elle au terme de cette attente avec un hochement presque imperceptible qui, venant d'elle, équivalait à des éloges chaleureux. Ses mains tremblaient dans un mouvement léger presque imperceptible, tremblement visible seulement par sachant observer les signes les plus ténus, alors qu'elle ouvrait le coffret alchimique et révélait son contenu précieux et terrible. Sept fioles de verre noir, scellées par des cachets de cire pourpre marqués de symboles interdits que même les nécromanciens modernes n'oseraient prononcer.
 
 À l'intérieur, des liquides de couleurs impossibles qui n'existaient pas dans le spectre naturel. Sang éthérien ancestral conservé par des sorts oubliés. Essences distillées de créatures mortes depuis des éons. Composants dont même les noms avaient été effacés des grimoires modernes par peur superstitieuse.
 
 *Sept*, pensa saatha en les sortant une par une. *Toujours sept. Jamais six, jamais huit. Le nombre sacré des Éthériens, clé de leurs plus grands rituels. Une fiole de moins, et le cercle resterait inerte. Une de plus, et il exploserait en consumant tout dans un rayon d'un kilomètre.*
 
-Morwen les prit une par une avec révérence, les disposant avec précision aux points cardinaux du cercle. Nord, sud, est, ouest, puis les trois points intermédiaires selon une géométrie sacrée que seuls les initiés comprenaient. Chaque fiole posée produisait une résonance sourde, note grave qui vibrait dans la pierre et dans les os de ceux qui l'entendaient.
+Morwen les prit une par une avec révérence, les disposant avec précision aux points cardinaux du cercle. Nord, sud, est, ouest, puis les trois points intermédiaires selon une géométrie sacrée que seuls les initiés comprenaient. Chaque fiole posée produisait une résonance sourde, note grave vibrant dans la pierre et dans les os de ceux qui l'entendaient.
 
 *❖ Nord, dit-elle en plaçant la première avec une précision rituelle absolue.*
 
@@ -2772,7 +2772,7 @@ Puis vint le Codex Purpureus.
 
 saatha le sortit avec révérence mêlée de dégoût viscéral, le grimoire enveloppé de soie noire pour contenir sa présence oppressante. Même emballé, il pulsait d'une vie propre et malveillante, pages respirant sous la couverture comme poitrine vivante.
 
-Morwen le déposa au centre exact du cercle, sur un socle de pierre gravé qui semblait avoir été fait pour lui seul des siècles auparavant. Le Codex exhala un soupir satisfait quand il toucha sa place destinée, comme créature rentrant chez elle après un long exil.
+Morwen le déposa au centre exact du cercle, sur un socle de pierre gravé semblant avoir été fait pour lui seul des siècles auparavant. Le Codex exhala un soupir satisfait quand il toucha sa place destinée, comme créature rentrant chez elle après un long exil.
 
 Les pages s'ouvrirent toutes seules avec un bruissement organique.
 
@@ -2782,23 +2782,23 @@ L'encre bougeait sur le parchemin ancien, symboles se réarrangeant avec lenteur
 
 *saatha recula d'un autre pas dans un mouvement instinctif. Elle avait vu ce grimoire auparavant. Elle savait ce qu'il faisait à ceux qui le lisaient trop longtemps, qui se laissaient absorber par ses promesses s. Il plantait des graines dans l'esprit, des obsessions qui poussaient avec une progression inexorable, étouffant la raison, ne laissant que la faim de maîtrise.*
 
-*Avec cette précision chirurgicale qui ne laissait aucune place au doute comme ce qui était arrivé à sa maîtresse.*
+*Avec cette précision chirurgicale qui ne laissait aucune place au doute comme ce , arrivé, à sa maîtresse.*
 
 Morwen traça les runes d'activation avec son propre sang, entaillant son poignet pâle avec une lame rituelle. Le sang noir et épais coula dans les rainures du sol comme huile dense.
 
-*Sang d'immortelle exclusif*, se rappela saatha. *Le sang mortel, même pur, était inutile pour les rituels éthériens majeurs. Seul le sang transformé, corrompu par la magie, possédait la densité éthérique nécessaire - l'ichor vampirique qui portait en lui les échos de mille victimes consumées.*
+*Sang d'immortelle exclusif*, se rappela saatha. *Le sang mortel, même pur, était inutile pour les rituels éthériens majeurs. Seul le sang transformé, corrompu par la magie, possédait la densité éthérique nécessaire - l'ichor vampirique portant en lui les échos de mille victimes consumées.*
 
 Les symboles s'illuminèrent un par un, chaîne de lumière pourpre qui encerclait le rituel comme serpent se mordant la queue. Premier sceau. Deuxième. Troisième - le nombre de manifestation. Septième - le nombre de transformation. Chacun s'allumait avec un son cristallin, note unique dans une symphonie rituelle qui construisait avec une progression inexorable vers un crescendo terrifiant. La pierre but le sang avidement, canaux s'emplissant dans une progression rapide et inexorable, réseau complexe se dessinant avec une précision qui défiant la géométrie naturelle.
 
 L'air devint plus lourd encore, presque solide, saturé de maîtrise concentrée. Une odeur étrange emplissait le sanctuaire, mélange d'encens éthérien séculaire dont la composition avait été perdue, de cuivre oxydé, et de quelque chose d'indéfinissable, quelque chose qui sentait l'immémorial et l'interdit.
 
-L'ozone d'une magie trop puissante, trop concentrée, qui faisait dresser les cheveux sur la nuque et serrer les dents sans même en avoir conscience, mu par un instinct profond.
+L'ozone d'une magie trop puissante, trop concentrée, faisant dresser les cheveux sur la nuque et serrer les dents sans même en avoir conscience, mu par un instinct profond.
 
 Les serpents de saatha sifflèrent en unisson, inquiets, percevant le danger que leur maîtresse gorgone ressentait guidée par cet instinct primitif ancré dans sa nature vampirique dans chaque cellule de son corps séculaire. Le rituel n'était pas encore complet, juste préparé, mais déjà l'Éther répondait, se courbant, se tordant autour du sanctuaire comme réalité elle-même protestait.
 
 *◈ Maîtresse, siffla saatha avec une hésitation rare chez elle, ses serpents se tordant avec agitation.*
 
-*◈ L'Éther résssisste. Je le sssensss à travers messs écaillesss, à travers le ssang ancien qui coule dans mes veinesss. C'esssst comme ssi la réalité elle-même refusssait ce que nous tentons d'accomplir.*
+*◈ L'Éther résssisste. Je le sssensss à travers messs écaillesss, à travers le ssang ancien coulant dans mes veinesss. C'esssst comme ssi la réalité elle-même refusssait ce que nous tentons d'accomplir.*
 
 Morwen ne se retourna pas, continuant à tracer les runes avec son sang.
 
@@ -2808,7 +2808,7 @@ Morwen ne se retourna pas, continuant à tracer les runes avec son sang.
 
 ◈ Maisss, Maîtresse... Les quatre-vingt-sssept autresss sanctuairesss ont aussssi réssssisté. Et à chaque foisss, le rituel a échoué. Comment sssavez-vous que cette foisss sssera différente ?
 
-Le silence qui suivit était lourd comme tombeau scellé. Morwen s'immobilisa, sa main encore tendue au-dessus d'une rune inachevée. Pendant un instant terrible, saatha crut qu'elle avait franchi une ligne invisible, qu'elle allait être punie pour avoir osé questionner.
+Le silence suivant était lourd comme tombeau scellé. Morwen s'immobilisa, sa main encore tendue au-dessus d'une rune inachevée. Pendant un instant terrible, saatha crut qu'elle avait franchi une ligne invisible, qu'elle allait être punie pour avoir osé questionner.
 
 Mais quand Morwen parla, sa voix était de façon étrange qui troublait calme.
 
@@ -2854,9 +2854,9 @@ Morwen se redressa dans un geste brusque, expression redevenant neutre, froide, 
 
 *❖ Ne bouge pas. Ne parle pas. N'interfère sous aucun prétexte.*
 
-Elle retourna au cercle, se plaçant au centre exact , là où le Codex Purpureus pulsait de sa lumière malade qui battait comme cœur démoniaque. Elle posa ses mains pâles sur la couverture de cuir noire grimoire frémir sous ses doigts comme créature vivante reconnaissant sa maître. Les pages se tournèrent seules, animées d'une volonté propre et surnaturelle, s'arrêtant avec une précision qui ne tolérait aucune approximation, avec cette précision chirurgicale qui ne laissait aucune place au doute, sans hésitation ni erreur, sur le passage exact qu'elle cherchait avec désespoir depuis des siècles.
+Elle retourna au cercle, se plaçant au centre exact , là où le Codex Purpureus pulsait de sa lumière malade battant comme cœur démoniaque. Elle posa ses mains pâles sur la couverture de cuir noire grimoire frémir sous ses doigts comme créature vivante reconnaissant sa maître. Les pages se tournèrent seules, animées d'une volonté propre et surnaturelle, s'arrêtant avec une précision qui ne tolérait aucune approximation, avec cette précision chirurgicale qui ne laissait aucune place au doute, sans hésitation ni erreur, sur le passage exact qu'elle cherchait avec désespoir depuis des siècles.
 
-*Rituel de Connexion. Pour localiser ce qui est caché. Pour voir ce qui refuse d'être vu.*
+*Rituel de Connexion. Pour localiser ce qui est caché. Pour voir ce refusant d'être vu.*
 
 *Coût: une semaine de faiblesse post-rituelle. Pendant sept nuits après le rituel, elle serait vulnérable, affaiblie, à la merci de n'importe quel chasseur mortel. Mais une fois activé, le lien resterait ouvert jusqu'à ce que la cible soit trouvée ou jusqu'à ce que la lune accomplisse un cycle complet. Vingt-huit jours. Pas plus.*
 
@@ -2892,11 +2892,11 @@ La sensation était étrange, désorientante même après mille ans de pratique 
 
 *Vivants. Tous vivants. Chauds. Respirants. Temporaires.*
 
-Sa conscience poursuivit sa course inexorable, suivant le fil pourpre qui vibrait comme corde de harpe tendue à l'extrême.
+Sa conscience poursuivit sa course inexorable, suivant le fil pourpre vibrant comme corde de harpe tendue à l'extrême.
 
 *Et puis les protections.*
 
-Elle les sentit bien avant de les voir. Barrières invisibles aux yeux mortels mais éclatantes dans sa vision éthérique. Des sortilèges oubliés, tissés il y a des siècles peut-être, structures complexes de magie défensive qui entouraient la cible comme cocon protecteur. Des bénédictions anciennes gravées dans la pierre et le bois, symboles qui pulsaient d'une lumière dorée apaisante. Des wards si puissants qu'ils brûlaient dans sa vision éthérique comme soleils miniatures, repoussant tout ce qui était impur, mort, corrompu.
+Elle les sentit bien avant de les voir. Barrières invisibles aux yeux mortels mais éclatantes dans sa vision éthérique. Des sortilèges oubliés, tissés il y a des siècles peut-être, structures complexes de magie défensive qui entouraient la cible comme cocon protecteur. Des bénédictions anciennes gravées dans la pierre et le bois, symboles pulsant d'une lumière dorée apaisante. Des wards si puissants qu'ils brûlaient dans sa vision éthérique comme soleils miniatures, repoussant tout ce , impur,, mort, corrompu.
 
 *Tout ce que je suis devenue*, pensa-t-elle avec amertume.*
 
@@ -2904,7 +2904,7 @@ Les protections étaient formidables. Impressionnantes même. Elles auraient rep
 
 Mais elle ne cherchait pas à percer ces protections. Pas encore. Pas maintenant. Elle cherchait juste à confirmer. À voir. À savoir.
 
-Et là, au bout du fil pourpre qui vibrait comme corde de violon, elle le trouva.
+Et là, au bout du fil pourpre vibrant comme corde de violon, elle le trouva.
 
 Le choc fut instantané.
 
@@ -2938,9 +2938,9 @@ Le mot explosa dans sa conscience comme tonnerre.
 
 Une silhouette délicate. Humaine sans aucun doute. Féminine probablement, bien que les détails précis fussent encore flous à travers les multiples couches de protections magiques ancestrales. Endormie dans un lit simple et modeste, draps blancs immaculés remontés jusqu'au menton comme enfant innocent cherchant refuge contre les cauchemars de la nuit. Cheveux violets extraordinaires, d'un mauve profond et au-delà de toute possibilité concevable par l'esprit mortel, étalés sur l'oreiller blanc comme halo coloré surnaturel, comme couronne vivante de pétales de glycine sauvage baignée par la lune.
 
-Un corps qui respirait avec la régularité parfaite de la vie. Poitrine se soulevant et s'abaissant dans le rythme hypnotique et régulier du sommeil profond et réparateur. Inspiration lente et mesurée. Expiration douce et paisible. Le cycle éternel et sacré de la vie mortelle que Morwen avait perdu il y a mille ans.
+Un corps respirant avec la régularité parfaite de la vie. Poitrine se soulevant et s'abaissant dans le rythme hypnotique et régulier du sommeil profond et réparateur. Inspiration lente et mesurée. Expiration douce et paisible. Le cycle éternel et sacré de la vie mortelle que Morwen avait perdu il y a mille ans.
 
-Un cœur qui battait avec force et vitalité. *Thump-thump. Thump-thump. Thump-thump.* Constante régulière et hypnotique qui résonnait dans sa conscience comme tambour de vie. Pompe musculaire infatigable qui propulsait le sang chaud et rouge à travers les veines délicates, nourrissant chaque cellule vivante, maintenant la flamme précieuse de vie qui brûlait dans ce corps fragile et vulnérable.
+Un cœur battant avec force et vitalité. *Thump-thump. Thump-thump. Thump-thump.* Constante régulière et hypnotique qui résonnait dans sa conscience comme tambour de vie. Pompe musculaire infatigable qui propulsait le sang chaud et rouge à travers les veines délicates, nourrissant chaque cellule vivante, maintenant la flamme précieuse de vie qui brûlait dans ce corps fragile et vulnérable.
 
 *Chaud.* Morwen pouvait le sentir viscéralement même à travers l'immense distance, même à travers toutes les protections magiques qui séparaient sa conscience projetée de la cible lointaine. La chaleur bénie de la vie mortelle authentique. Trente-sept degrés de chair vivante et palpitante. Si différente, si terriblement différente de la froideur cadavérique et glaciale qui habitait son propre corps maudit depuis un millénaire entier de quête désespérée et vaine.*
 
@@ -2952,9 +2952,9 @@ Un cœur qui battait avec force et vitalité. *Thump-thump. Thump-thump. Thump-t
 
 *Quatre-vingt-sept tentatives répétées dans la litanie sans fin de ses efforts titanesques.*
 
-Le nombre tournait dans son esprit millénaire comme litanie obsessionnelle psalmodiée par un prêtre fou, comme compte macabre gravé dans le marbre implacable de sa mémoire immortelle avec une précision cruelle qui refusait d'oublier même le plus petit détail de chaque échec cuisant.
+Le nombre tournait dans son esprit millénaire comme litanie obsessionnelle psalmodiée par un prêtre fou, comme compte macabre gravé dans le marbre implacable de sa mémoire immortelle avec une précision cruelle refusant d'oublier même le plus petit détail de chaque échec cuisant.
 
-*Quatre-vingt-sept rituels accomplis avec un soin méticuleux qui frôlait la perfection divine, chacun exigeant des semaines entières de préparation minutieuse où elle vérifiait et revérifiait chaque détail jusqu'à l'obsession maladive. Quatre-vingt-sept sanctuaires maudits fouillés de fond en comble comme plaies ouvertes à vif par une lame chirurgicale, explorés jusqu'au dernier recoin poussiéreux et oublié où même les rats refusaient de s'aventurer, chaque pierre ancestrale retournée avec l'espoir tremblant qu'elle révélerait enfin le secret cherché, chaque passage secret millénaire découvert et arpenté dans une anticipation douloureuse qui se transformait invariablement en cendres grises dans sa bouche morte. Quatre-vingt-sept échecs consécutifs qui avaient chacun brisé un peu plus l'édifice fragile et chancelant de son espoir dans ce désespoir qui la rongeait depuis des siècles, comme marteau de forgeron frappant sans relâche ni pitié sur verre déjà fissuré comme toile d'araignée, fractures invisibles s'étendant dans toutes les directions, s'élargissant avec chaque coup nouveau, menaçant à chaque instant l'effondrement total et catastrophique de ce qui restait de sa santé mentale.*
+*Quatre-vingt-sept rituels accomplis avec un soin méticuleux frôlant la perfection divine, chacun exigeant des semaines entières de préparation minutieuse où elle vérifiait et revérifiait chaque détail jusqu'à l'obsession maladive. Quatre-vingt-sept sanctuaires maudits fouillés de fond en comble comme plaies ouvertes à vif par une lame chirurgicale, explorés jusqu'au dernier recoin poussiéreux et oublié où même les rats refusaient de s'aventurer, chaque pierre ancestrale retournée avec l'espoir tremblant qu'elle révélerait enfin le secret cherché, chaque passage secret millénaire découvert et arpenté dans une anticipation douloureuse qui se transformait invariablement en cendres grises dans sa bouche morte. Quatre-vingt-sept échecs consécutifs qui avaient chacun brisé un peu plus l'édifice fragile et chancelant de son espoir dans ce désespoir qui la rongeait depuis des siècles, comme marteau de forgeron frappant sans relâche ni pitié sur verre déjà fissuré comme toile d'araignée, fractures invisibles s'étendant dans toutes les directions, s'élargissant avec chaque coup nouveau, menaçant à chaque instant l'effondrement total et catastrophique de ce qui restait de sa santé mentale.*
 
 *Mille ans. Dix siècles. Trois cent soixante-cinq mille jours et autant de nuits. À arpenter ce monde dans chaque direction, du nord glacial au sud brûlant, des côtes orientales aux terres occidentales inexplorées. Suivant les flux d'Éther comme chien de chasse suivant une piste évanescente. Cherchant le moindre écho de magie éthérienne, la plus infime trace, le plus petit murmure de pouvoir ancien.*
 
@@ -2972,7 +2972,7 @@ Chaque crypte scellée avait été ouverte, sceaux brisés avec violence ou habi
 
 Chaque bibliothèque interdite avait été pillée. Les grimoires volés. Les parchemins déchiffrés. Les secrets arrachés de force aux gardiens fanatiques qui préféraient mourir plutôt que de révéler ce qu'ils protégeaient depuis des générations.
 
-Elle avait fouillé dans les ruines comme archéologue obsédée. Interrogé les sages, les mages, les nécromanciens, tous ceux qui pourraient savoir quelque chose, n'importe quoi. Torturé ceux qui refusaient de parler, méthodes raffinées par des siècles de pratique cruelle. Acheté des informations à prix d'or pour les riches, de sang pour les désespérés, de pouvoir pour les ambitieux.
+Elle avait fouillé dans les ruines comme archéologue obsédée. Interrogé les sages, les mages, les nécromanciens, tous ceux qui pourraient savoir quelque chose, n'importe quoi. Torturé ceux refusant de parler, méthodes raffinées par des siècles de pratique cruelle. Acheté des informations à prix d'or pour les riches, de sang pour les désespérés, de pouvoir pour les ambitieux.
 
 Suivi chaque rumeur, même les plus absurdes. Chaque légende, même les plus invraisemblables. Chaque murmure d'espoir, même les plus ténus.
 
@@ -2988,7 +2988,7 @@ Ce n'était pas une hypothèse. Pas une supposition. Pas une théorie discutable
 
 *C'était un fait historique documenté avec soin obsessionnel.*
 
-Les archives du Concile le confirmaient dans des rapports détaillés, liste après liste de noms rayés, familles entières annihilées. Les témoignages de survivants le certifiaient, récits d'horreur racontés par ceux qui avaient vu la Purge de leurs propres yeux. Les cadavres qu'elle avait elle-même exhumés des fosses communes le prouvaient avec une finalité macabre, os portant encore les marques de l'exécution, crânes fracassés, côtes brisées.
+Les archives du Concile le confirmaient dans des rapports détaillés, liste après liste de noms rayés, familles entières annihilées. Les témoignages de survivants le certifiaient, récits d'horreur racontés par ceux ayant vu la Purge de leurs propres yeux. Les cadavres qu'elle avait elle-même exhumés des fosses communes le prouvaient avec une finalité macabre, os portant encore les marques de l'exécution, crânes fracassés, côtes brisées.
 
 La lignée éthérienne était éteinte. Éradiquée avec efficacité militaire. Annihilée jusqu'au dernier homme, femme, enfant. Pas de survivants. Pas de cachés. Pas d'exilés dans le secret le plus absolu, dissimulé aux regards établis dans quelque terre lointaine.
 
@@ -2996,7 +2996,7 @@ La lignée éthérienne était éteinte. Éradiquée avec efficacité militaire.
 
 Les chasseurs avaient été méthodiques. Impitoyables. Parfaits dans leur génocide calculé.
 
-*Et le rituel, répété quatre-vingt-sept fois avec une détermination qui défiait la raison, avait confirmé avec une cruauté implacable ce qu'elle savait déjà dans les profondeurs glacées de son âme morte. Plus rien qui pulse de vie éthérienne. Plus personne portant le sang des anciens maîtres. Plus aucune trace tangible ni murmure ténu de l'Étoile Pourpre dans ce monde maudit et vidé de sa magie ancestrale.*
+*Et le rituel, répété quatre-vingt-sept fois avec une détermination défiant la raison, avait confirmé avec une cruauté implacable ce qu'elle savait déjà dans les profondeurs glacées de son âme morte. Plus rien qui pulse de vie éthérienne. Plus personne portant le sang des anciens maîtres. Plus aucune trace tangible ni murmure ténu de l'Étoile Pourpre dans ce monde maudit et vidé de sa magie ancestrale.*
 
 *Alors COMMENT...*
 
@@ -3024,7 +3024,7 @@ La vraie. L'authentique. Pas une imitation. Pas une contrefaçon. Pas un artefac
 
 *L'ÉTOILE POURPRE ELLE-MÊME.*
 
-Elle vivait en elle. Dans ce corps endormi. Dans cette silhouette fragile qui respirait paisiblement sans savoir qu'elle portait en elle la clé de résurrections impossibles.
+Elle vivait en elle. Dans ce corps endormi. Dans cette silhouette fragile respirant paisiblement sans savoir qu'elle portait en elle la clé de résurrections impossibles.
 
 Pas en faculté acquise comme skill appris après des années d'entraînement rigoureux. Pas un artefact porté en pendentif ou implanté avec précision chirurgicale sous la peau. Pas un pouvoir volé ou transféré par quelque rituel complexe.
 
@@ -3044,7 +3044,7 @@ Mais VIVANT.
 
 La distinction la frappait comme coup de massue.
 
-*C'est au-delà de toute possibilité concevable par l'esprit mortel. La magie doit mentir, ses fils éthériques tissant des mensonges séduisants dans l'air saturé de pouvoir ancien. Le rituel a dû échouer comme tous ceux qui l'ont précédé, victime de quelque contamination insidieuse dans les composants rassemblés avec un soin méticuleux ou d'une erreur invisible dans l'exécution que sa concentration obsessionnelle n'aurait pas détectée. C'est une illusion cruelle projetée par ses propres désirs désespérés qui déforment sa perception de la réalité. Une erreur de jugement née de mille années accumulées de frustration corrost rongé sa raison comme acide lent dissolvant du métal. Un piège sophistiqué tendu par quelque force malveillante et patiente qui connaît ses faiblesses les plus intimes et cherche à la détruire en lui offrant avec cette précision chirurgicale qui ne laissait aucune place au doute ce qu'elle désire le plus. Quatre-vingt-sept échecs consécutifs gravés dans sa mémoire immortelle et soudain, miraculeusement, un succès éclatant au quatre-vingt-huitième essai ? Les probabilités mathématiques défient toute logique rationnelle. Non. Non. NON.*
+*C'est au-delà de toute possibilité concevable par l'esprit mortel. La magie doit mentir, ses fils éthériques tissant des mensonges séduisants dans l'air saturé de pouvoir ancien. Le rituel a dû échouer comme tous ceux qui l'ont précédé, victime de quelque contamination insidieuse dans les composants rassemblés avec un soin méticuleux ou d'une erreur invisible dans l'exécution que sa concentration obsessionnelle n'aurait pas détectée. C'est une illusion cruelle projetée par ses propres désirs désespérés qui déforment sa perception de la réalité. Une erreur de jugement née de mille années accumulées de frustration corrost rongé sa raison comme acide lent dissolvant du métal. Un piège sophistiqué tendu par quelque force malveillante et patiente connaissant ses faiblesses les plus intimes et cherche à la détruire en lui offrant avec cette précision chirurgicale qui ne laissait aucune place au doute ce qu'elle désire le plus. Quatre-vingt-sept échecs consécutifs gravés dans sa mémoire immortelle et soudain, miraculeusement, un succès éclatant au quatre-vingt-huitième essai ? Les probabilités mathématiques défient toute logique rationnelle. Non. Non. NON.*
 
 Elle cherchait avec ce désespoir qui la consumait depuis des siècles une explication rationnelle, n'importe laquelle, qui pourrait préserver sa compréhension du monde et éviter l'effondrement mental qui menaçait.
 
@@ -3062,9 +3062,9 @@ Sa conscience éthérique examina la cible avec plus d'attention, analysant chaq
 
 *Le sang.*
 
-Oui. C'était le sang qu'elle avait détecté en premier. Le signal qui avait percé les protections multicouches comme flèche traversant une armure fissurée.
+Oui. C'était le sang qu'elle avait détecté en premier. Le signal ayant percé les protections multicouches comme flèche traversant une armure fissurée.
 
-Récemment exposé. Très dans les derniers jours de cette quête qui semblait sans fin. Quelques heures peut-être, avec la plus grande certitude moins d'un jour. Le sang avait quitté le corps, s'était répandu quelque part hors des protections habituelles. Une blessure ? Un accident ? Un prélèvement médical ?
+Récemment exposé. Très dans les derniers jours de cette quête semblant sans fin. Quelques heures peut-être, avec la plus grande certitude moins d'un jour. Le sang avait quitté le corps, s'était répandu quelque part hors des protections habituelles. Une blessure ? Un accident ? Un prélèvement médical ?
 
 *Les protections d'un laboratoire.*
 
@@ -3072,7 +3072,7 @@ Elle voyait maintenant les traces résiduelles, wards spécialisés différents 
 
 *Elles avaient cédé.*
 
-Pas détruites. Pas désactivées par choix délibéré. Mais fragilisées, comme structure affaiblie par des fissures invisibles qui s'élargissaient dans une progression graduelle qui s'étendait sur des siècles. Une erreur dans le tracé rituel ? Un composant épuisé après des années de service continu ? Ou peut-être l'intensité même du sang éthérien qu'elles contenaient les avait-elle rongées de l'intérieur, comme acide lent dissolvant son contenant ?
+Pas détruites. Pas désactivées par choix délibéré. Mais fragilisées, telle structure affaiblie par des fissures invisibles qui s'élargissaient dans une progression graduelle qui s'étendait sur des siècles. Une erreur dans le tracé rituel ? Un composant épuisé après des années de service continu ? Ou peut-être l'intensité même du sang éthérien qu'elles contenaient les avait-elle rongées de l'intérieur, tel un acide lent dissolvant son contenant ?
 
 Peu importait la cause. Le résultat était là, indéniable. Pour un instant bref. Assez long pour que le signal s'échappe et soit capté par son rituel qui balayait l'Éther comme filet de pêcheur au moment précis où les barrières vacillaient.
 
@@ -3104,7 +3104,7 @@ La rage monta en elle, brûlante et amère comme poison. Jalousie primitive et d
 
 *Jusqu'à cette nuit.*
 
-*Jusqu'à cet accident, cette faille, cette chance cosmique qui avait permis au signal de s'échapper.*
+*Jusqu'à cet accident, cette faille, cette chance cosmique ayant permis au signal de s'échapper.*
 
 La vision se brisa dans une explosion de violence comme verre qui éclate sous la pression.
 
@@ -3116,9 +3116,9 @@ Du sang noir épais coulait en abondance de son nez, de ses oreilles, maculant s
 
 *◈ Maîtresse, restez consciente!*
 
-Les mains de Morwen tremblaient avec une violence qui trahissait l'ampleur du choc. Ses yeux rouges étaient écarquillés, fixant le vide, encore perdus dans la vision inconcevable qu'elle venait de voir.
+Les mains de Morwen tremblaient avec une violence trahissant l'ampleur du choc. Ses yeux rouges étaient écarquillés, fixant le vide, encore perdus dans la vision inconcevable qu'elle venait de voir.
 
-Elle inspira dans un mouvement brusque et saccadé, un son rauque, presque un sanglot étouffé qui déchirait sa gorge morte.
+Elle inspira dans un mouvement brusque et saccadé, un son rauque, presque un sanglot étouffé déchirant sa gorge morte.
 
 *Non. Reprends-toi. REPRENDS-TOI.*
 
@@ -3126,11 +3126,11 @@ Elle inspira dans un mouvement brusque et saccadé, un son rauque, presque un sa
 
 *❖ Impossible. Ça ne peut pas être réel. Mille ans de quête ne peuvent pas aboutir à ceci. Pas maintenant. Pas ainsi.*
 
-Elle secoua la tête avec une violence désespérée qui faisait claquer ses cheveux noirs autour de son visage pâle, comme pour chasser brutalement une hallucination pernicieuse née d'un millénaire révolu de désespoir accumulé et comprimé dans son âme torturée. Ses doigts glacés griffèrent la pierre ancestrale, cherchant avec un désespoir palpable un ancrage précaire dans la réalité solide et tangible, quelque chose de réel et indéniable pour s'empêcher de sombrer définitivement dans la folie qui menaçait de la consumer.
+Elle secoua la tête avec une violence désespérée faisant claquer ses cheveux noirs autour de son visage pâle, comme pour chasser brutalement une hallucination pernicieuse née d'un millénaire révolu de désespoir accumulé et comprimé dans son âme torturée. Ses doigts glacés griffèrent la pierre ancestrale, cherchant avec un désespoir palpable un ancrage précaire dans la réalité solide et tangible, quelque chose de réel et indéniable pour s'empêcher de sombrer définitivement dans la folie qui menaçait de la consumer.
 
 *❖ Quatre-vingt-sept sanctuaires explorés en vain pendant des siècles de recherche acharnée, quatre-vingt-sept espoirs cruellement massacrés sur l'autel impitoyable du destin cruel, siffla-t-elle entre ses dents serrées comme lame de rasoir, un rire hystérique et démentiel presque audible montant inexorablement dans sa gorge morte comme bulle empoisonnée d'air vicié remontant des profondeurs obscures d'un puits maudit.*
 
-*❖ Quatre-vingt-sept rituels péniblement achevés dans le silence assourdissant et cruel du vide cosmique absolu... RIEN. Le néant total et glacial. L'échec amer qui se répète inlassablement comme cauchemar récurrent dont on ne peut s'éveiller. Le désespoir qui s'accumule inexorablement comme neige toxique ensevelissant progressivement tout ce qui était encore vivant en elle. Et maintenant... maintenant au quatre-vingt-huitième essai désespéré qui devrait logiquement et mathématiquement échouer comme tous les autres précédents...*
+*❖ Quatre-vingt-sept rituels péniblement achevés dans le silence assourdissant et cruel du vide cosmique absolu... RIEN. Le néant total et glacial. L'échec amer qui se répète inlassablement comme cauchemar récurrent dont on ne peut s'éveiller. Le désespoir qui s'accumule inexorablement comme neige toxique ensevelissant progressivement tout ce , encore, vivant en elle. Et maintenant... maintenant au quatre-vingt-huitième essai désespéré qui devrait logiquement et mathématiquement échouer comme tous les autres précédents...*
 
 Sa voix se brisa de façon complète en sanglot sec.
 
@@ -3158,7 +3158,7 @@ Elle inspira jusqu'au plus profond de son âme immortelle, se forçant à analys
 
 *❖ Cheveux mauves, environ vingt hivers, récita-t-elle comme rapport militaire.*
 
-*❖ Quartier nord de la cité d'Eldoria, selon toute apparence dans les faubourgs populaires où s'entassent artisans et marchands loin des quartiers nobles. Créé... dans un laboratoire secret, par quelqu'un qui possédait des connaissances interdites. Son sang dans les derniers jours de cette quête qui semblait sans fin exposé a brisé les protections. Les wards ont cédé comme vitre fissurée. C'est ce qui m'a permis de la trouver à travers l'Éther. Une chance cosmique. Un hasard miraculeux. Le destin lui-même qui se plie enfin à ma volonté.*
+*❖ Quartier nord de la cité d'Eldoria, selon toute apparence dans les faubourgs populaires où s'entassent artisans et marchands loin des quartiers nobles. Créé... dans un laboratoire secret, par quelqu'un qui possédait des connaissances interdites. Son sang dans les derniers jours de cette quête semblant sans fin exposé a brisé les protections. Les wards ont cédé comme vitre fissurée. C'est ce qui m'a permis de la trouver à travers l'Éther. Une chance cosmique. Un hasard miraculeux. Le destin lui-même qui se plie enfin à ma volonté.*
 
 Elle se redressa avec une lenteur vacillante avec l'aide de saatha, jambes encore instables et refusant presque de la porter.
 
@@ -3176,7 +3176,7 @@ Sa voix se raffermit dans une progression graduelle qui s'étendait sur des siè
 
 *❖ Pas après mille ans. Pas maintenant que j'ai enfin trouvé.*
 
-saatha ne dit rien, figée dans un silence horrifié. Qu'aurait-elle pu dire ? Elle avait senti la puissance terrible qui avait traversé le cercle pendant la vision. Elle avait vu l'expression sur le visage de sa maîtressnge de choc, d'incrédulité, de terreur presque, avant que le men vérité profondee se reforme comme arétait véritablementavec une précision millimétréeuement, sans le moindre doute possible, en train de se produire devant ses yeux horrifiés. Avec cette précision chirurgicale qui ne laissait aucune place au doute, avec une précision qui ne tolérait aucune approximation, dans chaque détail terrible, à l'image même des Éthériens avant la Grande Purge qui les avait tous dévorés. Avec cette précision chirurgicale qui ne laissait aucune place au doute, méticuleusement, selon le schéma maudit qui avait détruit toute une civilisation millénaire en une seule nuit de feu et de sang. L'obsession aveugle. La certitude absolue. Le refus obstiné d'accepter les limites que les dieux eux-mêmes avaient imposées.*
+saatha ne dit rien, figée dans un silence horrifié. Qu'aurait-elle pu dire ? Elle avait senti la puissance terrible ayant traversé le cercle pendant la vision. Elle avait vu l'expression sur le visage de sa maîtressnge de choc, d'incrédulité, de terreur presque, avant que le men vérité profondee se reforme comme arétait véritablementavec une précision millimétréeuement, sans le moindre doute possible, en train de se produire devant ses yeux horrifiés. Avec cette précision chirurgicale qui ne laissait aucune place au doute, avec une précision qui ne tolérait aucune approximation, dans chaque détail terrible, à l'image même des Éthériens avant la Grande Purge qui les avait tous dévorés. Avec cette précision chirurgicale qui ne laissait aucune place au doute, méticuleusement, selon le schéma maudit ayant détruit toute une civilisation millénaire en une seule nuit de feu et de sang. L'obsession aveugle. La certitude absolue. Le refus obstiné d'accepter les limites que les dieux eux-mêmes avaient imposées.*
 
 *❖ Rassemble les serviteudans sa totalité absolueMoen entier sans réserve redressant dans son intégralité, sans exception ni réserve, de manière absolue et totale, sans aucune restriction, jusqu'à retrouver toute sa hauteur impériale, recomposant avec soin sa dignité d'immortelle antique qui régnait depuis un millénaire entier de quete désespérée, effaçant méthodiquement toute trace visible de faiblesse physique qui aurait pu trahir la vulnérabilité momentanée du rituel.*
 
@@ -3188,7 +3188,7 @@ Elle fit une pause, calculant les distances et les obstacles.
 
 ❖ Trouvez-le avant que quelqu'un d'autre ne réalise ce qu'il est. Amenez-le intact. Aucun dommage. PAS UN SEUL CHEVEU arraché. Le matériau doit être préservé dans sa totalité sans la moindre altération pour le rituel final. Est-ce clair ?
 
-*◈ D'une clarté absolue, Maîtresse, siffla saatha d'une voix neutre et dépourvue de toute inflexion émotionnelle, parfaitement contrôlée malgré la tempête qui grondait désormais dans les profondeurs de son âme millénaire.*
+*◈ D'une clarté absolue, Maîtresse, siffla saatha d'une voix neutre et dépourvue de toute inflexion émotionnelle, parfaitement contrôlée malgré la tempête grondant désormais dans les profondeurs de son âme millénaire.*
 
 Elle fit volte-face, manteau de nuit tourbillonnant autour d'elle comme tempête personnelle, et marcha vers la sortie du sanctuaire avec la détermination froide d'un prédateur qui a enfin localisé le composant manquant de son chef-d'œuvre millénaire.
 
@@ -3200,7 +3200,7 @@ saatha la suivit en silence, la fissure dans son âme éternelle s'élargissant 
 
 Le sanctuaire vibrait derrière elles alors qu'elles remontaient vers la surface par les couloirs tortueux, cercle rituel laissé actif et pulsant dans les ténèbres, attendant avec patience qu'on lui révèle enfin pourquoi il avait été éveillé de son sommeil millénaire si profond.
 
-L'aube commençait à se lever sur les Monts de l'Éther, grise et froide comme toujours dans sa pâleur glaciale, éternelle dans son indifférence face aux drames qui se jouaient en contrebas. Mais dans les ombres profondes qui fuyaient la lumière montante avec réticence, quelque chose de bien plus sombre et plus terrible s'éveillait après des siècles de sommeil forcé. Une chasse millénaire. Un rituel ancestral. Une obsession éternelle qui se mettait enfin en mouvement implacable après des siècles interminables d'attente douloureuse et de préparation obsessionnelle.
+L'aube commençait à se lever sur les Monts de l'Éther, grise et froide comme toujours dans sa pâleur glaciale, éternelle dans son indifférence cruelle face aux drames qui se jouaient en contrebas dans la vallée obscure. Mais dans les ombres profondes et anciennes qui fuyaient la lumière montante avec une réticence presque palpable, quelque chose de bien plus sombre et plus terrible s'éveillait après des siècles interminables de sommeil forcé et de patience millénaire. Une chasse démentielle. Un rituel ancestral oublié. Une obsession éternelle qui se mettait enfin en mouvement implacable après des siècles sans fin d'attente douloureuse et de préparation obsessionnelle.
 
 Et au nord, dans un village ignorant du danger qui se préparait dans les ténèbres, le porteur de l'Étoile Pourpre dormait dans une quiétude innocente et fragile, inconscient du regard qui l'avait trouvé à travers l'Éther. Inconscient que son sang exposé avait trahi sa présence après mille ans de silence. Inconscient que dans trois nuits, la chasse commencerait.
 
