@@ -74,14 +74,6 @@ class DnDMusicPlayer {
             const newPlaylist = data.files || [];
             const newInitPlaylist = data.initFiles || [];
 
-            console.log('📁 DEBUG loadPlaylist - Données reçues de l\'API:');
-            console.log('  - Total fichiers:', newPlaylist.length);
-            console.log('  - Fichiers init:', newInitPlaylist.length);
-            console.log('  - Détail fichiers avec isInit:');
-            newPlaylist.forEach(track => {
-                console.log(`    • ${track.name} - isInit: ${track.isInit} - path: ${track.path}`);
-            });
-
             // Vérifier si la playlist a changé
             const playlistChanged = JSON.stringify(this.playlist) !== JSON.stringify(newPlaylist);
 
@@ -160,11 +152,6 @@ class DnDMusicPlayer {
         // Mélanger la queue
         this.shuffleArray(this.shuffledQueue);
 
-        console.log('🔍 DEBUG refillShuffledQueue:');
-        console.log('  - firstPlayCompleted:', this.firstPlayCompleted);
-        console.log('  - initPlaylist.length:', this.initPlaylist.length);
-        console.log('  - Queue AVANT swap:', this.shuffledQueue.map(t => `${t.name} (isInit: ${t.isInit})`));
-
         // Si première lecture pas encore effectuée, garantir que les 2 PREMIÈRES musiques soient du dossier init
         if (!this.firstPlayCompleted && this.initPlaylist.length >= 2) {
             // Trouver TOUTES les musiques init dans la queue mélangée
@@ -175,13 +162,10 @@ class DnDMusicPlayer {
                 }
             });
 
-            console.log('  - Indices de musiques init trouvées:', initIndices);
-
             // S'assurer que les 2 premières positions contiennent des musiques init
             if (initIndices.length >= 2) {
                 // Si position 0 n'est pas init, swapper avec la première musique init trouvée
                 if (!this.shuffledQueue[0].isInit) {
-                    console.log('  - SWAP position 0: Échange avec position', initIndices[0]);
                     [this.shuffledQueue[0], this.shuffledQueue[initIndices[0]]] =
                     [this.shuffledQueue[initIndices[0]], this.shuffledQueue[0]];
 
@@ -194,18 +178,12 @@ class DnDMusicPlayer {
                     // Trouver le premier index init qui n'est pas en position 0
                     const secondInitIndex = initIndices.find(idx => idx !== 0 && idx > 1);
                     if (secondInitIndex !== undefined) {
-                        console.log('  - SWAP position 1: Échange avec position', secondInitIndex);
                         [this.shuffledQueue[1], this.shuffledQueue[secondInitIndex]] =
                         [this.shuffledQueue[secondInitIndex], this.shuffledQueue[1]];
                     }
                 }
             }
         }
-
-        console.log('  - Queue APRÈS swap:', this.shuffledQueue.map(t => `${t.name} (isInit: ${t.isInit})`));
-        console.log('  - Les 2 premières musiques:',
-            this.shuffledQueue[0]?.name, '(isInit:', this.shuffledQueue[0]?.isInit + '),',
-            this.shuffledQueue[1]?.name, '(isInit:', this.shuffledQueue[1]?.isInit + ')');
     }
 
     /**
@@ -235,12 +213,8 @@ class DnDMusicPlayer {
         });
 
         this.audio.addEventListener('error', (e) => {
-            console.error('❌ ERREUR AUDIO détectée:', e);
-            console.error('  - Type erreur:', e.type);
-            console.error('  - Source:', this.audio.src);
-            console.error('  - Error code:', this.audio.error?.code);
-            console.error('  - Error message:', this.audio.error?.message);
-            this.playNext(); // Passer au suivant en cas d'erreur
+            // Erreur audio - passer au suivant
+            this.playNext();
         });
 
         this.audio.addEventListener('canplaythrough', () => {
@@ -376,6 +350,17 @@ class DnDMusicPlayer {
                 return;
             }
 
+            // Marquer IMMÉDIATEMENT comme traité pour éviter les appels multiples
+            this.firstInteraction = false;
+
+            // Retirer TOUS les listeners IMMÉDIATEMENT
+            document.removeEventListener('click', this.startMusicHandler, true);
+            document.removeEventListener('keydown', this.startMusicHandler, true);
+            document.removeEventListener('touchstart', this.startMusicHandler, true);
+            document.removeEventListener('wheel', this.startMusicHandler, true);
+            document.removeEventListener('scroll', this.startMusicHandler, true);
+            document.removeEventListener('touchmove', this.startMusicHandler, true);
+
             // Attendre que l'initialisation soit terminée si nécessaire
             if (!this.isInitialized) {
                 const startTime = Date.now();
@@ -388,19 +373,14 @@ class DnDMusicPlayer {
             if (this.isInitialized) {
                 const playbackSuccess = await this.startPlayback();
 
-                // Retirer les listeners SEULEMENT si la lecture a réussi
-                if (playbackSuccess) {
-                    this.firstInteraction = false;
-                    this.autoplayBlocked = false;
-                    document.removeEventListener('click', this.startMusicHandler, true);
-                    document.removeEventListener('keydown', this.startMusicHandler, true);
-                    document.removeEventListener('touchstart', this.startMusicHandler, true);
-                    document.removeEventListener('wheel', this.startMusicHandler, true);
-                    document.removeEventListener('scroll', this.startMusicHandler, true);
-                    document.removeEventListener('touchmove', this.startMusicHandler, true);
-                } else {
-                    // Lecture bloquée - marquer et attendre un click
+                if (!playbackSuccess) {
+                    // Lecture bloquée - remettre les listeners et attendre un click
                     this.autoplayBlocked = true;
+                    this.firstInteraction = true; // Permettre une nouvelle tentative
+                    document.addEventListener('click', this.startMusicHandler, true);
+                    document.addEventListener('touchstart', this.startMusicHandler, true);
+                } else {
+                    this.autoplayBlocked = false;
                 }
             }
         }
@@ -411,17 +391,10 @@ class DnDMusicPlayer {
             return false;
         }
 
-        console.log('🎵 DEBUG startPlayback:');
-        console.log('  - trackSelected:', this.trackSelected);
-
         // Si on n'a PAS encore sélectionné de musique, en sélectionner une
         if (!this.trackSelected) {
             // Pour la première lecture, sélectionner depuis la queue
             const selectedTrack = this.getNextTrackFromQueue();
-
-            console.log('  - Track sélectionné depuis queue:', selectedTrack?.name);
-            console.log('  - isInit:', selectedTrack?.isInit);
-            console.log('  - path:', selectedTrack?.path);
 
             if (!selectedTrack) {
                 return false;
@@ -430,10 +403,6 @@ class DnDMusicPlayer {
             // Stocker le track sélectionné directement au lieu de chercher son index
             this.currentTrack = selectedTrack;
             this.trackSelected = true;
-
-            console.log('  - Track stocké directement:', this.currentTrack.name);
-        } else {
-            console.log('  - Réutilisation track déjà sélectionné:', this.currentTrack?.name);
         }
 
         await this.loadCurrentTrack();
@@ -447,18 +416,39 @@ class DnDMusicPlayer {
 
         if (!trackToLoad) return;
 
-        console.log('📀 Chargement track:', trackToLoad.name, '- path:', trackToLoad.path);
-
         // Encoder correctement l'URL pour gérer les caractères spéciaux
         const encodedPath = trackToLoad.path.split('/').map(part => encodeURIComponent(part)).join('/');
         this.audio.src = `/${encodedPath}`;
 
-        console.log('📀 URL encodée:', this.audio.src);
-
         try {
-            this.audio.load();
+            // Attendre que l'audio soit prêt avant de continuer
+            await new Promise((resolve, reject) => {
+                const timeoutId = setTimeout(() => {
+                    this.audio.removeEventListener('canplay', onCanPlay);
+                    this.audio.removeEventListener('error', onError);
+                    resolve(); // Résoudre quand même pour ne pas bloquer
+                }, 5000);
+
+                const onCanPlay = () => {
+                    clearTimeout(timeoutId);
+                    this.audio.removeEventListener('canplay', onCanPlay);
+                    this.audio.removeEventListener('error', onError);
+                    resolve();
+                };
+
+                const onError = (e) => {
+                    clearTimeout(timeoutId);
+                    this.audio.removeEventListener('canplay', onCanPlay);
+                    this.audio.removeEventListener('error', onError);
+                    reject(e);
+                };
+
+                this.audio.addEventListener('canplay', onCanPlay, { once: true });
+                this.audio.addEventListener('error', onError, { once: true });
+                this.audio.load();
+            });
         } catch (error) {
-            // Erreur chargement piste silencieuse en production
+            // Erreur chargement silencieuse
         }
     }
 
@@ -505,9 +495,6 @@ class DnDMusicPlayer {
     }
 
     async playNext() {
-        console.log('⏭️ playNext() appelé - Stack trace:');
-        console.trace();
-
         // Mémoriser l'état de lecture actuel
         const wasPlaying = this.isPlaying;
 
@@ -517,7 +504,6 @@ class DnDMusicPlayer {
             if (selectedTrack) {
                 this.currentTrack = selectedTrack;
                 this.currentIndex = this.playlist.findIndex((track) => track.path === selectedTrack.path);
-                console.log('  - Nouvelle musique:', selectedTrack.name, '- isInit:', selectedTrack.isInit);
             }
         } else {
             // Mode séquentiel
