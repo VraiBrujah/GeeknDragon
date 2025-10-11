@@ -12,6 +12,7 @@ class DnDMusicPlayer {
         this.weightedPlaylist = [];
         this.shuffledQueue = []; // Queue exhaustive: toutes les musiques avant répétition
         this.currentIndex = 0;
+        this.currentTrack = null; // Track actuel (objet complet avec path, name, isInit)
         this.isPlaying = false;
         this.volume = 0.15; // 15% par défaut
         this.shuffle = true;
@@ -72,10 +73,18 @@ class DnDMusicPlayer {
             const data = await response.json();
             const newPlaylist = data.files || [];
             const newInitPlaylist = data.initFiles || [];
-            
+
+            console.log('📁 DEBUG loadPlaylist - Données reçues de l\'API:');
+            console.log('  - Total fichiers:', newPlaylist.length);
+            console.log('  - Fichiers init:', newInitPlaylist.length);
+            console.log('  - Détail fichiers avec isInit:');
+            newPlaylist.forEach(track => {
+                console.log(`    • ${track.name} - isInit: ${track.isInit} - path: ${track.path}`);
+            });
+
             // Vérifier si la playlist a changé
             const playlistChanged = JSON.stringify(this.playlist) !== JSON.stringify(newPlaylist);
-            
+
             this.playlist = newPlaylist;
             this.initPlaylist = newInitPlaylist;
             this.heroIntroPath = data.heroIntro;
@@ -151,17 +160,52 @@ class DnDMusicPlayer {
         // Mélanger la queue
         this.shuffleArray(this.shuffledQueue);
 
-        // Si première lecture pas encore effectuée, garantir qu'une musique init est en première position
-        if (!this.firstPlayCompleted && this.initPlaylist.length > 0) {
-            // Trouver l'index d'une musique init dans la queue mélangée
-            const firstInitIndex = this.shuffledQueue.findIndex(track => track.isInit);
+        console.log('🔍 DEBUG refillShuffledQueue:');
+        console.log('  - firstPlayCompleted:', this.firstPlayCompleted);
+        console.log('  - initPlaylist.length:', this.initPlaylist.length);
+        console.log('  - Queue AVANT swap:', this.shuffledQueue.map(t => `${t.name} (isInit: ${t.isInit})`));
 
-            if (firstInitIndex > 0) {
-                // Échanger la musique init trouvée avec la première position
-                [this.shuffledQueue[0], this.shuffledQueue[firstInitIndex]] =
-                [this.shuffledQueue[firstInitIndex], this.shuffledQueue[0]];
+        // Si première lecture pas encore effectuée, garantir que les 2 PREMIÈRES musiques soient du dossier init
+        if (!this.firstPlayCompleted && this.initPlaylist.length >= 2) {
+            // Trouver TOUTES les musiques init dans la queue mélangée
+            const initIndices = [];
+            this.shuffledQueue.forEach((track, index) => {
+                if (track.isInit) {
+                    initIndices.push(index);
+                }
+            });
+
+            console.log('  - Indices de musiques init trouvées:', initIndices);
+
+            // S'assurer que les 2 premières positions contiennent des musiques init
+            if (initIndices.length >= 2) {
+                // Si position 0 n'est pas init, swapper avec la première musique init trouvée
+                if (!this.shuffledQueue[0].isInit) {
+                    console.log('  - SWAP position 0: Échange avec position', initIndices[0]);
+                    [this.shuffledQueue[0], this.shuffledQueue[initIndices[0]]] =
+                    [this.shuffledQueue[initIndices[0]], this.shuffledQueue[0]];
+
+                    // Mettre à jour les indices après le swap
+                    initIndices[0] = 0;
+                }
+
+                // Si position 1 n'est pas init, swapper avec la deuxième musique init trouvée
+                if (!this.shuffledQueue[1].isInit) {
+                    // Trouver le premier index init qui n'est pas en position 0
+                    const secondInitIndex = initIndices.find(idx => idx !== 0 && idx > 1);
+                    if (secondInitIndex !== undefined) {
+                        console.log('  - SWAP position 1: Échange avec position', secondInitIndex);
+                        [this.shuffledQueue[1], this.shuffledQueue[secondInitIndex]] =
+                        [this.shuffledQueue[secondInitIndex], this.shuffledQueue[1]];
+                    }
+                }
             }
         }
+
+        console.log('  - Queue APRÈS swap:', this.shuffledQueue.map(t => `${t.name} (isInit: ${t.isInit})`));
+        console.log('  - Les 2 premières musiques:',
+            this.shuffledQueue[0]?.name, '(isInit:', this.shuffledQueue[0]?.isInit + '),',
+            this.shuffledQueue[1]?.name, '(isInit:', this.shuffledQueue[1]?.isInit + ')');
     }
 
     /**
@@ -191,7 +235,11 @@ class DnDMusicPlayer {
         });
 
         this.audio.addEventListener('error', (e) => {
-            // Erreur audio silencieuse en production
+            console.error('❌ ERREUR AUDIO détectée:', e);
+            console.error('  - Type erreur:', e.type);
+            console.error('  - Source:', this.audio.src);
+            console.error('  - Error code:', this.audio.error?.code);
+            console.error('  - Error message:', this.audio.error?.message);
             this.playNext(); // Passer au suivant en cas d'erreur
         });
 
@@ -363,18 +411,29 @@ class DnDMusicPlayer {
             return false;
         }
 
+        console.log('🎵 DEBUG startPlayback:');
+        console.log('  - trackSelected:', this.trackSelected);
+
         // Si on n'a PAS encore sélectionné de musique, en sélectionner une
         if (!this.trackSelected) {
             // Pour la première lecture, sélectionner depuis la queue
             const selectedTrack = this.getNextTrackFromQueue();
 
+            console.log('  - Track sélectionné depuis queue:', selectedTrack?.name);
+            console.log('  - isInit:', selectedTrack?.isInit);
+            console.log('  - path:', selectedTrack?.path);
+
             if (!selectedTrack) {
                 return false;
             }
 
-            // Trouver l'index de cette piste dans la playlist complète
-            this.currentIndex = this.playlist.findIndex((track) => track.path === selectedTrack.path);
+            // Stocker le track sélectionné directement au lieu de chercher son index
+            this.currentTrack = selectedTrack;
             this.trackSelected = true;
+
+            console.log('  - Track stocké directement:', this.currentTrack.name);
+        } else {
+            console.log('  - Réutilisation track déjà sélectionné:', this.currentTrack?.name);
         }
 
         await this.loadCurrentTrack();
@@ -383,10 +442,18 @@ class DnDMusicPlayer {
     }
 
     async loadCurrentTrack() {
-        if (!this.playlist[this.currentIndex]) return;
+        // Utiliser this.currentTrack si disponible (première lecture), sinon fallback sur this.currentIndex
+        const trackToLoad = this.currentTrack || this.playlist[this.currentIndex];
 
-        const currentTrack = this.playlist[this.currentIndex];
-        this.audio.src = `/${currentTrack.path}`;
+        if (!trackToLoad) return;
+
+        console.log('📀 Chargement track:', trackToLoad.name, '- path:', trackToLoad.path);
+
+        // Encoder correctement l'URL pour gérer les caractères spéciaux
+        const encodedPath = trackToLoad.path.split('/').map(part => encodeURIComponent(part)).join('/');
+        this.audio.src = `/${encodedPath}`;
+
+        console.log('📀 URL encodée:', this.audio.src);
 
         try {
             this.audio.load();
@@ -438,6 +505,9 @@ class DnDMusicPlayer {
     }
 
     async playNext() {
+        console.log('⏭️ playNext() appelé - Stack trace:');
+        console.trace();
+
         // Mémoriser l'état de lecture actuel
         const wasPlaying = this.isPlaying;
 
@@ -445,11 +515,14 @@ class DnDMusicPlayer {
             // Mode aléatoire exhaustif: prendre la prochaine musique de la queue
             const selectedTrack = this.getNextTrackFromQueue();
             if (selectedTrack) {
+                this.currentTrack = selectedTrack;
                 this.currentIndex = this.playlist.findIndex((track) => track.path === selectedTrack.path);
+                console.log('  - Nouvelle musique:', selectedTrack.name, '- isInit:', selectedTrack.isInit);
             }
         } else {
             // Mode séquentiel
             this.currentIndex = (this.currentIndex + 1) % this.playlist.length;
+            this.currentTrack = this.playlist[this.currentIndex];
         }
 
         await this.loadCurrentTrack();
@@ -466,6 +539,7 @@ class DnDMusicPlayer {
 
             // Sinon, aller à la piste précédente
             this.currentIndex = this.currentIndex > 0 ? this.currentIndex - 1 : this.playlist.length - 1;
+            this.currentTrack = this.playlist[this.currentIndex];
             await this.loadCurrentTrack();
             if (wasPlaying) await this.play();
         }
