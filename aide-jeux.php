@@ -582,11 +582,58 @@ $extraHead = <<<HTML
 
 .music-player:hover {
   border-color: rgba(139, 92, 246, 0.6);
-  box-shadow: 
+  box-shadow:
     0 12px 40px rgba(0, 0, 0, 0.4),
     0 0 30px rgba(139, 92, 246, 0.25),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
   transform: scale(1.02);
+}
+
+/* Indicateur de statut (note de musique verte) */
+.music-status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22c55e; /* Vert par défaut (en lecture) */
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+  transition: all 0.3s ease;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Animation de pulsation quand la musique joue */
+.music-status-indicator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: inherit;
+  animation: music-pulse 2s ease-in-out infinite;
+}
+
+@keyframes music-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2);
+  }
+}
+
+/* État en pause */
+.music-status-indicator.paused {
+  background: #6b7280; /* Gris */
+  box-shadow: 0 0 6px rgba(107, 114, 128, 0.5);
+}
+
+.music-status-indicator.paused::before {
+  animation: none; /* Pas d'animation en pause */
 }
 
 .music-controls {

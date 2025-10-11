@@ -19,13 +19,14 @@ class DnDMusicPlayer {
         this.firstInteraction = true;
         this.heroIntroPath = null;
         this.firstPlayCompleted = false; // Track si la première lecture depuis init/ a été faite
+        this.autoplayBlocked = false; // Track si l'autoplay a été bloqué (attendre un click)
 
         // Cache pour éviter les recharges inutiles
         this.lastPlaylistUpdate = 0;
         this.playlistCacheTimeout = 30000; // 30 secondes
 
         // Stocker la référence du listener pour pouvoir le retirer
-        this.startMusicHandler = () => this.markUserInteraction();
+        this.startMusicHandler = (event) => this.markUserInteraction(event);
 
         this.initializePlayer();
         this.setupEventListeners();
@@ -46,16 +47,12 @@ class DnDMusicPlayer {
     }
 
     async initializePlayer() {
-        console.log('[DEBUG] initializePlayer() démarré');
         try {
             await this.loadPlaylist();
-            console.log('[DEBUG] loadPlaylist() terminé - playlist.length:', this.playlist.length);
             this.setupAudioElement();
             this.createPlayerInterface();
             this.isInitialized = true;
-            console.log('[DEBUG] initializePlayer() terminé avec succès');
         } catch (error) {
-            console.error('[DEBUG] ERREUR dans initializePlayer():', error);
             // Erreur initialisation silencieuse en production
         }
     }
@@ -201,6 +198,17 @@ class DnDMusicPlayer {
             this.updatePlayButton();
         });
 
+        // Synchroniser l'état de lecture avec les événements audio natifs
+        this.audio.addEventListener('playing', () => {
+            this.isPlaying = true;
+            this.updatePlayButton();
+        });
+
+        this.audio.addEventListener('pause', () => {
+            this.isPlaying = false;
+            this.updatePlayButton();
+        });
+
         this.audio.addEventListener('timeupdate', () => {
             this.updateStatusIndicator();
         });
@@ -298,99 +306,78 @@ class DnDMusicPlayer {
     }
 
     setupEventListeners() {
-        // Détecter si la page vient d'être rechargée (navigation vs F5)
-        const isPageRefresh = performance.getEntriesByType('navigation')[0]?.type === 'reload';
-
-        if (isPageRefresh) {
-            // Si F5: SEULEMENT click/touch (pas de scroll)
-            // Car le navigateur bloque autoplay via scroll après F5
-            document.addEventListener('click', this.startMusicHandler, true);
-            document.addEventListener('touchstart', this.startMusicHandler, true);
-            document.addEventListener('keydown', this.startMusicHandler, true);
-        } else {
-            // Si navigation normale: tous les types d'interactions
-            document.addEventListener('click', this.startMusicHandler, true);
-            document.addEventListener('keydown', this.startMusicHandler, true);
-            document.addEventListener('touchstart', this.startMusicHandler, true);
-            document.addEventListener('wheel', this.startMusicHandler, { passive: true, capture: true });
-            document.addEventListener('scroll', this.startMusicHandler, { passive: true, capture: true });
-            document.addEventListener('touchmove', this.startMusicHandler, { passive: true, capture: true });
-        }
+        // Écouter TOUS les types d'interactions (y compris scroll après F5)
+        // Si le navigateur bloque l'autoplay via scroll, on réessaiera au prochain click
+        document.addEventListener('click', this.startMusicHandler, true);
+        document.addEventListener('keydown', this.startMusicHandler, true);
+        document.addEventListener('touchstart', this.startMusicHandler, true);
+        document.addEventListener('wheel', this.startMusicHandler, { passive: true, capture: true });
+        document.addEventListener('scroll', this.startMusicHandler, { passive: true, capture: true });
+        document.addEventListener('touchmove', this.startMusicHandler, { passive: true, capture: true });
     }
 
     /**
      * Marque qu'une interaction utilisateur a eu lieu
      * Lance automatiquement la lecture si c'est la première interaction
      */
-    async markUserInteraction() {
-        console.log('[DEBUG] markUserInteraction appelé - firstInteraction:', this.firstInteraction, 'isInitialized:', this.isInitialized);
-
+    async markUserInteraction(event) {
         if (this.firstInteraction) {
-            this.firstInteraction = false;
-
-            // Retirer tous les listeners après la première interaction
-            // (retirer à la fois ceux de navigation normale ET ceux de F5)
-            document.removeEventListener('click', this.startMusicHandler, true);
-            document.removeEventListener('keydown', this.startMusicHandler, true);
-            document.removeEventListener('touchstart', this.startMusicHandler, true);
-            document.removeEventListener('wheel', this.startMusicHandler, true);
-            document.removeEventListener('scroll', this.startMusicHandler, true);
-            document.removeEventListener('touchmove', this.startMusicHandler, true);
-
-            console.log('[DEBUG] Listeners retirés');
+            // Si l'autoplay a été bloqué, n'accepter QUE les clicks
+            if (this.autoplayBlocked && event?.type !== 'click' && event?.type !== 'touchstart') {
+                return;
+            }
 
             // Attendre que l'initialisation soit terminée si nécessaire
             if (!this.isInitialized) {
-                console.log('[DEBUG] En attente de l\'initialisation...');
-                // Attendre maximum 5 secondes pour l'initialisation
                 const startTime = Date.now();
                 while (!this.isInitialized && (Date.now() - startTime) < 5000) {
                     await new Promise(resolve => setTimeout(resolve, 100));
                 }
-                console.log('[DEBUG] Fin attente - isInitialized:', this.isInitialized, 'durée:', Date.now() - startTime, 'ms');
-            } else {
-                console.log('[DEBUG] Déjà initialisé, pas d\'attente');
             }
-
-            console.log('[DEBUG] Avant vérification isInitialized:', this.isInitialized);
 
             // Lancer automatiquement la lecture si l'initialisation a réussi
             if (this.isInitialized) {
-                console.log('[DEBUG] Lancement startPlayback() - playlist.length:', this.playlist.length);
-                await this.startPlayback();
-                console.log('[DEBUG] startPlayback() terminé');
-            } else {
-                console.log('[DEBUG] ÉCHEC - isInitialized est false');
+                const playbackSuccess = await this.startPlayback();
+
+                // Retirer les listeners SEULEMENT si la lecture a réussi
+                if (playbackSuccess) {
+                    this.firstInteraction = false;
+                    this.autoplayBlocked = false;
+                    document.removeEventListener('click', this.startMusicHandler, true);
+                    document.removeEventListener('keydown', this.startMusicHandler, true);
+                    document.removeEventListener('touchstart', this.startMusicHandler, true);
+                    document.removeEventListener('wheel', this.startMusicHandler, true);
+                    document.removeEventListener('scroll', this.startMusicHandler, true);
+                    document.removeEventListener('touchmove', this.startMusicHandler, true);
+                } else {
+                    // Lecture bloquée - marquer et attendre un click
+                    this.autoplayBlocked = true;
+                }
             }
         }
     }
 
     async startPlayback() {
-        console.log('[DEBUG] startPlayback() - début, playlist.length:', this.playlist.length);
-
         if (!this.playlist.length) {
-            console.log('[DEBUG] startPlayback() - ÉCHEC: playlist vide');
-            return;
+            return false;
         }
 
-        // Pour la première lecture, sélectionner depuis la queue (qui contient seulement init au début)
-        const selectedTrack = this.getNextTrackFromQueue();
-        console.log('[DEBUG] startPlayback() - selectedTrack:', selectedTrack);
+        // Si on n'a PAS encore de track chargé, en sélectionner un
+        if (this.currentIndex === 0 && !this.audio.src) {
+            // Pour la première lecture, sélectionner depuis la queue
+            const selectedTrack = this.getNextTrackFromQueue();
 
-        if (!selectedTrack) {
-            console.log('[DEBUG] startPlayback() - ÉCHEC: selectedTrack est null');
-            return;
+            if (!selectedTrack) {
+                return false;
+            }
+
+            // Trouver l'index de cette piste dans la playlist complète
+            this.currentIndex = this.playlist.findIndex((track) => track.path === selectedTrack.path);
         }
-
-        // Trouver l'index de cette piste dans la playlist complète
-        this.currentIndex = this.playlist.findIndex((track) => track.path === selectedTrack.path);
-        console.log('[DEBUG] startPlayback() - currentIndex:', this.currentIndex);
 
         await this.loadCurrentTrack();
-        console.log('[DEBUG] startPlayback() - loadCurrentTrack() terminé');
-
-        await this.play();
-        console.log('[DEBUG] startPlayback() - play() terminé');
+        const playSuccess = await this.play();
+        return playSuccess;
     }
 
     async loadCurrentTrack() {
@@ -407,23 +394,25 @@ class DnDMusicPlayer {
     }
 
     async play() {
-        console.log('[DEBUG] play() - début, audio.src:', this.audio.src);
         try {
             await this.audio.play();
-            console.log('[DEBUG] play() - audio.play() réussi');
-            this.isPlaying = true;
-            this.updatePlayButton();
+            // isPlaying sera mis à jour par l'événement 'playing'
+            return true;
         } catch (error) {
-            console.error('[DEBUG] play() - ERREUR:', error);
-            // Erreur lecture silencieuse en production
+            // Si c'est une erreur d'autoplay, ne pas passer au suivant
+            // Juste signaler l'échec pour que l'appelant sache
+            if (error.name === 'NotAllowedError') {
+                return false;
+            }
+            // Pour les autres erreurs, passer au suivant
             this.playNext();
+            return false;
         }
     }
 
     pause() {
         this.audio.pause();
-        this.isPlaying = false;
-        this.updatePlayButton();
+        // isPlaying sera mis à jour par l'événement 'pause'
     }
 
     async togglePlayPause() {

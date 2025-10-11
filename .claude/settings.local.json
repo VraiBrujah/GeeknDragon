@@ -28,7 +28,8 @@
       "Read(//i/Backup/GitHub-E/Projet/Projet OrIA/**)",
       "Read(//i/Backup/GitHub-E/**)",
       "Read(//i/Backup/**)",
-      "Bash(awk:*)"
+      "Bash(awk:*)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []
