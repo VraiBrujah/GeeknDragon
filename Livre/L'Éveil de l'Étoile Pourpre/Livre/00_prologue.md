@@ -40,7 +40,7 @@ Plus loin, par-delà les crêtes déchiquetées, les cités d'Etheria poursuivai
 
 Tous ces royaumes, aveuglés par leur quête égoïste de confort, oublieux des fondations mêmes sur lesquelles leur monde fragile reposait, ignorants des forces primordiales qui dormaient sous leurs pieds comme des volcans prêts à exploser.
 
-Mais elle, elle n'oubliait rien. Elle ne pouvait oublier, car l'oubli n'était pas dans sa nature transformée—ces instants où, jeune mortelle, elle s'était endormie au soleil dans les jardins de son enfance, le visage caressé par une brise tiède qui sentait la lavande et les promesses, la sensation de ses doigts d'alors, chauds et vivants, feuilletant un livre d'histoires près de la cheminée familiale.
+Mais elle, elle n'oubliait rien. Elle ne pouvait oublier. L'oubli n'était pas dans sa nature transformée, cette essence vampirique qui gravait chaque instant dans l'éternité de sa mémoire maudite—ces instants où, jeune mortelle, elle s'était endormie au soleil dans les jardins de son enfance, le visage caressé par une brise tiède qui sentait la lavande et les promesses, la sensation de ses doigts d'alors, chauds et vivants, feuilletant un livre d'histoires près de la cheminée familiale.
 
 Jamais.
 

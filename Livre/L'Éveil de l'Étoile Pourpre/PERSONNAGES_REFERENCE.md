@@ -228,11 +228,15 @@
 - Questions rhétoriques introspectives
 - Transitions entre douceur mélancolique et dureté glaciale
 - Détails sensoriels vampiriques (odeurs, battements de cœur, chaleur)
+- **Répétitions stylistiques épurées** : Évite les termes génériques trop fréquents ("de nouveau", "une fois de plus")
+- **Euphémismes refusés** : Dit "mille ans" plutôt que "millénaire" (vocabulaire direct et cru)
+- **Constructions variées** : Alterne phrases longues poétiques et affirmations courtes brutales
 
 **Exemples typiques** :
 - "Mille quatre-vingt-deux ans, trois mois et dix-sept jours"
 - "J'ai l'éternité devant moi"
 - "Le temps est un complice patient"
+- "Mille ans. Mille ans que je cherche." (répétition pour emphase, pas remplissage)
 - Phrases construites avec précision : sujet + verbe + métaphore gothique
 
 **Évolution** : De désespoir (transformation) → détermination glaciale (présent)
@@ -267,10 +271,14 @@
 - Observation plutôt qu'action
 - Acceptation fataliste mêlée de conscience naissante
 - Métaphores alchimiques et serpentines
+- **Présence physique intégrée** : Ses serpents capillaires participent à la communication (sifflements, mouvements)
+- **Vocabulaire alchimique précis** : Termes techniques liés à ses potions (dissimulation, métamorphose, essence)
+- **Temporalité millénaire** : Références aux âges passés, aux maîtres successifs, à la Grande Purge
 
 **Exemples typiques** :
 - "◈ Maîtresse, siffla-t-elle avec cette voix grave et sibilante"
 - "◈ Je sssens l'Éther s'éveiller"
+- "◈ Cela prendra un moment. Mes serpents doivent goûter l'air."
 - Formulation : Titre + observation + référence au passé
 - Les serpents de sa chevelure "ajoutent leurs murmures aux siens"
 
@@ -349,6 +357,41 @@
 - "❖ Je peux encore arrêter ? Dis-moi que je peux arrêter !"
 
 **Évolution** : Espoir → terreur → acceptation horrible → détermination glaciale (sur 1000 ans)
+
+## Règles Éditoriales Stylistiques
+
+### Répétitions à Éviter
+**Termes génériques trop fréquents** (à varier systématiquement) :
+- "de nouveau" → alternatives : "une fois encore", "à nouveau", restructuration de phrase
+- "une fois de plus" → alternatives : "encore", "à nouveau", omission si contexte clair
+- "comme" (comparaisons) → limiter à 1 par paragraphe, alterner avec métaphores directes
+- Adverbes en "-ment" → remplacer par constructions descriptives ("lentement" → "avec lenteur calculée")
+
+**Règle des répétitions stylistiques** :
+- Répétition acceptable si elle sert l'emphase dramatique ("Mille ans. Mille ans que je cherche.")
+- Répétition interdite si elle est mécanique/remplissage ("de nouveau... de nouveau... de nouveau")
+- Maximum 2 occurrences du même terme générique par page
+
+### Vocabulaire Spécifique
+**Termes à privilégier** (voix de Morwen) :
+- "mille ans" (direct) plutôt que "millénaire" (euphémisme)
+- Noms concrets plutôt qu'abstractions ("sang" > "essence vitale")
+- Verbes d'action précis ("déchirer" > "abîmer", "dévorer" > "consommer")
+
+**Métaphores Rice-style** (Anne Rice 35% d'influence) :
+- Synesthésie sensorielle ("goût du temps", "odeur de la mort")
+- Personnification d'abstractions ("le temps est un complice")
+- Baroquisme gothique mesuré (riche mais pas surchargé)
+
+### Construction des Phrases
+**Variation obligatoire** :
+- Alterner phrases longues complexes (introspection, description) et courtes brutales (révélations, actions)
+- Éviter 3+ phrases consécutives de même structure
+- Utiliser pauses dramatiques (points, virgules stratégiques) pour rythme
+
+**Exemple transformation** :
+- ❌ AVANT : "Elle regarda de nouveau le sanctuaire vide. Une fois de plus, rien. Comme toujours."
+- ✅ APRÈS : "Elle balaya le sanctuaire du regard. Vide. Toujours vide, comme les 347 qui l'avaient précédé."
 
 ## À Développer
 - [ ] Nom complet de Violette

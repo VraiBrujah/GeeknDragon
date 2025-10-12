@@ -1,177 +1,395 @@
-# L'Éveil de l'Étoile Pourpre - Instructions Éditoriales
+---
+project_type: livre
+project_name: L'Éveil de l'Étoile Pourpre
+version: 1.0.0
+modules_required:
+  - CLAUDE-LIVRE.md
+tools_priority:
+  - Grep  # Recherche personnages/lieux/répétitions
+  - Read  # Audits chapitres complets
+  - Edit  # Modifications ciblées
+---
 
-## Style et Influences - STANDARD ÉDITORIAL ÉTABLI
+# MÉMOIRE PROJET - L'Éveil de l'Étoile Pourpre
 
-**NOUVEAU STANDARD STYLISTIQUE** (confirmé par audit prologue V15) :
+<system-reminder>
+Projet actif: L'Éveil de l'Étoile Pourpre (Livre fantasy)
+Module chargé: CLAUDE-LIVRE.md
+Spécificités: Dark fantasy, vampires, éthériens, transformation
+</system-reminder>
 
-### Influences Principales Établies
+---
 
-**1. Anne Rice - 35%** (Dominante gothique)
-- Monologues intérieurs vampiriques, conscience millénaire obsessionnelle
-- Sensorium corporel riche (sang, peau, souffle mort)
-- Temporalité dilatée des immortels (siècles comme battements de cœur)
-- Prose baroque sensuelle, mélancolie gothique
-- **Application** : Voix narrative Morwen, descriptions atmosphère, rapport au temps
+## 📚 CONTEXTE SPÉCIFIQUE
 
-**2. R.A. Salvatore - 25%** (Structure narrative)
-- Action chorégraphiée précise (combats, mouvements tactiques)
-- Dialogues vifs révélateurs de caractère
-- Rythme rapide dans scènes de tension
-- Développement psychologique via l'action
-- **Application** : Scènes de combat, dialogues directs, progression intrigue
+**L'Éveil de l'Étoile Pourpre** est un roman de dark fantasy écrit par Brujah. L'histoire suit Violette, un phylactère vivant de l'Étoile Pourpre, traquée par Morwen Nyx'andra, une vampire millénaire obsédée par la résurrection de sa famille morte.
 
-**3. William Blake - 15%** (Symbolisme cosmique)
-- Vision prophétique oraculaire, ton apocalyptique
-- Contraires fusionnés (innocence/expérience, création/destruction)
-- Imagerie cosmo-métallurgique (forges éternelles, fournaises cosmiques)
-- Symbolique chromatique saturée (pourpre, rubis, argent noir)
-- Mythopoïèse (panthéon propre, noms résonants)
-- Cosmologie incarnée (nature chargée de volonté morale)
-- **Application** : Rituels, invocations, descriptions Codex Purpureus, enjeux cosmiques
+**Répertoire de Travail** : `E:\GitHub\GeeknDragon\Livre\L'Éveil de l'Étoile Pourpre`
 
-**4. Mary Shelley - 10%** (Structure tragique)
-- Relation créateur/créature (Morwen/saatha, Éthériens/créations)
-- Hubris scientifique et conséquences (chute des Éthériens)
-- Questionnement éthique transformation (vampirisme, servitude)
-- Solitude de l'immortel, quête d'humanité perdue
-- **Application** : Arc Morwen, arc saatha, thématiques esclavage/liberté
+---
 
-**5. H.P. Lovecraft - 8%** (Horreur cosmique)
-- Grimoire sentient comme entité (Codex Purpureus)
-- Architecture oppressante des ruines éthériennes
-- Horreur de l'échelle temporelle (civilisation disparue)
-- Lexique liturgique, angoisse face à l'ancien
-- **Application** : Sanctuaires, Monts de l'Éther, Codex, ruines antiques
+## 🎯 RÈGLES ÉDITORIALES ABSOLUES
 
-**6. J.R.R. Tolkien - 5%** (Toponymie uniquement)
-- Noms de lieux résonants (Eldoria, Valgaris, Sylvelune)
-- **ATTENTION** : Prose reste baroque Rice, PAS archaïque Tolkien
-- **Application** : Toponymie, noms propres géographiques
+### Règle Fondamentale - Préservation et Expansion du Texte
+**INTERDICTION ABSOLUE** de couper, condenser ou raccourcir le texte lors des corrections ou modifications éditoriales.
 
-**7. Brandon Sanderson - 3%** (Règles magiques)
-- Système magique avec règles implicites cohérentes
-- Rituel structuré (géométrie, ingrédients, coûts)
-- **ATTENTION** : Règles présentes mais NON didactiques (pas d'exposition)
-- **Application** : Rituels, magie éthérienne, système de pouvoir
+- ✅ **Autorisé** : Reformulation poétique enrichie, ajout de détails sensoriels, expansion narrative
+- ✅ **Autorisé** : Correction orthographique/grammaticale sans perte de contenu
+- ✅ **Autorisé** : Remplacement d'éléments incohérents par des versions ÉQUIVALENTES OU PLUS LONGUES
+- ✅ **Autorisé** : Variation lexicale pour éviter répétitions (sans réduire le texte)
+- ❌ **INTERDIT ABSOLU** : Condensation, résumé, suppression de passages
+- ❌ **INTERDIT ABSOLU** : Réduction de longueur pour "optimiser" ou "alléger"
+- ❌ **INTERDIT ABSOLU** : Coupes éditoriales non explicitement demandées par l'auteur
+- ❌ **INTERDIT ABSOLU** : Simplification qui réduit la richesse descriptive
 
-**8. Clive Barker - 2%** (Horreur corporelle)
-- Transformations viscérales, métamorphoses physiques
-- Horreur corporelle élégante
-- **Application** : Scènes de transformation, descriptions vampirisme
+**Principe sacré** : Le texte corrigé doit TOUJOURS être égal ou supérieur en longueur à l'original. Une correction qui réduit de 10 mots doit en ajouter 15 ailleurs pour compenser.
 
-**9. Style Propre - 12%** (Fusion unique)
-- "Gothique Épique Martial" : Fusion Rice + Salvatore + Blake sans équivalent direct
-- Pitch : "*Interview with the Vampire* rencontre *Legend of Drizzt* dans mythologie William Blake"
+### Application aux Corrections Éditoriales
 
-### Influences Éventuelles (Inspiration Secondaire Uniquement)
+**Lors de corrections de répétitions lexicales :**
+- ❌ INTERDIT : Supprimer "murmura" → rien
+- ✅ CORRECT : Remplacer "murmura" → "dit d'une voix basse qui résonnait dans l'obscurité"
+- ✅ CORRECT : Supprimer verbe de parole redondant MAIS ajouter description action/émotion
 
-Les influences suivantes peuvent être utilisées ponctuellement pour enrichissement stylistique, SANS chercher à atteindre de pourcentage cible :
+**Exemple transformation acceptable :**
+- AVANT (12 mots) : "❖ Je sais, murmura-t-elle doucement en regardant l'horizon."
+- APRÈS (15+ mots) : "❖ Je sais, dit-elle, sa voix douce comme soie noire glissant sur la pierre, regard perdu vers l'horizon ténébreux."
 
-- **Christopher Paolini** : Worldbuilding naturaliste, descriptions lyriques (utiliser avec modération)
-- **J.K. Rowling** : Ton accessible, découverte progressive (utiliser avec modération)
-- **Mark Twain** : Tournures simples vivantes, réalisme poétique (touches ponctuelles)
+**Lors de corrections d'adverbes :**
+- ❌ INTERDIT : "lentement" → suppression pure
+- ✅ CORRECT : "avançait lentement" → "avançait avec cette lenteur délibérée des prédateurs qui savourent chaque instant"
 
-**RÈGLE CRITIQUE** : Ces influences secondaires ne doivent JAMAIS diluer les 8 influences principales établies.
+### Règle du Style Gothique Préservé
 
-## Exigences Éditoriales
+**Même lors de corrections de "purple prose" :**
+- Le style dark fantasy gothique DOIT être maintenu
+- Les métaphores peuvent être MODIFIÉES mais pas SUPPRIMÉES
+- Les descriptions sensorielles peuvent être VARIÉES mais pas RÉDUITES
+- L'atmosphère immersive est PRIORITAIRE sur la concision
 
-**Structure narrative** : Livre minimum 200 000 mots, chapitres de 9000+ mots. Suspense constant, rebondissements cohérents, climax marquants.
+**Principe** : Ce livre vise un public friand de prose riche. Ne pas "nettoyer" vers un style minimaliste.
 
-**Organisation des fichiers** : Tous les éléments (chapitres, personnages, monde, magie) doivent être organisés dans des fichiers dédiés et maintenus à jour.
+### Consultation Obligatoire des Documents de Référence
 
-**Gestion des versions de chapitres** :
-- **Dossier de travail** : `Livre/` contient toutes les versions successives des chapitres avec suffixe de version (ex: `00_prologue_V1.md`, `00_prologue_V2.md`, etc.)
-- **Fichier de référence** : Le répertoire racine contient la version publiée de chaque chapitre sans suffixe (ex: `00_prologue.md`)
-- **Synchronisation obligatoire** : À chaque modification d'un fichier versionné dans `Livre/`, le fichier de référence dans le répertoire racine DOIT être mis à jour avec le contenu de la version la plus récente
-- **Règle de synchronisation** :
-  - Identifier la version la plus élevée par numéro (ex: V6 > V5 > V4)
-  - Copier le contenu de `Livre/NN_nom_chapitre_VX.md` (version la plus élevée) vers `NN_nom_chapitre.md` (racine)
-  - Conserver le nom du fichier de référence sans suffixe de version
-  - Exemple : Si `Livre/00_prologue_V6.md` est la dernière version, son contenu remplace celui de `00_prologue.md`
-- **Conservation historique** : Toutes les versions dans `Livre/` sont conservées pour traçabilité éditoriale
-- **Application** : Cette règle s'applique à TOUS les chapitres du livre
+**AVANT d'écrire ou corriger tout dialogue, consulter OBLIGATOIREMENT** :
+1. `PERSONNAGES_REFERENCE.md` - Traits de personnalité, voix narrative unique, historique complet
+2. `docs/projet/CLAUDE.md` - Influences stylistiques établies (Rice 35%, Salvatore 25%, Blake 15%, etc.)
+3. `docs/guides/GUIDE_STYLISTIQUE.md` - Standard éditorial validé par audit
 
-**Conventions typographiques** :
-- Esclaves : noms entièrement en minuscules (violette, saatha)
-- Maîtres : Titre + nom avec majuscule initiale (Maître Brujah, Maîtresse Drakkarys)
-- Pas de tirets de dialogue, pas d'emojis
-- Ponctuation française standard
+**Éléments à vérifier systématiquement** :
+- **Symboles utilisés** pour les dialogues (❖ Morwen, ◆ Umbra, ◈ saatha, ● Kael, ⟨ ⟩ Codex)
+- **Voix narrative UNIQUE** du personnage (registre, vocabulaire, tics de langage, rythme syntaxique)
+- **Cohérence caractérielle** avec interactions passées et motivations établies
+- **Respect arc narratif** du personnage (évolution psychologique progressive)
+- **Distinction absolue** : Chaque personnage doit être reconnaissable UNIQUEMENT par son style de dialogue
 
-## Personnages Principaux
+**RÈGLE CRITIQUE - VOIX DISTINCTIVES** :
+Chaque personnage possède une voix UNIQUE immédiatement reconnaissable. Le lecteur doit identifier QUI parle SANS voir le symbole, juste en lisant le contenu/style du dialogue.
 
-**Maîtresse Drakkarys** : Dragon en forme humaine, présence imposante, chevelure brune, yeux perçants, teint clair. Vêtue de noir avec saphirs et argent.
+**Exemples de différenciation obligatoire** :
+- **Morwen (❖)** : Phrases complexes baroques, métaphores Rice, oscillation émotionnelle, vocabulaire riche, monologues introspectifs
+- **Umbra (◆)** : Déférence constante ("Maîtresse"), questions prudentes philosophiques, phrases courtes respectueuses, curiosité intellectuelle
+- **saatha (◈)** : Sifflements intégrés ("sssens"), formalité millénaire, résignation séculaire, syntaxe archaïque, observations critiques tues
+- **Kael (●)** : Terreur transparente, phrases hachées nerveuses, amertume rentrée (300 ans service), pragmatisme militaire
+- **Codex Purpureus (⟨ ⟩)** : Phrases impératives courtes, manipulation séductrice, symbolisme obscur, satisfaction sombre
 
-**Maître Brujah** : Vampire, carrure puissante, chevelure et barbe sombres, regard intense. Toge noire monastique.
+---
 
-**Rosalya/violette** : Yeux violets changeant selon l'humeur, chevelure violette, teint pâle. Style violet audacieux, colliers d'esclave quand elle choisit ce statut.
+## 🎭 PERSONNAGES & VOIX NARRATIVES
 
-**saatha la Gorgone** : Millénaire, chevelure de serpents noirs, lunettes épaisses, peau minérale. Vêtements verts, bijoux d'esclave.
+### Documents de Référence Obligatoires
+- **Fichier principal** : `PERSONNAGES_REFERENCE.md`
+- **Mise à jour** : Après chaque développement significatif de personnage
+- **Consultation** : Avant chaque écriture de dialogue ou scène impliquant un personnage établi
 
-## Éléments Narratifs Clés
+### Symboles de Dialogue - CONVENTIONS ÉTABLIES
 
-**Intrigue principale** : Échec des sbires de Morwen à récupérer violette. Révélation finale : Morwen est la sœur aînée de Brujah.
+**Système de symboles personnalisés pour chaque personnage :**
 
-**Arc de saatha** : Tentatives échouées de récupération de violette, blessée par Morwen, retour décisif dans le combat final après avoir compris sa liberté de choix.
+- **❖** (Morwen Nyx'andra) : Vampire millénaire, protagoniste
+- **◆** (Umbra) : Serviteur-ombre, compagnon
+- **◈** (saatha) : Gorgone, esclave millénaire
+- **●** (Kael) : Goule vampirique, lieutenant
+- **○** (Autres voix) : Personnages secondaires
+- **⟨ ⟩** (Codex Purpureus) : Grimoire vivant, entité
 
-**Relations** : 
-- Romance Brujah/Drakkarys
-- violette développe un amour esclave volontaire envers le couple Maître Brujah/Maîtresse Drakkarys
-- saatha désire se donner au couple en fin de récit
-- Complémentarité Alpha (Brujah/Drakkarys) et Oméga (violette/saatha)
+**Pensées intérieures :** *Italiques entre astérisques*
 
-**Contexte social** : Racisme contre les non-humains (95% humains), groupe isolé, violette atteint 16 ans en fin de livre.
+**Convention INTERDITE :** Tirets cadratins (—) pour dialogues
 
-## Univers
+**Avantages système actuel :**
+- Identification immédiate du locuteur sans "dit-il/dit-elle"
+- Distinction visuelle claire entre personnages
+- Permet variations voix narrative sans confusion
 
-**Lieux** : Eldoria, Valgaris, Etheria - toponymie celtique/nordique
-**Magie** : Systèmes cohérents, règles claires, coûts visibles
-**Règles d'adresse** : violette et saatha vouvoient leurs Maîtres
+---
 
-## Critères d'Édition
+## 🌍 UNIVERS & SYSTÈME MAGIQUE
 
-**Dialogues distinctifs** : Chaque personnage reconnaissable par ton, lexique, silences. Pas d'échanges génériques.
-**Narration fluide** : Immersive, transitions naturelles, pas de digressions. Cohérence chronologique et géographique stricte.
-**Libertés éditoriales** : Restructuration, fusion/division de chapitres autorisées pour améliorer rythme et tension.
+### Éléments Centraux
+- **Éthériens** : Race disparue, maîtres de l'Éther, annihilés lors de la Grande Purge
+- **Éther** : Magie primordiale, force invisible traversant toute chose
+- **Sang Éthérien** : Essence transformatrice, clé des rituels de pouvoir
+- **Étoile Pourpre** : Symbole de transformation vampirique, défi à l'ordre naturel
 
-## Audit Post-Édition
+### Lieux Principaux
+- **Monts de l'Éther** : Sanctuaires ruinés, atmosphère oppressante
+- **Eldoria** : Cité magnifique (nord = localisation Violette)
+- **Valgaris** : Cité industrielle aux flammes inquiétantes
+- **Sylvelune** : Forêts elfiques aux cités arboricoles
 
-Après chaque mise à jour majeure :
-1. Rapport de cohérence global
-2. Résumés par chapitre avec éléments clés
-3. Propositions d'amélioration priorisées
-4. Verdict de publiabilité
-5. Synopsis du prochain chapitre si applicable
+**Référence complète** : Voir `PERSONNAGES_REFERENCE.md` sections "Lieux" et "Système Magique"
 
-Maintenir à jour tous les fichiers du dossier Livre pour assurer la cohérence.
+---
 
-## Méthodologie d'Audit Éditorial
+## ✍️ PROCESSUS ÉDITORIAL
 
-**Objectifs** : Audit complet - cohérence, structure, style, langue française irréprochable.
+### Workflow Standard
+1. **Lecture du texte existant** (outil Read)
+2. **Consultation PERSONNAGES_REFERENCE.md** pour personnages impliqués
+3. **Vérification cohérence** : dialogue, symbolique, chronologie
+4. **Modification avec Edit** (jamais raccourcir)
+5. **Validation** : Relecture post-modification
 
-**Analyse par composante** :
-- Macro-structure et intrigue
-- Développement des personnages et voix distinctives 
-- Cohérence de l'univers et règles magiques
-- Qualité linguistique et orthotypographie
-- Lisibilité et rythme narratif
-- Originalité et positionnement marché
+### Cas Spécifiques
 
-**Livrables** : Rapport complet, corrections priorisées, exemples de réécriture, évaluation de publiabilité, projections de vente conservatrices.
+#### Correction de Dialogue
+```
+ÉTAPE 1 : Read du fichier concerné
+ÉTAPE 2 : Read de PERSONNAGES_REFERENCE.md (section personnage)
+ÉTAPE 3 : Vérifier voix narrative, symboles, cohérence
+ÉTAPE 4 : Edit en préservant/augmentant la longueur
+```
 
-**Contrôles spécialisés** : Vérification du mélange stylistique, équilibre descriptif, matrice des voix de personnages, typographie française.
-- En plus des influences principales (Salvatore, Tolkien, Sanderson, Paolini, Rowling, Rice), insuffle une légère touche inspirée de William Blake.
+#### Audit de Chapitre
+```
+ÉTAPE 1 : Read du chapitre complet
+ÉTAPE 2 : Grep pour répétitions/incohérences
+ÉTAPE 3 : Liste des problèmes trouvés (pas de corrections automatiques)
+ÉTAPE 4 : Suggestions de corrections avec justifications
+```
 
-Blake doit apporter des phrases imagées, mystiques et presque prophétiques, où la nature et les symboles prennent une dimension spirituelle.
+#### Expansion de Scène
+```
+ÉTAPE 1 : Read du passage à développer
+ÉTAPE 2 : Read de PERSONNAGES_REFERENCE.md (personnages + lieux)
+ÉTAPE 3 : Proposition d'expansion avec détails sensoriels/émotionnels
+ÉTAPE 4 : Edit pour intégration harmonieuse
+```
 
-Twain doit colorer le texte par des tournures simples, vivantes, parfois ironiques ou pleines d’un réalisme poétique, rappelant la voix du conteur et du peuple.
+---
 
-👉 Les phrases doivent être belles, imagées et poétiques, sans jamais alourdir le récit. Le texte doit conserver une fluidité romanesque, mais offrir par endroits des éclats d’image forte ou de métaphore lumineuse, comme des joyaux sertis dans la narration.
-- ### Prompt anti-dégradation
+## 🎨 TON & STYLE NARRATIF
 
-⚠️ **Important** : Ne simplifie pas, ne raccourcis pas et ne dégrades pas les phrases existantes.
+### Registre Attendu
+- **Atmosphère** : Dark fantasy, gothique, viscéral
+- **Descriptions** : Riches en détails sensoriels (visuel, olfactif, tactile)
+- **Rythme** : Variable selon tension dramatique (lent = contemplation, rapide = action)
+- **Vocabulaire** : Soutenu sans être archaïque, immersif
 
-* Garde absolument toutes les **belles tournures de phrases poétiques et imagées**.
-* Si tu proposes une amélioration, elle doit **enrichir** le texte, pas le réduire ni le simplifier.
-* Les phrases doivent rester **nobles, lyriques et évocatrices**, comme des constellations de mots.
-* ❌ Exemple interdit : remplacer « constellation humaine dont l’éclat rivalisait avec les astres » par une version simplifiée comme « une étoile dans le ciel ».
-* ✅ Exemple attendu : tu peux étoffer ou polir la phrase, mais toujours dans le respect de sa **beauté originelle** et de sa **poésie élevée**.
+### Formulations Caractéristiques (Exemples)
+
+#### ✅ Style Attendu
+- "Le sang éthérien pulsait dans les veines de l'amulette comme un cœur minéral."
+- "Les serpents capillaires de saatha ondulaient avec une grâce hypnotique, langues fourchues goûtant l'air saturé de magie."
+- "Morwen comptait les siècles comme les mortels comptent les battements de cœur."
+
+#### ❌ Style à Éviter
+- "Le sang était magique." (trop plat)
+- "saatha avait des serpents sur la tête." (descriptif sans atmosphère)
+- "Morwen était très vieille." (manque de viscéralité)
+
+**Principe** : Chaque phrase doit évoquer une image, une sensation, une émotion.
+
+---
+
+## 📋 DOCUMENTS DE RÉFÉRENCE
+
+### Fichiers Essentiels
+1. **PERSONNAGES_REFERENCE.md** - Bible des personnages, lieux, magie
+2. **00_prologue.md** (et variantes V14/V15) - Texte principal
+3. **EXPANSION_4_SAATHA_FINAL.md** - Développement arc saatha
+4. **AUDIT_EDITORIAL_SEVERE_INDEPENDANT.md** - Corrections identifiées
+
+### Mise à Jour des Références
+**Après chaque développement majeur** :
+- Ajouter nouveaux personnages à PERSONNAGES_REFERENCE.md
+- Documenter nouveaux lieux/artefacts
+- Mettre à jour chronologie si nécessaire
+- Ajouter symboles/conventions établis
+
+---
+
+## 🧪 VALIDATION & QUALITÉ
+
+### Checklist Pré-Validation (Modifications)
+- [ ] Longueur préservée ou augmentée (jamais réduite)
+- [ ] PERSONNAGES_REFERENCE.md consulté pour dialogues
+- [ ] Cohérence avec chapitres précédents
+- [ ] Symboles de dialogue conformes
+- [ ] Voix narrative respectée (registre, vocabulaire)
+- [ ] Détails sensoriels présents (pas de descriptions plates)
+- [ ] Aucun tiret cadratin (—) introduit
+
+### Checklist Pré-Validation (Nouveaux Contenus)
+- [ ] Arc narratif respecté (consulter PERSONNAGES_REFERENCE.md)
+- [ ] Système magique cohérent (règles de l'Éther)
+- [ ] Chronologie vérifiée
+- [ ] Ton dark fantasy maintenu
+- [ ] Symbolisme Étoile Pourpre intégré si pertinent
+
+---
+
+## 🎯 OBJECTIFS NARRATIFS
+
+### Arcs Principaux à Développer
+1. **Violette** : Découverte de sa nature → Confrontation destin
+2. **Morwen** : Obsession résurrection → Rédemption ou damnation
+3. **saatha** : Servitude millénaire → Conscience → Rébellion décisive
+4. **Étoile Pourpre** : Symbole transformation → Révélation véritable nature
+
+### Thèmes Centraux
+- Obsession vs Amour (Morwen et sa famille)
+- Immortalité vs Humanité (prix du pouvoir)
+- Esclavage vs Liberté (arc saatha)
+- Hubris vs Sagesse (chute des Éthériens)
+
+---
+
+## 📝 CONVENTIONS TYPOGRAPHIQUES SPÉCIFIQUES LIVRE
+
+### Héritées de CLAUDE.md Global
+- **INTERDICTION TOTALE** du tiret cadratin (—)
+- Toujours utiliser tiret simple (-) ou double tiret (--)
+- Langue : Français exclusivement
+
+### Spécifiques au Projet Livre
+
+#### Formatage Markdown - RÈGLES CRITIQUES
+**INTERDICTION ABSOLUE** de couper les balises Markdown par des retours chariot :
+
+- ❌ **INTERDIT** :
+  ```
+  *❖ Texte dialogue ligne 1
+
+  ❖ Texte dialogue ligne 2*
+  ```
+
+- ✅ **CORRECT** :
+  ```
+  *❖ Texte dialogue ligne 1❖ Texte dialogue ligne 2*
+  ```
+
+**Règle** : Les astérisques d'ouverture et de fermeture doivent être sur la même "portée" sans interruption par retour chariot, sinon ils s'affichent littéralement au lieu d'être interprétés.
+
+#### Conventions de Formatage Établies
+
+**Dialogues normaux (présent narratif)** :
+- Format brut sans formatage spécial
+- Exemple : `❖ Je sais, dit-elle.`
+
+**Pensées intérieures (présent narratif)** :
+- **Gras entre doubles astérisques**
+- Exemple : `**❖ Que dois-je faire maintenant ?**`
+
+**Flashbacks (scènes passées)** :
+- *Italique entre astérisques simples* pour TOUT le texte (narration + dialogues)
+- Exemple : `*Elle marchait lentement vers le sanctuaire.*`
+- Exemple dialogue flashback : `*❖ Mère tient encore debout, dit-elle.*`
+
+**Pensées dans flashback** :
+- ***Gras + Italique (triple astérisques)***
+- Exemple : `***❖ Dois-je vraiment faire cela ?***`
+
+**RÈGLE ABSOLUE** : Jamais de retour chariot entre balises ouvrantes/fermantes de même niveau.
+
+---
+
+## 🔍 RECHERCHES & AUDITS
+
+### Outils Privilégiés
+- **Grep** : Recherche de répétitions, incohérences, occurrences de noms/lieux
+- **Read** : Lecture complète de chapitres pour audit holistique
+- **Edit** : Corrections ciblées (jamais Write sur fichiers existants)
+
+### Exemples de Recherches Utiles
+```bash
+# Vérifier toutes mentions d'un personnage
+Grep "Morwen" --output_mode content -n
+
+# Trouver répétitions de formulations
+Grep "yeux rouges" --output_mode content -n
+
+# Localiser tous les dialogues de saatha
+Grep "saatha.*:" --output_mode content -n
+
+# Identifier utilisations de l'Étoile Pourpre
+Grep "Étoile Pourpre" --output_mode files_with_matches
+```
+
+---
+
+## 🚨 RAPPELS CRITIQUES
+
+### RÈGLES ABSOLUES NON-NÉGOCIABLES
+
+1. **JAMAIS RACCOURCIR LE TEXTE** - C'est le style de l'auteur
+   - ❌ INTERDIT : Couper, condenser, résumer, simplifier pour "alléger"
+   - ✅ AUTORISÉ : Augmenter, reformuler poétiquement, enrichir
+   - ✅ AUTORISÉ : Modifier si incohérence MAIS version corrigée doit être égale ou plus longue
+   - **Principe sacré** : Texte corrigé ≥ texte original EN LONGUEUR
+
+2. **TOUJOURS CONSULTER PERSONNAGES_REFERENCE.md AVANT DIALOGUES**
+   - Vérifier voix narrative unique (registre, vocabulaire, tics)
+   - Vérifier symbole correct (❖◆◈●○⟨⟩)
+   - Vérifier cohérence caractérielle et arc narratif
+   - **Obligation absolue** : Lecteur doit reconnaître QUI parle par style seul
+
+3. **JAMAIS UTILISER TIRET CADRATIN (—)** - Utiliser tiret simple (-) ou double (--)
+
+4. **TOUJOURS PRÉSERVER VOIX NARRATIVE ÉTABLIE**
+   - Chaque personnage possède style dialogue UNIQUE et RECONNAISSABLE
+   - Différenciation obligatoire entre personnages similaires (Umbra ≠ Kael)
+   - Consulter PERSONNAGES_REFERENCE.md pour maintenir cohérence
+
+5. **TOUJOURS RESPECTER INFLUENCES STYLISTIQUES ÉTABLIES**
+   - Anne Rice 35% (prose gothique baroque, temporalité immortels)
+   - R.A. Salvatore 25% (action chorégraphiée, dialogues vifs)
+   - William Blake 15% (symbolisme cosmique, contraires fusionnés)
+   - Mary Shelley 10%, Lovecraft 8%, Tolkien 5%, Sanderson 3%, Barker 2%
+   - Consulter `docs/projet/CLAUDE.md` et `docs/guides/GUIDE_STYLISTIQUE.md`
+
+6. **JAMAIS FAIRE CORRECTIONS AUTOMATIQUES MASSIVES** - Proposer d'abord
+
+7. **TOUJOURS JUSTIFIER MODIFICATIONS** avec références (numéros lignes, cohérence personnage)
+
+### CORRECTIONS AUTORISÉES (Respectant Règles Ci-Dessus)
+
+✅ **Éliminer sur-explications** en reformulant poétiquement (SANS réduire longueur)
+✅ **Varier répétitions mécaniques** par reformulations enrichies
+✅ **Différencier voix dialogues** pour renforcer unicité personnages
+✅ **Enrichir géographie** en ajoutant détails sensoriels
+✅ **Corriger incohérences** narratives/caractérielles (version corrigée ≥ originale)
+✅ **Polir métaphores clichées** en les remplaçant par originales (même longueur minimum)
+
+❌ **Raccourcir "pour rythme"** : INTERDIT
+❌ **Condenser "pour efficacité narrative"** : INTERDIT
+❌ **Simplifier "pour accessibilité"** : INTERDIT
+❌ **Couper passages "répétitifs"** : INTERDIT (varier formulation à la place)
+
+---
+
+## 📊 ÉTAT DU PROJET
+
+### Fichiers Actifs
+- `00_prologue.md` - Version principale
+- `00_prologue_V14.md` - Variante archivée
+- `00_prologue_V15_SECTIONS_1-9_TRANSFORMEES.md` - Travail en cours
+- `EXPANSION_4_SAATHA_FINAL.md` - Arc secondaire développé
+
+### Prochaines Étapes (À Développer)
+- [ ] Finaliser prologue (sections 1-9 transformées)
+- [ ] Établir conventions symboles dialogue
+- [ ] Développer chapitre 1 (après prologue)
+- [ ] Intégrer arc saatha dans narration principale
+- [ ] Documenter résolution finale Morwen/Violette/saatha

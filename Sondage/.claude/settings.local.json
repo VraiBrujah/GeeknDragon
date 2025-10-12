@@ -41,7 +41,11 @@
       "Bash(del:*)",
       "Bash(echo:*)",
       "Bash(php:*)",
-      "Bash(test:*)"
+      "Bash(test:*)",
+      "Bash(curl:*)",
+      "Bash(node:*)",
+      "Bash(tasklist)",
+      "Bash(findstr:*)"
     ],
     "deny": [],
     "ask": []
