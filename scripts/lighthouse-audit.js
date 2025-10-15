@@ -15,10 +15,14 @@
  *   node scripts/lighthouse-audit.js https://staging.geekndragon.com
  */
 
-const lighthouse = require('lighthouse');
-const chromeLauncher = require('chrome-launcher');
-const fs = require('fs');
-const path = require('path');
+import lighthouse from 'lighthouse';
+import * as chromeLauncher from 'chrome-launcher';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Configuration
 const BASE_URL = process.argv[2] || 'http://localhost:8000';
