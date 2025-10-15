@@ -197,28 +197,8 @@ if (!$snipcartKey) {
   //   }
   // }, 3000);
 
-  // Désactiver tous les logs Snipcart en production
-  (function() {
-    const originalLog = console.log;
-    const originalWarn = console.warn;
-    
-    console.log = function(...args) {
-      const message = args.join(' ');
-      if (message.includes('snipcart') || message.includes('gtag') || message.includes('GTag') || 
-          message.includes('Enabling GTag') || message.includes('Sending event')) {
-        return; // Bloquer les logs Snipcart/GTag
-      }
-      originalLog.apply(console, args);
-    };
-    
-    console.warn = function(...args) {
-      const message = args.join(' ');
-      if (message.includes('snipcart') || message.includes('gtag') || message.includes('GTag')) {
-        return; // Bloquer les warnings Snipcart/GTag
-      }
-      originalWarn.apply(console, args);
-    };
-  })();
+  // Filtrage conditionnel des logs Snipcart selon DEBUG_MODE
+  <?php echo get_console_filter_script(); ?>
 
 })();
 </script>

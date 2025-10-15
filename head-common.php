@@ -7,10 +7,15 @@
  * identifiant est fourni, le script gtag est injecté avant Snipcart afin
  * d'activer le suivi e-commerce attendu par Snipcart sans exposer de valeur
  * codée en dur.
- * 
+ *
  * Le CMP (Consent Management Platform) est chargé en PRIORITÉ ABSOLUE
  * pour bloquer automatiquement les trackers avant consentement utilisateur.
  */
+
+// Charger les helpers communs
+require_once __DIR__ . '/includes/asset-helper.php';
+require_once __DIR__ . '/includes/debug-helper.php';
+
 $gaMeasurementId = $_ENV['GA_MEASUREMENT_ID']
     ?? $_SERVER['GA_MEASUREMENT_ID']
     ?? null;
@@ -18,9 +23,6 @@ $gaMeasurementId = $_ENV['GA_MEASUREMENT_ID']
 if (is_string($gaMeasurementId)) {
     $gaMeasurementId = trim($gaMeasurementId);
 }
-
-// Mode debug global - désactivé en production
-$debugMode = ($_ENV['DEBUG_MODE'] ?? 'false') === 'true';
 
 ?>
 <head>
@@ -36,7 +38,7 @@ $debugMode = ($_ENV['DEBUG_MODE'] ?? 'false') === 'true';
   <link rel="preconnect" href="https://c.delivery.consentmanager.net" crossorigin>
   <script>
     // Mode debug global - contrôle tous les logs de débogage
-    window.DEBUG_MODE = <?php echo $debugMode ? 'true' : 'false'; ?>;
+    window.DEBUG_MODE = <?php echo is_debug_mode() ? 'true' : 'false'; ?>;
   </script>
   <?php 
   // CMP réactivé avec exemption Snipcart configurée
@@ -75,21 +77,28 @@ $debugMode = ($_ENV['DEBUG_MODE'] ?? 'false') === 'true';
   <link rel="canonical" href="<?= htmlspecialchars($metaUrl) ?>">
 
   <!-- Preload CSS critique -->
-  <link rel="preload" href="/css/vendor.bundle.min.css?v=<?= filemtime(__DIR__.'/css/vendor.bundle.min.css') ?>" as="style">
-  <link rel="stylesheet" href="/css/vendor.bundle.min.css?v=<?= filemtime(__DIR__.'/css/vendor.bundle.min.css') ?>" />
+  <?= preload_asset('css/vendor.bundle.min.css', 'style') ?>
+
+  <?= stylesheet_tag('css/vendor.bundle.min.css') ?>
+
 
   <!-- Polices auto-hébergées avec preload critique -->
   <?php if (file_exists(__DIR__.'/css/fonts-selfhosted.css')): ?>
-    <link rel="stylesheet" href="/css/fonts-selfhosted.css?v=<?= filemtime(__DIR__.'/css/fonts-selfhosted.css') ?>">
+    <?= stylesheet_tag('css/fonts-selfhosted.css') ?>
+
     <?php if (file_exists(__DIR__.'/media/fonts/OpenSans-400.woff2')): ?>
-      <link rel="preload" as="font" type="font/woff2" href="/media/fonts/OpenSans-400.woff2" crossorigin>
+      <?= preload_asset('media/fonts/OpenSans-400.woff2', 'font') ?>
+
     <?php endif; ?>
     <?php if (file_exists(__DIR__.'/media/fonts/Cinzel-600.woff2')): ?>
-      <link rel="preload" as="font" type="font/woff2" href="/media/fonts/Cinzel-600.woff2" crossorigin>
+      <?= preload_asset('media/fonts/Cinzel-600.woff2', 'font') ?>
+
     <?php endif; ?>
   <?php endif; ?>
-  <link rel="stylesheet" href="/css/styles.css?v=<?= filemtime(__DIR__.'/css/styles.css') ?>">
-  <link rel="stylesheet" href="/css/shop-grid.css?v=<?= filemtime(__DIR__.'/css/shop-grid.css') ?>">
+  <?= stylesheet_tag('css/styles.css') ?>
+
+  <?= stylesheet_tag('css/shop-grid.css') ?>
+
   <?php if (!empty($gaMeasurementId)): ?>
     <!-- Google Analytics : chargement conditionnel après consentement CMP -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=<?= rawurlencode($gaMeasurementId) ?>"></script>
