@@ -224,3 +224,7 @@ if (!function_exists('gd_build_absolute_url')) {
     }
 }
 
+// Chargement des helpers communs
+require_once __DIR__ . '/includes/asset-helper.php';
+require_once __DIR__ . '/includes/debug-helper.php';
+
