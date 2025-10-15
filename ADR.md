@@ -131,7 +131,7 @@ coin-quintessence → 5 variations (1 par métal, fixe)
 
 **Enforcement** :
 - TodoList rappel automatique
-- Documentation explicite `CLAUDE.md`
+- Documentation projet complète
 - Commande unique centralisée
 - Validation via `npm run validate`
 
