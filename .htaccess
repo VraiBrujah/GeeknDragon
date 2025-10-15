@@ -34,6 +34,12 @@
     RewriteCond %{HTTPS} !=on
     RewriteCond %{HTTP:X-Forwarded-Proto} !https
     RewriteRule ^ https://geekndragon.com%{REQUEST_URI} [L,R=301]
+
+    # Redirections anciennes URLs produits
+    RewriteRule ^lot10\.php$ /product.php?id=coin-traveler-offering [L,R=301]
+    RewriteRule ^lot25\.php$ /product.php?id=coin-kingdom-currency [L,R=301]
+    RewriteRule ^lot50-essence\.php$ /product.php?id=coin-kingdom-essence [L,R=301]
+    RewriteRule ^lot50-tresorerie\.php$ /product.php?id=coin-merchant-treasury [L,R=301]
 </IfModule>
 
 # Mise en cache des assets statiques optimisé
