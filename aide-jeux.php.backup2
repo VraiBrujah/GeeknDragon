@@ -1483,11 +1483,11 @@ echo $snipcartInit;
 
         <!-- Explication résultat -->
         <div class="bg-indigo-900/30 border border-indigo-700/50 rounded-lg p-4 mb-6">
-          <p class="text-gray-300 text-center" data-i18n="gameHelp.abilityScoreRoller.dnd2024Rules">
-            <?= __('gameHelp.abilityScoreRoller.dnd2024Rules', '<strong>D&D 2024 :</strong> Lancez 4d6, gardez les 3 meilleurs. Résultat : <strong class="text-yellow-300">Score (Modificateur)</strong>') ?>
+          <p class="text-gray-300 text-center">
+            <strong>D&D 2024 :</strong> Lancez 4d6, gardez les 3 meilleurs. Résultat : <strong class="text-yellow-300">Score (Modificateur)</strong>
           </p>
           <p class="text-sm text-gray-400 text-center mt-2" data-i18n="gameHelp.diceRoller.example">
-            <?= __('gameHelp.diceRoller.example', 'Ex: <strong>16 (+3)</strong> → Inscrivez <strong>16</strong> dans la case valeur, <strong>+3</strong> dans la case modificateur ET dans toutes les compétences associées (triptyque Historique)') ?>
+            Ex: <strong>16 (+3)</strong> → Inscrivez <strong>16</strong> dans la case valeur, <strong>+3</strong> dans la case modificateur ET dans toutes les compétences associées (triptyque Historique)
           </p>
         </div>
 
@@ -1551,61 +1551,61 @@ echo $snipcartInit;
         <div class="grid md:grid-cols-2 gap-6 mt-8">
           <!-- Colonne gauche : Calcul compétences -->
           <div class="bg-gray-800/50 rounded-lg p-6">
-            <h4 class="text-lg font-semibold mb-4 text-indigo-400" data-i18n="gameHelp.abilityScoreRoller.skillCalc.title"><?= __('gameHelp.abilityScoreRoller.skillCalc.title', '🧮 Calcul des compétences') ?></h4>
+            <h4 class="text-lg font-semibold mb-4 text-indigo-400">🧮 Calcul des compétences</h4>
             <div class="bg-indigo-900/30 border border-indigo-600/50 rounded p-3 mb-4">
-              <p class="text-center text-yellow-300 font-bold" data-i18n="gameHelp.abilityScoreRoller.skillCalc.formula"><?= __('gameHelp.abilityScoreRoller.skillCalc.formula', 'Bonus = Modificateur + Maîtrise') ?></p>
+              <p class="text-center text-yellow-300 font-bold">Bonus = Modificateur + Maîtrise</p>
             </div>
 
             <div class="space-y-3">
               <div class="flex items-center gap-3">
                 <img src="/media/branding/icons/competence.webp" alt="Non maîtrisée" class="w-10 h-10">
-                <p class="text-sm text-gray-300" data-i18n="gameHelp.abilityScoreRoller.skillCalc.notProficient"><?= __('gameHelp.abilityScoreRoller.skillCalc.notProficient', '<strong>Non maîtrisée :</strong> Modificateur seul') ?></p>
+                <p class="text-sm text-gray-300"><strong>Non maîtrisée :</strong> Modificateur seul</p>
               </div>
               <div class="flex items-center gap-3">
                 <img src="/media/branding/icons/maitrise.webp" alt="Maîtrisée" class="w-10 h-10">
-                <p class="text-sm text-gray-300" data-i18n="gameHelp.abilityScoreRoller.skillCalc.proficient"><?= __('gameHelp.abilityScoreRoller.skillCalc.proficient', '<strong>Maîtrisée :</strong> Mod + Bonus') ?></p>
+                <p class="text-sm text-gray-300"><strong>Maîtrisée :</strong> Mod + Bonus</p>
               </div>
               <div class="flex items-center gap-3">
                 <img src="/media/branding/icons/expertise.webp" alt="Expertisée" class="w-10 h-10">
-                <p class="text-sm text-gray-300" data-i18n="gameHelp.abilityScoreRoller.skillCalc.expertise"><?= __('gameHelp.abilityScoreRoller.skillCalc.expertise', '<strong>Expertisée :</strong> Mod + (Bonus×2)') ?></p>
+                <p class="text-sm text-gray-300"><strong>Expertisée :</strong> Mod + (Bonus×2)</p>
               </div>
             </div>
 
             <div class="mt-4 pt-4 border-t border-gray-700">
-              <p class="text-xs text-gray-400" data-i18n="gameHelp.abilityScoreRoller.skillCalc.proficiencyBonus"><?= __('gameHelp.abilityScoreRoller.skillCalc.proficiencyBonus', '<strong>Bonus maîtrise :</strong> Niv 1-4:+2 • 5-8:+3 • 9-12:+4 • 13-16:+5 • 17-20:+6') ?></p>
+              <p class="text-xs text-gray-400"><strong>Bonus maîtrise :</strong> Niv 1-4:+2 • 5-8:+3 • 9-12:+4 • 13-16:+5 • 17-20:+6</p>
             </div>
           </div>
 
           <!-- Colonne droite : Exemple -->
           <div class="bg-gray-800/50 rounded-lg p-6">
-            <h4 class="text-lg font-semibold mb-4 text-green-400" data-i18n="gameHelp.abilityScoreRoller.skillCalc.exampleTitle"><?= __('gameHelp.abilityScoreRoller.skillCalc.exampleTitle', '💡 Exemple (Dex 16, Niv 5)') ?></h4>
-            <p class="text-sm text-gray-400 mb-4" data-i18n="gameHelp.abilityScoreRoller.skillCalc.exampleStats"><?= __('gameHelp.abilityScoreRoller.skillCalc.exampleStats', 'Score <strong>16</strong> → Mod <strong>+3</strong> • Bonus maîtrise <strong>+3</strong>') ?></p>
+            <h4 class="text-lg font-semibold mb-4 text-green-400">💡 Exemple (Dex 16, Niv 5)</h4>
+            <p class="text-sm text-gray-400 mb-4">Score <strong>16</strong> → Mod <strong>+3</strong> • Bonus maîtrise <strong>+3</strong></p>
 
             <div class="space-y-2">
               <div class="bg-gray-700/50 rounded p-3 flex items-center gap-2">
                 <img src="/media/branding/icons/competence.webp" alt="Non maîtrisée" class="w-6 h-6">
-                <p class="text-sm" data-i18n="gameHelp.abilityScoreRoller.skillCalc.exampleAcrobatics"><?= __('gameHelp.abilityScoreRoller.skillCalc.exampleAcrobatics', '<strong>Acrobaties</strong> : +3 = <strong class="text-yellow-300">+3</strong>') ?></p>
+                <p class="text-sm"><strong>Acrobaties</strong> : +3 = <strong class="text-yellow-300">+3</strong></p>
               </div>
               <div class="bg-gray-700/50 rounded p-3 flex items-center gap-2">
                 <img src="/media/branding/icons/maitrise.webp" alt="Maîtrisée" class="w-6 h-6">
-                <p class="text-sm" data-i18n="gameHelp.abilityScoreRoller.skillCalc.exampleStealth"><?= __('gameHelp.abilityScoreRoller.skillCalc.exampleStealth', '<strong>Discrétion</strong> : +3+3 = <strong class="text-yellow-300">+6</strong>') ?></p>
+                <p class="text-sm"><strong>Discrétion</strong> : +3+3 = <strong class="text-yellow-300">+6</strong></p>
               </div>
               <div class="bg-gray-700/50 rounded p-3 flex items-center gap-2">
                 <img src="/media/branding/icons/expertise.webp" alt="Expertisée" class="w-6 h-6">
-                <p class="text-sm" data-i18n="gameHelp.abilityScoreRoller.skillCalc.exampleSleight"><?= __('gameHelp.abilityScoreRoller.skillCalc.exampleSleight', '<strong>Escamotage</strong> : +3+3+3 = <strong class="text-yellow-300">+9</strong>') ?></p>
+                <p class="text-sm"><strong>Escamotage</strong> : +3+3+3 = <strong class="text-yellow-300">+9</strong></p>
               </div>
             </div>
 
             <div class="mt-4 p-3 bg-amber-900/30 border border-amber-700/50 rounded">
-              <p class="text-xs text-amber-300" data-i18n="gameHelp.abilityScoreRoller.skillCalc.exampleNote"><?= __('gameHelp.abilityScoreRoller.skillCalc.exampleNote', '→ Ces bonus vont sur le triptyque d\'Historique') ?></p>
+              <p class="text-xs text-amber-300">→ Ces bonus vont sur le triptyque d'Historique</p>
             </div>
           </div>
         </div>
 
         <!-- Note finale compacte -->
         <div class="mt-6 p-4 bg-purple-900/30 border border-purple-700/50 rounded-lg">
-          <p class="text-sm text-gray-300 text-center" data-i18n="gameHelp.abilityScoreRoller.skillCalc.importantNote">
-            <?= __('gameHelp.abilityScoreRoller.skillCalc.importantNote', '<strong>Important :</strong> Ajoutez +2 et +1 (bonus Historique) aux caract.') ?>
+          <p class="text-sm text-gray-300 text-center">
+            <strong>Important :</strong> Ajoutez +2 et +1 (bonus Historique) aux caract.
           </p>
         </div>
       </div>

@@ -848,8 +848,21 @@ class CurrencyConverterPremium {
             });
         });
 
-        // Trier par valeur décroissante pour l'algorithme glouton optimal
-        denominations.sort((a, b) => b.value - a.value);
+        // Fonction de score pour prioriser les métaux nobles en cas d'égalité de valeur
+        const getMetalScore = (currency) => {
+            const scores = { platinum: 5, gold: 4, electrum: 3, silver: 2, copper: 1 };
+            return scores[currency] || 0;
+        };
+
+        // Trier par valeur décroissante puis par métal noble en cas d'égalité
+        denominations.sort((a, b) => {
+            // D'abord par valeur décroissante
+            if (b.value !== a.value) {
+                return b.value - a.value;
+            }
+            // En cas d'égalité de valeur, privilégier le métal le plus noble
+            return getMetalScore(b.currency) - getMetalScore(a.currency);
+        });
 
         // Algorithme glouton pour minimisation du nombre de pièces
         denominations.forEach((denom) => {
@@ -974,8 +987,21 @@ class CurrencyConverterPremium {
             });
         });
 
-        // Trier par valeur décroissante pour l'algorithme glouton optimal
-        denominations.sort((a, b) => b.value - a.value);
+        // Fonction de score pour prioriser les métaux nobles en cas d'égalité de valeur
+        const getMetalScore = (currency) => {
+            const scores = { platinum: 5, gold: 4, electrum: 3, silver: 2, copper: 1 };
+            return scores[currency] || 0;
+        };
+
+        // Trier par valeur décroissante puis par métal noble en cas d'égalité
+        denominations.sort((a, b) => {
+            // D'abord par valeur décroissante
+            if (b.value !== a.value) {
+                return b.value - a.value;
+            }
+            // En cas d'égalité de valeur, privilégier le métal le plus noble
+            return getMetalScore(b.currency) - getMetalScore(a.currency);
+        });
 
         // Algorithme glouton pour minimisation du nombre de pièces
         denominations.forEach((denom) => {
@@ -1820,7 +1846,7 @@ class CurrencyConverterPremium {
             source = 'user';
         }
 
-        const finalBreakdownText = this.formatBreakdownText(finalBreakdown);
+        const finalBreakdownText = this.formatSolutionForDisplay(finalBreakdown);
         const sourceIndicator = source === 'user'
             ? '<span class="text-blue-600">✏️</span>'
             : '<span class="text-green-600">🤖</span>';

@@ -1,1311 +1,1329 @@
 {
-    "meta": {
-        "home": {
-            "title": "Pièces D&D Métalliques & Accessoires Immersifs Québec | Geek & Dragon",
-            "desc": "Transformez vos trésors en expérience tactile avec nos pièces métalliques gravées, cartes d'équipement illustrées et fiches de personnage robustes. Conçu au Québec, livraison rapide."
-        },
-        "gameHelp": {
-            "description": "Guide complet pour vos accessoires D&D Geek & Dragon : triptyques de personnage, cartes d'équipement, monnaie physique et convertisseur. Tout pour enrichir vos parties de jeu de rôle."
-        },
-        "shop": {
-            "title": "Boutique - Pièces D&D, Cartes & Triptyques | Geek & Dragon",
-            "desc": "Découvrez notre collection complète : pièces métalliques gravées (cuivre, argent, or, platine), cartes d'équipement illustrées et triptyques de personnage robustes. Livraison rapide depuis le Québec."
-        },
-        "contact": {
-            "title": "Contact - Questions & Projets Personnalisés | Geek & Dragon",
-            "desc": "Besoin d'aide ou d'un projet sur mesure ? Contactez notre équipe québécoise pour des accessoires D&D personnalisés : pièces gravées, cartes triptyques."
-        },
-        "thankyou": {
-            "title": "Merci !!! | Geek & Dragon",
-            "desc": "Confirmation de l'envoi de votre message à Geek & Dragon."
-        },
-        "news": {
-            "flim2025": {
-                "title": "Des héros niveau 20, un raton trop tenace, et… nos pièces | Geek & Dragon",
-                "desc": "Retour sur notre démonstration de pièces au FLIM 2025 avec Es-tu Game ?"
-            }
-        }
-    },
-    "common": {
-        "back": "Retour"
-    },
-    "nav": {
-        "products": "Produits",
-        "news": "Actualités",
-        "shop": "Boutique",
-        "gameHelp": "Aide de Jeux",
-        "contact": "Contact",
-        "cart": "Panier",
-        "account": "Compte",
-        "pieces": "Pièces",
-        "cards": "Cartes",
-        "triptychs": "Triptyques",
-        "home": "Accueil",
-        "skipToContent": "Passer au contenu",
-        "menu": "Menu",
-        "closeMenu": "Fermer le menu",
-        "mainNavigation": "Navigation principale",
-        "mobileNavigation": "Navigation mobile"
-    },
-    "btnOverlay": {
-        "discover": {
-            "desktop": "Découvrir",
-            "mobile": "Voir"
-        },
-        "collection": {
-            "desktop": "Toute la collection",
-            "mobile": "Tout voir"
-        },
-        "shop": {
-            "desktop": "L'Échoppe",
-            "mobile": "Échoppe"
-        },
-        "gameHelp": {
-            "desktop": "Grimoire",
-            "mobile": "Grimoire"
-        },
-        "contact": {
-            "desktop": "Message",
-            "mobile": "Contact"
-        },
-        "news": {
-            "desktop": "Chroniques",
-            "mobile": "Actus"
-        },
-        "home": {
-            "desktop": "Taverne",
-            "mobile": "Taverne"
-        },
-        "coins": {
-            "desktop": "Trésor",
-            "mobile": "Trésor"
-        },
-        "cards": {
-            "desktop": "Arsenal",
-            "mobile": "Arsenal"
-        },
-        "triptychs": {
-            "desktop": "Héros",
-            "mobile": "Héros"
-        },
-        "bundle": {
-            "desktop": "Coffre",
-            "mobile": "Coffre"
-        },
-        "reservation": {
-            "desktop": "Réservation",
-            "mobile": "Réserver"
-        }
-    },
-    "hero": {
-        "title": "Vos trésors méritent d'exister",
-        "subtitle1": "Pièces gravées, cartes illustrées, fiches robustes. Touchez votre aventure.",
-        "subtitle2": "Fabriqué au Québec • Qualité supérieure • Livraison rapide",
-        "discoverCreations": "Découvrir nos créations",
-        "shopNow": "Voir toute la collection"
-    },
+  "meta": {
     "home": {
-        "featured": {
-            "title": "Commencez par l'essentiel",
-            "subtitle": "Nos produits les plus populaires pour transformer votre première session",
-            "seeAll": "Voir toute la collection"
-        },
-        "why": {
-            "title": "Pourquoi du physique en 2025 ?",
-            "subtitle": "Parce que les meilleurs souvenirs ne s'effacent pas au prochain patch",
-            "benefit1": {
-                "title": "Souvenirs tactiles",
-                "desc": "Toucher vos trésors crée des émotions que les chiffres sur fiche ne peuvent jamais offrir"
-            },
-            "benefit2": {
-                "title": "Qualité supérieure",
-                "desc": "Conçu pour durer. Pas de mise à jour, pas d'abonnement, juste du solide"
-            },
-            "benefit3": {
-                "title": "Artisanat québécois",
-                "desc": "Conçu et fabriqué au Québec. Chaque achat soutient la création locale"
-            }
-        }
-    },
-    "reassurance": {
-        "local": "Fabriqué au Québec"
-    },
-    "footer": {
-        "made": "Conçu au Québec."
-    },
-    "contact": {
-        "title": "Contacte-nous",
-        "subtitle": "Une question ? Un projet sur mesure ? Parle directement à nos artisans.",
-        "requestQuote": "Nous contacter",
-        "form": {
-            "name": "Nom complet",
-            "email": "Adresse e-mail",
-            "phone": "Téléphone (optionnel)",
-            "message": "Détail de la demande",
-            "submit": "Envoyer ma demande"
-        },
-        "info": {
-            "role": "Responsable produit",
-            "roleCommunity": "Responsable produit & communauté",
-            "photoAlt": "Photo de Brujah"
-        }
-    },
-    "thankyou": {
-        "title": "Merci !",
-        "message": "Votre demande a bien été transmise à notre équipe.",
-        "backHome": "Retour à l'accueil"
-    },
-    "product": {
-        "back": "Retour à la boutique",
-        "multiplier": "Multiplicateur",
-        "metal": "Métal",
-        "language": "Langue",
-        "decreaseQuantity": "Diminuer la quantité",
-        "increaseQuantity": "Augmenter la quantité",
-        "languageOptions": {
-            "FR": "Français",
-            "EN": "Anglais"
-        },
-        "triptychSpecies": "Espèce",
-        "triptychClass": "Classe",
-        "triptychBackground": "Historique",
-        "triptychOption": "Option",
-        "quantity": "Quantité",
-        "unit": "unitaire",
-        "add": "Ajouter",
-        "outOfStock": {
-            "title": "Trésor Épuisé",
-            "subtitle": "Malheureusement, cet artefact n'est plus disponible pour le moment"
-        },
-        "insufficientStock": "Stock insuffisant",
-        "securePayment": "Transaction protégée par la Guilde des Marchands",
-        "realTimeStock": "Stocks mis à jour en temps réel."
-    },
-    "shop": {
-        "hero": {
-            "title": "Boutique Geek & Dragon",
-            "description": "Une figurine de dragon à 300&nbsp;$&nbsp;? La plupart des campagnes n'en verront jamais la couleur. Nos trésors québécois&nbsp;? Indispensables à chaque partie, pour toutes vos aventures.",
-            "button": "Choisir mes trésors",
-            "bundleButton": "Coffre du Dragon",
-            "quickLinks": {
-                "title": "Accès rapide",
-                "ariaLabel": "Navigation rapide vers les catégories de la boutique",
-                "pieces": "Monnaie",
-                "cards": "Cartes",
-                "triptychs": "Triptyques",
-                "bundle": "Coffre"
-            }
-        },
-        "intro": {
-            "title": "Trésors artisanaux",
-            "description": "Objets de collection et aides de jeu artisanaux, fabriqués au&nbsp;Québec.",
-            "payment": "Transaction protégée par la Guilde des Marchands",
-            "stock": "Stocks mis à jour en temps réel."
-        },
-        "pieces": {
-            "title": "Pièces métalliques",
-            "description": "Un jeu de rôle sans pièces physiques, c'est comme un Monopoly sans billets. Offrez‑vous le poids authentique du trésor.",
-            "video": "Voir les Conseils Jeux de Rôle sur L'Économie de D&D en vidéo&nbsp;>",
-            "intro": {
-                "shortDescription": "Nos pièces métalliques reproduisent fidèlement le système monétaire de D&D (<strong class=\"text-amber-300\">5 métaux</strong> : cuivre, argent, électrum, or, platine). Les pièces unitaires sont <strong class=\"text-yellow-200\">brillantes</strong>, tandis que les <strong class=\"text-yellow-300\">multiplicateurs gravés</strong> (×10, ×100, ×1000, ×10000) ont un fini mat distinctif. Chaque pièce représente physiquement sa valeur : une pièce ×100 = 100 pièces unitaires. <strong class=\"text-green-400\">Ressentez le poids réel du trésor</strong> entre vos mains !",
-                "learnMore": "En savoir plus sur le système de pièces et leurs poids"
-            },
-            "backToTop": "Retour au comptoir du marchand"
-        },
-        "deluxeBundle": {
-            "title": "Coffre du Dragon - Édition Collectionneur",
-            "badge": "Édition Limitée Numérotée",
-            "subtitle": "L'expérience ultime pour collectionneurs et maîtres de jeu exigeants",
-            "description": "Le coffret premium qui transforme chaque partie en légende. Numéroté et certifié, ce trésor contient l'arsenal complet du maître de jeu passionné.",
-            "features": {
-                "title": "Contenu du Coffre",
-                "essence": "<strong class=\"text-yellow-300\">2× Essence du Marchand</strong> - Sets complets pour distribution rapide en jeu",
-                "collectors": {
-                    "title": "<strong class=\"text-yellow-200\">5 Pièces de Collection Plaquées</strong>",
-                    "subtitle": "Édition exclusive plaquée dans leur <strong class=\"text-amber-400\">véritable métal rare authentique</strong>",
-                    "copper": {
-                        "name": "Pièce Cuivre",
-                        "detail": "Plaquée cuivre pur - Éclat chaleureux et reflets orangés"
-                    },
-                    "silver": {
-                        "name": "Pièce Argent",
-                        "detail": "Plaquée argent sterling 925 - Brillance immaculée et prestige"
-                    },
-                    "electrum": {
-                        "name": "Pièce Électrum",
-                        "detail": "Plaquée argent sterling 925 - Éclat argenté pur et intemporel"
-                    },
-                    "gold": {
-                        "name": "Pièce Or",
-                        "detail": "Plaquée or 18 carats véritable - Luxe royal et éclat légendaire"
-                    },
-                    "platinum": {
-                        "name": "Pièce Platine",
-                        "detail": "Plaquée platine véritable - Rareté ultime, noblesse absolue"
-                    }
-                },
-                "cards": "<strong class=\"text-indigo-300\">Set complet 560 cartes d'équipement</strong> dans boîte premium",
-                "triptychs": "<strong class=\"text-purple-300\">3 triptyques au choix</strong> (Espèce + Classe + Historique)",
-                "bag": "Sac en velours brodé \"Geek & Dragon\"",
-                "certificate": "Certificat d'authenticité numéroté à la main",
-                "chest": "Coffret deluxe personnalisé",
-                "guide": "Guide d'immersion deluxe (livret 24 pages)"
-            },
-            "specs": {
-                "title": "Spécifications Premium",
-                "numbered": "Numérotation unique gravée au laser",
-                "savings": "Économie de 25% vs achat séparé"
-            },
-            "cta": "Réserver Mon Édition",
-            "contact": "Contactez-nous pour disponibilité",
-            "limited": "Production limitée à 500 exemplaires",
-            "backToTop": "Retour au comptoir du marchand"
-        },
-        "cards": {
-            "title": "Cartes d'équipement",
-            "coming": "À venir",
-            "description": "Paquets thématiques de cartes illustrées pour gérer l'inventaire visuellement.",
-            "faqLink": "Questions fréquentes / Guide des cartes",
-            "description1": "Nos scribes enchantent encore ces parchemins d'aventure.",
-            "description2": "Les cartes d'équipement forgeront leur entrée lors de la prochaine lune.",
-            "intro": {
-                "shortDescription": "<strong class=\"text-indigo-300\">560 cartes d'équipement illustrées</strong> remplaçant la lecture fastidieuse des manuels. Chaque carte présente <strong class=\"text-purple-300\">visuellement</strong> une arme, une armure ou un équipement avec ses statistiques complètes. <strong class=\"text-green-400\">Gagnez du temps et de l'immersion</strong> en jeu ! <span class=\"text-amber-300 text-sm italic\">(Cartes de sorts de classe complètes en cours de création par nos gobelins dans nos monastères...)</span>",
-                "learnMore": "En savoir plus sur les cartes d'équipement"
-            },
-            "backToTop": "Retour au comptoir du marchand"
-        },
-        "triptychs": {
-            "title": "Triptyques de personnage",
-            "coming": "À venir",
-            "description": "Héros clé en main pour des parties improvisées.",
-            "description1": "Les artisans façonnent encore ces grimoires de héros.",
-            "description2": "Les triptyques rejoindront la boutique sous peu.",
-            "guideCta": "Comment utiliser vos triptyques",
-            "backToTop": "Retour au comptoir du marchand",
-            "intro": {
-                "shortDescription": "Fiches de personnage <strong class=\"text-purple-300\">triptyques robustes</strong> imprimées sur <strong class=\"text-pink-300\">carton rigide</strong>. Trois volets indépendants et complémentaires (Espèce, Classe, Historique) avec <strong class=\"text-amber-300\">toutes les règles</strong> et informations <strong class=\"text-yellow-300\">du niveau 1 à 20</strong>. Inclut les cartes d'équipement et sorts recommandés. <strong class=\"text-green-400\">Plus besoin du manuel</strong> en jeu !",
-                "learnMore": "En savoir plus sur les triptyques de personnage"
-            }
-        },
-        "collective": {
-            "title": "Investissez ensemble, partagez l’aventure",
-            "description1": "Ne laissez pas le maître de jeu se ruiner pour votre plaisir&nbsp;: chaque joueur pourra bientôt contribuer en achetant son triptyque, ses cartes et ses pièces.",
-            "description2": "À titre de comparaison, certaines figurines de dragon se vendent plus de <strong>300&nbsp;$</strong> l'unité et ne sont généralement utilisées qu’une seule fois dans toute une campagne — et encore, seulement lorsque le scénario le permet, car ce n’est pas systématique. Nos pièces, elles, servent à chaque session et pour des années de campagne.",
-            "description3": "Complétez la <em>carte de propriété</em> ci‑contre en indiquant votre nom et le nombre de pièces achetées, signez-la et remettez vos trésors au maître de jeu. À la fin de la campagne, il vous les restituera sans difficulté."
-        },
-        "converter": {
-            "title": "Convertisseur de monnaie",
-            "sourcesLabel": "Monnaies sources",
-            "multiplierLabel": "Tableau multiplicateur (éditable)",
-            "equivalences": "Équivalences totales par métal",
-            "recommendations": "Recommandations optimales",
-            "currencyLabel": "Monnaie",
-            "currency": {
-                "copper": "Cuivre",
-                "silver": "Argent",
-                "electrum": "Électrum",
-                "gold": "Or",
-                "platinum": "Platine"
-            },
-            "metals": {
-                "copper": "cuivre",
-                "silver": "argent",
-                "electrum": "électrum",
-                "gold": "or",
-                "platinum": "platine"
-            },
-            "enterAmounts": "Entrez des montants pour voir les recommandations optimales",
-            "optimalConversion": "Conversion optimale",
-            "total": "Total",
-            "value": "Valeur",
-            "minimalCoins": "Nombre minimal de pièces",
-            "totalCoins": "Total pièces",
-            "remainder": "Reste",
-            "units": "Unités",
-            "lots": "Lots",
-            "coins": "pièces",
-            "and": "et"
-        }
-    },
-    "news": {
-        "flim2025": {
-            "heading": "Actualités & Témoignages",
-            "title": "Des héros niveau 20, un raton trop tenace, et… nos pièces",
-            "summary": "Notre première démonstration de pièces au FLIM 2025 a pris la forme d’un one-shot légendaire animé par Es‑tu Game ?",
-            "read": "Lire l’article",
-            "video1": "Le maire rend hommage aux trois héros en argent véritable",
-            "video2": "Quand tout se joue sur une pièce… dragon ou étoile ?",
-            "video3": "Final de la game : Le raton, les étoiles… et le chaos",
-            "youtube": "Retrouvez la table complète sur la chaîne YouTube officielle :",
-            "youtubeLink": "Es‑tu Game ? — Jeux de rôle",
-            "p1": "Lors du premier jour du <strong>Festival Ludique International de Montréal</strong>, notre toute première démonstration publique de monnaies a pris la forme d’un <strong>one-shot légendaire</strong>. Nos pièces furent lancées comme autant de dés du destin. Elles virevoltaient dans l’air, retombaient dans un tintement métallique profond, déclenchant aussitôt une vague d’émerveillement. Les regards s’élargissaient. Les voix s’élevaient, entre rires et émerveillement. La matière même du jeu de rôle venait de changer.",
-            "p2": "Rien de tout cela n’aurait été possible sans notre allié dans cette aventure : <strong>Es-tu Game ?</strong>, la référence québécoise des parties endiablées sur YouTube, Et surtout, l’incontournable, le fabuleux <strong>Pierre‑Louis Renaud</strong>. Conteur de plan, forgeron d’univers, il est ce MJ légendaire qu’aucun archidiable n’ose défier. Même à Sigil, les doyens du multivers murmurent son nom avec respect… et un brin de jalousie. Car s’il existe un Plan où l’on croise un meilleur maître du jeu, c’est sans doute que Pierre‑Louis y a lancé ses dés. Et pour notre plus grand plaisir, il a invoqué l’un de ses one-shots les plus déjantés : une aventure de niveau 20 d’une absurdi... intensité épique jamais vue.",
-            "p3": "Un véritable feu d’artifice de chaos contrôlé, mettant en scène trois figures cultes de ses campagnes passées :",
-            "li1": "<strong>Gratis</strong>, incarné par Dave Belisle (Les Appendices) : un gnome artificier aussi exalté qu’incontrôlable, alchimiste des sauces aux effets souvent explosifs… et toujours inconnus. Pour lui, offrir une goutte de sa dernière mixture est une marque d’affection – que le destinataire survive ou non. Ses sauces, instables au possible, ont tendance à déclencher des effets imprévisibles : inversion de gravité, torrent de larmes noires comme de l’encre fraîche, ou valse murale verticale. Même les ennemis ne sont pas à l’abri de sa générosité épicée.",
-            "li2": "<strong>Marlin</strong>, brillamment interprété par Jean‑François Provençal (Les Appendices), voleur illusionniste aussi insaisissable qu’improbable. Stratège à la logique alternative, d’un courage sélectif mais d’un charme désarmant, il s’illustre par sa propension à fuir avec élégance, à voler avec panache, et à se retrouver, sans jamais l’avoir cherché, au cœur des situations les plus absurdes. À croire que l’univers entier conspire pour faire de lui le pivot du chaos.",
-            "li3": "<strong>Tana</strong>, l’inoubliable barbare à la hache bien affûtée, incarnée par Rosanne Berry. Redoutée pour sa devise immuable : frapper d’abord, réfléchir ensuite, poser des questions... rarement. Elle est aussi célèbre pour ses charges fracassantes que pour ses larmes sincères. Une colosse au cœur tendre, véritable raz-de-marée émotionnel et tranchant, qui ne s’attendait certainement pas à se heurter à un raton laveur… résistant à ses attaques pourtant capables de fendre la trame de l’espace-temps.",
-            "p4": "Ce trio improbable pensait savourer une retraite paisible dans un village endormi… jusqu’à ce qu’il ne puisse résister à l’envie de subtiliser quelques pièces aux badauds émerveillés.",
-            "p5": "Marlin et Tana, toujours en quête d’un brin d’adrénaline, s’amusaient à dérober la petite bourse des voyageurs conquis par leur légende, avant même que l’idée de « vol » ne leur effleure l’esprit. Gratis, un brin coupable, suivait presque à contre-cœur, cantonnant ses larcins à des actes de bravoure bon enfant.",
-            "p6": "Mais la tentative de cambriolage de la demeure du maire tourna court. Un bruissement dans les poubelles, un raton laveur trop curieux et un compost mal ordonné plongèrent l’opération dans le chaos, stoppant net les exploits de nos trois héros-voyous.",
-            "p7": "Le point culminant ? Un raton laveur cosmique aspiré dans les étoiles, emporté par une gravité inversée, tandis que le maire, en larmes, vidait son coffre dans un tourbillon de pièces de cuivre et d’argent en hommage à ses fils disparus, et que le public et la table éclatait de rire dans une immersion totale."
-        }
-    },
-    "ui": {
-        "noImageAvailable": "Aucune image disponible",
-        "previousImage": "Image précédente",
-        "nextImage": "Image suivante",
-        "loading": "Chargement...",
-        "error": "Erreur",
-        "errorLoadingProducts": "Erreur de chargement des produits",
-        "close": "Fermer",
-        "add": "Ajouter",
-        "remove": "Retirer",
-        "cancel": "Annuler",
-        "confirm": "Confirmer",
-        "save": "Enregistrer",
-        "delete": "Supprimer",
-        "edit": "Modifier",
-        "search": "Rechercher",
-        "filter": "Filtrer",
-        "sort": "Trier",
-        "show": "Afficher",
-        "hide": "Masquer",
-        "more": "Plus",
-        "less": "Moins",
-        "all": "Tout",
-        "none": "Aucun",
-        "yes": "Oui",
-        "no": "Non",
-        "ok": "OK",
-        "apply": "Appliquer",
-        "reset": "Réinitialiser",
-        "musicPlayer": {
-            "previous": "Précédent",
-            "playPause": "Lecture / Pause",
-            "next": "Suivant",
-            "volume": "Volume"
-        },
-        "icons": {
-            "rotation": "Icône rotation",
-            "minus": "Moins",
-            "plus": "Plus"
-        },
-        "payment": {
-            "visa": "Logo Visa",
-            "mastercard": "Logo Mastercard",
-            "amex": "Logo American Express"
-        }
-    },
-    "testimonials": {
-        "title": "Témoignages",
-        "moreReviews": "Plus d'avis sur",
-        "trictrac": "TricTrac",
-        "quote1": {
-            "title": "« Finis les combats contre nos feuilles de personnage ! »",
-            "intro": "De nombreux joueurs présents l’affirment : les pièces physiques changent tout.",
-            "p1": "Terminées les colonnes de chiffres gribouillées à la hâte sur une fiche froissée. Désormais, chaque joueur sentait le poids réel du butin, glissant entre ses doigts comme un héritage oublié. Un trésor devenu palpable. À chaque échange, c’était tout le corps qui réagissait : la main qui hésite, l’œil qui soupèse, la gorge qui sèche. Le trésor prenait chair. Il devenait enjeu dramatique, émotion viscérale, c’est un événement, un souvenir marquant...",
-            "p2strong": "Fini les combats contre les feuilles de perso",
-            "p2rest": "les recherches interminables dans les livres pendant que les autres décrochent, ou les longues sessions de création de personnages qui découragent avant même que le jeu commence. Avec Geek & Dragon, tout commence quand la première pièce tombe sur la table."
-        }
+      "title": "Pièces D&D Métalliques & Accessoires Immersifs Québec | Geek & Dragon",
+      "desc": "Transformez vos trésors en expérience tactile avec nos pièces métalliques gravées, cartes d'équipement illustrées et fiches de personnage robustes. Conçu au Québec, livraison rapide."
     },
     "gameHelp": {
-        "images": {
-            "speciesAssimarFront": "Triptyque Espèce Aasimar - Recto",
-            "speciesAssimarBack": "Triptyque Espèce Aasimar - Verso",
-            "classBarbarianFront": "Triptyque Classe Barbare - Recto",
-            "classBarbarianBack": "Triptyque Classe Barbare - Verso",
-            "backgroundAcolyteFront": "Triptyque Historique Acolyte - Recto",
-            "backgroundAcolyteBack": "Triptyque Historique Acolyte - Verso",
-            "weaponCardFront": "Carte Arme - Recto",
-            "weaponCardBack": "Carte Arme - Verso",
-            "armorCardFront": "Carte Armure - Recto",
-            "armorCardBack": "Carte Armure - Verso",
-            "propertyCard": "Carte de propriété des pièces Geek & Dragon"
+      "description": "Guide complet pour vos accessoires D&D Geek & Dragon : triptyques de personnage, cartes d'équipement, monnaie physique et convertisseur. Tout pour enrichir vos parties de jeu de rôle."
+    },
+    "shop": {
+      "title": "Boutique - Pièces D&D, Cartes & Triptyques | Geek & Dragon",
+      "desc": "Découvrez notre collection complète : pièces métalliques gravées (cuivre, argent, or, platine), cartes d'équipement illustrées et triptyques de personnage robustes. Livraison rapide depuis le Québec."
+    },
+    "contact": {
+      "title": "Contact - Questions & Projets Personnalisés | Geek & Dragon",
+      "desc": "Besoin d'aide ou d'un projet sur mesure ? Contactez notre équipe québécoise pour des accessoires D&D personnalisés : pièces gravées, cartes triptyques."
+    },
+    "thankyou": {
+      "title": "Merci !!! | Geek & Dragon",
+      "desc": "Confirmation de l'envoi de votre message à Geek & Dragon."
+    },
+    "news": {
+      "flim2025": {
+        "title": "Des héros niveau 20, un raton trop tenace, et… nos pièces | Geek & Dragon",
+        "desc": "Retour sur notre démonstration de pièces au FLIM 2025 avec Es-tu Game ?"
+      }
+    }
+  },
+  "common": {
+    "back": "Retour"
+  },
+  "nav": {
+    "products": "Produits",
+    "news": "Actualités",
+    "shop": "Boutique",
+    "gameHelp": "Aide de Jeux",
+    "contact": "Contact",
+    "cart": "Panier",
+    "account": "Compte",
+    "pieces": "Pièces",
+    "cards": "Cartes",
+    "triptychs": "Triptyques",
+    "home": "Accueil",
+    "skipToContent": "Passer au contenu",
+    "menu": "Menu",
+    "closeMenu": "Fermer le menu",
+    "mainNavigation": "Navigation principale",
+    "mobileNavigation": "Navigation mobile"
+  },
+  "btnOverlay": {
+    "discover": {
+      "desktop": "Découvrir",
+      "mobile": "Voir"
+    },
+    "collection": {
+      "desktop": "Toute la collection",
+      "mobile": "Tout voir"
+    },
+    "shop": {
+      "desktop": "L'Échoppe",
+      "mobile": "Échoppe"
+    },
+    "gameHelp": {
+      "desktop": "Grimoire",
+      "mobile": "Grimoire"
+    },
+    "contact": {
+      "desktop": "Message",
+      "mobile": "Contact"
+    },
+    "news": {
+      "desktop": "Chroniques",
+      "mobile": "Actus"
+    },
+    "home": {
+      "desktop": "Taverne",
+      "mobile": "Taverne"
+    },
+    "coins": {
+      "desktop": "Trésor",
+      "mobile": "Trésor"
+    },
+    "cards": {
+      "desktop": "Arsenal",
+      "mobile": "Arsenal"
+    },
+    "triptychs": {
+      "desktop": "Héros",
+      "mobile": "Héros"
+    },
+    "bundle": {
+      "desktop": "Coffre",
+      "mobile": "Coffre"
+    },
+    "reservation": {
+      "desktop": "Réservation",
+      "mobile": "Réserver"
+    }
+  },
+  "hero": {
+    "title": "Vos trésors méritent d'exister",
+    "subtitle1": "Pièces gravées, cartes illustrées, fiches robustes. Touchez votre aventure.",
+    "subtitle2": "Fabriqué au Québec • Qualité supérieure • Livraison rapide",
+    "discoverCreations": "Découvrir nos créations",
+    "shopNow": "Voir toute la collection"
+  },
+  "home": {
+    "featured": {
+      "title": "Commencez par l'essentiel",
+      "subtitle": "Nos produits les plus populaires pour transformer votre première session",
+      "seeAll": "Voir toute la collection"
+    },
+    "why": {
+      "title": "Pourquoi du physique en 2025 ?",
+      "subtitle": "Parce que les meilleurs souvenirs ne s'effacent pas au prochain patch",
+      "benefit1": {
+        "title": "Souvenirs tactiles",
+        "desc": "Toucher vos trésors crée des émotions que les chiffres sur fiche ne peuvent jamais offrir"
+      },
+      "benefit2": {
+        "title": "Qualité supérieure",
+        "desc": "Conçu pour durer. Pas de mise à jour, pas d'abonnement, juste du solide"
+      },
+      "benefit3": {
+        "title": "Artisanat québécois",
+        "desc": "Conçu et fabriqué au Québec. Chaque achat soutient la création locale"
+      }
+    }
+  },
+  "reassurance": {
+    "local": "Fabriqué au Québec"
+  },
+  "footer": {
+    "made": "Conçu au Québec."
+  },
+  "contact": {
+    "title": "Contacte-nous",
+    "subtitle": "Une question ? Un projet sur mesure ? Parle directement à nos artisans.",
+    "requestQuote": "Nous contacter",
+    "form": {
+      "name": "Nom complet",
+      "email": "Adresse e-mail",
+      "phone": "Téléphone (optionnel)",
+      "message": "Détail de la demande",
+      "submit": "Envoyer ma demande"
+    },
+    "info": {
+      "role": "Responsable produit",
+      "roleCommunity": "Responsable produit & communauté",
+      "photoAlt": "Photo de Brujah"
+    }
+  },
+  "thankyou": {
+    "title": "Merci !",
+    "message": "Votre demande a bien été transmise à notre équipe.",
+    "backHome": "Retour à l'accueil"
+  },
+  "product": {
+    "back": "Retour à la boutique",
+    "multiplier": "Multiplicateur",
+    "metal": "Métal",
+    "language": "Langue",
+    "decreaseQuantity": "Diminuer la quantité",
+    "increaseQuantity": "Augmenter la quantité",
+    "languageOptions": {
+      "FR": "Français",
+      "EN": "Anglais"
+    },
+    "triptychSpecies": "Espèce",
+    "triptychClass": "Classe",
+    "triptychBackground": "Historique",
+    "triptychOption": "Option",
+    "quantity": "Quantité",
+    "unit": "unitaire",
+    "add": "Ajouter",
+    "outOfStock": {
+      "title": "Trésor Épuisé",
+      "subtitle": "Malheureusement, cet artefact n'est plus disponible pour le moment"
+    },
+    "insufficientStock": "Stock insuffisant",
+    "securePayment": "Transaction protégée par la Guilde des Marchands",
+    "realTimeStock": "Stocks mis à jour en temps réel."
+  },
+  "shop": {
+    "hero": {
+      "title": "Boutique Geek & Dragon",
+      "description": "Une figurine de dragon à 300&nbsp;$&nbsp;? La plupart des campagnes n'en verront jamais la couleur. Nos trésors québécois&nbsp;? Indispensables à chaque partie, pour toutes vos aventures.",
+      "button": "Choisir mes trésors",
+      "bundleButton": "Coffre du Dragon",
+      "quickLinks": {
+        "title": "Accès rapide",
+        "ariaLabel": "Navigation rapide vers les catégories de la boutique",
+        "pieces": "Monnaie",
+        "cards": "Cartes",
+        "triptychs": "Triptyques",
+        "bundle": "Coffre"
+      }
+    },
+    "intro": {
+      "title": "Trésors artisanaux",
+      "description": "Objets de collection et aides de jeu artisanaux, fabriqués au&nbsp;Québec.",
+      "payment": "Transaction protégée par la Guilde des Marchands",
+      "stock": "Stocks mis à jour en temps réel."
+    },
+    "pieces": {
+      "title": "Pièces métalliques",
+      "description": "Un jeu de rôle sans pièces physiques, c'est comme un Monopoly sans billets. Offrez‑vous le poids authentique du trésor.",
+      "video": "Voir les Conseils Jeux de Rôle sur L'Économie de D&D en vidéo&nbsp;>",
+      "intro": {
+        "shortDescription": "Nos pièces métalliques reproduisent fidèlement le système monétaire de D&D (<strong class=\"text-amber-300\">5 métaux</strong> : cuivre, argent, électrum, or, platine). Les pièces unitaires sont <strong class=\"text-yellow-200\">brillantes</strong>, tandis que les <strong class=\"text-yellow-300\">multiplicateurs gravés</strong> (×10, ×100, ×1000, ×10000) ont un fini mat distinctif. Chaque pièce représente physiquement sa valeur : une pièce ×100 = 100 pièces unitaires. <strong class=\"text-green-400\">Ressentez le poids réel du trésor</strong> entre vos mains !",
+        "learnMore": "En savoir plus sur le système de pièces et leurs poids"
+      },
+      "backToTop": "Retour au comptoir du marchand"
+    },
+    "deluxeBundle": {
+      "title": "Coffre du Dragon - Édition Collectionneur",
+      "badge": "Édition Limitée Numérotée",
+      "subtitle": "L'expérience ultime pour collectionneurs et maîtres de jeu exigeants",
+      "description": "Le coffret premium qui transforme chaque partie en légende. Numéroté et certifié, ce trésor contient l'arsenal complet du maître de jeu passionné.",
+      "features": {
+        "title": "Contenu du Coffre",
+        "essence": "<strong class=\"text-yellow-300\">2× Essence du Marchand</strong> - Sets complets pour distribution rapide en jeu",
+        "collectors": {
+          "title": "<strong class=\"text-yellow-200\">5 Pièces de Collection Plaquées</strong>",
+          "subtitle": "Édition exclusive plaquée dans leur <strong class=\"text-amber-400\">véritable métal rare authentique</strong>",
+          "copper": {
+            "name": "Pièce Cuivre",
+            "detail": "Plaquée cuivre pur - Éclat chaleureux et reflets orangés"
+          },
+          "silver": {
+            "name": "Pièce Argent",
+            "detail": "Plaquée argent sterling 925 - Brillance immaculée et prestige"
+          },
+          "electrum": {
+            "name": "Pièce Électrum",
+            "detail": "Plaquée argent sterling 925 - Éclat argenté pur et intemporel"
+          },
+          "gold": {
+            "name": "Pièce Or",
+            "detail": "Plaquée or 18 carats véritable - Luxe royal et éclat légendaire"
+          },
+          "platinum": {
+            "name": "Pièce Platine",
+            "detail": "Plaquée platine véritable - Rareté ultime, noblesse absolue"
+          }
         },
-        "quotes": {
-            "monopoly": "S'il n'y avait plus de billets dans le Monopoly, le jeu perdrait tout son intérêt..."
+        "cards": "<strong class=\"text-indigo-300\">Set complet 560 cartes d'équipement</strong> dans boîte premium",
+        "triptychs": "<strong class=\"text-purple-300\">3 triptyques au choix</strong> (Espèce + Classe + Historique)",
+        "bag": "Sac en velours brodé \"Geek & Dragon\"",
+        "certificate": "Certificat d'authenticité numéroté à la main",
+        "chest": "Coffret deluxe personnalisé",
+        "guide": "Guide d'immersion deluxe (livret 24 pages)"
+      },
+      "specs": {
+        "title": "Spécifications Premium",
+        "numbered": "Numérotation unique gravée au laser",
+        "savings": "Économie de 25% vs achat séparé"
+      },
+      "cta": "Réserver Mon Édition",
+      "contact": "Contactez-nous pour disponibilité",
+      "limited": "Production limitée à 500 exemplaires",
+      "backToTop": "Retour au comptoir du marchand"
+    },
+    "cards": {
+      "title": "Cartes d'équipement",
+      "coming": "À venir",
+      "description": "Paquets thématiques de cartes illustrées pour gérer l'inventaire visuellement.",
+      "faqLink": "Questions fréquentes / Guide des cartes",
+      "description1": "Nos scribes enchantent encore ces parchemins d'aventure.",
+      "description2": "Les cartes d'équipement forgeront leur entrée lors de la prochaine lune.",
+      "intro": {
+        "shortDescription": "<strong class=\"text-indigo-300\">560 cartes d'équipement illustrées</strong> remplaçant la lecture fastidieuse des manuels. Chaque carte présente <strong class=\"text-purple-300\">visuellement</strong> une arme, une armure ou un équipement avec ses statistiques complètes. <strong class=\"text-green-400\">Gagnez du temps et de l'immersion</strong> en jeu ! <span class=\"text-amber-300 text-sm italic\">(Cartes de sorts de classe complètes en cours de création par nos gobelins dans nos monastères...)</span>",
+        "learnMore": "En savoir plus sur les cartes d'équipement"
+      },
+      "backToTop": "Retour au comptoir du marchand"
+    },
+    "triptychs": {
+      "title": "Triptyques de personnage",
+      "coming": "À venir",
+      "description": "Héros clé en main pour des parties improvisées.",
+      "description1": "Les artisans façonnent encore ces grimoires de héros.",
+      "description2": "Les triptyques rejoindront la boutique sous peu.",
+      "guideCta": "Comment utiliser vos triptyques",
+      "backToTop": "Retour au comptoir du marchand",
+      "intro": {
+        "shortDescription": "Fiches de personnage <strong class=\"text-purple-300\">triptyques robustes</strong> imprimées sur <strong class=\"text-pink-300\">carton rigide</strong>. Trois volets indépendants et complémentaires (Espèce, Classe, Historique) avec <strong class=\"text-amber-300\">toutes les règles</strong> et informations <strong class=\"text-yellow-300\">du niveau 1 à 20</strong>. Inclut les cartes d'équipement et sorts recommandés. <strong class=\"text-green-400\">Plus besoin du manuel</strong> en jeu !",
+        "learnMore": "En savoir plus sur les triptyques de personnage"
+      }
+    },
+    "collective": {
+      "title": "Investissez ensemble, partagez l’aventure",
+      "description1": "Ne laissez pas le maître de jeu se ruiner pour votre plaisir&nbsp;: chaque joueur pourra bientôt contribuer en achetant son triptyque, ses cartes et ses pièces.",
+      "description2": "À titre de comparaison, certaines figurines de dragon se vendent plus de <strong>300&nbsp;$</strong> l'unité et ne sont généralement utilisées qu’une seule fois dans toute une campagne — et encore, seulement lorsque le scénario le permet, car ce n’est pas systématique. Nos pièces, elles, servent à chaque session et pour des années de campagne.",
+      "description3": "Complétez la <em>carte de propriété</em> ci‑contre en indiquant votre nom et le nombre de pièces achetées, signez-la et remettez vos trésors au maître de jeu. À la fin de la campagne, il vous les restituera sans difficulté."
+    },
+    "converter": {
+      "title": "Convertisseur de monnaie",
+      "sourcesLabel": "Monnaies sources",
+      "multiplierLabel": "Tableau multiplicateur (éditable)",
+      "equivalences": "Équivalences totales par métal",
+      "recommendations": "Recommandations optimales",
+      "currencyLabel": "Monnaie",
+      "currency": {
+        "copper": "Cuivre",
+        "silver": "Argent",
+        "electrum": "Électrum",
+        "gold": "Or",
+        "platinum": "Platine"
+      },
+      "metals": {
+        "copper": "cuivre",
+        "silver": "argent",
+        "electrum": "électrum",
+        "gold": "or",
+        "platinum": "platine"
+      },
+      "enterAmounts": "Entrez des montants pour voir les recommandations optimales",
+      "optimalConversion": "Conversion optimale",
+      "total": "Total",
+      "value": "Valeur",
+      "minimalCoins": "Nombre minimal de pièces",
+      "totalCoins": "Total pièces",
+      "remainder": "Reste",
+      "units": "Unités",
+      "lots": "Lots",
+      "coins": "pièces",
+      "and": "et"
+    }
+  },
+  "news": {
+    "flim2025": {
+      "heading": "Actualités & Témoignages",
+      "title": "Des héros niveau 20, un raton trop tenace, et… nos pièces",
+      "summary": "Notre première démonstration de pièces au FLIM 2025 a pris la forme d’un one-shot légendaire animé par Es‑tu Game ?",
+      "read": "Lire l’article",
+      "video1": "Le maire rend hommage aux trois héros en argent véritable",
+      "video2": "Quand tout se joue sur une pièce… dragon ou étoile ?",
+      "video3": "Final de la game : Le raton, les étoiles… et le chaos",
+      "youtube": "Retrouvez la table complète sur la chaîne YouTube officielle :",
+      "youtubeLink": "Es‑tu Game ? — Jeux de rôle",
+      "p1": "Lors du premier jour du <strong>Festival Ludique International de Montréal</strong>, notre toute première démonstration publique de monnaies a pris la forme d’un <strong>one-shot légendaire</strong>. Nos pièces furent lancées comme autant de dés du destin. Elles virevoltaient dans l’air, retombaient dans un tintement métallique profond, déclenchant aussitôt une vague d’émerveillement. Les regards s’élargissaient. Les voix s’élevaient, entre rires et émerveillement. La matière même du jeu de rôle venait de changer.",
+      "p2": "Rien de tout cela n’aurait été possible sans notre allié dans cette aventure : <strong>Es-tu Game ?</strong>, la référence québécoise des parties endiablées sur YouTube, Et surtout, l’incontournable, le fabuleux <strong>Pierre‑Louis Renaud</strong>. Conteur de plan, forgeron d’univers, il est ce MJ légendaire qu’aucun archidiable n’ose défier. Même à Sigil, les doyens du multivers murmurent son nom avec respect… et un brin de jalousie. Car s’il existe un Plan où l’on croise un meilleur maître du jeu, c’est sans doute que Pierre‑Louis y a lancé ses dés. Et pour notre plus grand plaisir, il a invoqué l’un de ses one-shots les plus déjantés : une aventure de niveau 20 d’une absurdi... intensité épique jamais vue.",
+      "p3": "Un véritable feu d’artifice de chaos contrôlé, mettant en scène trois figures cultes de ses campagnes passées :",
+      "li1": "<strong>Gratis</strong>, incarné par Dave Belisle (Les Appendices) : un gnome artificier aussi exalté qu’incontrôlable, alchimiste des sauces aux effets souvent explosifs… et toujours inconnus. Pour lui, offrir une goutte de sa dernière mixture est une marque d’affection – que le destinataire survive ou non. Ses sauces, instables au possible, ont tendance à déclencher des effets imprévisibles : inversion de gravité, torrent de larmes noires comme de l’encre fraîche, ou valse murale verticale. Même les ennemis ne sont pas à l’abri de sa générosité épicée.",
+      "li2": "<strong>Marlin</strong>, brillamment interprété par Jean‑François Provençal (Les Appendices), voleur illusionniste aussi insaisissable qu’improbable. Stratège à la logique alternative, d’un courage sélectif mais d’un charme désarmant, il s’illustre par sa propension à fuir avec élégance, à voler avec panache, et à se retrouver, sans jamais l’avoir cherché, au cœur des situations les plus absurdes. À croire que l’univers entier conspire pour faire de lui le pivot du chaos.",
+      "li3": "<strong>Tana</strong>, l’inoubliable barbare à la hache bien affûtée, incarnée par Rosanne Berry. Redoutée pour sa devise immuable : frapper d’abord, réfléchir ensuite, poser des questions... rarement. Elle est aussi célèbre pour ses charges fracassantes que pour ses larmes sincères. Une colosse au cœur tendre, véritable raz-de-marée émotionnel et tranchant, qui ne s’attendait certainement pas à se heurter à un raton laveur… résistant à ses attaques pourtant capables de fendre la trame de l’espace-temps.",
+      "p4": "Ce trio improbable pensait savourer une retraite paisible dans un village endormi… jusqu’à ce qu’il ne puisse résister à l’envie de subtiliser quelques pièces aux badauds émerveillés.",
+      "p5": "Marlin et Tana, toujours en quête d’un brin d’adrénaline, s’amusaient à dérober la petite bourse des voyageurs conquis par leur légende, avant même que l’idée de « vol » ne leur effleure l’esprit. Gratis, un brin coupable, suivait presque à contre-cœur, cantonnant ses larcins à des actes de bravoure bon enfant.",
+      "p6": "Mais la tentative de cambriolage de la demeure du maire tourna court. Un bruissement dans les poubelles, un raton laveur trop curieux et un compost mal ordonné plongèrent l’opération dans le chaos, stoppant net les exploits de nos trois héros-voyous.",
+      "p7": "Le point culminant ? Un raton laveur cosmique aspiré dans les étoiles, emporté par une gravité inversée, tandis que le maire, en larmes, vidait son coffre dans un tourbillon de pièces de cuivre et d’argent en hommage à ses fils disparus, et que le public et la table éclatait de rire dans une immersion totale."
+    }
+  },
+  "ui": {
+    "noImageAvailable": "Aucune image disponible",
+    "previousImage": "Image précédente",
+    "nextImage": "Image suivante",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "errorLoadingProducts": "Erreur de chargement des produits",
+    "close": "Fermer",
+    "add": "Ajouter",
+    "remove": "Retirer",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "show": "Afficher",
+    "hide": "Masquer",
+    "more": "Plus",
+    "less": "Moins",
+    "all": "Tout",
+    "none": "Aucun",
+    "yes": "Oui",
+    "no": "Non",
+    "ok": "OK",
+    "apply": "Appliquer",
+    "reset": "Réinitialiser",
+    "musicPlayer": {
+      "previous": "Précédent",
+      "playPause": "Lecture / Pause",
+      "next": "Suivant",
+      "volume": "Volume"
+    },
+    "icons": {
+      "rotation": "Icône rotation",
+      "minus": "Moins",
+      "plus": "Plus"
+    },
+    "payment": {
+      "visa": "Logo Visa",
+      "mastercard": "Logo Mastercard",
+      "amex": "Logo American Express"
+    }
+  },
+  "testimonials": {
+    "title": "Témoignages",
+    "moreReviews": "Plus d'avis sur",
+    "trictrac": "TricTrac",
+    "quote1": {
+      "title": "« Finis les combats contre nos feuilles de personnage ! »",
+      "intro": "De nombreux joueurs présents l’affirment : les pièces physiques changent tout.",
+      "p1": "Terminées les colonnes de chiffres gribouillées à la hâte sur une fiche froissée. Désormais, chaque joueur sentait le poids réel du butin, glissant entre ses doigts comme un héritage oublié. Un trésor devenu palpable. À chaque échange, c’était tout le corps qui réagissait : la main qui hésite, l’œil qui soupèse, la gorge qui sèche. Le trésor prenait chair. Il devenait enjeu dramatique, émotion viscérale, c’est un événement, un souvenir marquant...",
+      "p2strong": "Fini les combats contre les feuilles de perso",
+      "p2rest": "les recherches interminables dans les livres pendant que les autres décrochent, ou les longues sessions de création de personnages qui découragent avant même que le jeu commence. Avec Geek & Dragon, tout commence quand la première pièce tombe sur la table."
+    }
+  },
+  "gameHelp": {
+    "images": {
+      "speciesAssimarFront": "Triptyque Espèce Aasimar - Recto",
+      "speciesAssimarBack": "Triptyque Espèce Aasimar - Verso",
+      "classBarbarianFront": "Triptyque Classe Barbare - Recto",
+      "classBarbarianBack": "Triptyque Classe Barbare - Verso",
+      "backgroundAcolyteFront": "Triptyque Historique Acolyte - Recto",
+      "backgroundAcolyteBack": "Triptyque Historique Acolyte - Verso",
+      "weaponCardFront": "Carte Arme - Recto",
+      "weaponCardBack": "Carte Arme - Verso",
+      "armorCardFront": "Carte Armure - Recto",
+      "armorCardBack": "Carte Armure - Verso",
+      "propertyCard": "Carte de propriété des pièces Geek & Dragon"
+    },
+    "quotes": {
+      "monopoly": "S'il n'y avait plus de billets dans le Monopoly, le jeu perdrait tout son intérêt..."
+    },
+    "hero": {
+      "title": "Guides d'Aide aux Jeux",
+      "subtitle": "Maîtrisez tous vos accessoires Geek & Dragon : triptyques, cartes et monnaie"
+    },
+    "navigation": {
+      "quickNav": "Navigation Rapide",
+      "triptychsGuide": "Guide des Triptyques",
+      "cardsGuide": "Guide des Cartes",
+      "coinGuide": "Guide de la Monnaie",
+      "triptychsSubtitle": "Espèce, Classe, Historique - D&D 2024",
+      "cardsSubtitle": "Armes, Équipements, Sorts",
+      "coinSubtitle": "Système monétaire + Convertisseur"
+    },
+    "triptychGuide": {
+      "title": "Les 3 Triptyques de votre Personnage",
+      "intro": "Nos triptyques sont des <strong class=\"text-purple-300\">fiches de personnage robustes</strong> imprimées sur <strong class=\"text-pink-300\">carton rigide recto-verso</strong>. Trois pages cartonnées indépendantes et complémentaires (Espèce, Classe, Historique) avec <strong class=\"text-amber-300\">toutes les règles nécessaires</strong>. Les fiches de Classe contiennent <strong class=\"text-yellow-300\">tous les niveaux de 1 à 20</strong> plus les cartes d'équipement et sorts spécifiques recommandés. <strong class=\"text-green-400\">Jouez sans ouvrir le manuel</strong> !",
+      "description": "Chaque personnage D&D nécessite 3 triptyques cartonnés indépendants : Espèce, Classe et Historique.",
+      "species": "Triptyque d'Espèce",
+      "class": "Triptyque de Classe",
+      "background": "Triptyque d'Historique"
+    },
+    "howToUse": {
+      "title": "Comment utiliser vos triptyques",
+      "fold": "3 pages cartonnées",
+      "organize": "Disposez devant vous",
+      "reference": "Consultez pendant le jeu"
+    },
+    "comingSoon": "Bientôt disponible",
+    "buttons": {
+      "discover": "Découvrir les Triptyques",
+      "cardsGuide": "Guide des Cartes",
+      "moneyGuide": "Guide de la Monnaie",
+      "buyTriptychs": "Acheter mes Triptyques",
+      "goToShop": "Visiter la Boutique"
+    },
+    "sections": {
+      "whatIsTriptyque": "Qu'est-ce qu'un triptyque Geek & Dragon ?",
+      "triptychDescription": "Un triptyque est une <strong>fiche de personnage cartonnée</strong> indépendante avec <strong>recto-verso</strong>, conçue pour remplacer les fastidieuses recherches dans les manuels.",
+      "threeRequired": "Chaque personnage D&D nécessite <strong>3 triptyques différents et complémentaires</strong> (3 pages cartonnées à disposer devant soi) qui contiennent <strong>toutes les informations de niveau 1 à 20</strong>.",
+      "detailsText": "Découvrez en détail chaque type de triptyque. Cliquez sur les images pour voir le verso de chaque fiche.",
+      "clickToFlip": "Cliquez pour retourner la fiche",
+      "classTriptych": "Triptyque de Classe",
+      "backgroundTriptych": "Triptyque d'Historique"
+    },
+    "triptychsSection": {
+      "whatIs": "Qu'est-ce qu'un triptyque Geek & Dragon ?",
+      "description": "Un triptyque est une fiche de personnage cartonnée pliable en 3 volets, conçue pour remplacer les fastidieuses recherches dans les manuels.",
+      "speciesTitle": "Triptyque d'Espèce",
+      "speciesDesc": "Toutes les capacités raciales, traits et bonus de votre espèce",
+      "classTitle": "Triptyque de Classe",
+      "classDesc": "Compétences, sorts, aptitudes et progression de votre classe",
+      "backgroundTitle": "Triptyque d'Historique",
+      "backgroundDesc": "Compétences sociales, équipements de départ et background",
+      "detailsText": "Découvrez en détail chaque type de triptyque.",
+      "clickToFlip": "Cliquez pour retourner la fiche"
+    },
+    "diceRoller": {
+      "title": "Lanceur de Caractéristiques",
+      "description": "<strong>D&D 2024 :</strong> Lancez 4d6 et gardez les 3 meilleurs résultats.",
+      "backgroundNote": "Vous ajouterez ensuite les bonus d'<strong>Historique</strong> (+2 et +1) dans le triptyque d'Historique.",
+      "example": "Ex: <strong>16 (+3)</strong> → Inscrivez <strong>16</strong> dans la case valeur, <strong>+3</strong> dans la case modificateur ET dans toutes les compétences associées (triptyque Historique)",
+      "conDetails": "❤️ Pas de compétences<br><strong>Affecte PV :</strong><br>Mod × Niveau",
+      "rollButton": "Lancer",
+      "rollAllButton": "Lancer toutes les caractéristiques",
+      "strength": "Force",
+      "dexterity": "Dextérité",
+      "constitution": "Constitution",
+      "intelligence": "Intelligence",
+      "wisdom": "Sagesse",
+      "charisma": "Charisme",
+      "modifierExplanation": {
+        "title": "📊 Comprendre les Modificateurs de Caractéristiques",
+        "intro": "Le lanceur affiche <strong>deux valeurs essentielles</strong> :",
+        "scoreLabel": "<strong>Score de caractéristique</strong> (ex: 16) → À reporter dans le triptyque d'<strong>Historique</strong>",
+        "modifierLabel": "<strong>Modificateur</strong> (ex: +3) → C'est ce bonus que vous ajouterez à vos jets de dés",
+        "tableIntro": "📋 Table de conversion rapide :",
+        "score810": "Score 8-9 → Modificateur -1",
+        "score1011": "Score 10-11 → Modificateur +0",
+        "score1213": "Score 12-13 → Modificateur +1",
+        "score1415": "Score 14-15 → Modificateur +2",
+        "score1617": "Score 16-17 → Modificateur +3",
+        "score1819": "Score 18-19 → Modificateur +4",
+        "score20": "Score 20 → Modificateur +5",
+        "formula": "<strong>Formule :</strong> (Caractéristique - 10) ÷ 2 (arrondi vers le bas)",
+        "where": "✍️ <strong>Que reporter sur le triptyque d'Historique ?</strong>",
+        "whereItem1": "<strong>Score de caractéristique</strong> : À inscrire dans la grande case de la caractéristique",
+        "whereItem2": "<strong>Modificateur</strong> : À inscrire dans toutes les compétences qui dépendent de cette caractéristique",
+        "whereItem3": "<strong>Bonus additionnel d'Historique</strong> : +2 sur une caractéristique, +1 sur une autre (selon votre choix d'Historique)",
+        "skillsTitle": "🎯 Compétences par Caractéristique",
+        "strSkills": "<strong>Force :</strong> Athlétisme",
+        "dexSkills": "<strong>Dextérité :</strong> Acrobaties, Discrétion, Escamotage",
+        "conSkills": "<strong>Constitution :</strong> Aucune compétence (mais affecte vos Points de Vie !)",
+        "intSkills": "<strong>Intelligence :</strong> Arcanes, Histoire, Investigation, Nature, Religion",
+        "wisSkills": "<strong>Sagesse :</strong> Dressage, Médecine, Perception, Perspicacité, Survie",
+        "chaSkills": "<strong>Charisme :</strong> Intimidation, Persuasion, Représentation, Supercherie"
+      },
+      "proficiencyBonus": {
+        "title": "⭐ Bonus de Maîtrise et d'Expertise",
+        "intro": "Sur votre triptyque d'<strong>Historique</strong>, certaines compétences ont des cases à cocher. Voici comment calculer le bonus final d'une compétence :",
+        "calcTitle": "🧮 <strong>Formule de calcul d'une compétence :</strong>",
+        "calcBase": "<strong>Bonus de compétence = Modificateur de caractéristique + Bonus de maîtrise (si maîtrisée/expertisée)</strong>",
+        "level14": "Niveau 1-4 → Bonus de maîtrise +2",
+        "level58": "Niveau 5-8 → Bonus de maîtrise +3",
+        "level912": "Niveau 9-12 → Bonus de maîtrise +4",
+        "level1316": "Niveau 13-16 → Bonus de maîtrise +5",
+        "level1720": "Niveau 17-20 → Bonus de maîtrise +6",
+        "symbolsTitle": "🎯 <strong>Symboles de Maîtrise (cases à cocher sur la fiche d'Historique) :</strong>",
+        "notProficient": "⬜ <strong>Case vide (non maîtrisée) :</strong> Bonus = Modificateur de caractéristique uniquement",
+        "proficient": "✅ <strong>Case cochée une fois (maîtrisée) :</strong> Bonus = Modificateur + Bonus de maîtrise",
+        "expert": "✅✅ <strong>Case cochée deux fois (expertisée) :</strong> Bonus = Modificateur + (Bonus de maîtrise × 2)",
+        "exampleTitle": "💡 <strong>Exemple détaillé (Personnage niveau 5)</strong>",
+        "exampleSetup": "Votre Dextérité est de 16, donc modificateur = +3. Votre bonus de maîtrise au niveau 5 = +3.",
+        "exampleCase1": "<strong>Acrobaties (⬜ non maîtrisée) :</strong> +3 (modificateur seul) = <strong>Bonus final +3</strong>",
+        "exampleCase2": "<strong>Discrétion (✅ maîtrisée) :</strong> +3 (modificateur) + 3 (maîtrise) = <strong>Bonus final +6</strong>",
+        "exampleCase3": "<strong>Escamotage (✅✅ expertisée) :</strong> +3 (modificateur) + 3 (maîtrise) + 3 (maîtrise) = <strong>Bonus final +9</strong>",
+        "finalNote": "💡 <strong>Important :</strong> Ces bonus finaux sont ce que vous inscrivez dans les cases de compétences sur votre triptyque d'Historique !"
+      }
+    },
+    "examples": {
+      "species": "Espèce",
+      "speciesExample": "Exemple : Aasimar",
+      "speciesDesc": "Traits raciaux et aptitudes d'espèce",
+      "class": "Classe",
+      "classExample": "Exemple : Barbare",
+      "classDesc": "Aptitudes de classe et progression",
+      "background": "Historique",
+      "backgroundExample": "Exemple : Acolyte",
+      "backgroundDesc": "Bonus de caractéristiques maintenant dans l'historique"
+    },
+    "fillingGuide": {
+      "title": "Guide Détaillé de Remplissage (D&D 2024)",
+      "newIn2024": "Nouveau dans D&D 2024 !",
+      "importantNote": "Les bonus de caractéristiques sont maintenant assignés par l'Historique !"
+    },
+    "species": {
+      "title": "Triptyque d'Espèce",
+      "description": "Toutes les capacités raciales, traits et bonus de votre espèce (Elfe, Nain, Humain...)",
+      "example": "Exemple : Aasimar",
+      "exampleDesc": "Traits raciaux et aptitudes d'espèce avec statistiques détaillées.",
+      "trait1": "• Traits et résistances",
+      "trait2": "• Sorts d'espèce",
+      "trait3": "• Langues spéciales"
+    },
+    "class": {
+      "title": "Triptyque de Classe",
+      "description": "Compétences, sorts, aptitudes et progression de votre classe (Guerrier, Magicien, Rôdeur...)",
+      "example": "Exemple : Barbare",
+      "exampleDesc": "Aptitudes de classe et progression avec statistiques vitales.",
+      "trait1": "• Initiative et jets de mort",
+      "trait2": "• Points de vie complets",
+      "trait3": "• Classe d'armure",
+      "trait4": "• Rage et aptitudes"
+    },
+    "background": {
+      "title": "Triptyque d'Historique",
+      "description": "Compétences sociales, équipements de départ et background de votre personnage",
+      "example": "Exemple : Acolyte",
+      "exampleDesc": "<strong>D&D 2024 :</strong> Bonus de caractéristiques maintenant dans l'historique.",
+      "priority": "Triptyque d'Historique (PRIORITÉ)",
+      "centralization": "Triptyque d'Historique = CENTRALISATION de toutes les compétences !",
+      "trait1": "• <strong>Bonus caractéristiques</strong>",
+      "trait2": "• Compétences sociales",
+      "trait3": "• Aptitude spéciale",
+      "trait4": "• Personnalité"
+    },
+    "filling": {
+      "step1": "1. Triptyque d'Historique (PRIORITÉ)",
+      "step2": "2. Triptyque d'Espèce",
+      "step3": "3. Triptyque de Classe"
+    },
+    "detailedGuide": {
+      "title": "Guide Détaillé de Remplissage (D&D 2024)",
+      "important": "Important :",
+      "importantText": "Les bonus de caractéristiques sont maintenant assignés par l'<strong>Historique</strong>, plus par l'Espèce ! C'est dans le triptyque d'Historique que vous noterez vos caractéristiques finales.",
+      "backgroundPriority": {
+        "title": "1. Triptyque d'Historique (PRIORITÉ)",
+        "characteristics": {
+          "title": "1. Bonus de caractéristiques (NOUVEAU 2024)",
+          "important": "C'est ICI que vous notez vos caractéristiques finales !",
+          "rules": {
+            "rule1": "• Lancez 4d6 (gardez les 3 meilleurs) avec le lanceur ci-dessus",
+            "rule2": "• Ajoutez les bonus d'historique (+2 dans une carac, +1 dans une autre)",
+            "rule3": "• Notez le total final et le modificateur (ex: 16 = +3)",
+            "rule4": "• <em>Les espèces n'ont plus de bonus de caractéristiques fixes</em>"
+          }
         },
-        "hero": {
-            "title": "Guides d'Aide aux Jeux",
-            "subtitle": "Maîtrisez tous vos accessoires Geek & Dragon : triptyques, cartes et monnaie"
+        "skills": {
+          "title": "2. Compétences et maîtrises (toutes sources)",
+          "important": "Triptyque d'Historique = CENTRALISATION de toutes les compétences !",
+          "list": {
+            "item1": "• Les 2 compétences d'historique",
+            "item2": "• Compétences de classe (reportées depuis le triptyque de Classe)",
+            "item3": "• Compétences raciales (reportées depuis le triptyque d'Espèce)",
+            "item4": "• Maîtrises d'outils spécifiques",
+            "item5": "• Aptitude d'historique unique (ex: Initié à la magie)"
+          }
         },
-        "navigation": {
-            "quickNav": "Navigation Rapide",
-            "triptychsGuide": "Guide des Triptyques",
-            "cardsGuide": "Guide des Cartes",
-            "coinGuide": "Guide de la Monnaie",
-            "triptychsSubtitle": "Espèce, Classe, Historique - D&D 2024",
-            "cardsSubtitle": "Armes, Équipements, Sorts",
-            "coinSubtitle": "Système monétaire + Convertisseur"
-        },
-        "triptychGuide": {
-            "title": "Les 3 Triptyques de votre Personnage",
-            "intro": "Nos triptyques sont des <strong class=\"text-purple-300\">fiches de personnage robustes</strong> imprimées sur <strong class=\"text-pink-300\">carton rigide recto-verso</strong>. Trois pages cartonnées indépendantes et complémentaires (Espèce, Classe, Historique) avec <strong class=\"text-amber-300\">toutes les règles nécessaires</strong>. Les fiches de Classe contiennent <strong class=\"text-yellow-300\">tous les niveaux de 1 à 20</strong> plus les cartes d'équipement et sorts spécifiques recommandés. <strong class=\"text-green-400\">Jouez sans ouvrir le manuel</strong> !",
-            "description": "Chaque personnage D&D nécessite 3 triptyques cartonnés indépendants : Espèce, Classe et Historique.",
-            "species": "Triptyque d'Espèce",
-            "class": "Triptyque de Classe",
-            "background": "Triptyque d'Historique"
-        },
-        "howToUse": {
-            "title": "Comment utiliser vos triptyques",
-            "fold": "3 pages cartonnées",
-            "organize": "Disposez devant vous",
-            "reference": "Consultez pendant le jeu"
-        },
-        "comingSoon": "Bientôt disponible",
-        "buttons": {
-            "discover": "Découvrir les Triptyques",
-            "cardsGuide": "Guide des Cartes",
-            "moneyGuide": "Guide de la Monnaie",
-            "buyTriptychs": "Acheter mes Triptyques",
-            "goToShop": "Visiter la Boutique"
-        },
-        "sections": {
-            "whatIsTriptyque": "Qu'est-ce qu'un triptyque Geek & Dragon ?",
-            "triptychDescription": "Un triptyque est une <strong>fiche de personnage cartonnée</strong> indépendante avec <strong>recto-verso</strong>, conçue pour remplacer les fastidieuses recherches dans les manuels.",
-            "threeRequired": "Chaque personnage D&D nécessite <strong>3 triptyques différents et complémentaires</strong> (3 pages cartonnées à disposer devant soi) qui contiennent <strong>toutes les informations de niveau 1 à 20</strong>.",
-            "detailsText": "Découvrez en détail chaque type de triptyque. Cliquez sur les images pour voir le verso de chaque fiche.",
-            "clickToFlip": "Cliquez pour retourner la fiche",
-            "classTriptych": "Triptyque de Classe",
-            "backgroundTriptych": "Triptyque d'Historique"
-        },
-        "triptychsSection": {
-            "whatIs": "Qu'est-ce qu'un triptyque Geek & Dragon ?",
-            "description": "Un triptyque est une fiche de personnage cartonnée pliable en 3 volets, conçue pour remplacer les fastidieuses recherches dans les manuels.",
-            "speciesTitle": "Triptyque d'Espèce",
-            "speciesDesc": "Toutes les capacités raciales, traits et bonus de votre espèce",
-            "classTitle": "Triptyque de Classe",
-            "classDesc": "Compétences, sorts, aptitudes et progression de votre classe",
-            "backgroundTitle": "Triptyque d'Historique",
-            "backgroundDesc": "Compétences sociales, équipements de départ et background",
-            "detailsText": "Découvrez en détail chaque type de triptyque.",
-            "clickToFlip": "Cliquez pour retourner la fiche"
-        },
-        "diceRoller": {
-            "title": "Lanceur de Caractéristiques",
-            "description": "<strong>D&D 2024 :</strong> Lancez 4d6 et gardez les 3 meilleurs résultats.",
-            "backgroundNote": "Vous ajouterez ensuite les bonus d'<strong>Historique</strong> (+2 et +1) dans le triptyque d'Historique.",
-            "example": "Ex: <strong>16 (+3)</strong> → Inscrivez <strong>16</strong> dans la case valeur, <strong>+3</strong> dans la case modificateur ET dans toutes les compétences associées (triptyque Historique)",
-            "conDetails": "❤️ Pas de compétences<br><strong>Affecte PV :</strong><br>Mod × Niveau",
-            "rollButton": "Lancer",
-            "rollAllButton": "Lancer toutes les caractéristiques",
-            "strength": "Force",
-            "dexterity": "Dextérité",
-            "constitution": "Constitution",
-            "intelligence": "Intelligence",
-            "wisdom": "Sagesse",
-            "charisma": "Charisme",
-            "modifierExplanation": {
-                "title": "📊 Comprendre les Modificateurs de Caractéristiques",
-                "intro": "Le lanceur affiche <strong>deux valeurs essentielles</strong> :",
-                "scoreLabel": "<strong>Score de caractéristique</strong> (ex: 16) → À reporter dans le triptyque d'<strong>Historique</strong>",
-                "modifierLabel": "<strong>Modificateur</strong> (ex: +3) → C'est ce bonus que vous ajouterez à vos jets de dés",
-                "tableIntro": "📋 Table de conversion rapide :",
-                "score810": "Score 8-9 → Modificateur -1",
-                "score1011": "Score 10-11 → Modificateur +0",
-                "score1213": "Score 12-13 → Modificateur +1",
-                "score1415": "Score 14-15 → Modificateur +2",
-                "score1617": "Score 16-17 → Modificateur +3",
-                "score1819": "Score 18-19 → Modificateur +4",
-                "score20": "Score 20 → Modificateur +5",
-                "formula": "<strong>Formule :</strong> (Caractéristique - 10) ÷ 2 (arrondi vers le bas)",
-                "where": "✍️ <strong>Que reporter sur le triptyque d'Historique ?</strong>",
-                "whereItem1": "<strong>Score de caractéristique</strong> : À inscrire dans la grande case de la caractéristique",
-                "whereItem2": "<strong>Modificateur</strong> : À inscrire dans toutes les compétences qui dépendent de cette caractéristique",
-                "whereItem3": "<strong>Bonus additionnel d'Historique</strong> : +2 sur une caractéristique, +1 sur une autre (selon votre choix d'Historique)",
-                "skillsTitle": "🎯 Compétences par Caractéristique",
-                "strSkills": "<strong>Force :</strong> Athlétisme",
-                "dexSkills": "<strong>Dextérité :</strong> Acrobaties, Discrétion, Escamotage",
-                "conSkills": "<strong>Constitution :</strong> Aucune compétence (mais affecte vos Points de Vie !)",
-                "intSkills": "<strong>Intelligence :</strong> Arcanes, Histoire, Investigation, Nature, Religion",
-                "wisSkills": "<strong>Sagesse :</strong> Dressage, Médecine, Perception, Perspicacité, Survie",
-                "chaSkills": "<strong>Charisme :</strong> Intimidation, Persuasion, Représentation, Supercherie"
-            },
-            "proficiencyBonus": {
-                "title": "⭐ Bonus de Maîtrise et d'Expertise",
-                "intro": "Sur votre triptyque d'<strong>Historique</strong>, certaines compétences ont des cases à cocher. Voici comment calculer le bonus final d'une compétence :",
-                "calcTitle": "🧮 <strong>Formule de calcul d'une compétence :</strong>",
-                "calcBase": "<strong>Bonus de compétence = Modificateur de caractéristique + Bonus de maîtrise (si maîtrisée/expertisée)</strong>",
-                "level14": "Niveau 1-4 → Bonus de maîtrise +2",
-                "level58": "Niveau 5-8 → Bonus de maîtrise +3",
-                "level912": "Niveau 9-12 → Bonus de maîtrise +4",
-                "level1316": "Niveau 13-16 → Bonus de maîtrise +5",
-                "level1720": "Niveau 17-20 → Bonus de maîtrise +6",
-                "symbolsTitle": "🎯 <strong>Symboles de Maîtrise (cases à cocher sur la fiche d'Historique) :</strong>",
-                "notProficient": "⬜ <strong>Case vide (non maîtrisée) :</strong> Bonus = Modificateur de caractéristique uniquement",
-                "proficient": "✅ <strong>Case cochée une fois (maîtrisée) :</strong> Bonus = Modificateur + Bonus de maîtrise",
-                "expert": "✅✅ <strong>Case cochée deux fois (expertisée) :</strong> Bonus = Modificateur + (Bonus de maîtrise × 2)",
-                "exampleTitle": "💡 <strong>Exemple détaillé (Personnage niveau 5)</strong>",
-                "exampleSetup": "Votre Dextérité est de 16, donc modificateur = +3. Votre bonus de maîtrise au niveau 5 = +3.",
-                "exampleCase1": "<strong>Acrobaties (⬜ non maîtrisée) :</strong> +3 (modificateur seul) = <strong>Bonus final +3</strong>",
-                "exampleCase2": "<strong>Discrétion (✅ maîtrisée) :</strong> +3 (modificateur) + 3 (maîtrise) = <strong>Bonus final +6</strong>",
-                "exampleCase3": "<strong>Escamotage (✅✅ expertisée) :</strong> +3 (modificateur) + 3 (maîtrise) + 3 (maîtrise) = <strong>Bonus final +9</strong>",
-                "finalNote": "💡 <strong>Important :</strong> Ces bonus finaux sont ce que vous inscrivez dans les cases de compétences sur votre triptyque d'Historique !"
-            }
-        },
-        "examples": {
-            "species": "Espèce",
-            "speciesExample": "Exemple : Aasimar",
-            "speciesDesc": "Traits raciaux et aptitudes d'espèce",
-            "class": "Classe",
-            "classExample": "Exemple : Barbare",
-            "classDesc": "Aptitudes de classe et progression",
-            "background": "Historique",
-            "backgroundExample": "Exemple : Acolyte",
-            "backgroundDesc": "Bonus de caractéristiques maintenant dans l'historique"
-        },
-        "fillingGuide": {
-            "title": "Guide Détaillé de Remplissage (D&D 2024)",
-            "newIn2024": "Nouveau dans D&D 2024 !",
-            "importantNote": "Les bonus de caractéristiques sont maintenant assignés par l'Historique !"
-        },
-        "species": {
-            "title": "Triptyque d'Espèce",
-            "description": "Toutes les capacités raciales, traits et bonus de votre espèce (Elfe, Nain, Humain...)",
-            "example": "Exemple : Aasimar",
-            "exampleDesc": "Traits raciaux et aptitudes d'espèce avec statistiques détaillées.",
-            "trait1": "• Traits et résistances",
-            "trait2": "• Sorts d'espèce",
-            "trait3": "• Langues spéciales"
-        },
-        "class": {
-            "title": "Triptyque de Classe",
-            "description": "Compétences, sorts, aptitudes et progression de votre classe (Guerrier, Magicien, Rôdeur...)",
-            "example": "Exemple : Barbare",
-            "exampleDesc": "Aptitudes de classe et progression avec statistiques vitales.",
-            "trait1": "• Initiative et jets de mort",
-            "trait2": "• Points de vie complets",
-            "trait3": "• Classe d'armure",
-            "trait4": "• Rage et aptitudes"
-        },
-        "background": {
-            "title": "Triptyque d'Historique",
-            "description": "Compétences sociales, équipements de départ et background de votre personnage",
-            "example": "Exemple : Acolyte",
-            "exampleDesc": "<strong>D&D 2024 :</strong> Bonus de caractéristiques maintenant dans l'historique.",
-            "priority": "Triptyque d'Historique (PRIORITÉ)",
-            "centralization": "Triptyque d'Historique = CENTRALISATION de toutes les compétences !",
-            "trait1": "• <strong>Bonus caractéristiques</strong>",
-            "trait2": "• Compétences sociales",
-            "trait3": "• Aptitude spéciale",
-            "trait4": "• Personnalité"
-        },
-        "filling": {
-            "step1": "1. Triptyque d'Historique (PRIORITÉ)",
-            "step2": "2. Triptyque d'Espèce",
-            "step3": "3. Triptyque de Classe"
-        },
-        "detailedGuide": {
-            "title": "Guide Détaillé de Remplissage (D&D 2024)",
-            "important": "Important :",
-            "importantText": "Les bonus de caractéristiques sont maintenant assignés par l'<strong>Historique</strong>, plus par l'Espèce ! C'est dans le triptyque d'Historique que vous noterez vos caractéristiques finales.",
-            "backgroundPriority": {
-                "title": "1. Triptyque d'Historique (PRIORITÉ)",
-                "characteristics": {
-                    "title": "1. Bonus de caractéristiques (NOUVEAU 2024)",
-                    "important": "C'est ICI que vous notez vos caractéristiques finales !",
-                    "rules": {
-                        "rule1": "• Lancez 4d6 (gardez les 3 meilleurs) avec le lanceur ci-dessus",
-                        "rule2": "• Ajoutez les bonus d'historique (+2 dans une carac, +1 dans une autre)",
-                        "rule3": "• Notez le total final et le modificateur (ex: 16 = +3)",
-                        "rule4": "• <em>Les espèces n'ont plus de bonus de caractéristiques fixes</em>"
-                    }
-                },
-                "skills": {
-                    "title": "2. Compétences et maîtrises (toutes sources)",
-                    "important": "Triptyque d'Historique = CENTRALISATION de toutes les compétences !",
-                    "list": {
-                        "item1": "• Les 2 compétences d'historique",
-                        "item2": "• Compétences de classe (reportées depuis le triptyque de Classe)",
-                        "item3": "• Compétences raciales (reportées depuis le triptyque d'Espèce)",
-                        "item4": "• Maîtrises d'outils spécifiques",
-                        "item5": "• Aptitude d'historique unique (ex: Initié à la magie)"
-                    }
-                },
-                "equipment": {
-                    "title": "3. Équipement et Personnalité",
-                    "list": {
-                        "item1": "• Cartes d'équipement de départ fournies avec le triptyque",
-                        "item2": "• Remplissez les traits de personnalité (Coûts, Idéaux, Liens, Défauts)",
-                        "item3": "• Développez votre background narratif"
-                    }
-                }
-            },
-            "speciesGuide": {
-                "title": "2. Triptyque d'Espèce",
-                "traits": {
-                    "title": "1. Langues et traits raciaux",
-                    "languages": "<strong>Langues :</strong> C'est ICI que vous notez les langues !",
-                    "list": {
-                        "item1": "• Langue commune + langue raciale (ex: Céleste, Draconique)",
-                        "item2": "• Une troisième langue au choix",
-                        "item3": "• Cochez les résistances aux dégâts",
-                        "item4": "• Notez les sens spéciaux (vision dans le noir, etc.)"
-                    }
-                },
-                "abilities": {
-                    "title": "2. Capacités et sorts d'espèce",
-                    "list": {
-                        "item1": "• Détaillez les sorts raciaux (niveau, utilisations/repos)",
-                        "item2": "• Notez les aptitudes héréditaires uniques",
-                        "item3": "• Cochez les immunités et résistances spéciales",
-                        "item4": "• Taille, vitesse de déplacement, durée de vie"
-                    }
-                },
-                "note": "<strong>Note importante :</strong> Les compétences et maîtrises d'espèce doivent être reportées sur le triptyque d'Historique !",
-                "training": {
-                    "title": "3. Champs \"Entraînements\" (vides au départ)",
-                    "important": "<strong>Important :</strong> Ces 5 champs sont pour les acquisitions EN JEU",
-                    "list": {
-                        "item1": "• Nouvelles langues apprises durant l'aventure",
-                        "item2": "• Maîtrises d'outils acquises",
-                        "item3": "• Compétences spéciales gagnées",
-                        "item4": "• Ne les remplissez que si votre personnage apprend quelque chose"
-                    }
-                }
-            },
-            "classGuide": {
-                "title": "3. Triptyque de Classe",
-                "combat": {
-                    "title": "1. Statistiques vitales et combat",
-                    "list": {
-                        "item1": "• <strong>Points de vie :</strong> Maximum, actuels, temporaires",
-                        "item2": "• <strong>Classe d'armure :</strong> Avec et sans bouclier",
-                        "item3": "• <strong>Initiative :</strong> Modificateur et résultat de jet",
-                        "item4": "• <strong>Jets contre la mort :</strong> Suivi des réussites/échecs",
-                        "item5": "• Niveau actuel et bonus de maîtrise"
-                    }
-                },
-                "skills": {
-                    "title": "2. Compétences et maîtrises de classe",
-                    "list": {
-                        "item1": "• Cochez les compétences de classe maîtrisées",
-                        "item2": "• Notez les maîtrises d'armes et armures",
-                        "item3": "• Jets de sauvegarde maîtrisés"
-                    }
-                },
-                "note": "📝 <strong>Note importante :</strong> Les compétences et maîtrises de classe doivent être reportées sur le triptyque d'Historique !",
-                "abilities": {
-                    "title": "3. Aptitudes et ressources",
-                    "list": {
-                        "item1": "• Aptitudes acquises par niveau (cochez au fur et à mesure)",
-                        "item2": "• Ressources de classe (Rage, Inspiration, Emplacements de sorts...)",
-                        "item3": "• Capacités de sous-classe spécifiques"
-                    }
-                }
-            },
-            "order": {
-                "title": "Ordre de Remplissage Recommandé",
-                "step1": {
-                    "title": "1. DÉMARRAGE",
-                    "text": "<strong>Historique FIRST :</strong> Lancez les dés et notez les caractéristiques avec bonus d'historique"
-                },
-                "step2": {
-                    "title": "2️⃣ ESPÈCE",
-                    "text": "<strong>Espèce :</strong> Traits raciaux, langues, capacités. <em>Reportez les compétences sur l'Historique</em>"
-                },
-                "step3": {
-                    "title": "3️⃣ CLASSE",
-                    "text": "<strong>Classe :</strong> PV, aptitudes, ressources. <em>Reportez les compétences sur l'Historique</em>"
-                },
-                "step4": {
-                    "title": "4️⃣ FINALISATION",
-                    "text": "<strong>Historique FINAL :</strong> Centralisez toutes les compétences et maîtrises des 3 triptyques"
-                }
-            },
-            "tips": {
-                "title": "Conseils de Remplissage",
-                "tip1": {
-                    "title": "✏️",
-                    "text": "<strong>Crayon obligatoire :</strong> Les valeurs évoluent constamment"
-                },
-                "tip2": {
-                    "title": "📱",
-                    "text": "<strong>Photo de sauvegarde :</strong> Sécurisez vos triptyques remplis"
-                },
-                "tip3": {
-                    "title": "🗂️",
-                    "text": "<strong>Organisation :</strong> Historique à gauche (caracs), Espèce au centre, Classe à droite"
-                },
-                "tip4": {
-                    "title": "Astuce",
-                    "text": "<strong>Mémo 2024 :</strong> Les bonus de caracs viennent de l'HISTORIQUE maintenant !"
-                }
-            }
-        },
-        "customTriptychs": {
-            "title": "Triptyques Personnalisés",
-            "description": "Vous voulez un triptyque totalement adapté à votre personnage unique ? Nous créons des triptyques sur mesure avec vos choix spécifiques !",
-            "standard": {
-                "title": "Triptyques Standards",
-                "list": {
-                    "item1": "• Cartes d'équipement aléatoires incluses",
-                    "item2": "• Choix standards pour les options variables",
-                    "item3": "• Livraison rapide depuis notre stock",
-                    "item4": "• Prix catalogue de la boutique"
-                }
-            },
-            "custom": {
-                "title": "Triptyques Personnalisés",
-                "list": {
-                    "item1": "• Choix précis de tous les équipements",
-                    "item2": "• Sélection manuelle des cartes incluses",
-                    "item3": "• Adaptation à votre background spécifique",
-                    "item4": "• Création sur commande (délai supplémentaire)"
-                }
-            },
-            "contact": {
-                "title": "📧 Comment Commander",
-                "description": "Pour un triptyque entièrement personnalisé, contactez-nous par email avec les détails de votre personnage :",
-                "email": "commande@geekndragon.com",
-                "subject": "Triptyque Personnalisé",
-                "subjectLabel": "Sujet : \"Triptyque Personnalisé\"",
-                "tip": "<strong>Astuce :</strong> Précisez votre classe, espèce, historique et vos préférences d'équipement dans votre email"
-            },
-            "usage": {
-                "title": "Comment utiliser vos triptyques",
-                "description": "Vos 3 triptyques cartonnés indépendants sont conçus pour être disposés devant vous sur votre table de jeu",
-                "step1": {
-                    "title": "📄 3 pages cartonnées indépendantes",
-                    "text": "Chaque triptyque est une page cartonnée <strong>recto-verso robuste</strong>. Pas besoin de plier : ce sont 3 fiches indépendantes et complémentaires."
-                },
-                "step2": {
-                    "title": "Disposez devant vous",
-                    "text": "Disposez vos 3 triptyques devant vous : Espèce à gauche, Classe au centre, Historique à droite. Accès instantané à toutes vos capacités du niveau 1 à 20."
-                },
-                "step3": {
-                    "title": "Consultez pendant le jeu",
-                    "text": "Plus besoin d'ouvrir les manuels ! Toutes vos aptitudes sont visibles d'un coup d'œil. Le MJ et les autres joueurs restent concentrés sur l'action."
-                },
-                "proTip": {
-                    "title": "Conseil Pro",
-                    "text": "Gardez vos triptyques ouverts pendant toute la session. Ils remplacent efficacement la feuille de personnage traditionnelle et accélèrent considérablement le jeu !",
-                    "writingAdvice": {
-                        "title": "Astuce d'Écriture & Effacement",
-                        "triptychs": {
-                            "title": "Pour les Triptyques :",
-                            "text": "<strong>Marqueurs permanents Sharpie + gomme Staedtler</strong> = combinaison parfaite ! Vous pouvez effacer complètement le marqueur sur les triptyques, même sur les zones colorées. N'hésitez pas à gommer énergiquement, le carton résiste parfaitement."
-                        },
-                        "cards": {
-                            "title": "Pour les Cartes :",
-                            "text": "La technique fonctionne aussi sur les cartes, mais <strong>limitez le gommage aux zones blanches</strong> idéalement car elles sont plus fines. Les cartes devraient être personnalisées à chaque personnage pour une expérience optimale !"
-                        }
-                    }
-                }
-            }
-        },
-        "writingTips": {
-            "title": "Astuce d'Écriture & Effacement",
-            "description": "Pour une utilisation optimale de vos triptyques :",
-            "list": {
-                "item1": "• <strong>Crayon uniquement :</strong> Les valeurs changent souvent pendant l'aventure",
-                "item2": "• <strong>Gomme de qualité :</strong> Pour les modifications sans traces",
-                "item3": "• <strong>Pression légère :</strong> Évitez de marquer le carton en profondeur",
-                "item4": "• <strong>Backup régulier :</strong> Prenez une photo de vos triptyques remplis"
-            },
-            "recommended": "Crayon recommandé : Staedtler HB ou 2H pour un tracé précis et effaçable."
-        },
-        "backToMain": "🔝 Retour au menu principal",
-        "cards": {
-            "mainTitle": "Guide des Cartes à Jouer Geek & Dragon",
-            "intro": "<strong class=\"text-indigo-300\">560 cartes d'équipement illustrées</strong> couvrant armes, armures et équipements. Chaque carte présente <strong class=\"text-purple-300\">visuellement</strong> toutes les statistiques nécessaires. <strong class=\"text-green-400\">Fini la lecture fastidieuse</strong> des manuels pendant les parties ! <span class=\"text-amber-300 text-sm italic block mt-2\">Les cartes de sorts de classe complètes arrivent bientôt, nos gobelins travaillent avec ardeur dans nos monastères enchantés...</span>",
-            "faqSubtitle": "FAQ Cartes",
-            "mainDescription": "Complétez vos triptyques avec nos cartes détaillées : Armes, Armures, Équipements, Sorts, Monstres et bien plus ! Chaque carte contient toutes les informations nécessaires pour accélérer vos parties.",
-            "title": "Cartes d'Équipement",
-            "types": {
-                "equipment": {
-                    "title": "Cartes d'Équipement",
-                    "weapons": "<strong>Armes :</strong> Statistiques complètes, propriétés spéciales",
-                    "armor": "<strong>Armures :</strong> CA, poids, restrictions de classe",
-                    "equipment": "<strong>Équipement :</strong> Objets d'aventure et outils",
-                    "magicItems": "<strong>Objets magiques :</strong> Pouvoirs et malédictions <span class=\"text-amber-300 text-xs italic\">(en cours de création par nos gobelins dans nos forges...)</span>"
-                },
-                "rules": {
-                    "title": "Cartes de Règles",
-                    "special": "<strong>Règles spéciales :</strong> Maladies, création d'objets",
-                    "services": "<strong>Services :</strong> Marchands, artisans, guides",
-                    "vehicles": "<strong>Véhicules :</strong> Montres, navires, véhicules",
-                    "poisons": "<strong>Poisons :</strong> Effets et antidotes"
-                },
-                "gameplay": {
-                    "title": "Cartes de Gameplay",
-                    "spells": "<strong>Sorts :</strong> Descriptions complètes, composantes",
-                    "monsters": "<strong>Monstres :</strong> Statistiques, tactiques, butin",
-                    "packages": "<strong>Paquetages :</strong> Kits d'équipement thématiques",
-                    "goods": "<strong>Marchandises :</strong> Commerce et économie"
-                }
-            },
-            "availability": {
-                "title": "Disponibilité des Cartes",
-                "available": "<strong>Toutes les cartes d'objets sont disponibles</strong> dans notre boutique ! Personnalisez vos decks selon vos besoins et votre personnage.",
-                "comingSoon": "Les cartes d'objets magiques arrivent bientôt, nos gobelins travaillent dur dans nos forges pour vous créer des merveilles !"
-            },
-            "examples": {
-                "title": "Exemples de Cartes",
-                "weapon": {
-                    "title": "Carte d'Arme : Pistolet à Silex",
-                    "front": "<strong>Recto :</strong> Illustration, prix, poids, bonus d'attaque",
-                    "back": "<strong>Verso :</strong> Règles détaillées, propriétés spéciales"
-                },
-                "armor": {
-                    "title": "Carte d'Armure : Armure de Cuir",
-                    "front": "<strong>Recto :</strong> Illustration, prix, poids, CA de base",
-                    "back": "<strong>Verso :</strong> Modificateurs, restrictions, descriptions"
-                },
-                "tip": "<strong>Astuce :</strong> Cliquez sur les cartes pour voir le recto et le verso !"
-            },
-            "usage": {
-                "title": "Comment Utiliser vos Cartes",
-                "inGame": {
-                    "title": "🎮 Pendant le Jeu",
-                    "quickAccess": {
-                        "title": "1. Accès Rapide",
-                        "list": {
-                            "item1": "• Gardez vos cartes d'équipement à portée de main",
-                            "item2": "• Consultez les propriétés spéciales sans ralentir le jeu",
-                            "item3": "• Plus besoin d'ouvrir les manuels pendant l'action"
-                        }
-                    },
-                    "dmShare": {
-                        "title": "2. Partage avec le MJ",
-                        "list": {
-                            "item1": "• Montrez directement vos cartes au MJ",
-                            "item2": "• Validation immédiate des règles et effets",
-                            "item3": "• Clarification rapide en cas de doute"
-                        }
-                    }
-                },
-                "organization": {
-                    "title": "Organisation",
-                    "categorySort": {
-                        "title": "1. Tri par Catégorie",
-                        "list": {
-                            "item1": "• Séparez : Armes, Armures, Équipement, Sorts",
-                            "item2": "• Utilisez des intercalaires ou pochettes",
-                            "item3": "• Gardez les cartes actuelles sur le dessus"
-                        }
-                    },
-                    "visualInventory": {
-                        "title": "2. Inventaire Visuel",
-                        "list": {
-                            "item1": "• Étalez vos cartes d'équipement actuel",
-                            "item2": "• Ajoutez/retirez selon vos acquisitions",
-                            "item3": "• Inventaire physique = inventaire de personnage"
-                        }
-                    }
-                },
-                "proTips": {
-                    "title": "Conseils de Pro",
-                    "rotation": "<strong>Rotation :</strong> Changez vos cartes selon vos aventures",
-                    "protection": "<strong>Protection :</strong> Utilisez des protège-cartes transparents",
-                    "notes": {
-                        "main": "<strong>Notes :</strong> Annotez au crayon les modifications temporaires",
-                        "tip": "Conseil pro : Utilisez des crayons Staedtler 8B ou 9B pour un marquage optimal"
-                    }
-                }
-            },
-            "backToMain": "🔝 Retour au menu principal"
+        "equipment": {
+          "title": "3. Équipement et Personnalité",
+          "list": {
+            "item1": "• Cartes d'équipement de départ fournies avec le triptyque",
+            "item2": "• Remplissez les traits de personnalité (Coûts, Idéaux, Liens, Défauts)",
+            "item3": "• Développez votre background narratif"
+          }
         }
+      },
+      "speciesGuide": {
+        "title": "2. Triptyque d'Espèce",
+        "traits": {
+          "title": "1. Langues et traits raciaux",
+          "languages": "<strong>Langues :</strong> C'est ICI que vous notez les langues !",
+          "list": {
+            "item1": "• Langue commune + langue raciale (ex: Céleste, Draconique)",
+            "item2": "• Une troisième langue au choix",
+            "item3": "• Cochez les résistances aux dégâts",
+            "item4": "• Notez les sens spéciaux (vision dans le noir, etc.)"
+          }
+        },
+        "abilities": {
+          "title": "2. Capacités et sorts d'espèce",
+          "list": {
+            "item1": "• Détaillez les sorts raciaux (niveau, utilisations/repos)",
+            "item2": "• Notez les aptitudes héréditaires uniques",
+            "item3": "• Cochez les immunités et résistances spéciales",
+            "item4": "• Taille, vitesse de déplacement, durée de vie"
+          }
+        },
+        "note": "<strong>Note importante :</strong> Les compétences et maîtrises d'espèce doivent être reportées sur le triptyque d'Historique !",
+        "training": {
+          "title": "3. Champs \"Entraînements\" (vides au départ)",
+          "important": "<strong>Important :</strong> Ces 5 champs sont pour les acquisitions EN JEU",
+          "list": {
+            "item1": "• Nouvelles langues apprises durant l'aventure",
+            "item2": "• Maîtrises d'outils acquises",
+            "item3": "• Compétences spéciales gagnées",
+            "item4": "• Ne les remplissez que si votre personnage apprend quelque chose"
+          }
+        }
+      },
+      "classGuide": {
+        "title": "3. Triptyque de Classe",
+        "combat": {
+          "title": "1. Statistiques vitales et combat",
+          "list": {
+            "item1": "• <strong>Points de vie :</strong> Maximum, actuels, temporaires",
+            "item2": "• <strong>Classe d'armure :</strong> Avec et sans bouclier",
+            "item3": "• <strong>Initiative :</strong> Modificateur et résultat de jet",
+            "item4": "• <strong>Jets contre la mort :</strong> Suivi des réussites/échecs",
+            "item5": "• Niveau actuel et bonus de maîtrise"
+          }
+        },
+        "skills": {
+          "title": "2. Compétences et maîtrises de classe",
+          "list": {
+            "item1": "• Cochez les compétences de classe maîtrisées",
+            "item2": "• Notez les maîtrises d'armes et armures",
+            "item3": "• Jets de sauvegarde maîtrisés"
+          }
+        },
+        "note": "📝 <strong>Note importante :</strong> Les compétences et maîtrises de classe doivent être reportées sur le triptyque d'Historique !",
+        "abilities": {
+          "title": "3. Aptitudes et ressources",
+          "list": {
+            "item1": "• Aptitudes acquises par niveau (cochez au fur et à mesure)",
+            "item2": "• Ressources de classe (Rage, Inspiration, Emplacements de sorts...)",
+            "item3": "• Capacités de sous-classe spécifiques"
+          }
+        }
+      },
+      "order": {
+        "title": "Ordre de Remplissage Recommandé",
+        "step1": {
+          "title": "1. DÉMARRAGE",
+          "text": "<strong>Historique FIRST :</strong> Lancez les dés et notez les caractéristiques avec bonus d'historique"
+        },
+        "step2": {
+          "title": "2️⃣ ESPÈCE",
+          "text": "<strong>Espèce :</strong> Traits raciaux, langues, capacités. <em>Reportez les compétences sur l'Historique</em>"
+        },
+        "step3": {
+          "title": "3️⃣ CLASSE",
+          "text": "<strong>Classe :</strong> PV, aptitudes, ressources. <em>Reportez les compétences sur l'Historique</em>"
+        },
+        "step4": {
+          "title": "4️⃣ FINALISATION",
+          "text": "<strong>Historique FINAL :</strong> Centralisez toutes les compétences et maîtrises des 3 triptyques"
+        }
+      },
+      "tips": {
+        "title": "Conseils de Remplissage",
+        "tip1": {
+          "title": "✏️",
+          "text": "<strong>Crayon obligatoire :</strong> Les valeurs évoluent constamment"
+        },
+        "tip2": {
+          "title": "📱",
+          "text": "<strong>Photo de sauvegarde :</strong> Sécurisez vos triptyques remplis"
+        },
+        "tip3": {
+          "title": "🗂️",
+          "text": "<strong>Organisation :</strong> Historique à gauche (caracs), Espèce au centre, Classe à droite"
+        },
+        "tip4": {
+          "title": "Astuce",
+          "text": "<strong>Mémo 2024 :</strong> Les bonus de caracs viennent de l'HISTORIQUE maintenant !"
+        }
+      }
     },
-    "money": {
-        "title": "Guide de la Monnaie D&D",
-        "description": "Découvrez le système monétaire de D&D, nos pièces physiques Geek & Dragon, et utilisez notre convertisseur pour gérer facilement vos finances d'aventurier !",
-        "coinTypes": {
-            "title": "Types de Pièces",
-            "platinum": {
-                "name": "    Pièce de Platine (pp)",
-                "description": "    La plus précieuse • 1 pp = 10 po"
+    "customTriptychs": {
+      "title": "Triptyques Personnalisés",
+      "description": "Vous voulez un triptyque totalement adapté à votre personnage unique ? Nous créons des triptyques sur mesure avec vos choix spécifiques !",
+      "standard": {
+        "title": "Triptyques Standards",
+        "list": {
+          "item1": "• Cartes d'équipement aléatoires incluses",
+          "item2": "• Choix standards pour les options variables",
+          "item3": "• Livraison rapide depuis notre stock",
+          "item4": "• Prix catalogue de la boutique"
+        }
+      },
+      "custom": {
+        "title": "Triptyques Personnalisés",
+        "list": {
+          "item1": "• Choix précis de tous les équipements",
+          "item2": "• Sélection manuelle des cartes incluses",
+          "item3": "• Adaptation à votre background spécifique",
+          "item4": "• Création sur commande (délai supplémentaire)"
+        }
+      },
+      "contact": {
+        "title": "📧 Comment Commander",
+        "description": "Pour un triptyque entièrement personnalisé, contactez-nous par email avec les détails de votre personnage :",
+        "email": "commande@geekndragon.com",
+        "subject": "Triptyque Personnalisé",
+        "subjectLabel": "Sujet : \"Triptyque Personnalisé\"",
+        "tip": "<strong>Astuce :</strong> Précisez votre classe, espèce, historique et vos préférences d'équipement dans votre email"
+      },
+      "usage": {
+        "title": "Comment utiliser vos triptyques",
+        "description": "Vos 3 triptyques cartonnés indépendants sont conçus pour être disposés devant vous sur votre table de jeu",
+        "step1": {
+          "title": "📄 3 pages cartonnées indépendantes",
+          "text": "Chaque triptyque est une page cartonnée <strong>recto-verso robuste</strong>. Pas besoin de plier : ce sont 3 fiches indépendantes et complémentaires."
+        },
+        "step2": {
+          "title": "Disposez devant vous",
+          "text": "Disposez vos 3 triptyques devant vous : Espèce à gauche, Classe au centre, Historique à droite. Accès instantané à toutes vos capacités du niveau 1 à 20."
+        },
+        "step3": {
+          "title": "Consultez pendant le jeu",
+          "text": "Plus besoin d'ouvrir les manuels ! Toutes vos aptitudes sont visibles d'un coup d'œil. Le MJ et les autres joueurs restent concentrés sur l'action."
+        },
+        "proTip": {
+          "title": "Conseil Pro",
+          "text": "Gardez vos triptyques ouverts pendant toute la session. Ils remplacent efficacement la feuille de personnage traditionnelle et accélèrent considérablement le jeu !",
+          "writingAdvice": {
+            "title": "Astuce d'Écriture & Effacement",
+            "triptychs": {
+              "title": "Pour les Triptyques :",
+              "text": "<strong>Marqueurs permanents Sharpie + gomme Staedtler</strong> = combinaison parfaite ! Vous pouvez effacer complètement le marqueur sur les triptyques, même sur les zones colorées. N'hésitez pas à gommer énergiquement, le carton résiste parfaitement."
             },
-            "gold": {
-                "name": "    Pièce d'Or (po)",
-                "description": "    Monnaie de référence • 1 po = 10 pa"
-            },
-            "silver": {
-                "name": "    Pièce d'Argent (pa)",
-                "description": "    Monnaie courante • 1 pa = 10 pe"
-            },
-            "electrum": {
-                "name": "    Pièce d'Électrum (pe)",
-                "description": "    Alliage or-argent • 1 pe = 5 pc"
-            },
-            "copper": {
-                "name": "    Pièce de Cuivre (pc)",
-                "description": "    Menue monnaie • La plus commune"
+            "cards": {
+              "title": "Pour les Cartes :",
+              "text": "La technique fonctionne aussi sur les cartes, mais <strong>limitez le gommage aux zones blanches</strong> idéalement car elles sont plus fines. Les cartes devraient être personnalisées à chaque personnage pour une expérience optimale !"
             }
-        },
-        "conversionTable": {
-            "title": "🔄 Tableau de Conversion",
-            "headers": {
-                "coin": "Pièce"
-            },
-            "rows": {
-                "platinum": "Platine (pp)",
-                "gold": "Or (po)",
-                "silver": "Argent (pa)",
-                "electrum": "Électrum (pe)",
-                "copper": "Cuivre (pc)"
-            }
-        },
-        "converter": {
-            "recommendations": {
-                "title": "Recommandations optimales"
-            },
-            "optimalLotsTitle": "Collection la Plus Efficace",
-            "lotsRecommendedTitle": "Collections Tableau Multiplicateur",
-            "lotsRecommendations": {
-                "description": "Ces collections correspondent exactement à votre répartition personnalisée définie dans le tableau multiplicateur éditable ci-dessus. Respectent vos choix spécifiques de métaux et multiplicateurs pour un trésor sur-mesure.",
-                "addAllButton": "Acquérir votre collection",
-                "optimizationNote": "Collections adaptées à votre répartition personnalisée pour un trésor sur-mesure",
-                "noLotsMessage": "Aucune collection disponible.",
-                "noLotsSubMessage": "Modifiez votre trésor pour découvrir de nouvelles options",
-                "promptMessage": "Définissez votre trésor dans le convertisseur",
-                "promptSubMessage": "pour découvrir vos collections personnalisées"
-            },
-            "optimalLots": {
-                "description": "Les maîtres-forgerons recommandent cette sélection pour obtenir votre trésor avec le nombre minimal de pièces. Optimisez votre espace de coffre et simplifiez vos comptages lors des échanges commerciaux.",
-                "addAllButton": "Acquérir la collection efficace",
-                "optimizationNote": "Solution recommandée par les experts pour minimiser la gestion de votre trésor",
-                "noLotsMessage": "Aucune solution optimale disponible.",
-                "noLotsSubMessage": "Ajustez votre trésor pour explorer d'autres configurations",
-                "promptMessage": "Configurez votre trésor dans le convertisseur",
-                "promptSubMessage": "pour découvrir les collections les plus efficaces"
-            },
-            "abbreviations": {
-                "copper": "pc",
-                "silver": "pa",
-                "electrum": "pe",
-                "gold": "po",
-                "platinum": "pp"
-            },
-            "debugSection": {
-                "title": "Section de débogage pour valider les algorithmes métaheuristiques de conversion et recommandations de lots."
-            },
-            "labels": {
-                "copper": "Cuivre",
-                "silver": "Argent",
-                "electrum": "Électrum",
-                "gold": "Or",
-                "platinum": "Platine"
-            },
-            "multiplierTable": {
-                "copper": "Cuivre",
-                "silver": "Argent",
-                "electrum": "Électrum",
-                "gold": "Or",
-                "platinum": "Platine"
-            },
-            "productSummary": "Lot de pièces D&D",
-            "coinDescription": {
-                "faithfulReproduction": "Nos pièces métalliques reproduisent fidèlement le système monétaire de D&D. Chaque type de pièce a son propre design et sa finition unique."
-            }
-        },
-        "physicalTreasure": {
-            "title": "🏆 Un Trésor Tangible",
-            "paragraph1": "Dans Donjons & Dragons, les <strong class=\"text-amber-400\">deux objectifs principaux</strong> sont l'expérience et le trésor. Devoir écrire le trésor sur papier puis le gommer ne lui rend pas hommage. Le trésor mérite d'être <strong class=\"text-yellow-400\">tangible, pesé, manipulé</strong>.",
-            "paragraph2": "Nos pièces physiques transforment chaque récompense en moment mémorable. Quand le MJ fait <em class=\"text-amber-300\">tinter les pièces d'or</em> dans sa main avant de les distribuer, c'est toute l'immersion qui s'intensifie.",
-            "property": "Système de Propriété",
-            "sheetInstructions": "Utilisez notre <strong>fiche de monnaie</strong> pour répertorier vos trésors. Inscrivez votre nom, comptez vos pièces, signez et remettez au MJ. En fin de campagne, récupérez facilement votre investissement !"
-        },
-        "physicalCoins": {
-            "title": "Pièces Physiques Geek & Dragon",
-            "system": {
-                "title": "Le Système Monétaire D&D",
-                "paragraph1": "Dans D&D, la monnaie utilise <strong class=\"text-amber-300\">5 métaux différents</strong> : cuivre (pc), argent (pa), électrum (pe), or (po) et platine (pp). Les conversions de base sont : 10 pc = 1 pa, 2 pa = 1 pe, 5 pa = 1 po, et 10 po = 1 pp.",
-                "paragraph2": "Nos pièces physiques ajoutent une dimension immersive : les pièces unitaires ont un <strong class=\"text-yellow-200\">fini brillant</strong>, tandis que les <strong class=\"text-yellow-300\">multiplicateurs gravés</strong> (×10, ×100, ×1000, ×10000) arborent un fini mat distinctif. Une pièce d'or ×100 vaut 100 po — parfait pour gérer de gros trésors sans manipuler des centaines de pièces !"
-            },
-            "weight": {
-                "title": "⚖️ Poids Authentiques",
-                "paragraph": "Selon les règles officielles D&D, <strong class=\"text-amber-300\">50 pièces = 500g/1 lb</strong>. Nos multiplicateurs représentent fidèlement ces valeurs et leur poids pour une immersion totale :"
-            },
-            "weightTable": {
-                "title": "📊 Tableau des poids par multiplicateur",
-                "note": "Ressentez le poids croissant du trésor entre vos mains !",
-                "notice": "📌 Ces multiplicateurs s'appliquent à <strong>n'importe quel métal</strong> (cuivre, argent, électrum, or, platine)"
-            },
-            "example": {
-                "title": "Exemple concret avec de l'or : trésor de 1 500 po",
-                "text": "Plutôt que d'empiler <strong class=\"text-red-400\">1 500 pièces unitaires</strong> (15 kg / 33 lb), utilisez :",
-                "item1": "<strong class=\"text-yellow-400\">1 pièce d'or ×1000</strong> → 1000 po (10 kg / 22 lb)",
-                "item2": "<strong class=\"text-yellow-300\">5 pièces d'or ×100</strong> → 500 po (5 kg / 11 lb)",
-                "result": "<strong class=\"text-green-400\">Résultat : 6 pièces physiques</strong> au lieu de 1 500 !"
-            },
-            "authentic": {
-                "title": "Des Pièces Authentiques",
-                "feature1": "• <strong>Métal véritable</strong> avec finitions spécifiques",
-                "feature2": "• <strong>Gravures détaillées</strong> inspirées de l'univers D&D",
-                "feature3": "• <strong>Poids authentique</strong> pour une expérience immersive",
-                "feature4": "• <strong>Sets complets</strong> ou pièces individuelles"
-            },
-            "uses": {
-                "feature5": "• <strong>Gestion tactile</strong> de votre trésor"
-            },
-            "gameUse": {
-                "title": "Utilisation en Jeu",
-                "feature1": "• <strong>Récompenses physiques</strong> pour les joueurs",
-                "feature2": "• <strong>Immersion totale</strong> lors des transactions",
-                "feature3": "• <strong>Ambiance médiévale-fantastique</strong> renforcée"
-            },
-            "order": {
-                "title": "Commandez vos Pièces",
-                "description": "Découvrez notre collection complète de pièces métalliques et donnez vie à l'économie de vos parties !",
-                "shopButton": "Voir les Pièces en Boutique",
-                "treasuryButton": "Set Complet de Trésorerie"
-            }
-        },
-        "tests": {
-            "title": "Tests du Système de Conversion",
-            "results": "Résultats des Tests",
-            "runningBasic": "Exécution des tests de base...",
-            "runningAdvanced": "Exécution des tests avancés...",
-            "noTests": "Aucun test exécuté...",
-            "error": "❌ Erreur lors de l'exécution des tests",
-            "notAvailable": "❌ CurrencyConverterTests non disponible",
-            "basic": "Tests de Base",
-            "advanced": "Tests Avancés",
-            "basicButton": "🧪 Tests de Base",
-            "advancedButton": "Tests Avancés",
-            "successText": "tests réussis",
-            "errorLabel": "Erreur",
-            "performance": "Performance",
-            "totalTime": "Temps total"
-        },
-        "download": {
-            "title": "Télécharger la Fiche de Monnaie",
-            "subtitle": "Fiche à imprimer",
-            "button": "📥 Télécharger",
-            "buttonShort": "📥 Télécharger",
-            "downloadSheet": "📥 Télécharger la fiche",
-            "instruction": "Cliquez sur l'image pour télécharger la fiche à imprimer",
-            "printTip": "Conseil d'impression :",
-            "description": "Téléchargez l'image de la fiche de monnaie pour l'imprimer chez vous",
-            "instructions": "Imprimez sur du papier cartonné (200-250g) pour un meilleur rendu. Vous pouvez plastifier la fiche pour une utilisation répétée.",
-            "confirmButton": "📥 Télécharger",
-            "cancelButton": "Annuler"
-        },
-        "backToMain": "🔝 Retour au menu principal"
+          }
+        }
+      }
     },
-    "callToAction": {
-        "title": "Prêt à révolutionner vos parties ?",
-        "description": "Découvrez notre collection complète : triptyques, cartes d'équipement et pièces métalliques. Transformez votre expérience de jeu de rôle avec nos accessoires artisanaux conçus au Québec.",
-        "buttons": {
-            "triptychs": "Triptyques",
-            "cards": "Cartes d'Équipement",
-            "coins": "Pièces Métalliques",
-            "shop": "Voir toute la boutique"
+    "writingTips": {
+      "title": "Astuce d'Écriture & Effacement",
+      "description": "Pour une utilisation optimale de vos triptyques :",
+      "list": {
+        "item1": "• <strong>Crayon uniquement :</strong> Les valeurs changent souvent pendant l'aventure",
+        "item2": "• <strong>Gomme de qualité :</strong> Pour les modifications sans traces",
+        "item3": "• <strong>Pression légère :</strong> Évitez de marquer le carton en profondeur",
+        "item4": "• <strong>Backup régulier :</strong> Prenez une photo de vos triptyques remplis"
+      },
+      "recommended": "Crayon recommandé : Staedtler HB ou 2H pour un tracé précis et effaçable."
+    },
+    "backToMain": "🔝 Retour au menu principal",
+    "cards": {
+      "mainTitle": "Guide des Cartes à Jouer Geek & Dragon",
+      "intro": "<strong class=\"text-indigo-300\">560 cartes d'équipement illustrées</strong> couvrant armes, armures et équipements. Chaque carte présente <strong class=\"text-purple-300\">visuellement</strong> toutes les statistiques nécessaires. <strong class=\"text-green-400\">Fini la lecture fastidieuse</strong> des manuels pendant les parties ! <span class=\"text-amber-300 text-sm italic block mt-2\">Les cartes de sorts de classe complètes arrivent bientôt, nos gobelins travaillent avec ardeur dans nos monastères enchantés...</span>",
+      "faqSubtitle": "FAQ Cartes",
+      "mainDescription": "Complétez vos triptyques avec nos cartes détaillées : Armes, Armures, Équipements, Sorts, Monstres et bien plus ! Chaque carte contient toutes les informations nécessaires pour accélérer vos parties.",
+      "title": "Cartes d'Équipement",
+      "types": {
+        "equipment": {
+          "title": "Cartes d'Équipement",
+          "weapons": "<strong>Armes :</strong> Statistiques complètes, propriétés spéciales",
+          "armor": "<strong>Armures :</strong> CA, poids, restrictions de classe",
+          "equipment": "<strong>Équipement :</strong> Objets d'aventure et outils",
+          "magicItems": "<strong>Objets magiques :</strong> Pouvoirs et malédictions <span class=\"text-amber-300 text-xs italic\">(en cours de création par nos gobelins dans nos forges...)</span>"
+        },
+        "rules": {
+          "title": "Cartes de Règles",
+          "special": "<strong>Règles spéciales :</strong> Maladies, création d'objets",
+          "services": "<strong>Services :</strong> Marchands, artisans, guides",
+          "vehicles": "<strong>Véhicules :</strong> Montres, navires, véhicules",
+          "poisons": "<strong>Poisons :</strong> Effets et antidotes"
+        },
+        "gameplay": {
+          "title": "Cartes de Gameplay",
+          "spells": "<strong>Sorts :</strong> Descriptions complètes, composantes",
+          "monsters": "<strong>Monstres :</strong> Statistiques, tactiques, butin",
+          "packages": "<strong>Paquetages :</strong> Kits d'équipement thématiques",
+          "goods": "<strong>Marchandises :</strong> Commerce et économie"
+        }
+      },
+      "availability": {
+        "title": "Disponibilité des Cartes",
+        "available": "<strong>Toutes les cartes d'objets sont disponibles</strong> dans notre boutique ! Personnalisez vos decks selon vos besoins et votre personnage.",
+        "comingSoon": "Les cartes d'objets magiques arrivent bientôt, nos gobelins travaillent dur dans nos forges pour vous créer des merveilles !"
+      },
+      "examples": {
+        "title": "Exemples de Cartes",
+        "weapon": {
+          "title": "Carte d'Arme : Pistolet à Silex",
+          "front": "<strong>Recto :</strong> Illustration, prix, poids, bonus d'attaque",
+          "back": "<strong>Verso :</strong> Règles détaillées, propriétés spéciales"
+        },
+        "armor": {
+          "title": "Carte d'Armure : Armure de Cuir",
+          "front": "<strong>Recto :</strong> Illustration, prix, poids, CA de base",
+          "back": "<strong>Verso :</strong> Modificateurs, restrictions, descriptions"
+        },
+        "tip": "<strong>Astuce :</strong> Cliquez sur les cartes pour voir le recto et le verso !"
+      },
+      "usage": {
+        "title": "Comment Utiliser vos Cartes",
+        "inGame": {
+          "title": "🎮 Pendant le Jeu",
+          "quickAccess": {
+            "title": "1. Accès Rapide",
+            "list": {
+              "item1": "• Gardez vos cartes d'équipement à portée de main",
+              "item2": "• Consultez les propriétés spéciales sans ralentir le jeu",
+              "item3": "• Plus besoin d'ouvrir les manuels pendant l'action"
+            }
+          },
+          "dmShare": {
+            "title": "2. Partage avec le MJ",
+            "list": {
+              "item1": "• Montrez directement vos cartes au MJ",
+              "item2": "• Validation immédiate des règles et effets",
+              "item3": "• Clarification rapide en cas de doute"
+            }
+          }
         },
         "organization": {
-            "title": "Organisation",
-            "sortByCategory": {
-                "title": "1. Tri par Catégorie",
-                "list": {
-                    "item1": "• Séparez : Armes, Armures, Équipement, Sorts",
-                    "item2": "• Utilisez des intercalaires ou pochettes",
-                    "item3": "• Gardez les cartes actuelles sur le dessus"
-                }
-            },
-            "visualInventory": {
-                "title": "2. Inventaire Visuel",
-                "list": {
-                    "item1": "• Étalez vos cartes d'équipement actuel",
-                    "item2": "• Ajoutez/retirez selon vos acquisitions",
-                    "item3": "• Inventaire physique = inventaire de personnage"
-                }
+          "title": "Organisation",
+          "categorySort": {
+            "title": "1. Tri par Catégorie",
+            "list": {
+              "item1": "• Séparez : Armes, Armures, Équipement, Sorts",
+              "item2": "• Utilisez des intercalaires ou pochettes",
+              "item3": "• Gardez les cartes actuelles sur le dessus"
             }
+          },
+          "visualInventory": {
+            "title": "2. Inventaire Visuel",
+            "list": {
+              "item1": "• Étalez vos cartes d'équipement actuel",
+              "item2": "• Ajoutez/retirez selon vos acquisitions",
+              "item3": "• Inventaire physique = inventaire de personnage"
+            }
+          }
         },
         "proTips": {
-            "title": "⭐ Conseils de Pro",
-            "rotation": "<strong>Rotation :</strong> Changez vos cartes selon vos aventures",
-            "protection": "<strong>Protection :</strong> Utilisez des protège-cartes transparents",
-            "notes": "<strong>Notes :</strong> Annotez au crayon les modifications temporaires<br><em>Conseil pro : Utilisez des crayons Staedtler 8B ou 9B pour un marquage optimal</em>"
+          "title": "Conseils de Pro",
+          "rotation": "<strong>Rotation :</strong> Changez vos cartes selon vos aventures",
+          "protection": "<strong>Protection :</strong> Utilisez des protège-cartes transparents",
+          "notes": {
+            "main": "<strong>Notes :</strong> Annotez au crayon les modifications temporaires",
+            "tip": "Conseil pro : Utilisez des crayons Staedtler 8B ou 9B pour un marquage optimal"
+          }
         }
+      },
+      "backToMain": "🔝 Retour au menu principal"
     },
-    "backToTop": "Retour au grimoire principal",
-    "products": {
-        "coin-custom-single": {
-            "name": "Pièce Personnalisée",
-            "description": "### Pièce unique à votre choix\r\n\r\nChoisissez **le métal** (cuivre, argent, électrum, or, platine) et **le multiplicateur** (unitaire, ×10, ×100, ×1000, ×10000) pour créer votre pièce sur mesure.\r\n\r\n**Contenu :**\r\n- 1 pièce métallique personnalisable\r\n- Choix du métal : cuivre, argent, électrum, or, platine\r\n- Choix du multiplicateur : ×1, ×10, ×100, ×1000, ×10000\r\n- Finition selon le multiplicateur choisi\r\n\r\n*Parfait pour compléter une collection ou remplacer une pièce perdue.*",
-            "summary": "Pièce métallique personnalisable avec choix du métal et du multiplicateur.",
-            "metals": [
-                "cuivre",
-                "argent",
-                "électrum",
-                "or",
-                "platine"
-            ]
-        },
-        "coin-trio-customizable": {
-            "name": "Trio de Pièces",
-            "description": "### Trois pièces personnalisables\r\n\r\n**3 pièces métalliques** au choix avec métal et multiplicateur personnalisables. Idéal pour compléter une collection ou créer un petit trésor sur mesure.\r\n\r\n**Contenu :**\r\n- 3 pièces au choix de métal et multiplicateur\r\n\r\n*Parfait pour débuter ou compléter votre collection de pièces !*",
-            "summary": "Lot de trois pièces personnalisables avec choix du métal et multiplicateur unique.",
-            "metals": [
-                "cuivre",
-                "argent",
-                "électrum",
-                "or",
-                "platine"
-            ]
-        },
-        "coin-quintessence-metals": {
-            "name": "Quintessence Métallique",
-            "description": "### Cinq métaux, un multiplicateur\r\n\r\n**5 pièces de métaux différents** appliquant le même multiplicateur choisi : une de chaque métal (cuivre, argent, électrum, or, platine) avec finition uniforme.\r\n\r\n**Contenu :**\r\n- 1 pièce de cuivre\r\n- 1 pièce d'argent\r\n- 1 pièce d'électrum\r\n- 1 pièce d'or\r\n- 1 pièce de platine\r\n\r\n*Découvrez la diversité des métaux avec une valeur cohérente !*",
-            "summary": "Collection de cinq pièces avec un de chaque métal et multiplicateur uniforme."
-        },
-        "coin-septuple-free": {
-            "name": "Septuple Libre",
-            "description": "### Sept pièces entièrement personnalisables\r\n\r\n**7 pièces métalliques** avec choix libre du métal et du multiplicateur pour chaque pièce. Créez votre propre assortiment selon vos besoins précis.\r\n\r\n**Contenu :**\r\n- 7 pièces métalliques personnalisables\r\n- Chaque pièce : métal ET multiplicateur au choix\r\n- Métaux disponibles : cuivre, argent, électrum, or, platine\r\n- Multiplicateurs : ×1, ×10, ×100, ×1000, ×10000\r\n\r\n*Composez votre trésor exact selon vos besoins de jeu !*",
-            "summary": "Lot de sept pièces avec choix libre du métal et multiplicateur pour chaque pièce.",
-            "metals": [
-                "cuivre",
-                "argent",
-                "électrum",
-                "or",
-                "platine"
-            ]
-        },
-        "coin-traveler-offering": {
-            "name": "Offrande du Voyageur",
-            "description": "### Trésor de départ immersif\r\n\r\n**10 pièces en métal** : **2 de chaque métal** (cuivre, argent, électrum, or, platine). Vous choisissez **un seul multiplicateur** pour tout le lot.\r\n\r\n**Contenu :**\r\n- 2 pièces de cuivre\r\n- 2 pièces d'argent\r\n- 2 pièces d'électrum\r\n- 2 pièces d'or\r\n- 2 pièces de platine\r\n- Multiplicateur unique au choix : ×1, ×10, ×100, ×1000, ×10000\r\n- Finition : unitaire (brillant) ou gravé (légèrement mat)\r\n\r\n*Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*",
-            "summary": "Ensemble de 10 pièces métalliques assorties avec multiplicateur unique pour accélérer les comptes."
-        },
-        "coin-five-realms-complete": {
-            "name": "La Monnaie des Cinq Royaumes",
-            "description": "### 25 pièces, zéro doublon\r\n\r\n**5 métaux × 5 multiplicateurs** = **25 modèles uniques**. Chaque métal existe en unitaire (brillant) et avec multiplicateurs gravés (finition mate).\r\n\r\n**Contenu :**\r\n- 5 pièces de cuivre : ×1, ×10, ×100, ×1000, ×10000\r\n- 5 pièces d'argent : ×1, ×10, ×100, ×1000, ×10000\r\n- 5 pièces d'électrum : ×1, ×10, ×100, ×1000, ×10000\r\n- 5 pièces d'or : ×1, ×10, ×100, ×1000, ×10000\r\n- 5 pièces de platine : ×1, ×10, ×100, ×1000, ×10000\r\n\r\n*Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*",
-            "summary": "Collection de 25 pièces uniques couvrant les cinq métaux et tous les multiplicateurs pour la table."
-        },
-        "coin-merchant-essence-double": {
-            "name": "Essence du Marchand",
-            "description": "### 50 pièces, double variété\r\n\r\n**2 exemplaires** de chacun des **25 modèles** de la *Monnaie des Cinq Royaumes* : total **50 pièces**.\r\n\r\n**Contenu :**\r\n- 10 pièces de cuivre : 2×(×1, ×10, ×100, ×1000, ×10000)\r\n- 10 pièces d'argent : 2×(×1, ×10, ×100, ×1000, ×10000)\r\n- 10 pièces d'électrum : 2×(×1, ×10, ×100, ×1000, ×10000)\r\n- 10 pièces d'or : 2×(×1, ×10, ×100, ×1000, ×10000)\r\n- 10 pièces de platine : 2×(×1, ×10, ×100, ×1000, ×10000)\r\n- Finition : unitaire (brillant) et gravé (mat)\r\n\r\n*Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*",
-            "summary": "Double exemplaire de chaque modèle pour 50 pièces prêtes à l'emploi avec tous les multiplicateurs."
-        },
-        "coin-lord-treasury-uniform": {
-            "name": "La Trésorerie du Seigneur",
-            "description": "### 50 pièces pour l'opulence\r\n\r\n**10 pièces de chaque métal** (cuivre, argent, électrum, or, platine) appliquant **le même multiplicateur** choisi à l'achat.\r\n\r\n**Contenu :**\r\n- 10 pièces de cuivre (même multiplicateur)\r\n- 10 pièces d'argent (même multiplicateur)\r\n- 10 pièces d'électrum (même multiplicateur)\r\n- 10 pièces d'or (même multiplicateur)\r\n- 10 pièces de platine (même multiplicateur)\r\n- Choix du multiplicateur : ×1, ×10, ×100, ×1000, ×10000\r\n- Finition : unitaire (brillant) ou gravé (mat)\r\n\r\n*Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*",
-            "summary": "Sélection de 50 pièces d'un même multiplicateur pour assurer une trésorerie abondante et cohérente."
-        },
-        "cards-random-discovery-10": {
-            "name": "10 Cartes Surprise",
-            "description": "### Découverte aléatoire - 10 cartes\r\n\r\nSélection mystère de **10 cartes d'équipement** piochées dans notre catalogue complet. Parfait pour découvrir de nouveaux objets ou enrichir votre collection avec des surprises !\r\n\r\n**Contenu :**\r\n- 10 cartes d'équipement aléatoires\r\n- Mélange possible : armes, armures, outils, objets spéciaux\r\n- Cartes illustrées haute qualité\r\n- Compatibles D&D 5e et systèmes similaires\r\n\r\n*L'aventure commence par la surprise de l'inconnu !*",
-            "summary": "Sélection mystère de 10 cartes d'équipement pour découvrir de nouveaux objets."
-        },
-        "cards-weapons-armor-60": {
-            "name": "Armes & Armures",
-            "description": "### Combat complet - 60 cartes\\n\\nCollection essentielle de **60 cartes** pour équiper vos combattants : arsenal complet d'armes de mêlée et à distance, protections légères aux lourdes, et boucliers.\\n\\n**Contenu :**\\n- **44 armes** : mêlée, distance, exotiques, armes à feu modernes et futuristes\\n- **14 armures** : légères, intermédiaires, lourdes\\n- **2 boucliers** : métal et bois\\n\\n*L'essentiel pour équiper guerriers, aventuriers et soldats !*",
-            "summary": "Collection de 60 cartes d'armes et armures pour équiper combattants et aventuriers."
-        },
-        "cards-adventure-packs-70": {
-            "name": "Paquetages d'Aventure",
-            "description": "### Équipement par background - 70 cartes\\n\\nCollection complète de **70 cartes** regroupant tout l'équipement de départ selon les historiques D&D 5e. Idéal pour créer rapidement des personnages ou distribuer du matériel thématique.\\n\\n**Contenu :**\\n- **Paquetage d'artiste** : instruments et matériel créatif\\n- **Paquetage d'ecclésiastique** : objets religieux et sacrés\\n- **Paquetage d'explorateur** : survie et navigation\\n- **Paquetage d'exploration souterraine** : spéléologie et donjons\\n- **Paquetage d'érudit** : livres et outils d'étude\\n- **Paquetage de cambrioleur** : crochetage et infiltration\\n- **Paquetage de diplomate** : négociation et relations sociales\\n\\n*Personnalisez instantanément selon l'origine de vos héros !*",
-            "summary": "Collection de 70 cartes d'équipement organisées par paquetages d'historiques D&D."
-        },
-        "cards-explosives-tools-60": {
-            "name": "Explosifs & Outils",
-            "description": "### Arsenal spécialisé - 60 cartes\\n\\nCollection technique de **60 cartes** pour les campagnes avancées : explosifs, armes futuristes et outils d'artisan.\\n\\n**Contenu :**\\n- **21 explosifs** : bombes, grenades, dynamite, charges modernes et futuristes\\n- **37 outils** : artisanat, alchimie, crochetage, navigation\\n- **2 cartes règles** : mécaniques d'explosion et d'artisanat\\n\\n*Pour les aventuriers qui aiment les solutions créatives !*",
-            "summary": "Collection de 60 cartes d'explosifs et outils spécialisés pour campagnes techniques."
-        },
-        "cards-services-vehicles-85": {
-            "name": "Services & Véhicules",
-            "description": "### Voyage et logistique - 85 cartes\\n\\nCollection complète de **85 cartes** pour organiser voyages et missions : services d'auberge, transport et tous types de véhicules.\\n\\n**Contenu :**\\n- **55 services** : auberges, soins, trains de vie, mercenaires, passeurs\\n- **27 véhicules** : montures, terrestres, marins, aériens\\n- **3 cartes règles** : mécaniques de voyage et logistique\\n\\n*Tout pour voyager et s'organiser en campagne !*",
-            "summary": "Collection de 85 cartes de services et véhicules pour organiser voyages et missions."
-        },
-        "cards-loot-engineering-170": {
-            "name": "Butins & Ingénieries",
-            "description": "### Butin • Marchandises • Outils - 170 cartes\\n\\nPour des campagnes qui osent : trésors variés, biens commerciaux et les indispensables de l'artisan.\\n\\n**Contenu :**\\n- **104 butins** : trésors, gemmes, artefacts, objets précieux\\n- **27 marchandises** : biens de commerce, matières premières\\n- **37 outils** : artisanat, crochetage, alchimie, navigation\\n- **2 cartes règles** : mécaniques de commerce et d'artisanat\\n\\n*Injecte de la variété et des choix tactiques — du troc de marché aux découvertes de trésors !*",
-            "summary": "Collection de 170 cartes de butins, marchandises et outils pour enrichir vos campagnes."
-        },
-        "cards-roads-services-165": {
-            "name": "Routes & Services",
-            "description": "### Paquetages • Services • Véhicules • Poisons - 165 cartes\\n\\nTout pour mettre le monde en mouvement : préparez vos PJ, voyagez, négociez et prenez des risques avec des cartes claires et pratiques.\\n\\n**Contenu :**\\n- **65 paquetages** : 7 types selon les historiques D&D\\n- **55 services** : auberges, soins, trains de vie, mercenaires\\n- **27 véhicules** : montures, terrestres, marins, aériens\\n- **14 poisons** : substances dangereuses et toxiques\\n- **4 cartes règles** : mécaniques de voyage, services et poisons\\n\\n*Parfait pour les campagnes orientées exploration, voyage et intrigue !*",
-            "summary": "Sélection complète de 165 cartes dédiées aux voyages, services, véhicules et poisons."
-        },
-        "cards-adventurer-arsenal-190": {
-            "name": "Arsenal de l'Aventurier",
-            "description": "### Armes • Armures • Équipement - 190 cartes\\n\\nLot massif et prêt-à-jouer pour équiper tout un groupe : armes classiques et exotiques, protections pour chaque style, et l'essentiel d'aventure en cartes illustrées.\\n\\n**Contenu :**\\n- **44 armes** : mêlée, distance, exotiques, armes à feu modernes\\n- **14 armures** : légères, intermédiaires, lourdes, boucliers\\n- **127 équipements** : outils d'aventure, survie, artisanat\\n- **5 cartes règles** : maîtriser équipement et mécaniques\\n\\n*Idéal pour la table : pioche, pose, échange — fini la fouille dans le manuel !*",
-            "summary": "Boîte massive de 190 cartes illustrées pour équiper immédiatement tout un groupe d'aventuriers."
-        },
-        "triptych-mystery-hero": {
-            "name": "Triptyques Mystères",
-            "description": "### Trois triptyques, un héros clé en main\r\n\r\nTire au sort **1 Classe**, **1 Espèce** et **1 Historique** pour forger une origine unique, puis joue immédiatement avec :\r\n\r\n**Inclus :**\r\n- 1 triptyque Classe aléatoire\r\n- 1 triptyque Espèce aléatoire\r\n- 1 triptyque Historique aléatoire\r\n\r\n*Fini la fouille dans le manuel.*",
-            "summary": "Lot de triptyques aléatoires pour créer un héros complet avec équipement assorti et pièces de départ."
-        },
-        "triptych-species-collection": {
-            "name": "Triptyques Especes",
-            "description": "### Collection complète des triptyques d'espèces\r\n\r\nDécouvrez toutes les espèces jouables de D&D 5e avec des triptyques détaillés et illustrés. Chaque triptyque présente les caractéristiques, capacités spéciales et traits culturels de l'espèce.\r\n\r\n**Contenu :**\r\n- Triptyques de toutes les espèces officielles\r\n- Caractéristiques détaillées\r\n- Capacités spéciales illustrées\r\n\r\n*Parfait pour créer des personnages variés ou enrichir vos campagnes !*",
-            "summary": "Collection de triptyques présentant toutes les espèces jouables avec leurs caractéristiques et capacités."
-        },
-        "triptych-class-collection": {
-            "name": "Triptyques Classes",
-            "description": "### Collection complète des triptyques de classes\r\n\r\nExplorez toutes les classes et sous-classes de D&D 5e avec des triptyques complets. Chaque triptyque détaille les capacités, sorts, et progressions de classe avec des exemples visuels.\r\n\r\n**Contenu :**\r\n- Triptyques de toutes les classes officielles\r\n- Sous-classes et archétypes\r\n- Progressions et capacités détaillées\r\n\r\n*Idéal pour comprendre les mécaniques de classe ou préparer des PNJ !*",
-            "summary": "Collection de triptyques couvrant toutes les classes et sous-classes avec leurs capacités et progressions."
-        },
-        "triptych-background-collection": {
-            "name": "Triptyques Historiques",
-            "description": "### Collection complète des triptyques d'historiques\r\n\r\nEnrichissez vos personnages avec tous les historiques disponibles en D&D 5e. Chaque triptyque présente l'origine, les compétences, équipements et contacts de l'historique.\r\n\r\n**Contenu :**\r\n- Triptyques de tous les historiques officiels\r\n- Compétences et équipements détaillés\r\n- Contacts et relations sociales\r\n\r\n*Parfait pour donner de la profondeur à vos personnages !*",
-            "summary": "Collection de triptyques présentant tous les historiques avec leurs compétences et équipements."
-        },
-        "test-produit-1": {
-            "nom": "Objet Magique",
-            "details": "Description française détaillée",
-            "type": [
-                "Artefact",
-                "Relique"
-            ],
-            "couleurs": [
-                "Rouge",
-                "Bleu",
-                "Vert"
-            ]
-        },
-        "test-produit-2": {
-            "nom": "Grimoire Ancien",
-            "details": "Livre de sorts ancestraux",
-            "type": [
-                "Manuel",
-                "Guide"
-            ],
-            "couleurs": [
-                "Noir",
-                "Or"
-            ]
-        },
-        "test-produit-3": {
-            "nom": "Épée Enchantée",
-            "details": "Lame forgée par les elfes",
-            "type": [
-                "Épée",
-                "Lame"
-            ],
-            "couleurs": [
-                "Argenté",
-                "Brillant"
-            ]
-        },
-        "livre-1": {
-            "titre": "Le Guide Complet",
-            "resume": "Un livre essentiel pour débuter",
-            "specifications": [
-                "Couverture rigide",
-                "300 pages",
-                "Format A5"
-            ],
-            "tags": [
-                "Fantastique",
-                "Aventure",
-                "Guide"
-            ]
-        },
-        "accessoire-2": {
-            "titre": "Dés Enchantés",
-            "resume": "Set de dés magiques",
-            "specifications": [
-                "Métal",
-                "Gravures runiques",
-                "Set de 7"
-            ],
-            "tags": [
-                "Précision",
-                "Magie",
-                "Mystique"
-            ]
-        }
+    "abilityScoreRoller": {
+      "skillCalc": {
+        "title": "🧮 Calcul des compétences",
+        "formula": "Bonus = Modificateur + Maîtrise",
+        "notProficient": "<strong>Non maîtrisée :</strong> Modificateur seul",
+        "proficient": "<strong>Maîtrisée :</strong> Mod + Bonus",
+        "expertise": "<strong>Expertisée :</strong> Mod + (Bonus×2)",
+        "proficiencyBonus": "<strong>Bonus maîtrise :</strong> Niv 1-4:+2 • 5-8:+3 • 9-12:+4 • 13-16:+5 • 17-20:+6",
+        "exampleTitle": "💡 Exemple (Dex 16, Niv 5)",
+        "exampleStats": "Score <strong>16</strong> → Mod <strong>+3</strong> • Bonus maîtrise <strong>+3</strong>",
+        "exampleAcrobatics": "<strong>Acrobaties</strong> : +3 = <strong class=\"text-yellow-300\">+3</strong>",
+        "exampleStealth": "<strong>Discrétion</strong> : +3+3 = <strong class=\"text-yellow-300\">+6</strong>",
+        "exampleSleight": "<strong>Escamotage</strong> : +3+3+3 = <strong class=\"text-yellow-300\">+9</strong>",
+        "exampleNote": "→ Ces bonus vont sur le triptyque d'Historique",
+        "importantNote": "<strong>Important :</strong> Ajoutez +2 et +1 (bonus Historique) aux caract."
+      },
+      "dnd2024Rules": "<strong>D&D 2024 :</strong> Lancez 4d6, gardez les 3 meilleurs. Résultat : <strong class=\"text-yellow-300\">Score (Modificateur)</strong>"
     }
+  },
+  "money": {
+    "title": "Guide de la Monnaie D&D",
+    "description": "Découvrez le système monétaire de D&D, nos pièces physiques Geek & Dragon, et utilisez notre convertisseur pour gérer facilement vos finances d'aventurier !",
+    "coinTypes": {
+      "title": "Types de Pièces",
+      "platinum": {
+        "name": "    Pièce de Platine (pp)",
+        "description": "    La plus précieuse • 1 pp = 10 po"
+      },
+      "gold": {
+        "name": "    Pièce d'Or (po)",
+        "description": "    Monnaie de référence • 1 po = 10 pa"
+      },
+      "silver": {
+        "name": "    Pièce d'Argent (pa)",
+        "description": "    Monnaie courante • 1 pa = 10 pe"
+      },
+      "electrum": {
+        "name": "    Pièce d'Électrum (pe)",
+        "description": "    Alliage or-argent • 1 pe = 5 pc"
+      },
+      "copper": {
+        "name": "    Pièce de Cuivre (pc)",
+        "description": "    Menue monnaie • La plus commune"
+      }
+    },
+    "conversionTable": {
+      "title": "🔄 Tableau de Conversion",
+      "headers": {
+        "coin": "Pièce"
+      },
+      "rows": {
+        "platinum": "Platine (pp)",
+        "gold": "Or (po)",
+        "silver": "Argent (pa)",
+        "electrum": "Électrum (pe)",
+        "copper": "Cuivre (pc)"
+      }
+    },
+    "converter": {
+      "recommendations": {
+        "title": "Recommandations optimales"
+      },
+      "optimalLotsTitle": "Collection la Plus Efficace",
+      "lotsRecommendedTitle": "Collections Tableau Multiplicateur",
+      "lotsRecommendations": {
+        "description": "Ces collections correspondent exactement à votre répartition personnalisée définie dans le tableau multiplicateur éditable ci-dessus. Respectent vos choix spécifiques de métaux et multiplicateurs pour un trésor sur-mesure.",
+        "addAllButton": "Acquérir votre collection",
+        "optimizationNote": "Collections adaptées à votre répartition personnalisée pour un trésor sur-mesure",
+        "noLotsMessage": "Aucune collection disponible.",
+        "noLotsSubMessage": "Modifiez votre trésor pour découvrir de nouvelles options",
+        "promptMessage": "Définissez votre trésor dans le convertisseur",
+        "promptSubMessage": "pour découvrir vos collections personnalisées"
+      },
+      "optimalLots": {
+        "description": "Les maîtres-forgerons recommandent cette sélection pour obtenir votre trésor avec le nombre minimal de pièces. Optimisez votre espace de coffre et simplifiez vos comptages lors des échanges commerciaux.",
+        "addAllButton": "Acquérir la collection efficace",
+        "optimizationNote": "Solution recommandée par les experts pour minimiser la gestion de votre trésor",
+        "noLotsMessage": "Aucune solution optimale disponible.",
+        "noLotsSubMessage": "Ajustez votre trésor pour explorer d'autres configurations",
+        "promptMessage": "Configurez votre trésor dans le convertisseur",
+        "promptSubMessage": "pour découvrir les collections les plus efficaces"
+      },
+      "abbreviations": {
+        "copper": "pc",
+        "silver": "pa",
+        "electrum": "pe",
+        "gold": "po",
+        "platinum": "pp"
+      },
+      "debugSection": {
+        "title": "Section de débogage pour valider les algorithmes métaheuristiques de conversion et recommandations de lots."
+      },
+      "labels": {
+        "copper": "Cuivre",
+        "silver": "Argent",
+        "electrum": "Électrum",
+        "gold": "Or",
+        "platinum": "Platine"
+      },
+      "multiplierTable": {
+        "copper": "Cuivre",
+        "silver": "Argent",
+        "electrum": "Électrum",
+        "gold": "Or",
+        "platinum": "Platine"
+      },
+      "productSummary": "Lot de pièces D&D",
+      "coinDescription": {
+        "faithfulReproduction": "Nos pièces métalliques reproduisent fidèlement le système monétaire de D&D. Chaque type de pièce a son propre design et sa finition unique."
+      }
+    },
+    "physicalTreasure": {
+      "title": "🏆 Un Trésor Tangible",
+      "paragraph1": "Dans Donjons & Dragons, les <strong class=\"text-amber-400\">deux objectifs principaux</strong> sont l'expérience et le trésor. Devoir écrire le trésor sur papier puis le gommer ne lui rend pas hommage. Le trésor mérite d'être <strong class=\"text-yellow-400\">tangible, pesé, manipulé</strong>.",
+      "paragraph2": "Nos pièces physiques transforment chaque récompense en moment mémorable. Quand le MJ fait <em class=\"text-amber-300\">tinter les pièces d'or</em> dans sa main avant de les distribuer, c'est toute l'immersion qui s'intensifie.",
+      "property": "Système de Propriété",
+      "sheetInstructions": "Utilisez notre <strong>fiche de monnaie</strong> pour répertorier vos trésors. Inscrivez votre nom, comptez vos pièces, signez et remettez au MJ. En fin de campagne, récupérez facilement votre investissement !"
+    },
+    "physicalCoins": {
+      "title": "Pièces Physiques Geek & Dragon",
+      "system": {
+        "title": "Le Système Monétaire D&D",
+        "paragraph1": "Dans D&D, la monnaie utilise <strong class=\"text-amber-300\">5 métaux différents</strong> : cuivre (pc), argent (pa), électrum (pe), or (po) et platine (pp). Les conversions de base sont : 10 pc = 1 pa, 2 pa = 1 pe, 5 pa = 1 po, et 10 po = 1 pp.",
+        "paragraph2": "Nos pièces physiques ajoutent une dimension immersive : les pièces unitaires ont un <strong class=\"text-yellow-200\">fini brillant</strong>, tandis que les <strong class=\"text-yellow-300\">multiplicateurs gravés</strong> (×10, ×100, ×1000, ×10000) arborent un fini mat distinctif. Une pièce d'or ×100 vaut 100 po — parfait pour gérer de gros trésors sans manipuler des centaines de pièces !"
+      },
+      "weight": {
+        "title": "⚖️ Poids Authentiques",
+        "paragraph": "Selon les règles officielles D&D, <strong class=\"text-amber-300\">50 pièces = 500g/1 lb</strong>. Nos multiplicateurs représentent fidèlement ces valeurs et leur poids pour une immersion totale :"
+      },
+      "weightTable": {
+        "title": "📊 Tableau des poids par multiplicateur",
+        "note": "Ressentez le poids croissant du trésor entre vos mains !",
+        "notice": "📌 Ces multiplicateurs s'appliquent à <strong>n'importe quel métal</strong> (cuivre, argent, électrum, or, platine)"
+      },
+      "example": {
+        "title": "Exemple concret avec de l'or : trésor de 1 500 po",
+        "text": "Plutôt que d'empiler <strong class=\"text-red-400\">1 500 pièces unitaires</strong> (15 kg / 33 lb), utilisez :",
+        "item1": "<strong class=\"text-yellow-400\">1 pièce d'or ×1000</strong> → 1000 po (10 kg / 22 lb)",
+        "item2": "<strong class=\"text-yellow-300\">5 pièces d'or ×100</strong> → 500 po (5 kg / 11 lb)",
+        "result": "<strong class=\"text-green-400\">Résultat : 6 pièces physiques</strong> au lieu de 1 500 !"
+      },
+      "authentic": {
+        "title": "Des Pièces Authentiques",
+        "feature1": "• <strong>Métal véritable</strong> avec finitions spécifiques",
+        "feature2": "• <strong>Gravures détaillées</strong> inspirées de l'univers D&D",
+        "feature3": "• <strong>Poids authentique</strong> pour une expérience immersive",
+        "feature4": "• <strong>Sets complets</strong> ou pièces individuelles"
+      },
+      "uses": {
+        "feature5": "• <strong>Gestion tactile</strong> de votre trésor"
+      },
+      "gameUse": {
+        "title": "Utilisation en Jeu",
+        "feature1": "• <strong>Récompenses physiques</strong> pour les joueurs",
+        "feature2": "• <strong>Immersion totale</strong> lors des transactions",
+        "feature3": "• <strong>Ambiance médiévale-fantastique</strong> renforcée"
+      },
+      "order": {
+        "title": "Commandez vos Pièces",
+        "description": "Découvrez notre collection complète de pièces métalliques et donnez vie à l'économie de vos parties !",
+        "shopButton": "Voir les Pièces en Boutique",
+        "treasuryButton": "Set Complet de Trésorerie"
+      }
+    },
+    "tests": {
+      "title": "Tests du Système de Conversion",
+      "results": "Résultats des Tests",
+      "runningBasic": "Exécution des tests de base...",
+      "runningAdvanced": "Exécution des tests avancés...",
+      "noTests": "Aucun test exécuté...",
+      "error": "❌ Erreur lors de l'exécution des tests",
+      "notAvailable": "❌ CurrencyConverterTests non disponible",
+      "basic": "Tests de Base",
+      "advanced": "Tests Avancés",
+      "basicButton": "🧪 Tests de Base",
+      "advancedButton": "Tests Avancés",
+      "successText": "tests réussis",
+      "errorLabel": "Erreur",
+      "performance": "Performance",
+      "totalTime": "Temps total"
+    },
+    "download": {
+      "title": "Télécharger la Fiche de Monnaie",
+      "subtitle": "Fiche à imprimer",
+      "button": "📥 Télécharger",
+      "buttonShort": "📥 Télécharger",
+      "downloadSheet": "📥 Télécharger la fiche",
+      "instruction": "Cliquez sur l'image pour télécharger la fiche à imprimer",
+      "printTip": "Conseil d'impression :",
+      "description": "Téléchargez l'image de la fiche de monnaie pour l'imprimer chez vous",
+      "instructions": "Imprimez sur du papier cartonné (200-250g) pour un meilleur rendu. Vous pouvez plastifier la fiche pour une utilisation répétée.",
+      "confirmButton": "📥 Télécharger",
+      "cancelButton": "Annuler"
+    },
+    "backToMain": "🔝 Retour au menu principal"
+  },
+  "callToAction": {
+    "title": "Prêt à révolutionner vos parties ?",
+    "description": "Découvrez notre collection complète : triptyques, cartes d'équipement et pièces métalliques. Transformez votre expérience de jeu de rôle avec nos accessoires artisanaux conçus au Québec.",
+    "buttons": {
+      "triptychs": "Triptyques",
+      "cards": "Cartes d'Équipement",
+      "coins": "Pièces Métalliques",
+      "shop": "Voir toute la boutique"
+    },
+    "organization": {
+      "title": "Organisation",
+      "sortByCategory": {
+        "title": "1. Tri par Catégorie",
+        "list": {
+          "item1": "• Séparez : Armes, Armures, Équipement, Sorts",
+          "item2": "• Utilisez des intercalaires ou pochettes",
+          "item3": "• Gardez les cartes actuelles sur le dessus"
+        }
+      },
+      "visualInventory": {
+        "title": "2. Inventaire Visuel",
+        "list": {
+          "item1": "• Étalez vos cartes d'équipement actuel",
+          "item2": "• Ajoutez/retirez selon vos acquisitions",
+          "item3": "• Inventaire physique = inventaire de personnage"
+        }
+      }
+    },
+    "proTips": {
+      "title": "⭐ Conseils de Pro",
+      "rotation": "<strong>Rotation :</strong> Changez vos cartes selon vos aventures",
+      "protection": "<strong>Protection :</strong> Utilisez des protège-cartes transparents",
+      "notes": "<strong>Notes :</strong> Annotez au crayon les modifications temporaires<br><em>Conseil pro : Utilisez des crayons Staedtler 8B ou 9B pour un marquage optimal</em>"
+    }
+  },
+  "backToTop": "Retour au grimoire principal",
+  "products": {
+    "coin-custom-single": {
+      "name": "Pièce Personnalisée",
+      "description": "### Pièce unique à votre choix\r\n\r\nChoisissez **le métal** (cuivre, argent, électrum, or, platine) et **le multiplicateur** (unitaire, ×10, ×100, ×1000, ×10000) pour créer votre pièce sur mesure.\r\n\r\n**Contenu :**\r\n- 1 pièce métallique personnalisable\r\n- Choix du métal : cuivre, argent, électrum, or, platine\r\n- Choix du multiplicateur : ×1, ×10, ×100, ×1000, ×10000\r\n- Finition selon le multiplicateur choisi\r\n\r\n*Parfait pour compléter une collection ou remplacer une pièce perdue.*",
+      "summary": "Pièce métallique personnalisable avec choix du métal et du multiplicateur.",
+      "metals": [
+        "cuivre",
+        "argent",
+        "électrum",
+        "or",
+        "platine"
+      ]
+    },
+    "coin-trio-customizable": {
+      "name": "Trio de Pièces",
+      "description": "### Trois pièces personnalisables\r\n\r\n**3 pièces métalliques** au choix avec métal et multiplicateur personnalisables. Idéal pour compléter une collection ou créer un petit trésor sur mesure.\r\n\r\n**Contenu :**\r\n- 3 pièces au choix de métal et multiplicateur\r\n\r\n*Parfait pour débuter ou compléter votre collection de pièces !*",
+      "summary": "Lot de trois pièces personnalisables avec choix du métal et multiplicateur unique.",
+      "metals": [
+        "cuivre",
+        "argent",
+        "électrum",
+        "or",
+        "platine"
+      ]
+    },
+    "coin-quintessence-metals": {
+      "name": "Quintessence Métallique",
+      "description": "### Cinq métaux, un multiplicateur\r\n\r\n**5 pièces de métaux différents** appliquant le même multiplicateur choisi : une de chaque métal (cuivre, argent, électrum, or, platine) avec finition uniforme.\r\n\r\n**Contenu :**\r\n- 1 pièce de cuivre\r\n- 1 pièce d'argent\r\n- 1 pièce d'électrum\r\n- 1 pièce d'or\r\n- 1 pièce de platine\r\n\r\n*Découvrez la diversité des métaux avec une valeur cohérente !*",
+      "summary": "Collection de cinq pièces avec un de chaque métal et multiplicateur uniforme."
+    },
+    "coin-septuple-free": {
+      "name": "Septuple Libre",
+      "description": "### Sept pièces entièrement personnalisables\r\n\r\n**7 pièces métalliques** avec choix libre du métal et du multiplicateur pour chaque pièce. Créez votre propre assortiment selon vos besoins précis.\r\n\r\n**Contenu :**\r\n- 7 pièces métalliques personnalisables\r\n- Chaque pièce : métal ET multiplicateur au choix\r\n- Métaux disponibles : cuivre, argent, électrum, or, platine\r\n- Multiplicateurs : ×1, ×10, ×100, ×1000, ×10000\r\n\r\n*Composez votre trésor exact selon vos besoins de jeu !*",
+      "summary": "Lot de sept pièces avec choix libre du métal et multiplicateur pour chaque pièce.",
+      "metals": [
+        "cuivre",
+        "argent",
+        "électrum",
+        "or",
+        "platine"
+      ]
+    },
+    "coin-traveler-offering": {
+      "name": "Offrande du Voyageur",
+      "description": "### Trésor de départ immersif\r\n\r\n**10 pièces en métal** : **2 de chaque métal** (cuivre, argent, électrum, or, platine). Vous choisissez **un seul multiplicateur** pour tout le lot.\r\n\r\n**Contenu :**\r\n- 2 pièces de cuivre\r\n- 2 pièces d'argent\r\n- 2 pièces d'électrum\r\n- 2 pièces d'or\r\n- 2 pièces de platine\r\n- Multiplicateur unique au choix : ×1, ×10, ×100, ×1000, ×10000\r\n- Finition : unitaire (brillant) ou gravé (légèrement mat)\r\n\r\n*Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*",
+      "summary": "Ensemble de 10 pièces métalliques assorties avec multiplicateur unique pour accélérer les comptes."
+    },
+    "coin-five-realms-complete": {
+      "name": "La Monnaie des Cinq Royaumes",
+      "description": "### 25 pièces, zéro doublon\r\n\r\n**5 métaux × 5 multiplicateurs** = **25 modèles uniques**. Chaque métal existe en unitaire (brillant) et avec multiplicateurs gravés (finition mate).\r\n\r\n**Contenu :**\r\n- 5 pièces de cuivre : ×1, ×10, ×100, ×1000, ×10000\r\n- 5 pièces d'argent : ×1, ×10, ×100, ×1000, ×10000\r\n- 5 pièces d'électrum : ×1, ×10, ×100, ×1000, ×10000\r\n- 5 pièces d'or : ×1, ×10, ×100, ×1000, ×10000\r\n- 5 pièces de platine : ×1, ×10, ×100, ×1000, ×10000\r\n\r\n*Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*",
+      "summary": "Collection de 25 pièces uniques couvrant les cinq métaux et tous les multiplicateurs pour la table."
+    },
+    "coin-merchant-essence-double": {
+      "name": "Essence du Marchand",
+      "description": "### 50 pièces, double variété\r\n\r\n**2 exemplaires** de chacun des **25 modèles** de la *Monnaie des Cinq Royaumes* : total **50 pièces**.\r\n\r\n**Contenu :**\r\n- 10 pièces de cuivre : 2×(×1, ×10, ×100, ×1000, ×10000)\r\n- 10 pièces d'argent : 2×(×1, ×10, ×100, ×1000, ×10000)\r\n- 10 pièces d'électrum : 2×(×1, ×10, ×100, ×1000, ×10000)\r\n- 10 pièces d'or : 2×(×1, ×10, ×100, ×1000, ×10000)\r\n- 10 pièces de platine : 2×(×1, ×10, ×100, ×1000, ×10000)\r\n- Finition : unitaire (brillant) et gravé (mat)\r\n\r\n*Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*",
+      "summary": "Double exemplaire de chaque modèle pour 50 pièces prêtes à l'emploi avec tous les multiplicateurs."
+    },
+    "coin-lord-treasury-uniform": {
+      "name": "La Trésorerie du Seigneur",
+      "description": "### 50 pièces pour l'opulence\r\n\r\n**10 pièces de chaque métal** (cuivre, argent, électrum, or, platine) appliquant **le même multiplicateur** choisi à l'achat.\r\n\r\n**Contenu :**\r\n- 10 pièces de cuivre (même multiplicateur)\r\n- 10 pièces d'argent (même multiplicateur)\r\n- 10 pièces d'électrum (même multiplicateur)\r\n- 10 pièces d'or (même multiplicateur)\r\n- 10 pièces de platine (même multiplicateur)\r\n- Choix du multiplicateur : ×1, ×10, ×100, ×1000, ×10000\r\n- Finition : unitaire (brillant) ou gravé (mat)\r\n\r\n*Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*",
+      "summary": "Sélection de 50 pièces d'un même multiplicateur pour assurer une trésorerie abondante et cohérente."
+    },
+    "cards-random-discovery-10": {
+      "name": "10 Cartes Surprise",
+      "description": "### Découverte aléatoire - 10 cartes\r\n\r\nSélection mystère de **10 cartes d'équipement** piochées dans notre catalogue complet. Parfait pour découvrir de nouveaux objets ou enrichir votre collection avec des surprises !\r\n\r\n**Contenu :**\r\n- 10 cartes d'équipement aléatoires\r\n- Mélange possible : armes, armures, outils, objets spéciaux\r\n- Cartes illustrées haute qualité\r\n- Compatibles D&D 5e et systèmes similaires\r\n\r\n*L'aventure commence par la surprise de l'inconnu !*",
+      "summary": "Sélection mystère de 10 cartes d'équipement pour découvrir de nouveaux objets."
+    },
+    "cards-weapons-armor-60": {
+      "name": "Armes & Armures",
+      "description": "### Combat complet - 60 cartes\\n\\nCollection essentielle de **60 cartes** pour équiper vos combattants : arsenal complet d'armes de mêlée et à distance, protections légères aux lourdes, et boucliers.\\n\\n**Contenu :**\\n- **44 armes** : mêlée, distance, exotiques, armes à feu modernes et futuristes\\n- **14 armures** : légères, intermédiaires, lourdes\\n- **2 boucliers** : métal et bois\\n\\n*L'essentiel pour équiper guerriers, aventuriers et soldats !*",
+      "summary": "Collection de 60 cartes d'armes et armures pour équiper combattants et aventuriers."
+    },
+    "cards-adventure-packs-70": {
+      "name": "Paquetages d'Aventure",
+      "description": "### Équipement par background - 70 cartes\\n\\nCollection complète de **70 cartes** regroupant tout l'équipement de départ selon les historiques D&D 5e. Idéal pour créer rapidement des personnages ou distribuer du matériel thématique.\\n\\n**Contenu :**\\n- **Paquetage d'artiste** : instruments et matériel créatif\\n- **Paquetage d'ecclésiastique** : objets religieux et sacrés\\n- **Paquetage d'explorateur** : survie et navigation\\n- **Paquetage d'exploration souterraine** : spéléologie et donjons\\n- **Paquetage d'érudit** : livres et outils d'étude\\n- **Paquetage de cambrioleur** : crochetage et infiltration\\n- **Paquetage de diplomate** : négociation et relations sociales\\n\\n*Personnalisez instantanément selon l'origine de vos héros !*",
+      "summary": "Collection de 70 cartes d'équipement organisées par paquetages d'historiques D&D."
+    },
+    "cards-explosives-tools-60": {
+      "name": "Explosifs & Outils",
+      "description": "### Arsenal spécialisé - 60 cartes\\n\\nCollection technique de **60 cartes** pour les campagnes avancées : explosifs, armes futuristes et outils d'artisan.\\n\\n**Contenu :**\\n- **21 explosifs** : bombes, grenades, dynamite, charges modernes et futuristes\\n- **37 outils** : artisanat, alchimie, crochetage, navigation\\n- **2 cartes règles** : mécaniques d'explosion et d'artisanat\\n\\n*Pour les aventuriers qui aiment les solutions créatives !*",
+      "summary": "Collection de 60 cartes d'explosifs et outils spécialisés pour campagnes techniques."
+    },
+    "cards-services-vehicles-85": {
+      "name": "Services & Véhicules",
+      "description": "### Voyage et logistique - 85 cartes\\n\\nCollection complète de **85 cartes** pour organiser voyages et missions : services d'auberge, transport et tous types de véhicules.\\n\\n**Contenu :**\\n- **55 services** : auberges, soins, trains de vie, mercenaires, passeurs\\n- **27 véhicules** : montures, terrestres, marins, aériens\\n- **3 cartes règles** : mécaniques de voyage et logistique\\n\\n*Tout pour voyager et s'organiser en campagne !*",
+      "summary": "Collection de 85 cartes de services et véhicules pour organiser voyages et missions."
+    },
+    "cards-loot-engineering-170": {
+      "name": "Butins & Ingénieries",
+      "description": "### Butin • Marchandises • Outils - 170 cartes\\n\\nPour des campagnes qui osent : trésors variés, biens commerciaux et les indispensables de l'artisan.\\n\\n**Contenu :**\\n- **104 butins** : trésors, gemmes, artefacts, objets précieux\\n- **27 marchandises** : biens de commerce, matières premières\\n- **37 outils** : artisanat, crochetage, alchimie, navigation\\n- **2 cartes règles** : mécaniques de commerce et d'artisanat\\n\\n*Injecte de la variété et des choix tactiques — du troc de marché aux découvertes de trésors !*",
+      "summary": "Collection de 170 cartes de butins, marchandises et outils pour enrichir vos campagnes."
+    },
+    "cards-roads-services-165": {
+      "name": "Routes & Services",
+      "description": "### Paquetages • Services • Véhicules • Poisons - 165 cartes\\n\\nTout pour mettre le monde en mouvement : préparez vos PJ, voyagez, négociez et prenez des risques avec des cartes claires et pratiques.\\n\\n**Contenu :**\\n- **65 paquetages** : 7 types selon les historiques D&D\\n- **55 services** : auberges, soins, trains de vie, mercenaires\\n- **27 véhicules** : montures, terrestres, marins, aériens\\n- **14 poisons** : substances dangereuses et toxiques\\n- **4 cartes règles** : mécaniques de voyage, services et poisons\\n\\n*Parfait pour les campagnes orientées exploration, voyage et intrigue !*",
+      "summary": "Sélection complète de 165 cartes dédiées aux voyages, services, véhicules et poisons."
+    },
+    "cards-adventurer-arsenal-190": {
+      "name": "Arsenal de l'Aventurier",
+      "description": "### Armes • Armures • Équipement - 190 cartes\\n\\nLot massif et prêt-à-jouer pour équiper tout un groupe : armes classiques et exotiques, protections pour chaque style, et l'essentiel d'aventure en cartes illustrées.\\n\\n**Contenu :**\\n- **44 armes** : mêlée, distance, exotiques, armes à feu modernes\\n- **14 armures** : légères, intermédiaires, lourdes, boucliers\\n- **127 équipements** : outils d'aventure, survie, artisanat\\n- **5 cartes règles** : maîtriser équipement et mécaniques\\n\\n*Idéal pour la table : pioche, pose, échange — fini la fouille dans le manuel !*",
+      "summary": "Boîte massive de 190 cartes illustrées pour équiper immédiatement tout un groupe d'aventuriers."
+    },
+    "triptych-mystery-hero": {
+      "name": "Triptyques Mystères",
+      "description": "### Trois triptyques, un héros clé en main\r\n\r\nTire au sort **1 Classe**, **1 Espèce** et **1 Historique** pour forger une origine unique, puis joue immédiatement avec :\r\n\r\n**Inclus :**\r\n- 1 triptyque Classe aléatoire\r\n- 1 triptyque Espèce aléatoire\r\n- 1 triptyque Historique aléatoire\r\n\r\n*Fini la fouille dans le manuel.*",
+      "summary": "Lot de triptyques aléatoires pour créer un héros complet avec équipement assorti et pièces de départ."
+    },
+    "triptych-species-collection": {
+      "name": "Triptyques Especes",
+      "description": "### Collection complète des triptyques d'espèces\r\n\r\nDécouvrez toutes les espèces jouables de D&D 5e avec des triptyques détaillés et illustrés. Chaque triptyque présente les caractéristiques, capacités spéciales et traits culturels de l'espèce.\r\n\r\n**Contenu :**\r\n- Triptyques de toutes les espèces officielles\r\n- Caractéristiques détaillées\r\n- Capacités spéciales illustrées\r\n\r\n*Parfait pour créer des personnages variés ou enrichir vos campagnes !*",
+      "summary": "Collection de triptyques présentant toutes les espèces jouables avec leurs caractéristiques et capacités."
+    },
+    "triptych-class-collection": {
+      "name": "Triptyques Classes",
+      "description": "### Collection complète des triptyques de classes\r\n\r\nExplorez toutes les classes et sous-classes de D&D 5e avec des triptyques complets. Chaque triptyque détaille les capacités, sorts, et progressions de classe avec des exemples visuels.\r\n\r\n**Contenu :**\r\n- Triptyques de toutes les classes officielles\r\n- Sous-classes et archétypes\r\n- Progressions et capacités détaillées\r\n\r\n*Idéal pour comprendre les mécaniques de classe ou préparer des PNJ !*",
+      "summary": "Collection de triptyques couvrant toutes les classes et sous-classes avec leurs capacités et progressions."
+    },
+    "triptych-background-collection": {
+      "name": "Triptyques Historiques",
+      "description": "### Collection complète des triptyques d'historiques\r\n\r\nEnrichissez vos personnages avec tous les historiques disponibles en D&D 5e. Chaque triptyque présente l'origine, les compétences, équipements et contacts de l'historique.\r\n\r\n**Contenu :**\r\n- Triptyques de tous les historiques officiels\r\n- Compétences et équipements détaillés\r\n- Contacts et relations sociales\r\n\r\n*Parfait pour donner de la profondeur à vos personnages !*",
+      "summary": "Collection de triptyques présentant tous les historiques avec leurs compétences et équipements."
+    },
+    "test-produit-1": {
+      "nom": "Objet Magique",
+      "details": "Description française détaillée",
+      "type": [
+        "Artefact",
+        "Relique"
+      ],
+      "couleurs": [
+        "Rouge",
+        "Bleu",
+        "Vert"
+      ]
+    },
+    "test-produit-2": {
+      "nom": "Grimoire Ancien",
+      "details": "Livre de sorts ancestraux",
+      "type": [
+        "Manuel",
+        "Guide"
+      ],
+      "couleurs": [
+        "Noir",
+        "Or"
+      ]
+    },
+    "test-produit-3": {
+      "nom": "Épée Enchantée",
+      "details": "Lame forgée par les elfes",
+      "type": [
+        "Épée",
+        "Lame"
+      ],
+      "couleurs": [
+        "Argenté",
+        "Brillant"
+      ]
+    },
+    "livre-1": {
+      "titre": "Le Guide Complet",
+      "resume": "Un livre essentiel pour débuter",
+      "specifications": [
+        "Couverture rigide",
+        "300 pages",
+        "Format A5"
+      ],
+      "tags": [
+        "Fantastique",
+        "Aventure",
+        "Guide"
+      ]
+    },
+    "accessoire-2": {
+      "titre": "Dés Enchantés",
+      "resume": "Set de dés magiques",
+      "specifications": [
+        "Métal",
+        "Gravures runiques",
+        "Set de 7"
+      ],
+      "tags": [
+        "Précision",
+        "Magie",
+        "Mystique"
+      ]
+    }
+  }
 }

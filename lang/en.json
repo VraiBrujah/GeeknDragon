@@ -1,1317 +1,1329 @@
 {
-    "meta": {
-        "home": {
-            "title": "D&D Metal Coins & Immersive Accessories Quebec | Geek & Dragon",
-            "desc": "Transform your D&D treasures into tactile experiences with our engraved metal coins, illustrated equipment cards, and sturdy character sheets. Crafted in Quebec, fast delivery."
-        },
-        "gameHelp": {
-            "description": "Complete guide for your D&D Geek & Dragon accessories: character triptychs, equipment cards, physical currency and converter. Everything to enrich your role-playing sessions."
-        },
-        "shop": {
-            "title": "Shop - D&D Coins, Cards & Triptychs | Geek & Dragon",
-            "desc": "Browse our complete collection: engraved metal coins (copper, silver, gold, platinum), illustrated equipment cards, and sturdy character triptychs. Fast shipping from Quebec."
-        },
-        "contact": {
-            "title": "Contact - Questions & Custom Projects | Geek & Dragon",
-            "desc": "Need help or a custom project? Contact our Quebec team for personalized D&D accessories: engraved coins, triptych cards."
-        },
-        "thankyou": {
-            "title": "Thank you!!! | Geek & Dragon",
-            "desc": "Confirmation that your message has been sent to Geek & Dragon."
-        },
-        "news": {
-            "flim2025": {
-                "title": "Heroes level 20, an overly tenacious raccoon, and... our coins | Geek & Dragon",
-                "desc": "Recap of our coin demonstration at FLIM 2025 with Es-tu Game?"
-            }
-        }
+  "meta": {
+    "home": {
+      "title": "D&D Metal Coins & Immersive Accessories Quebec | Geek & Dragon",
+      "desc": "Transform your D&D treasures into tactile experiences with our engraved metal coins, illustrated equipment cards, and sturdy character sheets. Crafted in Quebec, fast delivery."
     },
-    "common": {
-        "back": "Back"
+    "gameHelp": {
+      "description": "Complete guide for your D&D Geek & Dragon accessories: character triptychs, equipment cards, physical currency and converter. Everything to enrich your role-playing sessions."
     },
-    "nav": {
-        "products": "Products",
-        "news": "News",
-        "shop": "Shop",
-        "gameHelp": "Game Help",
-        "contact": "Contact",
-        "cart": "Cart",
-        "account": "Account",
+    "shop": {
+      "title": "Shop - D&D Coins, Cards & Triptychs | Geek & Dragon",
+      "desc": "Browse our complete collection: engraved metal coins (copper, silver, gold, platinum), illustrated equipment cards, and sturdy character triptychs. Fast shipping from Quebec."
+    },
+    "contact": {
+      "title": "Contact - Questions & Custom Projects | Geek & Dragon",
+      "desc": "Need help or a custom project? Contact our Quebec team for personalized D&D accessories: engraved coins, triptych cards."
+    },
+    "thankyou": {
+      "title": "Thank you!!! | Geek & Dragon",
+      "desc": "Confirmation that your message has been sent to Geek & Dragon."
+    },
+    "news": {
+      "flim2025": {
+        "title": "Heroes level 20, an overly tenacious raccoon, and... our coins | Geek & Dragon",
+        "desc": "Recap of our coin demonstration at FLIM 2025 with Es-tu Game?"
+      }
+    }
+  },
+  "common": {
+    "back": "Back"
+  },
+  "nav": {
+    "products": "Products",
+    "news": "News",
+    "shop": "Shop",
+    "gameHelp": "Game Help",
+    "contact": "Contact",
+    "cart": "Cart",
+    "account": "Account",
+    "pieces": "Coins",
+    "cards": "Cards",
+    "triptychs": "Triptychs",
+    "home": "Home",
+    "skipToContent": "Skip to content",
+    "menu": "Menu",
+    "closeMenu": "Close menu",
+    "mainNavigation": "Main navigation",
+    "mobileNavigation": "Mobile navigation"
+  },
+  "btnOverlay": {
+    "discover": {
+      "desktop": "Discover",
+      "mobile": "See"
+    },
+    "collection": {
+      "desktop": "Full collection",
+      "mobile": "See all"
+    },
+    "shop": {
+      "desktop": "The Shop",
+      "mobile": "Shop"
+    },
+    "gameHelp": {
+      "desktop": "Grimoire",
+      "mobile": "Grimoire"
+    },
+    "contact": {
+      "desktop": "Message",
+      "mobile": "Contact"
+    },
+    "news": {
+      "desktop": "Chronicles",
+      "mobile": "News"
+    },
+    "home": {
+      "desktop": "Tavern",
+      "mobile": "Tavern"
+    },
+    "coins": {
+      "desktop": "Treasury",
+      "mobile": "Treasury"
+    },
+    "cards": {
+      "desktop": "Arsenal",
+      "mobile": "Arsenal"
+    },
+    "triptychs": {
+      "desktop": "Heroes",
+      "mobile": "Heroes"
+    },
+    "bundle": {
+      "desktop": "Chest",
+      "mobile": "Chest"
+    },
+    "reservation": {
+      "desktop": "Reservation",
+      "mobile": "Reserve"
+    }
+  },
+  "hero": {
+    "title": "Your D&D treasures deserve to exist",
+    "subtitle1": "Engraved coins, illustrated cards, sturdy sheets. Touch your adventure.",
+    "subtitle2": "Crafted in Canada • Premium quality • Fast delivery",
+    "discoverCreations": "Discover our creations",
+    "shopNow": "See the full collection"
+  },
+  "home": {
+    "featured": {
+      "title": "Start with the essentials",
+      "subtitle": "Our most popular products to transform your first session",
+      "seeAll": "See the full collection"
+    },
+    "why": {
+      "title": "Why physical in 2025?",
+      "subtitle": "Because the best memories don't fade with the next patch",
+      "benefit1": {
+        "title": "Tactile memories",
+        "desc": "Touching your treasures creates emotions that numbers on a sheet can never offer"
+      },
+      "benefit2": {
+        "title": "Premium quality",
+        "desc": "Built to last. No updates, no subscription, just solid quality"
+      },
+      "benefit3": {
+        "title": "Quebec craftsmanship",
+        "desc": "Designed and crafted in Quebec. Every purchase supports local creation"
+      }
+    }
+  },
+  "reassurance": {
+    "local": "Crafted in Quebec"
+  },
+  "footer": {
+    "made": "Designed in Quebec."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Got a question? Need something custom? Talk directly to our craftspeople.",
+    "requestQuote": "Contact us",
+    "form": {
+      "name": "Full name",
+      "email": "Email address",
+      "phone": "Phone (optional)",
+      "message": "Request details",
+      "submit": "Send my request"
+    },
+    "info": {
+      "role": "Product manager",
+      "roleCommunity": "Product manager & community",
+      "photoAlt": "Photo of Brujah"
+    }
+  },
+  "thankyou": {
+    "title": "Thank you!",
+    "message": "Your request has been sent to our team.",
+    "backHome": "Back to home"
+  },
+  "product": {
+    "back": "Back to shop",
+    "multiplier": "Multiplier",
+    "metal": "Metal",
+    "language": "Language",
+    "decreaseQuantity": "Decrease quantity",
+    "increaseQuantity": "Increase quantity",
+    "languageOptions": {
+      "FR": "French",
+      "EN": "English"
+    },
+    "triptychSpecies": "Species",
+    "triptychClass": "Class",
+    "triptychBackground": "Background",
+    "triptychOption": "Option",
+    "quantity": "Quantity",
+    "unit": "single",
+    "add": "Add",
+    "outOfStock": {
+      "title": "Treasure Depleted",
+      "subtitle": "Unfortunately, this artifact is no longer available at the moment"
+    },
+    "insufficientStock": "Insufficient stock",
+    "securePayment": "Transaction protected by the Merchant's Guild",
+    "realTimeStock": "Stock updated in real time"
+  },
+  "shop": {
+    "hero": {
+      "title": "Geek & Dragon Shop",
+      "description": "A $300 dragon miniature? Most campaigns will never see it hit the table. Our Canadian treasures? Essential at every session, for all your adventures.",
+      "button": "Choose my treasures",
+      "bundleButton": "⭐ Dragon's Vault ⭐",
+      "quickLinks": {
+        "title": "Quick links",
+        "ariaLabel": "Quick navigation to the shop categories",
         "pieces": "Coins",
         "cards": "Cards",
         "triptychs": "Triptychs",
-        "home": "Home",
-        "skipToContent": "Skip to content",
-        "menu": "Menu",
-        "closeMenu": "Close menu",
-        "mainNavigation": "Main navigation",
-        "mobileNavigation": "Mobile navigation"
+        "bundle": "Dragon's Vault"
+      }
     },
-    "btnOverlay": {
-        "discover": {
-            "desktop": "Discover",
-            "mobile": "See"
+    "intro": {
+      "title": "Handcrafted treasures",
+      "description": "Collectible items and handcrafted game aids, made in Quebec.",
+      "payment": "Transaction protected by the Merchant's Guild",
+      "stock": "Stock updated in real time."
+    },
+    "pieces": {
+      "title": "Metal coins",
+      "description": "A role-playing game without physical coins is like Monopoly without banknotes. Treat yourself to the authentic weight of treasure.",
+      "video": "Watch Role-Playing Tips on D&D Economy video >",
+      "intro": {
+        "shortDescription": "Our metal coins faithfully reproduce D&D's monetary system (<strong class=\"text-amber-300\">5 metals</strong>: copper, silver, electrum, gold, platinum). Unit coins are <strong class=\"text-yellow-200\">shiny</strong>, while <strong class=\"text-yellow-300\">engraved multipliers</strong> (×10, ×100, ×1000, ×10000) have a distinctive matte finish. Each coin physically represents its value: one ×100 coin = 100 unit coins. <strong class=\"text-green-400\">Feel the real weight of treasure</strong> in your hands!",
+        "learnMore": "Learn more about the coin system and their weights"
+      },
+      "backToTop": "Back to the merchant's counter"
+    },
+    "deluxeBundle": {
+      "title": "Dragon's Vault - Collector's Edition",
+      "badge": "⭐ Limited Numbered Edition ⭐",
+      "subtitle": "The ultimate experience for collectors and demanding game masters",
+      "description": "The premium set that transforms every session into legend. Numbered and certified, this treasure contains the complete arsenal of the passionate game master.",
+      "features": {
+        "title": "Vault Contents",
+        "essence": "<strong class=\"text-yellow-300\">2× Merchant's Essence</strong> - Complete sets for quick in-game distribution",
+        "collectors": {
+          "title": "<strong class=\"text-yellow-200\">5 Plated Collector Coins</strong>",
+          "subtitle": "Exclusive edition plated in their <strong class=\"text-amber-400\">authentic genuine rare metal</strong>",
+          "copper": {
+            "name": "Copper Coin",
+            "detail": "Pure copper plated - Warm shine with orange reflections"
+          },
+          "silver": {
+            "name": "Silver Coin",
+            "detail": "Sterling silver 925 plated - Immaculate brilliance and prestige"
+          },
+          "electrum": {
+            "name": "Electrum Coin",
+            "detail": "Sterling silver 925 plated - Pure and timeless silver shine"
+          },
+          "gold": {
+            "name": "Gold Coin",
+            "detail": "Genuine 18-karat gold plated - Royal luxury and legendary radiance"
+          },
+          "platinum": {
+            "name": "Platinum Coin",
+            "detail": "Genuine platinum plated - Ultimate rarity, absolute nobility"
+          }
         },
-        "collection": {
-            "desktop": "Full collection",
-            "mobile": "See all"
-        },
-        "shop": {
-            "desktop": "The Shop",
-            "mobile": "Shop"
-        },
-        "gameHelp": {
-            "desktop": "Grimoire",
-            "mobile": "Grimoire"
-        },
-        "contact": {
-            "desktop": "Message",
-            "mobile": "Contact"
-        },
-        "news": {
-            "desktop": "Chronicles",
-            "mobile": "News"
-        },
-        "home": {
-            "desktop": "Tavern",
-            "mobile": "Tavern"
-        },
-        "coins": {
-            "desktop": "Treasury",
-            "mobile": "Treasury"
-        },
-        "cards": {
-            "desktop": "Arsenal",
-            "mobile": "Arsenal"
-        },
-        "triptychs": {
-            "desktop": "Heroes",
-            "mobile": "Heroes"
-        },
-        "bundle": {
-            "desktop": "Chest",
-            "mobile": "Chest"
-        },
-        "reservation": {
-            "desktop": "Reservation",
-            "mobile": "Reserve"
-        }
+        "cards": "<strong class=\"text-indigo-300\">Complete 560 equipment cards set</strong> in premium box",
+        "triptychs": "<strong class=\"text-purple-300\">3 triptychs of choice</strong> (Species + Class + Background)",
+        "bag": "Embroidered velvet pouch \"Geek & Dragon\"",
+        "certificate": "Hand-numbered certificate of authenticity",
+        "chest": "Customized deluxe chest",
+        "guide": "Deluxe immersion guide (24-page booklet)"
+      },
+      "specs": {
+        "title": "Premium Specifications",
+        "numbered": "Unique laser-engraved numbering",
+        "savings": "25% savings vs separate purchase"
+      },
+      "cta": "Reserve My Edition",
+      "contact": "Contact us for availability",
+      "limited": "Limited production to 500 units",
+      "backToTop": "Back to the merchant's counter"
+    },
+    "cards": {
+      "title": "Equipment cards",
+      "coming": "Coming soon",
+      "description": "Themed packs of illustrated cards to manage inventory visually.",
+      "faqLink": "Frequently Asked Questions / Card Guide",
+      "description1": "Our scribes are still enchanting these adventure parchments.",
+      "description2": "The equipment cards will forge their way in by the next moon.",
+      "intro": {
+        "shortDescription": "<strong class=\"text-indigo-300\">560 illustrated equipment cards</strong> replacing tedious manual reading. Each card <strong class=\"text-purple-300\">visually</strong> presents a weapon, armor, or equipment with complete statistics. <strong class=\"text-green-400\">Save time and increase immersion</strong> in-game! <span class=\"text-amber-300 text-sm italic\">(Complete class spell cards currently being crafted by our goblins in their enchanted monasteries...)</span>",
+        "learnMore": "Learn more about equipment cards"
+      },
+      "backToTop": "Back to the merchant's counter"
+    },
+    "triptychs": {
+      "title": "Character triptychs",
+      "coming": "Coming soon",
+      "description": "Ready-to-play heroes for improvised sessions.",
+      "description1": "The artisans are still shaping these hero grimoires.",
+      "description2": "The triptychs will join the shop shortly.",
+      "guideCta": "How to use your triptychs",
+      "backToTop": "Back to the merchant's counter",
+      "intro": {
+        "shortDescription": "<strong class=\"text-purple-300\">Sturdy triptych</strong> character sheets printed on <strong class=\"text-pink-300\">rigid cardboard</strong>. Three independent panels (Species, Class, Background) with <strong class=\"text-amber-300\">all necessary rules</strong> and information <strong class=\"text-yellow-300\">from level 1 to 20</strong>. Includes recommended equipment and spell cards. <strong class=\"text-green-400\">No need for the manual</strong> during play!",
+        "learnMore": "Learn more about character triptychs"
+      }
+    },
+    "collective": {
+      "title": "Invest together, share the adventure",
+      "description1": "Don't let the game master go broke for your pleasure: each player will soon be able to contribute by buying their triptych, cards and coins.",
+      "description2": "By comparison, some dragon figurines sell for over <strong>$300</strong> each and are generally used only once in an entire campaign—and even then, only when the scenario allows it, because it's not systematic. Our coins, however, are used in every session for years of campaigning.",
+      "description3": "Fill out the <em>ownership card</em> opposite by writing your name and the number of coins purchased, sign it and hand your treasures to the game master. At the end of the campaign, they will return them to you without difficulty."
+    },
+    "converter": {
+      "title": "Currency converter",
+      "sourcesLabel": "💰 Source currencies",
+      "multiplierLabel": "⚖️ Multiplier table (editable)",
+      "equivalences": "💼 Total equivalences by metal",
+      "recommendations": "✨ Optimal recommendations",
+      "currencyLabel": "Currency",
+      "currency": {
+        "copper": "Copper",
+        "silver": "Silver",
+        "electrum": "Electrum",
+        "gold": "Gold",
+        "platinum": "Platinum"
+      },
+      "metals": {
+        "copper": "copper",
+        "silver": "silver",
+        "electrum": "electrum",
+        "gold": "gold",
+        "platinum": "platinum"
+      },
+      "enterAmounts": "Enter amounts to see optimal recommendations",
+      "optimalConversion": "Optimal conversion",
+      "total": "Total",
+      "value": "Value",
+      "minimalCoins": "Minimum number of coins",
+      "totalCoins": "Total coins",
+      "remainder": "Remainder",
+      "units": "Units",
+      "lots": "Lots",
+      "coins": "coins",
+      "and": "and"
+    }
+  },
+  "news": {
+    "flim2025": {
+      "heading": "News & Testimonials",
+      "title": "Heroes level 20, an overly tenacious raccoon, and... our coins",
+      "summary": "Our first demonstration of coins at FLIM 2025 took the form of a legendary one-shot hosted by Es-tu Game?.",
+      "read": "Read the article",
+      "video1": "The mayor honors the three heroes with real silver",
+      "video2": "When everything is decided by a coin... dragon or star?",
+      "video3": "Game finale: The raccoon, the stars... and chaos",
+      "youtube": "Watch the full session on the official YouTube channel:",
+      "youtubeLink": "Es-tu Game? — Role-playing games",
+      "p1": "During the first day of the <strong>Montreal International Ludic Festival</strong>, our very first public demonstration of coins took the form of a <strong>legendary one-shot</strong>. We tossed our pieces like dice of destiny. They whirled through the air and landed with a deep metallic chime, immediately sparking a wave of wonder. Eyes widened. Voices rose in laughter and astonishment. The very essence of role‑playing had just changed.",
+      "p2": "None of it would have been possible without our ally in this adventure: <strong>Es-tu Game?</strong>, Québec’s go-to channel for wild gaming sessions on YouTube—and above all, the inimitable, fabulous <strong>Pierre‑Louis Renaud</strong>. A master of plotting and a world‑forger, he’s that legendary GM no archdevil dares challenge. Even in Sigil, the eldest sages of the multiverse whisper his name with respect—and more than a hint of envy. For if there is a plane where a better game master exists, it’s only because Pierre‑Louis rolled his dice there first. And for our greatest delight, he unleashed one of his most madcap one-shots: a level‑20 adventure of absurdly epic intensity.",
+      "p3": "A true fireworks display of controlled chaos, featuring three cult figures from his past campaigns:",
+      "li1": "<strong>Gratis</strong>, played by Dave Belisle (Les Appendices): a gnome artificer as exuberant as he is unmanageable, an alchemist of sauces with effects that are often explosive… and always unpredictable. To him, offering a drop of his latest concoction is a sign of affection—whether the recipient survives or not. His sauces, as unstable as can be, tend to trigger unforeseen effects: reversed gravity, torrents of tears as black as fresh ink, or vertical wall waltzes. Even enemies are not immune to his spicy generosity.",
+      "li2": "<strong>Marlin</strong>, brilliantly portrayed by Jean‑François Provençal (Les Appendices), an illusionist rogue as elusive as he is improbable. A strategist of alternative logic, selectively brave but disarmingly charming, he excels in fleeing with grace, stealing with flair, and finding himself—without ever seeking it—in the heart of the most absurd situations. It’s as if the entire universe conspires to make him the pivot of chaos.",
+      "li3": "<strong>Tana</strong>, the unforgettable axe-wielding barbarian, embodied by Rosanne Berry. Feared for her unshakable motto: strike first, think later, ask questions… rarely. She’s as famous for her crushing charges as she is for her heartfelt tears. A colossus with a tender heart, a veritable emotional and cutting tidal wave, who certainly didn’t expect to encounter a raccoon… immune to her blows capable of cleaving the fabric of space-time.",
+      "p4": "This improbable trio thought they could enjoy a peaceful retirement in a sleepy village—until they couldn’t resist the urge to filch a few coins from the star-struck onlookers.",
+      "p5": "Marlin and Tana, forever chasing a thrill, amused themselves by lifting the small purses of travelers dazzled by their legend, before the thought of ‘theft’ even crossed their minds. Gratis, feeling slightly guilty, followed almost reluctantly, limiting his petty crimes to lighthearted acts of bravado.",
+      "p6": "But the attempted burglary of the mayor’s residence went awry. A rustle in the trash, an overly curious raccoon, and a poorly sorted compost threw the operation into chaos, abruptly halting our heroic scoundrels’ exploits.",
+      "p7": "The climax? A cosmic raccoon sucked into the stars by inverted gravity, while the mayor, in tears, emptied his safe in a whirl of copper and silver coins in homage to his lost sons, and the spectators and table erupted in laughter—completely swept away by the immersion."
+    }
+  },
+  "ui": {
+    "noImageAvailable": "No image available",
+    "previousImage": "Previous image",
+    "nextImage": "Next image",
+    "loading": "Loading...",
+    "error": "Error",
+    "errorLoadingProducts": "Error loading products",
+    "close": "Close",
+    "add": "Add",
+    "remove": "Remove",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "show": "Show",
+    "hide": "Hide",
+    "more": "More",
+    "less": "Less",
+    "all": "All",
+    "none": "None",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK",
+    "apply": "Apply",
+    "reset": "Reset",
+    "musicPlayer": {
+      "previous": "Previous",
+      "playPause": "Play / Pause",
+      "next": "Next",
+      "volume": "Volume"
+    },
+    "icons": {
+      "rotation": "Rotation icon",
+      "minus": "Minus",
+      "plus": "Plus"
+    },
+    "payment": {
+      "visa": "Visa logo",
+      "mastercard": "Mastercard logo",
+      "amex": "American Express logo"
+    }
+  },
+  "testimonials": {
+    "title": "Testimonials",
+    "moreReviews": "More reviews on",
+    "trictrac": "TricTrac",
+    "quote1": {
+      "title": "“No more battles with our character sheets!”",
+      "intro": "Many players said it: physical coins change everything.",
+      "p1": "Gone are the columns of numbers hastily scribbled on a crumpled sheet. Now every player felt the real weight of the loot, sliding between their fingers like a forgotten heirloom. Treasure became tangible. At each exchange, the whole body reacted: the hand hesitating, the eye weighing, the throat drying. The hoard took on flesh. It became dramatic stakes, visceral emotion, an event, a lasting memory...",
+      "p2strong": "No more fights with character sheets",
+      "p2rest": "endless book searches while others disconnect, or the long character creation sessions that discourage before the game even begins. With Geek & Dragon, everything starts when the coin hits the table."
+    }
+  },
+  "gameHelp": {
+    "images": {
+      "speciesAssimarFront": "Species Triptych Aasimar - Front",
+      "speciesAssimarBack": "Species Triptych Aasimar - Back",
+      "classBarbarianFront": "Class Triptych Barbarian - Front",
+      "classBarbarianBack": "Class Triptych Barbarian - Back",
+      "backgroundAcolyteFront": "Background Triptych Acolyte - Front",
+      "backgroundAcolyteBack": "Background Triptych Acolyte - Back",
+      "weaponCardFront": "Weapon Card - Front",
+      "weaponCardBack": "Weapon Card - Back",
+      "armorCardFront": "Armor Card - Front",
+      "armorCardBack": "Armor Card - Back",
+      "propertyCard": "Geek & Dragon coins property card"
+    },
+    "quotes": {
+      "monopoly": "If there were no more bills in Monopoly, the game would lose all its interest..."
     },
     "hero": {
-        "title": "Your D&D treasures deserve to exist",
-        "subtitle1": "Engraved coins, illustrated cards, sturdy sheets. Touch your adventure.",
-        "subtitle2": "Crafted in Canada • Premium quality • Fast delivery",
-        "discoverCreations": "Discover our creations",
-        "shopNow": "See the full collection"
+      "title": "Game Help Guides",
+      "subtitle": "Master all your Geek & Dragon accessories: triptychs, cards and currency"
     },
-    "home": {
-        "featured": {
-            "title": "Start with the essentials",
-            "subtitle": "Our most popular products to transform your first session",
-            "seeAll": "See the full collection"
+    "navigation": {
+      "quickNav": "Quick Navigation",
+      "triptychsGuide": "Triptychs Guide",
+      "cardsGuide": "Cards Guide",
+      "coinGuide": "Currency Guide",
+      "triptychsSubtitle": "Species, Class, Background - D&D 2024",
+      "cardsSubtitle": "Weapons, Equipment, Spells",
+      "coinSubtitle": "Monetary system + Converter"
+    },
+    "triptychGuide": {
+      "title": "The 3 Triptychs of your Character",
+      "intro": "Our triptychs are <strong class=\"text-purple-300\">sturdy character sheets</strong> printed on <strong class=\"text-pink-300\">rigid double-sided cardboard</strong>. Three independent and complementary cardboard pages (Species, Class, Background) with <strong class=\"text-amber-300\">all necessary rules</strong>. Class sheets contain <strong class=\"text-yellow-300\">all levels from 1 to 20</strong> plus specific recommended equipment and spell cards. <strong class=\"text-green-400\">Play without opening the manual</strong>!",
+      "description": "Each D&D character requires 3 independent cardboard triptychs: Species, Class and Background.",
+      "species": "Species Triptych",
+      "class": "Class Triptych",
+      "background": "Background Triptych"
+    },
+    "howToUse": {
+      "title": "How to use your triptychs",
+      "fold": "3 cardboard pages",
+      "organize": "Place in front of you",
+      "reference": "Reference during play"
+    },
+    "comingSoon": "Coming soon",
+    "buttons": {
+      "discover": "Discover Triptychs",
+      "cardsGuide": "Cards Guide",
+      "moneyGuide": "Currency Guide",
+      "buyTriptychs": "Buy my Triptychs",
+      "goToShop": "Visit the Shop"
+    },
+    "sections": {
+      "whatIsTriptyque": "What is a Geek & Dragon triptych?",
+      "triptychDescription": "A triptych is an independent <strong>double-sided cardboard character sheet</strong>, designed to replace tedious manual searches.",
+      "threeRequired": "Each D&D character requires <strong>3 different and complementary triptychs</strong> (3 cardboard pages to place in front of you) that contain <strong>all information from level 1 to 20</strong>.",
+      "detailsText": "Discover each type of triptych in detail. Click on images to see the back of each sheet.",
+      "clickToFlip": "Click to flip the sheet",
+      "classTriptych": "Class Triptych",
+      "backgroundTriptych": "Background Triptych"
+    },
+    "triptychsSection": {
+      "whatIs": "What is a Geek & Dragon triptych?",
+      "description": "A triptych is a foldable cardboard character sheet with 3 panels, designed to replace tedious manual searches.",
+      "speciesTitle": "Species Triptych",
+      "speciesDesc": "All racial abilities, traits and bonuses of your species",
+      "classTitle": "Class Triptych",
+      "classDesc": "Skills, spells, abilities and progression of your class",
+      "backgroundTitle": "Background Triptych",
+      "backgroundDesc": "Social skills, starting equipment and your character's background",
+      "detailsText": "Discover each type of triptych in detail.",
+      "clickToFlip": "Click to flip the sheet"
+    },
+    "diceRoller": {
+      "title": "🎲 Ability Score Roller",
+      "description": "<strong>D&D 2024:</strong> Roll 4d6 and keep the 3 best results.",
+      "backgroundNote": "You'll then add the <strong>Background</strong> bonuses (+2 and +1) in the Background triptych.",
+      "example": "Ex: <strong>16 (+3)</strong> → Write <strong>16</strong> in the score box, <strong>+3</strong> in the modifier box AND in all associated skills (Background triptych)",
+      "conDetails": "❤️ No skills<br><strong>Affects HP:</strong><br>Mod × Level",
+      "rollButton": "Roll",
+      "rollAllButton": "🎲 Roll all ability scores",
+      "strength": "Strength",
+      "dexterity": "Dexterity",
+      "constitution": "Constitution",
+      "intelligence": "Intelligence",
+      "wisdom": "Wisdom",
+      "charisma": "Charisma",
+      "modifierExplanation": {
+        "title": "📊 Understanding Ability Score Modifiers",
+        "intro": "The roller displays <strong>two essential values</strong>:",
+        "scoreLabel": "<strong>Ability score</strong> (e.g.: 16) → Write on your <strong>Background</strong> triptych",
+        "modifierLabel": "<strong>Modifier</strong> (e.g.: +3) → This is the bonus you add to your dice rolls",
+        "tableIntro": "📋 Quick conversion table:",
+        "score810": "Score 8-9 → Modifier -1",
+        "score1011": "Score 10-11 → Modifier +0",
+        "score1213": "Score 12-13 → Modifier +1",
+        "score1415": "Score 14-15 → Modifier +2",
+        "score1617": "Score 16-17 → Modifier +3",
+        "score1819": "Score 18-19 → Modifier +4",
+        "score20": "Score 20 → Modifier +5",
+        "formula": "<strong>Formula:</strong> (Ability Score - 10) ÷ 2 (round down)",
+        "where": "✍️ <strong>What to write on Background triptych?</strong>",
+        "whereItem1": "<strong>Ability score</strong>: Write in the large ability score box",
+        "whereItem2": "<strong>Modifier</strong>: Write in all skills that depend on this ability",
+        "whereItem3": "<strong>Additional Background bonus</strong>: +2 to one ability, +1 to another (based on your Background choice)",
+        "skillsTitle": "🎯 Skills by Ability Score",
+        "strSkills": "<strong>Strength:</strong> Athletics",
+        "dexSkills": "<strong>Dexterity:</strong> Acrobatics, Stealth, Sleight of Hand",
+        "conSkills": "<strong>Constitution:</strong> No skills (but affects your Hit Points!)",
+        "intSkills": "<strong>Intelligence:</strong> Arcana, History, Investigation, Nature, Religion",
+        "wisSkills": "<strong>Wisdom:</strong> Animal Handling, Medicine, Perception, Insight, Survival",
+        "chaSkills": "<strong>Charisma:</strong> Intimidation, Persuasion, Performance, Deception"
+      },
+      "proficiencyBonus": {
+        "title": "⭐ Proficiency Bonus and Expertise",
+        "intro": "On your <strong>Background</strong> triptych, some skills have checkboxes. Here's how to calculate the final bonus for a skill:",
+        "calcTitle": "🧮 <strong>Skill calculation formula:</strong>",
+        "calcBase": "<strong>Skill bonus = Ability modifier + Proficiency bonus (if proficient/expertise)</strong>",
+        "level14": "Level 1-4 → Proficiency bonus +2",
+        "level58": "Level 5-8 → Proficiency bonus +3",
+        "level912": "Level 9-12 → Proficiency bonus +4",
+        "level1316": "Level 13-16 → Proficiency bonus +5",
+        "level1720": "Level 17-20 → Proficiency bonus +6",
+        "symbolsTitle": "🎯 <strong>Proficiency Symbols (checkboxes on Background sheet):</strong>",
+        "notProficient": "⬜ <strong>Empty box (not proficient):</strong> Bonus = Ability modifier only",
+        "proficient": "✅ <strong>Checked once (proficient):</strong> Bonus = Modifier + Proficiency bonus",
+        "expert": "✅✅ <strong>Checked twice (expertise):</strong> Bonus = Modifier + (Proficiency bonus × 2)",
+        "exampleTitle": "💡 <strong>Detailed Example (Level 5 Character)</strong>",
+        "exampleSetup": "Your Dexterity is 16, so modifier = +3. Your proficiency bonus at level 5 = +3.",
+        "exampleCase1": "<strong>Acrobatics (⬜ not proficient):</strong> +3 (modifier alone) = <strong>Final bonus +3</strong>",
+        "exampleCase2": "<strong>Stealth (✅ proficient):</strong> +3 (modifier) + 3 (proficiency) = <strong>Final bonus +6</strong>",
+        "exampleCase3": "<strong>Sleight of Hand (✅✅ expertise):</strong> +3 (modifier) + 3 (proficiency) + 3 (proficiency) = <strong>Final bonus +9</strong>",
+        "finalNote": "💡 <strong>Important:</strong> These final bonuses are what you write in the skill boxes on your Background triptych!"
+      }
+    },
+    "examples": {
+      "species": "🧝 Species",
+      "speciesExample": "Example: Aasimar",
+      "speciesDesc": "Racial traits and species abilities",
+      "class": "⚔️ Class",
+      "classExample": "Example: Barbarian",
+      "classDesc": "Class abilities and progression",
+      "background": "📜 Background",
+      "backgroundExample": "Example: Acolyte",
+      "backgroundDesc": "Ability score bonuses now in background"
+    },
+    "fillingGuide": {
+      "title": "📝 Detailed Filling Guide (D&D 2024)",
+      "newIn2024": "⚠️ New in D&D 2024!",
+      "importantNote": "Ability score bonuses are now assigned by Background!"
+    },
+    "species": {
+      "title": "Species Triptych",
+      "description": "All racial abilities, traits and bonuses of your species (Elf, Dwarf, Human...)",
+      "example": "Example: Aasimar",
+      "exampleDesc": "Racial traits and species abilities with detailed statistics.",
+      "trait1": "• Traits and resistances",
+      "trait2": "• Species spells",
+      "trait3": "• Special languages"
+    },
+    "class": {
+      "title": "Class Triptych",
+      "description": "Skills, spells, abilities and progression of your class (Fighter, Wizard, Ranger...)",
+      "example": "Example: Barbarian",
+      "exampleDesc": "Class abilities and progression with vital statistics.",
+      "trait1": "• Initiative and death saves",
+      "trait2": "• Complete hit points",
+      "trait3": "• Armor class",
+      "trait4": "• Rage and abilities"
+    },
+    "background": {
+      "title": "Background Triptych",
+      "description": "Social skills, starting equipment and your character's background",
+      "example": "Example: Acolyte",
+      "exampleDesc": "<strong>D&D 2024:</strong> Ability score bonuses now in background.",
+      "priority": "Background Triptych (PRIORITY)",
+      "centralization": "Background Triptych = CENTRALIZATION of all skills!",
+      "trait1": "• <strong>Ability bonuses</strong>",
+      "trait2": "• Social skills",
+      "trait3": "• Special feature",
+      "trait4": "• Personality"
+    },
+    "filling": {
+      "step1": "1. Background Triptych (PRIORITY)",
+      "step2": "2. Species Triptych",
+      "step3": "3. Class Triptych"
+    },
+    "detailedGuide": {
+      "title": "📝 Detailed Filling Guide (D&D 2024)",
+      "important": "Important:",
+      "importantText": "Ability score bonuses are now assigned by <strong>Background</strong>, not by Species! It's in the Background triptych that you'll note your final characteristics.",
+      "backgroundPriority": {
+        "title": "📜 1. Background Triptych (PRIORITY)",
+        "characteristics": {
+          "title": "1. Ability Score Bonuses (NEW 2024)",
+          "important": "This is WHERE you note your final characteristics!",
+          "rules": {
+            "rule1": "• Roll 4d6 (keep the 3 best) with the roller above",
+            "rule2": "• Add background bonuses (+2 to one ability, +1 to another)",
+            "rule3": "• Note the final total and modifier (e.g.: 16 = +3)",
+            "rule4": "• <em>Species no longer have fixed ability score bonuses</em>"
+          }
         },
-        "why": {
-            "title": "Why physical in 2025?",
-            "subtitle": "Because the best memories don't fade with the next patch",
-            "benefit1": {
-                "title": "Tactile memories",
-                "desc": "Touching your treasures creates emotions that numbers on a sheet can never offer"
-            },
-            "benefit2": {
-                "title": "Premium quality",
-                "desc": "Built to last. No updates, no subscription, just solid quality"
-            },
-            "benefit3": {
-                "title": "Quebec craftsmanship",
-                "desc": "Designed and crafted in Quebec. Every purchase supports local creation"
-            }
+        "skills": {
+          "title": "2. Skills and proficiencies (all sources)",
+          "important": "Background Triptych = CENTRALIZATION of all skills!",
+          "list": {
+            "item1": "• The 2 background skills",
+            "item2": "• Class skills (carried over from Class triptych)",
+            "item3": "• Racial skills (carried over from Species triptych)",
+            "item4": "• Specific tool proficiencies",
+            "item5": "• Unique background feature (e.g.: Magic Initiate)"
+          }
+        },
+        "equipment": {
+          "title": "3. Equipment and Personality",
+          "list": {
+            "item1": "• Starting equipment cards provided with the triptych",
+            "item2": "• Fill in personality traits (Bonds, Ideals, Flaws, Traits)",
+            "item3": "• Develop your narrative background"
+          }
         }
-    },
-    "reassurance": {
-        "local": "Crafted in Quebec"
-    },
-    "footer": {
-        "made": "Designed in Quebec."
-    },
-    "contact": {
-        "title": "Contact Us",
-        "subtitle": "Got a question? Need something custom? Talk directly to our craftspeople.",
-        "requestQuote": "Contact us",
-        "form": {
-            "name": "Full name",
-            "email": "Email address",
-            "phone": "Phone (optional)",
-            "message": "Request details",
-            "submit": "Send my request"
+      },
+      "speciesGuide": {
+        "title": "🧝 2. Species Triptych",
+        "traits": {
+          "title": "1. Languages and racial traits",
+          "languages": "<strong>Languages:</strong> This is WHERE you note the languages!",
+          "list": {
+            "item1": "• Common language + racial language (e.g.: Celestial, Draconic)",
+            "item2": "• One third language of your choice",
+            "item3": "• Check damage resistances",
+            "item4": "• Note special senses (darkvision, etc.)"
+          }
         },
-        "info": {
-            "role": "Product manager",
-            "roleCommunity": "Product manager & community",
-            "photoAlt": "Photo of Brujah"
+        "abilities": {
+          "title": "2. Species abilities and spells",
+          "list": {
+            "item1": "• Detail racial spells (level, uses/rest)",
+            "item2": "• Note unique hereditary abilities",
+            "item3": "• Check immunities and special resistances",
+            "item4": "• Size, movement speed, lifespan"
+          }
+        },
+        "note": "📝 <strong>Important note:</strong> Species skills and proficiencies must be carried over to the Background triptych!",
+        "training": {
+          "title": "3. \"Training\" fields (empty at start)",
+          "important": "<strong>Important:</strong> These 5 fields are for IN-GAME acquisitions",
+          "list": {
+            "item1": "• New languages learned during adventure",
+            "item2": "• Acquired tool proficiencies",
+            "item3": "• Special skills gained",
+            "item4": "• Only fill them if your character learns something"
+          }
         }
-    },
-    "thankyou": {
-        "title": "Thank you!",
-        "message": "Your request has been sent to our team.",
-        "backHome": "Back to home"
-    },
-    "product": {
-        "back": "Back to shop",
-        "multiplier": "Multiplier",
-        "metal": "Metal",
-        "language": "Language",
-        "decreaseQuantity": "Decrease quantity",
-        "increaseQuantity": "Increase quantity",
-        "languageOptions": {
-            "FR": "French",
-            "EN": "English"
+      },
+      "classGuide": {
+        "title": "⚔️ 3. Class Triptych",
+        "combat": {
+          "title": "1. Vital statistics and combat",
+          "list": {
+            "item1": "• <strong>Hit points:</strong> Maximum, current, temporary",
+            "item2": "• <strong>Armor class:</strong> With and without shield",
+            "item3": "• <strong>Initiative:</strong> Modifier and roll result",
+            "item4": "• <strong>Death saving throws:</strong> Track successes/failures",
+            "item5": "• Current level and proficiency bonus"
+          }
         },
-        "triptychSpecies": "Species",
-        "triptychClass": "Class",
-        "triptychBackground": "Background",
-        "triptychOption": "Option",
-        "quantity": "Quantity",
-        "unit": "single",
-        "add": "Add",
-        "outOfStock": {
-            "title": "Treasure Depleted",
-            "subtitle": "Unfortunately, this artifact is no longer available at the moment"
+        "skills": {
+          "title": "2. Class skills and proficiencies",
+          "list": {
+            "item1": "• Check mastered class skills",
+            "item2": "• Note weapon and armor proficiencies",
+            "item3": "• Mastered saving throws"
+          }
         },
-        "insufficientStock": "Insufficient stock",
-        "securePayment": "Transaction protected by the Merchant's Guild",
-        "realTimeStock": "Stock updated in real time"
-    },
-    "shop": {
-        "hero": {
-            "title": "Geek & Dragon Shop",
-            "description": "A $300 dragon miniature? Most campaigns will never see it hit the table. Our Canadian treasures? Essential at every session, for all your adventures.",
-            "button": "Choose my treasures",
-            "bundleButton": "⭐ Dragon's Vault ⭐",
-            "quickLinks": {
-                "title": "Quick links",
-                "ariaLabel": "Quick navigation to the shop categories",
-                "pieces": "Coins",
-                "cards": "Cards",
-                "triptychs": "Triptychs",
-                "bundle": "Dragon's Vault"
-            }
-        },
-        "intro": {
-            "title": "Handcrafted treasures",
-            "description": "Collectible items and handcrafted game aids, made in Quebec.",
-            "payment": "Transaction protected by the Merchant's Guild",
-            "stock": "Stock updated in real time."
-        },
-        "pieces": {
-            "title": "Metal coins",
-            "description": "A role-playing game without physical coins is like Monopoly without banknotes. Treat yourself to the authentic weight of treasure.",
-            "video": "Watch Role-Playing Tips on D&D Economy video >",
-            "intro": {
-                "shortDescription": "Our metal coins faithfully reproduce D&D's monetary system (<strong class=\"text-amber-300\">5 metals</strong>: copper, silver, electrum, gold, platinum). Unit coins are <strong class=\"text-yellow-200\">shiny</strong>, while <strong class=\"text-yellow-300\">engraved multipliers</strong> (×10, ×100, ×1000, ×10000) have a distinctive matte finish. Each coin physically represents its value: one ×100 coin = 100 unit coins. <strong class=\"text-green-400\">Feel the real weight of treasure</strong> in your hands!",
-                "learnMore": "Learn more about the coin system and their weights"
-            },
-            "backToTop": "Back to the merchant's counter"
-        },
-        "deluxeBundle": {
-            "title": "Dragon's Vault - Collector's Edition",
-            "badge": "⭐ Limited Numbered Edition ⭐",
-            "subtitle": "The ultimate experience for collectors and demanding game masters",
-            "description": "The premium set that transforms every session into legend. Numbered and certified, this treasure contains the complete arsenal of the passionate game master.",
-            "features": {
-                "title": "Vault Contents",
-                "essence": "<strong class=\"text-yellow-300\">2× Merchant's Essence</strong> - Complete sets for quick in-game distribution",
-                "collectors": {
-                    "title": "<strong class=\"text-yellow-200\">5 Plated Collector Coins</strong>",
-                    "subtitle": "Exclusive edition plated in their <strong class=\"text-amber-400\">authentic genuine rare metal</strong>",
-                    "copper": {
-                        "name": "Copper Coin",
-                        "detail": "Pure copper plated - Warm shine with orange reflections"
-                    },
-                    "silver": {
-                        "name": "Silver Coin",
-                        "detail": "Sterling silver 925 plated - Immaculate brilliance and prestige"
-                    },
-                    "electrum": {
-                        "name": "Electrum Coin",
-                        "detail": "Sterling silver 925 plated - Pure and timeless silver shine"
-                    },
-                    "gold": {
-                        "name": "Gold Coin",
-                        "detail": "Genuine 18-karat gold plated - Royal luxury and legendary radiance"
-                    },
-                    "platinum": {
-                        "name": "Platinum Coin",
-                        "detail": "Genuine platinum plated - Ultimate rarity, absolute nobility"
-                    }
-                },
-                "cards": "<strong class=\"text-indigo-300\">Complete 560 equipment cards set</strong> in premium box",
-                "triptychs": "<strong class=\"text-purple-300\">3 triptychs of choice</strong> (Species + Class + Background)",
-                "bag": "Embroidered velvet pouch \"Geek & Dragon\"",
-                "certificate": "Hand-numbered certificate of authenticity",
-                "chest": "Customized deluxe chest",
-                "guide": "Deluxe immersion guide (24-page booklet)"
-            },
-            "specs": {
-                "title": "Premium Specifications",
-                "numbered": "Unique laser-engraved numbering",
-                "savings": "25% savings vs separate purchase"
-            },
-            "cta": "Reserve My Edition",
-            "contact": "Contact us for availability",
-            "limited": "Limited production to 500 units",
-            "backToTop": "Back to the merchant's counter"
-        },
-        "cards": {
-            "title": "Equipment cards",
-            "coming": "Coming soon",
-            "description": "Themed packs of illustrated cards to manage inventory visually.",
-            "faqLink": "Frequently Asked Questions / Card Guide",
-            "description1": "Our scribes are still enchanting these adventure parchments.",
-            "description2": "The equipment cards will forge their way in by the next moon.",
-            "intro": {
-                "shortDescription": "<strong class=\"text-indigo-300\">560 illustrated equipment cards</strong> replacing tedious manual reading. Each card <strong class=\"text-purple-300\">visually</strong> presents a weapon, armor, or equipment with complete statistics. <strong class=\"text-green-400\">Save time and increase immersion</strong> in-game! <span class=\"text-amber-300 text-sm italic\">(Complete class spell cards currently being crafted by our goblins in their enchanted monasteries...)</span>",
-                "learnMore": "Learn more about equipment cards"
-            },
-            "backToTop": "Back to the merchant's counter"
-        },
-        "triptychs": {
-            "title": "Character triptychs",
-            "coming": "Coming soon",
-            "description": "Ready-to-play heroes for improvised sessions.",
-            "description1": "The artisans are still shaping these hero grimoires.",
-            "description2": "The triptychs will join the shop shortly.",
-            "guideCta": "How to use your triptychs",
-            "backToTop": "Back to the merchant's counter",
-            "intro": {
-                "shortDescription": "<strong class=\"text-purple-300\">Sturdy triptych</strong> character sheets printed on <strong class=\"text-pink-300\">rigid cardboard</strong>. Three independent panels (Species, Class, Background) with <strong class=\"text-amber-300\">all necessary rules</strong> and information <strong class=\"text-yellow-300\">from level 1 to 20</strong>. Includes recommended equipment and spell cards. <strong class=\"text-green-400\">No need for the manual</strong> during play!",
-                "learnMore": "Learn more about character triptychs"
-            }
-        },
-        "collective": {
-            "title": "Invest together, share the adventure",
-            "description1": "Don't let the game master go broke for your pleasure: each player will soon be able to contribute by buying their triptych, cards and coins.",
-            "description2": "By comparison, some dragon figurines sell for over <strong>$300</strong> each and are generally used only once in an entire campaign—and even then, only when the scenario allows it, because it's not systematic. Our coins, however, are used in every session for years of campaigning.",
-            "description3": "Fill out the <em>ownership card</em> opposite by writing your name and the number of coins purchased, sign it and hand your treasures to the game master. At the end of the campaign, they will return them to you without difficulty."
-        },
-        "converter": {
-            "title": "Currency converter",
-            "sourcesLabel": "💰 Source currencies",
-            "multiplierLabel": "⚖️ Multiplier table (editable)",
-            "equivalences": "💼 Total equivalences by metal",
-            "recommendations": "✨ Optimal recommendations",
-            "currencyLabel": "Currency",
-            "currency": {
-                "copper": "Copper",
-                "silver": "Silver",
-                "electrum": "Electrum",
-                "gold": "Gold",
-                "platinum": "Platinum"
-            },
-            "metals": {
-                "copper": "copper",
-                "silver": "silver",
-                "electrum": "electrum",
-                "gold": "gold",
-                "platinum": "platinum"
-            },
-            "enterAmounts": "Enter amounts to see optimal recommendations",
-            "optimalConversion": "Optimal conversion",
-            "total": "Total",
-            "value": "Value",
-            "minimalCoins": "Minimum number of coins",
-            "totalCoins": "Total coins",
-            "remainder": "Remainder",
-            "units": "Units",
-            "lots": "Lots",
-            "coins": "coins",
-            "and": "and"
+        "note": "📝 <strong>Important note:</strong> Class skills and proficiencies must be carried over to the Background triptych!",
+        "abilities": {
+          "title": "3. Abilities and resources",
+          "list": {
+            "item1": "• Abilities gained per level (check as you progress)",
+            "item2": "• Class resources (Rage, Inspiration, Spell slots...)",
+            "item3": "• Specific subclass abilities"
+          }
         }
-    },
-    "news": {
-        "flim2025": {
-            "heading": "News & Testimonials",
-            "title": "Heroes level 20, an overly tenacious raccoon, and... our coins",
-            "summary": "Our first demonstration of coins at FLIM 2025 took the form of a legendary one-shot hosted by Es-tu Game?.",
-            "read": "Read the article",
-            "video1": "The mayor honors the three heroes with real silver",
-            "video2": "When everything is decided by a coin... dragon or star?",
-            "video3": "Game finale: The raccoon, the stars... and chaos",
-            "youtube": "Watch the full session on the official YouTube channel:",
-            "youtubeLink": "Es-tu Game? — Role-playing games",
-            "p1": "During the first day of the <strong>Montreal International Ludic Festival</strong>, our very first public demonstration of coins took the form of a <strong>legendary one-shot</strong>. We tossed our pieces like dice of destiny. They whirled through the air and landed with a deep metallic chime, immediately sparking a wave of wonder. Eyes widened. Voices rose in laughter and astonishment. The very essence of role‑playing had just changed.",
-            "p2": "None of it would have been possible without our ally in this adventure: <strong>Es-tu Game?</strong>, Québec’s go-to channel for wild gaming sessions on YouTube—and above all, the inimitable, fabulous <strong>Pierre‑Louis Renaud</strong>. A master of plotting and a world‑forger, he’s that legendary GM no archdevil dares challenge. Even in Sigil, the eldest sages of the multiverse whisper his name with respect—and more than a hint of envy. For if there is a plane where a better game master exists, it’s only because Pierre‑Louis rolled his dice there first. And for our greatest delight, he unleashed one of his most madcap one-shots: a level‑20 adventure of absurdly epic intensity.",
-            "p3": "A true fireworks display of controlled chaos, featuring three cult figures from his past campaigns:",
-            "li1": "<strong>Gratis</strong>, played by Dave Belisle (Les Appendices): a gnome artificer as exuberant as he is unmanageable, an alchemist of sauces with effects that are often explosive… and always unpredictable. To him, offering a drop of his latest concoction is a sign of affection—whether the recipient survives or not. His sauces, as unstable as can be, tend to trigger unforeseen effects: reversed gravity, torrents of tears as black as fresh ink, or vertical wall waltzes. Even enemies are not immune to his spicy generosity.",
-            "li2": "<strong>Marlin</strong>, brilliantly portrayed by Jean‑François Provençal (Les Appendices), an illusionist rogue as elusive as he is improbable. A strategist of alternative logic, selectively brave but disarmingly charming, he excels in fleeing with grace, stealing with flair, and finding himself—without ever seeking it—in the heart of the most absurd situations. It’s as if the entire universe conspires to make him the pivot of chaos.",
-            "li3": "<strong>Tana</strong>, the unforgettable axe-wielding barbarian, embodied by Rosanne Berry. Feared for her unshakable motto: strike first, think later, ask questions… rarely. She’s as famous for her crushing charges as she is for her heartfelt tears. A colossus with a tender heart, a veritable emotional and cutting tidal wave, who certainly didn’t expect to encounter a raccoon… immune to her blows capable of cleaving the fabric of space-time.",
-            "p4": "This improbable trio thought they could enjoy a peaceful retirement in a sleepy village—until they couldn’t resist the urge to filch a few coins from the star-struck onlookers.",
-            "p5": "Marlin and Tana, forever chasing a thrill, amused themselves by lifting the small purses of travelers dazzled by their legend, before the thought of ‘theft’ even crossed their minds. Gratis, feeling slightly guilty, followed almost reluctantly, limiting his petty crimes to lighthearted acts of bravado.",
-            "p6": "But the attempted burglary of the mayor’s residence went awry. A rustle in the trash, an overly curious raccoon, and a poorly sorted compost threw the operation into chaos, abruptly halting our heroic scoundrels’ exploits.",
-            "p7": "The climax? A cosmic raccoon sucked into the stars by inverted gravity, while the mayor, in tears, emptied his safe in a whirl of copper and silver coins in homage to his lost sons, and the spectators and table erupted in laughter—completely swept away by the immersion."
+      },
+      "order": {
+        "title": "📋 Recommended Filling Order",
+        "step1": {
+          "title": "1️⃣ START",
+          "text": "<strong>Background FIRST:</strong> Roll dice and note characteristics with background bonuses"
+        },
+        "step2": {
+          "title": "2️⃣ SPECIES",
+          "text": "<strong>Species:</strong> Racial traits, languages, abilities. <em>Carry over skills to Background</em>"
+        },
+        "step3": {
+          "title": "3️⃣ CLASS",
+          "text": "<strong>Class:</strong> HP, abilities, resources. <em>Carry over skills to Background</em>"
+        },
+        "step4": {
+          "title": "4️⃣ FINALIZATION",
+          "text": "<strong>Background FINAL:</strong> Centralize all skills and proficiencies from the 3 triptychs"
         }
-    },
-    "ui": {
-        "noImageAvailable": "No image available",
-        "previousImage": "Previous image",
-        "nextImage": "Next image",
-        "loading": "Loading...",
-        "error": "Error",
-        "errorLoadingProducts": "Error loading products",
-        "close": "Close",
-        "add": "Add",
-        "remove": "Remove",
-        "cancel": "Cancel",
-        "confirm": "Confirm",
-        "save": "Save",
-        "delete": "Delete",
-        "edit": "Edit",
-        "search": "Search",
-        "filter": "Filter",
-        "sort": "Sort",
-        "show": "Show",
-        "hide": "Hide",
-        "more": "More",
-        "less": "Less",
-        "all": "All",
-        "none": "None",
-        "yes": "Yes",
-        "no": "No",
-        "ok": "OK",
-        "apply": "Apply",
-        "reset": "Reset",
-        "musicPlayer": {
-            "previous": "Previous",
-            "playPause": "Play / Pause",
-            "next": "Next",
-            "volume": "Volume"
+      },
+      "tips": {
+        "title": "💡 Filling Tips",
+        "tip1": {
+          "title": "✏️",
+          "text": "<strong>Pencil required:</strong> Values evolve constantly"
         },
-        "icons": {
-            "rotation": "Rotation icon",
-            "minus": "Minus",
-            "plus": "Plus"
+        "tip2": {
+          "title": "📱",
+          "text": "<strong>Backup photo:</strong> Secure your filled triptychs"
         },
-        "payment": {
-            "visa": "Visa logo",
-            "mastercard": "Mastercard logo",
-            "amex": "American Express logo"
+        "tip3": {
+          "title": "🗂️",
+          "text": "<strong>Organization:</strong> Background on left (stats), Species in center, Class on right"
+        },
+        "tip4": {
+          "title": "🎯",
+          "text": "<strong>2024 Memo:</strong> Ability bonuses now come from BACKGROUND!"
         }
+      }
     },
-    "testimonials": {
-        "title": "Testimonials",
-        "moreReviews": "More reviews on",
-        "trictrac": "TricTrac",
-        "quote1": {
-            "title": "“No more battles with our character sheets!”",
-            "intro": "Many players said it: physical coins change everything.",
-            "p1": "Gone are the columns of numbers hastily scribbled on a crumpled sheet. Now every player felt the real weight of the loot, sliding between their fingers like a forgotten heirloom. Treasure became tangible. At each exchange, the whole body reacted: the hand hesitating, the eye weighing, the throat drying. The hoard took on flesh. It became dramatic stakes, visceral emotion, an event, a lasting memory...",
-            "p2strong": "No more fights with character sheets",
-            "p2rest": "endless book searches while others disconnect, or the long character creation sessions that discourage before the game even begins. With Geek & Dragon, everything starts when the coin hits the table."
+    "customTriptychs": {
+      "title": "✨ Custom Triptychs",
+      "description": "Want a triptych totally adapted to your unique character? We create custom triptychs with your specific choices!",
+      "standard": {
+        "title": "🎯 Standard Triptychs",
+        "list": {
+          "item1": "• Random equipment cards included",
+          "item2": "• Standard choices for variable options",
+          "item3": "• Fast shipping from our stock",
+          "item4": "• Catalog prices from the shop"
         }
-    },
-    "gameHelp": {
-        "images": {
-            "speciesAssimarFront": "Species Triptych Aasimar - Front",
-            "speciesAssimarBack": "Species Triptych Aasimar - Back",
-            "classBarbarianFront": "Class Triptych Barbarian - Front",
-            "classBarbarianBack": "Class Triptych Barbarian - Back",
-            "backgroundAcolyteFront": "Background Triptych Acolyte - Front",
-            "backgroundAcolyteBack": "Background Triptych Acolyte - Back",
-            "weaponCardFront": "Weapon Card - Front",
-            "weaponCardBack": "Weapon Card - Back",
-            "armorCardFront": "Armor Card - Front",
-            "armorCardBack": "Armor Card - Back",
-            "propertyCard": "Geek & Dragon coins property card"
+      },
+      "custom": {
+        "title": "⭐ Custom Triptychs",
+        "list": {
+          "item1": "• Precise choice of all equipment",
+          "item2": "• Manual selection of included cards",
+          "item3": "• Adaptation to your specific background",
+          "item4": "• Made to order (additional delay)"
+        }
+      },
+      "contact": {
+        "title": "📧 How to Order",
+        "description": "For a fully personalized triptych, contact us by email with your character details:",
+        "email": "commande@geekndragon.com",
+        "subject": "Custom Triptych",
+        "subjectLabel": "Subject: \"Custom Triptych\"",
+        "tip": "💡 <strong>Tip:</strong> Specify your class, species, background and equipment preferences in your email"
+      },
+      "usage": {
+        "title": "How to use your triptychs",
+        "description": "Your 3 independent cardboard triptychs are designed to be placed in front of you on your gaming table",
+        "step1": {
+          "title": "📄 3 independent cardboard pages",
+          "text": "Each triptych is a <strong>sturdy double-sided cardboard page</strong>. No need to fold: these are 3 independent and complementary sheets."
         },
-        "quotes": {
-            "monopoly": "If there were no more bills in Monopoly, the game would lose all its interest..."
+        "step2": {
+          "title": "🎯 Place in front of you",
+          "text": "Arrange your 3 triptychs in front of you: Species on the left, Class in the center, Background on the right. Instant access to all your abilities from level 1 to 20."
         },
-        "hero": {
-            "title": "Game Help Guides",
-            "subtitle": "Master all your Geek & Dragon accessories: triptychs, cards and currency"
+        "step3": {
+          "title": "⚡ Consult during play",
+          "text": "No need to open manuals! All your abilities are visible at a glance. The DM and other players stay focused on the action."
         },
-        "navigation": {
-            "triptychsGuide": "Forge your Heroes",
-            "cardsGuide": "Equip your Adventures",
-            "coinGuide": "Count your Treasures"
-        },
-        "triptychGuide": {
-            "title": "The 3 Triptychs of your Character",
-            "intro": "Our triptychs are <strong class=\"text-purple-300\">sturdy character sheets</strong> printed on <strong class=\"text-pink-300\">rigid double-sided cardboard</strong>. Three independent and complementary cardboard pages (Species, Class, Background) with <strong class=\"text-amber-300\">all necessary rules</strong>. Class sheets contain <strong class=\"text-yellow-300\">all levels from 1 to 20</strong> plus specific recommended equipment and spell cards. <strong class=\"text-green-400\">Play without opening the manual</strong>!",
-            "description": "Each D&D character requires 3 independent cardboard triptychs: Species, Class and Background.",
-            "species": "Species Triptych",
-            "class": "Class Triptych",
-            "background": "Background Triptych"
-        },
-        "howToUse": {
-            "title": "How to use your triptychs",
-            "fold": "3 cardboard pages",
-            "organize": "Place in front of you",
-            "reference": "Reference during play"
-        },
-        "comingSoon": "Coming soon",
-        "buttons": {
-            "discover": "Discover Triptychs",
-            "cardsGuide": "Cards Guide",
-            "moneyGuide": "Currency Guide",
-            "buyTriptychs": "Buy my Triptychs",
-            "goToShop": "Visit the Shop"
-        },
-        "sections": {
-            "whatIsTriptyque": "What is a Geek & Dragon triptych?",
-            "triptychDescription": "A triptych is an independent <strong>double-sided cardboard character sheet</strong>, designed to replace tedious manual searches.",
-            "threeRequired": "Each D&D character requires <strong>3 different and complementary triptychs</strong> (3 cardboard pages to place in front of you) that contain <strong>all information from level 1 to 20</strong>.",
-            "detailsText": "Discover each type of triptych in detail. Click on images to see the back of each sheet.",
-            "clickToFlip": "Click to flip the sheet",
-            "classTriptych": "Class Triptych",
-            "backgroundTriptych": "Background Triptych"
-        },
-        "navigation": {
-            "quickNav": "Quick Navigation",
-            "triptychsGuide": "Triptychs Guide",
-            "cardsGuide": "Cards Guide",
-            "coinGuide": "Currency Guide",
-            "triptychsSubtitle": "Species, Class, Background - D&D 2024",
-            "cardsSubtitle": "Weapons, Equipment, Spells",
-            "coinSubtitle": "Monetary system + Converter"
-        },
-        "triptychsSection": {
-            "whatIs": "What is a Geek & Dragon triptych?",
-            "description": "A triptych is a foldable cardboard character sheet with 3 panels, designed to replace tedious manual searches.",
-            "speciesTitle": "Species Triptych",
-            "speciesDesc": "All racial abilities, traits and bonuses of your species",
-            "classTitle": "Class Triptych",
-            "classDesc": "Skills, spells, abilities and progression of your class",
-            "backgroundTitle": "Background Triptych",
-            "backgroundDesc": "Social skills, starting equipment and your character's background",
-            "detailsText": "Discover each type of triptych in detail.",
-            "clickToFlip": "Click to flip the sheet"
-        },
-        "diceRoller": {
-            "title": "🎲 Ability Score Roller",
-            "description": "<strong>D&D 2024:</strong> Roll 4d6 and keep the 3 best results.",
-            "backgroundNote": "You'll then add the <strong>Background</strong> bonuses (+2 and +1) in the Background triptych.",
-            "example": "Ex: <strong>16 (+3)</strong> → Write <strong>16</strong> in the score box, <strong>+3</strong> in the modifier box AND in all associated skills (Background triptych)",
-            "conDetails": "❤️ No skills<br><strong>Affects HP:</strong><br>Mod × Level",
-            "rollButton": "Roll",
-            "rollAllButton": "🎲 Roll all ability scores",
-            "strength": "Strength",
-            "dexterity": "Dexterity",
-            "constitution": "Constitution",
-            "intelligence": "Intelligence",
-            "wisdom": "Wisdom",
-            "charisma": "Charisma",
-            "modifierExplanation": {
-                "title": "📊 Understanding Ability Score Modifiers",
-                "intro": "The roller displays <strong>two essential values</strong>:",
-                "scoreLabel": "<strong>Ability score</strong> (e.g.: 16) → Write on your <strong>Background</strong> triptych",
-                "modifierLabel": "<strong>Modifier</strong> (e.g.: +3) → This is the bonus you add to your dice rolls",
-                "tableIntro": "📋 Quick conversion table:",
-                "score810": "Score 8-9 → Modifier -1",
-                "score1011": "Score 10-11 → Modifier +0",
-                "score1213": "Score 12-13 → Modifier +1",
-                "score1415": "Score 14-15 → Modifier +2",
-                "score1617": "Score 16-17 → Modifier +3",
-                "score1819": "Score 18-19 → Modifier +4",
-                "score20": "Score 20 → Modifier +5",
-                "formula": "<strong>Formula:</strong> (Ability Score - 10) ÷ 2 (round down)",
-                "where": "✍️ <strong>What to write on Background triptych?</strong>",
-                "whereItem1": "<strong>Ability score</strong>: Write in the large ability score box",
-                "whereItem2": "<strong>Modifier</strong>: Write in all skills that depend on this ability",
-                "whereItem3": "<strong>Additional Background bonus</strong>: +2 to one ability, +1 to another (based on your Background choice)",
-                "skillsTitle": "🎯 Skills by Ability Score",
-                "strSkills": "<strong>Strength:</strong> Athletics",
-                "dexSkills": "<strong>Dexterity:</strong> Acrobatics, Stealth, Sleight of Hand",
-                "conSkills": "<strong>Constitution:</strong> No skills (but affects your Hit Points!)",
-                "intSkills": "<strong>Intelligence:</strong> Arcana, History, Investigation, Nature, Religion",
-                "wisSkills": "<strong>Wisdom:</strong> Animal Handling, Medicine, Perception, Insight, Survival",
-                "chaSkills": "<strong>Charisma:</strong> Intimidation, Persuasion, Performance, Deception"
-            },
-            "proficiencyBonus": {
-                "title": "⭐ Proficiency Bonus and Expertise",
-                "intro": "On your <strong>Background</strong> triptych, some skills have checkboxes. Here's how to calculate the final bonus for a skill:",
-                "calcTitle": "🧮 <strong>Skill calculation formula:</strong>",
-                "calcBase": "<strong>Skill bonus = Ability modifier + Proficiency bonus (if proficient/expertise)</strong>",
-                "level14": "Level 1-4 → Proficiency bonus +2",
-                "level58": "Level 5-8 → Proficiency bonus +3",
-                "level912": "Level 9-12 → Proficiency bonus +4",
-                "level1316": "Level 13-16 → Proficiency bonus +5",
-                "level1720": "Level 17-20 → Proficiency bonus +6",
-                "symbolsTitle": "🎯 <strong>Proficiency Symbols (checkboxes on Background sheet):</strong>",
-                "notProficient": "⬜ <strong>Empty box (not proficient):</strong> Bonus = Ability modifier only",
-                "proficient": "✅ <strong>Checked once (proficient):</strong> Bonus = Modifier + Proficiency bonus",
-                "expert": "✅✅ <strong>Checked twice (expertise):</strong> Bonus = Modifier + (Proficiency bonus × 2)",
-                "exampleTitle": "💡 <strong>Detailed Example (Level 5 Character)</strong>",
-                "exampleSetup": "Your Dexterity is 16, so modifier = +3. Your proficiency bonus at level 5 = +3.",
-                "exampleCase1": "<strong>Acrobatics (⬜ not proficient):</strong> +3 (modifier alone) = <strong>Final bonus +3</strong>",
-                "exampleCase2": "<strong>Stealth (✅ proficient):</strong> +3 (modifier) + 3 (proficiency) = <strong>Final bonus +6</strong>",
-                "exampleCase3": "<strong>Sleight of Hand (✅✅ expertise):</strong> +3 (modifier) + 3 (proficiency) + 3 (proficiency) = <strong>Final bonus +9</strong>",
-                "finalNote": "💡 <strong>Important:</strong> These final bonuses are what you write in the skill boxes on your Background triptych!"
-            }
-        },
-        "examples": {
-            "species": "🧝 Species",
-            "speciesExample": "Example: Aasimar",
-            "speciesDesc": "Racial traits and species abilities",
-            "class": "⚔️ Class",
-            "classExample": "Example: Barbarian",
-            "classDesc": "Class abilities and progression",
-            "background": "📜 Background",
-            "backgroundExample": "Example: Acolyte",
-            "backgroundDesc": "Ability score bonuses now in background"
-        },
-        "fillingGuide": {
-            "title": "📝 Detailed Filling Guide (D&D 2024)",
-            "newIn2024": "⚠️ New in D&D 2024!",
-            "importantNote": "Ability score bonuses are now assigned by Background!"
-        },
-        "species": {
-            "title": "Species Triptych",
-            "description": "All racial abilities, traits and bonuses of your species (Elf, Dwarf, Human...)",
-            "example": "Example: Aasimar",
-            "exampleDesc": "Racial traits and species abilities with detailed statistics.",
-            "trait1": "• Traits and resistances",
-            "trait2": "• Species spells",
-            "trait3": "• Special languages"
-        },
-        "class": {
-            "title": "Class Triptych",
-            "description": "Skills, spells, abilities and progression of your class (Fighter, Wizard, Ranger...)",
-            "example": "Example: Barbarian",
-            "exampleDesc": "Class abilities and progression with vital statistics.",
-            "trait1": "• Initiative and death saves",
-            "trait2": "• Complete hit points",
-            "trait3": "• Armor class",
-            "trait4": "• Rage and abilities"
-        },
-        "background": {
-            "title": "Background Triptych",
-            "description": "Social skills, starting equipment and your character's background",
-            "example": "Example: Acolyte",
-            "exampleDesc": "<strong>D&D 2024:</strong> Ability score bonuses now in background.",
-            "priority": "Background Triptych (PRIORITY)",
-            "centralization": "Background Triptych = CENTRALIZATION of all skills!",
-            "trait1": "• <strong>Ability bonuses</strong>",
-            "trait2": "• Social skills",
-            "trait3": "• Special feature",
-            "trait4": "• Personality"
-        },
-        "filling": {
-            "step1": "1. Background Triptych (PRIORITY)",
-            "step2": "2. Species Triptych",
-            "step3": "3. Class Triptych"
-        },
-        "detailedGuide": {
-            "title": "📝 Detailed Filling Guide (D&D 2024)",
-            "important": "Important:",
-            "importantText": "Ability score bonuses are now assigned by <strong>Background</strong>, not by Species! It's in the Background triptych that you'll note your final characteristics.",
-            "backgroundPriority": {
-                "title": "📜 1. Background Triptych (PRIORITY)",
-                "characteristics": {
-                    "title": "1. Ability Score Bonuses (NEW 2024)",
-                    "important": "This is WHERE you note your final characteristics!",
-                    "rules": {
-                        "rule1": "• Roll 4d6 (keep the 3 best) with the roller above",
-                        "rule2": "• Add background bonuses (+2 to one ability, +1 to another)",
-                        "rule3": "• Note the final total and modifier (e.g.: 16 = +3)",
-                        "rule4": "• <em>Species no longer have fixed ability score bonuses</em>"
-                    }
-                },
-                "skills": {
-                    "title": "2. Skills and proficiencies (all sources)",
-                    "important": "Background Triptych = CENTRALIZATION of all skills!",
-                    "list": {
-                        "item1": "• The 2 background skills",
-                        "item2": "• Class skills (carried over from Class triptych)",
-                        "item3": "• Racial skills (carried over from Species triptych)",
-                        "item4": "• Specific tool proficiencies",
-                        "item5": "• Unique background feature (e.g.: Magic Initiate)"
-                    }
-                },
-                "equipment": {
-                    "title": "3. Equipment and Personality",
-                    "list": {
-                        "item1": "• Starting equipment cards provided with the triptych",
-                        "item2": "• Fill in personality traits (Bonds, Ideals, Flaws, Traits)",
-                        "item3": "• Develop your narrative background"
-                    }
-                }
-            },
-            "speciesGuide": {
-                "title": "🧝 2. Species Triptych",
-                "traits": {
-                    "title": "1. Languages and racial traits",
-                    "languages": "<strong>Languages:</strong> This is WHERE you note the languages!",
-                    "list": {
-                        "item1": "• Common language + racial language (e.g.: Celestial, Draconic)",
-                        "item2": "• One third language of your choice",
-                        "item3": "• Check damage resistances",
-                        "item4": "• Note special senses (darkvision, etc.)"
-                    }
-                },
-                "abilities": {
-                    "title": "2. Species abilities and spells",
-                    "list": {
-                        "item1": "• Detail racial spells (level, uses/rest)",
-                        "item2": "• Note unique hereditary abilities",
-                        "item3": "• Check immunities and special resistances",
-                        "item4": "• Size, movement speed, lifespan"
-                    }
-                },
-                "note": "📝 <strong>Important note:</strong> Species skills and proficiencies must be carried over to the Background triptych!",
-                "training": {
-                    "title": "3. \"Training\" fields (empty at start)",
-                    "important": "<strong>Important:</strong> These 5 fields are for IN-GAME acquisitions",
-                    "list": {
-                        "item1": "• New languages learned during adventure",
-                        "item2": "• Acquired tool proficiencies",
-                        "item3": "• Special skills gained",
-                        "item4": "• Only fill them if your character learns something"
-                    }
-                }
-            },
-            "classGuide": {
-                "title": "⚔️ 3. Class Triptych",
-                "combat": {
-                    "title": "1. Vital statistics and combat",
-                    "list": {
-                        "item1": "• <strong>Hit points:</strong> Maximum, current, temporary",
-                        "item2": "• <strong>Armor class:</strong> With and without shield",
-                        "item3": "• <strong>Initiative:</strong> Modifier and roll result",
-                        "item4": "• <strong>Death saving throws:</strong> Track successes/failures",
-                        "item5": "• Current level and proficiency bonus"
-                    }
-                },
-                "skills": {
-                    "title": "2. Class skills and proficiencies",
-                    "list": {
-                        "item1": "• Check mastered class skills",
-                        "item2": "• Note weapon and armor proficiencies",
-                        "item3": "• Mastered saving throws"
-                    }
-                },
-                "note": "📝 <strong>Important note:</strong> Class skills and proficiencies must be carried over to the Background triptych!",
-                "abilities": {
-                    "title": "3. Abilities and resources",
-                    "list": {
-                        "item1": "• Abilities gained per level (check as you progress)",
-                        "item2": "• Class resources (Rage, Inspiration, Spell slots...)",
-                        "item3": "• Specific subclass abilities"
-                    }
-                }
-            },
-            "order": {
-                "title": "📋 Recommended Filling Order",
-                "step1": {
-                    "title": "1️⃣ START",
-                    "text": "<strong>Background FIRST:</strong> Roll dice and note characteristics with background bonuses"
-                },
-                "step2": {
-                    "title": "2️⃣ SPECIES",
-                    "text": "<strong>Species:</strong> Racial traits, languages, abilities. <em>Carry over skills to Background</em>"
-                },
-                "step3": {
-                    "title": "3️⃣ CLASS",
-                    "text": "<strong>Class:</strong> HP, abilities, resources. <em>Carry over skills to Background</em>"
-                },
-                "step4": {
-                    "title": "4️⃣ FINALIZATION",
-                    "text": "<strong>Background FINAL:</strong> Centralize all skills and proficiencies from the 3 triptychs"
-                }
-            },
-            "tips": {
-                "title": "💡 Filling Tips",
-                "tip1": {
-                    "title": "✏️",
-                    "text": "<strong>Pencil required:</strong> Values evolve constantly"
-                },
-                "tip2": {
-                    "title": "📱",
-                    "text": "<strong>Backup photo:</strong> Secure your filled triptychs"
-                },
-                "tip3": {
-                    "title": "🗂️",
-                    "text": "<strong>Organization:</strong> Background on left (stats), Species in center, Class on right"
-                },
-                "tip4": {
-                    "title": "🎯",
-                    "text": "<strong>2024 Memo:</strong> Ability bonuses now come from BACKGROUND!"
-                }
-            }
-        },
-        "customTriptychs": {
-            "title": "✨ Custom Triptychs",
-            "description": "Want a triptych totally adapted to your unique character? We create custom triptychs with your specific choices!",
-            "standard": {
-                "title": "🎯 Standard Triptychs",
-                "list": {
-                    "item1": "• Random equipment cards included",
-                    "item2": "• Standard choices for variable options",
-                    "item3": "• Fast shipping from our stock",
-                    "item4": "• Catalog prices from the shop"
-                }
-            },
-            "custom": {
-                "title": "⭐ Custom Triptychs",
-                "list": {
-                    "item1": "• Precise choice of all equipment",
-                    "item2": "• Manual selection of included cards",
-                    "item3": "• Adaptation to your specific background",
-                    "item4": "• Made to order (additional delay)"
-                }
-            },
-            "contact": {
-                "title": "📧 How to Order",
-                "description": "For a fully personalized triptych, contact us by email with your character details:",
-                "email": "commande@geekndragon.com",
-                "subject": "Custom Triptych",
-                "subjectLabel": "Subject: \"Custom Triptych\"",
-                "tip": "💡 <strong>Tip:</strong> Specify your class, species, background and equipment preferences in your email"
-            },
-            "usage": {
-                "title": "How to use your triptychs",
-                "description": "Your 3 independent cardboard triptychs are designed to be placed in front of you on your gaming table",
-                "step1": {
-                    "title": "📄 3 independent cardboard pages",
-                    "text": "Each triptych is a <strong>sturdy double-sided cardboard page</strong>. No need to fold: these are 3 independent and complementary sheets."
-                },
-                "step2": {
-                    "title": "🎯 Place in front of you",
-                    "text": "Arrange your 3 triptychs in front of you: Species on the left, Class in the center, Background on the right. Instant access to all your abilities from level 1 to 20."
-                },
-                "step3": {
-                    "title": "⚡ Consult during play",
-                    "text": "No need to open manuals! All your abilities are visible at a glance. The DM and other players stay focused on the action."
-                },
-                "proTip": {
-                    "title": "💡 Pro Tip",
-                    "text": "Keep your triptychs open throughout the session. They effectively replace the traditional character sheet and significantly speed up gameplay!",
-                    "writingAdvice": {
-                        "title": "✏️ Writing & Erasing Tips",
-                        "triptychs": {
-                            "title": "For Triptychs:",
-                            "text": "<strong>Sharpie permanent markers + Staedtler eraser</strong> = perfect combination! You can completely erase the marker on triptychs, even on colored areas. Don't hesitate to erase vigorously, the cardboard resists perfectly."
-                        },
-                        "cards": {
-                            "title": "For Cards:",
-                            "text": "The technique also works on cards, but <strong>limit erasing to white areas</strong> ideally as they are thinner. Cards should be personalized for each character for an optimal experience!"
-                        }
-                    }
-                }
-            }
-        },
-        "writingTips": {
+        "proTip": {
+          "title": "💡 Pro Tip",
+          "text": "Keep your triptychs open throughout the session. They effectively replace the traditional character sheet and significantly speed up gameplay!",
+          "writingAdvice": {
             "title": "✏️ Writing & Erasing Tips",
-            "description": "For optimal use of your triptychs:",
-            "list": {
-                "item1": "• <strong>Pencil only:</strong> Values change often during adventures",
-                "item2": "• <strong>Quality eraser:</strong> For modifications without traces",
-                "item3": "• <strong>Light pressure:</strong> Avoid marking the cardboard deeply",
-                "item4": "• <strong>Regular backup:</strong> Take a photo of your filled triptychs"
+            "triptychs": {
+              "title": "For Triptychs:",
+              "text": "<strong>Sharpie permanent markers + Staedtler eraser</strong> = perfect combination! You can completely erase the marker on triptychs, even on colored areas. Don't hesitate to erase vigorously, the cardboard resists perfectly."
             },
-            "recommended": "Recommended pencil: Staedtler HB or 2H for precise and erasable lines."
-        },
-        "backToMain": "🔝 Back to main menu",
-        "cards": {
-            "mainTitle": "🃏 Geek & Dragon Playing Cards Guide",
-            "intro": "<strong class=\"text-indigo-300\">560 illustrated equipment cards</strong> covering weapons, armor and equipment. Each card <strong class=\"text-purple-300\">visually</strong> presents all necessary statistics. <strong class=\"text-green-400\">No more tedious manual reading</strong> during games! <span class=\"text-amber-300 text-sm italic block mt-2\">✨ Complete class spell cards coming soon, our goblins are working diligently in their enchanted monasteries...</span>",
-            "faqSubtitle": "Card FAQ",
-            "mainDescription": "Complete your triptychs with our detailed cards: Weapons, Armor, Equipment, Spells, Monsters and much more! Each card contains all the information needed to speed up your games.",
-            "title": "Equipment Cards",
-            "types": {
-                "equipment": {
-                    "title": "Equipment Cards",
-                    "weapons": "<strong>Weapons:</strong> Complete statistics, special properties",
-                    "armor": "<strong>Armor:</strong> AC, weight, class restrictions",
-                    "equipment": "<strong>Equipment:</strong> Adventure items and tools",
-                    "magicItems": "<strong>Magic items:</strong> Powers and curses <span class=\"text-amber-300 text-xs italic\">(being created by our goblins in our forges...)</span>"
-                },
-                "rules": {
-                    "title": "Rules Cards",
-                    "special": "<strong>Special rules:</strong> Diseases, item crafting",
-                    "services": "<strong>Services:</strong> Merchants, craftsmen, guides",
-                    "vehicles": "<strong>Vehicles:</strong> Mounts, ships, vehicles",
-                    "poisons": "<strong>Poisons:</strong> Effects and antidotes"
-                },
-                "gameplay": {
-                    "title": "Gameplay Cards",
-                    "spells": "<strong>Spells:</strong> Complete descriptions, components",
-                    "monsters": "<strong>Monsters:</strong> Statistics, tactics, loot",
-                    "packages": "<strong>Packages:</strong> Themed equipment kits",
-                    "goods": "<strong>Goods:</strong> Trade and economy"
-                }
-            },
-            "availability": {
-                "title": "📦 Card Availability",
-                "available": "<strong>All item cards are available</strong> in our shop! Customize your decks according to your needs and character.",
-                "comingSoon": "✨ Magic item cards coming soon, our goblins are working hard in our forges to create wonders for you!"
-            },
-            "examples": {
-                "title": "🎴 Card Examples",
-                "weapon": {
-                    "title": "Weapon Card: Flintlock Pistol",
-                    "front": "<strong>Front:</strong> Illustration, price, weight, attack bonus",
-                    "back": "<strong>Back:</strong> Detailed rules, special properties"
-                },
-                "armor": {
-                    "title": "Armor Card: Leather Armor",
-                    "front": "<strong>Front:</strong> Illustration, price, weight, base AC",
-                    "back": "<strong>Back:</strong> Modifiers, restrictions, descriptions"
-                },
-                "tip": "💡 <strong>Tip:</strong> Click on cards to see front and back!"
-            },
-            "usage": {
-                "title": "📋 How to Use Your Cards",
-                "inGame": {
-                    "title": "🎮 During the Game",
-                    "quickAccess": {
-                        "title": "1. Quick Access",
-                        "list": {
-                            "item1": "• Keep your equipment cards within reach",
-                            "item2": "• Check special properties without slowing the game",
-                            "item3": "• No need to open manuals during action"
-                        }
-                    },
-                    "dmShare": {
-                        "title": "2. Share with DM",
-                        "list": {
-                            "item1": "• Show your cards directly to the DM",
-                            "item2": "• Immediate validation of rules and effects",
-                            "item3": "• Quick clarification in case of doubt"
-                        }
-                    }
-                },
-                "organization": {
-                    "title": "🗂️ Organization",
-                    "categorySort": {
-                        "title": "1. Sort by Category",
-                        "list": {
-                            "item1": "• Separate: Weapons, Armor, Equipment, Spells",
-                            "item2": "• Use dividers or sleeves",
-                            "item3": "• Keep current cards on top"
-                        }
-                    },
-                    "visualInventory": {
-                        "title": "2. Visual Inventory",
-                        "list": {
-                            "item1": "• Spread out your current equipment cards",
-                            "item2": "• Add/remove according to your acquisitions",
-                            "item3": "• Physical inventory = character inventory"
-                        }
-                    }
-                },
-                "proTips": {
-                    "title": "⭐ Pro Tips",
-                    "rotation": "<strong>Rotation:</strong> Change your cards according to your adventures",
-                    "protection": "<strong>Protection:</strong> Use transparent card sleeves",
-                    "notes": {
-                        "main": "<strong>Notes:</strong> Annotate in pencil for temporary modifications",
-                        "tip": "Pro tip: Use Staedtler 8B or 9B pencils for optimal marking"
-                    }
-                }
-            },
-            "backToMain": "🔝 Back to main menu"
+            "cards": {
+              "title": "For Cards:",
+              "text": "The technique also works on cards, but <strong>limit erasing to white areas</strong> ideally as they are thinner. Cards should be personalized for each character for an optimal experience!"
+            }
+          }
         }
+      }
     },
-    "callToAction": {
-        "title": "Ready to revolutionize your games?",
-        "description": "Discover our complete collection: triptychs, equipment cards and metal coins. Transform your role-playing experience with our handcrafted accessories designed in Quebec.",
-        "buttons": {
-            "triptychs": "📁 Triptychs",
-            "cards": "🃏 Equipment Cards",
-            "coins": "🪙 Metal Coins",
-            "shop": "🛒 See entire shop"
+    "writingTips": {
+      "title": "✏️ Writing & Erasing Tips",
+      "description": "For optimal use of your triptychs:",
+      "list": {
+        "item1": "• <strong>Pencil only:</strong> Values change often during adventures",
+        "item2": "• <strong>Quality eraser:</strong> For modifications without traces",
+        "item3": "• <strong>Light pressure:</strong> Avoid marking the cardboard deeply",
+        "item4": "• <strong>Regular backup:</strong> Take a photo of your filled triptychs"
+      },
+      "recommended": "Recommended pencil: Staedtler HB or 2H for precise and erasable lines."
+    },
+    "backToMain": "🔝 Back to main menu",
+    "cards": {
+      "mainTitle": "🃏 Geek & Dragon Playing Cards Guide",
+      "intro": "<strong class=\"text-indigo-300\">560 illustrated equipment cards</strong> covering weapons, armor and equipment. Each card <strong class=\"text-purple-300\">visually</strong> presents all necessary statistics. <strong class=\"text-green-400\">No more tedious manual reading</strong> during games! <span class=\"text-amber-300 text-sm italic block mt-2\">✨ Complete class spell cards coming soon, our goblins are working diligently in their enchanted monasteries...</span>",
+      "faqSubtitle": "Card FAQ",
+      "mainDescription": "Complete your triptychs with our detailed cards: Weapons, Armor, Equipment, Spells, Monsters and much more! Each card contains all the information needed to speed up your games.",
+      "title": "Equipment Cards",
+      "types": {
+        "equipment": {
+          "title": "Equipment Cards",
+          "weapons": "<strong>Weapons:</strong> Complete statistics, special properties",
+          "armor": "<strong>Armor:</strong> AC, weight, class restrictions",
+          "equipment": "<strong>Equipment:</strong> Adventure items and tools",
+          "magicItems": "<strong>Magic items:</strong> Powers and curses <span class=\"text-amber-300 text-xs italic\">(being created by our goblins in our forges...)</span>"
+        },
+        "rules": {
+          "title": "Rules Cards",
+          "special": "<strong>Special rules:</strong> Diseases, item crafting",
+          "services": "<strong>Services:</strong> Merchants, craftsmen, guides",
+          "vehicles": "<strong>Vehicles:</strong> Mounts, ships, vehicles",
+          "poisons": "<strong>Poisons:</strong> Effects and antidotes"
+        },
+        "gameplay": {
+          "title": "Gameplay Cards",
+          "spells": "<strong>Spells:</strong> Complete descriptions, components",
+          "monsters": "<strong>Monsters:</strong> Statistics, tactics, loot",
+          "packages": "<strong>Packages:</strong> Themed equipment kits",
+          "goods": "<strong>Goods:</strong> Trade and economy"
+        }
+      },
+      "availability": {
+        "title": "📦 Card Availability",
+        "available": "<strong>All item cards are available</strong> in our shop! Customize your decks according to your needs and character.",
+        "comingSoon": "✨ Magic item cards coming soon, our goblins are working hard in our forges to create wonders for you!"
+      },
+      "examples": {
+        "title": "🎴 Card Examples",
+        "weapon": {
+          "title": "Weapon Card: Flintlock Pistol",
+          "front": "<strong>Front:</strong> Illustration, price, weight, attack bonus",
+          "back": "<strong>Back:</strong> Detailed rules, special properties"
+        },
+        "armor": {
+          "title": "Armor Card: Leather Armor",
+          "front": "<strong>Front:</strong> Illustration, price, weight, base AC",
+          "back": "<strong>Back:</strong> Modifiers, restrictions, descriptions"
+        },
+        "tip": "💡 <strong>Tip:</strong> Click on cards to see front and back!"
+      },
+      "usage": {
+        "title": "📋 How to Use Your Cards",
+        "inGame": {
+          "title": "🎮 During the Game",
+          "quickAccess": {
+            "title": "1. Quick Access",
+            "list": {
+              "item1": "• Keep your equipment cards within reach",
+              "item2": "• Check special properties without slowing the game",
+              "item3": "• No need to open manuals during action"
+            }
+          },
+          "dmShare": {
+            "title": "2. Share with DM",
+            "list": {
+              "item1": "• Show your cards directly to the DM",
+              "item2": "• Immediate validation of rules and effects",
+              "item3": "• Quick clarification in case of doubt"
+            }
+          }
         },
         "organization": {
-            "title": "🗂️ Organization",
-            "sortByCategory": {
-                "title": "1. Sort by Category",
-                "list": {
-                    "item1": "• Separate: Weapons, Armor, Equipment, Spells",
-                    "item2": "• Use dividers or pockets",
-                    "item3": "• Keep current cards on top"
-                }
-            },
-            "visualInventory": {
-                "title": "2. Visual Inventory",
-                "list": {
-                    "item1": "• Spread out your current equipment cards",
-                    "item2": "• Add/remove based on your acquisitions",
-                    "item3": "• Physical inventory = character inventory"
-                }
+          "title": "🗂️ Organization",
+          "categorySort": {
+            "title": "1. Sort by Category",
+            "list": {
+              "item1": "• Separate: Weapons, Armor, Equipment, Spells",
+              "item2": "• Use dividers or sleeves",
+              "item3": "• Keep current cards on top"
             }
+          },
+          "visualInventory": {
+            "title": "2. Visual Inventory",
+            "list": {
+              "item1": "• Spread out your current equipment cards",
+              "item2": "• Add/remove according to your acquisitions",
+              "item3": "• Physical inventory = character inventory"
+            }
+          }
         },
         "proTips": {
-            "title": "⭐ Pro Tips",
-            "rotation": "<strong>Rotation:</strong> Change your cards according to your adventures",
-            "protection": "<strong>Protection:</strong> Use transparent card sleeves",
-            "notes": "<strong>Notes:</strong> Annotate temporary modifications in pencil<br><em>Pro tip: Use Staedtler 8B or 9B pencils for optimal marking</em>"
+          "title": "⭐ Pro Tips",
+          "rotation": "<strong>Rotation:</strong> Change your cards according to your adventures",
+          "protection": "<strong>Protection:</strong> Use transparent card sleeves",
+          "notes": {
+            "main": "<strong>Notes:</strong> Annotate in pencil for temporary modifications",
+            "tip": "Pro tip: Use Staedtler 8B or 9B pencils for optimal marking"
+          }
         }
+      },
+      "backToMain": "🔝 Back to main menu"
     },
-    "money": {
-        "title": "💰 D&D Currency Guide",
-        "description": "Discover the D&D monetary system, our Geek & Dragon physical coins, and use our converter to easily manage your adventurer finances!",
-        "coinTypes": {
-            "title": "💎 Coin Types",
-            "platinum": {
-                "name": "    Platinum Coin (pp)",
-                "description": "    Most valuable • 1 pp = 10 gp"
-            },
-            "gold": {
-                "name": "    Gold Coin (gp)",
-                "description": "    Reference currency • 1 gp = 10 sp"
-            },
-            "silver": {
-                "name": "    Silver Coin (sp)",
-                "description": "    Common currency • 1 sp = 10 ep"
-            },
-            "electrum": {
-                "name": "    Electrum Coin (ep)",
-                "description": "    Gold-silver alloy • 1 ep = 5 cp"
-            },
-            "copper": {
-                "name": "    Copper Coin (cp)",
-                "description": "    Small change • Most common"
-            }
-        },
-        "conversionTable": {
-            "title": "🔄 Conversion Table",
-            "headers": {
-                "coin": "Coin"
-            },
-            "rows": {
-                "platinum": "Platinum (pp)",
-                "gold": "Gold (gp)",
-                "silver": "Silver (sp)",
-                "electrum": "Electrum (ep)",
-                "copper": "Copper (cp)"
-            }
-        },
-        "converter": {
-            "recommendations": {
-                "title": "Optimal recommendations"
-            },
-            "optimalLotsTitle": "Most Efficient Collection",
-            "lotsRecommendedTitle": "Multiplier Table Collections",
-            "lotsRecommendations": {
-                "description": "These collections correspond exactly to your personalized distribution defined in the editable multiplier table above. Respect your specific choices of metals and multipliers for a custom treasure.",
-                "addAllButton": "Acquire your collection",
-                "optimizationNote": "Collections adapted to your personalized distribution for a custom treasure",
-                "noLotsMessage": "No collection available.",
-                "noLotsSubMessage": "Modify your treasure to discover new options",
-                "promptMessage": "Define your treasure in the converter",
-                "promptSubMessage": "to discover your personalized collections"
-            },
-            "optimalLots": {
-                "description": "Master forgers recommend this selection to obtain your treasure with the minimal number of coins. Optimize your chest space and simplify your counts during commercial exchanges.",
-                "addAllButton": "Acquire the efficient collection",
-                "optimizationNote": "Solution recommended by experts to minimize your treasure management",
-                "noLotsMessage": "No optimal solution available.",
-                "noLotsSubMessage": "Adjust your treasure to explore other configurations",
-                "promptMessage": "Configure your treasure in the converter",
-                "promptSubMessage": "to discover the most efficient collections"
-            },
-            "abbreviations": {
-                "copper": "cp",
-                "silver": "sp",
-                "electrum": "ep",
-                "gold": "gp",
-                "platinum": "pp"
-            },
-            "debugSection": {
-                "title": "Debug section to validate metaheuristic algorithms for conversion and lot recommendations."
-            },
-            "labels": {
-                "copper": "🪙 Copper",
-                "silver": "🥈 Silver",
-                "electrum": "⚡ Electrum",
-                "gold": "🥇 Gold",
-                "platinum": "💎 Platinum"
-            },
-            "multiplierTable": {
-                "copper": "🪙 Copper",
-                "silver": "🥈 Silver",
-                "electrum": "⚡ Electrum",
-                "gold": "🥇 Gold",
-                "platinum": "💎 Platinum"
-            },
-            "lotsRecommendedTitle": "🛍️ Recommended coin lots",
-            "productSummary": "D&D coin lot",
-            "coinDescription": {
-                "faithfulReproduction": "Our metal coins faithfully reproduce the D&D monetary system. Each type of coin has its own design and unique finish."
-            }
-        },
-        "physicalTreasure": {
-            "title": "🏆 A Tangible Treasure",
-            "paragraph1": "In Dungeons & Dragons, the <strong class=\"text-amber-400\">two main objectives</strong> are experience and treasure. Having to write treasure on paper then erase it doesn't do it justice. Treasure deserves to be <strong class=\"text-yellow-400\">tangible, weighed, handled</strong>.",
-            "paragraph2": "Our physical coins transform each reward into a memorable moment. When the DM makes <em class=\"text-amber-300\">gold coins tinkle</em> in their hand before distributing them, the entire immersion intensifies.",
-            "property": "📋 Property System",
-            "sheetInstructions": "Use our <strong>money sheet</strong> to catalog your treasures. Write your name, count your coins, sign and give to the DM. At the end of the campaign, easily recover your investment!"
-        },
-        "physicalCoins": {
-            "title": "🪙 Geek & Dragon Physical Coins",
-            "system": {
-                "title": "💰 The D&D Monetary System",
-                "paragraph1": "In D&D, currency uses <strong class=\"text-amber-300\">5 different metals</strong>: copper (cp), silver (sp), electrum (ep), gold (gp), and platinum (pp). Base conversions are: 10 cp = 1 sp, 2 sp = 1 ep, 5 sp = 1 gp, and 10 gp = 1 pp.",
-                "paragraph2": "Our physical coins add an immersive dimension: unit coins have a <strong class=\"text-yellow-200\">shiny finish</strong>, while <strong class=\"text-yellow-300\">engraved multipliers</strong> (×10, ×100, ×1000, ×10000) feature a distinctive matte finish. A gold coin ×100 is worth 100 gp — perfect for managing large treasures without handling hundreds of coins!"
-            },
-            "weight": {
-                "title": "⚖️ Authentic Weights",
-                "paragraph": "According to official D&D rules, <strong class=\"text-amber-300\">50 coins = 500g/1 lb</strong>. Our multipliers faithfully represent these values and their weight for total immersion:"
-            },
-            "weightTable": {
-                "title": "📊 Weight table by multiplier",
-                "note": "Feel the growing weight of treasure in your hands!",
-                "notice": "📌 These multipliers apply to <strong>any metal</strong> (copper, silver, electrum, gold, platinum)"
-            },
-            "example": {
-                "title": "💡 Concrete example with gold: 1,500 gp treasure",
-                "text": "Rather than stacking <strong class=\"text-red-400\">1,500 unit coins</strong> (15 kg / 33 lb), use:",
-                "item1": "<strong class=\"text-yellow-400\">1 gold coin ×1000</strong> → 1000 gp (10 kg / 22 lb)",
-                "item2": "<strong class=\"text-yellow-300\">5 gold coins ×100</strong> → 500 gp (5 kg / 11 lb)",
-                "result": "<strong class=\"text-green-400\">Result: 6 physical coins</strong> instead of 1,500!"
-            },
-            "authentic": {
-                "title": "✨ Authentic Coins",
-                "feature1": "• <strong>Real metal</strong> with specific finishes",
-                "feature2": "• <strong>Detailed engravings</strong> inspired by the D&D universe",
-                "feature3": "• <strong>Authentic weight</strong> for immersive experience",
-                "feature4": "• <strong>Complete sets</strong> or individual coins"
-            },
-            "uses": {
-                "feature5": "• <strong>Tactile management</strong> of your treasure"
-            },
-            "gameUse": {
-                "title": "🎯 In-Game Use",
-                "feature1": "• <strong>Physical rewards</strong> for players",
-                "feature2": "• <strong>Total immersion</strong> during transactions",
-                "feature3": "• <strong>Enhanced medieval-fantasy</strong> atmosphere"
-            },
-            "order": {
-                "title": "💰 Order your Coins",
-                "description": "Discover our complete collection of metal coins and bring your game economy to life!",
-                "shopButton": "🛒 See Coins in Shop",
-                "treasuryButton": "⭐ Complete Treasury Set"
-            }
-        },
-        "tests": {
-            "title": "🔬 Conversion System Tests",
-            "results": "Test Results",
-            "runningBasic": "Running basic tests...",
-            "runningAdvanced": "Running advanced tests...",
-            "noTests": "No tests executed...",
-            "error": "❌ Error during test execution",
-            "notAvailable": "❌ CurrencyConverterTests not available",
-            "basic": "Basic Tests",
-            "advanced": "Advanced Tests",
-            "basicButton": "🧪 Basic Tests",
-            "advancedButton": "🔬 Advanced Tests",
-            "successText": "tests passed",
-            "errorLabel": "Error",
-            "performance": "Performance",
-            "totalTime": "Total time"
-        },
-        "download": {
-            "title": "Download the Money Sheet",
-            "subtitle": "Printable sheet",
-            "button": "📥 Download",
-            "buttonShort": "📥 Download",
-            "downloadSheet": "📥 Download sheet",
-            "instruction": "Click on the image to download the printable sheet",
-            "printTip": "💡 Printing tip:",
-            "description": "Download the money sheet image to print it at home",
-            "instructions": "Print on cardstock paper (200-250g) for better results. You can laminate the sheet for repeated use.",
-            "confirmButton": "📥 Download",
-            "cancelButton": "Cancel"
-        },
-        "backToMain": "🔝 Back to main menu"
-    },
-    "backToTop": "Back to the main grimoire",
-    "products": {
-        "coin-custom-single": {
-            "name": "Custom Coin",
-            "description": "### Single coin of your choice\r\n\r\nSelect **the metal** (copper, silver, electrum, gold, platinum) and **multiplier** (unit, ×10, ×100, ×1000, ×10000) to create your custom coin.\r\n\r\n**Contents:**\r\n- 1 customizable metal coin\r\n- Metal choice: copper, silver, electrum, gold, platinum\r\n- Multiplier choice: ×1, ×10, ×100, ×1000, ×10000\r\n- Finish according to chosen multiplier\r\n\r\n*Perfect for completing a collection or replacing a lost coin.*",
-            "summary": "Customizable metal coin with choice of metal and multiplier.",
-            "metals": [
-                "copper",
-                "silver",
-                "electrum",
-                "gold",
-                "platinum"
-            ]
-        },
-        "coin-trio-customizable": {
-            "name": "Trio of Coins",
-            "description": "### Three customizable coins\r\n\r\n**3 metal coins** of your choice with customizable metal and multiplier. Perfect for completing a collection or creating a small custom treasure.\r\n\r\n**Contents:**\r\n- 3 coins with choice of metal and multiplier\r\n\r\n*Perfect for starting or completing your coin collection!*",
-            "summary": "Set of three customizable coins with choice of metal and single multiplier.",
-            "metals": [
-                "copper",
-                "silver",
-                "electrum",
-                "gold",
-                "platinum"
-            ]
-        },
-        "coin-quintessence-metals": {
-            "name": "Metal Quintessence",
-            "description": "### Five metals, one multiplier\r\n\r\n**5 coins of different metals** applying the same chosen multiplier: one of each metal (copper, silver, electrum, gold, platinum) with uniform finish.\r\n\r\n**Contents:**\r\n- 1 copper coin\r\n- 1 silver coin\r\n- 1 electrum coin\r\n- 1 gold coin\r\n- 1 platinum coin\r\n\r\n*Discover the diversity of metals with consistent value!*",
-            "summary": "Collection of five coins with one of each metal and uniform multiplier."
-        },
-        "coin-septuple-free": {
-            "name": "Free Septuple",
-            "description": "### Seven fully customizable coins\r\n\r\n**7 metal coins** with free choice of metal and multiplier for each coin. Create your own assortment according to your precise needs.\r\n\r\n**Contents:**\r\n- 7 customizable metal coins\r\n- Each coin: metal AND multiplier choice\r\n- Available metals: copper, silver, electrum, gold, platinum\r\n- Multipliers: ×1, ×10, ×100, ×1000, ×10000\r\n\r\n*Compose your exact treasure according to your game needs!*",
-            "summary": "Set of seven coins with free choice of metal and multiplier for each coin.",
-            "metals": [
-                "copper",
-                "silver",
-                "electrum",
-                "gold",
-                "platinum"
-            ]
-        },
-        "coin-traveler-offering": {
-            "name": "The Traveler Offering",
-            "description": "### Immersive starter hoard\r\n\r\n**10 metal coins** : **2 of each metal** (copper, silver, electrum, gold, platinum). Choose **one multiplier** for the whole set.\r\n\r\n**Contents:**\r\n- 2 copper coins\r\n- 2 silver coins\r\n- 2 electrum coins\r\n- 2 gold coins\r\n- 2 platinum coins\r\n- Single multiplier choice: ×1, ×10, ×100, ×1000, ×10000\r\n- Finish: unit (shiny) or engraved (slightly matte)\r\n\r\n*Use multipliers to speed up counting without breaking immersion.*",
-            "summary": "Set of 10 assorted metal coins with a single multiplier to speed up tallying."
-        },
-        "coin-five-realms-complete": {
-            "name": "Currency of the Five Realms",
-            "description": "### 25 coins, no duplicates\r\n\r\n**5 metals × 5 multipliers** = **25 unique designs**. Each metal comes in unit (shiny) and with engraved multipliers (matte finish).\r\n\r\n**Contents:**\r\n- 5 copper coins: ×1, ×10, ×100, ×1000, ×10000\r\n- 5 silver coins: ×1, ×10, ×100, ×1000, ×10000\r\n- 5 electrum coins: ×1, ×10, ×100, ×1000, ×10000\r\n- 5 gold coins: ×1, ×10, ×100, ×1000, ×10000\r\n- 5 platinum coins: ×1, ×10, ×100, ×1000, ×10000\r\n\r\n**Everything included** — no selection needed.\r\n*Use multipliers to speed up counting without breaking immersion.*",
-            "summary": "Collection of 25 unique coins covering five metals and every multiplier for the table."
-        },
-        "coin-merchant-essence-double": {
-            "name": "Essence of the Merchant",
-            "description": "### 50 coins, double the variety\r\n\r\n**2 copies** of each of the **25 designs** from the *Currency of the Five Realms* — total **50 coins**.\r\n\r\n**Contents:**\r\n- 10 copper coins: 2×(×1, ×10, ×100, ×1000, ×10000)\r\n- 10 silver coins: 2×(×1, ×10, ×100, ×1000, ×10000)\r\n- 10 electrum coins: 2×(×1, ×10, ×100, ×1000, ×10000)\r\n- 10 gold coins: 2×(×1, ×10, ×100, ×1000, ×10000)\r\n- 10 platinum coins: 2×(×1, ×10, ×100, ×1000, ×10000)\r\n- Finish: unit (shiny) and engraved (matte)\r\n\r\n**Everything included** — no selection needed.\r\n*Use multipliers to speed up counting without breaking immersion.*",
-            "summary": "Two copies of every design for 50 ready-to-play coins including every multiplier."
-        },
-        "coin-lord-treasury-uniform": {
-            "name": "The Lord's Treasury",
-            "description": "### 50 coins for opulence\r\n\r\n**10 coins of each metal** (copper, silver, electrum, gold, platinum) using the **same multiplier** selected at checkout.\r\n\r\n**Contents:**\r\n- 10 copper coins (same multiplier)\r\n- 10 silver coins (same multiplier)\r\n- 10 electrum coins (same multiplier)\r\n- 10 gold coins (same multiplier)\r\n- 10 platinum coins (same multiplier)\r\n- Multiplier choice: ×1, ×10, ×100, ×1000, ×10000\r\n- Finish: unit (shiny) or engraved (matte)\r\n\r\n*Use multipliers to speed up counting without breaking immersion.*",
-            "summary": "Selection of 50 coins sharing one multiplier to deliver a plentiful, consistent treasury."
-        },
-        "cards-random-discovery-10": {
-            "name": "10 Random Cards",
-            "description": "### Random discovery - 10 cards\r\n\r\nMystery selection of **10 equipment cards** drawn from our complete catalog. Perfect for discovering new items or enriching your collection with surprises!\r\n\r\n**Contents:**\r\n- 10 random equipment cards\r\n- Possible mix: weapons, armor, tools, special items\r\n- High-quality illustrated cards\r\n- Compatible with D&D 5e and similar systems\r\n\r\n*Adventure begins with the surprise of the unknown!*",
-            "summary": "Mystery selection of 10 equipment cards to discover new items."
-        },
-        "cards-weapons-armor-60": {
-            "name": "Weapons & Armor",
-            "description": "### Complete combat arsenal - 60 cards\\n\\nEssential collection of **60 cards** to arm your fighters: complete arsenal of melee and ranged weapons, light to heavy protection, and shields.\\n\\n**Contents:**\\n- **44 weapons** : melee, ranged, exotic, modern and futuristic firearms\\n- **14 armor** : light, medium, heavy\\n- **2 shields** : metal and wood\\n\\n*Everything needed to outfit warriors, adventurers and soldiers!*",
-            "summary": "Collection of 60 weapon and armor cards to equip fighters and adventurers."
-        },
-        "cards-adventure-packs-70": {
-            "name": "Adventure Packs",
-            "description": "### Equipment by background - 70 cards\\n\\nComplete collection of **70 cards** grouping all starting equipment according to D&D 5e backgrounds. Perfect for quickly creating characters or distributing thematic gear.\\n\\n**Contents:**\\n- **Artist's pack** : instruments and creative materials\\n- **Ecclesiastic's pack** : religious and sacred objects\\n- **Explorer's pack** : survival and navigation\\n- **Dungeoneering pack** : spelunking and dungeon gear\\n- **Scholar's pack** : books and study tools\\n- **Burglar's pack** : lockpicking and infiltration\\n- **Diplomat's pack** : negotiation and social relations\\n\\n*Instantly customize based on your heroes' origins!*",
-            "summary": "Collection of 70 equipment cards organized by D&D background packs."
-        },
-        "cards-explosives-tools-60": {
-            "name": "Explosives & Tools",
-            "description": "### Specialized arsenal - 60 cards\\n\\nTechnical collection of **60 cards** for advanced campaigns: explosives, futuristic weapons and artisan tools.\\n\\n**Contents:**\\n- **21 explosives** : bombs, grenades, dynamite, modern and futuristic charges\\n- **37 tools** : crafting, alchemy, lockpicking, navigation\\n- **2 rule cards** : explosion and crafting mechanics\\n\\n*For adventurers who love creative solutions!*",
-            "summary": "Collection of 60 explosive and specialized tool cards for technical campaigns."
-        },
-        "cards-services-vehicles-85": {
-            "name": "Services & Vehicles",
-            "description": "### Travel and logistics - 85 cards\\n\\nComplete collection of **85 cards** to organize travels and missions: inn services, transport, and all types of vehicles.\\n\\n**Contents:**\\n- **55 services** : inns, care, lifestyles, mercenaries, guides\\n- **27 vehicles** : mounts, land, sea, air\\n- **3 rule cards** : travel and logistics mechanics\\n\\n*Everything to travel and organize in campaigns!*",
-            "summary": "Collection of 85 service and vehicle cards to organize travels and missions."
-        },
-        "cards-loot-engineering-170": {
-            "name": "Loot & Engineering",
-            "description": "### Loot • Trade Goods • Tools - 170 cards\\n\\nFor campaigns that push the envelope: varied treasures, commercial goods, and every crafter's staple.\\n\\n**Contents:**\\n- **104 loot items** : treasures, gems, artifacts, precious objects\\n- **27 trade goods** : commercial goods, raw materials\\n- **37 tools** : crafting, lockpicking, alchemy, navigation\\n- **2 rule cards** : trade and crafting mechanics\\n\\n*Add variety and tactical choices — from market bartering to treasure discoveries!*",
-            "summary": "Collection of 170 loot, trade goods, and tool cards to enrich your campaigns."
-        },
-        "cards-roads-services-165": {
-            "name": "Roads & Services",
-            "description": "### Packs • Services • Vehicles • Poisons - 165 cards\\n\\nEverything to set your world in motion: ready your PCs, travel, bargain, and take risks with clean, table-friendly cards.\\n\\n**Contents:**\\n- **65 packs** : 7 types according to D&D backgrounds\\n- **55 services** : inns, care, lifestyles, mercenaries\\n- **27 vehicles** : mounts, land, sea, air\\n- **14 poisons** : dangerous and toxic substances\\n- **4 rule cards** : travel, services, and poison mechanics\\n\\n*Perfect for exploration-, travel- and intrigue-heavy campaigns!*",
-            "summary": "Complete selection of 165 cards focused on travel, services, vehicles, and poisons."
-        },
-        "cards-adventurer-arsenal-190": {
-            "name": "Adventurer's Arsenal",
-            "description": "### Weapons • Armor • Equipment - 190 cards\\n\\nMassive, ready-to-play bundle to outfit an entire party: classic and exotic weapons, protection for every build, and all the adventuring essentials as illustrated cards.\\n\\n**Contents:**\\n- **44 weapons** : melee, ranged, exotic, modern firearms\\n- **14 armor** : light, medium, heavy, shields\\n- **127 equipment** : adventure tools, survival, crafting\\n- **5 rule cards** : master equipment and mechanics\\n\\n*Perfect at the table: draw, place, trade — no more digging through the rulebook!*",
-            "summary": "Massive box of 190 illustrated cards to instantly outfit an entire party of adventurers."
-        },
-        "triptych-mystery-hero": {
-            "name": "Mystery Triptychs",
-            "description": "### Three triptychs, a plug-and-play hero\r\n\r\nDraw at random **1 Class**, **1 Species** and **1 Background** to forge a unique origin, then play right away with:\r\n\r\n**Included:**\r\n- 1 random Class triptych\r\n- 1 random Species triptych\r\n- 1 random Background triptych\r\n\r\n*No more digging through the rulebook.*",
-            "summary": "Bundle of random triptychs to build a complete hero with matching gear and starting coins."
-        },
-        "triptych-species-collection": {
-            "name": "Species Triptychs",
-            "description": "### Complete collection of species triptychs\r\n\r\nDiscover all playable D&D 5e species with detailed and illustrated triptychs. Each triptych presents the characteristics, special abilities, and cultural traits of the species.\r\n\r\n**Contents:**\r\n- Triptychs of all official species\r\n- Detailed characteristics\r\n- Illustrated special abilities\r\n\r\n*Perfect for creating varied characters or enriching your campaigns!*",
-            "summary": "Collection of triptychs featuring all playable species with their characteristics and abilities."
-        },
-        "triptych-class-collection": {
-            "name": "Class Triptychs",
-            "description": "### Complete collection of class triptychs\r\n\r\nExplore all D&D 5e classes and subclasses with complete triptychs. Each triptych details class abilities, spells, and progressions with visual examples.\r\n\r\n**Contents:**\r\n- Triptychs of all official classes\r\n- Subclasses and archetypes\r\n- Detailed progressions and abilities\r\n\r\n*Ideal for understanding class mechanics or preparing NPCs!*",
-            "summary": "Collection of triptychs covering all classes and subclasses with their abilities and progressions."
-        },
-        "triptych-background-collection": {
-            "name": "Background Triptychs",
-            "description": "### Complete collection of background triptychs\r\n\r\nEnrich your characters with all available D&D 5e backgrounds. Each triptych presents the origin, skills, equipment, and contacts of the background.\r\n\r\n**Contents:**\r\n- Triptychs of all official backgrounds\r\n- Detailed skills and equipment\r\n- Contacts and social relations\r\n\r\n*Perfect for adding depth to your characters!*",
-            "summary": "Collection of triptychs featuring all backgrounds with their skills and equipment."
-        },
-        "test-produit-1": {
-            "nom": "Magic Item",
-            "details": "Detailed English description",
-            "type": [
-                "Artifact",
-                "Relic"
-            ],
-            "couleurs": [
-                "Red",
-                "Blue",
-                "Green"
-            ]
-        },
-        "test-produit-2": {
-            "nom": "Ancient Grimoire",
-            "details": "Ancient spellbook",
-            "type": [
-                "Manual",
-                "Guide"
-            ],
-            "couleurs": [
-                "Black",
-                "Gold"
-            ]
-        },
-        "test-produit-3": {
-            "nom": "Enchanted Sword",
-            "details": "Blade forged by elves",
-            "type": [
-                "Sword",
-                "Blade"
-            ],
-            "couleurs": [
-                "Silver",
-                "Shining"
-            ]
-        },
-        "livre-1": {
-            "titre": "Complete Guide",
-            "resume": "Essential book for beginners",
-            "specifications": [
-                "Hardcover",
-                "300 pages",
-                "A5 format"
-            ],
-            "tags": [
-                "Fantasy",
-                "Adventure",
-                "Guide"
-            ]
-        },
-        "accessoire-2": {
-            "titre": "Enchanted Dice",
-            "resume": "Magical dice set",
-            "specifications": [
-                "Metal",
-                "Runic engravings",
-                "Set of 7"
-            ],
-            "tags": [
-                "Precision",
-                "Magic",
-                "Mystical"
-            ]
-        }
+    "abilityScoreRoller": {
+      "skillCalc": {
+        "title": "🧮 Skill Calculation",
+        "formula": "Bonus = Modifier + Proficiency",
+        "notProficient": "<strong>Not Proficient:</strong> Modifier only",
+        "proficient": "<strong>Proficient:</strong> Mod + Bonus",
+        "expertise": "<strong>Expertise:</strong> Mod + (Bonus×2)",
+        "proficiencyBonus": "<strong>Proficiency bonus:</strong> Lvl 1-4:+2 • 5-8:+3 • 9-12:+4 • 13-16:+5 • 17-20:+6",
+        "exampleTitle": "💡 Example (Dex 16, Lvl 5)",
+        "exampleStats": "Score <strong>16</strong> → Mod <strong>+3</strong> • Proficiency bonus <strong>+3</strong>",
+        "exampleAcrobatics": "<strong>Acrobatics</strong> : +3 = <strong class=\"text-yellow-300\">+3</strong>",
+        "exampleStealth": "<strong>Stealth</strong> : +3+3 = <strong class=\"text-yellow-300\">+6</strong>",
+        "exampleSleight": "<strong>Sleight of Hand</strong> : +3+3+3 = <strong class=\"text-yellow-300\">+9</strong>",
+        "exampleNote": "→ These bonuses go on the Background triptych",
+        "importantNote": "<strong>Important:</strong> Add +2 and +1 (Background bonuses) to abilities."
+      },
+      "dnd2024Rules": "<strong>D&D 2024:</strong> Roll 4d6, keep the 3 best. Result: <strong class=\"text-yellow-300\">Score (Modifier)</strong>"
     }
+  },
+  "callToAction": {
+    "title": "Ready to revolutionize your games?",
+    "description": "Discover our complete collection: triptychs, equipment cards and metal coins. Transform your role-playing experience with our handcrafted accessories designed in Quebec.",
+    "buttons": {
+      "triptychs": "📁 Triptychs",
+      "cards": "🃏 Equipment Cards",
+      "coins": "🪙 Metal Coins",
+      "shop": "🛒 See entire shop"
+    },
+    "organization": {
+      "title": "🗂️ Organization",
+      "sortByCategory": {
+        "title": "1. Sort by Category",
+        "list": {
+          "item1": "• Separate: Weapons, Armor, Equipment, Spells",
+          "item2": "• Use dividers or pockets",
+          "item3": "• Keep current cards on top"
+        }
+      },
+      "visualInventory": {
+        "title": "2. Visual Inventory",
+        "list": {
+          "item1": "• Spread out your current equipment cards",
+          "item2": "• Add/remove based on your acquisitions",
+          "item3": "• Physical inventory = character inventory"
+        }
+      }
+    },
+    "proTips": {
+      "title": "⭐ Pro Tips",
+      "rotation": "<strong>Rotation:</strong> Change your cards according to your adventures",
+      "protection": "<strong>Protection:</strong> Use transparent card sleeves",
+      "notes": "<strong>Notes:</strong> Annotate temporary modifications in pencil<br><em>Pro tip: Use Staedtler 8B or 9B pencils for optimal marking</em>"
+    }
+  },
+  "money": {
+    "title": "💰 D&D Currency Guide",
+    "description": "Discover the D&D monetary system, our Geek & Dragon physical coins, and use our converter to easily manage your adventurer finances!",
+    "coinTypes": {
+      "title": "💎 Coin Types",
+      "platinum": {
+        "name": "    Platinum Coin (pp)",
+        "description": "    Most valuable • 1 pp = 10 gp"
+      },
+      "gold": {
+        "name": "    Gold Coin (gp)",
+        "description": "    Reference currency • 1 gp = 10 sp"
+      },
+      "silver": {
+        "name": "    Silver Coin (sp)",
+        "description": "    Common currency • 1 sp = 10 ep"
+      },
+      "electrum": {
+        "name": "    Electrum Coin (ep)",
+        "description": "    Gold-silver alloy • 1 ep = 5 cp"
+      },
+      "copper": {
+        "name": "    Copper Coin (cp)",
+        "description": "    Small change • Most common"
+      }
+    },
+    "conversionTable": {
+      "title": "🔄 Conversion Table",
+      "headers": {
+        "coin": "Coin"
+      },
+      "rows": {
+        "platinum": "Platinum (pp)",
+        "gold": "Gold (gp)",
+        "silver": "Silver (sp)",
+        "electrum": "Electrum (ep)",
+        "copper": "Copper (cp)"
+      }
+    },
+    "converter": {
+      "recommendations": {
+        "title": "Optimal recommendations"
+      },
+      "optimalLotsTitle": "Most Efficient Collection",
+      "lotsRecommendedTitle": "🛍️ Recommended coin lots",
+      "lotsRecommendations": {
+        "description": "These collections correspond exactly to your personalized distribution defined in the editable multiplier table above. Respect your specific choices of metals and multipliers for a custom treasure.",
+        "addAllButton": "Acquire your collection",
+        "optimizationNote": "Collections adapted to your personalized distribution for a custom treasure",
+        "noLotsMessage": "No collection available.",
+        "noLotsSubMessage": "Modify your treasure to discover new options",
+        "promptMessage": "Define your treasure in the converter",
+        "promptSubMessage": "to discover your personalized collections"
+      },
+      "optimalLots": {
+        "description": "Master forgers recommend this selection to obtain your treasure with the minimal number of coins. Optimize your chest space and simplify your counts during commercial exchanges.",
+        "addAllButton": "Acquire the efficient collection",
+        "optimizationNote": "Solution recommended by experts to minimize your treasure management",
+        "noLotsMessage": "No optimal solution available.",
+        "noLotsSubMessage": "Adjust your treasure to explore other configurations",
+        "promptMessage": "Configure your treasure in the converter",
+        "promptSubMessage": "to discover the most efficient collections"
+      },
+      "abbreviations": {
+        "copper": "cp",
+        "silver": "sp",
+        "electrum": "ep",
+        "gold": "gp",
+        "platinum": "pp"
+      },
+      "debugSection": {
+        "title": "Debug section to validate metaheuristic algorithms for conversion and lot recommendations."
+      },
+      "labels": {
+        "copper": "🪙 Copper",
+        "silver": "🥈 Silver",
+        "electrum": "⚡ Electrum",
+        "gold": "🥇 Gold",
+        "platinum": "💎 Platinum"
+      },
+      "multiplierTable": {
+        "copper": "🪙 Copper",
+        "silver": "🥈 Silver",
+        "electrum": "⚡ Electrum",
+        "gold": "🥇 Gold",
+        "platinum": "💎 Platinum"
+      },
+      "productSummary": "D&D coin lot",
+      "coinDescription": {
+        "faithfulReproduction": "Our metal coins faithfully reproduce the D&D monetary system. Each type of coin has its own design and unique finish."
+      }
+    },
+    "physicalTreasure": {
+      "title": "🏆 A Tangible Treasure",
+      "paragraph1": "In Dungeons & Dragons, the <strong class=\"text-amber-400\">two main objectives</strong> are experience and treasure. Having to write treasure on paper then erase it doesn't do it justice. Treasure deserves to be <strong class=\"text-yellow-400\">tangible, weighed, handled</strong>.",
+      "paragraph2": "Our physical coins transform each reward into a memorable moment. When the DM makes <em class=\"text-amber-300\">gold coins tinkle</em> in their hand before distributing them, the entire immersion intensifies.",
+      "property": "📋 Property System",
+      "sheetInstructions": "Use our <strong>money sheet</strong> to catalog your treasures. Write your name, count your coins, sign and give to the DM. At the end of the campaign, easily recover your investment!"
+    },
+    "physicalCoins": {
+      "title": "🪙 Geek & Dragon Physical Coins",
+      "system": {
+        "title": "💰 The D&D Monetary System",
+        "paragraph1": "In D&D, currency uses <strong class=\"text-amber-300\">5 different metals</strong>: copper (cp), silver (sp), electrum (ep), gold (gp), and platinum (pp). Base conversions are: 10 cp = 1 sp, 2 sp = 1 ep, 5 sp = 1 gp, and 10 gp = 1 pp.",
+        "paragraph2": "Our physical coins add an immersive dimension: unit coins have a <strong class=\"text-yellow-200\">shiny finish</strong>, while <strong class=\"text-yellow-300\">engraved multipliers</strong> (×10, ×100, ×1000, ×10000) feature a distinctive matte finish. A gold coin ×100 is worth 100 gp — perfect for managing large treasures without handling hundreds of coins!"
+      },
+      "weight": {
+        "title": "⚖️ Authentic Weights",
+        "paragraph": "According to official D&D rules, <strong class=\"text-amber-300\">50 coins = 500g/1 lb</strong>. Our multipliers faithfully represent these values and their weight for total immersion:"
+      },
+      "weightTable": {
+        "title": "📊 Weight table by multiplier",
+        "note": "Feel the growing weight of treasure in your hands!",
+        "notice": "📌 These multipliers apply to <strong>any metal</strong> (copper, silver, electrum, gold, platinum)"
+      },
+      "example": {
+        "title": "💡 Concrete example with gold: 1,500 gp treasure",
+        "text": "Rather than stacking <strong class=\"text-red-400\">1,500 unit coins</strong> (15 kg / 33 lb), use:",
+        "item1": "<strong class=\"text-yellow-400\">1 gold coin ×1000</strong> → 1000 gp (10 kg / 22 lb)",
+        "item2": "<strong class=\"text-yellow-300\">5 gold coins ×100</strong> → 500 gp (5 kg / 11 lb)",
+        "result": "<strong class=\"text-green-400\">Result: 6 physical coins</strong> instead of 1,500!"
+      },
+      "authentic": {
+        "title": "✨ Authentic Coins",
+        "feature1": "• <strong>Real metal</strong> with specific finishes",
+        "feature2": "• <strong>Detailed engravings</strong> inspired by the D&D universe",
+        "feature3": "• <strong>Authentic weight</strong> for immersive experience",
+        "feature4": "• <strong>Complete sets</strong> or individual coins"
+      },
+      "uses": {
+        "feature5": "• <strong>Tactile management</strong> of your treasure"
+      },
+      "gameUse": {
+        "title": "🎯 In-Game Use",
+        "feature1": "• <strong>Physical rewards</strong> for players",
+        "feature2": "• <strong>Total immersion</strong> during transactions",
+        "feature3": "• <strong>Enhanced medieval-fantasy</strong> atmosphere"
+      },
+      "order": {
+        "title": "💰 Order your Coins",
+        "description": "Discover our complete collection of metal coins and bring your game economy to life!",
+        "shopButton": "🛒 See Coins in Shop",
+        "treasuryButton": "⭐ Complete Treasury Set"
+      }
+    },
+    "tests": {
+      "title": "🔬 Conversion System Tests",
+      "results": "Test Results",
+      "runningBasic": "Running basic tests...",
+      "runningAdvanced": "Running advanced tests...",
+      "noTests": "No tests executed...",
+      "error": "❌ Error during test execution",
+      "notAvailable": "❌ CurrencyConverterTests not available",
+      "basic": "Basic Tests",
+      "advanced": "Advanced Tests",
+      "basicButton": "🧪 Basic Tests",
+      "advancedButton": "🔬 Advanced Tests",
+      "successText": "tests passed",
+      "errorLabel": "Error",
+      "performance": "Performance",
+      "totalTime": "Total time"
+    },
+    "download": {
+      "title": "Download the Money Sheet",
+      "subtitle": "Printable sheet",
+      "button": "📥 Download",
+      "buttonShort": "📥 Download",
+      "downloadSheet": "📥 Download sheet",
+      "instruction": "Click on the image to download the printable sheet",
+      "printTip": "💡 Printing tip:",
+      "description": "Download the money sheet image to print it at home",
+      "instructions": "Print on cardstock paper (200-250g) for better results. You can laminate the sheet for repeated use.",
+      "confirmButton": "📥 Download",
+      "cancelButton": "Cancel"
+    },
+    "backToMain": "🔝 Back to main menu"
+  },
+  "backToTop": "Back to the main grimoire",
+  "products": {
+    "coin-custom-single": {
+      "name": "Custom Coin",
+      "description": "### Single coin of your choice\r\n\r\nSelect **the metal** (copper, silver, electrum, gold, platinum) and **multiplier** (unit, ×10, ×100, ×1000, ×10000) to create your custom coin.\r\n\r\n**Contents:**\r\n- 1 customizable metal coin\r\n- Metal choice: copper, silver, electrum, gold, platinum\r\n- Multiplier choice: ×1, ×10, ×100, ×1000, ×10000\r\n- Finish according to chosen multiplier\r\n\r\n*Perfect for completing a collection or replacing a lost coin.*",
+      "summary": "Customizable metal coin with choice of metal and multiplier.",
+      "metals": [
+        "copper",
+        "silver",
+        "electrum",
+        "gold",
+        "platinum"
+      ]
+    },
+    "coin-trio-customizable": {
+      "name": "Trio of Coins",
+      "description": "### Three customizable coins\r\n\r\n**3 metal coins** of your choice with customizable metal and multiplier. Perfect for completing a collection or creating a small custom treasure.\r\n\r\n**Contents:**\r\n- 3 coins with choice of metal and multiplier\r\n\r\n*Perfect for starting or completing your coin collection!*",
+      "summary": "Set of three customizable coins with choice of metal and single multiplier.",
+      "metals": [
+        "copper",
+        "silver",
+        "electrum",
+        "gold",
+        "platinum"
+      ]
+    },
+    "coin-quintessence-metals": {
+      "name": "Metal Quintessence",
+      "description": "### Five metals, one multiplier\r\n\r\n**5 coins of different metals** applying the same chosen multiplier: one of each metal (copper, silver, electrum, gold, platinum) with uniform finish.\r\n\r\n**Contents:**\r\n- 1 copper coin\r\n- 1 silver coin\r\n- 1 electrum coin\r\n- 1 gold coin\r\n- 1 platinum coin\r\n\r\n*Discover the diversity of metals with consistent value!*",
+      "summary": "Collection of five coins with one of each metal and uniform multiplier."
+    },
+    "coin-septuple-free": {
+      "name": "Free Septuple",
+      "description": "### Seven fully customizable coins\r\n\r\n**7 metal coins** with free choice of metal and multiplier for each coin. Create your own assortment according to your precise needs.\r\n\r\n**Contents:**\r\n- 7 customizable metal coins\r\n- Each coin: metal AND multiplier choice\r\n- Available metals: copper, silver, electrum, gold, platinum\r\n- Multipliers: ×1, ×10, ×100, ×1000, ×10000\r\n\r\n*Compose your exact treasure according to your game needs!*",
+      "summary": "Set of seven coins with free choice of metal and multiplier for each coin.",
+      "metals": [
+        "copper",
+        "silver",
+        "electrum",
+        "gold",
+        "platinum"
+      ]
+    },
+    "coin-traveler-offering": {
+      "name": "The Traveler Offering",
+      "description": "### Immersive starter hoard\r\n\r\n**10 metal coins** : **2 of each metal** (copper, silver, electrum, gold, platinum). Choose **one multiplier** for the whole set.\r\n\r\n**Contents:**\r\n- 2 copper coins\r\n- 2 silver coins\r\n- 2 electrum coins\r\n- 2 gold coins\r\n- 2 platinum coins\r\n- Single multiplier choice: ×1, ×10, ×100, ×1000, ×10000\r\n- Finish: unit (shiny) or engraved (slightly matte)\r\n\r\n*Use multipliers to speed up counting without breaking immersion.*",
+      "summary": "Set of 10 assorted metal coins with a single multiplier to speed up tallying."
+    },
+    "coin-five-realms-complete": {
+      "name": "Currency of the Five Realms",
+      "description": "### 25 coins, no duplicates\r\n\r\n**5 metals × 5 multipliers** = **25 unique designs**. Each metal comes in unit (shiny) and with engraved multipliers (matte finish).\r\n\r\n**Contents:**\r\n- 5 copper coins: ×1, ×10, ×100, ×1000, ×10000\r\n- 5 silver coins: ×1, ×10, ×100, ×1000, ×10000\r\n- 5 electrum coins: ×1, ×10, ×100, ×1000, ×10000\r\n- 5 gold coins: ×1, ×10, ×100, ×1000, ×10000\r\n- 5 platinum coins: ×1, ×10, ×100, ×1000, ×10000\r\n\r\n**Everything included** — no selection needed.\r\n*Use multipliers to speed up counting without breaking immersion.*",
+      "summary": "Collection of 25 unique coins covering five metals and every multiplier for the table."
+    },
+    "coin-merchant-essence-double": {
+      "name": "Essence of the Merchant",
+      "description": "### 50 coins, double the variety\r\n\r\n**2 copies** of each of the **25 designs** from the *Currency of the Five Realms* — total **50 coins**.\r\n\r\n**Contents:**\r\n- 10 copper coins: 2×(×1, ×10, ×100, ×1000, ×10000)\r\n- 10 silver coins: 2×(×1, ×10, ×100, ×1000, ×10000)\r\n- 10 electrum coins: 2×(×1, ×10, ×100, ×1000, ×10000)\r\n- 10 gold coins: 2×(×1, ×10, ×100, ×1000, ×10000)\r\n- 10 platinum coins: 2×(×1, ×10, ×100, ×1000, ×10000)\r\n- Finish: unit (shiny) and engraved (matte)\r\n\r\n**Everything included** — no selection needed.\r\n*Use multipliers to speed up counting without breaking immersion.*",
+      "summary": "Two copies of every design for 50 ready-to-play coins including every multiplier."
+    },
+    "coin-lord-treasury-uniform": {
+      "name": "The Lord's Treasury",
+      "description": "### 50 coins for opulence\r\n\r\n**10 coins of each metal** (copper, silver, electrum, gold, platinum) using the **same multiplier** selected at checkout.\r\n\r\n**Contents:**\r\n- 10 copper coins (same multiplier)\r\n- 10 silver coins (same multiplier)\r\n- 10 electrum coins (same multiplier)\r\n- 10 gold coins (same multiplier)\r\n- 10 platinum coins (same multiplier)\r\n- Multiplier choice: ×1, ×10, ×100, ×1000, ×10000\r\n- Finish: unit (shiny) or engraved (matte)\r\n\r\n*Use multipliers to speed up counting without breaking immersion.*",
+      "summary": "Selection of 50 coins sharing one multiplier to deliver a plentiful, consistent treasury."
+    },
+    "cards-random-discovery-10": {
+      "name": "10 Random Cards",
+      "description": "### Random discovery - 10 cards\r\n\r\nMystery selection of **10 equipment cards** drawn from our complete catalog. Perfect for discovering new items or enriching your collection with surprises!\r\n\r\n**Contents:**\r\n- 10 random equipment cards\r\n- Possible mix: weapons, armor, tools, special items\r\n- High-quality illustrated cards\r\n- Compatible with D&D 5e and similar systems\r\n\r\n*Adventure begins with the surprise of the unknown!*",
+      "summary": "Mystery selection of 10 equipment cards to discover new items."
+    },
+    "cards-weapons-armor-60": {
+      "name": "Weapons & Armor",
+      "description": "### Complete combat arsenal - 60 cards\\n\\nEssential collection of **60 cards** to arm your fighters: complete arsenal of melee and ranged weapons, light to heavy protection, and shields.\\n\\n**Contents:**\\n- **44 weapons** : melee, ranged, exotic, modern and futuristic firearms\\n- **14 armor** : light, medium, heavy\\n- **2 shields** : metal and wood\\n\\n*Everything needed to outfit warriors, adventurers and soldiers!*",
+      "summary": "Collection of 60 weapon and armor cards to equip fighters and adventurers."
+    },
+    "cards-adventure-packs-70": {
+      "name": "Adventure Packs",
+      "description": "### Equipment by background - 70 cards\\n\\nComplete collection of **70 cards** grouping all starting equipment according to D&D 5e backgrounds. Perfect for quickly creating characters or distributing thematic gear.\\n\\n**Contents:**\\n- **Artist's pack** : instruments and creative materials\\n- **Ecclesiastic's pack** : religious and sacred objects\\n- **Explorer's pack** : survival and navigation\\n- **Dungeoneering pack** : spelunking and dungeon gear\\n- **Scholar's pack** : books and study tools\\n- **Burglar's pack** : lockpicking and infiltration\\n- **Diplomat's pack** : negotiation and social relations\\n\\n*Instantly customize based on your heroes' origins!*",
+      "summary": "Collection of 70 equipment cards organized by D&D background packs."
+    },
+    "cards-explosives-tools-60": {
+      "name": "Explosives & Tools",
+      "description": "### Specialized arsenal - 60 cards\\n\\nTechnical collection of **60 cards** for advanced campaigns: explosives, futuristic weapons and artisan tools.\\n\\n**Contents:**\\n- **21 explosives** : bombs, grenades, dynamite, modern and futuristic charges\\n- **37 tools** : crafting, alchemy, lockpicking, navigation\\n- **2 rule cards** : explosion and crafting mechanics\\n\\n*For adventurers who love creative solutions!*",
+      "summary": "Collection of 60 explosive and specialized tool cards for technical campaigns."
+    },
+    "cards-services-vehicles-85": {
+      "name": "Services & Vehicles",
+      "description": "### Travel and logistics - 85 cards\\n\\nComplete collection of **85 cards** to organize travels and missions: inn services, transport, and all types of vehicles.\\n\\n**Contents:**\\n- **55 services** : inns, care, lifestyles, mercenaries, guides\\n- **27 vehicles** : mounts, land, sea, air\\n- **3 rule cards** : travel and logistics mechanics\\n\\n*Everything to travel and organize in campaigns!*",
+      "summary": "Collection of 85 service and vehicle cards to organize travels and missions."
+    },
+    "cards-loot-engineering-170": {
+      "name": "Loot & Engineering",
+      "description": "### Loot • Trade Goods • Tools - 170 cards\\n\\nFor campaigns that push the envelope: varied treasures, commercial goods, and every crafter's staple.\\n\\n**Contents:**\\n- **104 loot items** : treasures, gems, artifacts, precious objects\\n- **27 trade goods** : commercial goods, raw materials\\n- **37 tools** : crafting, lockpicking, alchemy, navigation\\n- **2 rule cards** : trade and crafting mechanics\\n\\n*Add variety and tactical choices — from market bartering to treasure discoveries!*",
+      "summary": "Collection of 170 loot, trade goods, and tool cards to enrich your campaigns."
+    },
+    "cards-roads-services-165": {
+      "name": "Roads & Services",
+      "description": "### Packs • Services • Vehicles • Poisons - 165 cards\\n\\nEverything to set your world in motion: ready your PCs, travel, bargain, and take risks with clean, table-friendly cards.\\n\\n**Contents:**\\n- **65 packs** : 7 types according to D&D backgrounds\\n- **55 services** : inns, care, lifestyles, mercenaries\\n- **27 vehicles** : mounts, land, sea, air\\n- **14 poisons** : dangerous and toxic substances\\n- **4 rule cards** : travel, services, and poison mechanics\\n\\n*Perfect for exploration-, travel- and intrigue-heavy campaigns!*",
+      "summary": "Complete selection of 165 cards focused on travel, services, vehicles, and poisons."
+    },
+    "cards-adventurer-arsenal-190": {
+      "name": "Adventurer's Arsenal",
+      "description": "### Weapons • Armor • Equipment - 190 cards\\n\\nMassive, ready-to-play bundle to outfit an entire party: classic and exotic weapons, protection for every build, and all the adventuring essentials as illustrated cards.\\n\\n**Contents:**\\n- **44 weapons** : melee, ranged, exotic, modern firearms\\n- **14 armor** : light, medium, heavy, shields\\n- **127 equipment** : adventure tools, survival, crafting\\n- **5 rule cards** : master equipment and mechanics\\n\\n*Perfect at the table: draw, place, trade — no more digging through the rulebook!*",
+      "summary": "Massive box of 190 illustrated cards to instantly outfit an entire party of adventurers."
+    },
+    "triptych-mystery-hero": {
+      "name": "Mystery Triptychs",
+      "description": "### Three triptychs, a plug-and-play hero\r\n\r\nDraw at random **1 Class**, **1 Species** and **1 Background** to forge a unique origin, then play right away with:\r\n\r\n**Included:**\r\n- 1 random Class triptych\r\n- 1 random Species triptych\r\n- 1 random Background triptych\r\n\r\n*No more digging through the rulebook.*",
+      "summary": "Bundle of random triptychs to build a complete hero with matching gear and starting coins."
+    },
+    "triptych-species-collection": {
+      "name": "Species Triptychs",
+      "description": "### Complete collection of species triptychs\r\n\r\nDiscover all playable D&D 5e species with detailed and illustrated triptychs. Each triptych presents the characteristics, special abilities, and cultural traits of the species.\r\n\r\n**Contents:**\r\n- Triptychs of all official species\r\n- Detailed characteristics\r\n- Illustrated special abilities\r\n\r\n*Perfect for creating varied characters or enriching your campaigns!*",
+      "summary": "Collection of triptychs featuring all playable species with their characteristics and abilities."
+    },
+    "triptych-class-collection": {
+      "name": "Class Triptychs",
+      "description": "### Complete collection of class triptychs\r\n\r\nExplore all D&D 5e classes and subclasses with complete triptychs. Each triptych details class abilities, spells, and progressions with visual examples.\r\n\r\n**Contents:**\r\n- Triptychs of all official classes\r\n- Subclasses and archetypes\r\n- Detailed progressions and abilities\r\n\r\n*Ideal for understanding class mechanics or preparing NPCs!*",
+      "summary": "Collection of triptychs covering all classes and subclasses with their abilities and progressions."
+    },
+    "triptych-background-collection": {
+      "name": "Background Triptychs",
+      "description": "### Complete collection of background triptychs\r\n\r\nEnrich your characters with all available D&D 5e backgrounds. Each triptych presents the origin, skills, equipment, and contacts of the background.\r\n\r\n**Contents:**\r\n- Triptychs of all official backgrounds\r\n- Detailed skills and equipment\r\n- Contacts and social relations\r\n\r\n*Perfect for adding depth to your characters!*",
+      "summary": "Collection of triptychs featuring all backgrounds with their skills and equipment."
+    },
+    "test-produit-1": {
+      "nom": "Magic Item",
+      "details": "Detailed English description",
+      "type": [
+        "Artifact",
+        "Relic"
+      ],
+      "couleurs": [
+        "Red",
+        "Blue",
+        "Green"
+      ]
+    },
+    "test-produit-2": {
+      "nom": "Ancient Grimoire",
+      "details": "Ancient spellbook",
+      "type": [
+        "Manual",
+        "Guide"
+      ],
+      "couleurs": [
+        "Black",
+        "Gold"
+      ]
+    },
+    "test-produit-3": {
+      "nom": "Enchanted Sword",
+      "details": "Blade forged by elves",
+      "type": [
+        "Sword",
+        "Blade"
+      ],
+      "couleurs": [
+        "Silver",
+        "Shining"
+      ]
+    },
+    "livre-1": {
+      "titre": "Complete Guide",
+      "resume": "Essential book for beginners",
+      "specifications": [
+        "Hardcover",
+        "300 pages",
+        "A5 format"
+      ],
+      "tags": [
+        "Fantasy",
+        "Adventure",
+        "Guide"
+      ]
+    },
+    "accessoire-2": {
+      "titre": "Enchanted Dice",
+      "resume": "Magical dice set",
+      "specifications": [
+        "Metal",
+        "Runic engravings",
+        "Set of 7"
+      ],
+      "tags": [
+        "Precision",
+        "Magic",
+        "Mystical"
+      ]
+    }
+  }
 }
