@@ -82,18 +82,10 @@ if (is_string($gaMeasurementId)) {
   <?= stylesheet_tag('css/vendor.bundle.min.css') ?>
 
 
-  <!-- Polices auto-hébergées avec preload critique -->
+  <!-- Polices auto-hébergées (pas de preload - font-display:swap suffit) -->
   <?php if (file_exists(__DIR__.'/css/fonts-selfhosted.css')): ?>
     <?= stylesheet_tag('css/fonts-selfhosted.css') ?>
 
-    <?php if (file_exists(__DIR__.'/media/fonts/OpenSans-400.woff2')): ?>
-      <?= preload_asset('media/fonts/OpenSans-400.woff2', 'font') ?>
-
-    <?php endif; ?>
-    <?php if (file_exists(__DIR__.'/media/fonts/Cinzel-600.woff2')): ?>
-      <?= preload_asset('media/fonts/Cinzel-600.woff2', 'font') ?>
-
-    <?php endif; ?>
   <?php endif; ?>
   <?= stylesheet_tag('css/styles.css') ?>
 
