@@ -139,21 +139,21 @@ function sendSendgridMail(string $to, string $subject, string $body, string $rep
         $from = 'contact@geekndragon.com';
     }
 
-    // Construction du payload avec échappement préventif
+    // Construction du payload JSON brut (SendGrid gère l'encodage UTF-8)
     $payload = [
         'personalizations' => [[
-            'to' => [['email' => htmlspecialchars($to, ENT_QUOTES, 'UTF-8')]],
-            'subject' => htmlspecialchars($subject, ENT_QUOTES, 'UTF-8'),
+            'to' => [['email' => $to]],
+            'subject' => $subject,
         ]],
-        'from' => ['email' => htmlspecialchars($from, ENT_QUOTES, 'UTF-8')],
+        'from' => ['email' => $from],
         'content' => [[
             'type' => 'text/plain',
-            'value' => htmlspecialchars($body, ENT_QUOTES, 'UTF-8'),
+            'value' => $body,
         ]],
     ];
-    
+
     if ($replyTo) {
-        $payload['reply_to'] = ['email' => htmlspecialchars($replyTo, ENT_QUOTES, 'UTF-8')];
+        $payload['reply_to'] = ['email' => $replyTo];
     }
 
     $ch = curl_init('https://api.sendgrid.com/v3/mail/send');

@@ -95,16 +95,24 @@ if (!function_exists('gd_detect_request_scheme')) {
 
         // 1. Vérification X-Forwarded-Proto (proxy/load balancer)
         if (!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
-            $forwardedProto = filter_var($_SERVER['HTTP_X_FORWARDED_PROTO'], FILTER_SANITIZE_STRING);
+            $forwardedProto = filter_var(
+                $_SERVER['HTTP_X_FORWARDED_PROTO'],
+                FILTER_UNSAFE_RAW,
+                FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH
+            );
             if ($forwardedProto) {
                 $proto = strtolower(trim(explode(',', $forwardedProto)[0]));
-                $https = $proto === 'https';
+                $https = in_array($proto, ['https'], true);
             }
         }
 
         // 2. Vérification X-Forwarded-SSL
         if (!$https && !empty($_SERVER['HTTP_X_FORWARDED_SSL'])) {
-            $forwardedSsl = filter_var($_SERVER['HTTP_X_FORWARDED_SSL'], FILTER_SANITIZE_STRING);
+            $forwardedSsl = filter_var(
+                $_SERVER['HTTP_X_FORWARDED_SSL'],
+                FILTER_UNSAFE_RAW,
+                FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH
+            );
             if ($forwardedSsl) {
                 $https = strtolower($forwardedSsl) === 'on';
             }
@@ -112,7 +120,11 @@ if (!function_exists('gd_detect_request_scheme')) {
 
         // 3. Vérification HTTPS standard
         if (!$https && isset($_SERVER['HTTPS'])) {
-            $httpsValue = filter_var($_SERVER['HTTPS'], FILTER_SANITIZE_STRING);
+            $httpsValue = filter_var(
+                $_SERVER['HTTPS'],
+                FILTER_UNSAFE_RAW,
+                FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH
+            );
             if ($httpsValue) {
                 $https = strtolower($httpsValue) !== 'off' && $httpsValue !== '';
             }
@@ -120,9 +132,13 @@ if (!function_exists('gd_detect_request_scheme')) {
 
         // 4. Vérification REQUEST_SCHEME
         if (!$https && isset($_SERVER['REQUEST_SCHEME'])) {
-            $requestScheme = filter_var($_SERVER['REQUEST_SCHEME'], FILTER_SANITIZE_STRING);
+            $requestScheme = filter_var(
+                $_SERVER['REQUEST_SCHEME'],
+                FILTER_UNSAFE_RAW,
+                FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH
+            );
             if ($requestScheme) {
-                $https = strtolower($requestScheme) === 'https';
+                $https = in_array(strtolower($requestScheme), ['https'], true);
             }
         }
 

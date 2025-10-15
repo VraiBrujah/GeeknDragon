@@ -9,8 +9,8 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
 <?php
-// Utiliser shop-grid.css externe au lieu de CSS inline dupliqué
-$extraHead = '<link rel="stylesheet" href="/css/shop-grid.css?v=' . filemtime(__DIR__.'/css/shop-grid.css') . '">';
+// Précharger la vidéo hero (maintenant via helper)
+$extraHead = preload_asset('media/videos/backgrounds/mage_compressed.mp4', 'video');
 include 'head-common.php';
 ?>
 
@@ -34,7 +34,6 @@ include 'head-common.php';
 
     <!-- ===== HERO ===== -->
     <section class="min-h-screen flex items-center justify-center text-center relative text-white">
-      <link rel="preload" as="video" href="/media/videos/backgrounds/mage_compressed.mp4" type="video/mp4">
       <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="/media/videos/backgrounds/mage_compressed.mp4" data-videos='["/media/videos/backgrounds/cascade_HD_compressed.mp4","/media/videos/backgrounds/fontaine11_compressed.mp4","/media/videos/backgrounds/Carte1_compressed.mp4","/media/videos/backgrounds/fontaine4_compressed.mp4","/media/videos/backgrounds/fontaine3_compressed.mp4","/media/videos/backgrounds/fontaine2_compressed.mp4","/media/videos/backgrounds/fontaine1_compressed.mp4","/media/videos/backgrounds/trip2_compressed.mp4"]'></div>
       <div class="absolute inset-0 bg-black/60"></div>
       <div class="relative z-10 max-w-3xl p-6 hero-text">
