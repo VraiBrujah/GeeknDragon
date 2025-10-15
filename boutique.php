@@ -6,9 +6,14 @@ require __DIR__ . '/i18n.php';
 $title  = $translations['meta']['shop']['title'] ?? 'Geek & Dragon';
 $metaDescription = $translations['meta']['shop']['desc'] ?? '';
 $metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/boutique.php';
-// Utiliser shop-grid.css externe au lieu de CSS inline dupliqué
-$extraHead = '<link rel="stylesheet" href="/css/shop-grid.css?v=' . filemtime(__DIR__.'/css/shop-grid.css') . '">
-<!-- Preconnections pour ressources externes uniquement -->
+
+// Charger helpers si pas déjà fait
+if (!function_exists('asset_url')) {
+    require_once __DIR__ . '/includes/asset-helper.php';
+}
+
+// Preconnections pour ressources externes uniquement
+$extraHead = '<!-- Preconnections pour ressources externes uniquement -->
 <link rel="preconnect" href="https://app.snipcart.com">
 <link rel="dns-prefetch" href="https://app.snipcart.com">';
 

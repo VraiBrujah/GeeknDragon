@@ -13,13 +13,18 @@ class ScriptLoader {
     }
     
     /**
-     * Charge le bundle principal
+     * Charge le bundle principal avec helper asset
      */
     public function loadMainBundle() {
         $bundlePath = $this->baseDir . '/js/app.bundle.min.js';
-        
+
         if (file_exists($bundlePath)) {
-            echo '<script src="/js/app.bundle.min.js?v=' . filemtime($bundlePath) . '"></script>' . "\n";
+            // Utiliser helper si disponible, sinon fallback
+            if (function_exists('script_tag')) {
+                echo script_tag('js/app.bundle.min.js') . "\n";
+            } else {
+                echo '<script src="/js/app.bundle.min.js?v=' . filemtime($bundlePath) . '"></script>' . "\n";
+            }
             return true;
         } else {
             $this->loadScript('app');
@@ -36,20 +41,31 @@ class ScriptLoader {
         if (in_array($name, self::$loadedScripts)) {
             return 'already_loaded';
         }
-        
+
         $minPath = $this->baseDir . '/js/' . $name . '.min.js';
         $originalPath = $this->baseDir . '/js/' . $name . '.js';
-        
+
+        // Utiliser helper si disponible
+        $useHelper = function_exists('script_tag');
+
         if (file_exists($minPath)) {
-            echo '<script src="/js/' . $name . '.min.js?v=' . filemtime($minPath) . '"></script>' . "\n";
+            if ($useHelper) {
+                echo script_tag('js/' . $name . '.min.js') . "\n";
+            } else {
+                echo '<script src="/js/' . $name . '.min.js?v=' . filemtime($minPath) . '"></script>' . "\n";
+            }
             self::$loadedScripts[] = $name;
             return 'minified';
         } elseif ($fallbackToOriginal && file_exists($originalPath)) {
-            echo '<script src="/js/' . $name . '.js?v=' . filemtime($originalPath) . '"></script>' . "\n";
+            if ($useHelper) {
+                echo script_tag('js/' . $name . '.js') . "\n";
+            } else {
+                echo '<script src="/js/' . $name . '.js?v=' . filemtime($originalPath) . '"></script>' . "\n";
+            }
             self::$loadedScripts[] = $name;
             return 'original';
         }
-        
+
         return false;
     }
     
