@@ -27,3 +27,8 @@ cache/*
 # Configuration locale Claude Code (si réinstallé)
 .claude/
 CLAUDE.md
+
+# Tests et coverage
+coverage/
+*.lcov
+.jest/

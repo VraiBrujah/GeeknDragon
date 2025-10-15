@@ -1,0 +1,9 @@
+# Ignorer coverage
+coverage/
+*.lcov
+
+# Ignorer snapshots temporaires
+__snapshots__/
+
+# Ignorer fichiers de cache Jest
+.jest/
