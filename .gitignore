@@ -1,7 +1,15 @@
 error_log
 *.log
 node_modules/
+
+# Fichiers de configuration sensibles (credentials SMTP, API keys)
 .env
+.env.local
+.env.production
+.env.staging
+*.env
+!.env.example
+!.env.*.example
 
 # Fichiers temporaires et backup
 *.backup
@@ -27,6 +35,16 @@ cache/*
 # Configuration locale Claude Code (si réinstallé)
 .claude/
 CLAUDE.md
+
+# Fichiers de credentials et secrets (protection supplémentaire)
+*password*
+*secret*
+*credentials*
+!*.example
+!*.md
+!*.php
+!*.js
+!*.css
 
 # Tests et coverage
 coverage/
