@@ -9,8 +9,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
 <?php
-// Précharger la vidéo hero (maintenant via helper)
-$extraHead = preload_asset('media/videos/backgrounds/mage_compressed.mp4', 'video');
+// Pas de preload vidéo (as="video" non supporté + charge inutile)
 include 'head-common.php';
 ?>
 

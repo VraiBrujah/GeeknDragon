@@ -84,8 +84,14 @@
     </FilesMatch>
 
     # Cache-Control pour assets statiques (1 an = immutables)
-    <FilesMatch "\.(jpg|jpeg|png|webp|gif|svg|ico|woff2|woff|mp4|webm)$">
+    <FilesMatch "\.(jpg|jpeg|png|webp|gif|svg|ico|woff2|woff)$">
         Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+
+    # Cache-Control pour vidéos avec Range support
+    <FilesMatch "\.(mp4|webm)$">
+        Header set Cache-Control "public, max-age=2592000"
+        Header set Accept-Ranges "bytes"
     </FilesMatch>
 
     # Cache-Control pour CSS/JS versionnés
