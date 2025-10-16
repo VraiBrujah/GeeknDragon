@@ -1,6 +1,6 @@
 <?php
-require __DIR__ . '/bootstrap.php';
 session_start();
+require __DIR__ . '/bootstrap.php';
 $active = 'contact';
 require __DIR__ . '/i18n.php';
 $title  = $translations['meta']['contact']['title'] ?? 'Geek & Dragon';
