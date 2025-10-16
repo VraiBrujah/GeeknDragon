@@ -20,7 +20,7 @@ if (!function_exists('is_debug_mode')) {
 
         if ($debug === null) {
             $debug = filter_var(
-                getEnvironmentVariable('DEBUG_MODE', 'false'),
+                $_ENV['DEBUG_MODE'] ?? 'false',
                 FILTER_VALIDATE_BOOLEAN
             );
         }
